@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "ENV-DESKTOP-default",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "text_console_login"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 49,
+      "width": 140,
+      "height": 50,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 910,
+      "ypos": 680,
+      "width": 89,
+      "height": 46,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "anaconda_install_done",
+    "ENV-DESKTOP-default",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US"
+  ]
+}

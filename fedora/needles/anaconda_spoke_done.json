@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "anaconda_spoke_done",
+    "ENV-DESKTOP-default",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US"
+  ],
+  "area": [
+    {
+      "xpos": 20,
+      "ypos": 37,
+      "width": 60,
+      "height": 27,
+      "type": "match"
+    }
+  ]
+}
