@@ -3,7 +3,7 @@
     "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "text_console_login"
+    "clean_install_login"
   ],
   "area": [
     {

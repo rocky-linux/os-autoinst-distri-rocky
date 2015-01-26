@@ -14,16 +14,10 @@
                                       flavor  => "server",
                                       version => "rawhide",
                                     },
-                      test_suite => { name => "Server Simple" },
+                      test_suite => { name => "server_simple" },
                     },
                   ],
   Machines     => [
-                    {
-                      backend   => "qemu",
-                      name      => "32bit",
-                      settings  => [{ key => "QEMUCPU", value => "kvm32" }],
-                      variables => "",
-                    },
                     {
                       backend   => "qemu",
                       name      => "64bit",
@@ -35,91 +29,20 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "workstation",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "rawhide",
-                    },
-                    {
-                      arch      => "i686",
-                      distri    => "fedora",
-                      flavor    => "workstation",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "rawhide",
-                    },
-                    {
-                      arch      => "x86_64",
-                      distri    => "fedora",
                       flavor    => "server",
                       name      => "",
                       settings  => [
                                    ],
                       variables => "",
                       version   => "rawhide",
-                    },
-                    {
-                      arch      => "i686",
-                      distri    => "fedora",
-                      flavor    => "server",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "rawhide",
-                    },
-                    {
-                      arch      => "x86_64",
-                      distri    => "fedora",
-                      flavor    => "workstation",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "branched",
-                    },
-                    {
-                      arch      => "i686",
-                      distri    => "fedora",
-                      flavor    => "workstation",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "branched",
-                    },
-                    {
-                      arch      => "x86_64",
-                      distri    => "fedora",
-                      flavor    => "server",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "branched",
-                    },
-                    {
-                      arch      => "i686",
-                      distri    => "fedora",
-                      flavor    => "server",
-                      name      => "",
-                      settings  => [
-                                   ],
-                      variables => "",
-                      version   => "branched",
                     },
                   ],
   TestSuites   => [
                     {
-                      name => "Server Simple",
-                      prio => 50,
+                      name => "server_simple",
+                      prio => 1,
                       settings => [
-                        { key => "HDDMODEL", value => "virtio-blk" },
-                        { key => "PRODUCTNAME", value => "server" },
+                        { key => "DISK_GUIDED_EMPTY", value => "1" },
                       ],
                       variables => "",
                     },

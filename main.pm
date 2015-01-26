@@ -18,7 +18,20 @@ use strict;
 use testapi;
 use autotest;
 
-autotest::loadtest get_var('CASEDIR')."/tests/install_simple.pm";
+# Boot to anaconda Hub in English
+autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
+
+## Disk partitioning
+if (get_var('DISK_GUIDED_EMPTY')){
+    autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
+}
+
+# Start installation, set user & root passwords, reboot
+autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
+
+
+# Wait for the login screen
+autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
 
 1;
 
