@@ -46,5 +46,14 @@
                       ],
                       variables => "",
                     },
+                    {
+                      name => "server_sata_multi",
+                      prio => 2,
+                      settings => [
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "DISK_GUIDED_MULTI", value => "1" },
+                      ],
+                      variables => "",
+                    },
                   ],
 }

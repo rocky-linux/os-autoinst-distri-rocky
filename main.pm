@@ -25,6 +25,9 @@ autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
 if (get_var('DISK_GUIDED_EMPTY')){
     autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
 }
+elsif (get_var('DISK_GUIDED_MULTI')){
+    autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
+}
 
 # Start installation, set user & root passwords, reboot
 autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
