@@ -63,6 +63,9 @@ cp openqa.conf.template openqa.conf
 # provider = https://id.fedoraproject.org/
 
 
+# apply patch fixing machine-pausing in QEMU, if needed
+# https://github.com/os-autoinst/os-autoinst/commit/c8896375288d5f39424cf06108a92c8498c4aff3
+
 # services
 systemctl enable apache2
 systemctl restart apache2
