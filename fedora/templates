@@ -1,0 +1,128 @@
+#!/usr/share/openqa/script/load_templates
+#
+# openSUSE Machines, Products, TestSuites and JobTemplates
+#
+# use load_templates to load the file into the database
+#
+{
+  JobTemplates => [
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "opensuse",
+                                      flavor  => "Promo-DVD-OpenSourcePress",
+                                      version => "Factory",
+                                    },
+                      test_suite => { name => "gnome-live" },
+                    },
+                  ],
+  Machines     => [
+                    {
+                      backend   => "qemu",
+                      name      => "32bit",
+                      settings  => [{ key => "QEMUCPU", value => "kvm32" }],
+                      variables => "",
+                    },
+                    {
+                      backend   => "qemu",
+                      name      => "64bit",
+                      settings  => [{ key => "QEMUCPU", value => "qemu64" }],
+                      variables => "",
+                    },
+                  ],
+  Products     => [
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "workstation",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "rawhide",
+                    },
+                    {
+                      arch      => "i686",
+                      distri    => "fedora",
+                      flavor    => "workstation",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "rawhide",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "rawhide",
+                    },
+                    {
+                      arch      => "i686",
+                      distri    => "fedora",
+                      flavor    => "server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "rawhide",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "workstation",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "branched",
+                    },
+                    {
+                      arch      => "i686",
+                      distri    => "fedora",
+                      flavor    => "workstation",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "branched",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "branched",
+                    },
+                    {
+                      arch      => "i686",
+                      distri    => "fedora",
+                      flavor    => "server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "branched",
+                    },
+                  ],
+  TestSuites   => [
+                    {
+                      name => "RAID0",
+                      prio => 50,
+                      settings => [
+                        { key => "DESKTOP", value => "kde" },
+                        { key => "INSTALLONLY", value => 1 },
+                        { key => "RAIDLEVEL", value => 0 },
+                      ],
+                      variables => "",
+                    },
+                  ],
+}
