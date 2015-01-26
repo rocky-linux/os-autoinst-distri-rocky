@@ -7,14 +7,14 @@
 {
   JobTemplates => [
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "x86_64",
-                                      distri  => "opensuse",
-                                      flavor  => "Promo-DVD-OpenSourcePress",
-                                      version => "Factory",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
                                     },
-                      test_suite => { name => "gnome-live" },
+                      test_suite => { name => "Server Simple" },
                     },
                   ],
   Machines     => [
@@ -115,12 +115,11 @@
                   ],
   TestSuites   => [
                     {
-                      name => "RAID0",
+                      name => "Server Simple",
                       prio => 50,
                       settings => [
-                        { key => "DESKTOP", value => "kde" },
-                        { key => "INSTALLONLY", value => 1 },
-                        { key => "RAIDLEVEL", value => 0 },
+                        { key => "HDDMODEL", value => "virtio-blk" },
+                        { key => "PRODUCTNAME", value => "server" },
                       ],
                       variables => "",
                     },

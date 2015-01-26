@@ -4,12 +4,12 @@ use testapi;
 
 sub run {
     # Wait for bootloader to appear
-    assert_screen "bootloader", 30;
+
+    assert_screen "bootloader_".get_var("FLAVOR"), 30;
 
     # Skip the media check
     send_key "up";
     send_key "ret";
-
     # Select install language
     assert_screen "anaconda_select_install_lang", 300;
     type_string "english";
@@ -18,7 +18,7 @@ sub run {
     assert_and_click "anaconda_select_install_lang_continue";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300;
+    assert_screen "anaconda_main_hub_".get_var("FLAVOR"), 300; #
 
     # Default install destination (hdd should be empty for new KVM machine)
     assert_and_click "anaconda_main_hub_install_destination";

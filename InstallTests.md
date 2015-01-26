@@ -30,7 +30,7 @@
 * no swap
 
 # user interface
-* graphical implicitne
+* interface graphical
 * text?
 
 # installation repositories

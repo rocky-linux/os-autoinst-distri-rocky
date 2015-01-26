@@ -16,7 +16,7 @@
     }
   ],
   "tags": [
-    "bootloader",
+    "bootloader_server",
     "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US"
