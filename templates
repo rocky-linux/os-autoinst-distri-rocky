@@ -50,9 +50,12 @@
                       name => "server_sata_multi",
                       prio => 2,
                       settings => [
-                        { key => "NUMDISKS", value => "2" },
                         { key => "DISK_GUIDED_MULTI", value => "1" },
                         { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "HDD_2". value => "disk_full.img" },
+                        { key => "DO_LOGIN". value => "1" },
+                        { key => "ROOT_PASSWORD". value => "fedora" },
                       ],
                       variables => "",
                     },
@@ -60,8 +63,8 @@
                       name => "server_scsi_updates_img",
                       prio => 3,
                       settings => [
-                        { key => "DISK_GUIDED_EMPTY", value => "1" },
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
+                        { key => "DISK_GUIDED_EMPTY", value => "1" },
                         { key => "HDDMODEL", value => "virtio-scsi-pci" },
                       ],
                       variables => "",
