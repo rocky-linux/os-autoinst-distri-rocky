@@ -79,5 +79,16 @@
                       ],
                       variables => "",
                     },
+                    {
+                      name => "server_delete_pata",
+                      prio => 5,
+                      settings => [
+                        { key => "DISK_GUIDED_DELETE_ALL", value => "1" },
+                        { key => "HDDMODEL", value => "ide-hd" },
+                        { key => "HDDVERSION", value => "Full disk" },
+                        { key => "HDD_1", value => "disk_full.img" },
+                      ],
+                      variables => "",
+                    },
                   ],
 }

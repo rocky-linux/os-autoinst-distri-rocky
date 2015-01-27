@@ -30,6 +30,9 @@ unless (get_var("KICKSTART"))
     elsif (get_var('DISK_GUIDED_MULTI')){
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
     }
+    elsif (get_var('DISK_GUIDED_DELETE_ALL')){
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
+    }
 
     # Start installation, set user & root passwords, reboot
     autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
