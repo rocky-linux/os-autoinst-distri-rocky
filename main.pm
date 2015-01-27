@@ -41,7 +41,10 @@ unless (get_var("KICKSTART"))
 # Wait for the login screen
 autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
 
-
+if (get_var('DISK_GUIDED_MULTI'))
+{
+    autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";
+}
 1;
 
 # vim: set sw=4 et:

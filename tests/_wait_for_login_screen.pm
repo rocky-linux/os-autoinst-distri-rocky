@@ -11,21 +11,33 @@ sub run {
     # Reboot and wait for the text login
     assert_screen "clean_install_login", $wait_time;
 
-    if (get_var("CHECK_LOGIN"))
+    if (get_var("DO_LOGIN"))
     {
         if (get_var("FLAVOR") eq "server")
         {
-            type_string get_var("USER_LOGIN");
-            send_key "ret";
-            type_string get_var("USER_PASSWORD");
-            send_key "ret";
-            assert_screen "user_logged_in", 10;
-
+            my $user_logged_in = 0;
+            if (get_var("USER_LOGIN"))
+            {
+                type_string get_var("USER_LOGIN");
+                send_key "ret";
+                type_string get_var("USER_PASSWORD");
+                send_key "ret";
+                assert_screen "user_logged_in", 10;
+                $user_logged_in = 1;
+            }
             if (get_var("ROOT_PASSWORD"))
             {
-                type_string "su -";
-                send_key "ret";
-                assert_screen "console_password_required", 10;
+                if ($user_logged_in == 1)
+                {
+                    type_string "su -";
+                    send_key "ret";
+                    assert_screen "console_password_required", 10;
+                }
+                else
+                {
+                    type_string "root";
+                    send_key "ret";
+                }
                 type_string get_var("ROOT_PASSWORD");
                 send_key "ret";
                 assert_screen "root_logged_in", 10;

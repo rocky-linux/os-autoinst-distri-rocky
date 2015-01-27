@@ -72,7 +72,7 @@
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "BOOT_KICKSTART_HTTP", value => "1" },
-                        { key => "CHECK_LOGIN", value => "1" },
+                        { key => "DO_LOGIN", value => "1" },
                         { key => "USER_LOGIN", value => "test" },
                         { key => "USER_PASSWORD", value => "test" },
                         { key => "ROOT_PASSWORD", value => "111111" },
