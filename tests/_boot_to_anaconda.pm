@@ -13,17 +13,35 @@ sub run {
         send_key "up";
     }
 
-    send_key "ret";
+    if ( get_var("KICKSTART") )
+    {
+        if ( get_var("BOOT_KICKSTART_HTTP") )
+        {
+            send_key "tab";
+            type_string " inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
+        }
 
-    # Select install language
-    assert_screen "anaconda_select_install_lang", 300;
-    type_string "english";
-    assert_and_click "anaconda_select_install_lang_english_filtered";
-    assert_screen "anaconda_select_install_lang_english_selected", 3;
-    assert_and_click "anaconda_select_install_lang_continue";
+        send_key "ret";
+    }
+    else
+    {
+        if ( get_var("BOOT_UPDATES_IMG_URL") )
+        {
+            send_key "tab";
+            type_string " inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img";
+        }
 
-    # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+        send_key "ret";
+        # Select install language
+        assert_screen "anaconda_select_install_lang", 300;
+        type_string "english";
+        assert_and_click "anaconda_select_install_lang_english_filtered";
+        assert_screen "anaconda_select_install_lang_english_selected", 3;
+        assert_and_click "anaconda_select_install_lang_continue";
+
+        # Anaconda hub
+        assert_screen "anaconda_main_hub", 300; #
+    }
 }
 
 

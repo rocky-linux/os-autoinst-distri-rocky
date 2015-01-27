@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "user_logged_in",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 1,
+      "ypos": 94,
+      "width": 155,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

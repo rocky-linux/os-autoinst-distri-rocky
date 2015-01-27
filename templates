@@ -52,6 +52,30 @@
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "DISK_GUIDED_MULTI", value => "1" },
+                        { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_scsi_updates_img",
+                      prio => 3,
+                      settings => [
+                        { key => "DISK_GUIDED_EMPTY", value => "1" },
+                        { key => "BOOT_UPDATES_IMG_URL", value => "1" },
+                        { key => "HDDMODEL", value => "virtio-scsi-pci" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_kickstart_user_creation",
+                      prio => 4,
+                      settings => [
+                        { key => "KICKSTART", value => "1" },
+                        { key => "BOOT_KICKSTART_HTTP", value => "1" },
+                        { key => "CHECK_LOGIN", value => "1" },
+                        { key => "USER_LOGIN", value => "test" },
+                        { key => "USER_PASSWORD", value => "test" },
+                        { key => "ROOT_PASSWORD", value => "111111" },
                       ],
                       variables => "",
                     },
