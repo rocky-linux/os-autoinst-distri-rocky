@@ -1,52 +1,59 @@
 {
-  "area": [
-    {
-      "xpos": 168,
-      "ypos": 7,
-      "width": 227,
-      "height": 57,
-      "type": "match"
-    },
-    {
-      "xpos": 294,
-      "ypos": 139,
-      "width": 123,
-      "height": 31,
-      "type": "match"
-    },
-    {
-      "xpos": 693,
-      "ypos": 135,
-      "width": 101,
-      "height": 33,
-      "type": "match"
-    },
-    {
-      "xpos": 299,
-      "ypos": 207,
-      "width": 180,
-      "height": 33,
-      "type": "match"
-    },
-    {
-      "xpos": 297,
-      "ypos": 328,
-      "width": 203,
-      "height": 38,
-      "type": "match"
-    },
-    {
-      "xpos": 294,
-      "ypos": 443,
-      "width": 252,
-      "height": 40,
-      "type": "match"
-    }
-  ],
   "tags": [
     "anaconda_main_hub",
-    "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US"
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "width": 227,
+      "height": 57,
+      "xpos": 168,
+      "ypos": 7,
+      "type": "match"
+    },
+    {
+      "height": 33,
+      "ypos": 153,
+      "xpos": 266,
+      "width": 101,
+      "type": "match"
+    },
+    {
+      "width": 180,
+      "height": 33,
+      "xpos": 699,
+      "ypos": 155,
+      "type": "match"
+    },
+    {
+      "width": 203,
+      "height": 38,
+      "ypos": 346,
+      "xpos": 267,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "height": 40,
+      "ypos": 461,
+      "xpos": 264,
+      "width": 252
+    },
+    {
+      "height": 18,
+      "ypos": 236,
+      "xpos": 272,
+      "width": 36,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "height": 13,
+      "ypos": 240,
+      "xpos": 330,
+      "width": 40
+    }
   ]
 }

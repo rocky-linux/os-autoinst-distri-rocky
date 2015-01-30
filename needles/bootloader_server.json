@@ -1,24 +1,31 @@
 {
   "area": [
     {
-      "xpos": 77,
-      "ypos": 204,
-      "width": 182,
-      "height": 29,
+      "type": "match",
+      "width": 53,
+      "height": 24,
+      "xpos": 249,
+      "ypos": 147
+    },
+    {
+      "width": 114,
+      "height": 17,
+      "ypos": 216,
+      "xpos": 86,
       "type": "match"
     },
     {
-      "xpos": 68,
-      "ypos": 231,
-      "width": 335,
-      "height": 17,
+      "xpos": 78,
+      "ypos": 232,
+      "height": 20,
+      "width": 264,
       "type": "match"
     }
   ],
   "tags": [
     "bootloader",
-    "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US"
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-server"
   ]
 }

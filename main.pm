@@ -19,32 +19,43 @@ use testapi;
 use autotest;
 
 # Boot to anaconda Hub in English
-autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
 
-unless (get_var("KICKSTART"))
+if (get_var("ENTRYPOINT"))
 {
-    ## Disk partitioning
-    if (get_var('DISK_GUIDED_EMPTY')){
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
-    }
-    elsif (get_var('DISK_GUIDED_MULTI')){
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
-    }
-    elsif (get_var('DISK_GUIDED_DELETE_ALL')){
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
+    autotest::loadtest get_var('CASEDIR')."/tests/".get_var("ENTRYPOINT").".pm";
+}
+else
+{
+    autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
+
+    unless (get_var("KICKSTART"))
+    {
+        ## Disk partitioning
+        if (get_var('DISK_GUIDED_EMPTY')){
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
+        }
+        elsif (get_var('DISK_GUIDED_MULTI')){
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
+        }
+        elsif (get_var('DISK_GUIDED_DELETE_ALL')){
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
+        }
+
+        # Start installation, set user & root passwords, reboot
+        autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
     }
 
-    # Start installation, set user & root passwords, reboot
-    autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
+    # Wait for the login screen
+    autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
+
+    if (get_var('DISK_GUIDED_MULTI'))
+    {
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";
+    }
 }
 
-# Wait for the login screen
-autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
 
-if (get_var('DISK_GUIDED_MULTI'))
-{
-    autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";
-}
+
 1;
 
 # vim: set sw=4 et:

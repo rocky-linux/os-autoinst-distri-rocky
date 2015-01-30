@@ -6,11 +6,11 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
-    # Default install destination (hdd should be empty for new KVM machine)
     assert_and_click "anaconda_main_hub_install_destination"; 
 
     assert_and_click "anaconda_spoke_done";
 
+    # the only provided disk should be full
     assert_and_click "anaconda_install_destination_reclaim_space_btn";
 
     assert_and_click "anaconda_install_destination_delete_all_btn";
