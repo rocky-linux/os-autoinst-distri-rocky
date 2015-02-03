@@ -11,12 +11,12 @@ sub run {
 
     # Set root password
     assert_and_click "anaconda_install_root_password";
-    type_string "fedora";
+    type_string "weakpassword";
     send_key "tab";
-    type_string "fedora";
+    type_string "weakpassword";
     assert_and_click "anaconda_spoke_done";
     # weak password - click "done" once again"
-    assert_and_click "anaconda_spoke_done";
+    #assert_and_click "anaconda_spoke_done";
 
     # Set user details
     assert_and_click "anaconda_install_user_creation";
@@ -25,13 +25,13 @@ sub run {
     send_key "tab";
     send_key "tab";
     send_key "tab";
-    type_string "fedora";
+    type_string "weakpassword";
     send_key "tab";
-    type_string "fedora";
+    type_string "weakpassword";
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
     # weak password - click "done" once again"
-    assert_and_click "anaconda_spoke_done";
+    #assert_and_click "anaconda_spoke_done";
 
     # Wait for install to end
     assert_screen "anaconda_install_done", 1800;
