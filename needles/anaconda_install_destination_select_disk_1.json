@@ -1,24 +1,17 @@
 {
-  "tags": [
-    "anaconda_install_destination_select_disk_1",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
-    "ENV-FLAVOR-server"
-  ],
   "area": [
     {
+      "xpos": 56,
+      "width": 134,
       "type": "match",
-      "width": 64,
-      "xpos": 86,
-      "ypos": 177,
-      "height": 66
-    },
-    {
-      "type": "match",
-      "height": 30,
-      "xpos": 58,
-      "ypos": 274,
-      "width": 135
+      "height": 24,
+      "ypos": 289
     }
+  ],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server",
+    "ENV-INSTLANG-en_US",
+    "anaconda_install_destination_select_disk_1"
   ]
 }

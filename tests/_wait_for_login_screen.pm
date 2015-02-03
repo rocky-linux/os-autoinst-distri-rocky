@@ -6,7 +6,7 @@ sub run {
 
     # If KICKSTART is set, then the wait_time needs to
     #  consider the install time
-    my $wait_time = get_var("KICKSTART") ? 600 : 300;
+    my $wait_time = get_var("KICKSTART") ? 1800 : 300;
 
     # Reboot and wait for the text login
     assert_screen "clean_install_login", $wait_time;

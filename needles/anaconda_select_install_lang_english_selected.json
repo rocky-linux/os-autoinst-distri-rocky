@@ -1,23 +1,17 @@
 {
   "tags": [
     "anaconda_select_install_lang_english_selected",
-    "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US"
+    "ENV-INSTLANG-en_US",
+    "ENV-OFW-1",
+    "ENV-FLAVOR-server"
   ],
   "area": [
     {
-      "type": "match",
-      "height": 51,
-      "ypos": 194,
-      "xpos": 200,
-      "width": 356
-    },
-    {
+      "height": 70,
       "type": "match",
       "xpos": 593,
       "ypos": 190,
-      "height": 70,
       "width": 349
     }
   ]
