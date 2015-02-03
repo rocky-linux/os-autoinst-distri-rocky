@@ -30,6 +30,11 @@ else
 
     unless (get_var("KICKSTART"))
     {
+	# Select minimal flavor
+	if (get_var("FLAVOR") eq "server") {
+	    autotest::loadtest get_var('CASEDIR')."/tests/_select_minimal.pm";
+	}
+
         ## Disk partitioning
         if (get_var('DISK_GUIDED_EMPTY')){
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
