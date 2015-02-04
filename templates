@@ -41,9 +41,7 @@
                     {
                       name => "server_simple",
                       prio => 1,
-                      settings => [
-                        { key => "DISK_GUIDED_EMPTY", value => "1" },
-                      ],
+                      settings => [],
                       variables => "",
                     },
                     {
@@ -54,7 +52,6 @@
                         { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2". value => "disk_full.img" },
-                        { key => "DO_LOGIN". value => "1" },
                         { key => "ROOT_PASSWORD". value => "weakpassword" },
                       ],
                       variables => "",
@@ -64,7 +61,7 @@
                       prio => 3,
                       settings => [
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
-                        { key => "DISK_GUIDED_EMPTY", value => "1" },
+                        { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img" },
                         { key => "HDDMODEL", value => "virtio-scsi-pci" },
                       ],
                       variables => "",
@@ -74,8 +71,7 @@
                       prio => 4,
                       settings => [
                         { key => "KICKSTART", value => "1" },
-                        { key => "BOOT_KICKSTART_HTTP", value => "1" },
-                        { key => "DO_LOGIN", value => "1" },
+                        { key => "GRUB", value => "inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks" },
                         { key => "USER_LOGIN", value => "test" },
                         { key => "USER_PASSWORD", value => "test" },
                         { key => "ROOT_PASSWORD", value => "111111" },
@@ -88,8 +84,23 @@
                       settings => [
                         { key => "DISK_GUIDED_DELETE_ALL", value => "1" },
                         { key => "HDDMODEL", value => "ide-hd" },
-                        { key => "HDDVERSION", value => "Full disk" },
                         { key => "HDD_1", value => "disk_full.img" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_mirrorlist_graphical",
+                      prio => 6,
+                      settings => [
+                        { key => "MIRRORLIST_GRAPHICAL", value => "1" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_repository_http_graphical",
+                      prio => 7,
+                      settings => [
+                        { key => "REPOSITORY_GRAPHICAL", value => "1" },
                       ],
                       variables => "",
                     },

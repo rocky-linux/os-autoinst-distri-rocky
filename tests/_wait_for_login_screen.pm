@@ -11,7 +11,7 @@ sub run {
     # Reboot and wait for the text login
     assert_screen "clean_install_login", $wait_time;
 
-    if (get_var("DO_LOGIN"))
+    if ((get_var("USER_LOGIN") && get_var("USER_PASSWORD")) || get_var("ROOT_PASSWORD"))
     {
         if (get_var("FLAVOR") eq "server")
         {

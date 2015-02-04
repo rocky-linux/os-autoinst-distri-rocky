@@ -43,14 +43,14 @@ else
 
 
         ## Disk partitioning
-        if (get_var('DISK_GUIDED_EMPTY')){
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
-        }
-        elsif (get_var('DISK_GUIDED_MULTI')){
+        if (get_var('DISK_GUIDED_MULTI')){
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
         }
         elsif (get_var('DISK_GUIDED_DELETE_ALL')){
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
+        }
+        else {
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
         }
 
         # Start installation, set user & root passwords, reboot

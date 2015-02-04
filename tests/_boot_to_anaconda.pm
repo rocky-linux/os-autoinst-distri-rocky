@@ -13,25 +13,15 @@ sub run {
         send_key "up";
     }
 
-    if ( get_var("KICKSTART") )
-    {
-        if ( get_var("BOOT_KICKSTART_HTTP") )
-        {
-            send_key "tab";
-            type_string " inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
-        }
-
-        send_key "ret";
+    if( get_var("GRUB")){
+        send_key "tab";
+        type_string " ".get_var("GRUB");
     }
-    else
-    {
-        if ( get_var("BOOT_UPDATES_IMG_URL") )
-        {
-            send_key "tab";
-            type_string " inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img";
-        }
 
-        send_key "ret";
+    send_key "ret";
+
+    unless (get_var("KICKSTART"))
+    {
         # Select install language
         assert_screen "anaconda_select_install_lang", 300;
         type_string "english";
