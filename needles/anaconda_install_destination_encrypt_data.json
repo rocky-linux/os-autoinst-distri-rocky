@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "anaconda_install_destination_encrypt_data",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-OFW-1",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 20,
+      "ypos": 603,
+      "width": 121,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

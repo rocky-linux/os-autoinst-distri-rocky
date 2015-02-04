@@ -57,11 +57,19 @@ else
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
         }
 
+        if (get_var("ENCRYPT_PASSWORD")){
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted.pm";
+        }
+
+
         # Start installation, set user & root passwords, reboot
         autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
     }
 
     # Wait for the login screen
+    if (get_var("ENCRYPT_PASSWORD")){
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted_postinstall.pm";
+    }
     autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
 
     if (get_var('DISK_GUIDED_MULTI'))
