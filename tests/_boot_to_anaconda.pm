@@ -39,9 +39,9 @@ sub run {
         assert_screen "anaconda_select_install_lang_english_selected", 3;
         assert_and_click "anaconda_select_install_lang_continue";
 
-	if ( get_var("VERSION") eq "rawhide") {
-	    assert_and_click "anaconda_rawhide_accept_fate";
-	}
+        if ( get_var("VERSION") eq "rawhide") {
+            assert_and_click "anaconda_rawhide_accept_fate";
+        }
 
         # Anaconda hub
         assert_screen "anaconda_main_hub", 300; #

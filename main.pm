@@ -30,10 +30,17 @@ else
 
     unless (get_var("KICKSTART"))
     {
-	# Select minimal flavor
-	if (get_var("FLAVOR") eq "server") {
-	    autotest::loadtest get_var('CASEDIR')."/tests/_select_minimal.pm";
-	}
+
+        ## Select installation source
+        if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
+            autotest::loadtest get_var('CASEDIR')."/tests/install_source_graphical.pm";
+        }
+
+        ## Select minimal flavor
+        if (get_var("FLAVOR") eq "server") {
+            autotest::loadtest get_var('CASEDIR')."/tests/_select_minimal.pm";
+        }
+
 
         ## Disk partitioning
         if (get_var('DISK_GUIDED_EMPTY')){

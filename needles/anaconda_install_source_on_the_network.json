@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "anaconda_install_source_on_the_network",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-OFW-1",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 58,
+      "ypos": 128,
+      "width": 108,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}
