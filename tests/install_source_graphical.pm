@@ -53,9 +53,9 @@ sub run {
     assert_screen "anaconda_main_hub", 300;
 
     # check that the repo was used
-    send_key "ctrl-alt-f3";
+    send_key "ctrl-alt-f2";
     wait_idle 10;
-    type_string "grep \"".$repourl."\" /tmp/packaging.log | grep \"added repo\"";
+    type_string "grep \"".$repourl."\" /tmp/packaging.log"; # | grep \"added repo\"";
     send_key "ret";
     assert_screen "anaconda_install_source_check_repo_added";
     send_key "ctrl-alt-f6";

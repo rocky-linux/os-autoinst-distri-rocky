@@ -16,6 +16,25 @@ sub run {
     if( get_var("GRUB")){
         send_key "tab";
         type_string " ".get_var("GRUB");
+
+    }
+
+    if (get_var("REPOSITORY_VARIATION")){
+        unless (get_var("GRUB")){
+            send_key "tab";
+        }
+        my $fedora_version = "";
+        my $repourl = "";
+
+        if (get_var("VERSION") eq "rawhide"){
+            $fedora_version = "rawhide";
+        }
+        else {
+            $fedora_version = (split /_/, get_var("BUILD"))[0];
+        }
+
+        $repourl = "http://download.fedoraproject.org/pub/fedora/linux/development/".$fedora_version."/".get_var("ARCH")."/os";
+        type_string " inst.repo=".$repourl;
     }
 
     send_key "ret";

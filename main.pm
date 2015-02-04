@@ -31,10 +31,14 @@ else
     unless (get_var("KICKSTART"))
     {
 
-        ## Select installation source
+        ## Installation source
         if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
             autotest::loadtest get_var('CASEDIR')."/tests/install_source_graphical.pm";
         }
+        if (get_var("REPOSITORY_VARIATION")){
+            autotest::loadtest get_var('CASEDIR')."/tests/install_source_variation.pm";
+        }
+
 
         ## Select minimal flavor
         if (get_var("FLAVOR") eq "server") {

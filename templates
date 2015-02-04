@@ -104,5 +104,13 @@
                       ],
                       variables => "",
                     },
+                    {
+                      name => "server_repository_http_variation",
+                      prio => 8,
+                      settings => [
+                        { key => "REPOSITORY_VARIATION", value => "1" },
+                      ],
+                      variables => "",
+                    },
                   ],
 }
