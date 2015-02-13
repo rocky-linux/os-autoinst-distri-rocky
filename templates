@@ -112,5 +112,15 @@
                       ],
                       variables => "",
                     },
+                    {
+                      name => "server_delete_partial",
+                      prio => 9,
+                      settings => [
+                        { key => "DISK_GUIDED_DELETE_PARTIAL", value => "1" },
+                        { key => "HDD_1", value => "disk_full.img" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
                   ],
 }
