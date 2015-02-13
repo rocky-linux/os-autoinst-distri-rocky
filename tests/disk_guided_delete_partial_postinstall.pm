@@ -9,7 +9,7 @@ sub run {
     assert_screen "console_command_success";
     type_string "reset; cat /mnt/testfile";
     send_key "ret";
-    assert_screen "provided_disk_intact";
+    assert_screen "provided_second_partition_intact";
 }
 
 sub test_flags {
