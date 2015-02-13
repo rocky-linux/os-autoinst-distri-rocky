@@ -16,6 +16,86 @@
                                     },
                       test_suite => { name => "server_simple" },
                     },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_repository_http_variation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_repository_http_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_mirrorlist_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_delete_pata" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_kickstart_user_creation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_scsi_updates_img" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_sata_multi" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_simple_encrypted" },
+                    },
                   ],
   Machines     => [
                     {
@@ -119,6 +199,14 @@
                         { key => "DISK_GUIDED_DELETE_PARTIAL", value => "1" },
                         { key => "HDD_1", value => "disk_full.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_simple_encrypted",
+                      prio => 9,
+                      settings => [
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
                     },
