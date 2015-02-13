@@ -10,24 +10,27 @@ sub run {
     assert_and_click "anaconda_main_hub_begin_installation";
 
     # Set root password
+    my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_root_password";
-    type_string "weakpassword";
+    type_string $root_password;
     send_key "tab";
-    type_string "weakpassword";
+    type_string $root_password;
     assert_and_click "anaconda_spoke_done";
     # weak password - click "done" once again"
     #assert_and_click "anaconda_spoke_done";
 
     # Set user details
+    my $user_login = get_var("USER_LOGIN") || "test";
+    my $user_password = get_var("USER_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_user_creation";
-    type_string "test";
+    type_string $user_login;
     send_key "tab";
     send_key "tab";
     send_key "tab";
     send_key "tab";
-    type_string "weakpassword";
+    type_string $user_password;
     send_key "tab";
-    type_string "weakpassword";
+    type_string $user_password;
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
     # weak password - click "done" once again"
