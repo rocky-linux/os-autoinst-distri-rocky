@@ -7,12 +7,16 @@ sub post_fail_hook {
     my $self = shift;
     send_key "ctrl-alt-f2";
     if (check_screen "anaconda_console", 10) {
-        upload_logs "/tmp/X.log";  # TODO: it can't type "X"
+        upload_logs "/tmp/X.log";
         upload_logs "/tmp/anaconda.log";
         upload_logs "/tmp/packaging.log";
         upload_logs "/tmp/storage.log";
         upload_logs "/tmp/syslog";
         upload_logs "/tmp/program.log";
+
+        # Upload all ABRT logs
+        type_string "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
+        upload_logs "/var/tmp/abrt/abrt.tar.gz";
     }
 }
 
