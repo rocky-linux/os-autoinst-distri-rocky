@@ -9,15 +9,8 @@ sub run {
     assert_screen "anaconda_main_hub";
 
     # FIXME: this code is scattered in at least three places (here, _boot_to_anaconda, _install_source_graphical. Deduplicate
-    my $fedora_version = "";
+    my $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
     my $repourl = "";
-
-    if (get_var("VERSION") eq "rawhide"){
-        $fedora_version = "rawhide";
-    }
-    else {
-        $fedora_version = (split /_/, get_var("BUILD"))[0];
-    }
 
     $repourl = "download.fedoraproject.org/pub/fedora/linux/development/".$fedora_version."/".get_var("ARCH")."/os";
 

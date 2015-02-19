@@ -6,7 +6,7 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
-    # Go into the Install Sourcre spoke
+    # Go into the Install Source spoke
     assert_and_click "anaconda_main_hub_installation_source";
 
 
@@ -22,14 +22,9 @@ sub run {
 
     # insert the url
     send_key "tab";
-    my $fedora_version = "";
+    my $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
     my $repourl = "";
-    if (get_var("VERSION") eq "rawhide"){
-        $fedora_version = "rawhide";
-    }
-    else {
-        $fedora_version = (split /_/, get_var("BUILD"))[0];
-
+    if ($fedora_version ne "rawhide"){
         if (get_var("MIRRORLIST_GRAPHICAL")){
             $fedora_version = "fedora-".$fedora_version;
         }
