@@ -101,7 +101,10 @@
                     {
                       backend   => "qemu",
                       name      => "64bit",
-                      settings  => [{ key => "QEMUCPU", value => "qemu64" }],
+                      settings  => [
+                        { key => "QEMUCPU", value => "qemu64" },
+                        { key => "QEMUCPUS", value => "2"}
+                      ],
                       variables => "",
                     },
                   ],
