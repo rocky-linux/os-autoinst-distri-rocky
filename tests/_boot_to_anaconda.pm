@@ -38,7 +38,7 @@ sub run {
     {
         # Select install language
         assert_screen "anaconda_select_install_lang", 300;
-        sleep 4; # TODO: sometimes, input box is not focused. check if this solves it
+        assert_and_click "anaconda_select_install_lang_input";
         type_string "english";
         assert_and_click "anaconda_select_install_lang_english_filtered";
         assert_screen "anaconda_select_install_lang_english_selected", 3;
