@@ -49,7 +49,7 @@ sub run {
         }
 
         # Anaconda hub
-        assert_screen "anaconda_main_hub", 300; #
+        assert_screen "anaconda_main_hub", 900; #
     }
 }
 

@@ -13,6 +13,7 @@ sub post_fail_hook {
         upload_logs "/tmp/storage.log";
         upload_logs "/tmp/syslog";
         upload_logs "/tmp/program.log";
+        upload_logs "/tmp/dnf.log";
 
         # Upload all ABRT logs
         type_string "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
@@ -20,7 +21,7 @@ sub post_fail_hook {
         upload_logs "/var/tmp/abrt/abrt.tar.gz";
 
         # Upload Anaconda logs
-        type_string "cd / && tar czvf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
+        type_string "tar czvf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
         send_key "ret";
         upload_logs "/tmp/anaconda_tb.tar.gz";
     }
