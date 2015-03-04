@@ -12,7 +12,7 @@ sub run {
     my $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
     my $repourl = "";
 
-    $repourl = "download.fedoraproject.org/pub/fedora/linux/development/".$fedora_version."/".get_var("ARCH")."/os";
+    $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
 
     # check that the repo was used
     send_key "ctrl-alt-f2";

@@ -38,7 +38,7 @@ sub run {
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")){
-        $repourl = "download.fedoraproject.org/pub/fedora/linux/development/".$fedora_version."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".$fedora_version."/".get_var("ARCH")."/os";
         type_string $repourl;
     }
 

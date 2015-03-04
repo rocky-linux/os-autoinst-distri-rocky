@@ -183,7 +183,7 @@
                       name => "server_repository_http_graphical",
                       prio => 7,
                       settings => [
-                        { key => "REPOSITORY_GRAPHICAL", value => "1" },
+                        { key => "REPOSITORY_GRAPHICAL", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
                       variables => "",
                     },
@@ -191,7 +191,7 @@
                       name => "server_repository_http_variation",
                       prio => 8,
                       settings => [
-                        { key => "REPOSITORY_VARIATION", value => "1" },
+                        { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
                       variables => "",
                     },

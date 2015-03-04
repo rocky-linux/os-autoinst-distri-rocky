@@ -28,7 +28,7 @@ sub run {
 
         $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
 
-        $repourl = "http://download.fedoraproject.org/pub/fedora/linux/development/".$fedora_version."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
         type_string " inst.repo=".$repourl;
     }
 
