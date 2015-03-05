@@ -47,10 +47,10 @@ else
 
 
         ## Disk partitioning
-        if (get_var('DISK_GUIDED_MULTI')){
+        if (get_var('DISK_GUIDED_MULTI')) {
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
         }
-        elsif (get_var('DISK_GUIDED_DELETE_ALL')){
+        elsif (get_var('DISK_GUIDED_DELETE_ALL')) {
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
         }
         elsif (get_var('DISK_GUIDED_DELETE_PARTIAL')) {
@@ -75,14 +75,14 @@ else
     }
     autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
 
-    if (get_var('DISK_GUIDED_MULTI'))
-    {
+    if (get_var('DISK_GUIDED_MULTI')) {
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";
     }
-
-    if (get_var('DISK_GUIDED_DELETE_PARTIAL'))
-    {
+    elsif (get_var('DISK_GUIDED_DELETE_PARTIAL')) {
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_partial_postinstall.pm";
+    }
+    elsif (get_var('DISK_GUIDED_FREE_SPACE')) {
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_free_space_postinstall.pm";
     }
 }
 

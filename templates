@@ -96,6 +96,16 @@
                                     },
                       test_suite => { name => "server_simple_encrypted" },
                     },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_simple_free_space" },
+                    },
                   ],
   Machines     => [
                     {
@@ -207,9 +217,19 @@
                     },
                     {
                       name => "server_simple_encrypted",
-                      prio => 9,
+                      prio => 10,
                       settings => [
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_simple_free_space",
+                      prio => 11,
+                      settings => [
+                        { key => "DISK_GUIDED_FREE_SPACE", value => "1" },
+                        { key => "HDD_1", value => "disk_freespace.img" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
                     },
