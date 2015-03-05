@@ -56,7 +56,11 @@ else
         elsif (get_var('DISK_GUIDED_DELETE_PARTIAL')) {
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_partial.pm";
         }
+        elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all.pm";
+        }
         else {
+            # also DISK_GUIDED_FREE_SPACE
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
         }
 
@@ -83,6 +87,9 @@ else
     }
     elsif (get_var('DISK_GUIDED_FREE_SPACE')) {
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_free_space_postinstall.pm";
+    }
+    elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all_postinstall.pm";
     }
 }
 
