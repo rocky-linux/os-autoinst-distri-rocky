@@ -6,9 +6,9 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
-    # Select the first disk
     assert_and_click "anaconda_main_hub_install_destination";
 
+    # Select both disks for installation
     assert_screen "anaconda_install_destination_two_disks";
     assert_and_click "anaconda_install_destination_select_disk_1";
     assert_and_click "anaconda_install_destination_select_disk_2";

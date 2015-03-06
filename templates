@@ -116,6 +116,16 @@
                                     },
                       test_suite => { name => "server_multi_empty" },
                     },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_software_raid" },
+                    },
                   ],
   Machines     => [
                     {
@@ -248,6 +258,16 @@
                       prio => 12,
                       settings => [
                         { key => "DISK_GUIDED_MULTI_EMPTY_ALL", value => "1" },
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_software_raid",
+                      prio => 13,
+                      settings => [
+                        { key => "DISK_SOFTWARE_RAID", value => "1" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],

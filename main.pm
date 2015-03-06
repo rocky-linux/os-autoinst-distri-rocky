@@ -59,6 +59,9 @@ else
         elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all.pm";
         }
+        elsif (get_var('DISK_SOFTWARE_RAID')) {
+            autotest::loadtest get_var('CASEDIR')."/tests/disk_part_software_raid.pm";
+        }
         else {
             # also DISK_GUIDED_FREE_SPACE
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
@@ -90,6 +93,9 @@ else
     }
     elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all_postinstall.pm";
+    }
+    elsif (get_var('DISK_SOFTWARE_RAID')) {
+        autotest::loadtest get_var('CASEDIR')."/tests/disk_part_software_raid_postinstall.pm";
     }
 }
 
