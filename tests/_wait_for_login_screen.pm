@@ -20,6 +20,7 @@ sub run {
             {
                 type_string get_var("USER_LOGIN");
                 send_key "ret";
+                assert_screen "password_required", 10;
                 type_string get_var("USER_PASSWORD");
                 send_key "ret";
                 assert_screen "user_logged_in", 10;
@@ -38,6 +39,7 @@ sub run {
                     type_string "root";
                     send_key "ret";
                 }
+                assert_screen "password_required", 10;
                 type_string get_var("ROOT_PASSWORD");
                 send_key "ret";
                 assert_screen "root_logged_in", 10;
