@@ -126,6 +126,26 @@
                                     },
                       test_suite => { name => "server_software_raid" },
                     },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_delete_partial" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server",
+                                      version => "rawhide",
+                                    },
+                      test_suite => { name => "server_kickstart_hdd" },
+                    },
                   ],
   Machines     => [
                     {
@@ -270,6 +290,20 @@
                         { key => "DISK_SOFTWARE_RAID", value => "1" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_kickstart_hdd",
+                      prio => 13,
+                      settings => [
+                        { key => "KICKSTART", value => "1" },
+                        { key => "GRUB", value => "inst.ks=hd:vdb1:/root-user-crypted-net.ks" },
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "HDD_2", value => "disk_ks.img" }
+                        { key => "ROOT_PASSWORD", value => "111111" },
+                        { key => "USER_LOGIN", value => "test" },
+                        { key => "USER_PASSWORD", value => "test" },
                       ],
                       variables => "",
                     },
