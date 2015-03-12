@@ -300,7 +300,7 @@
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=hd:vdb1:/root-user-crypted-net.ks" },
                         { key => "NUMDISKS", value => "2" },
-                        { key => "HDD_2", value => "disk_ks.img" }
+                        { key => "HDD_2", value => "disk_ks.img" },
                         { key => "ROOT_PASSWORD", value => "111111" },
                         { key => "USER_LOGIN", value => "test" },
                         { key => "USER_PASSWORD", value => "test" },
