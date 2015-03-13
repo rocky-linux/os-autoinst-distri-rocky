@@ -4,10 +4,10 @@ use testapi;
 
 sub run {
     assert_screen "root_logged_in";
-    type_string "reset; mount /dev/vda1 /mnt; echo $?";
+    type_string 'reset; mount /dev/vda1 /mnt; echo $?'; # if you use doublequotes, $? gets replaced by Perl with last error code
     send_key "ret";
     assert_screen "console_command_success";
-    type_string "reset; cat /mnt/testfile";
+    type_string 'reset; cat /mnt/testfile';
     send_key "ret";
     assert_screen "provided_disk_intact";
 }

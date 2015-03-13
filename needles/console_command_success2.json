@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "height": 13,
+      "width": 204,
+      "ypos": 16,
+      "type": "match",
+      "xpos": 0
+    }
+  ],
+  "tags": [
+    "console_command_success",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-server"
+  ],
+  "properties": []
+}
