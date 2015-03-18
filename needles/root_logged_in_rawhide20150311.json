@@ -1,16 +1,16 @@
 {
   "tags": [
-    "ENV-DESKTOP-default",
+    "root_logged_in",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "text_console_login"
+    "ENV-FLAVOR-server"
   ],
   "area": [
     {
       "xpos": 0,
-      "ypos": 49,
-      "width": 140,
-      "height": 50,
+      "ypos": 80,
+      "width": 152,
+      "height": 14,
       "type": "match"
     }
   ]

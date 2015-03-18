@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 326,
+      "height": 20,
+      "xpos": 91,
+      "type": "match",
+      "width": 449
+    }
+  ],
+  "tags": [
+    "bootloader",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-server"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "live_initial_anaconda_launcher",
+    "ENV-DISTRI-fedora",
+    "ENV-DESKTOP-gnome"
+  ],
+  "area": [
+    {
+      "xpos": 542,
+      "ypos": 205,
+      "width": 227,
+      "height": 180,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

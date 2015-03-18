@@ -1,15 +1,15 @@
 {
   "area": [
     {
+      "ypos": 326,
+      "height": 20,
+      "xpos": 91,
       "type": "match",
-      "width": 76,
-      "xpos": 941,
-      "ypos": 686,
-      "height": 33
+      "width": 449
     }
   ],
   "tags": [
-    "anaconda_install_finish",
+    "bootloader",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
     "ENV-FLAVOR-server"

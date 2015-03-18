@@ -20,6 +20,7 @@ sub run {
     #assert_and_click "anaconda_spoke_done";
 
     # Set user details
+    sleep 1;
     my $user_login = get_var("USER_LOGIN") || "test";
     my $user_password = get_var("USER_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_user_creation";
@@ -37,8 +38,10 @@ sub run {
     #assert_and_click "anaconda_spoke_done";
 
     # Wait for install to end
-    assert_screen "anaconda_install_done", 1800;
-    assert_and_click "anaconda_install_finish";
+    assert_and_click "anaconda_install_done", '', 1800;
+    if (get_var('LIVE')) {
+        x11_start_program("reboot");
+    }
 }
 
 sub test_flags {

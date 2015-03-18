@@ -1,16 +1,16 @@
 {
   "tags": [
-    "ENV-DESKTOP-default",
+    "ENV-DESKTOP-gnome",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "text_console_login"
+    "graphical_login"
   ],
   "area": [
     {
-      "xpos": 0,
-      "ypos": 49,
-      "width": 140,
-      "height": 50,
+      "xpos": 335,
+      "ypos": 423,
+      "width": 67,
+      "height": 12,
       "type": "match"
     }
   ]

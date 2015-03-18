@@ -17,6 +17,37 @@
 use strict;
 use testapi;
 use autotest;
+use needle;
+
+# distribution-specific implementations of expected methods
+my $distri = testapi::get_var("CASEDIR") . '/lib/fedoradistribution.pm';
+require $distri;
+testapi::set_distribution(fedoradistribution->new());
+
+# Stolen from openSUSE.
+sub unregister_needle_tags($) {
+    my $tag = shift;
+    my @a   = @{ needle::tags($tag) };
+    for my $n (@a) { $n->unregister(); }
+}
+
+sub cleanup_needles() {
+    if (!get_var('LIVE')) {
+        ## Unregister live-only installer needles. The main issue is the
+        ## hub: on non-live we want to wait for repository setup to complete,
+        ## but if we match that spoke's "ready" icon, it breaks live because
+        ## it doesn't have that spoke. So we have a live needle which doesn't
+        ## match on that icon, but we unregister it for non-live installs so
+        ## they don't match on it too soon.
+        unregister_needle_tags("ENV-INSTALLER-live");
+    }
+}
+$needle::cleanuphandler = \&cleanup_needles;
+
+if (get_var('LIVE')) {
+    # No package set selection for lives.
+    set_var('PACKAGE_SET', "default");
+}
 
 # Boot to anaconda Hub in English
 
@@ -39,12 +70,11 @@ else
             autotest::loadtest get_var('CASEDIR')."/tests/install_source_variation.pm";
         }
 
-
-        ## Select minimal flavor
-        if (get_var("FLAVOR") eq "server") {
-            autotest::loadtest get_var('CASEDIR')."/tests/_select_minimal.pm";
+        ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
+        my $packageset = get_var('PACKAGE_SET', 'minimal');
+        unless ($packageset eq 'default') {
+            autotest::loadtest get_var('CASEDIR')."/tests/_select_".$packageset.".pm";
         }
-
 
         ## Disk partitioning
         if (get_var('DISK_GUIDED_MULTI')) {
@@ -76,11 +106,18 @@ else
         autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
     }
 
-    # Wait for the login screen
+    # Unlock encrypted storage volumes, if necessary
     if (get_var("ENCRYPT_PASSWORD")){
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted_postinstall.pm";
     }
-    autotest::loadtest get_var('CASEDIR')."/tests/_wait_for_login_screen.pm";
+
+    # Appropriate login method for install type
+    if (get_var("DESKTOP")) {
+        autotest::loadtest get_var('CASEDIR')."/tests/_graphical_wait_login.pm";
+    }
+    else {
+        autotest::loadtest get_var('CASEDIR')."/tests/_console_wait_login.pm";
+    }
 
     if (get_var('DISK_GUIDED_MULTI')) {
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";

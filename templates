@@ -11,18 +11,48 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "workstation_live",
+                                      version => "*",
                                     },
-                      test_suite => { name => "server_simple" },
+                      test_suite => { name => "default_install" },
                     },
                     {
                       machine    => { name => "64bit" },
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "server_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "generic_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "package_set_minimal" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_repository_http_variation" },
                     },
@@ -31,8 +61,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_repository_http_graphical" },
                     },
@@ -41,8 +71,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_mirrorlist_graphical" },
                     },
@@ -51,8 +81,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_delete_pata" },
                     },
@@ -61,8 +91,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_kickstart_user_creation" },
                     },
@@ -71,8 +101,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_scsi_updates_img" },
                     },
@@ -81,8 +111,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_sata_multi" },
                     },
@@ -91,8 +121,8 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server",
-                                      version => "rawhide",
+                                      flavor  => "universal",
+                                      version => "*",
                                     },
                       test_suite => { name => "server_simple_encrypted" },
                     },
@@ -153,7 +183,9 @@
                       name      => "64bit",
                       settings  => [
                         { key => "QEMUCPU", value => "qemu64" },
-                        { key => "QEMUCPUS", value => "2"}
+                        { key => "QEMUCPUS", value => "2"},
+                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMURAM", value => "2048"}
                       ],
                       variables => "",
                     },
@@ -162,19 +194,61 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "server",
+                      flavor    => "universal",
                       name      => "",
                       settings  => [
                                    ],
                       variables => "",
-                      version   => "rawhide",
+                      version   => "*",
                     },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "generic_boot",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "server_boot",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "workstation_live",
+                      name      => "",
+                      settings  => [
+                        { key => "LIVE", value => "1" },
+                        { key => "DESKTOP", value => "gnome" }
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    }
                   ],
   TestSuites   => [
                     {
-                      name => "server_simple",
+                      name => "default_install",
                       prio => 1,
-                      settings => [],
+                      settings => [
+                        { key => "PACKAGE_SET", value => "default" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "package_set_minimal",
+                      prio => 1,
+                      settings => [
+                        { key => "PACKAGE_SET", value => "minimal" },
+                      ],
                       variables => "",
                     },
                     {
