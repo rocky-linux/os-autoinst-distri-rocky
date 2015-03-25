@@ -71,10 +71,7 @@ else
         }
 
         ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
-        my $packageset = get_var('PACKAGE_SET', 'minimal');
-        unless ($packageset eq 'default') {
-            autotest::loadtest get_var('CASEDIR')."/tests/_select_".$packageset.".pm";
-        }
+        autotest::loadtest get_var('CASEDIR')."/tests/_software_selection.pm";
 
         ## Disk partitioning
         if (get_var('DISK_GUIDED_MULTI')) {
