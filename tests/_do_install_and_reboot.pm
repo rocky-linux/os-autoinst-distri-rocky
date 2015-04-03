@@ -12,6 +12,7 @@ sub run {
     # Set root password
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_root_password";
+    assert_screen "anaconda_install_root_password_screen";
     type_string $root_password;
     send_key "tab";
     type_string $root_password;
@@ -24,11 +25,9 @@ sub run {
     my $user_login = get_var("USER_LOGIN") || "test";
     my $user_password = get_var("USER_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_user_creation";
+    assert_screen "anaconda_install_user_creation_screen";
     type_string $user_login;
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
+    assert_and_click "anaconda_user_creation_password_input";
     type_string $user_password;
     send_key "tab";
     type_string $user_password;
