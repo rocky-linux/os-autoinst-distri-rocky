@@ -3,14 +3,14 @@ use strict;
 use testapi;
 
 sub run {
+    # Anaconda hub
+    assert_screen "anaconda_main_hub", 300; #
+
     # Select package set. Minimal is the default, if 'default' is specified, skip selection.
     my $packageset = get_var('PACKAGE_SET', 'minimal');
     if ($packageset eq 'default') {
         return
     }
-    
-    # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
 
     assert_and_click "anaconda_main_hub_select_packages";
 
