@@ -55,6 +55,12 @@ if (get_var("ENTRYPOINT"))
 {
     autotest::loadtest get_var('CASEDIR')."/tests/".get_var("ENTRYPOINT").".pm";
 }
+elsif (get_var("UPGRADE"))
+{
+    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_preinstall_".get_var("UPGRADE").".pm";
+    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_run_".get_var("UPGRADE").".pm";
+    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_postinstall_".get_var("UPGRADE").".pm";
+}
 else
 {
     autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";

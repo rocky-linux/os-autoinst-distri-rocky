@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "tmp_failed_proc",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-develop"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "xpos": 71,
+      "ypos": 338,
+      "width": 251,
+      "height": 11,
+      "type": "match"
+    }
+  ]
+}

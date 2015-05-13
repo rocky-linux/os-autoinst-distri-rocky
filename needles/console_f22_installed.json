@@ -2,17 +2,17 @@
   "properties": [],
   "area": [
     {
-      "width": 156,
       "xpos": 0,
-      "height": 19,
-      "ypos": 113,
+      "ypos": 129,
+      "width": 238,
+      "height": 12,
       "type": "match"
     }
   ],
   "tags": [
-    "root_logged_in",
+    "console_f22_installed",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "ENV-FLAVOR-server"
+    "ENV-FLAVOR-develop"
   ]
 }

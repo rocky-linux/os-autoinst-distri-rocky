@@ -2,15 +2,15 @@
   "properties": [],
   "area": [
     {
-      "width": 156,
-      "xpos": 0,
-      "height": 19,
-      "ypos": 113,
+      "xpos": 119,
+      "ypos": 51,
+      "width": 61,
+      "height": 10,
       "type": "match"
     }
   ],
   "tags": [
-    "root_logged_in",
+    "grub_fedup",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
     "ENV-FLAVOR-server"
