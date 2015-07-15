@@ -3,12 +3,14 @@ use base 'basetest';
 
 use testapi;
 
-sub post_fail_hook() {
+sub login_as_root {
     my $self = shift;
+    my $tty = shift || 1;
     my $password = get_var("ROOT_PASSWORD", "weakpassword");
 
-    send_key "ctrl-alt-f2";
+    send_key "ctrl-alt-f$tty";
     assert_screen "text_console_login", 20;
+
     type_string "root";
     send_key "ret";
     assert_screen "console_password_required", 10;
@@ -16,6 +18,19 @@ sub post_fail_hook() {
     send_key "ret";
 
     assert_screen "root_logged_in", 10;
+}
+
+sub boot_and_login {
+    my $self = shift;
+    wait_still_screen 10;
+
+    $self->login_as_root(3);
+}
+
+sub post_fail_hook {
+    my $self = shift;
+
+    $self->login_as_root(2);
 
     # Upload all ABRT logs
     type_string "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";

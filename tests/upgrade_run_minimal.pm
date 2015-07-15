@@ -28,15 +28,7 @@ sub run {
     assert_screen "grub_fedup", 30;
     send_key "ret";
 
-    my $counter = 0;
-
-    while (!check_screen ("text_console_login", 10) && $counter < 180) {
-        if (check_screen "tmp_failed_proc", 1) {
-            send_key "ctrl-alt-delete";
-        }
-        $counter++;
-    }
-    assert_screen "text_console_login", 10;
+    assert_screen "text_console_login", 6000;
 }
 
 
