@@ -20,11 +20,17 @@ sub login_as_root {
     assert_screen "root_logged_in", 10;
 }
 
-sub boot_and_login {
+sub boot_to_login_screen {
     my $self = shift;
-    wait_still_screen 10;
+    my $boot_done_screen = shift;
+    my $stillscreen = shift || 10;
+    my $timeout = shift || 60;
 
-    $self->login_as_root(3);
+    wait_still_screen $stillscreen, $timeout;
+
+    if ($boot_done_screen ne "") {
+        assert_screen $boot_done_screen;
+    }
 }
 
 sub post_fail_hook {

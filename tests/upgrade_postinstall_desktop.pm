@@ -2,25 +2,18 @@ use base "fedoralog";
 use strict;
 use testapi;
 
+
 sub run {
     my $self = shift;
+    my $password = get_var("PASSWORD", "weakpassword");
 
-    $self->boot_and_login();
+    $self->boot_to_login_screen("graphical_login", 20);
 
-    type_string 'yum -y update; echo $?';
     send_key "ret";
-
-    assert_screen "console_command_success", 1800;
-
-    type_string "reboot";
+    assert_screen "graphical_login_input";
+    type_string $password;
     send_key "ret";
-
-    $self->boot_and_login();
-
-    type_string 'yum -y install fedup; echo $?';
-    send_key "ret";
-
-    assert_screen "console_command_success", 1800;
+    assert_screen "graphical_desktop_clean", 30;
 }
 
 

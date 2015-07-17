@@ -28,7 +28,12 @@ sub run {
     assert_screen "grub_fedup", 30;
     send_key "ret";
 
-    assert_screen "text_console_login", 6000;
+    if (get_var('UPGRADE') eq "desktop") {
+        assert_screen "graphical_login", 6000;
+    #} elsif (get_var('UPGRADE' eq "minimal")) {
+    } else {
+        assert_screen "text_console_login", 6000;
+    }
 }
 
 

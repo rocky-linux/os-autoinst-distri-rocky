@@ -1,17 +1,18 @@
 {
   "tags": [
-    "ENV-DESKTOP-gnome",
+    "graphical_login",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "graphical_login"
+    "ENV-FLAVOR-develop"
   ],
+  "properties": [],
   "area": [
     {
-      "xpos": 335,
-      "ypos": 423,
-      "width": 67,
-      "height": 12,
-      "type": "match"
+      "width": 206,
+      "type": "match",
+      "xpos": 405,
+      "height": 106,
+      "ypos": 645
     }
   ]
 }

@@ -6,7 +6,8 @@ use testapi;
 sub run {
     my $self = shift;
 
-    $self->boot_and_login();
+    $self->boot_to_login_screen();
+    $self->login_as_root(3);
 
     assert_screen "console_f22_installed";
 }

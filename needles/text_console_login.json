@@ -1,17 +1,18 @@
 {
   "tags": [
-    "ENV-DESKTOP-default",
+    "text_console_login",
     "ENV-DISTRI-fedora",
     "ENV-INSTLANG-en_US",
-    "text_console_login"
+    "ENV-FLAVOR-develop"
   ],
+  "properties": [],
   "area": [
     {
+      "width": 128,
       "xpos": 0,
+      "type": "match",
       "ypos": 49,
-      "width": 140,
-      "height": 50,
-      "type": "match"
+      "height": 30
     }
   ]
 }

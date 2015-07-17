@@ -1,0 +1,25 @@
+{
+  "area": [
+    {
+      "xpos": 341,
+      "ypos": 372,
+      "width": 343,
+      "height": 65,
+      "type": "match"
+    },
+    {
+      "xpos": 600,
+      "ypos": 470,
+      "width": 80,
+      "height": 30,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "graphical_login_input",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-develop"
+  ],
+  "properties": []
+}
