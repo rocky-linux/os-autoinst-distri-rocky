@@ -1,17 +1,17 @@
 {
-  "tags": [
-    "anaconda_install_destination_two_disks",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
-    "ENV-FLAVOR-server"
-  ],
-  "area": [
-    {
-      "xpos": 57,
-      "ypos": 203,
-      "width": 322,
-      "height": 46,
-      "type": "match"
-    }
-  ]
+    "area": [
+        {
+            "height": 46,
+            "type": "match",
+            "width": 322,
+            "xpos": 57,
+            "ypos": 213
+        }
+    ],
+    "tags": [
+        "anaconda_install_destination_two_disks",
+        "ENV-DISTRI-fedora",
+        "ENV-INSTLANG-en_US",
+        "ENV-FLAVOR-server"
+    ]
 }

@@ -1,18 +1,18 @@
 {
-  "tags": [
-    "anaconda_part_plus_button",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
-    "ENV-FLAVOR-server"
-  ],
-  "area": [
-    {
-      "xpos": 32,
-      "ypos": 624,
-      "width": 35,
-      "height": 31,
-      "type": "match"
-    }
-  ],
-  "properties": []
+    "area": [
+        {
+            "height": 31,
+            "type": "match",
+            "width": 35,
+            "xpos": 32,
+            "ypos": 619
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "anaconda_part_plus_button",
+        "ENV-DISTRI-fedora",
+        "ENV-INSTLANG-en_US",
+        "ENV-FLAVOR-server"
+    ]
 }

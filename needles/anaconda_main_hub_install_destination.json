@@ -1,17 +1,17 @@
 {
-  "tags": [
-    "anaconda_main_hub_install_destination",
-    "ENV-DESKTOP-default",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US"
-  ],
-  "area": [
-    {
-      "xpos": 214,
-      "ypos": 446,
-      "width": 74,
-      "height": 77,
-      "type": "match"
-    }
-  ]
+    "area": [
+        {
+            "height": 77,
+            "type": "match",
+            "width": 74,
+            "xpos": 184,
+            "ypos": 461
+        }
+    ],
+    "tags": [
+        "anaconda_main_hub_install_destination",
+        "ENV-DESKTOP-default",
+        "ENV-DISTRI-fedora",
+        "ENV-INSTLANG-en_US"
+    ]
 }
