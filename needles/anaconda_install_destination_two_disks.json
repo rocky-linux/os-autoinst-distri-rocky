@@ -3,9 +3,23 @@
         {
             "height": 46,
             "type": "match",
-            "width": 322,
-            "xpos": 57,
+            "width": 162,
+            "xpos": 122,
             "ypos": 213
+        },
+        {
+            "height": 24,
+            "type": "match",
+            "width": 17,
+            "xpos": 41,
+            "ypos": 289
+        },
+        {
+            "height": 23,
+            "type": "match",
+            "width": 15,
+            "xpos": 206,
+            "ypos": 290
         }
     ],
     "tags": [
