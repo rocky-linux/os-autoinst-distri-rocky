@@ -7,6 +7,10 @@ sub run {
     assert_screen "anaconda_main_hub", 300; #
 
     # Begin installation
+    # Sometimes, the 'slide in from the top' animation messes with
+    # this - by the time we click the button isn't where it was any
+    # more. So wait a sec just in case.
+    sleep 1;
     assert_and_click "anaconda_main_hub_begin_installation";
 
     # Set root password
