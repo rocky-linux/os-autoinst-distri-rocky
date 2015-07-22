@@ -4,7 +4,7 @@ use testapi;
 
 sub run {
     # !!! GRUB parameter is set in _boot_to_anaconda.pm !!!
-
+    my $self = shift;
     # Anaconda hub
     assert_screen "anaconda_main_hub";
 
@@ -15,8 +15,7 @@ sub run {
     $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
 
     # check that the repo was used
-    send_key "ctrl-alt-f2";
-    wait_idle 10;
+    $self->root_console;
     type_string "grep \"".$repourl."\" /tmp/packaging.log"; #| grep \"added repo\"";
     send_key "ret";
     assert_screen "anaconda_install_source_check_repo_added";

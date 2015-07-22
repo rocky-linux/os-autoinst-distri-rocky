@@ -1,5 +1,5 @@
 package anacondalog;
-use base 'basetest';
+use base 'fedorabase';
 
 use testapi;
 
@@ -12,21 +12,8 @@ sub post_fail_hook {
         $has_traceback = 1;
     }
 
-    send_key "ctrl-alt-f2";
-    my $logged_in = 0;
-    if (get_var("LIVE") && check_screen "text_console_login", 20) {
-        # On live installs, we need to log in
-        type_string "root";
-        send_key "ret";
-        if (check_screen "root_logged_in", 10) {
-            $logged_in = 1;
-        }
-    }
-    elsif (check_screen "anaconda_console", 10) {
-        $logged_in = 1;
-    }
-
-    if ($logged_in == 1) {
+    $self->root_console(check=>0);
+    if (check_screen "root_console", 10) {
         upload_logs "/tmp/X.log";
         upload_logs "/tmp/anaconda.log";
         upload_logs "/tmp/packaging.log";
@@ -50,6 +37,24 @@ sub post_fail_hook {
     else {
         save_screenshot;
     }
+}
+
+sub root_console {
+    my $self = shift;
+    my %args = (
+        check => 1,
+        @_);
+
+    if (get_var("LIVE")) {
+        send_key "ctrl-alt-f2";
+    }
+    else {
+        # Working around RHBZ 1222413, no console on tty2
+        send_key "ctrl-alt-f1";
+        send_key "ctrl-b";
+        send_key "2";
+    }
+    $self->console_login(user=>"root",check=>$args{check});
 }
 
 1;

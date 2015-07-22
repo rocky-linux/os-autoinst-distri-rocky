@@ -3,7 +3,7 @@ use strict;
 use testapi;
 
 sub run {
-    assert_screen "root_logged_in";
+    assert_screen "root_console";
     type_string "reset; cat /proc/mdstat";
     send_key "ret";
     assert_screen "console_raid_used";

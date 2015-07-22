@@ -1,18 +1,26 @@
 {
-  "properties": [],
-  "area": [
-    {
-      "width": 156,
-      "xpos": 0,
-      "height": 19,
-      "ypos": 113,
-      "type": "match"
-    }
-  ],
-  "tags": [
-    "root_logged_in",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
-    "ENV-FLAVOR-server"
-  ]
+    "area": [
+        {
+            "height": 17,
+            "type": "match",
+            "width": 40,
+            "xpos": 7,
+            "ypos": 111
+        },
+        {
+            "height": 14,
+            "type": "match",
+            "width": 17,
+            "xpos": 137,
+            "ypos": 112
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "root_logged_in",
+        "root_console",
+        "ENV-DISTRI-fedora",
+        "ENV-INSTLANG-en_US",
+        "ENV-FLAVOR-server"
+    ]
 }

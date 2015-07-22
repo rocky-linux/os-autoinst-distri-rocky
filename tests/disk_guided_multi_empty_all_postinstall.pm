@@ -3,7 +3,7 @@ use strict;
 use testapi;
 
 sub run {
-    assert_screen "root_logged_in";
+    assert_screen "root_console";
     
     # when two disks are selected in installation, LVM is used
     type_string "reset; pvdisplay";

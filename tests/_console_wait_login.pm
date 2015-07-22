@@ -1,8 +1,9 @@
-use base "basetest";
+use base "fedorabase";
 use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
 
     # If KICKSTART is set, then the wait_time needs to
     #  consider the install time
@@ -11,37 +12,12 @@ sub run {
     # Reboot and wait for the text login
     assert_screen "text_console_login", $wait_time;
 
-    if ((get_var("USER_LOGIN") && get_var("USER_PASSWORD")) || get_var("ROOT_PASSWORD"))
-    {
-        my $user_logged_in = 0;
-        if (get_var("USER_LOGIN"))
-        {
-            type_string get_var("USER_LOGIN");
-            send_key "ret";
-            type_string get_var("USER_PASSWORD");
-            send_key "ret";
-            assert_screen "user_logged_in", 10;
-            $user_logged_in = 1;
-        }
-        if (get_var("ROOT_PASSWORD"))
-        {
-            if ($user_logged_in == 1)
-            {
-                type_string "su -";
-                send_key "ret";
-                assert_screen "console_password_required", 10;
-            }
-            else
-            {
-                type_string "root";
-                send_key "ret";
-            }
-            type_string get_var("ROOT_PASSWORD");
-            send_key "ret";
-            assert_screen "root_logged_in", 10;
-        }
+    if (get_var("USER_LOGIN") && get_var("USER_PASSWORD")) {
+         $self->console_login(user=>get_var("USER_LOGIN"), password=>get_var("USER_PASSWORD"));
     }
-
+    if (get_var("ROOT_PASSWORD")) {
+        $self->console_login(user=>"root", password=>get_var("ROOT_PASSWORD"));
+    }
 }
 
 sub test_flags {

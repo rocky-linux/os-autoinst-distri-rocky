@@ -11,7 +11,7 @@ sub run {
     } else {
         $self->boot_to_login_screen();
     }
-    $self->login_as_root(3);
+    $self->root_console(tty=>3);
 
     type_string 'yum -y update; echo $?';
     send_key "ret";
@@ -27,7 +27,7 @@ sub run {
     } else {
         $self->boot_to_login_screen();
     }
-    $self->login_as_root(3);
+    $self->root_console(tty=>3);
 
     type_string 'yum -y install fedup; echo $?';
     send_key "ret";

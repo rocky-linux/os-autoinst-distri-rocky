@@ -3,7 +3,7 @@ use strict;
 use testapi;
 
 sub run {
-    assert_screen "root_logged_in";
+    assert_screen "root_console";
     type_string 'reset; mount /dev/vda1 /mnt; echo $?'; # if you use doublequotes, $? gets replaced by Perl with last error code
     send_key "ret";
     assert_screen "console_command_success";

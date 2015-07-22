@@ -3,6 +3,7 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
@@ -48,8 +49,7 @@ sub run {
     assert_screen "anaconda_main_hub", 300;
 
     # check that the repo was used
-    send_key "ctrl-alt-f2";
-    wait_idle 10;
+    $self->root_console;
     type_string "grep \"".$repourl."\" /tmp/packaging.log"; # | grep \"added repo\"";
     send_key "ret";
     assert_screen "anaconda_install_source_check_repo_added";
