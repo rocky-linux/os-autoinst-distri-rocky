@@ -4,17 +4,16 @@ use testapi;
 
 sub run {
     my $self = shift;
-    # Anaconda hub
-    # Go to INSTALLATION DESTINATION and ensure one disk is selected.
-    $self->select_disks();
-
-    # updates.img tests work by changing the appearance of the INSTALLATION
-    # DESTINATION screen, so check that if needed.
-    if (get_var('BOOT_UPDATES_IMG_URL')){
-        assert_screen "anaconda_install_destination_pony", 30;
-    }
-
+    # Go to INSTALLATION DESTINATION and ensure two disks are selected.
+    # Because DISK_CUSTOM is set, select_disks will select custom for us.
+    $self->select_disks(2);
     assert_and_click "anaconda_spoke_done";
+
+    # Manual partitioning spoke should be displayed
+    assert_and_click "anaconda_part_automatic";
+    $self->custom_change_type("raid");
+    assert_and_click "anaconda_spoke_done";
+    assert_and_click "anaconda_part_accept_changes";
 
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #

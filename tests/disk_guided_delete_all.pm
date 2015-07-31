@@ -3,11 +3,10 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
-
-    assert_and_click "anaconda_main_hub_install_destination"; 
-
+    # Go to INSTALLATION DESTINATION and ensure one disk is selected.
+    $self->select_disks();
     assert_and_click "anaconda_spoke_done";
 
     # the only provided disk should be full

@@ -79,37 +79,37 @@ else
         ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
         autotest::loadtest get_var('CASEDIR')."/tests/_software_selection.pm";
 
-        ## Disk partitioning
-        if (get_var('DISK_GUIDED_MULTI')) {
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi.pm";
-        }
-        elsif (get_var('DISK_GUIDED_DELETE_ALL')) {
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_all.pm";
-        }
-        elsif (get_var('DISK_GUIDED_DELETE_PARTIAL')) {
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_partial.pm";
-        }
-        elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all.pm";
-        }
-        elsif (get_var('DISK_SOFTWARE_RAID')) {
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_part_software_raid.pm";
+        ## Disk partitioning.
+        # If DISK_CUSTOM or DISK_GUIDED is set, we pick the storage test
+        # to run based on the value (usually we run the test with the name
+        # that matches the value, except for a couple of commented cases).
+        my $storage = '';
+        if (get_var('DISK_CUSTOM')) {
+            $storage = get_var('CASEDIR')."/tests/disk_custom_".get_var('DISK_CUSTOM').".pm";
         }
         else {
-            # also DISK_GUIDED_FREE_SPACE
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_empty.pm";
+            my $disk_guided = get_var('DISK_GUIDED');
+            # if DISK_GUIDED is unset, or one of [...], use disk_guided_empty,
+            # which is the simplest / 'default' case.
+            if (! $disk_guided || $disk_guided ~~ ['empty', 'free_space']) {
+                $storage = get_var('CASEDIR')."/tests/disk_guided_empty.pm";
+            }
+            else {
+                $storage = get_var('CASEDIR')."/tests/disk_guided_".$disk_guided.".pm";
+            }
         }
+        autotest::loadtest $storage;
 
         if (get_var("ENCRYPT_PASSWORD")){
             autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted.pm";
         }
 
-
         # Start installation, set user & root passwords, reboot
         autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
     }
 
-    # Unlock encrypted storage volumes, if necessary
+    # Unlock encrypted storage volumes, if necessary. The test name here
+    # follows the 'storage post-install' convention, but must be run earlier.
     if (get_var("ENCRYPT_PASSWORD")){
         autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted_postinstall.pm";
     }
@@ -122,21 +122,19 @@ else
         autotest::loadtest get_var('CASEDIR')."/tests/_console_wait_login.pm";
     }
 
-    if (get_var('DISK_GUIDED_MULTI')) {
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_postinstall.pm";
+    # If there is a post-install test to verify storage configuration worked
+    # correctly, run it. Again we determine the test name based on the value
+    # of DISK_CUSTOM or DISK_GUIDED.
+    my $storagepost = '';
+    if (get_var('DISK_GUIDED')) {
+        my $loc = get_var('CASEDIR')."/tests/disk_guided_".get_var('DISK_GUIDED')."_postinstall.pm";
+        $storagepost = $loc if (-e $loc);
     }
-    elsif (get_var('DISK_GUIDED_DELETE_PARTIAL')) {
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_delete_partial_postinstall.pm";
+    elsif (get_var('DISK_CUSTOM')) {
+        my $loc = get_var('CASEDIR')."/tests/disk_custom_".get_var('DISK_CUSTOM')."_postinstall.pm";
+        $storagepost = $loc if (-e $loc);
     }
-    elsif (get_var('DISK_GUIDED_FREE_SPACE')) {
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_free_space_postinstall.pm";
-    }
-    elsif (get_var('DISK_GUIDED_MULTI_EMPTY_ALL')) {
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_multi_empty_all_postinstall.pm";
-    }
-    elsif (get_var('DISK_SOFTWARE_RAID')) {
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_part_software_raid_postinstall.pm";
-    }
+    autotest::loadtest $storagepost if ($storagepost);
 }
 
 
