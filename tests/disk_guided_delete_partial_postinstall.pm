@@ -1,10 +1,11 @@
-use base "basetest";
+use base "installedtest";
 use strict;
 use testapi;
 
 sub run {
     assert_screen "root_console";
-    type_string 'reset; mount /dev/vda2 /mnt; echo $?'; # if you use doublequotes, $? gets replaced by Perl with last error code
+    # mount second partition and check that it's intact
+    type_string 'reset; mount /dev/vda2 /mnt; echo $?';
     send_key "ret";
     assert_screen "console_command_success";
     type_string 'reset; cat /mnt/testfile';

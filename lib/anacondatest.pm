@@ -1,11 +1,17 @@
 package anacondalog;
 use base 'fedorabase';
 
+# base class for all Anaconda (installation) tests
+
+# should be used in tests where Anaconda is running - when it makes sense
+# to upload Anaconda logs when something fails
+
 use testapi;
 
 sub post_fail_hook {
     my $self = shift;
 
+    # if error dialog is shown, click "report" - it then creates directory structure for ABRT
     my $has_traceback = 0;
     if (check_screen "anaconda_error", 10) {
         assert_and_click "anaconda_report_btn"; # Generage Anaconda ABRT logs
@@ -29,7 +35,7 @@ sub post_fail_hook {
             upload_logs "/var/tmp/var_tmp.tar.gz";
         }
 
-        # Upload Anaconda logs
+        # Upload Anaconda traceback logs
         type_string "tar czvf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
         send_key "ret";
         upload_logs "/tmp/anaconda_tb.tar.gz";
@@ -42,7 +48,7 @@ sub post_fail_hook {
 sub root_console {
     my $self = shift;
     my %args = (
-        check => 1,
+        check => 1, # whether to fail when console wasn't reached
         @_);
 
     if (get_var("LIVE")) {
@@ -107,4 +113,3 @@ sub custom_change_type {
 1;
 
 # vim: set sw=4 et:
-

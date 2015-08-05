@@ -3,6 +3,17 @@ use base 'distribution';
 
 # Fedora distribution class
 
+# Distro-specific functions, that are actually part of the API
+# (and it's completely up to us to implement them) should be here
+
+# functions that can be reimplemented:
+# ensure_installed
+# x11_start_program
+# become_root
+# script_run
+# script_sudo
+# type_password
+
 use testapi qw(send_key type_string);
 
 sub init() {

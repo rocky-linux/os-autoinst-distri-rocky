@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 

@@ -1,4 +1,4 @@
-use base "fedoralog";
+use base "installedtest";
 use strict;
 use testapi;
 
@@ -6,6 +6,7 @@ use testapi;
 sub run {
     my $self = shift;
 
+    # try to login, check whether F22 is installed
     $self->boot_to_login_screen();
     $self->root_console(tty=>3);
 

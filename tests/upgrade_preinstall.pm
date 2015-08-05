@@ -1,17 +1,20 @@
-use base "fedoralog";
+use base "installedtest";
 use strict;
 use testapi;
 
 sub run {
     my $self = shift;
 
+    # wait for either GDM or text login
     if (get_var('UPGRADE') eq "desktop") {
         $self->boot_to_login_screen("graphical_login", 30); # GDM takes time to load
-    #} elsif (get_var('UPGRADE' eq "minimal")) {
     } else {
         $self->boot_to_login_screen();
     }
+    # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
+
+    # fedup should be installed on up-to-date system
 
     type_string 'yum -y update; echo $?';
     send_key "ret";
@@ -23,7 +26,6 @@ sub run {
 
     if (get_var('UPGRADE') eq "desktop") {
         $self->boot_to_login_screen("graphical_login", 30); # GDM takes time to load
-    #} elsif (get_var('UPGRADE' eq "minimal")) {
     } else {
         $self->boot_to_login_screen();
     }

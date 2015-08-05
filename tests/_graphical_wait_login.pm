@@ -3,7 +3,6 @@ use strict;
 use testapi;
 
 sub run {
-
     # If KICKSTART is set, then the wait_time needs to
     #  consider the install time
     my $wait_time = get_var("KICKSTART") ? 1800 : 300;

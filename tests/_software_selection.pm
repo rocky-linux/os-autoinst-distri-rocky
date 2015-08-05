@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
@@ -22,7 +22,7 @@ sub run {
     # select desired environment
     # go through the list 20 times at max (to prevent infinite loop when it's missing)
     for (my $i = 0; !check_screen("anaconda_".$packageset."_highlighted", 1) && $i < 20; $i++) {
-	send_key "down";
+	       send_key "down";
     }
 
     send_key "spc";

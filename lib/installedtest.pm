@@ -1,13 +1,18 @@
 package fedoralog;
 use base 'fedorabase';
 
+# base class for tests that run on installed system
+
+# should be used when with tests, where system is already installed, e. g all parts
+# of upgrade tests, postinstall phases...
+
 use testapi;
 
 sub root_console {
     my $self = shift;
     my %args = (
-        tty => 1,
-        check => 1,
+        tty => 1, # what TTY to login to
+        check => 1, # whether to fail when console wasn't reached
         @_);
 
     send_key "ctrl-alt-f$args{tty}";

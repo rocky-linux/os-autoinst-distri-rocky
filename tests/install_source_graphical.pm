@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
@@ -9,8 +9,6 @@ sub run {
 
     # Go into the Install Source spoke
     assert_and_click "anaconda_main_hub_installation_source";
-
-
 
     # select "http" on the network
     assert_and_click "anaconda_install_source_on_the_network";
@@ -31,6 +29,8 @@ sub run {
         }
     }
 
+    # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
+    # the repository url input
     if (get_var("MIRRORLIST_GRAPHICAL")){
         $repourl = "mirrors.fedoraproject.org/mirrorlist?repo=".$fedora_version."&arch=".get_var('ARCH');
         type_string $repourl;

@@ -49,22 +49,35 @@ if (get_var('LIVE')) {
     set_var('PACKAGE_SET', "default");
 }
 
-# Boot to anaconda Hub in English
-
+# if user set ENTRYPOINT, run required test directly
+# (good for tests where it doesn't make sense to use _boot_to_anaconda, _software_selection etc.)
 if (get_var("ENTRYPOINT"))
 {
     autotest::loadtest get_var('CASEDIR')."/tests/".get_var("ENTRYPOINT").".pm";
 }
 elsif (get_var("UPGRADE"))
 {
+    # all upgrade tests consist of: preinstall phase (where packages are upgraded and fedup is
+    # installed), run phase (where fedup is run) and postinstall phase (where is checked if
+    # fedora was upgraded successfully)
     autotest::loadtest get_var('CASEDIR')."/tests/upgrade_preinstall.pm";
     autotest::loadtest get_var('CASEDIR')."/tests/upgrade_run.pm";
+    # UPGRADE can be set to "minimal", "encrypted", "desktop"...
     autotest::loadtest get_var('CASEDIR')."/tests/upgrade_postinstall_".get_var("UPGRADE").".pm";
 }
 else
 {
+    # normal installation test consists of several phases, from which some of them are
+    # loaded automatically and others are loaded based on what env variables are set
+
+    # generally speaking, install test consists of: boot phase, customization phase, installation
+    # and reboot phase, postinstall phase
+
+    # boot phase is loaded automatically every time
     autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
 
+    # with kickstart tests, booting to anaconda is the only thing required (kickstart file handles
+    # everything else)
     unless (get_var("KICKSTART"))
     {
 
@@ -105,6 +118,7 @@ else
         }
 
         # Start installation, set user & root passwords, reboot
+        # install and reboot phase is loaded automatically every time (except when KICKSTART is set)
         autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
     }
 
@@ -121,6 +135,8 @@ else
     else {
         autotest::loadtest get_var('CASEDIR')."/tests/_console_wait_login.pm";
     }
+
+    # from now on, we have fully installed and booted system with root/specified user logged in
 
     # If there is a post-install test to verify storage configuration worked
     # correctly, run it. Again we determine the test name based on the value

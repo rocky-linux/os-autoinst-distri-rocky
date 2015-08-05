@@ -1,8 +1,9 @@
-use base "basetest";
+use base "installedtest";
 use strict;
 use testapi;
 
 sub run {
+    # decrypt disks during boot
     assert_screen "boot_enter_passphrase", 300; #
     type_string get_var("ENCRYPT_PASSWORD");
     send_key "ret";

@@ -1,4 +1,4 @@
-use base "fedoralog";
+use base "installedtest";
 use strict;
 use testapi;
 
@@ -6,6 +6,7 @@ sub run {
     my $fedup_url;
     my $to_version;
     # FIXME: this is just a workaround, see https://phab.qadevel.cloud.fedoraproject.org/T478
+    # construct download URL
     if (get_var("BUILD") =~ /^(\d+)_Final_(.*)$/) {
         $fedup_url = "https://dl.fedoraproject.org/pub/alt/stage/".$1."_".$2."/Server/".get_var("ARCH")."/os";
         $to_version = $1;
@@ -18,6 +19,7 @@ sub run {
     type_string "fedup --network ".$to_version." --instrepo ".$fedup_url;
     send_key "ret";
 
+    # wait untill fedup finishes its work (screen stops moving for 30 seconds)
     wait_still_screen 30, 6000; # TODO: shorter timeout, longer stillscreen?
 
     upload_logs "/var/log/fedup.log";
@@ -25,12 +27,14 @@ sub run {
     type_string "reboot";
     send_key "ret";
 
+    # check that "upgrade" item is shown in GRUB
     assert_screen "grub_fedup", 30;
     send_key "ret";
 
+    # now offline upgrading starts. user doesn't have to do anything, just wait untill
+    # system reboots and login screen is shown
     if (get_var('UPGRADE') eq "desktop") {
         assert_screen "graphical_login", 6000;
-    #} elsif (get_var('UPGRADE' eq "minimal")) {
     } else {
         assert_screen "text_console_login", 6000;
     }

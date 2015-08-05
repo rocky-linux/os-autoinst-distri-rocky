@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
@@ -7,9 +7,12 @@ sub run {
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one disk is selected.
     $self->select_disks();
+
+    # check "encrypt data" checkbox
     assert_and_click "anaconda_install_destination_encrypt_data";
     assert_and_click "anaconda_spoke_done";
 
+    # type password for disk encryption
     wait_idle 5;
     type_string get_var("ENCRYPT_PASSWORD");
     send_key "tab";

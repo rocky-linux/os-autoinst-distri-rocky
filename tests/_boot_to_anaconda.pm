@@ -1,10 +1,9 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
 sub run {
     # Wait for bootloader to appear
-
     assert_screen "bootloader", 30;
 
     # Make sure we skip media check if it's selected by default. Standard
@@ -12,12 +11,14 @@ sub run {
     send_key "up";
     send_key "up";
 
+    # if variable GRUB is set, add its value into kernel line in grub
     if( get_var("GRUB")){
         send_key "tab";
         type_string " ".get_var("GRUB");
 
     }
 
+    # if variable REPOSITORY_VARIATION is set, construct inst.repo url and add it to kernel line
     if (get_var("REPOSITORY_VARIATION")){
         unless (get_var("GRUB")){
             send_key "tab";
@@ -27,10 +28,13 @@ sub run {
 
         $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
 
+        # REPOSITORY_VARIATION should be set to repository URL without version and architecture
+        # appended (it will be appended automatically)
         $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
         type_string " inst.repo=".$repourl;
     }
 
+    # now we are on the correct "boot" menu item
     send_key "ret";
 
     unless (get_var("KICKSTART"))
@@ -52,7 +56,7 @@ sub run {
             assert_and_click "anaconda_rawhide_accept_fate";
         }
 
-        # Anaconda hub
+        # wait for Anaconda hub to appear
         assert_screen "anaconda_main_hub", 900; #
     }
 }

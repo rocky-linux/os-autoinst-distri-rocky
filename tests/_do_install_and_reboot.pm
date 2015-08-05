@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
@@ -21,8 +21,6 @@ sub run {
     send_key "tab";
     type_string $root_password;
     assert_and_click "anaconda_spoke_done";
-    # weak password - click "done" once again"
-    #assert_and_click "anaconda_spoke_done";
 
     # Set user details
     sleep 1;
@@ -37,8 +35,6 @@ sub run {
     type_string $user_password;
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
-    # weak password - click "done" once again"
-    #assert_and_click "anaconda_spoke_done";
 
     # Wait for install to end
     assert_and_click "anaconda_install_done", '', 1800;

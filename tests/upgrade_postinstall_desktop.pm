@@ -1,4 +1,4 @@
-use base "fedoralog";
+use base "installedtest";
 use strict;
 use testapi;
 
@@ -7,12 +7,15 @@ sub run {
     my $self = shift;
     my $password = get_var("PASSWORD", "weakpassword");
 
+    # wait for GDM to appear
     $self->boot_to_login_screen("graphical_login", 20);
 
+    # login as normal user
     send_key "ret";
     assert_screen "graphical_login_input";
     type_string $password;
     send_key "ret";
+    # wait until desktop appears
     assert_screen "graphical_desktop_clean", 30;
 }
 

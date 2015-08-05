@@ -1,4 +1,4 @@
-use base "anacondalog";
+use base "anacondatest";
 use strict;
 use testapi;
 
@@ -9,7 +9,7 @@ sub run {
     $self->select_disks();
     assert_and_click "anaconda_spoke_done";
 
-    # the only provided disk should be full
+    # the only provided disk should be automatically selected and full
     assert_and_click "anaconda_install_destination_reclaim_space_btn";
 
     assert_and_click "anaconda_install_destination_delete_all_btn";

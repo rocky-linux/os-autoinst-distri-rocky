@@ -1,8 +1,14 @@
 package fedorabase;
 use base 'basetest';
 
+# base class for all Fedora tests
+
+# use this class when using other base class doesn't make sense
+
 use testapi;
 
+# this subroutine handles logging in as a root/specified user into console
+# it requires TTY to be already displayed (handled by the root_console() method of subclasses)
 sub console_login {
     my $self = shift;
     my %args = (
@@ -63,7 +69,7 @@ sub console_login {
 
 sub boot_to_login_screen {
     my $self = shift;
-    my $boot_done_screen = shift;
+    my $boot_done_screen = shift; # what to expect when system is booted (e. g. GDM), can be ""
     my $stillscreen = shift || 10;
     my $timeout = shift || 60;
 
