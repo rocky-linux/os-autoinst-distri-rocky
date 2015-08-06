@@ -5,8 +5,9 @@ use testapi;
 sub run {
     my $self = shift;
     # Go to INSTALLATION DESTINATION and ensure two disks are selected.
-    # Because DISK_CUSTOM is set, select_disks will select custom for us.
     $self->select_disks(2);
+    # select custom partitioning
+    assert_and_click "anaconda_manual_partitioning";
     assert_and_click "anaconda_spoke_done";
 
     # Manual partitioning spoke should be displayed

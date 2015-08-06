@@ -90,10 +90,6 @@ sub select_disks {
         }
         # For exactly 1 disk, we don't need to do anything.
     }
-
-    if (get_var('DISK_CUSTOM')) {
-        assert_and_click "anaconda_manual_partitioning";
-    }
 }
 
 sub custom_scheme_select {
