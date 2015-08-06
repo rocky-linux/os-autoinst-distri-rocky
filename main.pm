@@ -93,23 +93,18 @@ else
         autotest::loadtest get_var('CASEDIR')."/tests/_software_selection.pm";
 
         ## Disk partitioning.
-        # If DISK_CUSTOM or DISK_GUIDED is set, we pick the storage test
+        # If PARTITIONING is set, we pick the storage test
         # to run based on the value (usually we run the test with the name
         # that matches the value, except for a couple of commented cases).
         my $storage = '';
-        if (get_var('DISK_CUSTOM')) {
-            $storage = get_var('CASEDIR')."/tests/disk_custom_".get_var('DISK_CUSTOM').".pm";
+        my $partitioning = get_var('PARTITIONING');
+        # if PARTITIONING is unset, or one of [...], use disk_guided_empty,
+        # which is the simplest / 'default' case.
+        if (! $partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
+            $storage = get_var('CASEDIR')."/tests/disk_guided_empty.pm";
         }
         else {
-            my $disk_guided = get_var('DISK_GUIDED');
-            # if DISK_GUIDED is unset, or one of [...], use disk_guided_empty,
-            # which is the simplest / 'default' case.
-            if (! $disk_guided || $disk_guided ~~ ['empty', 'free_space']) {
-                $storage = get_var('CASEDIR')."/tests/disk_guided_empty.pm";
-            }
-            else {
-                $storage = get_var('CASEDIR')."/tests/disk_guided_".$disk_guided.".pm";
-            }
+            $storage = get_var('CASEDIR')."/tests/disk_".$partitioning.".pm";
         }
         autotest::loadtest $storage;
 
@@ -140,14 +135,10 @@ else
 
     # If there is a post-install test to verify storage configuration worked
     # correctly, run it. Again we determine the test name based on the value
-    # of DISK_CUSTOM or DISK_GUIDED.
+    # of PARTITIONING
     my $storagepost = '';
-    if (get_var('DISK_GUIDED')) {
-        my $loc = get_var('CASEDIR')."/tests/disk_guided_".get_var('DISK_GUIDED')."_postinstall.pm";
-        $storagepost = $loc if (-e $loc);
-    }
-    elsif (get_var('DISK_CUSTOM')) {
-        my $loc = get_var('CASEDIR')."/tests/disk_custom_".get_var('DISK_CUSTOM')."_postinstall.pm";
+    if (get_var('PARTITIONING')) {
+        my $loc = get_var('CASEDIR')."/tests/disk_".get_var('PARTITIONING')."_postinstall.pm";
         $storagepost = $loc if (-e $loc);
     }
     autotest::loadtest $storagepost if ($storagepost);

@@ -275,7 +275,7 @@
                       name => "server_sata_multi",
                       prio => 2,
                       settings => [
-                        { key => "DISK_GUIDED", value => "multi" },
+                        { key => "PARTITIONING", value => "guided_multi" },
                         { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_full.img" },
@@ -309,7 +309,7 @@
                       name => "server_delete_pata",
                       prio => 5,
                       settings => [
-                        { key => "DISK_GUIDED", value => "delete_all" },
+                        { key => "PARTITIONING", value => "guided_delete_all" },
                         { key => "HDDMODEL", value => "ide-hd" },
                         { key => "HDD_1", value => "disk_full.img" },
                       ],
@@ -343,7 +343,7 @@
                       name => "server_delete_partial",
                       prio => 9,
                       settings => [
-                        { key => "DISK_GUIDED", value => "delete_partial" },
+                        { key => "PARTITIONING", value => "guided_delete_partial" },
                         { key => "HDD_1", value => "disk_full.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
@@ -361,7 +361,7 @@
                       name => "server_simple_free_space",
                       prio => 11,
                       settings => [
-                        { key => "DISK_GUIDED", value => "free_space" },
+                        { key => "PARTITIONING", value => "guided_free_space" },
                         { key => "HDD_1", value => "disk_freespace.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
@@ -371,7 +371,7 @@
                       name => "server_multi_empty",
                       prio => 12,
                       settings => [
-                        { key => "DISK_GUIDED", value => "multi_empty_all" },
+                        { key => "PARTITIONING", value => "guided_multi_empty_all" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
@@ -381,7 +381,7 @@
                       name => "server_software_raid",
                       prio => 13,
                       settings => [
-                        { key => "DISK_CUSTOM", value => "software_raid" },
+                        { key => "PARTITIONING", value => "custom_software_raid" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
