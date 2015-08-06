@@ -1,4 +1,4 @@
-package anacondalog;
+package anacondatest;
 use base 'fedorabase';
 
 # base class for all Anaconda (installation) tests

@@ -5,7 +5,7 @@ use testapi;
 
 sub run {
     my $self = shift;
-    my $password = get_var("PASSWORD", "weakpassword");
+    my $password = get_var("USER_PASSWORD", "weakpassword");
 
     # wait for GDM to appear
     $self->boot_to_login_screen("graphical_login", 20);

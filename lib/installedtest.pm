@@ -1,4 +1,4 @@
-package fedoralog;
+package installedtest;
 use base 'fedorabase';
 
 # base class for tests that run on installed system
