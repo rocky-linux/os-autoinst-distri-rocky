@@ -1,15 +1,15 @@
 {
     "area": [
         {
-            "height": 41,
+            "height": 16,
             "type": "match",
-            "width": 79,
-            "xpos": 46,
-            "ypos": 291
+            "width": 34,
+            "xpos": 376,
+            "ypos": 351
         }
     ],
     "tags": [
-        "anaconda_part_scheme",
+        "anaconda_part_fs_ext3",
         "ENV-DISTRI-fedora",
         "ENV-INSTLANG-en_US",
         "ENV-FLAVOR-server"

@@ -61,7 +61,7 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `MIRRORLIST_GRAPHICAL` | boolean | `false`/not set | `REPOSITORY_GRAPHICAL` | sets installation source to mirrorlist |
 | `REPOSITORY_GRAPHICAL` | url to repository (without arch and `/os`, for example `http://dl.fedoraproject.org/pub/fedora/linux/development`) | not set | `MIRRORLIST_GRAPHICAL` | sets installation source to repository url in Anaconda |
 | `REPOSITORY_VARIATION` | url to repository (without arch and `/os`, for example `http://dl.fedoraproject.org/pub/fedora/linux/development`) | not set | nothing | sets installation source to repository url in GRUB |
-| `PARTITIONING` | string (`custom_software_raid`, `guided_delete_all`, ...) | `guided_empty` | nothing | load specified test for partitioning part (when `PARTITIONING=guided_delete_all`, `tests/disk_guided_empty_all.pm` is loaded) |
+| `PARTITIONING` | string (`custom_software_raid`, `guided_delete_all`, ...) | `guided_empty` | nothing | load specified test for partitioning part (when `PARTITIONING=guided_delete_all`, `tests/disk_guided_delete_all.pm` is loaded) and optionally post-install partitioning check (if `tests/disk_guided_delete_all_postinstall.pm` exists, it will be loaded after login to the installed system). Also, if value starts with `custom_`, the `select_disks()` method will check the custom partitioning box |
 | `ENCRYPT_PASSWORD` | string | not set | nothing | if set, encrypt disk with given password |
 | `DESKTOP` | boolean | `false`/not set | nothing | set to indicate that Fedora is running with GUI (so for example OpenQA should expect graphical login screen) |
 | `ROOT_PASSWORD` | string | `weakpassword` | nothing | root password is set to this value |

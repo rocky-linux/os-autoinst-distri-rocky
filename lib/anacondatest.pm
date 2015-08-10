@@ -90,19 +90,40 @@ sub select_disks {
         }
         # For exactly 1 disk, we don't need to do anything.
     }
+
+    # If this is a custom partitioning test, select custom partitioning.
+    if (get_var('PARTITIONING') =~ /^custom_/) {
+        assert_and_click "anaconda_manual_partitioning";
+    }
 }
 
 sub custom_scheme_select {
     my ($self, $scheme) = @_;
     assert_and_click "anaconda_part_scheme";
+    # Move the mouse away from the menu
+    mouse_set(10, 10);
     assert_and_click "anaconda_part_scheme_$scheme";
 }
 
 sub custom_change_type {
-    my ($self, $type) = @_;
-    # We assume we start off with / selected.
+    my ($self, $type, $part) = @_;
+    $part ||= "root";
+    assert_and_click "anaconda_part_select_$part";
     assert_and_click "anaconda_part_device_type";
+    # Move the mouse away from the menu
+    mouse_set(10, 10);
     assert_and_click "anaconda_part_device_type_$type";
+    assert_and_click "anaconda_part_update_settings";
+}
+
+sub custom_change_fs {
+    my ($self, $fs, $part) = @_;
+    $part ||= "root";
+    assert_and_click "anaconda_part_select_$part";
+    assert_and_click "anaconda_part_fs";
+    # Move the mouse away from the menu
+    mouse_set(10, 10);
+    assert_and_click "anaconda_part_fs_$fs";
     assert_and_click "anaconda_part_update_settings";
 }
 

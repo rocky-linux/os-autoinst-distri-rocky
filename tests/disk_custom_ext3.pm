@@ -4,14 +4,18 @@ use testapi;
 
 sub run {
     my $self = shift;
-    # Go to INSTALLATION DESTINATION and ensure two disks are selected.
+    # Go to INSTALLATION DESTINATION and ensure the disk is selected.
     # Because PARTITIONING starts with 'custom_', this will select custom.
-    $self->select_disks(2);
+    $self->select_disks();
     assert_and_click "anaconda_spoke_done";
 
-    # Manual partitioning spoke should be displayed
+    # Manual partitioning spoke should be displayed. Select Standard
+    # Partition scheme
+    $self->custom_scheme_select("standard");
+    # Do 'automatic' partition creation
     assert_and_click "anaconda_part_automatic";
-    $self->custom_change_type("raid");
+    # Change root partition to ext3
+    $self->custom_change_fs("ext3");
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
 
