@@ -17,7 +17,7 @@ These variables control settings of underlying virtual machine where tests runs 
 | `BIOS` | filename | `ovmf-x86_64-ms.bin` for `x86_64` UEFI, not set otherwise | set different BIOS |
 | `BOOTFROM` | characters (see man qemu, `-boot order=` option) | not set | boot from different medium than CD |
 | `CDMODEL` | see `qemu-kvm -device help` | not set/Qemu default | type of device for CD |
-| `HDDMODEL` | see `qemu-kvm -device help` | `virtio-blk` | type of device for HDD |
+| `HDDMODEL` | see `qemu-kvm -device help` (e. g. PATA = `id-hd`, SATA = `ide-hd,bus-ahci0.0`, SCSI = `virtio-scsi-pci`) | `virtio-blk` | type of device for HDD |
 | `HDDSIZEGB` | integer | `10` | size (in GBs) for disks that are created automatically |
 | `HDD_$i` (`HDD_1, HDD_2`, ...) | filename | not set | attach additional HDD to VM |
 | `ISO` | filename | not set | attach CD drive with ISO inserted |
