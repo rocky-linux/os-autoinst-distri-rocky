@@ -757,7 +757,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f21_minimal.img" },
+                        { key => "HDD_1", value => "disk_f22_minimal.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
                       variables => "",
@@ -768,7 +768,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f21_desktop.img" },
+                        { key => "HDD_1", value => "disk_f22_desktop.img" },
                         { key => "UPGRADE", value => "desktop" },
                       ],
                       variables => "",
