@@ -227,6 +227,16 @@
                       test_suite => { name => "fedup_desktop" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_updates_img_local" },
+                    },
+                    {
                       machine    => { name => "32bit" },
                       product    => {
                                       arch    => "i386",
@@ -446,6 +456,16 @@
                                     },
                       test_suite => { name => "fedup_desktop" },
                     },
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_updates_img_local" },
+                    }
                   ],
   Machines     => [
                     {
@@ -750,6 +770,17 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f21_desktop.img" },
                         { key => "UPGRADE", value => "desktop" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_updates_img_local",
+                      prio => 20,
+                      settings => [
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "HDD_2", value => "disk_updates_img.img" },
+                        { key => "BOOT_UPDATES_IMG_URL", value => "1" },
+                        { key => "GRUB", value => "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img" },
                       ],
                       variables => "",
                     },

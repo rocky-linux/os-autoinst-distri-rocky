@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "anaconda_install_destination_pony",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-develop"
+  ],
+  "area": [
+    {
+      "xpos": 92,
+      "ypos": 237,
+      "width": 25,
+      "height": 26,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}
