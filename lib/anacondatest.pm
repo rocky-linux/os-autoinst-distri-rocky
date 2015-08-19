@@ -27,6 +27,8 @@ sub post_fail_hook {
         upload_logs "/tmp/syslog";
         upload_logs "/tmp/program.log";
         upload_logs "/tmp/dnf.log";
+        upload_logs "/tmp/dnf.librepo.log";
+        upload_logs "/tmp/dnf.rpm.log";
 
         # Upload all ABRT logs
         if ($has_traceback) {
