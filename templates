@@ -204,6 +204,16 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "server_no_swap" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "server_kickstart_hdd" },
                     },
                     {
@@ -425,6 +435,16 @@
                                       version => "*",
                                     },
                       test_suite => { name => "server_lvmthin" },
+                    },
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_no_swap" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -738,8 +758,17 @@
                       variables => "",
                     },
                     {
-                      name => "server_kickstart_hdd",
+                      name => "server_no_swap",
                       prio => 17,
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_no_swap" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_kickstart_hdd",
+                      prio => 18,
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=hd:vdb1:/root-user-crypted-net.ks" },
@@ -753,7 +782,7 @@
                     },
                     {
                       name => "fedup_minimal",
-                      prio => 18,
+                      prio => 19,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -764,7 +793,7 @@
                     },
                     {
                       name => "fedup_desktop",
-                      prio => 19,
+                      prio => 20,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },

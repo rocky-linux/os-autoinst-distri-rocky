@@ -129,6 +129,13 @@ sub custom_change_fs {
     assert_and_click "anaconda_part_update_settings";
 }
 
+sub custom_delete_part {
+    my ($self, $part) = @_;
+    return if not $part;
+    assert_and_click "anaconda_part_select_$part";
+    assert_and_click "anaconda_part_delete";
+}
+
 1;
 
 # vim: set sw=4 et:
