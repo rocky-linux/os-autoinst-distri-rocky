@@ -224,7 +224,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "fedup_minimal" },
+                      test_suite => { name => "fedup_minimal_64bit" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -234,7 +234,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "fedup_desktop" },
+                      test_suite => { name => "fedup_desktop_64bit" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -464,7 +464,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "fedup_minimal" },
+                      test_suite => { name => "fedup_minimal_32bit" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -474,7 +474,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "fedup_desktop" },
+                      test_suite => { name => "fedup_desktop_32bit" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -781,23 +781,45 @@
                       variables => "",
                     },
                     {
-                      name => "fedup_minimal",
+                      name => "fedup_minimal_64bit",
                       prio => 19,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_minimal.img" },
+                        { key => "HDD_1", value => "disk_f22_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
                       variables => "",
                     },
                     {
-                      name => "fedup_desktop",
+                      name => "fedup_desktop_64bit",
                       prio => 20,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_desktop.img" },
+                        { key => "HDD_1", value => "disk_f22_desktop_x86_64.img" },
+                        { key => "UPGRADE", value => "desktop" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "fedup_minimal_32bit",
+                      prio => 19,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f22_minimal_i686.img" },
+                        { key => "UPGRADE", value => "minimal" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "fedup_desktop_32bit",
+                      prio => 20,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f22_desktop_i686.img" },
                         { key => "UPGRADE", value => "desktop" },
                       ],
                       variables => "",
