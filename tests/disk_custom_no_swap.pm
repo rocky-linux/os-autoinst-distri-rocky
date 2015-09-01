@@ -14,6 +14,8 @@ sub run {
     $self->custom_delete_part('swap');
     assert_and_click "anaconda_spoke_done";
     # Deleting swap shows a warning and requires a second click to confirm
+    # Wait a sec first, otherwise sometimes we click too fast
+    sleep 1;
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
 
