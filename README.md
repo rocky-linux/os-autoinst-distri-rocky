@@ -1,8 +1,8 @@
-OpenQA tests for the Fedora distribution
+openQA tests for the Fedora distribution
 ========================================
 
 This repository contains tests and images for testing [Fedora](https://getfedora.org/) with
-[OpenQA](http://os-autoinst.github.io/openQA/). For additional tools, Installation Guide and
+[openQA](http://os-autoinst.github.io/openQA/). For additional tools, Installation Guide and
 Docker images, see [this repository](https://bitbucket.org/rajcze/openqa_fedora_tools).
 
 Test development
@@ -14,7 +14,7 @@ See official documentation [on basic concept](https://github.com/os-autoinst/ope
 [this example repo](https://github.com/os-autoinst/os-autoinst-distri-example) on how tests should be structured.
 
 ### main.pm modular architecture
-Since OpenQA uses only one entrypoint for all tests (main.pm), we have decided to utilize
+Since openQA uses only one entrypoint for all tests (main.pm), we have decided to utilize
 this feature and make tests modular. It means that basic passing through main.pm (without any variables set)
 results in most basic installation test executed. Developer can customize it with additional variables
 (for example by setting `PACKAGE_SET=minimal` to do installation only with minimal package set).
@@ -72,13 +72,52 @@ Your test can inherit from `basetest`, `fedorabase`, `installedtest` or `anacond
 
 - `basetest` is basic class provided by os-autoinst - it has empty `post_fail_hook()` and doesn't set any flags.
 - `fedorabase` doesn't neither set flags nor does anything in `post_fail_hook()`, but it provides basic functions
-that will be useful during testing Fedora, like `console_login()` or `boot_to_login_screen()`. It should be used
-when no other, more specific class can be used.
+that will be useful during testing Fedora. It should be used when no other, more specific class can be used. It provides
+these functions:
+    - `console_login()` handles logging in as a root/specified user into console. It requires TTY to
+       be already displayed (handled by the `root_console()` method of subclasses). You can configure user and password
+       by setting `user` and `password` arguments. If you set `check` argument to 1, this function
+       dies if it fails to log in. Example usage: `$self->console_login(user => "garret", password => "weakpassword");`
+       logs in as user `garret`, with password `weakpassword`.
+    - `boot_to_login_screen()` handles booting from bootloader to login screen. It can take three optional arguments:
+       first is the name of the login screen needle that should be displayed when system is booted, second is time how
+       long still screen should be displayed until openQA decides that system is booted and third is timeout how long
+       it should wait for still screen to appear. Example usage: `$self->boot_to_login_screen("graphical_login", 30);`
+       will wait until screen is not moving for 30 seconds and then checks, whether `graphical_login` needle is displayed.
 - `anacondatest` should be used in tests where Anaconda is running. It uploads Anaconda logs (for example
-`anaconda.log` or `packaging.log`) in `post_fail_hook()`. It also provides convenient methods for Anaconda
-like `select_disks()`.
+`anaconda.log` or `packaging.log`) in `post_fail_hook()`. It also provides these convenient methods for Anaconda:
+    - `root_console()` tries to login is as a root. It decides to what TTY to switch into and then calls `console_login()`
+      for root. If you set `check` argument, it dies if it fails to log in. Example usage:
+      after calling `$self->root_console(check=>1);`, console should be shown with root logged in.
+    - `select_disks()` handles disk selecting. It have one optional argument - number of disks to select. It should be
+      run when main Anaconda hub is displayed. It enters disk selection spoke and then ensures that required number of
+      disks are selected. Additionally, if `$PARTITIONING` variable (set in Web UI) starts with `custom_`, it selects
+      "custom partitioning" checkbox. Example usage: after calling `$self->select_disks(2);` from Anaconda main hub,
+      installation destination spoke will be displayed and two attached disks will be selected for installation.
+    - `custom_scheme_select()` is used for setting custom partitioning scheme (such as LVM). It should be called when
+      custom partitioning spoke is displayed. You have to pass it name of partitioning scheme and needle
+      `anaconda_part_scheme_$scheme` should exist. Example usage: `$self->custom_scheme_select("btrfs");` uses
+      `anaconda_part_scheme_btrfs` to set partitioning scheme to Btrfs.
+    - `custom_change_type()` is used to set different device types for specified partition (e. g. RAID). It should be
+      called when custom partitioning spoke is displayed. You have to pass it type of partition and name of partition
+      and needles `anaconda_part_select_$part` and `anaconda_part_device_type_$type` should exist. Example usage:
+      `$self->custom_change_type("raid", "root");` uses `anaconda_part_select_root` and `anaconda_part_device_type_raid`
+      needles to set RAID for root partition.
+    - `custom_change_fs()` is used to set different file systems for specified partition. It should be
+      called when custom partitioning spoke is displayed. You have to pass it filesystem name and name of partition
+      and needles `anaconda_part_select_$part` and `anaconda_part_fs_$fs` should exist. Example usage:
+      `$self->custom_change_fs("ext3", "root");` uses `anaconda_part_select_root` and `anaconda_part_fs_ext3` needles
+      to set ext3 file system for root partition.
+    - `custom_delete_part()` is used for deletion of previously added partitions in custom partitioning spoke. It should
+      be called when custom partitioning spoke is displayed. You have to pass it partition name and needle
+      `anaconda_part_select_$part` should exist. Example usage: `$self->custom_delete_part('swap');` uses
+      `anaconda_part_select_swap` to delete previously added swap partition.
 - `installedtest` should be used in tests that are running on installed system (either in postinstall phase
-or in upgrade tests). It uploads `/var/log` in `post_fail_hook()`.
+or in upgrade tests). It uploads `/var/log` in `post_fail_hook()`. It provides these functions:
+    - `root_console()` tries to login is as a root. It switches to TTY that is set as an argument (default is TTY1)
+      and then calls `console_login()` for root. If you set `check` argument, it dies if it fails to log in.
+      Example usage: running `$self->root_console(tty=>2, check=>0);` results in TTY2 displayed with root logged
+      in.
 
 ### New test development workflow
 
