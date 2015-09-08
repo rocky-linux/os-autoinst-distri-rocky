@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "anaconda_install_destination_reclaim_space_shrink_btn",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-develop"
+  ],
+  "area": [
+    {
+      "xpos": 172,
+      "ypos": 515,
+      "width": 61,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

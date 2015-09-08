@@ -247,6 +247,26 @@
                       test_suite => { name => "server_updates_img_local" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_shrink_ext4" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_shrink_ntfs" },
+                    },
+                    {
                       machine    => { name => "32bit" },
                       product    => {
                                       arch    => "i386",
@@ -826,12 +846,32 @@
                     },
                     {
                       name => "server_updates_img_local",
-                      prio => 20,
+                      prio => 21,
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_updates_img.img" },
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
                         { key => "GRUB", value => "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_shrink_ext4",
+                      prio => 22,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "HDD_1", value => "disk_shrink_ext4.img" },
+                        { key => "PARTITIONING", value => "guided_shrink" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_shrink_ntfs",
+                      prio => 23,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "HDD_1", value => "disk_shrink_ntfs.img" },
+                        { key => "PARTITIONING", value => "guided_shrink" },
                       ],
                       variables => "",
                     },
