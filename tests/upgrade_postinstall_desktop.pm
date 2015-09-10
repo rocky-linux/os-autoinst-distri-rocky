@@ -17,6 +17,9 @@ sub run {
     send_key "ret";
     # wait until desktop appears
     assert_screen "graphical_desktop_clean", 30;
+    # check an upgrade actually happened (and we can log into a console)
+    $self->root_console(tty=>3);
+    $self->check_release(get_var('VERSION'));
 }
 
 

@@ -3,32 +3,24 @@ use strict;
 use testapi;
 
 sub run {
-    my $fedup_url;
-    my $to_version;
-    # FIXME: this is just a workaround, see https://phab.qadevel.cloud.fedoraproject.org/T478
-    # construct download URL
-    if (get_var("BUILD") =~ /^(\d+)_Final_(.*)$/) {
-        $fedup_url = "https://dl.fedoraproject.org/pub/alt/stage/".$1."_".$2."/Server/".get_var("ARCH")."/os";
-        $to_version = $1;
-    } else {
-        $fedup_url = "https://dl.fedoraproject.org/pub/alt/stage/".get_var("BUILD")."/Server/".get_var("ARCH")."/os";
-        get_var("BUILD") =~ /^(\d+)/;
-        $to_version = $1;
+    my $release = lc(get_var('VERSION'));
+    my $milestone = lc((split /_/, get_var("BUILD"))[1]);
+    my $args = "--releasever=${release}";
+    # This is excessive - after the Bodhi activation point we don't
+    # need --nogpgcheck for Branched. But that's hard to detect magically
+    if ($release eq 'rawhide' or $milestone eq 'branched') {
+        $args .= " --nogpgcheck";
     }
-
-    type_string "fedup --network ".$to_version." --instrepo ".$fedup_url;
+    type_string "dnf -y system-upgrade download ${args}";
     send_key "ret";
 
-    # wait untill fedup finishes its work (screen stops moving for 30 seconds)
+    # wait until dnf finishes its work (screen stops moving for 30 seconds)
     wait_still_screen 30, 6000; # TODO: shorter timeout, longer stillscreen?
 
-    upload_logs "/var/log/fedup.log";
+    upload_logs "/var/log/dnf.log";
+    upload_logs "/var/log/dnf.rpm.log";
 
-    type_string "reboot";
-    send_key "ret";
-
-    # check that "upgrade" item is shown in GRUB
-    assert_screen "grub_fedup", 30;
+    type_string "dnf system-upgrade reboot";
     send_key "ret";
 
     # now offline upgrading starts. user doesn't have to do anything, just wait untill

@@ -57,9 +57,9 @@ if (get_var("ENTRYPOINT"))
 }
 elsif (get_var("UPGRADE"))
 {
-    # all upgrade tests consist of: preinstall phase (where packages are upgraded and fedup is
-    # installed), run phase (where fedup is run) and postinstall phase (where is checked if
-    # fedora was upgraded successfully)
+    # all upgrade tests consist of: preinstall phase (where packages are upgraded and
+    # dnf-plugin-system-upgrade is installed), run phase (where upgrade is run) and postinstall
+    # phase (where is checked if fedora was upgraded successfully)
     autotest::loadtest get_var('CASEDIR')."/tests/upgrade_preinstall.pm";
     autotest::loadtest get_var('CASEDIR')."/tests/upgrade_run.pm";
     # UPGRADE can be set to "minimal", "encrypted", "desktop"...

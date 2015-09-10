@@ -6,11 +6,10 @@ use testapi;
 sub run {
     my $self = shift;
 
-    # try to login, check whether F22 is installed
+    # try to login, check whether target release is installed
     $self->boot_to_login_screen();
     $self->root_console(tty=>3);
-
-    assert_screen "console_f22_installed";
+    $self->check_release(get_var('VERSION'));
 }
 
 

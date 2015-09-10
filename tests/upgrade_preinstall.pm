@@ -14,9 +14,9 @@ sub run {
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
 
-    # fedup should be installed on up-to-date system
+    # upgrader should be installed on up-to-date system
 
-    type_string 'yum -y update; echo $?';
+    type_string 'dnf -y update; echo $?';
     send_key "ret";
 
     assert_screen "console_command_success", 1800;
@@ -31,7 +31,7 @@ sub run {
     }
     $self->root_console(tty=>3);
 
-    type_string 'yum -y install fedup; echo $?';
+    type_string 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade; echo $?';
     send_key "ret";
 
     assert_screen "console_command_success", 1800;

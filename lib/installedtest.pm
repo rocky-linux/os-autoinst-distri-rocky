@@ -35,6 +35,15 @@ sub post_fail_hook {
     upload_logs "/tmp/var_log.tar.gz";
 }
 
+sub check_release {
+    my $self = shift;
+    my $release = shift;
+    type_string "clear\n";
+    type_string "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora | grep -q ${release}\n";
+    type_string "echo \$?\n";
+    assert_screen "console_command_success";
+}
+
 1;
 
 # vim: set sw=4 et:

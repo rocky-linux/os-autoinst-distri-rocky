@@ -118,6 +118,9 @@ or in upgrade tests). It uploads `/var/log` in `post_fail_hook()`. It provides t
       and then calls `console_login()` for root. If you set `check` argument, it dies if it fails to log in.
       Example usage: running `$self->root_console(tty=>2, check=>0);` results in TTY2 displayed with root logged
       in.
+    - `check_release()` checks whether the installed release matches a given value. E.g. `check_release(23)`
+      checks whether the installed system is Fedora 23. The value can be 'Rawhide' or a Fedora release number;
+      often you will want to use `get_var('VERSION')`. Expects a console prompt to be active when it is called.
 
 ### New test development workflow
 
