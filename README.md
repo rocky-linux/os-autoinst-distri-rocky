@@ -124,8 +124,7 @@ or in upgrade tests). It uploads `/var/log` in `post_fail_hook()`. It provides t
 
 ### New test development workflow
 
-1. Select test from [this document](https://bitbucket.org/rajcze/openqa_fedora_tools/src/develop/PhaseSeparation.md) or from
-[phabricator page](https://phab.qadevel.cloud.fedoraproject.org/maniphest/?statuses=open%28%29&projects=PHID-PROJ-epofbmazit3u2rndqccd#R)
+1. Select test from [phabricator page](https://phab.qadevel.cloud.fedoraproject.org/w/openqa/tests/).
 2. Put each part of your test as a separate file into `tests/` directory, reimplementing `run()` method
 and `test_flags()` method, inheriting from one of the classes mentioned above.
 3. Set correct variables (so that all test parts you have made are executed) in [WebUI -> Test suites](https://localhost:8080/admin/test_suites).
@@ -135,5 +134,5 @@ and `test_flags()` method, inheriting from one of the classes mentioned above.
 7. Add new Job template and Test suite into `templates` file.
 8. Add new Test suite and Test case into [`conf_test_suites.py`](https://bitbucket.org/rajcze/openqa_fedora_tools/src/develop/tools/openqa_trigger/conf_test_suites.py)
 file in openqa_fedora_tools repository.
-9. Mark your test in PhaseSeparation.md as done.
-10. Open differential request via phabricator, set openqa_fedora as a project and repository.
+9. Open differential request via phabricator, set openqa_fedora as a project and repository.
+10. Mark your test in [phabricator page](https://phab.qadevel.cloud.fedoraproject.org/w/openqa/tests/) as done.
