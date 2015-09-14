@@ -1,6 +1,8 @@
 package fedoradistribution;
 use base 'distribution';
 
+use testapi;
+
 # Fedora distribution class
 
 # Distro-specific functions, that are actually part of the API
@@ -29,7 +31,7 @@ sub x11_start_program($$$) {
     send_key "alt-f2";
     sleep 3;
     type_string $program;
-    sleep 1;
+    wait_idle 5; # because of KDE dialog - SUSE guys are doing the same!
     send_key "ret", 1;
 }
 

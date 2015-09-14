@@ -1,0 +1,26 @@
+{
+  "tags": [
+    "graphical_login",
+    "ENV-DESKTOP-kde",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-kde_live"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "xpos": 7,
+      "ypos": 7,
+      "width": 54,
+      "height": 18,
+      "type": "match"
+    },
+    {
+      "xpos": 621,
+      "ypos": 591,
+      "width": 17,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

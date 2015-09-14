@@ -41,6 +41,16 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "kde_live",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "universal",
                                       version => "*",
                                     },
@@ -295,6 +305,16 @@
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "generic_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "kde_live" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -575,6 +595,18 @@
                       version   => "*",
                     },
                     {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "kde_live",
+                      name      => "",
+                      settings  => [
+                        { key => "LIVE", value => "1" },
+                        { key => "DESKTOP", value => "kde" }
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
                       arch      => "i386",
                       distri    => "fedora",
                       flavor    => "universal",
@@ -615,7 +647,19 @@
                                    ],
                       variables => "",
                       version   => "*",
-                    }
+                  },
+                  {
+                    arch      => "i386",
+                    distri    => "fedora",
+                    flavor    => "kde_live",
+                    name      => "",
+                    settings  => [
+                      { key => "LIVE", value => "1" },
+                      { key => "DESKTOP", value => "kde" }
+                                 ],
+                    variables => "",
+                    version   => "*",
+                  }
                   ],
   TestSuites   => [
                     {

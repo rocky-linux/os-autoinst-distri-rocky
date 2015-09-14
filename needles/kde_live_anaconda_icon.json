@@ -1,0 +1,19 @@
+{
+  "tags": [
+    "live_start_anaconda_icon",
+    "ENV-DESKTOP-kde",
+    "ENV-DISTRI-fedora",
+    "ENV-INSTLANG-en_US",
+    "ENV-FLAVOR-kde_live"
+  ],
+  "area": [
+    {
+      "xpos": 42,
+      "ypos": 43,
+      "width": 41,
+      "height": 33,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

@@ -41,7 +41,7 @@ sub run {
     {
         # on lives, we have to explicitly launch anaconda
         if (get_var('LIVE')) {
-            assert_and_click "live_initial_anaconda_launcher", '', 300;
+            assert_and_click "live_start_anaconda_icon", '', 300;
         }
         # wait for anaconda to appear
         assert_screen "anaconda_select_install_lang", 300;
