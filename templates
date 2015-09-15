@@ -484,47 +484,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_repository_http_variation" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
                       test_suite => { name => "server_repository_http_graphical" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_mirrorlist_graphical" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_delete_pata" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_kickstart_user_creation" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -544,16 +504,6 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_sata_multi" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
                       test_suite => { name => "server_simple_encrypted" },
                     },
                     {
@@ -564,37 +514,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_free_space" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_multi_empty" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
                       test_suite => { name => "server_software_raid" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_delete_partial" },
                     },
                     {
                       machine    => { name => "32bit" },
@@ -634,57 +554,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_no_swap" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_kickstart_hdd" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "upgrade_minimal_32bit" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
                       test_suite => { name => "upgrade_desktop_32bit" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "server_updates_img_local" },
-                    },
-                    {
-                      machine    => { name => "32bit" },
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "european_language_install" },
                     }
                   ],
   Machines     => [
