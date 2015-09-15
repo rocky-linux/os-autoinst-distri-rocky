@@ -3,7 +3,7 @@
     "live_start_anaconda_icon",
     "ENV-DESKTOP-kde",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-kde_live"
   ],
   "area": [
