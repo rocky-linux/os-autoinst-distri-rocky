@@ -321,10 +321,10 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "kde_live",
                                       version => "*",
                                     },
-                      test_suite => { name => "kde_live" },
+                      test_suite => { name => "default_install" },
                     },
                     {
                       machine    => { name => "32bit" },
