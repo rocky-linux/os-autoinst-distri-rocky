@@ -17,6 +17,16 @@
                       test_suite => { name => "default_install" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "workstation_live",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       product    => {
                                       arch    => "x86_64",
@@ -27,7 +37,27 @@
                       test_suite => { name => "default_install" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
                       machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "generic_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -97,6 +127,16 @@
                       test_suite => { name => "server_delete_pata" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_delete_pata" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       product    => {
                                       arch    => "x86_64",
@@ -118,6 +158,16 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_sata_multi" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -208,6 +258,96 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_no_swap" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_simple_encrypted" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_simple_free_space" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_multi_empty" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_software_raid" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_delete_partial" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_btrfs" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_ext3" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_lvmthin" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -567,6 +707,18 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"}
+                      ],
+                      variables => "",
+                    },
+                    {
+                      backend   => "qemu",
+                      name      => "uefi",
+                      settings  => [
+                        { key => "QEMUCPU", value => "qemu64" },
+                        { key => "QEMUCPUS", value => "2"},
+                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMURAM", value => "2048"},
+                        { key => "UEFI", value => "1"}
                       ],
                       variables => "",
                     },

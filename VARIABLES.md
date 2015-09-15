@@ -69,6 +69,7 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `USER_LOGIN` | string | not set | should be used with `USER_PASSWORD` | when set, user login is set to this value |
 | `USER_PASSWORD` | string | not set | should be used with `USER_LOGIN` | when set, user password is set to this value |
 | `BOOT_UPDATES_IMG_URL` | boolean | `false`/not set | set to indicate that path to updates.img was appended to kernel line |
+| `UEFI` | boolean | `false`/not set | nothing | whether to use UEFI, this variable isn't usually set in test suites but in machine definition |
 
 Run variables
 -------------

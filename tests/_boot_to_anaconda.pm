@@ -2,9 +2,25 @@ use base "anacondatest";
 use strict;
 use testapi;
 
+# get_kernel_line switches to menu edit screen and sets the cursor to the end of kernel line
+sub get_kernel_line {
+    if( get_var("UEFI")){
+        send_key "e";
+        send_key "down";
+        send_key "down";
+        send_key "end";
+    } else {
+        send_key "tab";
+    }
+}
+
 sub run {
     # Wait for bootloader to appear
-    assert_screen "bootloader", 30;
+    if( get_var("UEFI")){
+        assert_screen "bootloader_uefi", 30;
+    } else {
+        assert_screen "bootloader", 30;
+    }
 
     # Make sure we skip media check if it's selected by default. Standard
     # 'boot installer' menu entry is always first.
@@ -13,7 +29,7 @@ sub run {
 
     # if variable GRUB is set, add its value into kernel line in grub
     if( get_var("GRUB")){
-        send_key "tab";
+        get_kernel_line;
         type_string " ".get_var("GRUB");
 
     }
@@ -21,7 +37,7 @@ sub run {
     # if variable REPOSITORY_VARIATION is set, construct inst.repo url and add it to kernel line
     if (get_var("REPOSITORY_VARIATION")){
         unless (get_var("GRUB")){
-            send_key "tab";
+            get_kernel_line;
         }
         my $fedora_version = "";
         my $repourl = "";
@@ -35,6 +51,9 @@ sub run {
     }
 
     # now we are on the correct "boot" menu item
+    # hit Ctrl+x for the case when the uefi kernel line was edited
+    send_key "ctrl-x";
+    # Return starts boot in all other cases
     send_key "ret";
 
     unless (get_var("KICKSTART"))

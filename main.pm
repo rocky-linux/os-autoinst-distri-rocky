@@ -161,6 +161,10 @@ else
         $storagepost = $loc if (-e $loc);
     }
     autotest::loadtest $storagepost if ($storagepost);
+
+    if (get_var("UEFI")) {
+        autotest::loadtest get_var('CASEDIR')."/tests/uefi_postinstall.pm";
+    }
 }
 
 
