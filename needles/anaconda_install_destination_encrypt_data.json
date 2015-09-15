@@ -2,7 +2,7 @@
   "tags": [
     "anaconda_install_destination_encrypt_data",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ENGLISH",
     "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ],

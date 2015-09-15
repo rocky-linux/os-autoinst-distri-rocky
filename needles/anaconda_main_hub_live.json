@@ -2,7 +2,7 @@
   "tags": [
     "anaconda_main_hub",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-INSTALLER-live"
   ],
   "area": [

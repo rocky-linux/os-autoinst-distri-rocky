@@ -1,18 +1,18 @@
 {
-  "area": [
-    {
-      "xpos": 690,
-      "ypos": 354,
-      "width": 195,
-      "height": 27,
-      "type": "match"
-    }
-  ],
-  "tags": [
-    "anaconda_main_hub_select_packages",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
-    "ENV-OFW-1",
-    "ENV-FLAVOR-server"
-  ]
+    "area": [
+        {
+            "height": 58,
+            "type": "match",
+            "width": 23,
+            "xpos": 627,
+            "ypos": 356
+        }
+    ],
+    "tags": [
+        "anaconda_main_hub_select_packages",
+        "ENV-DISTRI-fedora",
+        "ENV-LANGUAGE-ALL",
+        "ENV-OFW-1",
+        "ENV-FLAVOR-server"
+    ]
 }

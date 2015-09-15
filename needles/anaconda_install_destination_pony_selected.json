@@ -2,7 +2,7 @@
   "tags": [
     "anaconda_install_destination_pony",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-develop"
   ],
   "area": [

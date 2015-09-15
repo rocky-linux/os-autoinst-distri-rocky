@@ -3,7 +3,8 @@
     "live_initial_anaconda_launcher",
     "live_start_anaconda_icon",
     "ENV-DISTRI-fedora",
-    "ENV-DESKTOP-gnome"
+    "ENV-DESKTOP-gnome",
+    "ENV-LANGUAGE-ALL"
   ],
   "area": [
     {

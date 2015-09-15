@@ -43,13 +43,16 @@ sub run {
         if (get_var('LIVE')) {
             assert_and_click "live_start_anaconda_icon", '', 300;
         }
+        my $language = get_var('LANGUAGE') || 'english';
         # wait for anaconda to appear
         assert_screen "anaconda_select_install_lang", 300;
         # Select install language
         assert_and_click "anaconda_select_install_lang_input";
-        type_string "english";
-        assert_and_click "anaconda_select_install_lang_english_filtered";
-        assert_screen "anaconda_select_install_lang_english_selected", 3;
+        type_string "${language}";
+        # Needle filtering in main.pm ensures we will only look for the
+        # appropriate language, here
+        assert_and_click "anaconda_select_install_lang_filtered";
+        assert_screen "anaconda_select_install_lang_selected", 3;
         assert_and_click "anaconda_select_install_lang_continue";
 
         if ( check_screen "anaconda_rawhide_accept_fate" ) {

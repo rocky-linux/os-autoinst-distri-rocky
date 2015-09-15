@@ -2,7 +2,7 @@
   "tags": [
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-develop",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "anaconda_install_destination_reclaim_space_shrink_slider"
   ],
   "area": [

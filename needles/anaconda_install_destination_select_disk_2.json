@@ -12,7 +12,7 @@
     "tags": [
         "anaconda_install_destination_select_disk_2",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

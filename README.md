@@ -136,3 +136,17 @@ and `test_flags()` method, inheriting from one of the classes mentioned above.
 file in openqa_fedora_tools repository.
 9. Open differential request via phabricator, set openqa_fedora as a project and repository.
 10. Mark your test in [phabricator page](https://phab.qadevel.cloud.fedoraproject.org/w/openqa/tests/) as done.
+
+### Language handling
+
+Tests can run in different languages. To set the language which will be used for a test, set the `LANGUAGE`
+variable for the test suite. The results of this will be:
+
+1. The value set will be typed into the language search box in anaconda.
+2. Only needles with the tags `ENV-LANGUAGE-ALL` and `ENV-LANGUAGE-(LANGUAGE)` will be used for the test (where `(LANGUAGE)` is the value set, forced to upper-case).
+3. As a consequence, the chosen language will be selected at the anaconda Welcome screen.
+
+It is very important, therefore, that needles have the correct tags. Any needle which is expected to match for
+tests run in *any* language must have the `ENV-LANGUAGE-ALL` tag. Other needles must have the appropriate tag(s)
+for the languages they are expected to match. The safest option if you are unsure is to set `ENV-LANGUAGE-ALL`.
+The only danger of this is that missing translations may not be caught.

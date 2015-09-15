@@ -277,6 +277,16 @@
                       test_suite => { name => "server_shrink_ntfs" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "european_language_install" },
+                    },
+                    {
                       machine    => { name => "32bit" },
                       product    => {
                                       arch    => "i386",
@@ -525,6 +535,16 @@
                                       version => "*",
                                     },
                       test_suite => { name => "server_updates_img_local" },
+                    },
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "european_language_install" },
                     }
                   ],
   Machines     => [
@@ -916,6 +936,17 @@
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ntfs.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "european_language_install",
+                      prio => 24,
+                      settings => [
+                        { key => "LANGUAGE", value => "french" },
+                        { key => "USER_LOGIN", value => "qwerty" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
                     },

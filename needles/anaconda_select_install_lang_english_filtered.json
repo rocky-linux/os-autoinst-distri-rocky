@@ -16,9 +16,9 @@
     }
   ],
   "tags": [
-    "anaconda_select_install_lang_english_filtered",
+    "anaconda_select_install_lang_filtered",
     "ENV-DESKTOP-default",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US"
+    "ENV-LANGUAGE-ENGLISH"
   ]
 }

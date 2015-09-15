@@ -3,7 +3,7 @@
   "tags": [
     "anaconda_manual_partitioning",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ENGLISH",
     "ENV-FLAVOR-server"
   ],
   "area": [

@@ -3,7 +3,7 @@
   "tags": [
     "anaconda_install_source_http_selected",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "area": [

@@ -3,15 +3,15 @@
         {
             "height": 61,
             "type": "match",
-            "width": 187,
-            "xpos": 691,
+            "width": 23,
+            "xpos": 626,
             "ypos": 157
         }
     ],
     "tags": [
         "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ALL",
         "anaconda_install_user_creation"
     ]
 }

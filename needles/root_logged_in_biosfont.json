@@ -19,7 +19,7 @@
         "root_logged_in",
         "root_console",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

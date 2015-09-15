@@ -19,7 +19,7 @@
         "user_logged_in",
         "user_console",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

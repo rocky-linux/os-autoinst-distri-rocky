@@ -12,7 +12,7 @@
     "tags": [
         "anaconda_minimal_selected",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ENGLISH",
         "ENV-FLAVOR-server"
     ]
 }

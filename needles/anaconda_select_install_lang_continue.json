@@ -12,6 +12,6 @@
         "anaconda_select_install_lang_continue",
         "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US"
+        "ENV-LANGUAGE-ENGLISH"
     ]
 }

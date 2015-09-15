@@ -18,7 +18,7 @@
   "tags": [
     "console_two_disks_mounted_lvm",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "properties": []

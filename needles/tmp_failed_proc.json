@@ -2,7 +2,7 @@
   "tags": [
     "tmp_failed_proc",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ENGLISH",
     "ENV-FLAVOR-develop"
   ],
   "properties": [],

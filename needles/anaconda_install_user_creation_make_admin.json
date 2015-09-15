@@ -11,7 +11,7 @@
     "tags": [
         "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ENGLISH",
         "anaconda_install_user_creation_make_admin"
     ]
 }

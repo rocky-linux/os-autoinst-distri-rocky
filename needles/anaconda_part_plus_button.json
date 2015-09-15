@@ -12,7 +12,7 @@
     "tags": [
         "anaconda_part_plus_button",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

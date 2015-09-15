@@ -31,6 +31,19 @@ sub unregister_needle_tags($) {
     for my $n (@a) { $n->unregister(); }
 }
 
+# Un-register all needles *except* those with specified tags (arg is a
+# list of tags)
+sub unregister_except_tags {
+    NEEDLE: for my $needle ( needle::all() ) {
+        for my $tag (@_) {
+            # If the needle has any of the tags, we skip to the next needle
+            next NEEDLE if ($needle->has_tag($tag));
+        }
+        # We only get here for a needle if we didn't match any of the tags
+        $needle->unregister();
+    }
+}
+
 sub cleanup_needles() {
     if (!get_var('LIVE')) {
         ## Unregister live-only installer needles. The main issue is the
@@ -41,6 +54,12 @@ sub cleanup_needles() {
         ## they don't match on it too soon.
         unregister_needle_tags("ENV-INSTALLER-live");
     }
+
+    # Unregister non-language-appropriate needles. Needles which are expected
+    # to match all languages have ENV-LANGUAGE-ALL tag.
+    my $lang = uc(get_var('LANGUAGE')) || 'ENGLISH';
+    $lang = 'ENV-LANGUAGE-'.$lang;
+    unregister_except_tags($lang, 'ENV-LANGUAGE-ALL');
 }
 $needle::cleanuphandler = \&cleanup_needles;
 

@@ -2,7 +2,7 @@
   "tags": [
     "anaconda_install_source_check_repo_added",
     "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ],

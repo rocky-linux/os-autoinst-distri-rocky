@@ -9,10 +9,10 @@
         }
     ],
     "tags": [
-        "anaconda_select_install_lang_english_selected",
-        "anaconda_select_install_lang_english_filtered",
+        "anaconda_select_install_lang_selected",
+        "anaconda_select_install_lang_filtered",
         "ENV-DISTRI-fedora",
-        "ENV-INSTLANG-en_US",
+        "ENV-LANGUAGE-ENGLISH",
         "ENV-OFW-1",
         "ENV-FLAVOR-server"
     ]

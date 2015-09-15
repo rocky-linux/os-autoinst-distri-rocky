@@ -18,7 +18,7 @@
   "tags": [
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-server",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ALL",
     "anaconda_error"
   ],
   "properties": []
