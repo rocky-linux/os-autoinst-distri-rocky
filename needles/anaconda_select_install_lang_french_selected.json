@@ -13,7 +13,6 @@
         "anaconda_select_install_lang_filtered",
         "ENV-DISTRI-fedora",
         "ENV-LANGUAGE-FRENCH",
-        "ENV-OFW-1",
         "ENV-FLAVOR-server"
     ]
 }

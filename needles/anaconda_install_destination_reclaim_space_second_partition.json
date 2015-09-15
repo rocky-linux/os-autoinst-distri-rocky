@@ -12,7 +12,6 @@
     "anaconda_install_destination_reclaim_space_second_partition",
     "ENV-DISTRI-fedora",
     "ENV-LANGUAGE-ALL",
-    "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ]
 }

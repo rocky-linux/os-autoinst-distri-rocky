@@ -3,7 +3,6 @@
     "anaconda_install_source_check_repo_added",
     "ENV-DISTRI-fedora",
     "ENV-LANGUAGE-ALL",
-    "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ],
   "area": [

@@ -3,7 +3,6 @@
     "anaconda_main_hub_installation_source",
     "ENV-DISTRI-fedora",
     "ENV-LANGUAGE-ENGLISH",
-    "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ],
   "area": [

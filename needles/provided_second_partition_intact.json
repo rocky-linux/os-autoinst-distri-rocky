@@ -3,7 +3,6 @@
     "provided_second_partition_intact",
     "ENV-DISTRI-fedora",
     "ENV-LANGUAGE-ALL",
-    "ENV-OFW-1",
     "ENV-FLAVOR-server"
   ],
   "area": [
