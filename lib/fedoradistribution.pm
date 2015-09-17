@@ -26,10 +26,8 @@ sub init() {
 
 sub x11_start_program($$$) {
     my ($self, $program, $timeout, $options) = @_;
-    # TODO: take screenshots of every goddamn 'run command' dialog in
-    # every goddamn desktop and keep them updated forever
     send_key "alt-f2";
-    sleep 3;
+    assert_screen "desktop_runner";
     type_string $program;
     wait_idle 5; # because of KDE dialog - SUSE guys are doing the same!
     send_key "ret", 1;

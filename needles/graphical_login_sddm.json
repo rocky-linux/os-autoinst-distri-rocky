@@ -2,8 +2,7 @@
   "tags": [
     "graphical_login",
     "ENV-DESKTOP-kde",
-    "ENV-DISTRI-fedora",
-    "ENV-INSTLANG-en_US",
+    "ENV-LANGUAGE-ENGLISH",
     "ENV-FLAVOR-kde_live"
   ],
   "properties": [],
