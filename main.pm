@@ -31,16 +31,37 @@ sub unregister_needle_tags($) {
     for my $n (@a) { $n->unregister(); }
 }
 
-# Un-register all needles *except* those with specified tags (arg is a
-# list of tags)
-sub unregister_except_tags {
+# The purpose of this function is to un-register all needles which have
+# at least one tag that starts with a given string (the 'prefix'), if
+# it does not have any tag that matches the pattern 'prefix-value', for
+# any of the values given in an array. The first argument passed must
+# be the prefix; the second must be a reference to the array of values.
+# For instance, if the 'prefix' is LANGUAGE and the 'values' are
+# ENGLISH and FRENCH, this function would un-reference a needle which
+# had only the tag 'LANGUAGE-DUTCH', but it would keep a needle which
+# had the tag 'LANGUAGE-ENGLISH', or a needle with no tag starting in
+# 'LANGUAGE-' at all.
+sub unregister_prefix_tags {
+    my ($prefix, $valueref) = @_;
     NEEDLE: for my $needle ( needle::all() ) {
-        for my $tag (@_) {
-            # If the needle has any of the tags, we skip to the next needle
-            next NEEDLE if ($needle->has_tag($tag));
+        my $unregister = 0;
+        for my $tag ( @{$needle->{'tags'}} ) {
+            if ($tag =~ /^\Q$prefix/) {
+                # We have at least one tag matching the prefix, so we
+                # *MAY* want to un-register the needle
+                $unregister = 1;
+                for my $value ( @{$valueref} ) {
+                    # At any point if we hit a prefix-value match, we
+                    # know we need to keep this needle and can skip
+                    # to the next
+                    next NEEDLE if ($tag eq "$prefix-$value");
+                }
+            }
         }
-        # We only get here for a needle if we didn't match any of the tags
-        $needle->unregister();
+        # We get here if we hit no prefix-value match, but we only want
+        # to unregister the needle if we hit any prefix match, i.e. if
+        # 'unregister' is 1.
+        $needle->unregister() if ($unregister);
     }
 }
 
@@ -56,11 +77,11 @@ sub cleanup_needles() {
         unregister_needle_tags("INSTALLER-smallhub");
     }
 
-    # Unregister non-language-appropriate needles. Needles which are expected
-    # to match all languages have ENV-LANGUAGE-ALL tag.
-    my $lang = uc(get_var('LANGUAGE')) || 'ENGLISH';
-    $lang = 'ENV-LANGUAGE-'.$lang;
-    unregister_except_tags($lang, 'ENV-LANGUAGE-ALL');
+    # Unregister non-language-appropriate needles. See unregister_except_
+    # tags for details; basically all needles with at least one LANGUAGE-
+    # tag will be unregistered unless they match the current langauge.
+    my $langref = [ get_var('LANGUAGE') || 'english' ];
+    unregister_prefix_tags('LANGUAGE', $langref);
 }
 $needle::cleanuphandler = \&cleanup_needles;
 

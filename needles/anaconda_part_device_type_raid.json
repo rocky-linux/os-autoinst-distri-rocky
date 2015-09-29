@@ -12,7 +12,6 @@
   "tags": [
     "anaconda_part_device_type_raid",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ]
 }

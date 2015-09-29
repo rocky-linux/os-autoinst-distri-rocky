@@ -11,7 +11,7 @@
   "tags": [
     "anaconda_install_source_repo_select_mirrorlist",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ]
 }

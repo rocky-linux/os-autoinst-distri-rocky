@@ -2,7 +2,6 @@
   "tags": [
     "text_console_login",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-develop"
   ],
   "properties": [],

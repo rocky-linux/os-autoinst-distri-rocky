@@ -11,7 +11,7 @@
   "tags": [
     "anaconda_part_desired_capacity",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ],
   "properties": []

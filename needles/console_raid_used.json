@@ -12,7 +12,6 @@
   "tags": [
     "console_raid_used",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ]
 }

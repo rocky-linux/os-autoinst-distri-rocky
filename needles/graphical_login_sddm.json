@@ -2,7 +2,7 @@
   "tags": [
     "graphical_login",
     "ENV-DESKTOP-kde",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-kde_live"
   ],
   "properties": [],

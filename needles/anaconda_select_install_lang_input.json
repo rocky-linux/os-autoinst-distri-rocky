@@ -12,7 +12,6 @@
     "tags": [
         "anaconda_select_install_lang_input",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

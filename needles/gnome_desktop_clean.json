@@ -2,7 +2,7 @@
   "tags": [
     "ENV-DESKTOP-gnome",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "graphical_desktop_clean"
   ],
   "area": [

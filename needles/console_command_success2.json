@@ -2,7 +2,6 @@
   "tags": [
     "console_command_success",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "area": [

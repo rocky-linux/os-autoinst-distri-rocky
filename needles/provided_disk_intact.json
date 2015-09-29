@@ -2,7 +2,6 @@
   "tags": [
     "provided_disk_intact",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "area": [

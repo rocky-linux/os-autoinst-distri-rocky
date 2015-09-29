@@ -3,7 +3,7 @@
   "tags": [
     "anaconda_part_device_type",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ],
   "area": [

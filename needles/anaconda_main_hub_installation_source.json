@@ -2,7 +2,7 @@
   "tags": [
     "anaconda_main_hub_installation_source",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ],
   "area": [

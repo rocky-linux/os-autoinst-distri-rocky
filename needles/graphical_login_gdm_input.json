@@ -12,7 +12,7 @@
     "tags": [
         "graphical_login_input",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ENGLISH",
+        "LANGUAGE-english",
         "ENV-FLAVOR-develop"
     ]
 }

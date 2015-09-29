@@ -11,7 +11,7 @@
   "tags": [
     "anaconda_install_destination_delete_all_btn",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ]
 }

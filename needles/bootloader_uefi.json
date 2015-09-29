@@ -4,7 +4,6 @@
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-server_boot",
     "ENV-FLAVOR-workstation_live",
-    "ENV-LANGUAGE-ALL",
     "ENV-UEFI-1",
     "bootloader_uefi"
   ],

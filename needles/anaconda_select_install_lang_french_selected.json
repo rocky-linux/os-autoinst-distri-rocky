@@ -12,7 +12,7 @@
         "anaconda_select_install_lang_selected",
         "anaconda_select_install_lang_filtered",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-FRENCH",
+        "LANGUAGE-french",
         "ENV-FLAVOR-server"
     ]
 }

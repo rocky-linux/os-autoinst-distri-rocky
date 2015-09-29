@@ -2,7 +2,6 @@
   "tags": [
     "provided_second_partition_intact",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "area": [

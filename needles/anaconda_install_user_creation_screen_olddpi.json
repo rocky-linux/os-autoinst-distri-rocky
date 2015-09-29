@@ -19,7 +19,7 @@
     "tags": [
         "anaconda_install_user_creation_screen",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ENGLISH",
+        "LANGUAGE-english",
         "ENV-FLAVOR-server"
     ]
 }

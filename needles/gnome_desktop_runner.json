@@ -12,7 +12,6 @@
   "tags": [
     "ENV-DESKTOP-gnome",
     "ENV-FLAVOR-workstation_live",
-    "ENV-LANGUAGE-ALL",
     "desktop_runner"
   ]
 }

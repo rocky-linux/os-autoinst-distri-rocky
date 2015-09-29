@@ -12,7 +12,6 @@
     "tags": [
         "anaconda_part_list_box_swap",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

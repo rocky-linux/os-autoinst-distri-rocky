@@ -11,7 +11,7 @@
     "tags": [
         "ENV-DISTRI-fedora",
         "ENV-FLAVOR-server",
-        "ENV-LANGUAGE-FRENCH",
+        "LANGUAGE-french",
         "anaconda_rawhide_accept_fate"
     ]
 }

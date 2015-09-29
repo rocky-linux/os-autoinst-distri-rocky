@@ -11,7 +11,6 @@
     "tags": [
         "anaconda_main_hub_select_packages",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ALL",
         "ENV-FLAVOR-server"
     ]
 }

@@ -12,7 +12,7 @@
   "tags": [
     "anaconda_part_add_mountpoint",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ]
 }

@@ -19,6 +19,6 @@
         "anaconda_install_done",
         "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-FRENCH"
+        "LANGUAGE-french"
     ]
 }

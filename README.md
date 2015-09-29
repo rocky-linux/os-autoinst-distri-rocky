@@ -143,10 +143,14 @@ Tests can run in different languages. To set the language which will be used for
 variable for the test suite. The results of this will be:
 
 1. The value set will be typed into the language search box in anaconda.
-2. Only needles with the tags `ENV-LANGUAGE-ALL` and `ENV-LANGUAGE-(LANGUAGE)` will be used for the test (where `(LANGUAGE)` is the value set, forced to upper-case).
+2. Any needle with at least one tag that starts with `LANGUAGE` will be unregistered unless it has the tag `LANGUAGE-(LANGUAGE)` (where `(LANGUAGE)` is the value set, forced to upper-case).
 3. As a consequence, the chosen language will be selected at the anaconda Welcome screen.
 
 It is very important, therefore, that needles have the correct tags. Any needle which is expected to match for
-tests run in *any* language must have the `ENV-LANGUAGE-ALL` tag. Other needles must have the appropriate tag(s)
-for the languages they are expected to match. The safest option if you are unsure is to set `ENV-LANGUAGE-ALL`.
+tests run in *any* language must have no `LANGUAGE` tags. Other needles must have the appropriate tag(s)
+for the languages they are expected to match. The safest option if you are unsure is to set no `LANGUAGE` tag(s).
 The only danger of this is that missing translations may not be caught.
+
+Note that tags of the form `ENV-INSTLANG-(anything)` are useless artefacts and should be removed. Due to
+unfortunate design in openQA, any needle created in the web UI needle editor will have a `ENV-INSTLANG-en_US`
+tag by default; this should be removed before submission.

@@ -12,6 +12,6 @@
         "anaconda_spoke_done",
         "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
-        "ENV-LANGUAGE-ENGLISH"
+        "LANGUAGE-english"
     ]
 }

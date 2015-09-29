@@ -2,7 +2,6 @@
   "tags": [
     "boot_enter_passphrase",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ALL",
     "ENV-FLAVOR-server"
   ],
   "area": [

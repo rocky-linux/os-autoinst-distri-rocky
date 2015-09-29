@@ -36,6 +36,11 @@ sub run {
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
 
+    # Check username (and hence keyboard layout) if non-English
+    if (get_var('LANGUAGE')) {
+        assert_screen "anaconda_install_user_created";
+    }
+
     # Wait for install to end
     assert_and_click "anaconda_install_done", '', 1800;
     if (get_var('LIVE')) {

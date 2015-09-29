@@ -11,7 +11,7 @@
   "tags": [
     "anaconda_install_destination_save_passphrase",
     "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH",
+    "LANGUAGE-english",
     "ENV-FLAVOR-server"
   ]
 }
