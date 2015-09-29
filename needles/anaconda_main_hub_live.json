@@ -3,7 +3,7 @@
     "anaconda_main_hub",
     "ENV-DISTRI-fedora",
     "ENV-LANGUAGE-ALL",
-    "ENV-INSTALLER-live"
+    "INSTALLER-smallhub"
   ],
   "area": [
     {

@@ -45,14 +45,15 @@ sub unregister_except_tags {
 }
 
 sub cleanup_needles() {
-    if (!get_var('LIVE')) {
-        ## Unregister live-only installer needles. The main issue is the
-        ## hub: on non-live we want to wait for repository setup to complete,
-        ## but if we match that spoke's "ready" icon, it breaks live because
-        ## it doesn't have that spoke. So we have a live needle which doesn't
-        ## match on that icon, but we unregister it for non-live installs so
-        ## they don't match on it too soon.
-        unregister_needle_tags("ENV-INSTALLER-live");
+    if (!get_var('LIVE') and !get_var('CANNED')) {
+        ## Unregister smaller hub needles. Live and 'canned' installers have
+        ## a smaller hub with no repository spokes. On other images we want
+        ## to wait for repository setup to complete, but if we match that
+        ## spoke's "ready" icon, it breaks live and canned because they
+        ## don't have that spoke. So we have a needle which doesn't match
+        ## on that icon, but we unregister it for other installs so they
+        ## don't match on it too soon.
+        unregister_needle_tags("INSTALLER-smallhub");
     }
 
     # Unregister non-language-appropriate needles. Needles which are expected

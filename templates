@@ -81,6 +81,16 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "cloud_atomic_canned",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "universal",
                                       version => "*",
                                     },
@@ -620,6 +630,17 @@
                       flavor    => "server_boot",
                       name      => "",
                       settings  => [
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "cloud_atomic_canned",
+                      name      => "",
+                      settings  => [
+                        { key => "CANNED", value => "1" }
                                    ],
                       variables => "",
                       version   => "*",

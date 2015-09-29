@@ -1,24 +1,24 @@
 {
-  "area": [
-    {
-      "width": 103,
-      "xpos": 207,
-      "height": 45,
-      "type": "match",
-      "ypos": 196
-    },
-    {
-      "width": 79,
-      "height": 54,
-      "type": "match",
-      "xpos": 483,
-      "ypos": 195
-    }
-  ],
-  "tags": [
-    "anaconda_select_install_lang_filtered",
-    "ENV-DESKTOP-default",
-    "ENV-DISTRI-fedora",
-    "ENV-LANGUAGE-ENGLISH"
-  ]
+    "area": [
+        {
+            "height": 25,
+            "type": "match",
+            "width": 58,
+            "xpos": 222,
+            "ypos": 206
+        },
+        {
+            "height": 21,
+            "type": "match",
+            "width": 66,
+            "xpos": 490,
+            "ypos": 210
+        }
+    ],
+    "tags": [
+        "anaconda_select_install_lang_filtered",
+        "ENV-DESKTOP-default",
+        "ENV-DISTRI-fedora",
+        "ENV-LANGUAGE-ENGLISH"
+    ]
 }
