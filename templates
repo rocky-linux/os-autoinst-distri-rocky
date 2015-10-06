@@ -51,6 +51,16 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "server_dvd",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "generic_boot",
                                       version => "*",
                                     },
@@ -461,6 +471,16 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
+                                      flavor  => "server_dvd",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "default_install" },
+                    },
+                    {
+                      machine    => { name => "32bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
                                       flavor  => "generic_boot",
                                       version => "*",
                                     },
@@ -637,6 +657,16 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
+                      flavor    => "server_dvd",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
                       flavor    => "cloud_atomic_canned",
                       name      => "",
                       settings  => [
@@ -693,6 +723,16 @@
                       arch      => "i386",
                       distri    => "fedora",
                       flavor    => "server_boot",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      variables => "",
+                      version   => "*",
+                    },
+                    {
+                      arch      => "i386",
+                      distri    => "fedora",
+                      flavor    => "server_dvd",
                       name      => "",
                       settings  => [
                                    ],
