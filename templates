@@ -595,7 +595,8 @@
                         { key => "QEMUCPU", value => "qemu64" },
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
-                        { key => "QEMURAM", value => "2048"}
+                        { key => "QEMURAM", value => "2048"},
+                        { key => "PART_TABLE_TYPE", value => "mbr"}
                       ],
                       variables => "",
                     },
@@ -606,7 +607,8 @@
                         { key => "QEMUCPU", value => "qemu32" },
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
-                        { key => "QEMURAM", value => "2048"}
+                        { key => "QEMURAM", value => "2048"},
+                        { key => "PART_TABLE_TYPE", value => "mbr"}
                       ],
                       variables => "",
                     },
@@ -618,7 +620,8 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
-                        { key => "UEFI", value => "1"}
+                        { key => "UEFI", value => "1"},
+                        { key => "PART_TABLE_TYPE", value => "gpt"}
                       ],
                       variables => "",
                     },
@@ -788,7 +791,7 @@
                         { key => "PARTITIONING", value => "guided_multi" },
                         { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
                         { key => "NUMDISKS", value => "2" },
-                        { key => "HDD_2", value => "disk_full.img" },
+                        { key => "HDD_2", value => "disk_full_mbr.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
@@ -821,7 +824,7 @@
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_all" },
                         { key => "HDDMODEL", value => "ide-hd" },
-                        { key => "HDD_1", value => "disk_full.img" },
+                        { key => "HDD_1", value => "disk_full_mbr.img" },
                       ],
                       variables => "",
                     },
@@ -854,7 +857,7 @@
                       prio => 9,
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_partial" },
-                        { key => "HDD_1", value => "disk_full.img" },
+                        { key => "HDD_1", value => "disk_full_%PART_TABLE_TYPE%.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
@@ -872,7 +875,7 @@
                       prio => 11,
                       settings => [
                         { key => "PARTITIONING", value => "guided_free_space" },
-                        { key => "HDD_1", value => "disk_freespace.img" },
+                        { key => "HDD_1", value => "disk_freespace_%PART_TABLE_TYPE%.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
@@ -1007,7 +1010,7 @@
                       prio => 22,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_shrink_ext4.img" },
+                        { key => "HDD_1", value => "disk_shrink_ext4_mbr.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
                       variables => "",
@@ -1017,7 +1020,7 @@
                       prio => 23,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_shrink_ntfs.img" },
+                        { key => "HDD_1", value => "disk_shrink_ntfs_mbr.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
                       variables => "",

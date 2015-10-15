@@ -27,6 +27,7 @@ These variables control settings of underlying virtual machine where tests runs 
 | `MAKETESTSNAPSHOTS` | boolean | `false`/not set | save snapshot for each test |
 | `NOVIDEO` | boolean | `false`/not set | don't create video output if set |
 | `NUMDISKS` | integer | 1 | number of disks to be created and attached to VM |
+| `PART_TABLE_TYPE` | `mbr`, `gpt` | not set | what type of partition table should attached HDD have |
 | `PXEBOOT` | boolean | `false`/not set | boot VM from PXE (network) |
 | `QEMU` | filename, path to Qemu binary | not set | filename of Qemu binary |
 | `QEMUCPU` | see `qemu-kvm -cpu help` | not set | CPU to emulate |
