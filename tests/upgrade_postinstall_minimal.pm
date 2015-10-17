@@ -9,7 +9,7 @@ sub run {
     # try to login, check whether target release is installed
     $self->boot_to_login_screen();
     $self->root_console(tty=>3);
-    $self->check_release(get_var('VERSION'));
+    $self->check_release(lc(get_var('VERSION')));
 }
 
 
