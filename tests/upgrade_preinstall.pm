@@ -13,6 +13,8 @@ sub run {
     }
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
+    # disable screen blanking (update can take a long time)
+    type_string "setterm -blank 0\n";
 
     # upgrader should be installed on up-to-date system
 

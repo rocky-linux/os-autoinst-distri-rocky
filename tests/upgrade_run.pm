@@ -11,6 +11,9 @@ sub run {
     if ($release eq 'rawhide' or $milestone eq 'branched') {
         $args .= " --nogpgcheck";
     }
+    # disable screen blanking (download can take a long time)
+    type_string "setterm -blank 0\n";
+
     type_string "dnf -y system-upgrade download ${args}";
     send_key "ret";
 
