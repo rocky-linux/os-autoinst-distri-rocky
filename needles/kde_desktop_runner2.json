@@ -1,0 +1,18 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 307,
+      "height": 29,
+      "ypos": 3,
+      "width": 93,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "ENV-DESKTOP-kde",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-kde_live",
+    "desktop_runner"
+  ]
+}
