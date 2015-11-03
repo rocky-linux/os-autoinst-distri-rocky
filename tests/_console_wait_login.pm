@@ -12,9 +12,7 @@ sub run {
     # Reboot and wait for the text login
     assert_screen "text_console_login", $wait_time;
 
-    if (get_var("USER_LOGIN") && get_var("USER_PASSWORD")) {
-         $self->console_login(user=>get_var("USER_LOGIN"), password=>get_var("USER_PASSWORD"));
-    }
+    $self->console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
     if (get_var("ROOT_PASSWORD")) {
         $self->console_login(user=>"root", password=>get_var("ROOT_PASSWORD"));
     }
