@@ -5,12 +5,8 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # mount second partition and check that it's intact
-    type_string 'reset; mount /dev/vda2 /mnt; echo $?';
-    send_key "ret";
-    assert_screen "console_command_success";
-    type_string 'reset; cat /mnt/testfile';
-    send_key "ret";
-    assert_screen "provided_second_partition_intact";
+    validate_script_output 'mount /dev/vda2 /mnt; echo $?', sub { $_ =~ m/0/ };
+    validate_script_output 'cat /mnt/testfile', sub { $_ =~ m/Oh, hi Mark/ };
 }
 
 sub test_flags {

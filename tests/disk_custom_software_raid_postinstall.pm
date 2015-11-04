@@ -5,9 +5,7 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # check that RAID is used
-    type_string "reset; cat /proc/mdstat";
-    send_key "ret";
-    assert_screen "console_raid_used";
+    validate_script_output "cat /proc/mdstat", sub { $_ =~ m/Personalities : \[raid1\]/ };
 }
 
 sub test_flags {

@@ -6,9 +6,7 @@ sub run {
     assert_screen "root_console";
 
     # when two disks are selected in installation, LVM is used
-    type_string "reset; pvdisplay";
-    send_key "ret";
-    assert_screen "console_two_disks_mounted_lvm";
+    validate_script_output "pvdisplay", sub { $_ =~ m/\/dev\/vda/ && $_ =~ m/\/dev\/vdb/ };
 }
 
 sub test_flags {

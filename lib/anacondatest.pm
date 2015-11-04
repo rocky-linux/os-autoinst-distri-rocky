@@ -11,10 +11,9 @@ use testapi;
 sub post_fail_hook {
     my $self = shift;
 
-    # if error dialog is shown, click "report" - it then creates directory structure for ABRT
+    # if error dialog is shown, it created traceback file
     my $has_traceback = 0;
     if (check_screen "anaconda_error", 10) {
-        assert_and_click "anaconda_report_btn"; # Generage Anaconda ABRT logs
         $has_traceback = 1;
     }
 
@@ -30,17 +29,19 @@ sub post_fail_hook {
         upload_logs "/tmp/dnf.librepo.log";
         upload_logs "/tmp/dnf.rpm.log";
 
-        # Upload all ABRT logs
         if ($has_traceback) {
-            type_string "cd /var/tmp && tar czvf var_tmp.tar.gz *";
-            send_key "ret";
-            upload_logs "/var/tmp/var_tmp.tar.gz";
+            # Upload Anaconda traceback logs
+            script_run "tar czf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
+            upload_logs "/tmp/anaconda_tb.tar.gz";
         }
 
-        # Upload Anaconda traceback logs
-        type_string "tar czvf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
-        send_key "ret";
-        upload_logs "/tmp/anaconda_tb.tar.gz";
+        # Upload all ABRT logs
+        script_run "tar czf var_tmp.tar.gz /var/tmp";
+        upload_logs "/var/tmp/var_tmp.tar.gz";
+
+        # Upload /var/log
+        script_run "tar czf /tmp/var_log.tar.gz /var/log";
+        upload_logs "/tmp/var_log.tar.gz";
     }
     else {
         save_screenshot;

@@ -16,9 +16,7 @@ sub run {
 
     # check that the repo was used
     $self->root_console;
-    type_string "grep \"".$repourl."\" /tmp/packaging.log"; #| grep \"added repo\"";
-    send_key "ret";
-    assert_screen "anaconda_install_source_check_repo_added";
+    validate_script_output "grep \"".$repourl."\" /tmp/packaging.log", sub { $_ =~ m/added repo: 'anaconda'/ };
     send_key "ctrl-alt-f6";
 
     # Anaconda hub

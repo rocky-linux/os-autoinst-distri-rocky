@@ -12,10 +12,9 @@ sub run {
         $args .= " --nogpgcheck";
     }
     # disable screen blanking (download can take a long time)
-    type_string "setterm -blank 0\n";
+    script_run "setterm -blank 0";
 
-    type_string "dnf -y system-upgrade download ${args}";
-    send_key "ret";
+    script_run "dnf -y system-upgrade download ${args}";
 
     # wait until dnf finishes its work (screen stops moving for 30 seconds)
     wait_still_screen 30, 6000; # TODO: shorter timeout, longer stillscreen?
@@ -23,8 +22,7 @@ sub run {
     upload_logs "/var/log/dnf.log";
     upload_logs "/var/log/dnf.rpm.log";
 
-    type_string "dnf system-upgrade reboot";
-    send_key "ret";
+    script_run "dnf system-upgrade reboot";
 
     # now offline upgrading starts. user doesn't have to do anything, just wait untill
     # system reboots and login screen is shown

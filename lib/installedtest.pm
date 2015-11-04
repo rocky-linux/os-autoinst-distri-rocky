@@ -24,24 +24,23 @@ sub post_fail_hook {
 
     $self->root_console(tty=>2);
 
-    # Upload all ABRT logs
-    type_string "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
-    send_key "ret";
-    upload_logs "/var/tmp/abrt/abrt.tar.gz";
+    # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
+    if (validate_script_output "ls /var/tmp/abrt", sub { $_ ne '' }) {
+        # Upload all ABRT logs
+        script_run "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
+        upload_logs "/var/tmp/abrt/abrt.tar.gz";
+    }
 
     # Upload /var/log
-    type_string "tar czvf /tmp/var_log.tar.gz /var/log";
-    send_key "ret";
+    script_run "tar czvf /tmp/var_log.tar.gz /var/log";
     upload_logs "/tmp/var_log.tar.gz";
 }
 
 sub check_release {
     my $self = shift;
     my $release = shift;
-    type_string "clear\n";
-    type_string "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora | grep -q ${release}\n";
-    type_string "echo \$?\n";
-    assert_screen "console_command_success";
+    my $check_command = "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora";
+    validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
 }
 
 1;

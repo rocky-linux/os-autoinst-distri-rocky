@@ -14,17 +14,13 @@ sub run {
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
     # disable screen blanking (update can take a long time)
-    type_string "setterm -blank 0\n";
+    script_run "setterm -blank 0";
 
     # upgrader should be installed on up-to-date system
 
-    type_string 'dnf -y update; echo $?';
-    send_key "ret";
+    validate_script_output 'dnf -y update; echo $?', sub { $_ =~ m/0/ }, 1800;
 
-    assert_screen "console_command_success", 1800;
-
-    type_string "reboot";
-    send_key "ret";
+    script_run "reboot";
 
     if (get_var('UPGRADE') eq "desktop") {
         $self->boot_to_login_screen("graphical_login", 30); # GDM takes time to load
@@ -33,10 +29,8 @@ sub run {
     }
     $self->root_console(tty=>3);
 
-    type_string 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade; echo $?';
-    send_key "ret";
-
-    assert_screen "console_command_success", 1800;
+    my $update_command = 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade; echo $?';
+    validate_script_output $update_command, sub { $_ =~ m/0/ }, 1800;
 }
 
 

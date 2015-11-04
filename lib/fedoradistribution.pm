@@ -33,5 +33,12 @@ sub x11_start_program($$$) {
     send_key "ret", 1;
 }
 
+sub script_run {
+    my ($self, $program, $timeout) = @_;
+
+    type_string $program;
+    send_key "ret", $timeout;
+}
+
 1;
 # vim: set sw=4 et:

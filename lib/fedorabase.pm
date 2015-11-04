@@ -46,7 +46,7 @@ sub console_login {
             return;
         }
         elsif (check_screen $bad, 0) {
-            type_string "exit\n";
+            script_run "exit";
             sleep 2;
         }
         if ($needuser and check_screen "text_console_login", 0) {
