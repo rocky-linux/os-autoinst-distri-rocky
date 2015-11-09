@@ -803,6 +803,7 @@
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
                         { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img" },
                         { key => "HDDMODEL", value => "virtio-scsi-pci" },
+                        { key => "CDMODEL", value => "scsi-cd" },
                       ],
                       variables => "",
                     },
