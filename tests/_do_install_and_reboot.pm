@@ -41,8 +41,13 @@ sub run {
         assert_screen "anaconda_install_user_created";
     }
 
-    # Wait for install to end
-    assert_and_click "anaconda_install_done", '', 1800;
+    # Wait for install to end. Give Rawhide a bit longer, in case
+    # we're on a debug kernel, debug kernel installs are really slow.
+    my $timeout = 1800;
+    if (lc(get_var('VERSION')) eq "rawhide") {
+        $timeout = 2400;
+    }
+    assert_and_click "anaconda_install_done", '', $timeout;
     if (get_var('LIVE')) {
         x11_start_program("reboot");
     }
