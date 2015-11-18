@@ -23,6 +23,7 @@ sub run {
     upload_logs "/var/log/dnf.rpm.log";
 
     script_run "dnf system-upgrade reboot";
+    die "DNF reported failure" if (check_screen "upgrade_fail");
 
     # now offline upgrading starts. user doesn't have to do anything, just wait untill
     # system reboots and login screen is shown

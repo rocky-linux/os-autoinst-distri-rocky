@@ -1,0 +1,16 @@
+{
+    "area": [
+        {
+            "height": 15,
+            "type": "match",
+            "width": 305,
+            "xpos": 0,
+            "ypos": 735
+        }
+    ],
+  "tags": [
+    "upgrade_fail",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}
