@@ -447,7 +447,7 @@
                       test_suite => { name => "european_language_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -457,7 +457,7 @@
                       test_suite => { name => "default_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -467,7 +467,7 @@
                       test_suite => { name => "default_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -477,7 +477,7 @@
                       test_suite => { name => "default_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -487,7 +487,7 @@
                       test_suite => { name => "default_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -497,7 +497,7 @@
                       test_suite => { name => "default_install" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -507,7 +507,7 @@
                       test_suite => { name => "package_set_minimal" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -517,7 +517,7 @@
                       test_suite => { name => "server_repository_http_graphical" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -527,7 +527,7 @@
                       test_suite => { name => "server_scsi_updates_img" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -537,7 +537,7 @@
                       test_suite => { name => "server_simple_encrypted" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -547,7 +547,7 @@
                       test_suite => { name => "server_software_raid" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -557,7 +557,7 @@
                       test_suite => { name => "server_btrfs" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -567,7 +567,7 @@
                       test_suite => { name => "server_ext3" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -577,7 +577,7 @@
                       test_suite => { name => "server_lvmthin" },
                     },
                     {
-                      machine    => { name => "32bit" },
+                      machine    => { name => "64bit" },
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -592,21 +592,9 @@
                       backend   => "qemu",
                       name      => "64bit",
                       settings  => [
-                        { key => "QEMUCPU", value => "qemu64" },
+                        { key => "QEMUCPU", value => "host" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
-                        { key => "QEMURAM", value => "2048"},
-                        { key => "PART_TABLE_TYPE", value => "mbr"}
-                      ],
-                      variables => "",
-                    },
-                    {
-                      backend   => "qemu",
-                      name      => "32bit",
-                      settings  => [
-                        { key => "QEMUCPU", value => "qemu32" },
-                        { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMUVGA", value => "qxl"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "PART_TABLE_TYPE", value => "mbr"}
                       ],
@@ -616,9 +604,9 @@
                       backend   => "qemu",
                       name      => "uefi",
                       settings  => [
-                        { key => "QEMUCPU", value => "qemu64" },
+                        { key => "QEMUCPU", value => "host" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMUVGA", value => "qxl"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"}
