@@ -274,6 +274,16 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "server_xfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "server_lvmthin" },
                     },
                     {
@@ -355,6 +365,16 @@
                                       version => "*",
                                     },
                       test_suite => { name => "server_ext3" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_xfs" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -1022,6 +1042,15 @@
                         { key => "USER_LOGIN", value => "qwerty" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "server_xfs",
+                      prio => 25,
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_xfs" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                       variables => "",
                     },
