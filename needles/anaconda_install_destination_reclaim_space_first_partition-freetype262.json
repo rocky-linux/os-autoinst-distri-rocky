@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "anaconda_install_destination_reclaim_space_first_partition",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "height": 24,
+      "width": 70,
+      "ypos": 154,
+      "xpos": 15,
+      "type": "match"
+    }
+  ]
+}
