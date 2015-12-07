@@ -449,16 +449,6 @@
                     {
                       machine    => { name => "64bit" },
                       product    => {
-                                      arch    => "i686",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "upgrade_2_desktop_32bit" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
                                       flavor  => "universal",
@@ -636,6 +626,16 @@
                                     },
                       test_suite => { name => "upgrade_desktop_32bit" },
                     }
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_desktop_32bit" },
+                    },
                   ],
   Machines     => [
                     {
@@ -1013,7 +1013,7 @@
                     },
                     {
                       name => "upgrade_2_minimal_64bit",
-                      prio => 19,
+                      prio => 21,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1024,7 +1024,7 @@
                     },
                     {
                       name => "upgrade_2_desktop_64bit",
-                      prio => 20,
+                      prio => 22,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1034,8 +1034,19 @@
                       variables => "",
                     },
                     {
+                      name => "upgrade_desktop_32bit",
+                      prio => 23,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f23_desktop_i686.img" },
+                        { key => "UPGRADE", value => "desktop" },
+                      ],
+                      variables => "",
+                    },
+                    {
                       name => "upgrade_2_desktop_32bit",
-                      prio => 20,
+                      prio => 24,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1046,7 +1057,7 @@
                     },
                     {
                       name => "server_updates_img_local",
-                      prio => 21,
+                      prio => 25,
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_updates_img.img" },
@@ -1057,7 +1068,7 @@
                     },
                     {
                       name => "server_shrink_ext4",
-                      prio => 22,
+                      prio => 26,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ext4_mbr.img" },
@@ -1067,7 +1078,7 @@
                     },
                     {
                       name => "server_shrink_ntfs",
-                      prio => 23,
+                      prio => 27,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ntfs_mbr.img" },
@@ -1077,7 +1088,7 @@
                     },
                     {
                       name => "european_language_install",
-                      prio => 24,
+                      prio => 28,
                       settings => [
                         { key => "LANGUAGE", value => "french" },
                         { key => "USER_LOGIN", value => "qwerty" },
@@ -1088,7 +1099,7 @@
                     },
                     {
                       name => "server_xfs",
-                      prio => 25,
+                      prio => 29,
                       settings => [
                         { key => "PARTITIONING", value => "custom_xfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
