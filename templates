@@ -625,7 +625,7 @@
                                       version => "*",
                                     },
                       test_suite => { name => "upgrade_desktop_32bit" },
-                    }
+                    },
                     {
                       machine    => { name => "64bit" },
                       product    => {
