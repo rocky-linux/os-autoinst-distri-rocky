@@ -434,6 +434,46 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "upgrade_2_minimal_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_desktop_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_minimal_32bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_desktop_32bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "server_updates_img_local" },
                     },
                     {
@@ -965,7 +1005,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_minimal_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f23_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
                       variables => "",
@@ -976,13 +1016,35 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f23_desktop_x86_64.img" },
+                        { key => "UPGRADE", value => "desktop" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "upgrade_2_minimal_64bit",
+                      prio => 19,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f22_minimal_x86_64.img" },
+                        { key => "UPGRADE", value => "minimal" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "upgrade_2_desktop_64bit",
+                      prio => 20,
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f22_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
                       ],
                       variables => "",
                     },
                     {
-                      name => "upgrade_minimal_32bit",
+                      name => "upgrade_2_minimal_32bit",
                       prio => 19,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -993,7 +1055,7 @@
                       variables => "",
                     },
                     {
-                      name => "upgrade_desktop_32bit",
+                      name => "upgrade_2_desktop_32bit",
                       prio => 20,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
