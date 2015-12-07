@@ -449,17 +449,7 @@
                     {
                       machine    => { name => "64bit" },
                       product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "upgrade_2_minimal_32bit" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      product    => {
-                                      arch    => "x86_64",
+                                      arch    => "i686",
                                       distri  => "fedora",
                                       flavor  => "universal",
                                       version => "*",
@@ -1040,17 +1030,6 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f22_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
-                      ],
-                      variables => "",
-                    },
-                    {
-                      name => "upgrade_2_minimal_32bit",
-                      prio => 19,
-                      settings => [
-                        { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_minimal_i686.img" },
-                        { key => "UPGRADE", value => "minimal" },
                       ],
                       variables => "",
                     },
