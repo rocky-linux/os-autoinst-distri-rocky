@@ -1,17 +1,17 @@
 {
-  "properties": [],
-  "area": [
-    {
-      "ypos": 263,
-      "height": 24,
-      "type": "match",
-      "xpos": 15,
-      "width": 70
-    }
-  ],
-  "tags": [
-    "anaconda_install_destination_reclaim_space_first_partition",
-    "ENV-DISTRI-fedora",
-    "ENV-FLAVOR-server"
-  ]
+    "area": [
+        {
+            "height": 39,
+            "type": "match",
+            "width": 25,
+            "xpos": 150,
+            "ypos": 249
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "anaconda_install_destination_reclaim_space_first_partition",
+        "ENV-DISTRI-fedora",
+        "ENV-FLAVOR-server"
+    ]
 }
