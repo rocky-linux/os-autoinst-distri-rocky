@@ -297,6 +297,16 @@
                       test_suite => { name => "server_no_swap" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "package_set_kde" },
+                    },
+                    {
                       machine    => { name => "uefi" },
                       product    => {
                                       arch    => "x86_64",
@@ -635,6 +645,16 @@
                                       version => "*",
                                     },
                       test_suite => { name => "upgrade_2_desktop_32bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "package_set_kde" },
                     },
                   ],
   Machines     => [
@@ -1008,6 +1028,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f23_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
+                        { key => "DESKTOP", value => "gnome" },
                       ],
                       variables => "",
                     },
@@ -1042,6 +1063,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f23_desktop_i686.img" },
                         { key => "UPGRADE", value => "desktop" },
+                        { key => "DESKTOP", value => "gnome" },
                       ],
                       variables => "",
                     },
@@ -1105,6 +1127,15 @@
                       settings => [
                         { key => "PARTITIONING", value => "custom_xfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                      variables => "",
+                    },
+                    {
+                      name => "package_set_kde",
+                      prio => 26,
+                      settings => [
+                        { key => "DESKTOP", value => "kde" },
+                        { key => "PACKAGE_SET", value => "kde" },
                       ],
                       variables => "",
                     },
