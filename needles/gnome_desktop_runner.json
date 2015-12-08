@@ -10,7 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "ENV-DESKTOP-gnome",
+    "DESKTOP-gnome",
     "ENV-FLAVOR-workstation_live",
     "desktop_runner"
   ]

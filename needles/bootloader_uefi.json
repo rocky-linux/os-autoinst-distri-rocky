@@ -1,6 +1,5 @@
 {
   "tags": [
-    "ENV-DESKTOP-gnome",
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-server_boot",
     "ENV-FLAVOR-workstation_live",

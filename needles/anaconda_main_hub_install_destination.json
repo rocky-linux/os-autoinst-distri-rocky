@@ -10,7 +10,6 @@
     ],
     "tags": [
         "anaconda_main_hub_install_destination",
-        "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora"
     ]
 }

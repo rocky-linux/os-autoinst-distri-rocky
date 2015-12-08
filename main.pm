@@ -77,6 +77,11 @@ sub cleanup_needles() {
         unregister_needle_tags("INSTALLER-smallhub");
     }
 
+    # Unregister desktop needles of other desktops when DESKTOP is specified
+    if (get_var('DESKTOP')) {
+        unregister_prefix_tags('DESKTOP', [ get_var('DESKTOP') ])
+    }
+
     # Unregister non-language-appropriate needles. See unregister_except_
     # tags for details; basically all needles with at least one LANGUAGE-
     # tag will be unregistered unless they match the current langauge.

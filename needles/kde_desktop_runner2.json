@@ -10,7 +10,7 @@
     }
   ],
   "tags": [
-    "ENV-DESKTOP-kde",
+    "DESKTOP-kde",
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-kde_live",
     "desktop_runner"

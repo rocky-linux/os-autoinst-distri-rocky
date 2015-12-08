@@ -10,7 +10,7 @@
   ],
   "tags": [
     "desktop_runner",
-    "ENV-DESKTOP-kde",
+    "DESKTOP-kde",
     "ENV-FLAVOR-kde_live"
   ],
   "properties": []

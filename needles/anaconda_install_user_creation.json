@@ -9,7 +9,6 @@
         }
     ],
     "tags": [
-        "ENV-DESKTOP-default",
         "ENV-DISTRI-fedora",
         "anaconda_install_user_creation"
     ]
