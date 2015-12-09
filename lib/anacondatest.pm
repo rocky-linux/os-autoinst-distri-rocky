@@ -42,6 +42,9 @@ sub post_fail_hook {
         # Upload /var/log
         script_run "tar czf /tmp/var_log.tar.gz /var/log";
         upload_logs "/tmp/var_log.tar.gz";
+
+        # Upload anaconda core dump, if there is one
+        upload_logs "/tmp/anaconda.core";
     }
     else {
         save_screenshot;
