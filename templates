@@ -8,6 +8,7 @@
   JobTemplates => [
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -18,6 +19,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 11,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -28,6 +30,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -38,6 +41,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 11,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -48,6 +52,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -58,6 +63,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -68,6 +74,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 11,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -78,6 +85,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 15,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -88,6 +96,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -98,6 +107,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -108,6 +118,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -118,6 +129,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -128,6 +140,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -138,6 +151,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -148,6 +162,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 21,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -158,6 +173,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -168,6 +184,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -178,6 +195,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -188,6 +206,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 21,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -198,6 +217,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -208,6 +228,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -218,6 +239,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -228,6 +250,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -238,6 +261,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -248,6 +272,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -258,6 +283,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -268,6 +294,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -278,6 +305,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -288,6 +316,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -298,6 +327,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -308,6 +338,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 31,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -318,6 +349,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 31,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -328,6 +360,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 31,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -338,6 +371,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 31,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -348,6 +382,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 31,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -358,6 +393,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 41,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -368,6 +404,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 41,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -378,6 +415,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 41,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -388,6 +426,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 41,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -398,6 +437,7 @@
                     },
                     {
                       machine    => { name => "uefi" },
+                      prio       => 51,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -408,6 +448,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -418,6 +459,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -428,6 +470,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -438,6 +481,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -448,6 +492,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -458,6 +503,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -468,6 +514,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -478,6 +525,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -488,6 +536,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -498,6 +547,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 11,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -508,6 +558,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 12,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -518,6 +569,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 12,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -528,6 +580,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 12,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -538,6 +591,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 17,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -548,6 +602,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -558,6 +613,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 22,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -568,6 +624,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 22,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -578,6 +635,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -588,6 +646,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -598,6 +657,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 42,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -608,6 +668,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 42,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -618,6 +679,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 42,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -628,6 +690,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -638,6 +701,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 52,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -648,6 +712,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 52,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -668,7 +733,6 @@
                         { key => "QEMURAM", value => "2048"},
                         { key => "PART_TABLE_TYPE", value => "mbr"}
                       ],
-                      variables => "",
                     },
                     {
                       backend   => "qemu",
@@ -681,7 +745,6 @@
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"}
                       ],
-                      variables => "",
                     },
                   ],
   Products     => [
@@ -692,7 +755,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -702,7 +764,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -712,7 +773,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -722,7 +782,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -733,7 +792,6 @@
                       settings  => [
                         { key => "CANNED", value => "1" }
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -745,7 +803,6 @@
                         { key => "LIVE", value => "1" },
                         { key => "DESKTOP", value => "gnome" }
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -757,7 +814,6 @@
                         { key => "LIVE", value => "1" },
                         { key => "DESKTOP", value => "kde" }
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -767,7 +823,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -777,7 +832,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -787,7 +841,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -797,7 +850,6 @@
                       name      => "",
                       settings  => [
                                    ],
-                      variables => "",
                       version   => "*",
                     },
                     {
@@ -809,7 +861,6 @@
                         { key => "LIVE", value => "1" },
                         { key => "DESKTOP", value => "gnome" }
                                    ],
-                      variables => "",
                       version   => "*",
                   },
                   {
@@ -821,30 +872,24 @@
                       { key => "LIVE", value => "1" },
                       { key => "DESKTOP", value => "kde" }
                                  ],
-                    variables => "",
                     version   => "*",
                   }
                   ],
   TestSuites   => [
                     {
                       name => "default_install",
-                      prio => 1,
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "package_set_minimal",
-                      prio => 1,
                       settings => [
                         { key => "PACKAGE_SET", value => "minimal" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_sata_multi",
-                      prio => 2,
                       settings => [
                         { key => "PARTITIONING", value => "guided_multi" },
                         { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
@@ -852,22 +897,18 @@
                         { key => "HDD_2", value => "disk_full_mbr.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_scsi_updates_img",
-                      prio => 3,
                       settings => [
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
                         { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img" },
                         { key => "HDDMODEL", value => "virtio-scsi-pci" },
                         { key => "CDMODEL", value => "scsi-cd" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_kickstart_user_creation",
-                      prio => 4,
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks" },
@@ -875,129 +916,101 @@
                         { key => "USER_PASSWORD", value => "test" },
                         { key => "ROOT_PASSWORD", value => "111111" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_delete_pata",
-                      prio => 5,
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_all" },
                         { key => "HDDMODEL", value => "ide-hd" },
                         { key => "HDD_1", value => "disk_full_mbr.img" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_mirrorlist_graphical",
-                      prio => 6,
                       settings => [
                         { key => "MIRRORLIST_GRAPHICAL", value => "1" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_repository_http_graphical",
-                      prio => 7,
                       settings => [
                         { key => "REPOSITORY_GRAPHICAL", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_repository_http_variation",
-                      prio => 8,
                       settings => [
                         { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_delete_partial",
-                      prio => 9,
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_partial" },
                         { key => "HDD_1", value => "disk_full_%PART_TABLE_TYPE%.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_simple_encrypted",
-                      prio => 10,
                       settings => [
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_simple_free_space",
-                      prio => 11,
                       settings => [
                         { key => "PARTITIONING", value => "guided_free_space" },
                         { key => "HDD_1", value => "disk_freespace_%PART_TABLE_TYPE%.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_multi_empty",
-                      prio => 12,
                       settings => [
                         { key => "PARTITIONING", value => "guided_multi_empty_all" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_software_raid",
-                      prio => 13,
                       settings => [
                         { key => "PARTITIONING", value => "custom_software_raid" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_btrfs",
-                      prio => 14,
                       settings => [
                         { key => "PARTITIONING", value => "custom_btrfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_ext3",
-                      prio => 15,
                       settings => [
                         { key => "PARTITIONING", value => "custom_ext3" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_lvmthin",
-                      prio => 16,
                       settings => [
                         { key => "PARTITIONING", value => "custom_lvmthin" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_no_swap",
-                      prio => 17,
                       settings => [
                         { key => "PARTITIONING", value => "custom_no_swap" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_kickstart_hdd",
-                      prio => 18,
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=hd:vdb1:/root-user-crypted-net.ks" },
@@ -1007,22 +1020,18 @@
                         { key => "USER_LOGIN", value => "test" },
                         { key => "USER_PASSWORD", value => "test" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_minimal_64bit",
-                      prio => 19,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f23_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_desktop_64bit",
-                      prio => 20,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1030,22 +1039,18 @@
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_2_minimal_64bit",
-                      prio => 21,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f22_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_2_desktop_64bit",
-                      prio => 22,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1053,11 +1058,9 @@
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_desktop_32bit",
-                      prio => 23,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1065,11 +1068,9 @@
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "upgrade_2_desktop_32bit",
-                      prio => 24,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
@@ -1077,67 +1078,54 @@
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_updates_img_local",
-                      prio => 25,
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_updates_img.img" },
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
                         { key => "GRUB", value => "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_shrink_ext4",
-                      prio => 26,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ext4_mbr.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_shrink_ntfs",
-                      prio => 27,
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ntfs_mbr.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "european_language_install",
-                      prio => 28,
                       settings => [
                         { key => "LANGUAGE", value => "french" },
                         { key => "USER_LOGIN", value => "qwerty" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "server_xfs",
-                      prio => 29,
                       settings => [
                         { key => "PARTITIONING", value => "custom_xfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
-                      variables => "",
                     },
                     {
                       name => "package_set_kde",
-                      prio => 26,
                       settings => [
                         { key => "DESKTOP", value => "kde" },
                         { key => "PACKAGE_SET", value => "kde" },
                       ],
-                      variables => "",
                     },
                   ],
 }
