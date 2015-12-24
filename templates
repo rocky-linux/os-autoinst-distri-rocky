@@ -1135,7 +1135,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f23_minimal_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
                     },
@@ -1144,7 +1144,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f23_desktop_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
@@ -1154,7 +1154,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_minimal_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_minimal_x86_64.img" },
                         { key => "UPGRADE", value => "minimal" },
                       ],
                     },
@@ -1163,7 +1163,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_desktop_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
@@ -1173,7 +1173,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f23_desktop_i686.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_desktop_i686.img" },
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
@@ -1183,7 +1183,7 @@
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f22_desktop_i686.img" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_desktop_i686.img" },
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
                       ],
