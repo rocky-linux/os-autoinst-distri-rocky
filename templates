@@ -217,6 +217,39 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "generic_boot",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "workstation_live",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "server_dvd",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
                                       arch    => "x86_64",
@@ -1282,6 +1315,15 @@
                       name => "base_services_start",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_services_start" },
+                        { key => "START_AFTER_TEST", value => "default_install" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "base_service_manipulation",
+                      settings => [
+                        { key => "ENTRYPOINT", value => "base_service_manipulation" },
                         { key => "START_AFTER_TEST", value => "default_install" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
