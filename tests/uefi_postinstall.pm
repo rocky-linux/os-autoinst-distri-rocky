@@ -9,7 +9,7 @@ sub run {
     }
     assert_screen "root_console";
     # this test shows if the system is booted with efi
-    validate_script_output '[ -d /sys/firmware/efi/ ]; echo $?', sub { $_ =~ m/0/ };
+    assert_script_run '[ -d /sys/firmware/efi/ ]';
 }
 
 sub test_flags {

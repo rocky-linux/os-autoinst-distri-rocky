@@ -5,7 +5,7 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # check that first partition is intact
-    validate_script_output 'mount /dev/vda1 /mnt; echo $?', sub { $_ =~ m/0/ };
+    assert_script_run 'mount /dev/vda1 /mnt';
     validate_script_output 'cat /mnt/testfile', sub { $_ =~ m/Hello, world!/ };
 }
 

@@ -18,7 +18,7 @@ sub run {
 
     # upgrader should be installed on up-to-date system
 
-    validate_script_output 'dnf -y update; echo $?', sub { $_ =~ m/0/ }, 1800;
+    assert_script_run 'dnf -y update', 1800;
 
     script_run "reboot";
 
@@ -29,8 +29,8 @@ sub run {
     }
     $self->root_console(tty=>3);
 
-    my $update_command = 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade; echo $?';
-    validate_script_output $update_command, sub { $_ =~ m/0/ }, 1800;
+    my $update_command = 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade';
+    assert_script_run $update_command, 1800;
 }
 
 
