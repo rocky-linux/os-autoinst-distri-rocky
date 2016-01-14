@@ -184,6 +184,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "kde_live",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_selinux" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
@@ -217,6 +228,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "kde_live",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_services_start" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
@@ -244,6 +266,17 @@
                                       arch    => "x86_64",
                                       distri  => "fedora",
                                       flavor  => "server_dvd",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "kde_live",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
