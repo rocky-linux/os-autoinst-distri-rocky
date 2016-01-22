@@ -378,7 +378,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_sata_multi" },
+                      test_suite => { name => "server_multi" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -389,7 +389,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_sata_multi" },
+                      test_suite => { name => "server_multi" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -1097,10 +1097,9 @@
                       ],
                     },
                     {
-                      name => "server_sata_multi",
+                      name => "server_multi",
                       settings => [
                         { key => "PARTITIONING", value => "guided_multi" },
-                        { key => "HDDMODEL", value => "ide-hd,bus=ahci0.0" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_full_mbr.img" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
