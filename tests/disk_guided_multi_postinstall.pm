@@ -5,7 +5,7 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # check that second disk is intact
-    assert_script_run 'mount /dev/sdb1 /mnt';
+    assert_script_run 'mount /dev/vdb1 /mnt';
     validate_script_output 'cat /mnt/testfile', sub { $_ =~ m/Hello, world!/ };
 }
 
