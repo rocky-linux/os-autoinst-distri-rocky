@@ -88,16 +88,6 @@ sub boot_to_login_screen {
     }
 }
 
-sub get_release {
-    my $self = shift;
-    if (get_var("RAWHIDE")) {
-        return 'rawhide';
-    }
-    else {
-        return lc((split /-/, get_var("BUILD"))[1]);
-    }
-}
-
 sub get_milestone {
     my $self = shift;
     # FIXME: we don't know how to do this with Pungi 4 yet.

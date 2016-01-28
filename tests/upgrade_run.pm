@@ -4,7 +4,7 @@ use testapi;
 
 sub run {
     my $self = shift;
-    my $release = $self->get_release;
+    my $release = lc(get_var("VERSION"));
     # NOTE: this doesn't actually work yet, it's a FIXME in fedorabase
     my $milestone = $self->get_milestone;
     my $args = "--releasever=${release}";

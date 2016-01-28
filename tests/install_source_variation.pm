@@ -10,7 +10,7 @@ sub run {
 
     my $repourl = "";
 
-    $repourl = get_var("REPOSITORY_VARIATION")."/".$self->get_release."/".get_var("ARCH")."/os";
+    $repourl = get_var("REPOSITORY_VARIATION")."/".lc(get_var("VERSION"))."/".get_var("ARCH")."/os";
 
     # check that the repo was used
     $self->root_console;

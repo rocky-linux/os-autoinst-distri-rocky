@@ -44,7 +44,7 @@ sub run {
 
         # REPOSITORY_VARIATION should be set to repository URL without version and architecture
         # appended (it will be appended automatically)
-        $repourl = get_var("REPOSITORY_VARIATION")."/".$self->get_release."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_VARIATION")."/".lc(get_var("VERSION"))."/".get_var("ARCH")."/os";
         type_string " inst.repo=".$repourl;
     }
 
