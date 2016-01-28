@@ -85,4 +85,3 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
 | `ARCH` | is set to architecture that will be used (`x86_64`, `i686`) |
 | `BUILD` | contains Pungi compose_id (something like `Fedora-24-20160121.n.3`) |
-| `RAWHIDE` | set to 1 if this is a Rawhide compose (this is kind of a hack, see https://pagure.io/pungi/issue/134 ) |
