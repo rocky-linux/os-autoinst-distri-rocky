@@ -3,6 +3,7 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
     my $release = $self->get_release;
     # NOTE: this doesn't actually work yet, it's a FIXME in fedorabase
     my $milestone = $self->get_milestone;
