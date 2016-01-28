@@ -3,8 +3,9 @@ use strict;
 use testapi;
 
 sub run {
-    my $release = lc(get_var('VERSION'));
-    my $milestone = lc((split /_/, get_var("BUILD"))[1]);
+    my $release = $self->get_release;
+    # NOTE: this doesn't actually work yet, it's a FIXME in fedorabase
+    my $milestone = $self->get_milestone;
     my $args = "--releasever=${release}";
     # This is excessive - after the Bodhi activation point we don't
     # need --nogpgcheck for Branched. But that's hard to detect magically

@@ -8,11 +8,9 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub";
 
-    # FIXME: this code is scattered in at least three places (here, _boot_to_anaconda, _install_source_graphical. Deduplicate
-    my $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
     my $repourl = "";
 
-    $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
+    $repourl = get_var("REPOSITORY_VARIATION")."/".$self->get_release."/".get_var("ARCH")."/os";
 
     # check that the repo was used
     $self->root_console;

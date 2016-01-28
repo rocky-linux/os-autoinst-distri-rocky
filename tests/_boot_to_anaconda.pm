@@ -39,14 +39,11 @@ sub run {
         unless (get_var("GRUB")){
             get_kernel_line;
         }
-        my $fedora_version = "";
         my $repourl = "";
-
-        $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
 
         # REPOSITORY_VARIATION should be set to repository URL without version and architecture
         # appended (it will be appended automatically)
-        $repourl = get_var("REPOSITORY_VARIATION")."/".$fedora_version."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_VARIATION")."/".$self->get_release."/".get_var("ARCH")."/os";
         type_string " inst.repo=".$repourl;
     }
 

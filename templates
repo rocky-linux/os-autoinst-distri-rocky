@@ -12,7 +12,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -23,7 +23,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -34,7 +34,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_boot",
+                                      flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -45,7 +45,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_boot",
+                                      flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -56,7 +56,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -67,7 +67,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -78,7 +78,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -89,7 +89,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -100,7 +100,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_boot",
+                                      flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -111,7 +111,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_boot",
+                                      flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -122,7 +122,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -133,7 +133,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -144,7 +144,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "cloud_atomic_canned",
+                                      flavor  => "Cloud_Atomic-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -155,7 +155,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_selinux" },
@@ -166,7 +166,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_selinux" },
@@ -177,7 +177,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_selinux" },
@@ -188,7 +188,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_selinux" },
@@ -199,7 +199,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
@@ -210,7 +210,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
@@ -221,7 +221,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
@@ -232,7 +232,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
@@ -243,7 +243,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
@@ -254,7 +254,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
@@ -265,7 +265,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
@@ -276,7 +276,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
@@ -727,7 +727,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "workstation_live",
+                                      flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -738,7 +738,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "server_boot",
+                                      flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -749,7 +749,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "server_dvd",
+                                      flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -760,7 +760,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "generic_boot",
+                                      flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -771,7 +771,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "workstation_boot",
+                                      flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -782,7 +782,7 @@
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
-                                      flavor  => "kde_live",
+                                      flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -947,7 +947,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "generic_boot",
+                      flavor    => "Everything-boot-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -956,7 +956,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "server_boot",
+                      flavor    => "Server-boot-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -965,7 +965,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "server_dvd",
+                      flavor    => "Server-dvd-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -974,7 +974,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "cloud_atomic_canned",
+                      flavor    => "Cloud_Atomic-boot-iso",
                       name      => "",
                       settings  => [
                         { key => "CANNED", value => "1" }
@@ -984,7 +984,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "workstation_boot",
+                      flavor    => "Workstation-boot-iso",
                       name      => "",
                       settings  => [
                         { key => "DESKTOP", value => "gnome" }
@@ -994,7 +994,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "workstation_live",
+                      flavor    => "Workstation-live-iso",
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
@@ -1005,7 +1005,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "kde_live",
+                      flavor    => "KDE-live-iso",
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
@@ -1025,7 +1025,7 @@
                     {
                       arch      => "i386",
                       distri    => "fedora",
-                      flavor    => "generic_boot",
+                      flavor    => "Everything-boot-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -1034,7 +1034,7 @@
                     {
                       arch      => "i386",
                       distri    => "fedora",
-                      flavor    => "server_boot",
+                      flavor    => "Server-boot-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -1043,7 +1043,7 @@
                     {
                       arch      => "i386",
                       distri    => "fedora",
-                      flavor    => "server_dvd",
+                      flavor    => "Server-dvd-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -1052,7 +1052,7 @@
                     {
                       arch      => "i386",
                       distri    => "fedora",
-                      flavor    => "workstation_boot",
+                      flavor    => "Workstation-boot-iso",
                       name      => "",
                       settings  => [
                         { key => "DESKTOP", value => "gnome" }
@@ -1062,7 +1062,7 @@
                     {
                       arch      => "i386",
                       distri    => "fedora",
-                      flavor    => "workstation_live",
+                      flavor    => "Workstation-live-iso",
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
@@ -1073,7 +1073,7 @@
                   {
                     arch      => "i386",
                     distri    => "fedora",
-                    flavor    => "kde_live",
+                    flavor    => "KDE-live-iso",
                     name      => "",
                     settings  => [
                       { key => "LIVE", value => "1" },

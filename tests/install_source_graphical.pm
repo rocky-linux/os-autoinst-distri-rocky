@@ -21,25 +21,20 @@ sub run {
 
     # insert the url
     send_key "tab";
-    my $fedora_version = lc((split /_/, get_var("BUILD"))[0]);
     my $repourl = "";
-    if ($fedora_version ne "rawhide"){
-        if (get_var("MIRRORLIST_GRAPHICAL")){
-            $fedora_version = "fedora-".$fedora_version;
-        }
-    }
+    my $fedora_release = $self->get_release;
 
     # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
     # the repository url input
     if (get_var("MIRRORLIST_GRAPHICAL")){
-        $repourl = "mirrors.fedoraproject.org/mirrorlist?repo=".$fedora_version."&arch=".get_var('ARCH');
+        $repourl = "mirrors.fedoraproject.org/mirrorlist?repo=".$fedora_release."&arch=".get_var('ARCH');
         type_string $repourl;
 
         # select as mirror list
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")){
-        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".$fedora_version."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".$fedora_release."/".get_var("ARCH")."/os";
         type_string $repourl;
     }
 

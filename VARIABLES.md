@@ -78,9 +78,11 @@ These variables should be set when tests are scheduled (when running `isos post`
 
 | Variable | Explanation |
 | -------- | ----------- |
-| `ISO` | contains filename of ISO that is used for booting |
+| `ISO` | contains filename of ISO that is used for booting, if ISO is already downloaded |
+| `ISOURL` | contains URL for ISO to boot, openQA will download it. Set this or `ISO`, not both |
 | `DISTRI` | contains distribution name (should be same as in WebUI, probably `fedora`) |
 | `VERSION` | contains version of distribution |
-| `FLAVOR` | indicates what type of distribution is used (`universal`, `generic_boot`, `workstation_live`, `server_boot`) |
+| `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
 | `ARCH` | is set to architecture that will be used (`x86_64`, `i686`) |
-| `BUILD` | contains string `vv_tt_bb`, where `vv` is fedora version number, `tt` is release name (`Beta`, `Final`, ...) and `bb` is build (`RC3`, ...) |
+| `BUILD` | contains Pungi compose_id (something like `Fedora-24-20160121.n.3`) |
+| `RAWHIDE` | set to 1 if this is a Rawhide compose (this is kind of a hack, see https://pagure.io/pungi/issue/134 ) |
