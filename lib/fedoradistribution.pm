@@ -1,8 +1,6 @@
 package fedoradistribution;
 use base 'distribution';
 
-use testapi;
-
 # Fedora distribution class
 
 # Distro-specific functions, that are actually part of the API
@@ -16,7 +14,9 @@ use testapi;
 # script_sudo
 # type_password
 
-use testapi qw(send_key type_string);
+# importing whole testapi creates circular dependency, so import inly
+# necessary functions from testapi
+use testapi qw(send_key type_string wait_idle assert_screen);
 
 sub init() {
     my ($self) = @_;
@@ -24,7 +24,7 @@ sub init() {
     $self->SUPER::init();
 }
 
-sub x11_start_program($$$) {
+sub x11_start_program {
     my ($self, $program, $timeout, $options) = @_;
     send_key "alt-f2";
     assert_screen "desktop_runner";

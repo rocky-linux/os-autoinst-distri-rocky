@@ -99,17 +99,17 @@ if (get_var('LIVE')) {
 # (good for tests where it doesn't make sense to use _boot_to_anaconda, _software_selection etc.)
 if (get_var("ENTRYPOINT"))
 {
-    autotest::loadtest get_var('CASEDIR')."/tests/".get_var("ENTRYPOINT").".pm";
+    autotest::loadtest "tests/".get_var("ENTRYPOINT").".pm";
 }
 elsif (get_var("UPGRADE"))
 {
     # all upgrade tests consist of: preinstall phase (where packages are upgraded and
     # dnf-plugin-system-upgrade is installed), run phase (where upgrade is run) and postinstall
     # phase (where is checked if fedora was upgraded successfully)
-    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_preinstall.pm";
-    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_run.pm";
+    autotest::loadtest "tests/upgrade_preinstall.pm";
+    autotest::loadtest "tests/upgrade_run.pm";
     # UPGRADE can be set to "minimal", "encrypted", "desktop"...
-    autotest::loadtest get_var('CASEDIR')."/tests/upgrade_postinstall_".get_var("UPGRADE").".pm";
+    autotest::loadtest "tests/upgrade_postinstall_".get_var("UPGRADE").".pm";
 }
 else
 {
@@ -120,7 +120,7 @@ else
     # and reboot phase, postinstall phase
 
     # boot phase is loaded automatically every time
-    autotest::loadtest get_var('CASEDIR')."/tests/_boot_to_anaconda.pm";
+    autotest::loadtest "tests/_boot_to_anaconda.pm";
 
     # with kickstart tests, booting to anaconda is the only thing required (kickstart file handles
     # everything else)
@@ -129,14 +129,14 @@ else
 
         ## Installation source
         if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
-            autotest::loadtest get_var('CASEDIR')."/tests/install_source_graphical.pm";
+            autotest::loadtest "tests/install_source_graphical.pm";
         }
         if (get_var("REPOSITORY_VARIATION")){
-            autotest::loadtest get_var('CASEDIR')."/tests/install_source_variation.pm";
+            autotest::loadtest "tests/install_source_variation.pm";
         }
 
         ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
-        autotest::loadtest get_var('CASEDIR')."/tests/_software_selection.pm";
+        autotest::loadtest "tests/_software_selection.pm";
 
         ## Disk partitioning.
         # If PARTITIONING is set, we pick the storage test
@@ -147,34 +147,34 @@ else
         # if PARTITIONING is unset, or one of [...], use disk_guided_empty,
         # which is the simplest / 'default' case.
         if (! $partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
-            $storage = get_var('CASEDIR')."/tests/disk_guided_empty.pm";
+            $storage = "tests/disk_guided_empty.pm";
         }
         else {
-            $storage = get_var('CASEDIR')."/tests/disk_".$partitioning.".pm";
+            $storage = "tests/disk_".$partitioning.".pm";
         }
         autotest::loadtest $storage;
 
         if (get_var("ENCRYPT_PASSWORD")){
-            autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted.pm";
+            autotest::loadtest "tests/disk_guided_encrypted.pm";
         }
 
         # Start installation, set user & root passwords, reboot
         # install and reboot phase is loaded automatically every time (except when KICKSTART is set)
-        autotest::loadtest get_var('CASEDIR')."/tests/_do_install_and_reboot.pm";
+        autotest::loadtest "tests/_do_install_and_reboot.pm";
     }
 
     # Unlock encrypted storage volumes, if necessary. The test name here
     # follows the 'storage post-install' convention, but must be run earlier.
     if (get_var("ENCRYPT_PASSWORD")){
-        autotest::loadtest get_var('CASEDIR')."/tests/disk_guided_encrypted_postinstall.pm";
+        autotest::loadtest "tests/disk_guided_encrypted_postinstall.pm";
     }
 
     # Appropriate login method for install type
     if (get_var("DESKTOP")) {
-        autotest::loadtest get_var('CASEDIR')."/tests/_graphical_wait_login.pm";
+        autotest::loadtest "tests/_graphical_wait_login.pm";
     }
     else {
-        autotest::loadtest get_var('CASEDIR')."/tests/_console_wait_login.pm";
+        autotest::loadtest "tests/_console_wait_login.pm";
     }
 
     # from now on, we have fully installed and booted system with root/specified user logged in
@@ -184,13 +184,13 @@ else
     # of PARTITIONING
     my $storagepost = '';
     if (get_var('PARTITIONING')) {
-        my $loc = get_var('CASEDIR')."/tests/disk_".get_var('PARTITIONING')."_postinstall.pm";
+        my $loc = "tests/disk_".get_var('PARTITIONING')."_postinstall.pm";
         $storagepost = $loc if (-e $loc);
     }
     autotest::loadtest $storagepost if ($storagepost);
 
     if (get_var("UEFI")) {
-        autotest::loadtest get_var('CASEDIR')."/tests/uefi_postinstall.pm";
+        autotest::loadtest "tests/uefi_postinstall.pm";
     }
 }
 
