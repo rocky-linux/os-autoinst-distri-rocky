@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "desktop_runner",
+    "DESKTOP-kde",
+    "ENV-FLAVOR-kde_live"
+  ],
+  "area": [
+    {
+      "height": 30,
+      "width": 93,
+      "ypos": 5,
+      "type": "match",
+      "xpos": 307
+    }
+  ],
+  "properties": []
+}
