@@ -144,7 +144,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Cloud_Atomic-boot-iso",
+                                      flavor  => "Atomic-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "default_install" },
@@ -974,7 +974,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "Cloud_Atomic-boot-iso",
+                      flavor    => "Atomic-boot-iso",
                       name      => "",
                       settings  => [
                         { key => "CANNED", value => "1" }
