@@ -79,7 +79,7 @@ These variables should be set when tests are scheduled (when running `isos post`
 | Variable | Explanation |
 | -------- | ----------- |
 | `ISO` | contains filename of ISO that is used for booting. If ISOURL is not set, file must exist in /var/lib/openqa/share/factory/iso. If ISOURL is set, it will be downloaded to this name instead of its original name |
-| `ISOURL` | contains URL for ISO to boot, openQA will download it |
+| `ISO_URL` | contains URL for ISO to boot, openQA will download it |
 | `DISTRI` | contains distribution name (should be same as in WebUI, probably `fedora`) |
 | `VERSION` | contains version of distribution |
 | `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
