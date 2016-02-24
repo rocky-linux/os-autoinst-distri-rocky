@@ -15,7 +15,6 @@ sub get_kernel_line {
 }
 
 sub run {
-    my $self = shift;
     # Wait for bootloader to appear
     if( get_var("UEFI")){
         assert_screen "bootloader_uefi", 30;
