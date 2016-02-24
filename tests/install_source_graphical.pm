@@ -27,14 +27,14 @@ sub run {
     # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
     # the repository url input
     if (get_var("MIRRORLIST_GRAPHICAL")){
-        $repourl = "mirrors.fedoraproject.org/mirrorlist?repo=".$fedora_release."&arch=".get_var('ARCH');
+        $repourl = "mirrors.fedoraproject.org/mirrorlist?repo=fedora-".lc(get_var("VERSION"))."&arch=".get_var('ARCH');
         type_string $repourl;
 
         # select as mirror list
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")){
-        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".$fedora_release."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".lc(get_var("VERSION"))."/".get_var("ARCH")."/os";
         type_string $repourl;
     }
 
