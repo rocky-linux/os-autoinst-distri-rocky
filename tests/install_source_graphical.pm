@@ -22,7 +22,6 @@ sub run {
     # insert the url
     send_key "tab";
     my $repourl = "";
-    my $fedora_release = $self->get_release;
 
     # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
     # the repository url input
