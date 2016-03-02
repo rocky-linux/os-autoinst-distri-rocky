@@ -33,7 +33,7 @@ sub run {
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")){
-        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".lc(get_var("VERSION"))."/".get_var("ARCH")."/os";
+        $repourl = get_var("REPOSITORY_GRAPHICAL")."/".lc(get_var("VERSION"))."/Everything/".get_var("ARCH")."/os";
         type_string $repourl;
     }
 
