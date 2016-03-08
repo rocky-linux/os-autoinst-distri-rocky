@@ -11,9 +11,10 @@ use testapi;
 sub post_fail_hook {
     my $self = shift;
 
-    # if error dialog is shown, it created traceback file
+    # if error dialog is shown, click "report" - it then creates directory structure for ABRT
     my $has_traceback = 0;
     if (check_screen "anaconda_error", 10) {
+        assert_and_click "anaconda_error_report";
         $has_traceback = 1;
     }
 
@@ -36,7 +37,7 @@ sub post_fail_hook {
         }
 
         # Upload all ABRT logs
-        script_run "tar czf var_tmp.tar.gz /var/tmp";
+        script_run "tar czf /var/tmp/var_tmp.tar.gz /var/tmp";
         upload_logs "/var/tmp/var_tmp.tar.gz";
 
         # Upload /var/log
