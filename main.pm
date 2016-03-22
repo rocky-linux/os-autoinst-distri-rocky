@@ -192,6 +192,10 @@ else
     if (get_var("UEFI")) {
         autotest::loadtest "tests/uefi_postinstall.pm";
     }
+    # we should shut down before uploading disk images
+    if (get_var("STORE_HDD_1") || get_var("PUBLISH_HDD_1")) {
+        autotest::loadtest "tests/_console_shutdown.pm";
+    }
 }
 
 
