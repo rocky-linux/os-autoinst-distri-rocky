@@ -1,6 +1,6 @@
 #!/usr/share/openqa/script/load_templates
 #
-# openSUSE Machines, Products, TestSuites and JobTemplates
+# Fedora Machines, Products, TestSuites and JobTemplates
 #
 # use load_templates to load the file into the database
 #
@@ -15,7 +15,7 @@
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -26,7 +26,7 @@
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -37,7 +37,7 @@
                                       flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -48,7 +48,7 @@
                                       flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -59,7 +59,7 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -70,7 +70,7 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -81,7 +81,7 @@
                                       flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -92,7 +92,7 @@
                                       flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -103,7 +103,7 @@
                                       flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -114,7 +114,7 @@
                                       flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -125,7 +125,7 @@
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -136,7 +136,7 @@
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -147,7 +147,7 @@
                                       flavor  => "Atomic-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -290,7 +290,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "package_set_minimal" },
+                      test_suite => { name => "install_package_set_minimal" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -301,7 +301,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_repository_http_variation" },
+                      test_suite => { name => "install_repository_http_variation" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -312,7 +312,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_repository_http_graphical" },
+                      test_suite => { name => "install_repository_http_graphical" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -323,7 +323,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_mirrorlist_graphical" },
+                      test_suite => { name => "install_mirrorlist_graphical" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -334,7 +334,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_delete_pata" },
+                      test_suite => { name => "install_delete_pata" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -345,7 +345,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_delete_pata" },
+                      test_suite => { name => "install_delete_pata" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -356,7 +356,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_kickstart_user_creation" },
+                      test_suite => { name => "install_kickstart_user_creation" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -367,7 +367,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_scsi_updates_img" },
+                      test_suite => { name => "install_scsi_updates_img" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -378,7 +378,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_multi" },
+                      test_suite => { name => "install_multi" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -389,7 +389,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_multi" },
+                      test_suite => { name => "install_multi" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -400,7 +400,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_encrypted" },
+                      test_suite => { name => "install_simple_encrypted" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -411,7 +411,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_free_space" },
+                      test_suite => { name => "install_simple_free_space" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -422,7 +422,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_multi_empty" },
+                      test_suite => { name => "install_multi_empty" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -433,7 +433,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_software_raid" },
+                      test_suite => { name => "install_software_raid" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -444,7 +444,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_delete_partial" },
+                      test_suite => { name => "install_delete_partial" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -455,7 +455,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_btrfs" },
+                      test_suite => { name => "install_btrfs" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -466,7 +466,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_ext3" },
+                      test_suite => { name => "install_ext3" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -477,7 +477,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_xfs" },
+                      test_suite => { name => "install_xfs" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -488,7 +488,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_lvmthin" },
+                      test_suite => { name => "install_lvmthin" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -499,7 +499,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_no_swap" },
+                      test_suite => { name => "install_no_swap" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -510,7 +510,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "package_set_kde" },
+                      test_suite => { name => "install_package_set_kde" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -521,7 +521,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_encrypted" },
+                      test_suite => { name => "install_simple_encrypted" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -532,7 +532,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_free_space" },
+                      test_suite => { name => "install_simple_free_space" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -543,7 +543,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_multi_empty" },
+                      test_suite => { name => "install_multi_empty" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -554,7 +554,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_software_raid" },
+                      test_suite => { name => "install_software_raid" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -565,7 +565,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_delete_partial" },
+                      test_suite => { name => "install_delete_partial" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -576,7 +576,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_btrfs" },
+                      test_suite => { name => "install_btrfs" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -587,7 +587,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_ext3" },
+                      test_suite => { name => "install_ext3" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -598,7 +598,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_xfs" },
+                      test_suite => { name => "install_xfs" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -609,7 +609,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_lvmthin" },
+                      test_suite => { name => "install_lvmthin" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -620,7 +620,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_no_swap" },
+                      test_suite => { name => "install_no_swap" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -631,7 +631,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_kickstart_hdd" },
+                      test_suite => { name => "install_kickstart_hdd" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -686,7 +686,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_updates_img_local" },
+                      test_suite => { name => "install_updates_img_local" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -697,7 +697,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_shrink_ext4" },
+                      test_suite => { name => "install_shrink_ext4" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -708,7 +708,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_shrink_ntfs" },
+                      test_suite => { name => "install_shrink_ntfs" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -719,7 +719,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "european_language_install" },
+                      test_suite => { name => "install_european_language" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -730,7 +730,7 @@
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -741,7 +741,7 @@
                                       flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -752,7 +752,7 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -763,7 +763,7 @@
                                       flavor  => "Everything-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -774,7 +774,7 @@
                                       flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -785,7 +785,7 @@
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "default_install" },
+                      test_suite => { name => "install_default" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -796,7 +796,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "package_set_minimal" },
+                      test_suite => { name => "install_package_set_minimal" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -807,7 +807,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_repository_http_graphical" },
+                      test_suite => { name => "install_repository_http_graphical" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -818,7 +818,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_scsi_updates_img" },
+                      test_suite => { name => "install_scsi_updates_img" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -829,7 +829,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_simple_encrypted" },
+                      test_suite => { name => "install_simple_encrypted" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -840,7 +840,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_software_raid" },
+                      test_suite => { name => "install_software_raid" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -851,7 +851,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_btrfs" },
+                      test_suite => { name => "install_btrfs" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -862,7 +862,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_ext3" },
+                      test_suite => { name => "install_ext3" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -873,7 +873,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "server_lvmthin" },
+                      test_suite => { name => "install_lvmthin" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -906,7 +906,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "package_set_kde" },
+                      test_suite => { name => "install_package_set_kde" },
                     },
                   ],
   Machines     => [
@@ -1084,20 +1084,20 @@
                   ],
   TestSuites   => [
                     {
-                      name => "default_install",
+                      name => "install_default",
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
                     {
-                      name => "package_set_minimal",
+                      name => "install_package_set_minimal",
                       settings => [
                         { key => "PACKAGE_SET", value => "minimal" },
                       ],
                     },
                     {
-                      name => "server_multi",
+                      name => "install_multi",
                       settings => [
                         { key => "PARTITIONING", value => "guided_multi" },
                         { key => "NUMDISKS", value => "2" },
@@ -1106,7 +1106,7 @@
                       ],
                     },
                     {
-                      name => "server_scsi_updates_img",
+                      name => "install_scsi_updates_img",
                       settings => [
                         { key => "BOOT_UPDATES_IMG_URL", value => "1" },
                         { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-unipony.img" },
@@ -1115,7 +1115,7 @@
                       ],
                     },
                     {
-                      name => "server_kickstart_user_creation",
+                      name => "install_kickstart_user_creation",
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks" },
@@ -1125,7 +1125,7 @@
                       ],
                     },
                     {
-                      name => "server_delete_pata",
+                      name => "install_delete_pata",
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_all" },
                         { key => "HDDMODEL", value => "ide-hd" },
@@ -1133,25 +1133,25 @@
                       ],
                     },
                     {
-                      name => "server_mirrorlist_graphical",
+                      name => "install_mirrorlist_graphical",
                       settings => [
                         { key => "MIRRORLIST_GRAPHICAL", value => "1" },
                       ],
                     },
                     {
-                      name => "server_repository_http_graphical",
+                      name => "install_repository_http_graphical",
                       settings => [
                         { key => "REPOSITORY_GRAPHICAL", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
                     },
                     {
-                      name => "server_repository_http_variation",
+                      name => "install_repository_http_variation",
                       settings => [
                         { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                       ],
                     },
                     {
-                      name => "server_delete_partial",
+                      name => "install_delete_partial",
                       settings => [
                         { key => "PARTITIONING", value => "guided_delete_partial" },
                         { key => "HDD_1", value => "disk_full_%PART_TABLE_TYPE%.img" },
@@ -1159,13 +1159,13 @@
                       ],
                     },
                     {
-                      name => "server_simple_encrypted",
+                      name => "install_simple_encrypted",
                       settings => [
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "server_simple_free_space",
+                      name => "install_simple_free_space",
                       settings => [
                         { key => "PARTITIONING", value => "guided_free_space" },
                         { key => "HDD_1", value => "disk_freespace_%PART_TABLE_TYPE%.img" },
@@ -1173,7 +1173,7 @@
                       ],
                     },
                     {
-                      name => "server_multi_empty",
+                      name => "install_multi_empty",
                       settings => [
                         { key => "PARTITIONING", value => "guided_multi_empty_all" },
                         { key => "NUMDISKS", value => "2" },
@@ -1181,7 +1181,7 @@
                       ],
                     },
                     {
-                      name => "server_software_raid",
+                      name => "install_software_raid",
                       settings => [
                         { key => "PARTITIONING", value => "custom_software_raid" },
                         { key => "NUMDISKS", value => "2" },
@@ -1189,35 +1189,35 @@
                       ],
                     },
                     {
-                      name => "server_btrfs",
+                      name => "install_btrfs",
                       settings => [
                         { key => "PARTITIONING", value => "custom_btrfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "server_ext3",
+                      name => "install_ext3",
                       settings => [
                         { key => "PARTITIONING", value => "custom_ext3" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "server_lvmthin",
+                      name => "install_lvmthin",
                       settings => [
                         { key => "PARTITIONING", value => "custom_lvmthin" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "server_no_swap",
+                      name => "install_no_swap",
                       settings => [
                         { key => "PARTITIONING", value => "custom_no_swap" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "server_kickstart_hdd",
+                      name => "install_kickstart_hdd",
                       settings => [
                         { key => "KICKSTART", value => "1" },
                         { key => "GRUB", value => "inst.ks=hd:vdb1:/root-user-crypted-net.ks" },
@@ -1287,7 +1287,7 @@
                       ],
                     },
                     {
-                      name => "server_updates_img_local",
+                      name => "install_updates_img_local",
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_updates_img.img" },
@@ -1296,7 +1296,7 @@
                       ],
                     },
                     {
-                      name => "server_shrink_ext4",
+                      name => "install_shrink_ext4",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ext4_mbr.img" },
@@ -1304,7 +1304,7 @@
                       ],
                     },
                     {
-                      name => "server_shrink_ntfs",
+                      name => "install_shrink_ntfs",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_shrink_ntfs_mbr.img" },
@@ -1312,7 +1312,7 @@
                       ],
                     },
                     {
-                      name => "european_language_install",
+                      name => "install_european_language",
                       settings => [
                         { key => "LANGUAGE", value => "french" },
                         { key => "USER_LOGIN", value => "qwerty" },
@@ -1321,14 +1321,14 @@
                       ],
                     },
                     {
-                      name => "server_xfs",
+                      name => "install_xfs",
                       settings => [
                         { key => "PARTITIONING", value => "custom_xfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {
-                      name => "package_set_kde",
+                      name => "install_package_set_kde",
                       settings => [
                         { key => "DESKTOP", value => "kde" },
                         { key => "PACKAGE_SET", value => "kde" },
@@ -1338,7 +1338,7 @@
                       name => "base_selinux",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_selinux" },
-                        { key => "START_AFTER_TEST", value => "default_install" },
+                        { key => "START_AFTER_TEST", value => "install_default" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
@@ -1347,7 +1347,7 @@
                       name => "base_services_start",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_services_start" },
-                        { key => "START_AFTER_TEST", value => "default_install" },
+                        { key => "START_AFTER_TEST", value => "install_default" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
@@ -1356,7 +1356,7 @@
                       name => "base_service_manipulation",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_service_manipulation" },
-                        { key => "START_AFTER_TEST", value => "default_install" },
+                        { key => "START_AFTER_TEST", value => "install_default" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
