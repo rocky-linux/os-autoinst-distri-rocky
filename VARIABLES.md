@@ -67,8 +67,8 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `DESKTOP` | boolean | `false`/not set | nothing | set to indicate that Fedora is running with GUI (so for example OpenQA should expect graphical login screen) |
 | `ROOT_PASSWORD` | string | `weakpassword` | nothing | root password is set to this value |
 | `GRUB` | string | not set | nothing | when set, append this string to kernel line in GRUB |
-| `USER_LOGIN` | string | not set | should be used with `USER_PASSWORD` | when set, user login is set to this value |
-| `USER_PASSWORD` | string | not set | should be used with `USER_LOGIN` | when set, user password is set to this value |
+| `USER_LOGIN` | string | not set | should be used with `USER_PASSWORD` (unless `false`) | when set, user login is set to this value. If not set, default value `test` is used for console installs, no login is done for graphical installs. If set to `false`, no user login will be done |
+| `USER_PASSWORD` | string | not set | should be used with `USER_LOGIN` | when set, user password is set to this value. If not set, default value `weakpassword` is used for console installs, no login is done for graphical installs |
 | `BOOT_UPDATES_IMG_URL` | boolean | `false`/not set | set to indicate that path to updates.img was appended to kernel line |
 | `UEFI` | boolean | `false`/not set | nothing | whether to use UEFI, this variable isn't usually set in test suites but in machine definition |
 

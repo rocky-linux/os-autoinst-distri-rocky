@@ -723,6 +723,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_kickstart_firewall_disabled" },
+                    },
+{
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_kickstart_firewall_configured" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 11,
                       product    => {
                                       arch    => "i386",
@@ -1359,6 +1381,26 @@
                         { key => "START_AFTER_TEST", value => "install_default" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "install_kickstart_firewall_disabled",
+                      settings => [
+                        { key => "KICKSTART", value => "1" },
+                        { key => "GRUB", value => "inst.ks=http://fedorapeople.org/groups/qa/kickstarts/firewall-disabled-net.ks" },
+                        { key => "POSTINSTALL", value => "firewall_disabled" },
+                        { key => "ROOT_PASSWORD", value => "anaconda" },
+                        { key => "USER_LOGIN", value => "false" },
+                      ],
+                    },
+                    {
+                      name => "install_kickstart_firewall_configured",
+                      settings => [
+                        { key => "KICKSTART", value => "1" },
+                        { key => "GRUB", value => "inst.ks=http://fedorapeople.org/groups/qa/kickstarts/firewall-configured-net.ks" },
+                        { key => "POSTINSTALL", value => "firewall_configured" },
+                        { key => "ROOT_PASSWORD", value => "anaconda" },
+                        { key => "USER_LOGIN", value => "false" },
                       ],
                     },
                   ],
