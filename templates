@@ -15,7 +15,7 @@
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_default" },
+                      test_suite => { name => "install_default_upload" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -59,7 +59,7 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_default" },
+                      test_suite => { name => "install_default_upload" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -125,7 +125,7 @@
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_default" },
+                      test_suite => { name => "install_default_upload" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -155,17 +155,6 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Everything-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "base_selinux" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 40,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
@@ -199,17 +188,6 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Everything-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "base_services_start" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 40,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
@@ -236,17 +214,6 @@
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 40,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Everything-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "base_service_manipulation" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -1109,6 +1076,12 @@
                       name => "install_default",
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
+                      ],
+                    },
+                    {
+                      name => "install_default_upload",
+                      settings => [
+                        { key => "PACKAGE_SET", value => "default" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
@@ -1360,7 +1333,7 @@
                       name => "base_selinux",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_selinux" },
-                        { key => "START_AFTER_TEST", value => "install_default" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
@@ -1369,7 +1342,7 @@
                       name => "base_services_start",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_services_start" },
-                        { key => "START_AFTER_TEST", value => "install_default" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
@@ -1378,7 +1351,7 @@
                       name => "base_service_manipulation",
                       settings => [
                         { key => "ENTRYPOINT", value => "base_service_manipulation" },
-                        { key => "START_AFTER_TEST", value => "install_default" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
