@@ -1103,7 +1103,7 @@
                     {
                       name => "install_scsi_updates_img",
                       settings => [
-                        { key => "BOOT_UPDATES_IMG_URL", value => "1" },
+                        { key => "TEST_UPDATES", value => "1" },
                         { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-openqa.img" },
                         { key => "HDDMODEL", value => "virtio-scsi-pci" },
                         { key => "CDMODEL", value => "scsi-cd" },
@@ -1286,7 +1286,7 @@
                       settings => [
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_updates_img_2.img" },
-                        { key => "BOOT_UPDATES_IMG_URL", value => "1" },
+                        { key => "TEST_UPDATES", value => "1" },
                         { key => "GRUB", value => "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img" },
                       ],
                     },

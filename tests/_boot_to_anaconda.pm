@@ -34,9 +34,18 @@ sub run {
 
     }
 
+    # if GRUBADD is set, add that to kernel line too. this is for doing
+    # stuff like running the tests with an updates.img to test some
+    # anaconda change
+    if (get_var("GRUBADD")) {
+        # unless GRUB was also set, we need to get to the kernel line now
+        get_kernel_line unless (get_var("GRUB"));
+        type_string " ".get_var("GRUBADD");
+    }
+
     # if variable REPOSITORY_VARIATION is set, construct inst.repo url and add it to kernel line
     if (get_var("REPOSITORY_VARIATION")){
-        unless (get_var("GRUB")){
+        unless (get_var("GRUB") || get_var("GRUBADD")) {
             get_kernel_line;
         }
         my $repourl = "";

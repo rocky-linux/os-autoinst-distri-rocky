@@ -10,7 +10,7 @@ sub run {
 
     # updates.img tests work by changing the appearance of the INSTALLATION
     # DESTINATION screen, so check that if needed.
-    if (get_var('BOOT_UPDATES_IMG_URL')){
+    if (get_var('TEST_UPDATES')){
         assert_screen "anaconda_install_destination_updates", 30;
     }
 
