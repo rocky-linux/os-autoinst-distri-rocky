@@ -21,6 +21,9 @@ sub run {
     send_key "tab";
     type_string $root_password;
     assert_and_click "anaconda_spoke_done";
+    if (check_screen "anaconda_install_password_dictionary_error", 10) {
+            assert_and_click "anaconda_spoke_done";
+    }
 
     # Set user details
     sleep 1;
@@ -35,6 +38,10 @@ sub run {
     type_string $user_password;
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
+    # handle 'weak password' due to dictionary error: WORKAROUND
+    if (check_screen "anaconda_install_password_dictionary_error", 10) {
+            assert_and_click "anaconda_spoke_done";
+    }
 
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
