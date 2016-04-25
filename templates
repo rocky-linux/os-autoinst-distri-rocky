@@ -624,6 +624,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_server_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_kde_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 50,
                       product    => {
                                       arch    => "x86_64",
@@ -643,6 +665,28 @@
                                       version => "*",
                                     },
                       test_suite => { name => "upgrade_2_desktop_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_server_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_kde_64bit" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -1243,6 +1287,25 @@
                       ],
                     },
                     {
+                      name => "upgrade_server_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_server_x86_64.img" },
+                        { key => "UPGRADE", value => "minimal" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_kde_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_kde_x86_64.img" },
+                        { key => "UPGRADE", value => "desktop" },
+                        { key => "DESKTOP", value => "kde" },
+                      ],
+                    },
+                    {
                       name => "upgrade_2_minimal_64bit",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -1259,6 +1322,25 @@
                         { key => "HDD_1", value => "disk_f%PREVREL%_desktop_x86_64.img" },
                         { key => "UPGRADE", value => "desktop" },
                         { key => "DESKTOP", value => "gnome" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_2_server_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_server_x86_64.img" },
+                        { key => "UPGRADE", value => "minimal" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_2_kde_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_kde_x86_64.img" },
+                        { key => "UPGRADE", value => "desktop" },
+                        { key => "DESKTOP", value => "kde" },
                       ],
                     },
                     {
