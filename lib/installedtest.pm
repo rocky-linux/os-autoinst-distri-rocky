@@ -25,7 +25,8 @@ sub post_fail_hook {
     $self->root_console(tty=>2);
 
     # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
-    if (validate_script_output "ls /var/tmp/abrt", sub { $_ ne '' }) {
+    my $vartmp = script_output "ls /var/tmp/abrt";
+    if ($vartmp ne '') {
         # Upload all ABRT logs
         script_run "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
         upload_logs "/var/tmp/abrt/abrt.tar.gz";
