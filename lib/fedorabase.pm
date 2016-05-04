@@ -1,5 +1,6 @@
 package fedorabase;
 use base 'basetest';
+use lockapi;
 
 # base class for all Fedora tests
 
@@ -75,6 +76,64 @@ sub console_login {
     $args{check} && die "Failed to reach console!"
 }
 
+sub do_bootloader {
+    # Handle bootloader screen. 'bootloader' is syslinux or grub.
+    # 'uefi' is whether this is a UEFI install, will get_var UEFI if
+    # not explicitly set. 'postinstall' is whether we're on an
+    # installed system or at the installer (this matters for how many
+    # times we press 'down' to find the kernel line when typing args).
+    # 'args' is a string of extra kernel args, if desired. 'mutex' is
+    # a parallel test mutex lock to wait for before proceeding, if
+    # desired. 'first' is whether to hit 'up' a couple of times to
+    # make sure we boot the first menu entry.
+    my ($self, $postinstall, $args, $mutex, $first, $bootloader, $uefi) = @_;
+    $uefi //= get_var("UEFI");
+    $postinstall //= 0;
+    # if not postinstall and not UEFI, syslinux
+    $bootloader //= ($uefi || $postinstall) ? "grub" : "syslinux";
+    $args //= "";
+    $mutex //= "";
+    $first //= 1;
+    if ($uefi) {
+        # we don't just tag all screens with 'bootloader' because we
+        # want to be sure we actually did a UEFI boot
+        assert_screen "bootloader_uefi", 30;
+    } else {
+        assert_screen "bootloader", 30;
+    }
+    if ($mutex) {
+        # cancel countdown
+        send_key "left";
+        mutex_lock $mutex;
+        mutex_unlock $mutex;
+    }
+    if ($first) {
+        # press up a couple of times to make sure we're at first entry
+        send_key "up";
+        send_key "up";
+    }
+    if ($args) {
+        if ($bootloader eq "syslinux") {
+            send_key "tab";
+        }
+        else {
+            send_key "e";
+            # ternary: 13 'downs' to reach the kernel line for installed
+            # system, 2 for UEFI installer
+            my $presses = $postinstall ? 13 : 2;
+            foreach my $i (1..$presses) {
+                send_key "down";
+            }
+            send_key "end";
+        }
+        type_string " $args";
+    }
+    # ctrl-X boots from grub editor mode
+    send_key "ctrl-x";
+    # return boots all other cases
+    send_key "ret";
+}
+
 sub boot_to_login_screen {
     my $self = shift;
     my $boot_done_screen = shift; # what to expect when system is booted (e. g. GDM), can be ""
@@ -92,6 +151,22 @@ sub get_milestone {
     my $self = shift;
     # FIXME: we don't know how to do this with Pungi 4 yet.
     return '';
+}
+
+sub clone_host_resolv {
+    # this is pretty crazy, but SUSE do almost the same thing...
+    # it's for openvswitch jobs to clone the host's resolv.conf, so
+    # we don't have to hard code 8.8.8.8 or have the templates pass
+    # in an address or something
+    my $self = shift;
+    my $resolv = '';
+    open(FH, '<', "/etc/resolv.conf");
+    while (<FH>) {
+        $resolv .= $_;
+    }
+    assert_script_run "printf '$resolv' > /etc/resolv.conf";
+    # for debugging...
+    assert_script_run "cat /etc/resolv.conf";
 }
 
 1;

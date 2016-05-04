@@ -84,6 +84,7 @@ these functions:
        long still screen should be displayed until openQA decides that system is booted and third is timeout how long
        it should wait for still screen to appear. Example usage: `$self->boot_to_login_screen("graphical_login", 30);`
        will wait until screen is not moving for 30 seconds and then checks, whether `graphical_login` needle is displayed.
+    - `clone_host_resolv()` copies the contents of the host's `/etc/resolv.conf` into the guest, overwriting any existing contents. This is mainly intended for use by openvswitch guests which need external connectivity.
 - `anacondatest` should be used in tests where Anaconda is running. It uploads Anaconda logs (for example
 `anaconda.log` or `packaging.log`) in `post_fail_hook()`. It also provides these convenient methods for Anaconda:
     - `root_console()` tries to login is as a root. It decides to what TTY to switch into and then calls `console_login()`

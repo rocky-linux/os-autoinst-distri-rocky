@@ -2,66 +2,33 @@ use base "anacondatest";
 use strict;
 use testapi;
 
-# get_kernel_line switches to menu edit screen and sets the cursor to the end of kernel line
-sub get_kernel_line {
-    if( get_var("UEFI")){
-        send_key "e";
-        send_key "down";
-        send_key "down";
-        send_key "end";
-    } else {
-        send_key "tab";
-    }
-}
-
 sub run {
-    # Wait for bootloader to appear
-    if( get_var("UEFI")){
-        assert_screen "bootloader_uefi", 30;
-    } else {
-        assert_screen "bootloader", 30;
+    my $self = shift;
+    # construct the kernel args. the trick here is to wind up with
+    # spaced args if GRUB or GRUBADD is set, and just spaces if not,
+    # then check if we got all spaces. We wind up with a harmless
+    # extra space if GRUBADD is set but GRUB is not.
+    my $args = "";
+    $args .= get_var("GRUB", "") . " ";
+    $args .= get_var("GRUBADD", "") . " ";
+    # Construct inst.repo arg for REPOSITORY_VARIATION
+    my $repourl = get_var("REPOSITORY_VARIATION");
+    if ($repourl) {
+        my $version = lc(get_var("VERSION", ""));
+        my $arch = get_var("ARCH", "");
+        $repourl .= "/$version/Everything/$arch/os";
+        $args .= "inst.repo=$repourl";
     }
+    # ternary: set $args to "" if it contains only spaces
+    $args = $args =~ /^\s+$/ ? "" : $args;
 
-    # Make sure we skip media check if it's selected by default. Standard
-    # 'boot installer' menu entry is always first.
-    send_key "up";
-    send_key "up";
+    # set mutex wait if necessary
+    my $mutex = get_var("INSTALL_UNLOCK");
 
-    # if variable GRUB is set, add its value into kernel line in grub
-    if( get_var("GRUB")){
-        get_kernel_line;
-        type_string " ".get_var("GRUB");
+    # call do_bootloader with postinstall=0, the args, and the mutex
+    $self->do_bootloader(0, $args, $mutex);
 
-    }
-
-    # if GRUBADD is set, add that to kernel line too. this is for doing
-    # stuff like running the tests with an updates.img to test some
-    # anaconda change
-    if (get_var("GRUBADD")) {
-        # unless GRUB was also set, we need to get to the kernel line now
-        get_kernel_line unless (get_var("GRUB"));
-        type_string " ".get_var("GRUBADD");
-    }
-
-    # if variable REPOSITORY_VARIATION is set, construct inst.repo url and add it to kernel line
-    if (get_var("REPOSITORY_VARIATION")){
-        unless (get_var("GRUB") || get_var("GRUBADD")) {
-            get_kernel_line;
-        }
-        my $repourl = "";
-
-        # REPOSITORY_VARIATION should be set to repository URL without version and architecture
-        # appended (it will be appended automatically)
-        $repourl = get_var("REPOSITORY_VARIATION")."/".lc(get_var("VERSION"))."/Everything/".get_var("ARCH")."/os";
-        type_string " inst.repo=".$repourl;
-    }
-
-    # now we are on the correct "boot" menu item
-    # hit Ctrl+x for the case when the uefi kernel line was edited
-    send_key "ctrl-x";
-    # Return starts boot in all other cases
-    send_key "ret";
-
+    # proceed to installer
     unless (get_var("KICKSTART"))
     {
         # on lives, we have to explicitly launch anaconda

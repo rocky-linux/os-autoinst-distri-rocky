@@ -1,17 +1,17 @@
 {
-  "tags": [
-    "text_console_login",
-    "ENV-DISTRI-fedora",
-    "ENV-FLAVOR-develop"
-  ],
-  "properties": [],
-  "area": [
-    {
-      "width": 128,
-      "xpos": 0,
-      "type": "match",
-      "ypos": 49,
-      "height": 30
-    }
-  ]
+    "area": [
+        {
+            "height": 30,
+            "type": "match",
+            "width": 56,
+            "xpos": 72,
+            "ypos": 49
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "text_console_login",
+        "ENV-DISTRI-fedora",
+        "ENV-FLAVOR-develop"
+    ]
 }
