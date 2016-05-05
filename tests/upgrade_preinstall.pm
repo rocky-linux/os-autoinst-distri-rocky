@@ -7,7 +7,7 @@ sub run {
 
     # wait for either graphical or text login
     if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 15, 90); # DM takes time to load
+        $self->boot_to_login_screen("graphical_login", 30, 90); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
@@ -23,7 +23,7 @@ sub run {
     script_run "reboot";
 
     if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 15, 90); # DM takes time to load
+        $self->boot_to_login_screen("graphical_login", 30, 90); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
