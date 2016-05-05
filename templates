@@ -1489,6 +1489,7 @@
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                         { key => "GRUB", value => "net.ifnames=0 biosdevname=0" },
                         { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                     {
@@ -1504,6 +1505,7 @@
                         { key => "PARALLEL_WITH", value => "server_role_deploy_domain_controller" },
                         { key => "INSTALL_UNLOCK", value => "freeipa_ready" },
                         { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                   ],
