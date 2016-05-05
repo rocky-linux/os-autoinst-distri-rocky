@@ -4,12 +4,13 @@ use testapi;
 
 sub run {
     my $self = shift;
+    # If KICKSTART is set, then the wait_time needs to consider the
+    # install time. if UPGRADE, we have to wait for the entire upgrade
+    my $wait_time = 300;
+    $wait_time = 1800 if (get_var("KICKSTART"));
+    $wait_time = 6000 if (get_var("UPGRADE"));
 
-    # If KICKSTART is set, then the wait_time needs to
-    #  consider the install time
-    my $wait_time = get_var("KICKSTART") ? 1800 : 300;
-
-    # Reboot and wait for the text login
+    # Wait for the text login
     assert_screen "text_console_login", $wait_time;
 
     # do user login unless USER_LOGIN is set to string 'false'

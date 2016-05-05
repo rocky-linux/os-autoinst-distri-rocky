@@ -24,6 +24,9 @@ my $distri = testapi::get_var("CASEDIR") . '/lib/fedoradistribution.pm';
 require $distri;
 testapi::set_distribution(fedoradistribution->new());
 
+## UTILITY SUBROUTINES
+
+
 # Stolen from openSUSE.
 sub unregister_needle_tags($) {
     my $tag = shift;
@@ -90,29 +93,20 @@ sub cleanup_needles() {
 }
 $needle::cleanuphandler = \&cleanup_needles;
 
-if (get_var('LIVE')) {
-    # No package set selection for lives.
-    set_var('PACKAGE_SET', "default");
-}
+## TEST LOADING SUBROUTINES
 
-# if user set ENTRYPOINT, run required test directly
-# (good for tests where it doesn't make sense to use _boot_to_anaconda, _software_selection etc.)
-if (get_var("ENTRYPOINT"))
-{
-    autotest::loadtest "tests/".get_var("ENTRYPOINT").".pm";
-}
-elsif (get_var("UPGRADE"))
-{
+
+sub load_upgrade_tests() {
     # all upgrade tests consist of: preinstall phase (where packages are upgraded and
     # dnf-plugin-system-upgrade is installed), run phase (where upgrade is run) and postinstall
     # phase (where is checked if fedora was upgraded successfully)
     autotest::loadtest "tests/upgrade_preinstall.pm";
     autotest::loadtest "tests/upgrade_run.pm";
-    # UPGRADE can be set to "minimal", "encrypted", "desktop"...
-    autotest::loadtest "tests/upgrade_postinstall_".get_var("UPGRADE").".pm";
+    # set postinstall test
+    set_var('POSTINSTALL', "upgrade" );
 }
-else
-{
+
+sub load_install_tests() {
     # normal installation test consists of several phases, from which some of them are
     # loaded automatically and others are loaded based on what env variables are set
 
@@ -122,50 +116,54 @@ else
     # boot phase is loaded automatically every time
     autotest::loadtest "tests/_boot_to_anaconda.pm";
 
-    # with kickstart tests, booting to anaconda is the only thing required (kickstart file handles
-    # everything else)
-    unless (get_var("KICKSTART"))
-    {
+    # if this is a kickstart install, that's all folks
+    return if (get_var("KICKSTART"));
 
-        ## Installation source
-        if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
-            autotest::loadtest "tests/install_source_graphical.pm";
-        }
-        if (get_var("REPOSITORY_VARIATION")){
-            autotest::loadtest "tests/install_source_variation.pm";
-        }
-
-        ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
-        autotest::loadtest "tests/_software_selection.pm";
-
-        ## Disk partitioning.
-        # If PARTITIONING is set, we pick the storage test
-        # to run based on the value (usually we run the test with the name
-        # that matches the value, except for a couple of commented cases).
-        my $storage = '';
-        my $partitioning = get_var('PARTITIONING');
-        # if PARTITIONING is unset, or one of [...], use disk_guided_empty,
-        # which is the simplest / 'default' case.
-        if (! $partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
-            $storage = "tests/disk_guided_empty.pm";
-        }
-        else {
-            $storage = "tests/disk_".$partitioning.".pm";
-        }
-        autotest::loadtest $storage;
-
-        if (get_var("ENCRYPT_PASSWORD")){
-            autotest::loadtest "tests/disk_guided_encrypted.pm";
-        }
-
-        # Start installation, set user & root passwords, reboot
-        # install and reboot phase is loaded automatically every time (except when KICKSTART is set)
-        autotest::loadtest "tests/_do_install_and_reboot.pm";
+    ## Installation source
+    if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
+        autotest::loadtest "tests/install_source_graphical.pm";
+    }
+    if (get_var("REPOSITORY_VARIATION")){
+        autotest::loadtest "tests/install_source_variation.pm";
     }
 
+    if (get_var('LIVE')) {
+        # No package set selection for lives.
+        set_var('PACKAGE_SET', "default");
+    }
+
+    ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
+    autotest::loadtest "tests/_software_selection.pm";
+
+    ## Disk partitioning.
+    # If PARTITIONING is set, we pick the storage test
+    # to run based on the value (usually we run the test with the name
+    # that matches the value, except for a couple of commented cases).
+    my $storage = '';
+    my $partitioning = get_var('PARTITIONING');
+    # if PARTITIONING is unset, or one of [...], use disk_guided_empty,
+    # which is the simplest / 'default' case.
+    if (! $partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
+        $storage = "tests/disk_guided_empty.pm";
+    }
+    else {
+        $storage = "tests/disk_".$partitioning.".pm";
+    }
+    autotest::loadtest $storage;
+
+    if (get_var("ENCRYPT_PASSWORD")){
+        autotest::loadtest "tests/disk_guided_encrypted.pm";
+    }
+
+    # Start installation, set user & root passwords, reboot
+    # install and reboot phase is loaded automatically every time (except when KICKSTART is set)
+    autotest::loadtest "tests/_do_install_and_reboot.pm";
+}
+
+sub load_postinstall_tests() {
     # Unlock encrypted storage volumes, if necessary. The test name here
     # follows the 'storage post-install' convention, but must be run earlier.
-    if (get_var("ENCRYPT_PASSWORD")){
+    if (get_var("ENCRYPT_PASSWORD")) {
         autotest::loadtest "tests/disk_guided_encrypted_postinstall.pm";
     }
 
@@ -204,7 +202,26 @@ else
     }
 }
 
+## LOADING STARTS HERE
 
+
+# if user set ENTRYPOINT, run required test directly
+# (good for tests where it doesn't make sense to use _boot_to_anaconda, _software_selection etc.)
+if (get_var("ENTRYPOINT")) {
+    autotest::loadtest "tests/".get_var("ENTRYPOINT").".pm";
+}
+elsif (get_var("UPGRADE")) {
+    load_upgrade_tests;
+}
+elsif (!get_var("START_AFTER_TEST")) {
+    # for now we can assume START_AFTER_TEST means this test picks up
+    # after an install, so we skip to post-install
+    load_install_tests;
+}
+
+if (!get_var("ENTRYPOINT")) {
+    load_postinstall_tests;
+}
 
 1;
 

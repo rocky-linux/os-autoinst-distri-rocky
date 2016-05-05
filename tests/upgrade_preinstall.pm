@@ -5,9 +5,9 @@ use testapi;
 sub run {
     my $self = shift;
 
-    # wait for either GDM or text login
-    if (get_var('UPGRADE') eq "desktop") {
-        $self->boot_to_login_screen("graphical_login", 30); # GDM takes time to load
+    # wait for either graphical or text login
+    if (get_var('DESKTOP')) {
+        $self->boot_to_login_screen("graphical_login", 15, 90); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
@@ -22,15 +22,15 @@ sub run {
 
     script_run "reboot";
 
-    if (get_var('UPGRADE') eq "desktop") {
-        $self->boot_to_login_screen("graphical_login", 30); # GDM takes time to load
+    if (get_var('DESKTOP')) {
+        $self->boot_to_login_screen("graphical_login", 15, 90); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
     $self->root_console(tty=>3);
 
     my $update_command = 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade';
-    assert_script_run $update_command, 1800;
+    assert_script_run $update_command, 300;
 }
 
 

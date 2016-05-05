@@ -44,6 +44,18 @@ sub check_release {
     validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
 }
 
+sub menu_launch_type {
+    my $self = shift;
+    my $app = shift;
+    # super does not work on KDE, because fml
+    send_key 'alt-f1';
+    # srsly KDE y u so slo
+    wait_still_screen 3;
+    type_string "$app";
+    wait_still_screen 3;
+    send_key 'ret';
+}
+
 1;
 
 # vim: set sw=4 et:
