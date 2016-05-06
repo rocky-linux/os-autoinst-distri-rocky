@@ -54,7 +54,7 @@ sub run {
     if (lc(get_var('VERSION')) eq "rawhide") {
         $timeout = 2400;
     }
-    assert_screen "anaconda_install_done", '', $timeout;
+    assert_screen "anaconda_install_done", $timeout;
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
     assert_and_click "anaconda_install_done";
