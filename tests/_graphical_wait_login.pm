@@ -37,10 +37,10 @@ sub run {
             for my $n (1..20) {
                 mouse_set(100, 100);
                 assert_and_click "next_button";
+                mouse_set(100, 100);
                 last if (check_screen "skip_button", 5);
             }
             # click 'Skip' one time
-            mouse_set(100,100);
             wait_screen_change { assert_and_click "skip_button", 5; };
             send_key "ret";
             # wait for the stupid 'help' screen to show and kill it
