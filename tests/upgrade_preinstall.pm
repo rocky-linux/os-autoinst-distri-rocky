@@ -29,8 +29,8 @@ sub run {
     }
     $self->root_console(tty=>3);
 
-    my $update_command = 'dnf -y --enablerepo=updates-testing install dnf-plugin-system-upgrade';
-    assert_script_run $update_command, 300;
+    my $update_command = 'dnf -y install dnf-plugin-system-upgrade';
+    assert_script_run $update_command, 600;
 }
 
 
