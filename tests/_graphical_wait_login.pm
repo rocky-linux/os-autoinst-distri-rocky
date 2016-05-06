@@ -41,6 +41,7 @@ sub run {
                 last if (check_screen "skip_button", 5);
             }
             # click 'Skip' one time
+            sleep 5;
             assert_and_click "skip_button", 5;
             wait_still_screen 5;
             send_key "ret";
