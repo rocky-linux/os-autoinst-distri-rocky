@@ -29,21 +29,16 @@ sub run {
         # is set in which case it will have been done already
         if (get_var("DESKTOP") eq 'gnome' && !get_var("START_AFTER_TEST")) {
             assert_screen "next_button", 60;
-            # this wizard is kind of annoying, sometimes clicks just
-            # don't work. wait_still_screen and wait_screen_change
-            # don't help much either. let's use a loop and just click
-            # until we reach 'skip_button'. if we go through the loop
-            # 20 times, give up.
-            for my $n (1..20) {
+            for my $n (1..3) {
+                # click 'Next' three times, moving the mouse to avoid
+                # highlight problems, sleeping to give it time to get
+                # to the next screen between clicks
                 mouse_set(100, 100);
-                assert_and_click "next_button";
-                mouse_set(100, 100);
-                last if (check_screen "skip_button", 5);
+                wait_screen_change { assert_and_click "next_button"; };
             }
             # click 'Skip' one time
-            sleep 5;
-            assert_and_click "skip_button", 5;
-            wait_still_screen 5;
+            mouse_set(100,100);
+            wait_screen_change { assert_and_click "skip_button"; };
             send_key "ret";
             # wait for the stupid 'help' screen to show and kill it
             assert_screen "getting_started";
