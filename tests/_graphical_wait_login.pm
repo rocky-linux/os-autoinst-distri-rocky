@@ -28,12 +28,19 @@ sub run {
         # Handle initial-setup, for GNOME, unless START_AFTER_TEST
         # is set in which case it will have been done already
         if (get_var("DESKTOP") eq 'gnome' && !get_var("START_AFTER_TEST")) {
-            for my $n (1..3) {
-                # click 'Next' three times, moving the mouse to avoid
+            assert_screen "next_button", 60;
+            # sleep a bit to let things calm down; we can't wait still
+            # screen because g-i-s constantly changes and we can't wait
+            # idle because packagekit might be doin' stuff...
+            sleep 5;
+            assert_and_click "next_button", 10;
+            for my $n (1..2) {
+                # click 'Next' twice, moving the mouse to avoid
                 # highlight problems, sleeping to give it time to get
                 # to the next screen between clicks
+                wait_still_screen;
                 mouse_set(100, 100);
-                wait_screen_change { assert_and_click "next_button", 60; };
+                assert_and_click "next_button";
             }
             # click 'Skip' one time
             mouse_set(100,100);
