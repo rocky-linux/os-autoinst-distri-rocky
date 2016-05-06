@@ -20,15 +20,15 @@ sub post_fail_hook {
 
     $self->root_console(check=>0);
     if (check_screen "root_console", 10) {
-        upload_logs "/tmp/X.log";
-        upload_logs "/tmp/anaconda.log";
-        upload_logs "/tmp/packaging.log";
-        upload_logs "/tmp/storage.log";
-        upload_logs "/tmp/syslog";
-        upload_logs "/tmp/program.log";
-        upload_logs "/tmp/dnf.log";
-        upload_logs "/tmp/dnf.librepo.log";
-        upload_logs "/tmp/dnf.rpm.log";
+        upload_logs "/tmp/X.log", failok=>1;
+        upload_logs "/tmp/anaconda.log", failok=>1;
+        upload_logs "/tmp/packaging.log", failok=>1;
+        upload_logs "/tmp/storage.log", failok=>1;
+        upload_logs "/tmp/syslog", failok=>1;
+        upload_logs "/tmp/program.log", failok=>1;
+        upload_logs "/tmp/dnf.log", failok=>1;
+        upload_logs "/tmp/dnf.librepo.log", failok=>1;
+        upload_logs "/tmp/dnf.rpm.log", failok=>1;
 
         if ($has_traceback) {
             # Upload Anaconda traceback logs
@@ -46,7 +46,7 @@ sub post_fail_hook {
 
         # Upload anaconda core dump, if there is one
         script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*";
-        upload_logs "/tmp/anaconda.core.tar.gz";
+        upload_logs "/tmp/anaconda.core.tar.gz", failok=>1;
     }
     else {
         save_screenshot;
