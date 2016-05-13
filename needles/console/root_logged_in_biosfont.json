@@ -1,0 +1,24 @@
+{
+    "area": [
+        {
+            "height": 14,
+            "type": "match",
+            "width": 41,
+            "xpos": 7,
+            "ypos": 80
+        },
+        {
+            "height": 14,
+            "type": "match",
+            "width": 16,
+            "xpos": 136,
+            "ypos": 80
+        }
+    ],
+    "tags": [
+        "root_logged_in",
+        "root_console",
+        "ENV-DISTRI-fedora",
+        "ENV-FLAVOR-server"
+    ]
+}

@@ -1,0 +1,31 @@
+{
+  "tags": [
+    "anaconda_main_hub",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "type": "match",
+      "width": 74,
+      "height": 57,
+      "ypos": 158,
+      "xpos": 184
+    },
+    {
+      "type": "match",
+      "width": 66,
+      "ypos": 221,
+      "height": 66,
+      "xpos": 186
+    },
+    {
+      "width": 60,
+      "type": "match",
+      "xpos": 191,
+      "height": 60,
+      "ypos": 349
+    }
+  ],
+  "properties": []
+}

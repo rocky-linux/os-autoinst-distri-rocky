@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "anaconda_part_list_box_boot",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 471,
+      "ypos": 433,
+      "width": 63,
+      "height": 28,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

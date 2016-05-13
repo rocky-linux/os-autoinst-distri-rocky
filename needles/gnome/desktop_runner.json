@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 356,
+      "ypos": 356,
+      "width": 74,
+      "height": 37,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-FLAVOR-workstation_live",
+    "desktop_runner"
+  ]
+}

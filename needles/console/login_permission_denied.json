@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 13,
+            "type": "match",
+            "width": 136,
+            "xpos": 0,
+            "ypos": 144
+        }
+    ],
+    "tags": [
+        "login_permission_denied",
+        "ENV-DISTRI-fedora"
+    ]
+}

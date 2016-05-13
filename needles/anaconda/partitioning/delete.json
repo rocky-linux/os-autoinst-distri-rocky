@@ -1,0 +1,16 @@
+{
+    "area": [
+        {
+            "height": 20,
+            "type": "match",
+            "width": 55,
+            "xpos": 65,
+            "ypos": 625
+        }
+    ],
+    "tags": [
+        "anaconda_part_delete",
+        "ENV-DISTRI-fedora",
+        "ENV-FLAVOR-generic_boot"
+    ]
+}

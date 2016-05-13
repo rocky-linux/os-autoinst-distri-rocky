@@ -1,0 +1,24 @@
+{
+    "area": [
+        {
+            "height": 12,
+            "type": "match",
+            "width": 32,
+            "xpos": 33,
+            "ypos": 183,
+            "match": 100
+        },
+        {
+            "height": 11,
+            "type": "match",
+            "width": 29,
+            "xpos": 122,
+            "ypos": 183,
+            "match": 100
+        }
+    ],
+    "tags": [
+        "anaconda_install_destination_updates",
+        "ENV-DISTRI-fedora"
+    ]
+}

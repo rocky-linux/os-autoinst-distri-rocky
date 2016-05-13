@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "boot_enter_passphrase",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 361,
+      "width": 188,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}
