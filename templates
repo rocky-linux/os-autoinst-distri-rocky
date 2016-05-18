@@ -29,6 +29,17 @@
                       test_suite => { name => "install_default" },
                     },
                     {
+                      machine    => { name => "ARM" },
+                      prio       => 60,
+                      product    => {
+                                      arch    => "arm",
+                                      distri  => "fedora",
+                                      flavor  => "Minimal-raw_xz-raw.xz",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_arm_image_deployment_upload" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
@@ -787,7 +798,7 @@
                                     },
                       test_suite => { name => "install_kickstart_firewall_disabled" },
                     },
-{
+                    {
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -1010,6 +1021,19 @@
                         { key => "PART_TABLE_TYPE", value => "gpt"}
                       ],
                     },
+                    {
+                      backend   => "qemu",
+                      name      => "ARM",
+                      settings  => [
+                        { key => "QEMU", value => "arm" },
+                        { key => "QEMUCPUS", value => "2"},
+                        { key => "QEMUMACHINE", value => "virt"},
+                        { key => "QEMURAM", value => "1024"},
+                        { key => "QEMU_NO_KVM", value => "1"},
+                        { key => "TIMEOUT_SCALE", value => "5" },
+                        { key => "SERIALDEV", value => "ttyAMA0" }
+                      ],
+                    },
                   ],
   Products     => [
                     {
@@ -1157,6 +1181,15 @@
                       { key => "DESKTOP", value => "kde" }
                                  ],
                     version   => "*",
+                  },
+                  {
+                    arch      => "arm",
+                    distri    => "fedora",
+                    flavor    => "Minimal-raw_xz-raw.xz",
+                    name      => "",
+                    settings  => [
+                                 ],
+                    version   => "*",
                   }
                   ],
   TestSuites   => [
@@ -1170,6 +1203,13 @@
                       name => "install_default_upload",
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
+                        { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "install_arm_image_deployment_upload",
+                      settings => [
+                        { key => "ENTRYPOINT", value => "install_arm_image_deployment" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
