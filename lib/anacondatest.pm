@@ -142,6 +142,16 @@ sub custom_delete_part {
     assert_and_click "anaconda_part_delete";
 }
 
+sub switch_layout {
+    # switch to 'native' or 'us' keyboard layout
+    my ($self, $layout) = @_;
+    $layout //= 'us';
+    # if already selected, we're good
+    return if (check_screen "anaconda_layout_$layout", 3);
+    send_key "alt-shift";
+    assert_screen "anaconda_layout_$layout", 3;
+}
+
 1;
 
 # vim: set sw=4 et:

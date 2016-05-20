@@ -64,7 +64,16 @@ sub console_login {
             sleep 2;
         }
         elsif ($needpass and check_screen "console_password_required", 0) {
-            type_string "$args{password}\n";
+            type_string "$args{password}";
+            if (get_var("SWITCHED_LAYOUT")) {
+                # see _do_install_and_reboot; when layout is switched
+                # password is doubled to contain both US and native
+                # chars
+                $self->console_switch_layout();
+                type_string "$args{password}";
+                $self->console_switch_layout();
+            }
+            send_key "ret";
             $needpass = 0;
             # Sometimes login takes a bit of time, so add an extra sleep
             sleep 2;
@@ -167,6 +176,14 @@ sub clone_host_resolv {
     assert_script_run "printf '$resolv' > /etc/resolv.conf";
     # for debugging...
     assert_script_run "cat /etc/resolv.conf";
+}
+
+sub console_switch_layout {
+    # switcher key combo differs between layouts, for console
+    my $self = shift;
+    if (get_var("LANGUAGE", "") eq "russian") {
+        send_key "ctrl-shift";
+    }
 }
 
 1;

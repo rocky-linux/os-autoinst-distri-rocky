@@ -3,6 +3,7 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
@@ -17,6 +18,7 @@ sub run {
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_root_password";
     assert_screen "anaconda_install_root_password_screen";
+    $self->switch_layout("us") if (get_var("SWITCHED_LAYOUT"));
     type_string $root_password;
     send_key "tab";
     type_string $root_password;
@@ -33,9 +35,27 @@ sub run {
     assert_screen "anaconda_install_user_creation_screen";
     type_string $user_login;
     assert_and_click "anaconda_user_creation_password_input";
-    type_string $user_password;
+    if (get_var("SWITCHED_LAYOUT")) {
+        # we double the password, the second time using the native
+        # layout, so the password has both US and native characters
+        $self->switch_layout("us");
+        type_string $user_password;
+        $self->switch_layout("native");
+        type_string $user_password;
+    }
+    else {
+        type_string $user_password;
+    }
     send_key "tab";
-    type_string $user_password;
+    if (get_var("SWITCHED_LAYOUT")) {
+        $self->switch_layout("us");
+        type_string $user_password;
+        $self->switch_layout("native");
+        type_string $user_password;
+    }
+    else {
+        type_string $user_password;
+    }
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
     # handle 'weak password' due to dictionary error: WORKAROUND

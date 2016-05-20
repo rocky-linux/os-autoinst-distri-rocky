@@ -14,9 +14,12 @@ sub run {
 
     # type password for disk encryption
     wait_idle 5;
+    $self->switch_layout("us");
     type_string get_var("ENCRYPT_PASSWORD");
     send_key "tab";
     type_string get_var("ENCRYPT_PASSWORD");
+    # work around RHBZ #1333984
+    $self->switch_layout("native");
 
     assert_and_click "anaconda_install_destination_save_passphrase";
 

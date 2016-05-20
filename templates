@@ -796,6 +796,17 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_cyrillic_language" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_kickstart_firewall_disabled" },
                     },
                     {
@@ -1495,6 +1506,16 @@
                       name => "install_european_language",
                       settings => [
                         { key => "LANGUAGE", value => "french" },
+                        { key => "USER_LOGIN", value => "qwerty" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_cyrillic_language",
+                      settings => [
+                        { key => "LANGUAGE", value => "russian" },
+                        { key => "SWITCHED_LAYOUT", value => "1" },
                         { key => "USER_LOGIN", value => "qwerty" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
