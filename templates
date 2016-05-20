@@ -1533,6 +1533,7 @@
                       settings => [
                         { key => "DESKTOP", value => "kde" },
                         { key => "PACKAGE_SET", value => "kde" },
+                        { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
                         { key => "USER_LOGIN", value => "false" },
                       ],
                     },

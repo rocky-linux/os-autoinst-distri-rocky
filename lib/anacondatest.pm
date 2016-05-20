@@ -128,6 +128,8 @@ sub custom_change_fs {
     my ($self, $fs, $part) = @_;
     $part ||= "root";
     assert_and_click "anaconda_part_select_$part";
+    # if fs is already set correctly, do nothing
+    return if (check_screen "anaconda_part_fs_${fs}_selected", 5);
     assert_and_click "anaconda_part_fs";
     # Move the mouse away from the menu
     mouse_set(10, 10);
