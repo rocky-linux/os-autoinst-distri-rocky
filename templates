@@ -227,6 +227,17 @@
                       test_suite => { name => "base_services_start" },
                     },
                     {
+                      machine    => { name => "ARM" },
+                      prio       => 62,
+                      product    => {
+                                      arch    => "arm",
+                                      distri  => "fedora",
+                                      flavor  => "Minimal-raw_xz-raw.xz",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_services_start_arm" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -1221,6 +1232,10 @@
                       name => "install_arm_image_deployment_upload",
                       settings => [
                         { key => "ENTRYPOINT", value => "install_arm_image_deployment" },
+                        # we don't want HDD_2 to be really connected, but we need to use it to download
+                        # HDD ISO, see https://github.com/os-autoinst/openQA/issues/684
+                        { key => "NUMDISKS", value => "1" },
+                        { key => "HDD_1", value => "%HDD_2%" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
@@ -1552,6 +1567,15 @@
                         { key => "ENTRYPOINT", value => "base_services_start" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "base_services_start_arm",
+                      settings => [
+                        { key => "ENTRYPOINT", value => "base_services_start" },
+                        { key => "START_AFTER_TEST", value => "install_arm_image_deployment_upload" },
+                        { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
