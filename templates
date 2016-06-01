@@ -327,6 +327,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_cockpit_default" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_cockpit_basic" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -1655,6 +1677,29 @@
                         { key => "INSTALL_UNLOCK", value => "freeipa_ready" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "server_cockpit_default",
+                      settings => [
+                        { key => "POSTINSTALL", value => "server_cockpit_default" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                        { key => "STORE_HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "server_cockpit_basic",
+                      settings => [
+                        { key => "POSTINSTALL", value => "server_cockpit_basic" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "server_cockpit_default" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
                       ],
                     },
                     {

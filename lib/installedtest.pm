@@ -56,6 +56,29 @@ sub menu_launch_type {
     send_key 'ret';
 }
 
+sub start_cockpit {
+    my $self = shift;
+    my $login = shift || 0;
+    # run firefox directly in X as root. never do this, kids!
+    type_string "startx /usr/bin/firefox\n";
+    assert_screen "firefox";
+    # open a new tab so we don't race with the default page load
+    # (also focuses the location bar for us)
+    send_key "ctrl-t";
+    type_string "http://localhost:9090";
+    # firefox's stupid 'smart' url bar is a pain. wait for things to settle.
+    wait_still_screen 3;
+    send_key "ret";
+    assert_screen "cockpit_login";
+    if ($login) {
+        type_string "root";
+        send_key "tab";
+        type_string get_var("ROOT_PASSWORD", "weakpassword");
+        send_key "ret";
+        assert_screen "cockpit_main";
+    }
+}
+
 1;
 
 # vim: set sw=4 et:

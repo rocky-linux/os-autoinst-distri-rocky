@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 631,
+      "ypos": 126,
+      "width": 227,
+      "height": 77,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "cockpit_login"
+  ],
+  "properties": []
+}
