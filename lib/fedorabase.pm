@@ -65,9 +65,9 @@ sub console_login {
         }
         elsif ($needpass and check_screen "console_password_required", 0) {
             type_string "$args{password}";
-            if (get_var("SWITCHED_LAYOUT")) {
+            if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
                 # see _do_install_and_reboot; when layout is switched
-                # password is doubled to contain both US and native
+                # user password is doubled to contain both US and native
                 # chars
                 $self->console_switch_layout();
                 type_string "$args{password}";
