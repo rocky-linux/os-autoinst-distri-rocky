@@ -8,27 +8,68 @@ sub run {
     my $self=shift;
     # boot with kernel params to ensure interface is 'eth0' and not whatever
     # systemd feels like calling it today
-    $self->do_bootloader(1, "net.ifnames=0 biosdevname=0");
+    $self->do_bootloader(postinstall=>1, params=>"net.ifnames=0 biosdevname=0");
     $self->boot_to_login_screen("text_console_login", 5, 60);
     # login
     $self->root_console();
-    # set hostname
-    assert_script_run 'hostnamectl set-hostname ipa001.domain.local';
-    # add entry to /etc/hosts
-    assert_script_run 'echo "10.0.2.100 ipa001.domain.local ipa001" >> /etc/hosts';
-    # bring up network. DEFROUTE is *vital* here
-    assert_script_run 'printf "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=10.0.2.100\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes" > /etc/sysconfig/network-scripts/ifcfg-eth0';
-    script_run "systemctl restart NetworkManager.service";
+    # clone host's /etc/hosts (for phx2 internal routing to work)
+    # must come *before* setup_tap_static or else it would overwrite
+    # its changes
+    $self->clone_host_file("/etc/hosts");
+    # set up networking
+    $self->setup_tap_static("10.0.2.100", "ipa001.domain.local");
     # clone host's resolv.conf to get name resolution
-    $self->clone_host_resolv();
+    $self->clone_host_file("/etc/resolv.conf");
     # we don't want updates-testing for validation purposes
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
     assert_script_run 'dnf -y install haveged', 120;
     assert_script_run 'systemctl start haveged.service';
-    # deploy the domain controller role
-    assert_script_run 'echo \'{"admin_password":"monkeys123"}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
+    # read DNS server IPs from host's /etc/resolv.conf for passing to
+    # rolectl
+    my @forwards;
+    open(FH, '<', "/etc/resolv.conf");
+    while (<FH>) {
+        if ($_ =~ m/^nameserver +(.+)/) {
+            push @forwards, $1;
+        }
+    }
+    # we are now gonna work around a stupid bug in rolekit. we want to
+    # pass it a list of ipv4 DNS forwarders and have no ipv6 DNS
+    # forwarders. but it won't allow you to have a dns_forwarders array
+    # with a "ipv4" list but no "ipv6" list, any values in the "ipv6"
+    # list must be contactable (so we can't use real IPv6 DNS servers
+    # as we have no IPv6 connectivity), and if you use an empty list
+    # as the "ipv6" value you often hit a weird DBus error "unable to
+    # guess signature from an empty list". Fortunately, rolekit doesn't
+    # actually check that the values in the lists are really IPv6 /
+    # IPv4, it just turns all the values in each list into --forwarder
+    # args for ipa-server-install. So we can just stuff IPv4 values
+    # into both lists. rolekit bug:
+    # https://github.com/libre-server/rolekit/issues/64
+    # it should be fixed relatively soon.
+    my $fourlist;
+    my $sixlist;
+    if (scalar @forwards == 1) {
+        # we've only got one server, so dupe it, best we can do
+        $fourlist = '["' . $forwards[0] . '"]';
+        $sixlist = $fourlist;
+    }
+    else {
+        # put the first value in the 'IPv4' list and all the others in
+        # the 'IPv6' list
+        $fourlist = '["' . shift(@forwards) . '"]';
+        $sixlist = '["' . join('","', @forwards) . '"]';
+    }
+    # deploy the domain controller role, specifying an admin password
+    # and the list of DNS server IPs as JSON via stdin. If we don't do
+    # this, rolectl defaults to using the root servers as forwarders
+    # (it does not copy the settings from resolv.conf), which give the
+    # public results for mirrors.fedoraproject.org, some of which
+    # things running in phx2 cannot reach; we must make sure the phx2
+    # deployments use the phx2 nameservers.
+    assert_script_run 'echo \'{"admin_password":"monkeys123","dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
     # check the role status, should be 'running'
     validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^running/ };
     # check the admin password is listed in 'settings'
@@ -50,6 +91,9 @@ sub run {
     assert_script_run 'ipa hbacrule-add-user testrule --users=test1';
     # disable the default 'everyone everywhere' rule
     assert_script_run 'ipa hbacrule-disable allow_all';
+    # kinit as each user and set a new password
+    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test1@DOMAIN.LOCAL';
+    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test2@DOMAIN.LOCAL';
     # we're all ready for other jobs to run!
     mutex_create('freeipa_ready');
     wait_for_children;

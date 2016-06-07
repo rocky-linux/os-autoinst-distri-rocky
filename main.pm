@@ -193,7 +193,10 @@ sub load_postinstall_tests() {
 
     # generic post-install test load
     if (get_var("POSTINSTALL")) {
-        autotest::loadtest "tests/".get_var('POSTINSTALL')."_postinstall.pm";
+        my @pis = split(/ /, get_var("POSTINSTALL"));
+        foreach my $pi (@pis) {
+            autotest::loadtest "tests/${pi}_postinstall.pm";
+        }
     }
 
     # we should shut down before uploading disk images

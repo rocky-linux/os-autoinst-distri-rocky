@@ -4,29 +4,29 @@ use testapi;
 
 sub run {
     my $self = shift;
-    # construct the kernel args. the trick here is to wind up with
-    # spaced args if GRUB or GRUBADD is set, and just spaces if not,
+    # construct the kernel params. the trick here is to wind up with
+    # spaced params if GRUB or GRUBADD is set, and just spaces if not,
     # then check if we got all spaces. We wind up with a harmless
     # extra space if GRUBADD is set but GRUB is not.
-    my $args = "";
-    $args .= get_var("GRUB", "") . " ";
-    $args .= get_var("GRUBADD", "") . " ";
+    my $params = "";
+    $params .= get_var("GRUB", "") . " ";
+    $params .= get_var("GRUBADD", "") . " ";
     # Construct inst.repo arg for REPOSITORY_VARIATION
     my $repourl = get_var("REPOSITORY_VARIATION");
     if ($repourl) {
         my $version = lc(get_var("VERSION", ""));
         my $arch = get_var("ARCH", "");
         $repourl .= "/$version/Everything/$arch/os";
-        $args .= "inst.repo=$repourl";
+        $params .= "inst.repo=$repourl";
     }
-    # ternary: set $args to "" if it contains only spaces
-    $args = $args =~ /^\s+$/ ? "" : $args;
+    # ternary: set $params to "" if it contains only spaces
+    $params = $params =~ /^\s+$/ ? "" : $params;
 
     # set mutex wait if necessary
     my $mutex = get_var("INSTALL_UNLOCK");
 
-    # call do_bootloader with postinstall=0, the args, and the mutex
-    $self->do_bootloader(0, $args, $mutex);
+    # call do_bootloader with postinstall=0, the params, and the mutex
+    $self->do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
 
     # proceed to installer
     unless (get_var("KICKSTART"))

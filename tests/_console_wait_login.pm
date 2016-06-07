@@ -10,6 +10,12 @@ sub run {
     $wait_time = 1800 if (get_var("KICKSTART"));
     $wait_time = 6000 if (get_var("UPGRADE"));
 
+    # handle bootloader, if requested
+    if (get_var("GRUB_POSTINSTALL")) {
+        $self->do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
+        $wait_time = 180;
+    }
+
     # Wait for the text login
     assert_screen "text_console_login", $wait_time;
 

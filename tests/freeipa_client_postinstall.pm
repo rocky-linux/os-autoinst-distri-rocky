@@ -9,12 +9,11 @@ sub run {
     # check we can see the admin user in getent
     assert_script_run 'getent passwd admin@DOMAIN.LOCAL';
     # check keytab entries
-    validate_script_output 'klist -k', sub { $_ =~ m/client001\.domain\.local\@DOMAIN.LOCAL/ };
+    my $hostname = script_output 'hostname';
+    my $qhost = quotemeta($hostname);
+    validate_script_output 'klist -k', sub { $_ =~ m/$qhost\@DOMAIN\.LOCAL/ };
     # check we can kinit with the host principal
-    assert_script_run 'kinit -k host/client001.domain.local@DOMAIN.LOCAL';
-    # kinit as each user and set a new password
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test1@DOMAIN.LOCAL';
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test2@DOMAIN.LOCAL';
+    assert_script_run "kinit -k host/$hostname\@DOMAIN.LOCAL";
     # switch to tty3
     send_key "ctrl-alt-f3";
     # try and login as test1, should work

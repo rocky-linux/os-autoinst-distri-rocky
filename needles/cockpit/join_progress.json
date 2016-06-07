@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 237,
+      "ypos": 461,
+      "width": 125,
+      "height": 14,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "cockpit_join_progress"
+  ]
+}

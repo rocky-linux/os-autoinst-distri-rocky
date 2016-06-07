@@ -27,9 +27,15 @@ sub post_fail_hook {
     # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
     my $vartmp = script_output "ls /var/tmp/abrt";
     if ($vartmp ne '') {
-        # Upload all ABRT logs
-        script_run "cd /var/tmp/abrt && tar czvf abrt.tar.gz *";
-        upload_logs "/var/tmp/abrt/abrt.tar.gz";
+        # Upload /var/tmp ABRT logs
+        script_run "cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *";
+        upload_logs "/var/tmp/abrt/tmpabrt.tar.gz";
+    }
+    my $varspool = script_output "ls /var/spool/abrt";
+    if ($varspool ne '') {
+        # Upload /var/spool ABRT logs
+        script_run "cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *";
+        upload_logs "/var/spool/abrt/spoolabrt.tar.gz";
     }
 
     # Upload /var/log

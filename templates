@@ -349,6 +349,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "realmd_join_cockpit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -1700,6 +1711,21 @@
                         { key => "START_AFTER_TEST", value => "server_cockpit_default" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "realmd_join_cockpit",
+                      settings => [
+                        { key => "POSTINSTALL", value => "realmd_join_cockpit freeipa_client" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "server_cockpit_default" },
+                        { key => "PARALLEL_WITH", value => "server_role_deploy_domain_controller" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                     {
