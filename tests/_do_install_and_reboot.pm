@@ -79,7 +79,7 @@ sub run {
     wait_still_screen 3;
     assert_and_click "anaconda_install_done";
     if (get_var('LIVE')) {
-        x11_start_program("reboot");
+        x11_start_program("sudo reboot");
     }
 }
 
