@@ -360,6 +360,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "support_server" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -566,6 +577,17 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_no_swap" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_iscsi" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -1260,6 +1282,20 @@
                   ],
   TestSuites   => [
                     {
+                      name => "support_server",
+                      settings => [
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_x86_64.img" },
+                        { key => "POSTINSTALL", value => "_support_server" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                      ],
+                    },
+                    {
                       name => "install_default",
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
@@ -1585,6 +1621,18 @@
                       settings => [
                         { key => "PARTITIONING", value => "custom_xfs" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_iscsi",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_iscsi" },
+                        { key => "ANACONDA_STATIC", value => "10.0.2.111" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                     {

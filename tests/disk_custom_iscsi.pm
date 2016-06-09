@@ -4,20 +4,23 @@ use testapi;
 
 sub run {
     my $self = shift;
-    # Go to INSTALLATION DESTINATION and ensure two disks are selected.
-    # Because PARTITIONING starts with 'custom_', this will select custom.
-    $self->select_disks(disks=>2);
+    # iscsi config hash
+    my %iscsi;
+    $iscsi{'iqn.2016-06.local.domain:support.target1'} = '10.0.2.110';
+    # Anaconda hub
+    # Go to INSTALLATION DESTINATION and ensure one regular disk
+    # and the iscsi target are selected.
+    $self->select_disks(iscsi=>\%iscsi);
     assert_and_click "anaconda_spoke_done";
-
-    # Manual partitioning spoke should be displayed
+    # now we're at custom part. let's use standard partitioning for
+    # simplicity
+    $self->custom_scheme_select("standard");
+    # Do 'automatic' partition creation
     assert_and_click "anaconda_part_automatic";
-    $self->custom_change_type("raid");
+    # Make sure / is on the iSCSI target (which appears as sda)
+    $self->custom_change_device("root", "sda");
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
-
-    # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
-
 }
 
 sub test_flags {

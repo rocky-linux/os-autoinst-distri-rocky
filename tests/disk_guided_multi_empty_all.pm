@@ -6,7 +6,7 @@ sub run {
     my $self = shift;
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and select two disks.
-    $self->select_disks(2);
+    $self->select_disks(disks=>2);
     assert_and_click "anaconda_spoke_done";
 
     # Anaconda hub

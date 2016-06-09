@@ -119,6 +119,11 @@ sub load_install_tests() {
     # if this is a kickstart install, that's all folks
     return if (get_var("KICKSTART"));
 
+    ## Networking
+    if (get_var('ANACONDA_STATIC')) {
+        autotest::loadtest "tests/_network_static.pm";
+    }
+
     ## Installation source
     if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")){
         autotest::loadtest "tests/install_source_graphical.pm";
@@ -182,8 +187,9 @@ sub load_postinstall_tests() {
     # of PARTITIONING
     my $storagepost = '';
     if (get_var('PARTITIONING')) {
-        my $loc = "tests/disk_".get_var('PARTITIONING')."_postinstall.pm";
-        $storagepost = $loc if (-e $loc);
+        my $casedir = get_var("CASEDIR");
+        my $loc = "tests/disk_" . get_var('PARTITIONING') . "_postinstall.pm";
+        $storagepost = $loc if (-e "$casedir/$loc");
     }
     autotest::loadtest $storagepost if ($storagepost);
 
@@ -216,8 +222,8 @@ if (get_var("ENTRYPOINT")) {
 elsif (get_var("UPGRADE")) {
     load_upgrade_tests;
 }
-elsif (!get_var("START_AFTER_TEST")) {
-    # for now we can assume START_AFTER_TEST means this test picks up
+elsif (!get_var("BOOTFROM")) {
+    # for now we can assume BOOTFROM means this test picks up
     # after an install, so we skip to post-install
     load_install_tests;
 }

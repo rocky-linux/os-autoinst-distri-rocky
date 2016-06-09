@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_network_ipv4"
+  ],
+  "area": [
+    {
+      "xpos": 598,
+      "ypos": 213,
+      "width": 101,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

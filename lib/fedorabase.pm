@@ -212,6 +212,18 @@ sub console_switch_layout {
     }
 }
 
+sub get_host_dns {
+    # get DNS server addresses from the host
+    my @forwards;
+    open(FH, '<', "/etc/resolv.conf");
+    while (<FH>) {
+        if ($_ =~ m/^nameserver +(.+)/) {
+            push @forwards, $1;
+        }
+    }
+    return @forwards;
+}
+
 1;
 
 # vim: set sw=4 et:

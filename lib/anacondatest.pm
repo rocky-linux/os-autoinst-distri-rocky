@@ -72,8 +72,13 @@ sub root_console {
 }
 
 sub select_disks {
-    my ($self, $disks) = @_;
-    $disks ||= 1;
+    my $self = shift;
+    my %args = (
+        disks => 1,
+        iscsi => {},
+        @_
+    );
+    my %iscsi = %{$args{iscsi}};
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
     # Damn animation delay can cause bad clicks here too - wait for it
@@ -83,20 +88,42 @@ sub select_disks {
     if (get_var('NUMDISKS') > 1) {
         # Multi-disk case. Select however many disks the test needs. If
         # $disks is 0, this will do nothing, and 0 disks will be selected.
-        for my $n (1 .. $disks) {
+        for my $n (1 .. $args{disks}) {
             assert_and_click "anaconda_install_destination_select_disk_$n";
         }
     }
     else {
         # Single disk case.
-        if ($disks == 0) {
+        if ($args{disks} == 0) {
             # Clicking will *de*-select.
             assert_and_click "anaconda_install_destination_select_disk_1";
         }
-        elsif ($disks > 1) {
-            die "Only one disk is connected! Cannot select $disks disks.";
+        elsif ($args{disks} > 1) {
+            die "Only one disk is connected! Cannot select $args{disks} disks.";
         }
         # For exactly 1 disk, we don't need to do anything.
+    }
+
+    # Handle network disks.
+    if (%iscsi) {
+        assert_and_click "anaconda_install_destination_add_network_disk";
+        foreach my $target (keys %iscsi) {
+            my $ip = $iscsi{$target};
+            assert_and_click "anaconda_install_destination_add_iscsi_target";
+            type_string $ip;
+            wait_still_screen 2;
+            send_key "tab";
+            type_string $target;
+            wait_still_screen 2;
+            # start discovery
+            send_key "tab";
+            send_key "tab";
+            send_key "tab";
+            send_key "ret";
+            assert_and_click "anaconda_install_destination_target_login";
+            assert_and_click "anaconda_install_destination_select_target";
+        }
+        assert_and_click "anaconda_spoke_done";
     }
 
     # If this is a custom partitioning test, select custom partitioning.
@@ -134,6 +161,17 @@ sub custom_change_fs {
     # Move the mouse away from the menu
     mouse_set(10, 10);
     assert_and_click "anaconda_part_fs_$fs";
+    assert_and_click "anaconda_part_update_settings";
+}
+
+sub custom_change_device {
+    my ($self, $part, $devices) = @_;
+    assert_and_click "anaconda_part_select_$part";
+    assert_and_click "anaconda_part_device_modify";
+    foreach my $device (split(/ /, $devices)) {
+        assert_and_click "anaconda_part_device_${device}";
+    }
+    assert_and_click "anaconda_part_device_select";
     assert_and_click "anaconda_part_update_settings";
 }
 

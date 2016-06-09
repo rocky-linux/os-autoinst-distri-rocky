@@ -28,13 +28,7 @@ sub run {
     assert_script_run 'systemctl start haveged.service';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # rolectl
-    my @forwards;
-    open(FH, '<', "/etc/resolv.conf");
-    while (<FH>) {
-        if ($_ =~ m/^nameserver +(.+)/) {
-            push @forwards, $1;
-        }
-    }
+    my @forwards = $self->get_host_dns();
     # we are now gonna work around a stupid bug in rolekit. we want to
     # pass it a list of ipv4 DNS forwarders and have no ipv6 DNS
     # forwarders. but it won't allow you to have a dns_forwarders array
