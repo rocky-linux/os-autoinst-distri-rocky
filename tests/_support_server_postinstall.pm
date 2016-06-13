@@ -13,12 +13,44 @@ sub run {
     # set up networking
     $self->setup_tap_static("10.0.2.110", "support.domain.local");
     $self->clone_host_file("/etc/resolv.conf");
+
+    ## DNS / DHCP (dnsmasq)
+    # create config
+    assert_script_run "printf 'domain=domain.local\ndhcp-range=10.0.2.112,10.0.2.199\ndhcp-option=option:router,10.0.2.2' > /etc/dnsmasq.conf";
+    # open firewall ports
+    assert_script_run "firewall-cmd --add-service=dhcp";
+    assert_script_run "firewall-cmd --add-service=dns";
+    # start server
+    assert_script_run "systemctl restart dnsmasq.service";
+    assert_script_run "systemctl is-active dnsmasq.service";
+
+    ## ISCSI
+
     # start up iscsi target
     assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n</target>' > /etc/tgt/conf.d/openqa.conf";
     # open firewall port
     assert_script_run "firewall-cmd --add-service=iscsi-target";
-    assert_script_run "systemctl start tgtd.service";
-    assert_script_run 'systemctl is-active tgtd.service';
+    assert_script_run "systemctl restart tgtd.service";
+    assert_script_run "systemctl is-active tgtd.service";
+
+    ## NFS
+
+    # create the file share
+    assert_script_run "mkdir -p /export";
+    # get the kickstart
+    assert_script_run "curl -o /export/root-user-crypted-net.ks https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
+    # create the repo share
+    assert_script_run "mkdir -p /repo";
+    # mount the ISO there
+    assert_script_run "mount /dev/cdrom /repo";
+    # set up the exports
+    assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)' > /etc/exports";
+    # open firewall port
+    assert_script_run "firewall-cmd --add-service=nfs";
+    # start the server
+    assert_script_run "systemctl restart nfs-server.service";
+    assert_script_run "systemctl is-active nfs-server.service";
+
     # report ready, wait for children
     mutex_create('support_ready');
     wait_for_children;

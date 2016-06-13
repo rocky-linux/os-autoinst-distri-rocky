@@ -1,7 +1,7 @@
 {
   "properties": [],
   "tags": [
-    "anaconda_install_source_http_selected",
+    "anaconda_install_source_selected",
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-server"
   ],

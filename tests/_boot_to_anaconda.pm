@@ -14,10 +14,7 @@ sub run {
     # Construct inst.repo arg for REPOSITORY_VARIATION
     my $repourl = get_var("REPOSITORY_VARIATION");
     if ($repourl) {
-        my $version = lc(get_var("VERSION", ""));
-        my $arch = get_var("ARCH", "");
-        $repourl .= "/$version/Everything/$arch/os";
-        $params .= "inst.repo=$repourl";
+        $params .= "inst.repo=" . $self->get_full_repo($repourl);
     }
     # ternary: set $params to "" if it contains only spaces
     $params = $params =~ /^\s+$/ ? "" : $params;

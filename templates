@@ -305,6 +305,39 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "support_server" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_repository_nfs_variation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_repository_nfs_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
@@ -892,6 +925,17 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_kickstart_nfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
@@ -1285,7 +1329,7 @@
                       name => "support_server",
                       settings => [
                         { key => "NUMDISKS", value => "2" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_support_x86_64.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_2_x86_64.img" },
                         { key => "POSTINSTALL", value => "_support_server" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -1374,9 +1418,29 @@
                       ],
                     },
                     {
+                      name => "install_repository_nfs_graphical",
+                      settings => [
+                        { key => "REPOSITORY_GRAPHICAL", value => "nfs:10.0.2.110:/repo" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
                       name => "install_repository_http_variation",
                       settings => [
                         { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
+                      ],
+                    },
+                    {
+                      name => "install_repository_nfs_variation",
+                      settings => [
+                        { key => "REPOSITORY_VARIATION", value => "nfs:10.0.2.110:/repo" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                     {
@@ -1783,6 +1847,19 @@
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "install_kickstart_nfs",
+                      settings => [
+                        { key => "KICKSTART", value => "1" },
+                        { key => "GRUB", value => "inst.ks=nfs:10.0.2.110:/export/root-user-crypted-net.ks" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "111111" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                   ],

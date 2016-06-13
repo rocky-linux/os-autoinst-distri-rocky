@@ -192,6 +192,21 @@ sub switch_layout {
     assert_screen "anaconda_layout_$layout", 3;
 }
 
+sub get_full_repo {
+    my ($self, $repourl) = @_;
+    # trivial thing we kept repeating: fill out an HTTP or HTTPS
+    # repo URL with flavor and arch, leave NFS ones alone (as for
+    # NFS tests we just use a mounted ISO and the URL is complete)
+    if ($repourl !~ m/^nfs/) {
+        $repourl .= "/".lc(get_var("VERSION"))."/Everything/".get_var("ARCH")."/os";
+    }
+    return $repourl;
+}
+
+sub get_mirrorlist_url {
+    return "mirrors.fedoraproject.org/mirrorlist?repo=fedora-" . lc(get_var("VERSION")) . "&arch=" . get_var('ARCH')
+}
+
 1;
 
 # vim: set sw=4 et:
