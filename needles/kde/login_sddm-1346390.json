@@ -1,0 +1,26 @@
+{
+  "properties": [
+    "workaround"
+  ],
+  "tags": [
+    "DESKTOP-kde",
+    "LANGUAGE-english",
+    "graphical_login"
+  ],
+  "area": [
+    {
+      "width": 54,
+      "xpos": 153,
+      "ypos": 444,
+      "height": 18,
+      "type": "match"
+    },
+    {
+      "xpos": 542,
+      "width": 47,
+      "type": "match",
+      "ypos": 444,
+      "height": 19
+    }
+  ]
+}
