@@ -24,7 +24,7 @@ sub run {
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
-    assert_script_run 'dnf -y install haveged', 120;
+    assert_script_run 'dnf -y install haveged', 300;
     assert_script_run 'systemctl start haveged.service';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # rolectl
