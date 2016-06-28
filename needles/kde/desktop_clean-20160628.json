@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "DESKTOP-kde",
+    "LANGUAGE-english",
+    "graphical_desktop_clean"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "ypos": 739,
+      "width": 26,
+      "xpos": 3,
+      "type": "match",
+      "height": 26
+    }
+  ]
+}
