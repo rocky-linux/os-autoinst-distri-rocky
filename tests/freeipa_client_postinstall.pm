@@ -4,6 +4,11 @@ use testapi;
 
 sub run {
     my $self=shift;
+    # switch to tty1 (we're usually there already, but just in case
+    # we're carrying on from a failed freeipa_webui that didn't fail
+    # at tty1)
+    send_key "ctrl-alt-f1";
+    wait_still_screen 1;
     # check domain is listed in 'realm list'
     validate_script_output 'realm list', sub { $_ =~ m/domain-name: domain\.local.*configured: kerberos-member/s };
     # check we can see the admin user in getent
