@@ -11,8 +11,6 @@ sub run {
     $self->clone_host_file("/etc/hosts");
     # set up networking
     $self->setup_tap_static("10.0.2.102", "client002.domain.local");
-    # test
-    $self->clone_host_file("/etc/resolv.conf");
     # use FreeIPA server as DNS server
     assert_script_run "printf 'search domain.local\nnameserver 10.0.2.100' > /etc/resolv.conf";
     # wait for the server to be ready (do it now just to make sure name

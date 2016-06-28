@@ -393,6 +393,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "realmd_join_sssd" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
                                       arch    => "x86_64",
@@ -1835,6 +1846,21 @@
                         { key => "PARALLEL_WITH", value => "server_role_deploy_domain_controller" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "realmd_join_sssd",
+                      settings => [
+                        { key => "POSTINSTALL", value => "realmd_join_sssd freeipa_client" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "PARALLEL_WITH", value => "server_role_deploy_domain_controller" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
