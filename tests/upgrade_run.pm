@@ -24,6 +24,15 @@ sub run {
     script_run "dnf system-upgrade reboot";
     # fail immediately if we see a DNF error message
     die "DNF reported failure" if (check_screen "upgrade_fail");
+    # try and catch if we hit RHBZ #1349721 and work around it
+    if (check_screen "bootloader") {
+        # wait some secs for the screen to clear
+        sleep 10;
+        if (check_screen "bootloader") {
+            record_soft_failure;
+            $self->do_bootloader(postinstall=>1, params=>"enforcing=0");
+        }
+    }
 }
 
 
