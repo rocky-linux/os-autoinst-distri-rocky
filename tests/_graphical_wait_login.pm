@@ -5,9 +5,11 @@ use testapi;
 sub run {
     # If KICKSTART is set, then the wait_time needs to consider the
     # install time. if UPGRADE, we have to wait for the entire upgrade
+    # unless ENCRYPT_PASSWORD is set (in which case the postinstall
+    # test does the waiting)
     my $wait_time = 300;
     $wait_time = 1800 if (get_var("KICKSTART"));
-    $wait_time = 6000 if (get_var("UPGRADE"));
+    $wait_time = 6000 if (get_var("UPGRADE") && !get_var("ENCRYPT_PASSWORD"));
 
     # Wait for the login screen
     assert_screen "graphical_login", $wait_time;

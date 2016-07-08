@@ -23,15 +23,30 @@ sub run {
 
     script_run "dnf system-upgrade reboot";
     # fail immediately if we see a DNF error message
-    die "DNF reported failure" if (check_screen "upgrade_fail");
+    die "DNF reported failure" if (check_screen "upgrade_fail", 15);
+    if (get_var("ENCRYPT_PASSWORD")) {
+        $self->boot_decrypt(60);
+    }
     # try and catch if we hit RHBZ #1349721 and work around it
     if (check_screen "bootloader") {
         # wait some secs for the screen to clear
         sleep 10;
+        if (get_var("ENCRYPT_PASSWORD")) {
+            $self->boot_decrypt(60);
+        }
         if (check_screen "bootloader") {
             record_soft_failure;
             $self->do_bootloader(postinstall=>1, params=>"enforcing=0");
+            if (get_var("ENCRYPT_PASSWORD")) {
+                $self->boot_decrypt(60);
+            }
         }
+    }
+    # in encrypted case we need to wait a bit so postinstall test
+    # doesn't bogus match on the encryption prompt we just completed
+    # before it disappears from view
+    if (get_var("ENCRYPT_PASSWORD")) {
+        sleep 5;
     }
 }
 

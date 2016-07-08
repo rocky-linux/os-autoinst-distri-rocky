@@ -3,10 +3,13 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
+    my $wait_time = 300;
+    # if we're running an upgrade, we must wait for the entire upgrade
+    # process to run
+    $wait_time = 6000 if (get_var("UPGRADE"));
     # decrypt disks during boot
-    assert_screen "boot_enter_passphrase", 300; #
-    type_string get_var("ENCRYPT_PASSWORD");
-    send_key "ret";
+    $self->boot_decrypt($wait_time);
 }
 
 sub test_flags {

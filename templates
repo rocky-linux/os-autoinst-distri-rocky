@@ -811,6 +811,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_desktop_encrypted_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 50,
                       product    => {
                                       arch    => "x86_64",
@@ -852,6 +863,17 @@
                                       version => "*",
                                     },
                       test_suite => { name => "upgrade_2_kde_64bit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_desktop_encrypted_64bit" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -1578,6 +1600,19 @@
                       ],
                     },
                     {
+                      name => "upgrade_desktop_encrypted_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "USER_LOGIN", value => "test" },
+                        { key => "USER_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_desktopencrypt_x86_64.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
                       name => "upgrade_2_minimal_64bit",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -1621,6 +1656,19 @@
                         { key => "HDD_1", value => "disk_f%PREVREL%_kde_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "kde" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_2_desktop_encrypted_64bit",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "USER_LOGIN", value => "test" },
+                        { key => "USER_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_desktopencrypt_x86_64.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                       ],
                     },
                     {

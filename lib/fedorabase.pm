@@ -224,6 +224,15 @@ sub get_host_dns {
     return @forwards;
 }
 
+sub boot_decrypt {
+    # decrypt storage during boot; arg is timeout (in seconds)
+    my $self = shift;
+    my $timeout = shift || 60;
+    assert_screen "boot_enter_passphrase", $timeout; #
+    type_string get_var("ENCRYPT_PASSWORD");
+    send_key "ret";
+}
+
 1;
 
 # vim: set sw=4 et:

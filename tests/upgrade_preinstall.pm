@@ -4,6 +4,10 @@ use testapi;
 
 sub run {
     my $self = shift;
+    # decrypt disks during boot if necessary
+    if (get_var("ENCRYPT_PASSWORD")) {
+        $self->boot_decrypt(60);
+    }
 
     # wait for either graphical or text login
     if (get_var('DESKTOP')) {
@@ -21,6 +25,11 @@ sub run {
     assert_script_run 'dnf -y update', 1800;
 
     script_run "reboot";
+
+    # decrypt if necessary
+    if (get_var("ENCRYPT_PASSWORD")) {
+        $self->boot_decrypt(60);
+    }
 
     if (get_var('DESKTOP')) {
         $self->boot_to_login_screen("graphical_login", 30, 90); # DM takes time to load
