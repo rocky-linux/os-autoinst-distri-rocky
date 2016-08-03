@@ -404,6 +404,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_updates_nfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
                                       arch    => "x86_64",
@@ -1930,6 +1941,17 @@
                         { key => "GRUB", value => "inst.ks=nfs:10.0.2.110:/export/root-user-crypted-net.ks" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "111111" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_updates_nfs",
+                      settings => [
+                        { key => "GRUB", value => "inst.stage2=nfs:nfsvers=4:10.0.2.110:/repo" },
+                        { key => "TEST_UPDATES", value => "1" },
                         { key => "PARALLEL_WITH", value => "support_server" },
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
                         { key => "NICTYPE", value => "tap" },

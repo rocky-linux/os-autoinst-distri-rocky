@@ -41,8 +41,15 @@ sub run {
     assert_script_run "curl -o /export/root-user-crypted-net.ks https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
     # create the repo share
     assert_script_run "mkdir -p /repo";
+    # create a mount point for the ISO
+    assert_script_run "mkdir -p /mnt/iso";
     # mount the ISO there
-    assert_script_run "mount /dev/cdrom /repo";
+    assert_script_run "mount /dev/cdrom /mnt/iso";
+    # copy the contents of the ISO to the repo share
+    assert_script_run "cp -R /mnt/iso/* /repo";
+    # put the updates image in the NFS repo (for testing this update
+    # image delivery method)
+    assert_script_run "curl -o /repo/images/updates.img https://fedorapeople.org/groups/qa/updates/updates-openqa.img";
     # set up the exports
     assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)' > /etc/exports";
     # open firewall port
