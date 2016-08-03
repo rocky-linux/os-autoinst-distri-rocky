@@ -298,6 +298,28 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_browser" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_browser" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "universal",
                                       version => "*",
                                     },
@@ -1929,6 +1951,15 @@
                       name => "desktop_terminal",
                       settings => [
                         { key => "POSTINSTALL", value => "desktop_terminal" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "desktop_browser",
+                      settings => [
+                        { key => "POSTINSTALL", value => "desktop_browser" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
