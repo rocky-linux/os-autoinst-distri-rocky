@@ -39,7 +39,8 @@ sub post_fail_hook {
     }
 
     # Upload /var/log
-    script_run "tar czvf /tmp/var_log.tar.gz /var/log";
+    # lastlog can mess up tar sometimes and it's not much use
+    script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log";
     upload_logs "/tmp/var_log.tar.gz";
 }
 
@@ -71,6 +72,7 @@ sub start_cockpit {
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
     send_key "ctrl-t";
+    wait_still_screen 2;
     type_string "http://localhost:9090";
     # firefox's stupid 'smart' url bar is a pain. wait for things to settle.
     wait_still_screen 3;

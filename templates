@@ -1898,7 +1898,7 @@
                     {
                       name => "realmd_join_cockpit",
                       settings => [
-                        { key => "POSTINSTALL", value => "realmd_join_cockpit freeipa_webui freeipa_client" },
+                        { key => "POSTINSTALL", value => "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "server_cockpit_default" },

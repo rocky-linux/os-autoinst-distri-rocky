@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "freeipa_webui_hbac"
+  ],
+  "area": [
+    {
+      "xpos": 19,
+      "ypos": 200,
+      "width": 127,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

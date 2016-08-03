@@ -1,58 +1,21 @@
 use base "installedtest";
 use strict;
 use testapi;
-
-sub add_user {
-    my ($user, $surname) = @_;
-    wait_still_screen 1;
-    assert_and_click "freeipa_webui_add_button";
-    assert_screen "freeipa_webui_add_user";
-    wait_still_screen 1;
-    type_string $user;
-    wait_still_screen 1;
-    send_key "tab";
-    # we don't need to be too careful here as the names don't matter
-    type_string "Test";
-    send_key "tab";
-    type_string $surname;
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    type_string "correcthorse";
-    wait_still_screen 1;
-    send_key "tab";
-    wait_still_screen 1;
-    type_string "correcthorse\n";
-}
+use freeipa;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # we're restarting firefox (instead of using the same one from
     # freeipa_client_postinstall) so Firefox's trusted CA store
     # refreshes and it trusts the web server cert
     type_string "startx /usr/bin/firefox\n";
     assert_screen "firefox";
-    # new tab
-    send_key "ctrl-t";
-    wait_still_screen 2;
-    type_string "https://ipa001.domain.local";
-    # firefox's stupid 'smart' url bar is a pain. wait for things to settle.
-    wait_still_screen 3;
-    send_key "ret";
-    assert_screen "freeipa_webui_login";
-    type_string "admin";
-    wait_still_screen 1;
-    send_key "tab";
-    wait_still_screen 1;
-    type_string "monkeys123";
-    wait_still_screen 1;
-    send_key "ret";
-    assert_screen "freeipa_webui_users";
+    start_webui("admin", "monkeys123");
     add_user("test3", "Three");
     add_user("test4", "Four");
     assert_screen "freeipa_webui_users_added";
     assert_and_click "freeipa_webui_policy";
+    assert_screen "freeipa_webui_hbac";
     assert_and_click "freeipa_webui_add_button";
     assert_screen "freeipa_webui_add_policy";
     type_string "allow-test3";
@@ -109,7 +72,7 @@ sub run {
     assert_screen "console_password_required";
     type_string "batterystaple\n";
     assert_screen "login_permission_denied";
-    # back to tty1 to let generic freeipa_client test pick up from here
+    # back to tty1
     send_key "ctrl-alt-f1";
 }
 
@@ -118,7 +81,7 @@ sub test_flags {
     # 'fatal' - whole test suite is in danger if this fails
     # 'milestone' - after this test succeeds, update 'lastgood'
     # 'important' - if this fails, set the overall state to 'fail'
-    return {};
+    return { milestone => 1 };
 }
 
 1;

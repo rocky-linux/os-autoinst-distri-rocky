@@ -85,6 +85,8 @@ sub run {
     assert_script_run 'ipa hbacrule-add-user testrule --users=test1';
     # disable the default 'everyone everywhere' rule
     assert_script_run 'ipa hbacrule-disable allow_all';
+    # allow immediate password changes (as we need to test this)
+    assert_script_run 'ipa pwpolicy-mod --minlife=0';
     # kinit as each user and set a new password
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test1@DOMAIN.LOCAL';
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test2@DOMAIN.LOCAL';

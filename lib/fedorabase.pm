@@ -55,7 +55,8 @@ sub console_login {
             return;
         }
         elsif (check_screen $bad, 0) {
-            script_run "exit";
+            # we don't want to 'wait' for this as it won't return
+            script_run "exit", 0;
             sleep 2;
         }
         if ($needuser and check_screen "text_console_login", 0) {

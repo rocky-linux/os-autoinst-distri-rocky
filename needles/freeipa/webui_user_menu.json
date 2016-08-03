@@ -1,0 +1,22 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 885,
+      "ypos": 83,
+      "width": 10,
+      "height": 11,
+      "type": "match"
+    },
+    {
+      "xpos": 826,
+      "ypos": 84,
+      "width": 11,
+      "height": 10,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "freeipa_webui_user_menu"
+  ]
+}
