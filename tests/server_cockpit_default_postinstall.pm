@@ -11,8 +11,8 @@ sub run {
     # we don't want updates-testing for validation purposes
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
     # install a desktop and firefox so we can actually try it
-    assert_script_run 'dnf -y groupinstall "base-x"', 300;
-    assert_script_run 'dnf -y install firefox', 120;
+    assert_script_run 'dnf -y --nogpgcheck groupinstall "base-x"', 300;
+    assert_script_run 'dnf -y --nogpgcheck install firefox', 120;
     $self->start_cockpit(0);
     # quit firefox (return to console)
     send_key "ctrl-q";

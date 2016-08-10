@@ -4,19 +4,10 @@ use testapi;
 
 sub run {
     my $self = shift;
-    my $release = lc(get_var("VERSION"));
-    # NOTE: this doesn't actually work yet, it's a FIXME in fedorabase
-    my $milestone = $self->get_milestone;
-    my $args = "--releasever=${release}";
-    # This is excessive - after the Bodhi activation point we don't
-    # need --nogpgcheck for Branched. But that's hard to detect magically
-    if ($release eq 'rawhide' or $milestone eq 'branched') {
-        $args .= " --nogpgcheck";
-    }
     # disable screen blanking (download can take a long time)
     script_run "setterm -blank 0";
 
-    assert_script_run "dnf -y system-upgrade download ${args}", 6000;
+    assert_script_run "dnf -y --nogpgcheck system-upgrade download", 6000;
 
     upload_logs "/var/log/dnf.log";
     upload_logs "/var/log/dnf.rpm.log";
