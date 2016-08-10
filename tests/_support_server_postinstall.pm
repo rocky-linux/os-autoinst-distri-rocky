@@ -46,7 +46,7 @@ sub run {
     # mount the ISO there
     assert_script_run "mount /dev/cdrom /mnt/iso";
     # copy the contents of the ISO to the repo share
-    assert_script_run "cp -R /mnt/iso/* /repo";
+    assert_script_run "cp -R /mnt/iso/* /repo", 120;
     # put the updates image in the NFS repo (for testing this update
     # image delivery method)
     assert_script_run "curl -o /repo/images/updates.img https://fedorapeople.org/groups/qa/updates/updates-openqa.img";
