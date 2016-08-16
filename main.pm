@@ -217,8 +217,12 @@ sub load_postinstall_tests() {
 
 # if user set ENTRYPOINT, run required test directly
 # (good for tests where it doesn't make sense to use _boot_to_anaconda, _software_selection etc.)
+# if you want to run more than one test via ENTRYPOINT, separate them with space
 if (get_var("ENTRYPOINT")) {
-    autotest::loadtest "tests/".get_var("ENTRYPOINT").".pm";
+    my @entrs = split(/ /, get_var("ENTRYPOINT"));
+    foreach my $entr (@entrs) {
+        autotest::loadtest "tests/${entr}.pm";
+    }
 }
 elsif (get_var("UPGRADE")) {
     load_upgrade_tests;

@@ -56,7 +56,7 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | -------- | :------------: | ---------------------- | :-------: | ----------- |
 | `LIVE` | boolean | not set | technically `PACKAGE_SET`, `KICKSTART`, `MIRRORLIST_GRAPHICAL`, `REPOSITORY_GRAPHICAL`, `REPOSITORY_VARIATION` | specify that the test is running on Live system - additional steps are required (starting Anaconda...) |
 | `PACKAGE_SET` | string (`minimal`, `default`, ...) | `minimal`; `default` when `LIVE` is set | nothing | sets packageset to install - you have to add appropriate needles, see `tests/_software_selection.pm` |
-| `ENTRYPOINT` | filename | not set | N/A | set `ENTRYPOINT` to load specific test directly (bypass modular structure, mainly usable for testing) |
+| `ENTRYPOINT` | filename | not set | N/A | set `ENTRYPOINT` to load specific test directly (bypass modular structure, mainly usable for testing). If you want to run more than one test, separate them with space. |
 | `UPGRADE` | string (`minimal`, `desktop`, `encrypted`, ...) | not set | all except of `LIVE` and `USER_PASSWORD` | when set, do an upgrade test of specified type |
 | `KICKSTART` | boolean | `false`/not set | all | when specified, do an kickstart installation (you should use `GRUB` variable to specify where kickstart file resides) |
 | `MIRRORLIST_GRAPHICAL` | boolean | `false`/not set | `REPOSITORY_GRAPHICAL` | sets installation source to mirrorlist |
