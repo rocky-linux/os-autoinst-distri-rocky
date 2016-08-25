@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "anaconda_minimal_selected",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "ypos": 177,
+      "width": 162,
+      "type": "match",
+      "height": 16,
+      "xpos": 28
+    }
+  ]
+}

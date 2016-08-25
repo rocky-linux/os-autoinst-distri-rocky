@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 16,
+            "type": "match",
+            "width": 113,
+            "xpos": 577,
+            "ypos": 690
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "anaconda_install_destination_add_iscsi_target"
+    ]
+}

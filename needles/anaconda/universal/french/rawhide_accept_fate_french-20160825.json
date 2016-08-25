@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 475,
+      "width": 163,
+      "height": 27,
+      "xpos": 614,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french",
+    "anaconda_rawhide_accept_fate"
+  ]
+}
