@@ -1,0 +1,25 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "width": 54,
+      "height": 18,
+      "type": "match",
+      "ypos": 11,
+      "xpos": 74
+    },
+    {
+      "ypos": 278,
+      "xpos": 573,
+      "height": 153,
+      "width": 132,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "graphical_login",
+    "DESKTOP-kde",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-kde_live"
+  ]
+}
