@@ -87,6 +87,19 @@ sub start_cockpit {
     }
 }
 
+sub repo_setup {
+    # disable updates-testing and use the compose location rather than
+    # mirrorlist, so we're testing the right packages
+    my $location = get_var("LOCATION");
+    assert_script_run 'dnf config-manager --set-disabled updates-testing';
+    # we use script_run here as the rawhide repo file won't always exist
+    # and we don't want to bother testing or predicting its existence;
+    # assert_script_run doesn't buy you much with sed anyway as it'll
+    # return 0 even if it replaced nothing
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo";
+    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo";
+}
+
 1;
 
 # vim: set sw=4 et:

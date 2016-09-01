@@ -20,11 +20,11 @@ sub run {
     $self->setup_tap_static("10.0.2.100", "ipa001.domain.local");
     # clone host's resolv.conf to get name resolution
     $self->clone_host_file("/etc/resolv.conf");
-    # we don't want updates-testing for validation purposes
-    assert_script_run 'dnf config-manager --set-disabled updates-testing';
+    # use compose repo, disable u-t, etc.
+    $self->repo_setup();
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
-    assert_script_run 'dnf -y --nogpgcheck install haveged', 300;
+    assert_script_run 'dnf -y install haveged', 300;
     assert_script_run 'systemctl start haveged.service';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # rolectl

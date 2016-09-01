@@ -17,8 +17,8 @@ sub run {
     # resolution is working before we proceed)
     mutex_lock "freeipa_ready";
     mutex_unlock "freeipa_ready";
-    # disable updates-testing
-    assert_script_run 'dnf config-manager --set-disabled updates-testing';
+    # use compose repo, disable u-t, etc.
+    $self->repo_setup();
     # do the enrolment
     assert_script_run "echo 'monkeys123' | realm join --user=admin ipa001.domain.local", 300;
 }

@@ -1481,7 +1481,7 @@
                     {
                       name => "install_repository_http_graphical",
                       settings => [
-                        { key => "REPOSITORY_GRAPHICAL", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
+                        { key => "REPOSITORY_GRAPHICAL", value => "%LOCATION%" },
                       ],
                     },
                     {
@@ -1497,7 +1497,7 @@
                     {
                       name => "install_repository_http_variation",
                       settings => [
-                        { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                       ],
                     },
                     {
@@ -1797,7 +1797,7 @@
                       settings => [
                         { key => "DESKTOP", value => "kde" },
                         { key => "PACKAGE_SET", value => "kde" },
-                        { key => "REPOSITORY_VARIATION", value => "http://dl.fedoraproject.org/pub/fedora/linux/development" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "USER_LOGIN", value => "false" },
                       ],
                     },

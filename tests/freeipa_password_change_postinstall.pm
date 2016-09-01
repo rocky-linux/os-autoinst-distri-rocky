@@ -41,7 +41,7 @@ sub run {
     assert_script_run 'printf "loremipsum" | kinit test1';
     # change password via CLI (back to batterystaple, as that's what
     # freeipa_client test expects)
-    assert_script_run 'dnf -y --nogpgcheck install freeipa-admintools';
+    assert_script_run 'dnf -y install freeipa-admintools';
     assert_script_run 'printf "batterystaple\nbatterystaple" | ipa user-mod test1 --password';
     # check we can kinit again
     assert_script_run 'printf "batterystaple" | kinit test1';

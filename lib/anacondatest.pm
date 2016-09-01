@@ -198,7 +198,7 @@ sub get_full_repo {
     # repo URL with flavor and arch, leave NFS ones alone (as for
     # NFS tests we just use a mounted ISO and the URL is complete)
     if ($repourl !~ m/^nfs/) {
-        $repourl .= "/".lc(get_var("VERSION"))."/Everything/".get_var("ARCH")."/os";
+        $repourl .= "/Everything/".get_var("ARCH")."/os";
     }
     return $repourl;
 }

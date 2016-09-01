@@ -8,7 +8,13 @@ sub run {
     # disable screen blanking (download can take a long time)
     script_run "setterm -blank 0";
 
-    assert_script_run "dnf -y --nogpgcheck --releasever=${release} system-upgrade download", 6000;
+    # use compose repo
+    $self->repo_setup();
+    my $params = "-y --releasever=${release}";
+    if ($release eq "rawhide") {
+        $params .= " --nogpgcheck";
+    }
+    assert_script_run "dnf ${params} system-upgrade download", 6000;
 
     upload_logs "/var/log/dnf.log";
     upload_logs "/var/log/dnf.rpm.log";

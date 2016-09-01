@@ -13,9 +13,9 @@ sub run {
     # select appropriate protocol on the network
     assert_and_click "anaconda_install_source_on_the_network";
     send_key "tab";
-    # if we have an NFS repo select NFS (one 'up'), otherwise HTTP (four 'ups')
+    # if we have an NFS repo select NFS (one 'up'), otherwise HTTPS (three 'ups')
     my $num;
-    $num = get_var("REPOSITORY_GRAPHICAL") =~ m/^nfs:/ ? 1 : 4;
+    $num = get_var("REPOSITORY_GRAPHICAL") =~ m/^nfs:/ ? 1 : 3;
     for (my $i=0; $i<$num; $i++){
         send_key "up";
     }
