@@ -87,3 +87,6 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
 | `ARCH` | is set to architecture that will be used (`x86_64`, `i686`) |
 | `BUILD` | contains Pungi compose_id (something like `Fedora-24-20160121.n.3`) |
+| `CURRREL` | the current stable Fedora release at the time of the test run |
+| `PREVREL` | the previous stable Fedora release at the time of the test run |
+| `LOCATION` | contains Pungi base compose location (something like `https://kojipkgs.fedoraproject.org/compose/branched/Fedora-25-20160901.n.0/compose/`) |
