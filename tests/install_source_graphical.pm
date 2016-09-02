@@ -13,16 +13,21 @@ sub run {
     # select appropriate protocol on the network
     assert_and_click "anaconda_install_source_on_the_network";
     send_key "tab";
-    # if we have an NFS repo select NFS (one 'up'), otherwise HTTPS (three 'ups')
-    my $num;
-    $num = get_var("REPOSITORY_GRAPHICAL") =~ m/^nfs:/ ? 1 : 3;
-    for (my $i=0; $i<$num; $i++){
+    # select appropriate repo type for the URL by pressing 'up' a given
+    # number of times. default - 3 - is https
+    my $num = 3;
+    if (get_var("REPOSITORY_GRAPHICAL") =~ m/^nfs:/) {
+        $num = 1;
+    }
+    if (get_var("REPOSITORY_GRAPHICAL") =~ m/^http:/) {
+        $num = 4;
+    }
+    for (my $i=0; $i<$num; $i++) {
         send_key "up";
     }
-    # let's just accept either NFS or HTTP here, if it's the wrong one the
-    # test will fail soon anyhow
+    # we accept any of the protocol needles here, if we happened to
+    # choose wrong the test will fail soon anyhow
     assert_screen "anaconda_install_source_selected";
-
 
     # insert the url
     send_key "tab";
