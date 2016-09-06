@@ -31,8 +31,8 @@ sub run {
         # is set in which case it will have been done already
         if (get_var("DESKTOP") eq 'gnome' && !get_var("START_AFTER_TEST")) {
             assert_screen "next_button", 60;
-            # wait a sec in case of animation
-            wait_still_screen 1;
+            # wait a bit in case of animation
+            wait_still_screen 3;
             for my $n (1..3) {
                 # click 'Next' three times, moving the mouse to avoid
                 # highlight problems, sleeping to give it time to get
