@@ -119,6 +119,12 @@ sub load_install_tests() {
     # if this is a kickstart install, that's all folks
     return if (get_var("KICKSTART"));
 
+    if (get_var('ANACONDA_TEXT')) {
+        # since it differs much, handle text installation separately
+        autotest::loadtest "tests/install_text.pm";
+        return;
+    }
+
     ## Networking
     if (get_var('ANACONDA_STATIC')) {
         autotest::loadtest "tests/_network_static.pm";

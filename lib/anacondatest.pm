@@ -16,6 +16,9 @@ sub post_fail_hook {
     if (check_screen "anaconda_error", 10) {
         assert_and_click "anaconda_error_report";
         $has_traceback = 1;
+    } elsif (check_screen "anaconda_text_error", 10) {  # also for text install
+        type_string "1\n";
+        $has_traceback = 1;
     }
 
     $self->root_console(check=>0);

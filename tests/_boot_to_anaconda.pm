@@ -14,8 +14,9 @@ sub run {
     # Construct inst.repo arg for REPOSITORY_VARIATION
     my $repourl = get_var("REPOSITORY_VARIATION");
     if ($repourl) {
-        $params .= "inst.repo=" . $self->get_full_repo($repourl);
+        $params .= "inst.repo=" . $self->get_full_repo($repourl) . " ";
     }
+    $params .= "inst.text" if get_var("ANACONDA_TEXT");
     # ternary: set $params to "" if it contains only spaces
     $params = $params =~ /^\s+$/ ? "" : $params;
 
@@ -28,28 +29,37 @@ sub run {
     # proceed to installer
     unless (get_var("KICKSTART"))
     {
-        # on lives, we have to explicitly launch anaconda
-        if (get_var('LIVE')) {
-            assert_and_click "live_start_anaconda_icon", '', 300;
-        }
-        my $language = get_var('LANGUAGE') || 'english';
-        # wait for anaconda to appear
-        assert_screen "anaconda_select_install_lang", 300;
-        # Select install language
-        assert_and_click "anaconda_select_install_lang_input";
-        type_string "${language}";
-        # Needle filtering in main.pm ensures we will only look for the
-        # appropriate language, here
-        assert_and_click "anaconda_select_install_lang_filtered";
-        assert_screen "anaconda_select_install_lang_selected", 3;
-        assert_and_click "anaconda_select_install_lang_continue";
+        if (get_var("ANACONDA_TEXT")) {
+            # select that we don't want to start VNC; we want to run in text mode
+            assert_screen "anaconda_use_text_mode", 300;
+            type_string "2\n";
 
-        if ( check_screen "anaconda_rawhide_accept_fate" ) {
-            assert_and_click "anaconda_rawhide_accept_fate";
-        }
+            # wait for text version of Anaconda main hub
+            assert_screen "anaconda_main_hub_text", 300;
+        } else {
+            # on lives, we have to explicitly launch anaconda
+            if (get_var('LIVE')) {
+                assert_and_click "live_start_anaconda_icon", '', 300;
+            }
+            my $language = get_var('LANGUAGE') || 'english';
+            # wait for anaconda to appear
+            assert_screen "anaconda_select_install_lang", 300;
+            # Select install language
+            assert_and_click "anaconda_select_install_lang_input";
+            type_string "${language}";
+            # Needle filtering in main.pm ensures we will only look for the
+            # appropriate language, here
+            assert_and_click "anaconda_select_install_lang_filtered";
+            assert_screen "anaconda_select_install_lang_selected", 3;
+            assert_and_click "anaconda_select_install_lang_continue";
 
-        # wait for Anaconda hub to appear
-        assert_screen "anaconda_main_hub", 900; #
+            if ( check_screen "anaconda_rawhide_accept_fate" ) {
+                assert_and_click "anaconda_rawhide_accept_fate";
+            }
+
+            # wait for Anaconda hub to appear
+            assert_screen "anaconda_main_hub", 900; #
+        }
     }
 }
 

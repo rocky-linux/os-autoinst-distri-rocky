@@ -327,6 +327,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_anaconda_text" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
                                       arch    => "x86_64",
@@ -1428,6 +1439,12 @@
                         { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "%HDD_2%" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "install_anaconda_text",
+                      settings => [
+                        { key => "ANACONDA_TEXT", value => "1" },
                       ],
                     },
                     {
