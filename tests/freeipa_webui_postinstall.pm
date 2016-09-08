@@ -8,7 +8,7 @@ sub run {
     # we're restarting firefox (instead of using the same one from
     # freeipa_client_postinstall) so Firefox's trusted CA store
     # refreshes and it trusts the web server cert
-    type_string "startx /usr/bin/firefox\n";
+    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
     assert_screen "firefox";
     start_webui("admin", "monkeys123");
     add_user("test3", "Three");

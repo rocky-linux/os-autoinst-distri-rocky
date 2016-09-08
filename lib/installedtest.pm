@@ -67,7 +67,7 @@ sub start_cockpit {
     my $self = shift;
     my $login = shift || 0;
     # run firefox directly in X as root. never do this, kids!
-    type_string "startx /usr/bin/firefox\n";
+    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
     assert_screen "firefox";
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)

@@ -8,7 +8,7 @@ sub run {
     $self->console_login(user=>'root');
     # clear browser data so we don't go back to the 'admin' login
     assert_script_run 'rm -rf /root/.mozilla';
-    type_string "startx /usr/bin/firefox\n";
+    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
     assert_screen "firefox";
     start_webui("test1", "batterystaple");
     assert_and_click "freeipa_webui_actions";
