@@ -79,6 +79,12 @@ sub start_cockpit {
     send_key "ret";
     assert_screen "cockpit_login";
     if ($login) {
+        # with cockpit 118, user name field is not highlighted by
+        # default. for right now 118 is only in Rawhide, we'll have
+        # to adjust this conditional as necessary.
+        if (lc(get_var('VERSION')) eq "rawhide") {
+            wait_screen_change { send_key "tab"; };
+        }
         type_string "root";
         send_key "tab";
         type_string get_var("ROOT_PASSWORD", "weakpassword");
