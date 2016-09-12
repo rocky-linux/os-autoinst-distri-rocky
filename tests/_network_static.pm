@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -10,29 +11,16 @@ sub run {
     assert_and_click "anaconda_network_method";
     assert_and_click "anaconda_network_method_manual";
     assert_and_click "anaconda_network_address_add";
-    type_string get_var('ANACONDA_STATIC');
-    wait_still_screen 2;
-    send_key "tab";
+    type_safely get_var('ANACONDA_STATIC');
     # netmask is automatically set
-    send_key "tab";
+    type_safely "\t\t";
     # assume gateway
-    wait_still_screen 2;
-    type_string "10.0.2.2";
-    wait_still_screen 2;
-    send_key "ret";
+    type_safely "10.0.2.2";
     # move to DNS servers
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    wait_still_screen 2;
+    type_safely "\n\t\t\t";
     # set DNS from host
-    type_string join(',', $self->get_host_dns());
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    send_key "ret";
+    type_safely join(',', $self->get_host_dns());
+    type_safely "\t\t\t\t\t\n";
     # can take a bit of time as it seems to wait for all the pending
     # DHCP requests to time out before applying the static config
     assert_screen "anaconda_network_connected", 90;

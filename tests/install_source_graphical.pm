@@ -1,6 +1,8 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use main_common;
+use Time::HiRes qw( usleep );
 
 sub run {
     my $self = shift;
@@ -13,6 +15,7 @@ sub run {
     # select appropriate protocol on the network
     assert_and_click "anaconda_install_source_on_the_network";
     send_key "tab";
+    wait_still_screen 2;
     # select appropriate repo type for the URL by pressing 'up' a given
     # number of times. default - 3 - is https
     my $num = 3;
@@ -24,20 +27,21 @@ sub run {
     }
     for (my $i=0; $i<$num; $i++) {
         send_key "up";
+        usleep 100;
     }
     # we accept any of the protocol needles here, if we happened to
     # choose wrong the test will fail soon anyhow
     assert_screen "anaconda_install_source_selected";
 
     # insert the url
-    send_key "tab";
+    wait_screen_change { send_key "tab"; };
     my $repourl = "";
 
     # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
     # the repository url input
     if (get_var("MIRRORLIST_GRAPHICAL")) {
         $repourl = $self->get_mirrorlist_url();
-        type_string $repourl;
+        type_safely $repourl;
 
         # select as mirror list
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
@@ -46,7 +50,7 @@ sub run {
         $repourl = $self->get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
         # strip the 'nfs:' for typing here
         $repourl =~ s/^nfs://;
-        type_string $repourl;
+        type_safely $repourl;
     }
 
     assert_and_click "anaconda_spoke_done";

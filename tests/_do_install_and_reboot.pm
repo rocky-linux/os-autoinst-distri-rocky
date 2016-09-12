@@ -1,6 +1,23 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use main_common;
+
+sub type_user_password {
+    my $self = shift;
+    my $user_password = get_var("USER_PASSWORD") || "weakpassword";
+    if (get_var("SWITCHED_LAYOUT")) {
+        # we double the password, the second time using the native
+        # layout, so the password has both US and native characters
+        $self->switch_layout("us");
+        type_very_safely $user_password;
+        $self->switch_layout("native");
+        type_very_safely $user_password;
+    }
+    else {
+        type_very_safely $user_password;
+    }
+}
 
 sub run {
     my $self = shift;
@@ -18,40 +35,40 @@ sub run {
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_root_password";
     assert_screen "anaconda_install_root_password_screen";
+    # wait out animation
+    wait_still_screen 2;
     $self->switch_layout("us") if (get_var("SWITCHED_LAYOUT"));
-    type_string $root_password;
-    send_key "tab";
-    type_string $root_password;
+    # these screens seems insanely subject to typing errors, so let's
+    # type super safely. Note this doesn't really slow the test down
+    # as we still get done before the install process is complete.
+    type_very_safely $root_password;
+    wait_screen_change { send_key "tab"; };
+    type_very_safely $root_password;
     assert_and_click "anaconda_spoke_done";
 
     # Set user details
-    sleep 1;
+    # wait out animation
+    sleep 3;
     my $user_login = get_var("USER_LOGIN") || "test";
-    my $user_password = get_var("USER_PASSWORD") || "weakpassword";
     assert_and_click "anaconda_install_user_creation";
     assert_screen "anaconda_install_user_creation_screen";
-    type_string $user_login;
-    assert_and_click "anaconda_user_creation_password_input";
-    if (get_var("SWITCHED_LAYOUT")) {
-        # we double the password, the second time using the native
-        # layout, so the password has both US and native characters
-        $self->switch_layout("us");
-        type_string $user_password;
-        $self->switch_layout("native");
-        type_string $user_password;
-    }
-    else {
-        type_string $user_password;
-    }
-    send_key "tab";
-    if (get_var("SWITCHED_LAYOUT")) {
-        $self->switch_layout("us");
-        type_string $user_password;
-        $self->switch_layout("native");
-        type_string $user_password;
-    }
-    else {
-        type_string $user_password;
+    # wait out animation
+    wait_still_screen 2;
+    type_very_safely $user_login;
+    type_very_safely "\t\t\t\t";
+    $self->type_user_password();
+    wait_screen_change { send_key "tab"; };
+    wait_still_screen 2;
+    $self->type_user_password();
+    # even with all our slow typing this still *sometimes* seems to
+    # miss a character, so let's try again if we have a warning bar
+    if (check_screen "anaconda_warning_bar", 3) {
+        wait_screen_change { send_key "shift-tab"; };
+        wait_still_screen 2;
+        $self->type_user_password();
+        wait_screen_change { send_key "tab"; };
+        wait_still_screen 2;
+        $self->type_user_password();
     }
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
@@ -59,6 +76,13 @@ sub run {
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
         assert_screen "anaconda_install_user_created";
+    }
+
+    # With the slow typing - especially with SWITCHED_LAYOUT - we
+    # may not complete user creation until anaconda reaches post-install,
+    # which causes a 'Finish configuration' button
+    if (check_screen "anaconda_install_finish_configuration", 5) {
+        assert_and_click "anaconda_install_finish_configuration";
     }
 
     # Wait for install to end. Give Rawhide a bit longer, in case
@@ -72,7 +96,10 @@ sub run {
     wait_still_screen 3;
     assert_and_click "anaconda_install_done";
     if (get_var('LIVE')) {
-        x11_start_program("sudo reboot");
+        # reboot from a console, it's more reliable than the desktop
+        # runners
+        $self->root_console;
+        type_string "reboot\n";
     }
 }
 

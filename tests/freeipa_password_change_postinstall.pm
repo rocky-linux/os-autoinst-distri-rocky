@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 use freeipa;
 
 sub run {
@@ -10,27 +11,20 @@ sub run {
     assert_script_run 'rm -rf /root/.mozilla';
     # clear kerberos ticket so we don't auto-auth as 'test4'
     assert_script_run 'kdestroy -A';
-    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
-    assert_screen "firefox";
     start_webui("test1", "batterystaple");
     assert_and_click "freeipa_webui_actions";
     assert_and_click "freeipa_webui_reset_password_link";
     wait_still_screen 3;
-    type_string "batterystaple";
-    wait_still_screen 1;
-    send_key "tab";
-    send_key "tab";
-    wait_still_screen 1;
-    type_string "loremipsum";
-    wait_still_screen 1;
-    send_key "tab";
-    wait_still_screen 1;
-    type_string "loremipsum";
-    wait_still_screen 1;
+    type_safely "batterystaple";
+    type_safely "\t\t";
+    type_safely "loremipsum";
+    wait_screen_change { send_key "tab"; };
+    type_safely "loremipsum";
     assert_and_click "freeipa_webui_reset_password_button";
     wait_still_screen 2;
     # log out
     assert_and_click "freeipa_webui_user_menu";
+    wait_still_screen 2;
     assert_and_click "freeipa_webui_logout";
     wait_still_screen 3;
     # close browser, back to console

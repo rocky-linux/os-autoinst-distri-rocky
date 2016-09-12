@@ -16,8 +16,9 @@ sub run {
 
     # Focus on "base environment" list
     send_key "tab";
-    sleep 1;
+    wait_still_screen 1;
     send_key "tab";
+    wait_still_screen 1;
 
     # select desired environment
     # go through the list 20 times at max (to prevent infinite loop when it's missing)

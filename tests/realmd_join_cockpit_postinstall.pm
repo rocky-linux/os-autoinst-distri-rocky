@@ -2,9 +2,10 @@ use base "installedtest";
 use strict;
 use testapi;
 use lockapi;
+use main_common;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # clone host's /etc/hosts (for phx2 internal routing to work)
     # must come *before* setup_tap_static or else it would overwrite
     # its changes
@@ -18,21 +19,21 @@ sub run {
     mutex_lock "freeipa_ready";
     mutex_unlock "freeipa_ready";
     # run firefox and login to cockpit
+    # note: we can't use wait_screen_change, wait_still_screen or
+    # check_type_string in cockpit because of that fucking constantly
+    # scrolling graph
     $self->start_cockpit(1);
     assert_and_click "cockpit_join_domain_button";
     assert_screen "cockpit_join_domain";
     send_key "tab";
-    wait_still_screen 1;
-    type_string "ipa001.domain.local";
-    wait_still_screen 1;
+    sleep 3;
+    type_string("ipa001.domain.local", 4);
+    type_string("\t\t", 4);
+    type_string("admin", 4);
     send_key "tab";
-    send_key "tab";
-    wait_still_screen 1;
-    type_string "admin";
-    wait_still_screen 1;
-    send_key "tab";
-    type_string "monkeys123";
-    wait_still_screen 1;
+    sleep 3;
+    type_string("monkeys123", 4);
+    sleep 3;
     assert_and_click "cockpit_join_button";
     # check we hit the progress screen, so we fail faster if it's
     # broken

@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -33,7 +34,6 @@ sub run {
             # select that we don't want to start VNC; we want to run in text mode
             assert_screen "anaconda_use_text_mode", 300;
             type_string "2\n";
-
             # wait for text version of Anaconda main hub
             assert_screen "anaconda_main_hub_text", 300;
         } else {
@@ -45,8 +45,8 @@ sub run {
             # wait for anaconda to appear
             assert_screen "anaconda_select_install_lang", 300;
             # Select install language
-            assert_and_click "anaconda_select_install_lang_input";
-            type_string "${language}";
+            wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };
+            type_safely $language;
             # Needle filtering in main.pm ensures we will only look for the
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";

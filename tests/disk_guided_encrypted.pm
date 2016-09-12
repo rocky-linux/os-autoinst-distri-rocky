@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -17,9 +18,9 @@ sub run {
     if (get_var("SWITCHED_LAYOUT")) {
         $self->switch_layout("us");
     }
-    type_string get_var("ENCRYPT_PASSWORD");
-    send_key "tab";
-    type_string get_var("ENCRYPT_PASSWORD");
+    type_safely get_var("ENCRYPT_PASSWORD");
+    wait_screen_change { send_key "tab"; };
+    type_safely get_var("ENCRYPT_PASSWORD");
     if (get_var("SWITCHED_LAYOUT")) {
         # work around RHBZ #1333984
         $self->switch_layout("native");

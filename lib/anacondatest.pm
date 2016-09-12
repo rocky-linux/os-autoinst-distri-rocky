@@ -7,6 +7,7 @@ use base 'fedorabase';
 # to upload Anaconda logs when something fails
 
 use testapi;
+use main_common;
 
 sub post_fail_hook {
     my $self = shift;
@@ -113,16 +114,12 @@ sub select_disks {
         foreach my $target (keys %iscsi) {
             my $ip = $iscsi{$target};
             assert_and_click "anaconda_install_destination_add_iscsi_target";
-            type_string $ip;
             wait_still_screen 2;
-            send_key "tab";
-            type_string $target;
-            wait_still_screen 2;
-            # start discovery
-            send_key "tab";
-            send_key "tab";
-            send_key "tab";
-            send_key "ret";
+            type_safely $ip;
+            wait_screen_change { send_key "tab"; };
+            type_safely $target;
+            # start discovery - three tabs, enter
+            type_safely "\t\t\t\n";
             assert_and_click "anaconda_install_destination_target_login";
             assert_and_click "anaconda_install_destination_select_target";
         }

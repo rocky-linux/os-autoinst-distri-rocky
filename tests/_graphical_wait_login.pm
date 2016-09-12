@@ -1,8 +1,10 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
+    my $self = shift;
     # If KICKSTART is set, then the wait_time needs to consider the
     # install time. if UPGRADE, we have to wait for the entire upgrade
     # unless ENCRYPT_PASSWORD is set (in which case the postinstall
@@ -24,13 +26,13 @@ sub run {
             send_key "ret";
         }
         assert_screen "graphical_login_input";
-        type_string get_var("USER_PASSWORD", "weakpassword");
+        type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key "ret";
 
         # Handle initial-setup, for GNOME, unless START_AFTER_TEST
         # is set in which case it will have been done already
         if (get_var("DESKTOP") eq 'gnome' && !get_var("START_AFTER_TEST")) {
-            assert_screen "next_button", 60;
+            assert_screen "next_button", 120;
             # wait a bit in case of animation
             wait_still_screen 3;
             for my $n (1..3) {

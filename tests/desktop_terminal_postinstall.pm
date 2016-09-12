@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self=shift;
@@ -9,12 +10,17 @@ sub run {
     wait_still_screen 5;
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");
-    type_string "su\n";
+    type_string "su\n", 20;
     wait_still_screen 3;
-    type_string "$rootpass\n";
+    # can't use type_safely for now as current implementation relies
+    # on screen change checks, and there is no screen change here
+    type_string "$rootpass\n", 1;
     wait_still_screen 3;
-    # if we can do an assert_script_run, we're at a console
-    assert_script_run 'ls';
+    # if we can run something successfully, we're at a console;
+    # we're reinventing assert_script_run instead of using it so
+    # we can type safely
+    type_very_safely "ls && echo 'ls OK' > /dev/ttyS0\n";
+    wait_serial "ls OK" || die "terminal command failed";
 }
 
 sub test_flags {

@@ -7,6 +7,7 @@ use base 'fedorabase';
 # of upgrade tests, postinstall phases...
 
 use testapi;
+use main_common;
 
 sub root_console {
     my $self = shift;
@@ -58,8 +59,7 @@ sub menu_launch_type {
     send_key 'alt-f1';
     # srsly KDE y u so slo
     wait_still_screen 3;
-    type_string "$app";
-    wait_still_screen 3;
+    type_very_safely $app;
     send_key 'ret';
 }
 
@@ -67,17 +67,9 @@ sub start_cockpit {
     my $self = shift;
     my $login = shift || 0;
     # run firefox directly in X as root. never do this, kids!
-    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
-    assert_screen "firefox";
-    # open a new tab so we don't race with the default page load
-    # (also focuses the location bar for us)
-    send_key "ctrl-t";
-    wait_still_screen 2;
-    type_string "http://localhost:9090";
-    # firefox's stupid 'smart' url bar is a pain. wait for things to settle.
-    wait_still_screen 3;
-    send_key "ret";
+    type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
     assert_screen "cockpit_login";
+    wait_still_screen 5;
     if ($login) {
         # with cockpit 118, user name field is not highlighted by
         # default. for right now 118 is only in Rawhide, we'll have
@@ -85,11 +77,14 @@ sub start_cockpit {
         if (lc(get_var('VERSION')) eq "rawhide") {
             wait_screen_change { send_key "tab"; };
         }
-        type_string "root";
-        send_key "tab";
-        type_string get_var("ROOT_PASSWORD", "weakpassword");
+        type_safely "root";
+        wait_screen_change { send_key "tab"; };
+        type_safely get_var("ROOT_PASSWORD", "weakpassword");
         send_key "ret";
         assert_screen "cockpit_main";
+        # wait for any animation or other weirdness
+        # can't use wait_still_screen because of that damn graph
+        sleep 3;
     }
 }
 

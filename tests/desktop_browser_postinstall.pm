@@ -1,6 +1,16 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
+
+# we are very paranoid with waits and typing speed in this test
+# because the system can be very busy; it's effectively first boot of
+# a freshly installed system and we're running Firefox for the first
+# time, which causes an awful lot of system load, and there's lots of
+# screen change potentially going on. This makes the test quite slow,
+# but it's best to be safe. If you're working on the test you might
+# want to tweak the waits down a bit and use type_safely instead of
+# type_very_safely for your test runs, just to save your time.
 
 sub run {
     my $self = shift;
@@ -10,16 +20,19 @@ sub run {
     wait_still_screen 2;
     assert_and_click 'browser_launcher';
     assert_screen 'browser';
+    wait_idle 5;
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
     send_key 'ctrl-t';
     wait_still_screen 2;
-    # check FAS
-    type_string "https://admin.fedoraproject.org/accounts/\n";
+    wait_idle 3;
+    # check FAS, typing slowly to avoid errors
+    type_very_safely "https://admin.fedoraproject.org/accounts/\n";
     assert_screen "browser_fas_home";
     send_key 'ctrl-t';
     wait_still_screen 2;
-    type_string "https://kernel.org\n";
+    wait_idle 2;
+    type_very_safely "https://kernel.org\n";
     assert_and_click "browser_kernelorg_patch";
     assert_and_click "browser_download_save";
     send_key 'ret';
@@ -34,7 +47,8 @@ sub run {
     # default browser doesn't support add-ons or uses different ones
     send_key 'ctrl-t';
     wait_still_screen 2;
-    type_string "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
+    wait_idle 2;
+    type_very_safely "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
     assert_and_click "firefox_addon_add";
     assert_and_click "firefox_addon_install";
     assert_and_click "firefox_addon_success";

@@ -1,44 +1,35 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 use freeipa;
 
 sub run {
     my $self = shift;
     # we're restarting firefox (instead of using the same one from
-    # freeipa_client_postinstall) so Firefox's trusted CA store
-    # refreshes and it trusts the web server cert
-    type_string "startx /usr/bin/firefox -width 1024 -height 768\n";
-    assert_screen "firefox";
+    # realmd_join_cockpit) so Firefox's trusted CA store refreshes and
+    # it trusts the web server cert
     start_webui("admin", "monkeys123");
     add_user("test3", "Three");
     add_user("test4", "Four");
     assert_screen "freeipa_webui_users_added";
     assert_and_click "freeipa_webui_policy";
+    wait_still_screen 2;
     assert_screen "freeipa_webui_hbac";
     assert_and_click "freeipa_webui_add_button";
+    wait_still_screen 2;
     assert_screen "freeipa_webui_add_policy";
-    type_string "allow-test3";
-    wait_still_screen 1;
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    wait_still_screen 1;
+    type_safely "allow-test3";
+    type_safely "\t\t\t";
     send_key "ret";
     assert_and_click "freeipa_webui_policy_add_user";
+    wait_still_screen 2;
     # filter users
-    type_string "test3\n";
+    type_safely "test3\n";
     # go to the correct checkbox (assert_and_click is tricky as
-    # we can't make sure we click the right checkbox)
-    send_key "tab";
-    send_key "tab";
-    send_key "tab";
-    # check it
-    send_key "spc";
-    # select the right arrow
-    send_key "tab";
-    # click it
-    send_key "ret";
+    # we can't make sure we click the right checkbox), check it,
+    # select right arrow, click it - tab tab tab, space, tab, enter
+    type_safely "\t\t\t \t\n";
     assert_and_click "freeipa_webui_add_button";
     wait_still_screen 2;
     send_key "pgdn";
