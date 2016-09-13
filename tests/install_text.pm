@@ -24,6 +24,8 @@ sub run {
     # Set timezone
     run_with_error_check(sub {type_string $spoke_number{"timezone"} . "\n"}, "anaconda_text_error");
     wait_still_screen 5;
+    type_string "1\n"; # Set timezone
+    wait_still_screen 5;
     type_string "1\n"; # Europe
     wait_still_screen 5;
     type_string "37\n"; # Prague
