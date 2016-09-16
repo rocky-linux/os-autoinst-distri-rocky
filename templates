@@ -338,6 +338,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 31,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_rescue_encrypted" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
                                       arch    => "x86_64",
@@ -1470,6 +1481,14 @@
                       ],
                     },
                     {
+                      name => "install_rescue_encrypted",
+                      settings => [
+                        { key => "ENTRYPOINT", value => "rescue_mode_encrypted" },
+                        { key => "HDD_1", value => "disk_%MACHINE%_encrypted.qcow2" },
+                        { key => "START_AFTER_TEST", value => "install_simple_encrypted" },
+                      ],
+                    },
+                    {
                       name => "install_package_set_minimal",
                       settings => [
                         { key => "PACKAGE_SET", value => "minimal" },
@@ -1561,6 +1580,7 @@
                       name => "install_simple_encrypted",
                       settings => [
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "STORE_HDD_1", value => "disk_%MACHINE%_encrypted.qcow2" },
                       ],
                     },
                     {
