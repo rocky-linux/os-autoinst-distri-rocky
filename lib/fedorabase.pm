@@ -110,11 +110,11 @@ sub do_bootloader {
     # if not postinstall and not UEFI, syslinux
     $args{bootloader} //= ($args{uefi} || $args{postinstall}) ? "grub" : "syslinux";
     if ($args{uefi}) {
-        # we don't just tag all screens with 'bootloader' because we
-        # want to be sure we actually did a UEFI boot
+        # we use the firmware-type specific tags because we want to be
+        # sure we actually did a UEFI boot
         assert_screen "bootloader_uefi", $args{timeout};
     } else {
-        assert_screen "bootloader", $args{timeout};
+        assert_screen "bootloader_bios", $args{timeout};
     }
     if ($args{mutex}) {
         # cancel countdown

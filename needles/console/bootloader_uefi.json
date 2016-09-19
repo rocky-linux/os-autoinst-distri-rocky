@@ -4,7 +4,8 @@
     "ENV-FLAVOR-server_boot",
     "ENV-FLAVOR-workstation_live",
     "ENV-UEFI-1",
-    "bootloader_uefi"
+    "bootloader_uefi",
+    "bootloader"
   ],
   "area": [
     {

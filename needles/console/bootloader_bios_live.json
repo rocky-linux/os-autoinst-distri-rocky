@@ -10,6 +10,7 @@
   ],
   "tags": [
     "bootloader",
+    "bootloader_bios",
     "ENV-DISTRI-fedora",
     "ENV-FLAVOR-server"
   ]

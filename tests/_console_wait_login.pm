@@ -4,10 +4,8 @@ use testapi;
 
 sub run {
     my $self = shift;
-    # If KICKSTART is set, then the wait_time needs to consider the
-    # install time. if UPGRADE, we have to wait for the entire upgrade
+    # If UPGRADE is set, we have to wait for the entire upgrade
     my $wait_time = 300;
-    $wait_time = 1800 if (get_var("KICKSTART"));
     $wait_time = 6000 if (get_var("UPGRADE"));
 
     # handle bootloader, if requested

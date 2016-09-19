@@ -28,8 +28,13 @@ sub run {
     $self->do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
 
     # proceed to installer
-    unless (get_var("KICKSTART"))
-    {
+    if (get_var("KICKSTART")) {
+        # wait for the bootloader *here* - in a test that inherits from
+        # anacondatest - so that if something goes wrong during install,
+        # we get anaconda logs
+        assert_screen "bootloader", 1800;
+    }
+    else {
         if (get_var("ANACONDA_TEXT")) {
             # select that we don't want to start VNC; we want to run in text mode
             assert_screen "anaconda_use_text_mode", 300;
