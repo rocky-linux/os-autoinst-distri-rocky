@@ -23,7 +23,7 @@ sub root_console {
 sub post_fail_hook {
     my $self = shift;
 
-    $self->root_console(tty=>2);
+    $self->root_console(tty=>6);
 
     # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
     my $vartmp = script_output "ls /var/tmp/abrt";
