@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 846,
+      "ypos": 743,
+      "width": 17,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_expand_notifications"
+  ],
+  "properties": []
+}

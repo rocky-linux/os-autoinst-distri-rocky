@@ -312,6 +312,28 @@
                                       flavor  => "Workstation-live-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "desktop_update_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_update_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "desktop_terminal" },
                     },
                     {
@@ -2076,6 +2098,15 @@
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "desktop_update_graphical",
+                      settings => [
+                        { key => "POSTINSTALL", value => "desktop_update_graphical" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
                     {

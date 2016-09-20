@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 749,
+      "ypos": 705,
+      "width": 100,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_package_tool_update_apply"
+  ],
+  "properties": []
+}
