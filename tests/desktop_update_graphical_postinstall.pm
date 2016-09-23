@@ -16,7 +16,7 @@ sub run {
     if ($desktop eq 'kde') {
         # KDE team tells me the 'preferred' update method is the
         # systray applet
-        assert_and_click 'desktop_expand_notifications';
+        assert_and_click 'desktop_expand_systray';
     }
     else {
         # this launches GNOME Software on GNOME, dunno for any other
