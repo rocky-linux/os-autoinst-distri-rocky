@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/run_with_error_check check_type_string type_safely type_very_safely/;
+our @EXPORT = qw/run_with_error_check check_type_string type_safely type_very_safely desktop_vt/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -47,4 +47,18 @@ sub type_very_safely {
     my $string = shift;
     check_type_string($string, size => 1, still => 5, max_interval => 1);
     wait_still_screen 5;
+}
+
+# Figure out what tty the desktop is on, switch to it. Assumes we're
+# at a root console
+sub desktop_vt {
+    # use ps to find the tty of Xwayland or Xorg
+    my $xout;
+    # don't fail test if we don't find any process, just guess tty1
+    eval { $xout = script_output 'ps -C Xwayland,Xorg -o tty --no-headers'; };
+    my $tty = 1; # default
+    while ($xout =~ /tty(\d)/g) {
+        $tty = $1; # most recent match is probably best
+    }
+    send_key "ctrl-alt-f${tty}";
 }

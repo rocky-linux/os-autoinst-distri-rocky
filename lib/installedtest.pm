@@ -101,16 +101,6 @@ sub repo_setup {
     script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo";
 }
 
-# switch to the desktop where the VT is
-sub desktop_vt {
-    if (get_var("DESKTOP") eq 'gnome') {
-        send_key 'ctrl-alt-f2';
-    }
-    else {
-        send_key 'ctrl-alt-f1';
-    }
-}
-
 1;
 
 # vim: set sw=4 et:

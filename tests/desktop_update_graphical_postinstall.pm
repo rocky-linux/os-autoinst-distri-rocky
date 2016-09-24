@@ -12,7 +12,7 @@ sub run {
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
     prepare_test_packages;
     # get back to the desktop
-    $self->desktop_vt();
+    desktop_vt;
     # run the updater
     if ($desktop eq 'kde') {
         # KDE team tells me the 'preferred' update method is the

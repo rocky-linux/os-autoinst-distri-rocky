@@ -23,7 +23,7 @@ sub run {
     # just assume we're gonna win
     $self->root_console(tty=>3);
     prepare_test_packages;
-    $self->desktop_vt();
+    desktop_vt;
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
     # things that crash a few minutes after startup, etc.
