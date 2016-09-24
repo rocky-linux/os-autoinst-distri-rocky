@@ -11,7 +11,7 @@ sub run {
 
     # wait for either graphical or text login
     if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 30, 120); # DM takes time to load
+        $self->boot_to_login_screen("graphical_login", 45, 120); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
@@ -32,7 +32,7 @@ sub run {
     }
 
     if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 30, 120); # DM takes time to load
+        $self->boot_to_login_screen("graphical_login", 45, 120); # DM takes time to load
     } else {
         $self->boot_to_login_screen();
     }
