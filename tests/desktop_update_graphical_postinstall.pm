@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 use packagetest;
 
 sub run {
@@ -46,6 +47,11 @@ sub run {
         mouse_set 10, 10;
         mouse_hide;
     }
+    # KDE annoyingly pops the notification up right over the install
+    # button, which doesn't help...wait for it to go away
+    if ($desktop eq 'kde') {
+        wait_still_screen 5;
+    }
     assert_and_click 'desktop_package_tool_update_apply';
     # on GNOME, wait for reboots.
     if ($desktop eq 'gnome') {
@@ -58,7 +64,19 @@ sub run {
         assert_screen 'graphical_login', 300;
     }
     else {
-        assert_screen 'desktop_package_tool_update_done', 180;
+        # KDE will prompt for authentication if any package is not
+        # signed. As of 2016-09-23, puiterwijk claims Rawhide packages
+        # will be autosigned 'by Monday', so if this happens, we're
+        # going to treat it as a soft fail, indicating the update
+        # mechanism works, but a package that should have been signed
+        # was not.
+        assert_screen ['desktop_package_tool_update_done', 'desktop_package_tool_update_authenticate'], 180;
+        if (match_has_tag('desktop_package_tool_update_authenticate')) {
+            record_soft_failure;
+            type_very_safely get_var('USER_PASSWORD', 'weakpassword');
+            send_key 'ret';
+            assert_screen 'desktop_package_tool_update_done', 180;
+        }
     }
     # back to console to verify updates
     $self->root_console(tty=>3);
