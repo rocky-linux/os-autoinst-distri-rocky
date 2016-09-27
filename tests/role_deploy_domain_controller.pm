@@ -5,11 +5,7 @@ use lockapi;
 use mmapi;
 
 sub run {
-    my $self=shift;
-    # boot with kernel params to ensure interface is 'eth0' and not whatever
-    # systemd feels like calling it today
-    $self->do_bootloader(postinstall=>1, params=>"net.ifnames=0 biosdevname=0");
-    $self->boot_to_login_screen("text_console_login", 5, 60);
+    my $self = shift;
     # login
     $self->root_console();
     # clone host's /etc/hosts (for phx2 internal routing to work)

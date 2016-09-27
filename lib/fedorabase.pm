@@ -149,19 +149,6 @@ sub do_bootloader {
     send_key "ret";
 }
 
-sub boot_to_login_screen {
-    my $self = shift;
-    my $boot_done_screen = shift; # what to expect when system is booted (e. g. GDM), can be ""
-    my $stillscreen = shift || 10;
-    my $timeout = shift || 60;
-
-    wait_still_screen $stillscreen, $timeout;
-
-    if ($boot_done_screen ne "") {
-        assert_screen $boot_done_screen;
-    }
-}
-
 sub get_milestone {
     my $self = shift;
     # FIXME: we don't know how to do this with Pungi 4 yet.

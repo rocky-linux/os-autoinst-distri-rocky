@@ -61,7 +61,7 @@ sub run {
         if (check_screen 'gnome_reboot_confirm', 15) {
             send_key 'ret';
         }
-        assert_screen 'graphical_login', 300;
+        boot_to_login_screen;
     }
     else {
         # KDE will prompt for authentication if any package is not

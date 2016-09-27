@@ -3,14 +3,7 @@ use strict;
 use testapi;
 
 sub run {
-    my $self=shift;
-    if (get_var("ARCH") eq "arm") {
-        # we cannot use boot_to_login_screen, wait_still_screen is unusable during ARM boot (it shows black screen for first few minutes)
-        assert_screen "text_console_login", 150;
-    } else {
-        # wait for boot to complete
-        $self->boot_to_login_screen("", 30);
-    }
+    my $self = shift;
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
     my $output = script_output 'systemctl --failed';

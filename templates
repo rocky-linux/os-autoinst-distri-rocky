@@ -1962,7 +1962,9 @@
                     {
                       name => "base_selinux",
                       settings => [
-                        { key => "ENTRYPOINT", value => "base_selinux" },
+                        { key => "POSTINSTALL", value => "base_selinux" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -1971,7 +1973,9 @@
                     {
                       name => "base_services_start",
                       settings => [
-                        { key => "ENTRYPOINT", value => "base_services_start" },
+                        { key => "POSTINSTALL", value => "base_services_start" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -1980,7 +1984,9 @@
                     {
                       name => "base_services_start_arm",
                       settings => [
-                        { key => "ENTRYPOINT", value => "base_services_start" },
+                        { key => "POSTINSTALL", value => "base_services_start" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_arm_image_deployment_upload" },
                         { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -1989,7 +1995,9 @@
                     {
                       name => "base_service_manipulation",
                       settings => [
-                        { key => "ENTRYPOINT", value => "base_service_manipulation" },
+                        { key => "POSTINSTALL", value => "base_service_manipulation" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -1998,7 +2006,9 @@
                     {
                       name => "base_update_cli",
                       settings => [
-                        { key => "ENTRYPOINT", value => "base_update_cli" },
+                        { key => "POSTINSTALL", value => "base_update_cli" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -2037,7 +2047,10 @@
                     {
                       name => "server_role_deploy_domain_controller",
                       settings => [
-                        { key => "ENTRYPOINT", value => "role_deploy_domain_controller" },
+                        { key => "POSTINSTALL", value => "role_deploy_domain_controller" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
@@ -2183,7 +2196,7 @@
                     {
                       name => "desktop_notifications_live",
                       settings => [
-                        { key => "ENTRYPOINT", value => "desktop_notifications_postinstall" },
+                        { key => "ENTRYPOINT", value => "desktop_notifications" },
                       ],
                     },
                     {

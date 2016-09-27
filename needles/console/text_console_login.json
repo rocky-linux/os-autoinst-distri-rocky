@@ -11,6 +11,7 @@
     "properties": [],
     "tags": [
         "text_console_login",
+        "login_screen",
         "ENV-DISTRI-fedora",
         "ENV-FLAVOR-develop"
     ]

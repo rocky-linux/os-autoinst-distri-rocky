@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -9,21 +10,14 @@ sub run {
         $self->boot_decrypt(60);
     }
 
-    # wait for either graphical or text login
-    if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 45, 120); # DM takes time to load
-    } else {
-        $self->boot_to_login_screen();
-    }
+    boot_to_login_screen;
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
     # disable screen blanking (update can take a long time)
     script_run "setterm -blank 0";
 
     # upgrader should be installed on up-to-date system
-
     assert_script_run 'dnf -y update', 1800;
-
     script_run "reboot";
 
     # decrypt if necessary
@@ -31,11 +25,7 @@ sub run {
         $self->boot_decrypt(60);
     }
 
-    if (get_var('DESKTOP')) {
-        $self->boot_to_login_screen("graphical_login", 45, 120); # DM takes time to load
-    } else {
-        $self->boot_to_login_screen();
-    }
+    boot_to_login_screen;
     $self->root_console(tty=>3);
 
     my $update_command = 'dnf -y install dnf-plugin-system-upgrade';

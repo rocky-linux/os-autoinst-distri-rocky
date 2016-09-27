@@ -14,11 +14,7 @@ sub run {
     $wait_time = 6000 if (get_var("UPGRADE") && !get_var("ENCRYPT_PASSWORD"));
 
     # Wait for the login screen
-    assert_screen "graphical_login", $wait_time;
-    # handle the qemu display buffer sometimes showing the DM from the
-    # *previous* boot - https://openqa.stg.fedoraproject.org/tests/17116
-    wait_still_screen;
-    assert_screen "graphical_login";
+    boot_to_login_screen(timeout => $wait_time);
     # do user login unless USER_LOGIN is set to string 'false'
     unless (get_var("USER_LOGIN") eq "false") {
         if (get_var("DESKTOP") eq 'gnome') {

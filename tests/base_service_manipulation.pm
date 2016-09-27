@@ -1,11 +1,10 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
-    my $self=shift;
-    # wait for boot to complete
-    $self->boot_to_login_screen("", 30);
+    my $self = shift;
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
     # we could make this slightly more 'efficient' by assuming sshd
@@ -14,7 +13,7 @@ sub run {
     script_run "systemctl stop sshd.service";
     script_run "systemctl disable sshd.service";
     script_run "reboot";
-    $self->boot_to_login_screen("", 30);
+    boot_to_login_screen;
     $self->root_console(tty=>3);
     # note the use of ! here is a bash-ism, but it sure makes life easier
     assert_script_run '! systemctl is-enabled sshd.service';
@@ -33,14 +32,14 @@ sub run {
     assert_script_run '! systemctl is-active sshd.service';
     assert_script_run '! ps -C sshd';
     script_run "reboot";
-    $self->boot_to_login_screen("", 30);
+    boot_to_login_screen;
     $self->root_console(tty=>3);
     assert_script_run 'systemctl is-enabled sshd.service';
     assert_script_run 'systemctl is-active sshd.service';
     assert_script_run 'ps -C sshd';
     script_run "systemctl disable sshd.service";
     script_run "reboot";
-    $self->boot_to_login_screen("", 30);
+    boot_to_login_screen;
     $self->root_console(tty=>3);
     assert_script_run '! systemctl is-enabled sshd.service';
     assert_script_run '! systemctl is-active sshd.service';

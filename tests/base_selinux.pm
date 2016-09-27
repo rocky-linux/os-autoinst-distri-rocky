@@ -4,8 +4,6 @@ use testapi;
 
 sub run {
     my $self=shift;
-    # wait for boot to complete
-    $self->boot_to_login_screen("", 30);
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
     validate_script_output 'getenforce', sub { $_ =~ m/Enforcing/ };

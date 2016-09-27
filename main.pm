@@ -103,7 +103,7 @@ sub load_upgrade_tests() {
     autotest::loadtest "tests/upgrade_preinstall.pm";
     autotest::loadtest "tests/upgrade_run.pm";
     # set postinstall test
-    set_var('POSTINSTALL', "upgrade" );
+    set_var('POSTINSTALL', "upgrade_postinstall" );
 }
 
 sub load_install_tests() {
@@ -208,7 +208,7 @@ sub load_postinstall_tests() {
     if (get_var("POSTINSTALL")) {
         my @pis = split(/ /, get_var("POSTINSTALL"));
         foreach my $pi (@pis) {
-            autotest::loadtest "tests/${pi}_postinstall.pm";
+            autotest::loadtest "tests/${pi}.pm";
         }
     }
 
@@ -233,9 +233,9 @@ if (get_var("ENTRYPOINT")) {
 elsif (get_var("UPGRADE")) {
     load_upgrade_tests;
 }
-elsif (!get_var("BOOTFROM")) {
-    # for now we can assume BOOTFROM means this test picks up
-    # after an install, so we skip to post-install
+elsif (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
+    # for now we can assume START_AFTER_TEST and BOOTFROM mean the
+    # test picks up after an install, so we skip to post-install
     load_install_tests;
 }
 

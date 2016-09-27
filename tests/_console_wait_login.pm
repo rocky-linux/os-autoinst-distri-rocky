@@ -1,6 +1,7 @@
 use base "fedorabase";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -15,7 +16,7 @@ sub run {
     }
 
     # Wait for the text login
-    assert_screen "text_console_login", $wait_time;
+    boot_to_login_screen(timeout => $wait_time);
 
     # do user login unless USER_LOGIN is set to string 'false'
     unless (get_var("USER_LOGIN") eq "false") {
