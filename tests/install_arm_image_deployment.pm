@@ -11,6 +11,8 @@ sub run {
     # Set timezone
     type_string "2\n";
     wait_still_screen 5;
+    type_string "1\n"; # Set timezone
+    wait_still_screen 5;
     type_string "1\n"; # Europe
     wait_still_screen 5;
     type_string "37\n"; # Prague
