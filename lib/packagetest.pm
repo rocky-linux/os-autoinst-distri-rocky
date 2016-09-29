@@ -16,7 +16,7 @@ sub prepare_test_packages {
     script_run 'dnf -y remove python3-kickstart';
     # we seem to often lose keystrokes in the next command if we run
     # it too fast, let's wait for idle first
-    wait_idle 7;
+    wait_idle 20;
     # grab the test repo definitions
     assert_script_run 'curl -o /etc/yum.repos.d/openqa-testrepo-1.repo https://fedorapeople.org/groups/qa/openqa-repos/openqa-testrepo-1.repo';
     # install the test packages from repo1
