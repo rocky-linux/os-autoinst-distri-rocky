@@ -22,45 +22,40 @@ sub post_fail_hook {
         $has_traceback = 1;
     }
 
-    $self->root_console(check=>0);
-    if (check_screen "root_console", 10) {
-        upload_logs "/tmp/X.log", failok=>1;
-        upload_logs "/tmp/anaconda.log", failok=>1;
-        upload_logs "/tmp/packaging.log", failok=>1;
-        upload_logs "/tmp/storage.log", failok=>1;
-        upload_logs "/tmp/syslog", failok=>1;
-        upload_logs "/tmp/program.log", failok=>1;
-        upload_logs "/tmp/dnf.log", failok=>1;
-        upload_logs "/tmp/dnf.librepo.log", failok=>1;
-        upload_logs "/tmp/dnf.rpm.log", failok=>1;
+    save_screenshot;
+    $self->root_console();
+    upload_logs "/tmp/X.log", failok=>1;
+    upload_logs "/tmp/anaconda.log", failok=>1;
+    upload_logs "/tmp/packaging.log", failok=>1;
+    upload_logs "/tmp/storage.log", failok=>1;
+    upload_logs "/tmp/syslog", failok=>1;
+    upload_logs "/tmp/program.log", failok=>1;
+    upload_logs "/tmp/dnf.log", failok=>1;
+    upload_logs "/tmp/dnf.librepo.log", failok=>1;
+    upload_logs "/tmp/dnf.rpm.log", failok=>1;
 
-        if ($has_traceback) {
-            # Upload Anaconda traceback logs
-            script_run "tar czf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
-            upload_logs "/tmp/anaconda_tb.tar.gz";
-        }
-
-        # Upload all ABRT logs
-        script_run "tar czf /var/tmp/var_tmp.tar.gz /var/tmp";
-        upload_logs "/var/tmp/var_tmp.tar.gz";
-
-        # Upload /var/log
-        script_run "tar czf /tmp/var_log.tar.gz /var/log";
-        upload_logs "/tmp/var_log.tar.gz";
-
-        # Upload anaconda core dump, if there is one
-        script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*";
-        upload_logs "/tmp/anaconda.core.tar.gz", failok=>1;
+    if ($has_traceback) {
+        # Upload Anaconda traceback logs
+        script_run "tar czf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
+        upload_logs "/tmp/anaconda_tb.tar.gz";
     }
-    else {
-        save_screenshot;
-    }
+
+    # Upload all ABRT logs
+    script_run "tar czf /var/tmp/var_tmp.tar.gz /var/tmp";
+    upload_logs "/var/tmp/var_tmp.tar.gz";
+
+    # Upload /var/log
+    script_run "tar czf /tmp/var_log.tar.gz /var/log";
+    upload_logs "/tmp/var_log.tar.gz";
+
+    # Upload anaconda core dump, if there is one
+    script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*";
+    upload_logs "/tmp/anaconda.core.tar.gz", failok=>1;
 }
 
 sub root_console {
     my $self = shift;
     my %args = (
-        check => 1, # whether to fail when console wasn't reached
         @_);
 
     if (get_var("LIVE")) {
@@ -72,7 +67,7 @@ sub root_console {
         send_key "ctrl-b";
         send_key "2";
     }
-    $self->console_login(user=>"root",check=>$args{check});
+    console_login(user=>"root");
 }
 
 sub select_disks {

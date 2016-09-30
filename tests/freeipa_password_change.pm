@@ -6,7 +6,7 @@ use freeipa;
 
 sub run {
     my $self = shift;
-    $self->console_login(user=>'root');
+    console_login(user=>'root');
     # clear browser data so we don't go back to the 'admin' login
     assert_script_run 'rm -rf /root/.mozilla';
     # clear kerberos ticket so we don't auto-auth as 'test4'

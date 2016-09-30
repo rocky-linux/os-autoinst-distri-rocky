@@ -52,7 +52,7 @@ sub run {
     # switch to tty4 (boy, the tty jugglin')
     send_key "ctrl-alt-f4";
     # try and login as test3, should work
-    $self->console_login(user=>'test3@DOMAIN.LOCAL', password=>'batterystaple');
+    console_login(user=>'test3@DOMAIN.LOCAL', password=>'batterystaple');
     type_string "exit\n";
     # try and login as test4, should fail. we cannot use console_login
     # as it takes 10 seconds to complete when login fails, and

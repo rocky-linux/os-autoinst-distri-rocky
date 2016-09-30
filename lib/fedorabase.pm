@@ -8,84 +8,6 @@ use lockapi;
 
 use testapi;
 
-# this subroutine handles logging in as a root/specified user into console
-# it requires TTY to be already displayed (handled by the root_console() method of subclasses)
-sub console_login {
-    my $self = shift;
-    my %args = (
-        user => "root",
-        password => get_var("ROOT_PASSWORD", "weakpassword"),
-        check => 1,
-        @_);
-
-    # There's a timing problem when we switch from a logged-in console
-    # to a non-logged in console and immediately call this function;
-    # if the switch lags a bit, this function will match one of the
-    # logged-in needles for the console we switched from, and get out
-    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
-    # To avoid this, we'll sleep a couple of seconds before starting
-    sleep 2;
-
-    my $good = "";
-    my $bad = "";
-    my $needuser = 1;
-    my $needpass = 1;
-    if ($args{user} eq "root") {
-        $good = "root_console";
-        $bad = "user_console";
-    }
-    else {
-        $good = "user_console";
-        $bad = "root_console";
-    }
-
-    for my $n (1 .. 10) {
-        # This little loop should handle all possibilities quite
-        # efficiently: already at a prompt (previously logged in, or
-        # anaconda case), only need to enter username (live case),
-        # need to enter both username and password (installed system
-        # case). There are some annoying cases here involving delays
-        # to various commands and the limitations of needles;
-        # text_console_login also matches when the password prompt
-        # is displayed (as the login prompt is still visible), and
-        # both still match after login is complete, unless something
-        # runs 'clear'. The sleeps and $needuser / $needpass attempt
-        # to mitigate these problems.
-        if (check_screen $good, 0) {
-            return;
-        }
-        elsif (check_screen $bad, 0) {
-            # we don't want to 'wait' for this as it won't return
-            script_run "exit", 0;
-            sleep 2;
-        }
-        if ($needuser and check_screen "text_console_login", 0) {
-            type_string "$args{user}\n";
-            $needuser = 0;
-            sleep 2;
-        }
-        elsif ($needpass and check_screen "console_password_required", 0) {
-            type_string "$args{password}";
-            if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
-                # see _do_install_and_reboot; when layout is switched
-                # user password is doubled to contain both US and native
-                # chars
-                $self->console_switch_layout();
-                type_string "$args{password}";
-                $self->console_switch_layout();
-            }
-            send_key "ret";
-            $needpass = 0;
-            # Sometimes login takes a bit of time, so add an extra sleep
-            sleep 2;
-        }
-
-        sleep 1;
-    }
-    # If we got here we failed; if 'check' is set, die.
-    $args{check} && die "Failed to reach console!"
-}
-
 sub do_bootloader {
     # Handle bootloader screen. 'bootloader' is syslinux or grub.
     # 'uefi' is whether this is a UEFI install, will get_var UEFI if
@@ -190,14 +112,6 @@ sub setup_tap_static {
     # bring up network. DEFROUTE is *vital* here
     assert_script_run "printf 'DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes' > /etc/sysconfig/network-scripts/ifcfg-eth0";
     script_run "systemctl restart NetworkManager.service";
-}
-
-sub console_switch_layout {
-    # switcher key combo differs between layouts, for console
-    my $self = shift;
-    if (get_var("LANGUAGE", "") eq "russian") {
-        send_key "ctrl-shift";
-    }
 }
 
 sub get_host_dns {

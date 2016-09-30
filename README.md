@@ -88,8 +88,8 @@ these functions:
 - `anacondatest` should be used in tests where Anaconda is running. It uploads Anaconda logs (for example
 `anaconda.log` or `packaging.log`) in `post_fail_hook()`. It also provides these convenient methods for Anaconda:
     - `root_console()` tries to login is as a root. It decides to what TTY to switch into and then calls `console_login()`
-      for root. If you set `check` argument, it dies if it fails to log in. Example usage:
-      after calling `$self->root_console(check=>1);`, console should be shown with root logged in.
+      for root. Example usage:
+      after calling `$self->root_console();`, console should be shown with root logged in.
     - `select_disks()` handles disk selecting. It have one optional argument - number of disks to select. It should be
       run when main Anaconda hub is displayed. It enters disk selection spoke and then ensures that required number of
       disks are selected. Additionally, if `$PARTITIONING` variable (set in Web UI) starts with `custom_`, it selects
@@ -116,8 +116,8 @@ these functions:
 - `installedtest` should be used in tests that are running on installed system (either in postinstall phase
 or in upgrade tests). It uploads `/var/log` in `post_fail_hook()`. It provides these functions:
     - `root_console()` tries to login is as a root. It switches to TTY that is set as an argument (default is TTY1)
-      and then calls `console_login()` for root. If you set `check` argument, it dies if it fails to log in.
-      Example usage: running `$self->root_console(tty=>2, check=>0);` results in TTY2 displayed with root logged
+      and then calls `console_login()` for root.
+      Example usage: running `$self->root_console(tty=>2);` results in TTY2 displayed with root logged
       in.
     - `check_release()` checks whether the installed release matches a given value. E.g. `check_release(23)`
       checks whether the installed system is Fedora 23. The value can be 'Rawhide' or a Fedora release number;

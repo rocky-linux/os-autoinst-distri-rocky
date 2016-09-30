@@ -13,11 +13,10 @@ sub root_console {
     my $self = shift;
     my %args = (
         tty => 1, # what TTY to login to
-        check => 1, # whether to fail when console wasn't reached
         @_);
 
     send_key "ctrl-alt-f$args{tty}";
-    $self->console_login(check=>$args{check});
+    console_login;
 }
 
 sub post_fail_hook {

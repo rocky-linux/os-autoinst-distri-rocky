@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self = shift;
@@ -58,7 +59,7 @@ sub run {
     assert_screen "text_console_login", 60;
 
     # Try to log in as an user
-    $self->console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
+    console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
 }
 
 

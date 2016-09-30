@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use main_common;
 
 sub run {
     my $self=shift;
@@ -22,7 +23,7 @@ sub run {
     # switch to tty3
     send_key "ctrl-alt-f3";
     # try and login as test1, should work
-    $self->console_login(user=>'test1@DOMAIN.LOCAL', password=>'batterystaple');
+    console_login(user=>'test1@DOMAIN.LOCAL', password=>'batterystaple');
     type_string "exit\n";
     # try and login as test2, should fail. we cannot use console_login
     # as it takes 10 seconds to complete when login fails, and

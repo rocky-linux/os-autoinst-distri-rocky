@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/run_with_error_check check_type_string type_safely type_very_safely desktop_vt boot_to_login_screen/;
+our @EXPORT = qw/run_with_error_check check_type_string type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -83,4 +83,71 @@ sub boot_to_login_screen {
         wait_still_screen 10, 30;
         assert_screen "login_screen";
     }
+}
+
+# Switch keyboard layouts at a console
+sub console_switch_layout {
+    # switcher key combo differs between layouts, for console
+    if (get_var("LANGUAGE", "") eq "russian") {
+        send_key "ctrl-shift";
+    }
+}
+
+# this subroutine handles logging in as a root/specified user into console
+# it requires TTY to be already displayed (handled by the root_console()
+# method of distribution classes)
+sub console_login {
+    my %args = (
+        user => "root",
+        password => get_var("ROOT_PASSWORD", "weakpassword"),
+        @_);
+
+    # There's a timing problem when we switch from a logged-in console
+    # to a non-logged in console and immediately call this function;
+    # if the switch lags a bit, this function will match one of the
+    # logged-in needles for the console we switched from, and get out
+    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
+    # To avoid this, we'll sleep a couple of seconds before starting
+    sleep 2;
+
+    my $good = "";
+    my $bad = "";
+    if ($args{user} eq "root") {
+        $good = "root_console";
+        $bad = "user_console";
+    }
+    else {
+        $good = "user_console";
+        $bad = "root_console";
+    }
+
+    if (check_screen $bad, 0) {
+        # we don't want to 'wait' for this as it won't return
+        script_run "exit", 0;
+        sleep 2;
+    }
+
+    check_screen [$good, 'text_console_login'], 10;
+    # if we're already logged in, all is good
+    return if (match_has_tag $good);
+    # if we see the login prompt, type the username
+    type_string("$args{user}\n") if (match_has_tag 'text_console_login');
+    check_screen [$good, 'console_password_required'], 30;
+    # on a live image, just the user name will be enough
+    return if (match_has_tag $good);
+    # otherwise, type the password if we see the prompt
+    if (match_has_tag 'console_password_required') {
+        type_string "$args{password}";
+        if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
+            # see _do_install_and_reboot; when layout is switched
+            # user password is doubled to contain both US and native
+            # chars
+            console_switch_layout;
+            type_string "$args{password}";
+            console_switch_layout;
+        }
+        send_key "ret";
+    }
+    # make sure we reached the console
+    assert_screen($good, 30);
 }
