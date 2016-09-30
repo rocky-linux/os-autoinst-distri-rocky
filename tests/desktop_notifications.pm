@@ -49,7 +49,7 @@ sub run {
     }
     if (get_var("BOOTFROM")) {
         # we should see an update notification and no others
-        check_screen "desktop_update_notification_only";
+        assert_screen "desktop_update_notification_only";
     }
     else {
         # for the live case there should be *no* notifications
