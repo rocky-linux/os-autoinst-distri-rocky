@@ -155,7 +155,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Atomic-boot-iso",
+                                      flavor  => "Atomic-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "install_default" },
@@ -1416,7 +1416,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "Atomic-boot-iso",
+                      flavor    => "Atomic-dvd_ostree-iso",
                       name      => "",
                       settings  => [
                         { key => "CANNED", value => "1" }
