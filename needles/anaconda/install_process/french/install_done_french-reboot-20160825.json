@@ -3,22 +3,22 @@
         {
             "height": 20,
             "type": "match",
-            "width": 300,
-            "xpos": 718,
+            "width": 400,
+            "xpos": 620,
             "ypos": 632
         },
         {
-            "height": 28,
+            "height": 16,
             "type": "match",
-            "width": 23,
-            "xpos": 1000,
-            "ypos": 678
+            "width": 72,
+            "xpos": 930,
+            "ypos": 683
         }
     ],
     "properties": [],
     "tags": [
         "anaconda_install_done",
         "ENV-DISTRI-fedora",
-        "LANGUAGE-english"
+        "LANGUAGE-french"
     ]
 }
