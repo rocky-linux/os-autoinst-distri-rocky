@@ -71,10 +71,10 @@ sub start_cockpit {
     wait_still_screen 5;
     if ($login) {
         # with cockpit 118, user name field is not highlighted by
-        # default. this will be fixed in 119, so we will need to make
-        # this F25-only when 119 hits Rawhide, then remove it entirely
-        # when 119 goes stable for F25.
-        wait_screen_change { send_key "tab"; };
+        # default. Rawhide has 119 already, where this is fixed.
+        unless (lc(get_var('VERSION')) eq "rawhide") {
+            wait_screen_change { send_key "tab"; };
+        }
 
         type_safely "root";
         wait_screen_change { send_key "tab"; };
