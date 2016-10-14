@@ -38,12 +38,22 @@ sub run {
     # wait out animation
     wait_still_screen 2;
     $self->switch_layout("us") if (get_var("SWITCHED_LAYOUT"));
-    # these screens seems insanely subject to typing errors, so let's
-    # type super safely. Note this doesn't really slow the test down
-    # as we still get done before the install process is complete.
-    type_very_safely $root_password;
-    wait_screen_change { send_key "tab"; };
-    type_very_safely $root_password;
+    if (get_var("IMAGETYPE") eq 'dvd-ostree') {
+        # we can't type SUPER safely for ostree installer tests, as
+        # the install completes quite fast and if we type too slow
+        # the USER CREATION spoke may be blocked
+        type_safely $root_password;
+        wait_screen_change { send_key "tab"; };
+        type_safely $root_password;
+    }
+    else {
+        # these screens seems insanely subject to typing errors, so
+        # type super safely. This doesn't really slow the test down
+        # as we still get done before the install process is complete.
+        type_very_safely $root_password;
+        wait_screen_change { send_key "tab"; };
+        type_very_safely $root_password;
+    }
     assert_and_click "anaconda_spoke_done";
 
     # Set user details
