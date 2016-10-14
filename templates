@@ -447,6 +447,17 @@
                       test_suite => { name => "install_rescue_encrypted" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_rescue_encrypted" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
