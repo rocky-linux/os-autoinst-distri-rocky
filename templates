@@ -1582,6 +1582,8 @@
                         { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "%HDD_2%" },
                         { key => "STORE_HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                        # set kernel arguments for DKB
+                        { key => "APPEND", value => "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0" },
                       ],
                     },
                     {
@@ -2001,6 +2003,8 @@
                         { key => "START_AFTER_TEST", value => "install_arm_image_deployment_upload" },
                         { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                        # set kernel arguments for DKB
+                        { key => "APPEND", value => "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0" },
                       ],
                     },
                     {
