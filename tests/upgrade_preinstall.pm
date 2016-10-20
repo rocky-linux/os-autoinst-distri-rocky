@@ -18,7 +18,7 @@ sub run {
 
     # upgrader should be installed on up-to-date system
     assert_script_run 'dnf -y update', 1800;
-    script_run "reboot";
+    script_run "reboot", 0;
 
     # decrypt if necessary
     if (get_var("ENCRYPT_PASSWORD")) {

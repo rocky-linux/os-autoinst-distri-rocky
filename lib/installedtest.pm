@@ -28,19 +28,19 @@ sub post_fail_hook {
     my $vartmp = script_output "ls /var/tmp/abrt";
     if ($vartmp ne '') {
         # Upload /var/tmp ABRT logs
-        script_run "cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *";
+        script_run "cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *", 0;
         upload_logs "/var/tmp/abrt/tmpabrt.tar.gz";
     }
     my $varspool = script_output "ls /var/spool/abrt";
     if ($varspool ne '') {
         # Upload /var/spool ABRT logs
-        script_run "cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *";
+        script_run "cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *", 0;
         upload_logs "/var/spool/abrt/spoolabrt.tar.gz";
     }
 
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
-    script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log";
+    script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log", 0;
     upload_logs "/tmp/var_log.tar.gz";
 }
 
@@ -90,8 +90,8 @@ sub repo_setup {
     # and we don't want to bother testing or predicting its existence;
     # assert_script_run doesn't buy you much with sed anyway as it'll
     # return 0 even if it replaced nothing
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo";
-    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo";
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
 }
 
 1;

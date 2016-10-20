@@ -13,7 +13,7 @@ our @EXPORT = qw/prepare_test_packages verify_installed_packages verify_updated_
 sub prepare_test_packages {
     # remove python3-kickstart if installed (we don't use assert
     # here in case it's not)
-    script_run 'dnf -y remove python3-kickstart';
+    script_run 'dnf -y remove python3-kickstart', 180;
     # we seem to often lose keystrokes in the next command if we run
     # it too fast, let's wait for idle first
     wait_idle 20;

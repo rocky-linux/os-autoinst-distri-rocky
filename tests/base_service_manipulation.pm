@@ -12,7 +12,7 @@ sub run {
     # to force an expected starting state.
     script_run "systemctl stop sshd.service";
     script_run "systemctl disable sshd.service";
-    script_run "reboot";
+    script_run "reboot", 0;
     boot_to_login_screen;
     $self->root_console(tty=>3);
     # note the use of ! here is a bash-ism, but it sure makes life easier
@@ -31,14 +31,14 @@ sub run {
     assert_script_run 'systemctl is-enabled sshd.service';
     assert_script_run '! systemctl is-active sshd.service';
     assert_script_run '! ps -C sshd';
-    script_run "reboot";
+    script_run "reboot", 0;
     boot_to_login_screen;
     $self->root_console(tty=>3);
     assert_script_run 'systemctl is-enabled sshd.service';
     assert_script_run 'systemctl is-active sshd.service';
     assert_script_run 'ps -C sshd';
     script_run "systemctl disable sshd.service";
-    script_run "reboot";
+    script_run "reboot", 0;
     boot_to_login_screen;
     $self->root_console(tty=>3);
     assert_script_run '! systemctl is-enabled sshd.service';
