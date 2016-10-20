@@ -94,7 +94,7 @@ sub run {
     # check role is stopped
     validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^ready-to-start/ };
     # decommission the role
-    assert_script_run 'rolectl decommission domaincontroller/domain.local', 120;
+    assert_script_run 'rolectl decommission domaincontroller/domain.local', 300;
     # check role is decommissioned
     validate_script_output 'rolectl list instances', sub { $_ eq "" };
 }
