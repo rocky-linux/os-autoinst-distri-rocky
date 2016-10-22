@@ -19,7 +19,7 @@ sub run {
     upload_logs "/var/log/dnf.log";
     upload_logs "/var/log/dnf.rpm.log";
 
-    script_run "dnf system-upgrade reboot";
+    script_run "dnf system-upgrade reboot", 0;
     # fail immediately if we see a DNF error message
     die "DNF reported failure" if (check_screen "upgrade_fail", 15);
     if (get_var("ENCRYPT_PASSWORD")) {
