@@ -371,6 +371,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_notifications_live" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_notifications_postinstall" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
                                       arch    => "x86_64",
