@@ -12,7 +12,7 @@ sub run {
     # properly testing shutdown/reboot/log out from desktops.
     $self->root_console(tty=>3);
     script_run("poweroff", 0);
-    assert_shutdown;
+    assert_shutdown 180;
 }
 
 # this is not 'fatal' or 'important' as all wiki test cases are passed
