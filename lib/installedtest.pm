@@ -24,6 +24,9 @@ sub post_fail_hook {
 
     $self->root_console(tty=>6);
 
+    # We can't rely on tar being in minimal installs
+    assert_script_run "dnf -y install tar", 180;
+
     # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
     my $vartmp = script_output "ls /var/tmp/abrt";
     if ($vartmp ne '') {
