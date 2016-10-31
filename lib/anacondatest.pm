@@ -36,21 +36,24 @@ sub post_fail_hook {
 
     if ($has_traceback) {
         # Upload Anaconda traceback logs
-        script_run "tar czf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*", 0;
+        script_run "tar czf /tmp/anaconda_tb.tar.gz /tmp/anaconda-tb-*";
         upload_logs "/tmp/anaconda_tb.tar.gz";
     }
 
-    # Upload all ABRT logs
-    script_run "tar czf /var/tmp/var_tmp.tar.gz /var/tmp", 0;
-    upload_logs "/var/tmp/var_tmp.tar.gz";
+    # Upload all ABRT logs (if there are any)
+    unless (script_run 'test -n "$(ls -A /var/tmp)" && tar czf /var/tmp/var_tmp.tar.gz /var/tmp') {
+        upload_logs "/var/tmp/var_tmp.tar.gz";
+    }
 
     # Upload /var/log
-    script_run "tar czf /tmp/var_log.tar.gz /var/log", 0;
-    upload_logs "/tmp/var_log.tar.gz";
+    unless (script_run "tar czf /tmp/var_log.tar.gz /var/log") {
+        upload_logs "/tmp/var_log.tar.gz";
+    }
 
     # Upload anaconda core dump, if there is one
-    script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*", 0;
-    upload_logs "/tmp/anaconda.core.tar.gz", failok=>1;
+    unless (script_run "ls /tmp/anaconda.core.* && tar czf /tmp/anaconda.core.tar.gz /tmp/anaconda.core.*") {
+        upload_logs "/tmp/anaconda.core.tar.gz";
+    }
 }
 
 sub root_console {

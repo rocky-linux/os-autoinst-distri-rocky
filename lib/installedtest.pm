@@ -27,24 +27,21 @@ sub post_fail_hook {
     # We can't rely on tar being in minimal installs
     assert_script_run "dnf -y install tar", 180;
 
-    # If /var/tmp/abrt directory isn't empty (ls doesn't return empty string)
-    my $vartmp = script_output "ls /var/tmp/abrt";
-    if ($vartmp ne '') {
-        # Upload /var/tmp ABRT logs
-        script_run "cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *", 0;
+    # Note: script_run returns the exit code, so the logic looks weird.
+    # We're testing that the directory exists and contains something.
+    unless (script_run 'test -n "$(ls -A /var/tmp/abrt)" && cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *') {
         upload_logs "/var/tmp/abrt/tmpabrt.tar.gz";
     }
-    my $varspool = script_output "ls /var/spool/abrt";
-    if ($varspool ne '') {
-        # Upload /var/spool ABRT logs
-        script_run "cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *", 0;
+
+    unless (script_run 'test -n "$(ls -A /var/spool/abrt)" && cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *') {
         upload_logs "/var/spool/abrt/spoolabrt.tar.gz";
     }
 
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
-    script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log", 0;
-    upload_logs "/tmp/var_log.tar.gz";
+    unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
+        upload_logs "/tmp/var_log.tar.gz";
+    }
 }
 
 sub check_release {
