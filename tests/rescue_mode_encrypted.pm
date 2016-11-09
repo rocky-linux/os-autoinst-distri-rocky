@@ -5,16 +5,24 @@ use testapi;
 sub run {
     # handle bootloader screen
     assert_screen "bootloader", 30;
-    # select troubleshooting
-    send_key "down";
-    send_key "ret";
-    # select "rescue system"
-    if (get_var('UEFI')) {
+    if (get_var('OFW')) {
+        # select "rescue system" directly
+        send_key "down";
         send_key "down";
         send_key "ret";
     }
     else {
-        type_string "r\n";
+        # select troubleshooting
+        send_key "down";
+        send_key "ret";
+        # select "rescue system"
+        if (get_var('UEFI')) {
+            send_key "down";
+            send_key "ret";
+        }
+        else {
+            type_string "r\n";
+        }
     }
 
     assert_screen "rescue_select", 120; # it takes time to start anaconda

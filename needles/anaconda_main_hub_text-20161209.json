@@ -1,0 +1,36 @@
+{
+  "tags": [
+    "anaconda_main_hub_text"
+  ],
+  "area": [
+    {
+      "xpos": 2,
+      "height": 10,
+      "width": 304,
+      "ypos": 562,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "ypos": 322,
+      "width": 127,
+      "xpos": 55,
+      "height": 13
+    },
+    {
+      "ypos": 417,
+      "width": 119,
+      "type": "match",
+      "xpos": 8,
+      "height": 13
+    },
+    {
+      "xpos": 584,
+      "ypos": 338,
+      "width": 10,
+      "height": 10,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

@@ -193,10 +193,11 @@ sub do_bootloader {
         first => 1,
         timeout => 30,
         uefi => get_var("UEFI"),
+        ofw => get_var("OFW"),
         @_
     );
-    # if not postinstall and not UEFI, syslinux
-    $args{bootloader} //= ($args{uefi} || $args{postinstall}) ? "grub" : "syslinux";
+    # if not postinstall not UEFI and not ofw, syslinux
+    $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) ? "grub" : "syslinux";
     if ($args{uefi}) {
         # we use the firmware-type specific tags because we want to be
         # sure we actually did a UEFI boot
@@ -229,7 +230,9 @@ sub do_bootloader {
             }
             send_key "end";
         }
-        type_string " $args{params}";
+        # Change type_string by type_safely because keyboard polling
+        # in SLOF usb-xhci driver failed sometimes in powerpc
+        type_safely " $args{params}";
     }
     # ctrl-X boots from grub editor mode
     send_key "ctrl-x";
