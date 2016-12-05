@@ -1,29 +1,29 @@
 {
-  "tags": [
-    "anaconda_main_hub_text"
-  ],
   "area": [
     {
-      "type": "match",
-      "ypos": 338,
       "height": 12,
       "width": 96,
+      "type": "match",
+      "ypos": 386,
       "xpos": 1
     },
     {
       "type": "match",
-      "ypos": 498,
       "height": 13,
-      "width": 127,
-      "xpos": 71
+      "width": 128,
+      "xpos": 55,
+      "ypos": 322
     },
     {
-      "xpos": 8,
-      "ypos": 369,
+      "type": "match",
       "width": 119,
       "height": 13,
-      "type": "match"
+      "xpos": 8,
+      "ypos": 417
     }
   ],
-  "properties": []
+  "properties": [],
+  "tags": [
+    "anaconda_main_hub_text"
+  ]
 }
