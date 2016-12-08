@@ -24,10 +24,6 @@ sub run {
     }
     if (get_var("ROOT_PASSWORD")) {
         console_login(user=>"root", password=>get_var("ROOT_PASSWORD"));
-        # if this is a non-English, non-switched layout, load US layout
-        # at this point as we've already checked the default layout is
-        # the native one, and we might want to run other commands now
-        console_loadkeys_us;
     }
 }
 
