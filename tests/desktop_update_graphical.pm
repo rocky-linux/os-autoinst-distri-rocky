@@ -40,7 +40,7 @@ sub run {
     }
     assert_and_click 'desktop_package_tool_update';
     # refresh updates
-    assert_and_click 'desktop_package_tool_update_refresh';
+    assert_and_click 'desktop_package_tool_update_refresh', '', 120;
     # wait for refresh, then apply updates
     for my $n (1..5) {
         last if (check_screen 'desktop_package_tool_update_apply', 120);
