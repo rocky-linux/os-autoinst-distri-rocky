@@ -204,8 +204,14 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/uefi_postinstall.pm";
     }
 
-    # console avc / crash check (desktops have specific tests for this)
-    if (!get_var("DESKTOP")) {
+    # console avc / crash check
+    # it makes no sense to run this after logging in on most post-
+    # install tests (hence ! BOOTFROM) but we *do* want to run it on
+    # upgrade tests after upgrading (hence UPGRADE)
+    # desktops have specific tests for this (hence !DESKTOP). For
+    # desktop upgrades we should really upload a disk image at the end
+    # of upgrade and run all the desktop post-install tests on that
+    if (!get_var("DESKTOP") && (!get_var("BOOTFROM") || get_var("UPGRADE"))) {
         autotest::loadtest "tests/_console_avc_crash.pm";
     }
 

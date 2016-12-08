@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout console_loadkeys_us/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -132,4 +132,11 @@ sub console_login {
     }
     # make sure we reached the console
     assert_screen($good, 30);
+}
+
+# load US layout (from a root console)
+sub console_loadkeys_us {
+    if (get_var('LANGUAGE') eq 'french') {
+        script_run "loqdkeys us", 0;
+    }
 }
