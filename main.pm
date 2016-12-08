@@ -204,6 +204,11 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/uefi_postinstall.pm";
     }
 
+    # console avc / crash check (desktops have specific tests for this)
+    if (!get_var("DESKTOP")) {
+        autotest::loadtest "tests/_console_avc_crash.pm";
+    }
+
     # generic post-install test load
     if (get_var("POSTINSTALL")) {
         my @pis = split(/ /, get_var("POSTINSTALL"));
