@@ -1,5 +1,6 @@
 use base "installedtest";
 use strict;
+use main_common;
 use testapi;
 
 sub run {
