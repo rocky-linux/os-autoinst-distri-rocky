@@ -447,6 +447,17 @@
                       test_suite => { name => "install_rescue_encrypted" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_rescue_encrypted" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 10,
                       product    => {
@@ -1586,6 +1597,7 @@
                     {
                       name => "install_rescue_encrypted",
                       settings => [
+                        { key => "BOOTFROM", value => "d" },
                         { key => "ENTRYPOINT", value => "rescue_mode_encrypted" },
                         { key => "HDD_1", value => "disk_%MACHINE%_encrypted.qcow2" },
                         { key => "START_AFTER_TEST", value => "install_simple_encrypted" },

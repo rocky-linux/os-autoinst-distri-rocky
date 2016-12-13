@@ -9,7 +9,13 @@ sub run {
     send_key "down";
     send_key "ret";
     # select "rescue system"
-    type_string "r\n";
+    if (get_var('UEFI')) {
+        send_key "down";
+        send_key "ret";
+    }
+    else {
+        type_string "r\n";
+    }
 
     assert_screen "rescue_select", 120; # it takes time to start anaconda
     # continue
