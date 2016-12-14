@@ -54,6 +54,9 @@ sub run {
     assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)' > /etc/exports";
     # open firewall port
     assert_script_run "firewall-cmd --add-service=nfs";
+    # workaround RHBZ #1402427: somehow the file is incorrectly labelled
+    # even after a clean install with fixed selinux-policy
+    assert_script_run "restorecon /usr/bin/rpcbind";
     # start the server
     assert_script_run "systemctl restart nfs-server.service";
     assert_script_run "systemctl is-active nfs-server.service";
