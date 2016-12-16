@@ -82,10 +82,11 @@ sub start_cockpit {
 }
 
 sub repo_setup {
-    # disable updates-testing and use the compose location rather than
-    # mirrorlist, so we're testing the right packages
+    # disable updates-testing and updates and use the compose location
+    # as the target for fedora and rawhide rather than mirrorlist, so
+    # tools see only packages from the compose under test
     my $location = get_var("LOCATION");
-    assert_script_run 'dnf config-manager --set-disabled updates-testing';
+    assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
     # we use script_run here as the rawhide repo file won't always exist
     # and we don't want to bother testing or predicting its existence;
     # assert_script_run doesn't buy you much with sed anyway as it'll
