@@ -9,9 +9,9 @@ sub type_user_password {
     if (get_var("SWITCHED_LAYOUT")) {
         # we double the password, the second time using the native
         # layout, so the password has both US and native characters
-        $self->switch_layout("us");
+        desktop_switch_layout "us", "anaconda";
         type_very_safely $user_password;
-        $self->switch_layout("native");
+        desktop_switch_layout "native", "anaconda";
         type_very_safely $user_password;
     }
     else {
@@ -37,7 +37,7 @@ sub run {
     assert_screen "anaconda_install_root_password_screen";
     # wait out animation
     wait_still_screen 2;
-    $self->switch_layout("us") if (get_var("SWITCHED_LAYOUT"));
+    desktop_switch_layout("us", "anaconda") if (get_var("SWITCHED_LAYOUT"));
     if (get_var("IMAGETYPE") eq 'dvd-ostree') {
         # we can't type SUPER safely for ostree installer tests, as
         # the install completes quite fast and if we type too slow

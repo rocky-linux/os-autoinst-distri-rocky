@@ -1,0 +1,24 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 6,
+      "width": 62,
+      "xpos": 10,
+      "height": 15
+    },
+    {
+      "ypos": 4,
+      "width": 43,
+      "type": "match",
+      "xpos": 968,
+      "height": 18
+    }
+  ],
+  "tags": [
+    "DESKTOP-gnome",
+    "LANGUAGE-french",
+    "graphical_desktop_clean"
+  ],
+  "properties": []
+}

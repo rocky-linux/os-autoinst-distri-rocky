@@ -16,14 +16,14 @@ sub run {
     # type password for disk encryption
     wait_idle 5;
     if (get_var("SWITCHED_LAYOUT")) {
-        $self->switch_layout("us");
+        desktop_switch_layout "us", "anaconda";
     }
     type_safely get_var("ENCRYPT_PASSWORD");
     wait_screen_change { send_key "tab"; };
     type_safely get_var("ENCRYPT_PASSWORD");
     if (get_var("SWITCHED_LAYOUT")) {
         # work around RHBZ #1333984
-        $self->switch_layout("native");
+        desktop_switch_layout "native", "anaconda";
     }
 
     assert_and_click "anaconda_install_destination_save_passphrase";

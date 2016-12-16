@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout console_loadkeys_us/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -73,6 +73,23 @@ sub console_switch_layout {
     if (get_var("LANGUAGE", "") eq "russian") {
         send_key "ctrl-shift";
     }
+}
+
+# switch to 'native' or 'us' keyboard layout in a graphical desktop
+# 'environment' can be a desktop name or 'anaconda' for anaconda
+# if not set, will use get_var('DESKTOP') or default 'anaconda'
+sub desktop_switch_layout {
+    my ($layout, $environment) = @_;
+    $layout //= 'us';
+    $environment //= get_var("DESKTOP", "anaconda");
+    # if already selected, we're good
+    return if (check_screen "${environment}_layout_${layout}", 3);
+    # otherwise we need to switch
+    my $switcher = "alt-shift";  # anaconda
+    $switcher = "super-spc" if $environment eq 'gnome';
+    # KDE? not used yet
+    send_key $switcher;
+    assert_screen "${environment}_layout_${layout}", 3;
 }
 
 # this subroutine handles logging in as a root/specified user into console

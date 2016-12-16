@@ -1933,19 +1933,27 @@
                       name => "install_european_language",
                       settings => [
                         { key => "LANGUAGE", value => "french" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "PACKAGE_SET", value => "workstation" },
                         { key => "USER_LOGIN", value => "qwerty" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "POSTINSTALL", value => "_console_login" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                       ],
                     },
                     {
                       name => "install_cyrillic_language",
                       settings => [
                         { key => "LANGUAGE", value => "russian" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "PACKAGE_SET", value => "workstation" },
                         { key => "SWITCHED_LAYOUT", value => "1" },
                         { key => "USER_LOGIN", value => "qwerty" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "POSTINSTALL", value => "_console_login" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                       ],
                     },
                     {

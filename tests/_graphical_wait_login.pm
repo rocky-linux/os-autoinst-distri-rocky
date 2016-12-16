@@ -22,7 +22,19 @@ sub run {
             send_key "ret";
         }
         assert_screen "graphical_login_input";
-        type_very_safely get_var("USER_PASSWORD", "weakpassword");
+        my $password = get_var("USER_PASSWORD", "weakpassword");
+        if (get_var("SWITCHED_LAYOUT")) {
+            # see _do_install_and_reboot; when layout is switched
+            # user password is doubled to contain both US and native
+            # chars
+            desktop_switch_layout 'us';
+            type_very_safely $password;
+            desktop_switch_layout 'native';
+            type_very_safely $password;
+        }
+        else {
+            type_very_safely $password;
+        }
         send_key "ret";
 
         # Handle initial-setup, for GNOME, unless START_AFTER_TEST
@@ -52,6 +64,11 @@ sub run {
         mouse_set(300, 200);
         # KDE can take ages to start up
         assert_screen "graphical_desktop_clean", 120;
+        if (get_var("SWITCHED_LAYOUT")) {
+            # check both layouts are available at the desktop
+            desktop_switch_layout 'us';
+            desktop_switch_layout 'native';
+        }
     }
 }
 
