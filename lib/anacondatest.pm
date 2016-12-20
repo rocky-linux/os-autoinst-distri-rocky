@@ -110,7 +110,9 @@ sub select_disks {
     if (%iscsi) {
         assert_and_click "anaconda_install_destination_add_network_disk";
         foreach my $target (keys %iscsi) {
-            my $ip = $iscsi{$target};
+            my $ip = $iscsi{$target}->[0];
+            my $user = $iscsi{$target}->[1];
+            my $password = $iscsi{$target}->[2];
             assert_and_click "anaconda_install_destination_add_iscsi_target";
             wait_still_screen 2;
             type_safely $ip;
@@ -118,6 +120,14 @@ sub select_disks {
             type_safely $target;
             # start discovery - three tabs, enter
             type_safely "\t\t\t\n";
+            if ($user && $password) {
+                assert_and_click "anaconda_install_destination_target_auth_type";
+                assert_and_click "anaconda_install_destination_target_auth_type_chap";
+                send_key "tab";
+                type_safely $user;
+                send_key "tab";
+                type_safely $password;
+            }
             assert_and_click "anaconda_install_destination_target_login";
             assert_and_click "anaconda_install_destination_select_target";
         }

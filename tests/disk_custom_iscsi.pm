@@ -6,7 +6,7 @@ sub run {
     my $self = shift;
     # iscsi config hash
     my %iscsi;
-    $iscsi{'iqn.2016-06.local.domain:support.target1'} = '10.0.2.110';
+    $iscsi{'iqn.2016-06.local.domain:support.target1'} = ['10.0.2.110', 'test', 'weakpassword'];
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one regular disk
     # and the iscsi target are selected.
