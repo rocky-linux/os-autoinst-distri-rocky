@@ -16,7 +16,7 @@ sub run {
     # type password for disk encryption
     wait_idle 5;
     if (get_var("SWITCHED_LAYOUT")) {
-        desktop_switch_layout "us", "anaconda";
+        desktop_switch_layout "ascii", "anaconda";
     }
     type_safely get_var("ENCRYPT_PASSWORD");
     wait_screen_change { send_key "tab"; };

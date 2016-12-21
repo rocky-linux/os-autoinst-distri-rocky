@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_select_install_lang_selected"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "xpos": 608,
+      "ypos": 201,
+      "width": 93,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

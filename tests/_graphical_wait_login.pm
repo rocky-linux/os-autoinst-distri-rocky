@@ -27,7 +27,7 @@ sub run {
             # see _do_install_and_reboot; when layout is switched
             # user password is doubled to contain both US and native
             # chars
-            desktop_switch_layout 'us';
+            desktop_switch_layout 'ascii';
             type_very_safely $password;
             desktop_switch_layout 'native';
             type_very_safely $password;
@@ -49,6 +49,14 @@ sub run {
                 # to the next screen between clicks
                 mouse_set(100, 100);
                 wait_screen_change { assert_and_click "next_button"; };
+                # for Japanese, we need to workaround a bug on the keyboard
+                # selection screen
+                if ($n == 1 && get_var("LANGUAGE") eq 'japanese') {
+                    if (!check_screen 'initial_setup_kana_kanji_selected', 5) {
+                        record_soft_failure 'kana kanji not selected: bgo#776189';
+                        assert_and_click 'initial_setup_kana_kanji';
+                    }
+                }
             }
             # click 'Skip' one time
             mouse_set(100,100);
@@ -64,11 +72,6 @@ sub run {
         mouse_set(300, 200);
         # KDE can take ages to start up
         assert_screen "graphical_desktop_clean", 120;
-        if (get_var("SWITCHED_LAYOUT")) {
-            # check both layouts are available at the desktop
-            desktop_switch_layout 'us';
-            desktop_switch_layout 'native';
-        }
     }
 }
 

@@ -1,15 +1,15 @@
 {
     "area": [
         {
-            "height": 13,
+            "height": 15,
             "type": "match",
             "width": 33,
             "xpos": 853,
-            "ypos": 7
+            "ypos": 5
         }
     ],
     "tags": [
-        "gnome_layout_us",
-        "gnome_layout_ascii"
+        "gnome_layout_native",
+        "LANGUAGE-japanese"
     ]
 }

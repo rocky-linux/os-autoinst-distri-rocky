@@ -75,12 +75,17 @@ sub console_switch_layout {
     }
 }
 
-# switch to 'native' or 'us' keyboard layout in a graphical desktop
+# switch to 'native' or 'ascii' input method in a graphical desktop
+# usually switched configs have one mode for inputting ascii-ish
+# characters (which may be 'us' keyboard layout, or a local layout for
+# inputting ascii like 'jp') and one mode for inputting native
+# characters (which may be another keyboard layout, like 'ru', or an
+# input method for more complex languages)
 # 'environment' can be a desktop name or 'anaconda' for anaconda
 # if not set, will use get_var('DESKTOP') or default 'anaconda'
 sub desktop_switch_layout {
     my ($layout, $environment) = @_;
-    $layout //= 'us';
+    $layout //= 'ascii';
     $environment //= get_var("DESKTOP", "anaconda");
     # if already selected, we're good
     return if (check_screen "${environment}_layout_${layout}", 3);

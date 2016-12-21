@@ -183,7 +183,11 @@ sub load_postinstall_tests() {
     if (get_var("DESKTOP")) {
         autotest::loadtest "tests/_graphical_wait_login.pm";
     }
-    else {
+    # Test non-US input at this point, on language tests
+    if (get_var("SWITCHED_LAYOUT") || get_var("INPUT_METHOD")) {
+        autotest::loadtest "tests/_graphical_input.pm";
+    }
+    unless (get_var("DESKTOP")) {
         autotest::loadtest "tests/_console_wait_login.pm";
     }
 

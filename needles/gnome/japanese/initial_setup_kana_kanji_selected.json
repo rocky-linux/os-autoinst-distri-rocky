@@ -1,0 +1,15 @@
+{
+    "area": [
+        {
+            "height": 15,
+            "type": "match",
+            "width": 396,
+            "xpos": 266,
+            "ypos": 315
+        }
+    ],
+    "tags": [
+        "initial_setup_kana_kanji_selected",
+        "LANGUAGE-japanese"
+    ]
+}
