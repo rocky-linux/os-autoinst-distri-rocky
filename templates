@@ -1354,7 +1354,7 @@
                       backend   => "qemu",
                       name      => "64bit",
                       settings  => [
-                        { key => "QEMUCPU", value => "host" },
+                        { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "qxl"},
                         { key => "QEMURAM", value => "2048"},
@@ -1365,7 +1365,7 @@
                       backend   => "qemu",
                       name      => "uefi",
                       settings  => [
-                        { key => "QEMUCPU", value => "host" },
+                        { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "qxl"},
                         { key => "QEMURAM", value => "2048"},
