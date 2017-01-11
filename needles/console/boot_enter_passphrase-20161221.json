@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "boot_enter_passphrase"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "width": 207,
+      "type": "match",
+      "height": 31,
+      "xpos": 0,
+      "ypos": 169
+    }
+  ]
+}
