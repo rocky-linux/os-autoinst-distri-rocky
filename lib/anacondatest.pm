@@ -57,6 +57,7 @@ sub post_fail_hook {
 }
 
 sub root_console {
+    # Switch to an appropriate TTY and log in as root.
     my $self = shift;
     my %args = (
         @_);
@@ -74,6 +75,15 @@ sub root_console {
 }
 
 sub select_disks {
+    # Handles disk selection. Has one optional argument - number of
+    # disks to select. Should be run when main Anaconda hub is
+    # displayed. Enters disk selection spoke and then ensures that
+    # required number of disks are selected. Additionally, if
+    # PARTITIONING variable starts with custom_, selects "custom
+    # partitioning" checkbox. Example usage:
+    # after calling `$self->select_disks(2);` from Anaconda main hub,
+    # installation destination spoke will be displayed and two
+    # attached disks will be selected for installation.
     my $self = shift;
     my %args = (
         disks => 1,
@@ -141,6 +151,12 @@ sub select_disks {
 }
 
 sub custom_scheme_select {
+    # Used for setting custom partitioning scheme (such as LVM).
+    # Should be called when custom partitioning spoke is displayed.
+    # Pass the name of the partitioning scheme. Needle
+    # `anaconda_part_scheme_$scheme` should exist. Example usage:
+    # `$self->custom_scheme_select("btrfs");` uses needle
+    # `anaconda_part_scheme_btrfs` to set partition scheme to Btrfs.
     my ($self, $scheme) = @_;
     assert_and_click "anaconda_part_scheme";
     # Move the mouse away from the menu
@@ -149,6 +165,14 @@ sub custom_scheme_select {
 }
 
 sub custom_change_type {
+    # Used to set different device types for specified partition (e.g.
+    # RAID). Should be called when custom partitioning spoke is
+    # displayed. Pass it type of partition and name of partition.
+    # Needles `anaconda_part_select_$part` and
+    # `anaconda_part_device_type_$type` should exist. Example usage:
+    # `$self->custom_change_type("raid", "root");` uses
+    # `anaconda_part_select_root` and `anaconda_part_device_type_raid`
+    # needles to set RAID for root partition.
     my ($self, $type, $part) = @_;
     $part ||= "root";
     assert_and_click "anaconda_part_select_$part";
@@ -160,6 +184,14 @@ sub custom_change_type {
 }
 
 sub custom_change_fs {
+    # Used to set different file systems for specified partition.
+    # Should be called when custom partitioning spoke is displayed.
+    # Pass filesystem name and name of partition. Needles
+    # `anaconda_part_select_$part` and `anaconda_part_fs_$fs` should
+    # exist. Example usage:
+    # `$self->custom_change_fs("ext3", "root");` uses
+    # `anaconda_part_select_root` and `anaconda_part_fs_ext3` needles
+    # to set ext3 file system for root partition.
     my ($self, $fs, $part) = @_;
     $part ||= "root";
     assert_and_click "anaconda_part_select_$part";
@@ -184,6 +216,13 @@ sub custom_change_device {
 }
 
 sub custom_delete_part {
+    # Used for deletion of previously added partitions in custom
+    # partitioning spoke. Should be called when custom partitioning
+    # spoke is displayed. Pass the partition name. Needle
+    # `anaconda_part_select_$part` should exist. Example usage:
+    # `$self->custom_delete_part('swap');` uses
+    # `anaconda_part_select_swap` to delete previously added swap
+    # partition.
     my ($self, $part) = @_;
     return if not $part;
     assert_and_click "anaconda_part_select_$part";

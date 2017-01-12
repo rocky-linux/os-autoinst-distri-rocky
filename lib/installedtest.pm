@@ -10,6 +10,7 @@ use testapi;
 use main_common;
 
 sub root_console {
+    # Switch to a default or specified TTY and log in as root.
     my $self = shift;
     my %args = (
         tty => 1, # what TTY to login to
@@ -45,6 +46,11 @@ sub post_fail_hook {
 }
 
 sub check_release {
+    # Checks whether the installed release matches a given value. E.g.
+    # `check_release(23)` checks whether the installed system is
+    # Fedora 23. The value can be 'Rawhide' or a Fedora release
+    # number; often you will want to use `get_var('VERSION')`. Expects
+    # a console prompt to be active when it is called.
     my $self = shift;
     my $release = shift;
     my $check_command = "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora";
@@ -52,6 +58,9 @@ sub check_release {
 }
 
 sub menu_launch_type {
+    # Launch an application in a graphical environment, by opening a
+    # launcher, typing the specified string and hitting enter. Pass
+    # the string to be typed to launch whatever it is you want.
     my $self = shift;
     my $app = shift;
     # super does not work on KDE, because fml
@@ -63,6 +72,9 @@ sub menu_launch_type {
 }
 
 sub start_cockpit {
+    # Starting from a console, get to a browser with Cockpit (running
+    # on localhost) shown. If $login is truth-y, also log in. Assumes
+    # X and Firefox are installed.
     my $self = shift;
     my $login = shift || 0;
     # run firefox directly in X as root. never do this, kids!
