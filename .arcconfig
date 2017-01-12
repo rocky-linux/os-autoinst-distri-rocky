@@ -1,6 +1,6 @@
 {
     "project_id" : "openqa_fedora",
     "conduit_uri" : "https://phab.qa.fedoraproject.org",
-    "arc.land.onto.default" : "develop",
-    "arc.feature.start.default" : "develop"
+    "arc.land.onto.default" : "master",
+    "arc.feature.start.default" : "master"
 }
