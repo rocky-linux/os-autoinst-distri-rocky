@@ -3,6 +3,11 @@ openQA tests for the Fedora distribution
 
 This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). For additional tools, Installation Guide and Docker images, see [this repository](https://bitbucket.org/rajcze/openqa_fedora_tools).
 
+Issues
+------
+
+For the present, issues (and pull requests) are tracked in [Phabricator](https://phab.qa.fedoraproject.org/). You can open issues against the openqa_fedora project there.
+
 Test development
 ----------------
 See official documentation on:
@@ -15,6 +20,7 @@ See official documentation on:
 See [this example repo](https://github.com/os-autoinst/os-autoinst-distri-example) on how tests should be structured.
 
 ### main.pm modular architecture
+
 Since openQA uses only one entrypoint for all tests (main.pm), we have decided to utilize this feature and make tests modular. It means that basic passing through main.pm (without any variables set) results in most basic installation test executed. Developer can customize it with additional variables (for example by setting `PACKAGE_SET=minimal` to do installation only with minimal package set).
 
 Make your test modular, so that it utilizes `_boot_to_anaconda.pm`, `_software_selection.pm` and `_do_install_and_reboot.pm` tests (that are loaded automatically). Break your test into smaller parts, each dealing with one specific feature (e. g. partitioning, user creation...) and add their loading into main.pm based on reasonable variable setting (so they can be used in other tests also).
@@ -74,7 +80,7 @@ and `test_flags()` method, inheriting from one of the classes mentioned above.
 7. Add new Job template and Test suite into `templates` file.
 8. Add new Test suite and Test case into [`conf_test_suites.py`](https://bitbucket.org/rajcze/openqa_fedora_tools/src/develop/tools/openqa_trigger/conf_test_suites.py)
 file in openqa_fedora_tools repository.
-9. Open pull request in [Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora).
+9. Open differential request via phabricator, set openqa_fedora as a project and repository.
 10. Mark your test in [phabricator page](https://phab.qa.fedoraproject.org/w/openqa/tests/) as done.
 
 ### Language handling
