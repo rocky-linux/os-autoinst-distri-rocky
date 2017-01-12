@@ -9,15 +9,16 @@ sub run {
     # dump the systemctl output
     assert_script_run "systemctl --failed | tee /tmp/failed.txt";
     # if we have 0 failed services, we're good
-    eval "assert_script_run 'grep \"0 loaded units\" /tmp/failed.txt';";
-    return unless $@;
+    my $ret = script_run "grep '0 loaded units' /tmp/failed.txt";
+    return if $ret == 0;
     # if only mcelog failed, that's a soft fail
-    eval "assert_script_run 'grep \"1 loaded units\" /tmp/failed.txt';";
-    if ($@) {
-	die "More than one services failed to start";
+    $ret = script_run "grep '1 loaded units' /tmp/failed.txt";
+    if ($ret != 0) {
+        die "More than one services failed to start";
     }
     else {
-	assert_script_run "systemctl is-failed mcelog.service";
+        # fail if it's something other than mcelog
+        assert_script_run "systemctl is-failed mcelog.service";
         record_soft_failure;
     }
 }
