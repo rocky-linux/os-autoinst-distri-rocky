@@ -6,7 +6,7 @@ This repository contains tests and images for testing [Fedora](https://getfedora
 Issues
 ------
 
-For the present, issues (and pull requests) are tracked in [Phabricator](https://phab.qa.fedoraproject.org/). You can open issues against the openqa_fedora project there.
+For the present, issues (and pull requests) are tracked in [Phabricator](https://phab.qa.fedoraproject.org/). You can open issues against the `openqa_fedora` project [here](https://phab.qa.fedoraproject.org/maniphest/task/edit/form/default/?tags=openqa_fedora).
 
 Test development
 ----------------
