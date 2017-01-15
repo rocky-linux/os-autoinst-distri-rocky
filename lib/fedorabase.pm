@@ -88,7 +88,9 @@ sub clone_host_file {
     while (<$fh>) {
         $text .= $_;
     }
-    assert_script_run "printf '$text' > $file";
+    # escape any ' characters in the text...
+    $text =~ s/"/\\"/g;
+    assert_script_run "printf \"$text\" > $file";
     # for debugging...
     assert_script_run "cat $file";
 }
