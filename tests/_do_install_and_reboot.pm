@@ -104,12 +104,15 @@ sub run {
     assert_screen "anaconda_install_done", $timeout;
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
-    assert_and_click "anaconda_install_done";
-    if (get_var('LIVE')) {
-        # reboot from a console, it's more reliable than the desktop
-        # runners
-        $self->root_console;
-        type_string "reboot\n";
+    # for the memory check test, we *don't* want to leave
+    unless (get_var("MEMCHECK")) {
+        assert_and_click "anaconda_install_done";
+        if (get_var('LIVE')) {
+            # reboot from a console, it's more reliable than the desktop
+            # runners
+            $self->root_console;
+            type_string "reboot\n";
+        }
     }
 }
 

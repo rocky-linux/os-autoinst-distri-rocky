@@ -117,6 +117,28 @@
                       test_suite => { name => "install_default" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      prio       => 100,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-boot-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "memory_check" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 100,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-boot-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "memory_check" },
+                    },
+                    {
                       machine    => { name => "uefi" },
                       prio       => 16,
                       product    => {
@@ -1240,6 +1262,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 100,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-boot-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "memory_check" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 17,
                       product    => {
                                       arch    => "i386",
@@ -2303,6 +2336,14 @@
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "memory_check",
+                      settings => [
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "MEMCHECK", value => "1" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                       ],
                     },
                   ],

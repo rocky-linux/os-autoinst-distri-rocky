@@ -17,7 +17,9 @@ sub run {
     if ($repourl) {
         $params .= "inst.repo=" . $self->get_full_repo($repourl) . " ";
     }
-    $params .= "inst.text" if get_var("ANACONDA_TEXT");
+    $params .= "inst.text " if get_var("ANACONDA_TEXT");
+    # inst.debug enables memory use tracking
+    $params .= "debug" if get_var("MEMCHECK");
     # ternary: set $params to "" if it contains only spaces
     $params = $params =~ /^\s+$/ ? "" : $params;
 

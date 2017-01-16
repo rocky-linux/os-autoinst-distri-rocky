@@ -173,6 +173,13 @@ sub load_install_tests() {
 }
 
 sub load_postinstall_tests() {
+    # special case for the memory check test, as it doesn't need to boot
+    # the installed system: just load its test and return
+    if (get_var("MEMCHECK")) {
+        autotest::loadtest "tests/_memcheck.pm";
+        return;
+    }
+
     # Unlock encrypted storage volumes, if necessary. The test name here
     # follows the 'storage post-install' convention, but must be run earlier.
     if (get_var("ENCRYPT_PASSWORD")) {
