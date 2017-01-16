@@ -664,6 +664,28 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_sata" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 21,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_sata" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_kickstart_user_creation" },
                     },
                     {
@@ -1655,6 +1677,13 @@
                         { key => "PARTITIONING", value => "guided_delete_all" },
                         { key => "HDDMODEL", value => "ide-hd" },
                         { key => "HDD_1", value => "disk_full_mbr.img" },
+                      ],
+                    },
+                    {
+                      name => "install_sata",
+                      settings => [
+                        { key => "HDDMODEL", value => "ide-drive" },
+                        { key => "ATACONTROLLER", value => "ich9-ahci" },
                       ],
                     },
                     {
