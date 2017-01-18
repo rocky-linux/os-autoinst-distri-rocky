@@ -71,8 +71,10 @@ sub run {
     wait_still_screen 2;
     $self->type_user_password();
     # even with all our slow typing this still *sometimes* seems to
-    # miss a character, so let's try again if we have a warning bar
-    if (check_screen "anaconda_warning_bar", 3) {
+    # miss a character, so let's try again if we have a warning bar.
+    # But not if we're installing with a switched layout, as those
+    # will *always* result in a warning bar at this point (see below)
+    if (!get_var("SWITCHED_LAYOUT") && check_screen "anaconda_warning_bar", 3) {
         wait_screen_change { send_key "shift-tab"; };
         wait_still_screen 2;
         $self->type_user_password();
@@ -82,6 +84,13 @@ sub run {
     }
     assert_and_click "anaconda_install_user_creation_make_admin";
     assert_and_click "anaconda_spoke_done";
+    # since 20170105, we will get a warning here when the password
+    # contains non-ASCII characters. Assume only switched layouts
+    # produce non-ASCII characters, though this isn't strictly true
+    if (get_var('SWITCHED_LAYOUT') && check_screen "anaconda_warning_bar", 3) {
+        wait_still_screen 1;
+        assert_and_click "anaconda_spoke_done";
+    }
 
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
