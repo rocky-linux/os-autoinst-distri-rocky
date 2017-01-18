@@ -1,7 +1,8 @@
 use base "anacondatest";
 use strict;
 use testapi;
-use main_common;
+use utils;
+use anaconda;
 
 sub run {
     my $self = shift;
@@ -15,7 +16,7 @@ sub run {
     # Construct inst.repo arg for REPOSITORY_VARIATION
     my $repourl = get_var("REPOSITORY_VARIATION");
     if ($repourl) {
-        $params .= "inst.repo=" . $self->get_full_repo($repourl) . " ";
+        $params .= "inst.repo=" . get_full_repo($repourl) . " ";
     }
     $params .= "inst.text " if get_var("ANACONDA_TEXT");
     # inst.debug enables memory use tracking
@@ -27,7 +28,7 @@ sub run {
     my $mutex = get_var("INSTALL_UNLOCK");
 
     # call do_bootloader with postinstall=0, the params, and the mutex
-    $self->do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
+    do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
 
     # proceed to installer
     if (get_var("KICKSTART")) {

@@ -59,14 +59,13 @@ After installation is finished and installed system is fully booted, you can run
 
 ### Test inheritance
 
-Your test can inherit from `basetest`, `fedorabase`, `installedtest` or `anacondatest`. Each provides relevant methods that are documented in-line, so read the files (`lib/basetest.pm`, `lib/fedorabase.pm` etc.) for information on these.
+Your test can inherit from `basetest`, `installedtest` or `anacondatest`. Each provides relevant methods that are documented in-line, so read the files (`lib/anacondatest.pm`, `lib/installedtest.pm`) for information on these.
 
 - `basetest`: A base class provided by os-autoinst - it has empty `post_fail_hook()` and doesn't set any flags.
-- `fedorabase`: doesn't set flags and does nothing in `post_fail_hook()`, but provides some basic methods that will be useful during testing Fedora. It should be used when no other, more specific class can be used.
 - `anacondatest`: should be used in tests where Anaconda is running. It uploads Anaconda logs (for example `anaconda.log` or `packaging.log`) in `post_fail_hook()`.
 - `installedtest`: should be used in tests that are running on installed system (either in postinstall phase or in upgrade tests).
 
-There are also several modules that export utility functions, currently `main_common`, `freeipa`, and `packagetest`. Your test can `use` any of these modules and then directly call the functions they export. Again, the functions are documented in-line.
+There are also several modules that export utility functions, currently `utils`, `anaconda`, `freeipa`, `packagetest` and `tapnet`. Your test can `use` any of these modules and then directly call the functions they export. Again, the functions are documented in-line.
 
 ### New test development workflow
 

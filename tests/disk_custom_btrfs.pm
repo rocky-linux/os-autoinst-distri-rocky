@@ -1,17 +1,18 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
     # Go to INSTALLATION DESTINATION and ensure the disk is selected.
     # Because PARTITIONING starts with 'custom_', this will select custom.
-    $self->select_disks();
+    select_disks();
     assert_and_click "anaconda_spoke_done";
 
     # Manual partitioning spoke should be displayed. Select BTRFS
     # partitioning scheme
-    $self->custom_scheme_select("btrfs");
+    custom_scheme_select("btrfs");
     assert_and_click "anaconda_part_automatic";
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";

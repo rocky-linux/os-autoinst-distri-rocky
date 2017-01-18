@@ -1,7 +1,7 @@
-use base "fedorabase";
+use base "basetest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 
 sub run {
     my $self = shift;
@@ -11,7 +11,7 @@ sub run {
 
     # handle bootloader, if requested
     if (get_var("GRUB_POSTINSTALL")) {
-        $self->do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
+        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
         $wait_time = 180;
     }
 

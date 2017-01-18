@@ -1,5 +1,5 @@
 package installedtest;
-use base 'fedorabase';
+use base 'basetest';
 
 # base class for tests that run on installed system
 
@@ -7,7 +7,7 @@ use base 'fedorabase';
 # of upgrade tests, postinstall phases...
 
 use testapi;
-use main_common;
+use utils;
 
 sub root_console {
     # Switch to a default or specified TTY and log in as root.
@@ -43,68 +43,6 @@ sub post_fail_hook {
     unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
         upload_logs "/tmp/var_log.tar.gz";
     }
-}
-
-sub check_release {
-    # Checks whether the installed release matches a given value. E.g.
-    # `check_release(23)` checks whether the installed system is
-    # Fedora 23. The value can be 'Rawhide' or a Fedora release
-    # number; often you will want to use `get_var('VERSION')`. Expects
-    # a console prompt to be active when it is called.
-    my $self = shift;
-    my $release = shift;
-    my $check_command = "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora";
-    validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
-}
-
-sub menu_launch_type {
-    # Launch an application in a graphical environment, by opening a
-    # launcher, typing the specified string and hitting enter. Pass
-    # the string to be typed to launch whatever it is you want.
-    my $self = shift;
-    my $app = shift;
-    # super does not work on KDE, because fml
-    send_key 'alt-f1';
-    # srsly KDE y u so slo
-    wait_still_screen 3;
-    type_very_safely $app;
-    send_key 'ret';
-}
-
-sub start_cockpit {
-    # Starting from a console, get to a browser with Cockpit (running
-    # on localhost) shown. If $login is truth-y, also log in. Assumes
-    # X and Firefox are installed.
-    my $self = shift;
-    my $login = shift || 0;
-    # run firefox directly in X as root. never do this, kids!
-    type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
-    assert_screen "cockpit_login";
-    wait_still_screen 5;
-    if ($login) {
-        type_safely "root";
-        wait_screen_change { send_key "tab"; };
-        type_safely get_var("ROOT_PASSWORD", "weakpassword");
-        send_key "ret";
-        assert_screen "cockpit_main";
-        # wait for any animation or other weirdness
-        # can't use wait_still_screen because of that damn graph
-        sleep 3;
-    }
-}
-
-sub repo_setup {
-    # disable updates-testing and updates and use the compose location
-    # as the target for fedora and rawhide rather than mirrorlist, so
-    # tools see only packages from the compose under test
-    my $location = get_var("LOCATION");
-    assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
-    # we use script_run here as the rawhide repo file won't always exist
-    # and we don't want to bother testing or predicting its existence;
-    # assert_script_run doesn't buy you much with sed anyway as it'll
-    # return 0 even if it replaced nothing
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
 }
 
 1;

@@ -1,13 +1,13 @@
 use base "installedtest";
 use strict;
 use testapi;
-
+use utils;
 
 sub run {
     my $self = shift;
     # try to login, check whether target release is installed
     $self->root_console(tty=>3);
-    $self->check_release(lc(get_var('VERSION')));
+    check_release(lc(get_var('VERSION')));
 }
 
 

@@ -1,7 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 use packagetest;
 
 # This test sort of covers QA:Testcase_desktop_update_notification
@@ -15,10 +15,10 @@ sub run {
     my $desktop = get_var("DESKTOP");
     # for the live image case, handle bootloader here
     if (get_var("BOOTFROM")) {
-        $self->do_bootloader(postinstall=>1, params=>'3');
+        do_bootloader(postinstall=>1, params=>'3');
     }
     else {
-        $self->do_bootloader(postinstall=>0, params=>'3');
+        do_bootloader(postinstall=>0, params=>'3');
     }
     boot_to_login_screen;
     $self->root_console(tty=>3);

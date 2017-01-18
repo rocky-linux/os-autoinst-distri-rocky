@@ -1,7 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 
 sub type_user_password {
     my $self = shift;

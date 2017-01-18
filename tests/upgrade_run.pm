@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
     my $self = shift;
@@ -9,7 +10,7 @@ sub run {
     script_run "setterm -blank 0";
 
     # use compose repo
-    $self->repo_setup();
+    repo_setup();
     my $params = "-y --releasever=${release}";
     if ($release eq "rawhide") {
         $params .= " --nogpgcheck";

@@ -3,16 +3,17 @@ use strict;
 use testapi;
 use lockapi;
 use mmapi;
+use tapnet;
 
 sub run {
     my $self=shift;
     # clone host's /etc/hosts (for phx2 internal routing to work)
     # must come *before* setup_tap_static or else it would overwrite
     # its changes
-    $self->clone_host_file("/etc/hosts");
+    clone_host_file("/etc/hosts");
     # set up networking
-    $self->setup_tap_static("10.0.2.110", "support.domain.local");
-    $self->clone_host_file("/etc/resolv.conf");
+    setup_tap_static("10.0.2.110", "support.domain.local");
+    clone_host_file("/etc/resolv.conf");
 
     ## DNS / DHCP (dnsmasq)
     # create config

@@ -1,12 +1,13 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one disk is selected.
-    $self->select_disks();
+    select_disks();
 
     # updates.img tests work by changing the appearance of the INSTALLATION
     # DESTINATION screen, so check that if needed.

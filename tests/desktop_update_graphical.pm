@@ -1,7 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 use packagetest;
 
 sub run {
@@ -22,7 +22,7 @@ sub run {
     else {
         # this launches GNOME Software on GNOME, dunno for any other
         # desktop yet
-        $self->menu_launch_type('update');
+        menu_launch_type('update');
     }
     # GNOME Software has a welcome screen, get rid of it if it shows
     # up (but don't fail if it doesn't, we're not testing that)

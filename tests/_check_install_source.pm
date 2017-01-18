@@ -1,16 +1,17 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
     my $repourl;
     if (get_var("MIRRORLIST_GRAPHICAL")) {
-        $repourl = $self->get_mirrorlist_url();
+        $repourl = get_mirrorlist_url();
     }
     else {
         $repourl = get_var("REPOSITORY_VARIATION", get_var("REPOSITORY_GRAPHICAL"));
-        $repourl = $self->get_full_repo($repourl);
+        $repourl = get_full_repo($repourl);
     }
 
     # check that the repo was used

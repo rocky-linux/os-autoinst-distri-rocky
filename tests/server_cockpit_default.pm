@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
     my $self = shift;
@@ -9,11 +10,11 @@ sub run {
     assert_script_run 'systemctl is-active cockpit.socket';
     assert_script_run 'firewall-cmd --query-service cockpit';
     # use compose repo, disable u-t, etc.
-    $self->repo_setup();
+    repo_setup();
     # install a desktop and firefox so we can actually try it
     assert_script_run 'dnf -y groupinstall "base-x"', 300;
     assert_script_run 'dnf -y install firefox', 120;
-    $self->start_cockpit(0);
+    start_cockpit(0);
     # quit firefox (return to console)
     send_key "ctrl-q";
 }

@@ -1,12 +1,13 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one disk is selected.
-    $self->select_disks();
+    select_disks();
     assert_and_click "anaconda_spoke_done";
 
     # the only provided disk should be automatically selected and full

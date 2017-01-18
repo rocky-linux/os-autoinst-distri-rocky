@@ -3,6 +3,8 @@ use strict;
 use testapi;
 use lockapi;
 use mmapi;
+use tapnet;
+use utils;
 
 sub run {
     my $self = shift;
@@ -11,20 +13,20 @@ sub run {
     # clone host's /etc/hosts (for phx2 internal routing to work)
     # must come *before* setup_tap_static or else it would overwrite
     # its changes
-    $self->clone_host_file("/etc/hosts");
+    clone_host_file("/etc/hosts");
     # set up networking
-    $self->setup_tap_static("10.0.2.100", "ipa001.domain.local");
+    setup_tap_static("10.0.2.100", "ipa001.domain.local");
     # clone host's resolv.conf to get name resolution
-    $self->clone_host_file("/etc/resolv.conf");
+    clone_host_file("/etc/resolv.conf");
     # use compose repo, disable u-t, etc.
-    $self->repo_setup();
+    repo_setup();
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
     assert_script_run 'dnf -y install haveged', 300;
     assert_script_run 'systemctl start haveged.service';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # rolectl
-    my @forwards = $self->get_host_dns();
+    my @forwards = get_host_dns();
     # we are now gonna work around a stupid bug in rolekit. we want to
     # pass it a list of ipv4 DNS forwarders and have no ipv6 DNS
     # forwarders. but it won't allow you to have a dns_forwarders array

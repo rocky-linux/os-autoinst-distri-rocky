@@ -1,17 +1,18 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
     # Go to INSTALLATION DESTINATION and ensure the disk is selected.
     # Because PARTITIONING starts with 'custom_', this will select custom.
-    $self->select_disks();
+    select_disks();
     assert_and_click "anaconda_spoke_done";
 
     # Manual partitioning spoke should be displayed
     assert_and_click "anaconda_part_automatic";
-    $self->custom_delete_part('swap');
+    custom_delete_part('swap');
     assert_and_click "anaconda_spoke_done";
     # Deleting swap shows a warning and requires a second click to confirm
     # Wait a sec first, otherwise sometimes we click too fast

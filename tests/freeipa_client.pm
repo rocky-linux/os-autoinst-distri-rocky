@@ -1,7 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 
 sub run {
     my $self=shift;

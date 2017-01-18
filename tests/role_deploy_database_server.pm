@@ -3,16 +3,18 @@ use strict;
 use testapi;
 use lockapi;
 use mmapi;
+use tapnet;
+use utils;
 
 sub run {
     my $self=shift;
-    $self->clone_host_file("/etc/hosts");
+    clone_host_file("/etc/hosts");
     # set up networking
-    $self->setup_tap_static("10.0.2.104", "db.domain.local");
+    setup_tap_static("10.0.2.104", "db.domain.local");
     # clone host's resolv.conf to get name resolution
-    $self->clone_host_file("/etc/resolv.conf");
+    clone_host_file("/etc/resolv.conf");
     # use compose repo, disable u-t, etc.
-    $self->repo_setup();
+    repo_setup();
     # deploy the database server role
     assert_script_run 'echo \'{"database":"openqa","owner":"openqa","password":"correcthorse"}\' | rolectl deploy databaseserver --settings-stdin', 300;
     # check the role status, should be 'running'

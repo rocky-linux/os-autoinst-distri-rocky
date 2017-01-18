@@ -1,12 +1,12 @@
 use base "installedtest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 
 sub run {
     my $self=shift;
     assert_screen 'graphical_desktop_clean';
-    $self->menu_launch_type('terminal');
+    menu_launch_type('terminal');
     wait_still_screen 5;
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");

@@ -1,7 +1,8 @@
 use base "anacondatest";
 use strict;
 use testapi;
-use main_common;
+use utils;
+use tapnet;
 
 sub run {
     my $self = shift;
@@ -19,7 +20,7 @@ sub run {
     # move to DNS servers
     type_safely "\n\t\t\t";
     # set DNS from host
-    type_safely join(',', $self->get_host_dns());
+    type_safely join(',', get_host_dns());
     type_safely "\t\t\t\t\t\n";
     # can take a bit of time as it seems to wait for all the pending
     # DHCP requests to time out before applying the static config

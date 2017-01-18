@@ -2,16 +2,17 @@ use base "installedtest";
 use strict;
 use testapi;
 use lockapi;
-use main_common;
+use utils;
+use tapnet;
 
 sub run {
     my $self = shift;
     # clone host's /etc/hosts (for phx2 internal routing to work)
     # must come *before* setup_tap_static or else it would overwrite
     # its changes
-    $self->clone_host_file("/etc/hosts");
+    clone_host_file("/etc/hosts");
     # set up networking
-    $self->setup_tap_static("10.0.2.102", "client002.domain.local");
+    setup_tap_static("10.0.2.102", "client002.domain.local");
     # use FreeIPA server as DNS server
     assert_script_run "printf 'search domain.local\nnameserver 10.0.2.100' > /etc/resolv.conf";
     # wait for the server to be ready (do it now just to make sure name
@@ -22,7 +23,7 @@ sub run {
     # note: we can't use wait_screen_change, wait_still_screen or
     # check_type_string in cockpit because of that fucking constantly
     # scrolling graph
-    $self->start_cockpit(1);
+    start_cockpit(1);
     assert_and_click "cockpit_join_domain_button";
     assert_screen "cockpit_join_domain";
     send_key "tab";

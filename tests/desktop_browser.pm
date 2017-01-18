@@ -1,7 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
-use main_common;
+use utils;
 
 # we are very paranoid with waits and typing speed in this test
 # because the system can be very busy; it's effectively first boot of

@@ -1,7 +1,8 @@
 use base "anacondatest";
 use strict;
 use testapi;
-use main_common;
+use utils;
+use anaconda;
 use Time::HiRes qw( usleep );
 
 sub run {
@@ -40,14 +41,14 @@ sub run {
     # if either MIRRORLIST_GRAPHICAL or REPOSITORY_GRAPHICAL is set, type this into
     # the repository url input
     if (get_var("MIRRORLIST_GRAPHICAL")) {
-        $repourl = $self->get_mirrorlist_url();
+        $repourl = get_mirrorlist_url();
         type_safely $repourl;
 
         # select as mirror list
         assert_and_click "anaconda_install_source_repo_select_mirrorlist";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")) {
-        $repourl = $self->get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
+        $repourl = get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
         # strip the 'nfs:' for typing here
         $repourl =~ s/^nfs://;
         type_safely $repourl;

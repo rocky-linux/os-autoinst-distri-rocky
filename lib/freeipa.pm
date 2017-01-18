@@ -6,7 +6,7 @@ use base 'Exporter';
 use Exporter;
 
 use testapi;
-use main_common;
+use utils;
 
 our @EXPORT = qw/add_user start_webui/;
 

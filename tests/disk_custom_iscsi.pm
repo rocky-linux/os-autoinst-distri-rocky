@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use anaconda;
 
 sub run {
     my $self = shift;
@@ -10,15 +11,15 @@ sub run {
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one regular disk
     # and the iscsi target are selected.
-    $self->select_disks(iscsi=>\%iscsi);
+    select_disks(iscsi=>\%iscsi);
     assert_and_click "anaconda_spoke_done";
     # now we're at custom part. let's use standard partitioning for
     # simplicity
-    $self->custom_scheme_select("standard");
+    custom_scheme_select("standard");
     # Do 'automatic' partition creation
     assert_and_click "anaconda_part_automatic";
     # Make sure / is on the iSCSI target (which appears as sda)
-    $self->custom_change_device("root", "sda");
+    custom_change_device("root", "sda");
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
 }
