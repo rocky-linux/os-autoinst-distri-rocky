@@ -284,11 +284,13 @@ sub start_cockpit {
     }
 }
 
-sub repo_setup {
+sub _repo_setup_compose {
+    # Appropriate repo setup steps for testing a compose
     # disable updates-testing and updates and use the compose location
     # as the target for fedora and rawhide rather than mirrorlist, so
     # tools see only packages from the compose under test
     my $location = get_var("LOCATION");
+    return unless $location;
     assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
     # we use script_run here as the rawhide repo file won't always exist
     # and we don't want to bother testing or predicting its existence;
@@ -296,5 +298,47 @@ sub repo_setup {
     # return 0 even if it replaced nothing
     script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
     script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+}
+
+sub _repo_setup_updates {
+    # Appropriate repo setup steps for testing a Bodhi update
+    # Check if we already ran, bail if so
+    return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
+    # Use baseurl not metalink so we don't wind up timing out getting
+    # metadata from a slow source...baseurl will always give us dl
+    # in infra
+    assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
+    # Set up an additional repo containing the update packages. We do
+    # this rather than simply running a one-time update because it may
+    # be the case that a package from the update isn't installed *now*
+    # but will be installed by one of the tests; by setting up a repo
+    # containing the update and enabling it here, we ensure all later
+    # 'dnf install' calls will get the packages from the update.
+    assert_script_run "mkdir -p /opt/update_repo";
+    assert_script_run "cd /opt/update_repo";
+    assert_script_run "dnf -y install bodhi-client git createrepo", 300;
+    # download the packages
+    my $version = lc(get_var("VERSION"));
+    if ($version eq 'rawhide' || $version > 25) {
+        # bodhi client 2.x
+        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 300;
+    }
+    else {
+        # bodhi client 0.9
+        # latest git python-fedora fixes bug which makes bodhi -D UPDATE_ID fail
+        assert_script_run "git clone https://github.com/fedora-infra/python-fedora.git";
+        assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 300;
+    }
+    # create the repo metadata
+    assert_script_run "createrepo .";
+    # write a repo config file
+    assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
+    # run an update now
+    script_run "dnf -y update", 300;
+}
+
+sub repo_setup {
+    # Run the appropriate sub-function for the job
+    get_var("ADVISORY") ? _repo_setup_updates : _repo_setup_compose;
 }
 

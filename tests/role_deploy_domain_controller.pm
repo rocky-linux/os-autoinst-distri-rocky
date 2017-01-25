@@ -10,14 +10,6 @@ sub run {
     my $self = shift;
     # login
     $self->root_console();
-    # clone host's /etc/hosts (for phx2 internal routing to work)
-    # must come *before* setup_tap_static or else it would overwrite
-    # its changes
-    clone_host_file("/etc/hosts");
-    # set up networking
-    setup_tap_static("10.0.2.100", "ipa001.domain.local");
-    # clone host's resolv.conf to get name resolution
-    clone_host_file("/etc/resolv.conf");
     # use compose repo, disable u-t, etc.
     repo_setup();
     # we need a lot of entropy for this, and we don't care how good

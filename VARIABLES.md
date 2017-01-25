@@ -74,6 +74,8 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `POSTINSTALL` | string | not set | nothing | If set, `tests/(value)_postinstall.pm` will be loaded after install, boot, login, and other postinstall tests
 | `UEFI` | boolean | `false`/not set | nothing | whether to use UEFI, this variable isn't usually set in test suites but in machine definition |
 | `ANACONDA_TEXT` | boolean | `false`/not set | all | when specified, anaconda will run in text mode |
+| `ANACONDA_STATIC` | string (IPv4 address) | not set | `ANACONDA_TEXT` | If set, will set up static networking using the chosen IP address during install |
+| `POST_STATIC` | string (space-separated IPv4 address and hostname) | not set | nothing | If set, will set up static networking using the chosen IP address and hostname during early post-install |
 
 Run variables
 -------------
@@ -81,8 +83,9 @@ These variables should be set when tests are scheduled (when running `isos post`
 
 | Variable | Explanation |
 | -------- | ----------- |
-| `ISO` | contains filename of ISO that is used for booting. If ISOURL is not set, file must exist in /var/lib/openqa/share/factory/iso. If ISOURL is set, it will be downloaded to this name instead of its original name |
+| `ISO` | contains filename of ISO that is used for booting. If `ISO_URL` is not set, file must exist in /var/lib/openqa/share/factory/iso. If `ISO_URL` is set, it will be downloaded to this name instead of its original name |
 | `ISO_URL` | contains URL for ISO to boot, openQA will download it |
+| `ADVISORY` | A Bodhi update ID. If set, the 'update testing' flow will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
 | `DISTRI` | contains distribution name (should be same as in WebUI, probably `fedora`) |
 | `VERSION` | contains version of distribution |
 | `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |

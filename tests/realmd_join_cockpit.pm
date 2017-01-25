@@ -7,18 +7,14 @@ use tapnet;
 
 sub run {
     my $self = shift;
-    # clone host's /etc/hosts (for phx2 internal routing to work)
-    # must come *before* setup_tap_static or else it would overwrite
-    # its changes
-    clone_host_file("/etc/hosts");
-    # set up networking
-    setup_tap_static("10.0.2.102", "client002.domain.local");
     # use FreeIPA server as DNS server
     assert_script_run "printf 'search domain.local\nnameserver 10.0.2.100' > /etc/resolv.conf";
     # wait for the server to be ready (do it now just to make sure name
     # resolution is working before we proceed)
     mutex_lock "freeipa_ready";
     mutex_unlock "freeipa_ready";
+    # do repo setup
+    repo_setup();
     # run firefox and login to cockpit
     # note: we can't use wait_screen_change, wait_still_screen or
     # check_type_string in cockpit because of that fucking constantly

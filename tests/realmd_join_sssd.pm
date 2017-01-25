@@ -7,12 +7,6 @@ use utils;
 
 sub run {
     my $self=shift;
-    # clone host's /etc/hosts (for phx2 internal routing to work)
-    # must come *before* setup_tap_static or else it would overwrite
-    # its changes
-    clone_host_file("/etc/hosts");
-    # set up networking
-    setup_tap_static("10.0.2.103", "client003.domain.local");
     # use FreeIPA server as DNS server
     assert_script_run "printf 'search domain.local\nnameserver 10.0.2.100' > /etc/resolv.conf";
     # wait for the server to be ready (do it now just to make sure name

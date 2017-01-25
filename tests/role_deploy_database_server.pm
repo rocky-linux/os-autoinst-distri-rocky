@@ -8,11 +8,6 @@ use utils;
 
 sub run {
     my $self=shift;
-    clone_host_file("/etc/hosts");
-    # set up networking
-    setup_tap_static("10.0.2.104", "db.domain.local");
-    # clone host's resolv.conf to get name resolution
-    clone_host_file("/etc/resolv.conf");
     # use compose repo, disable u-t, etc.
     repo_setup();
     # deploy the database server role

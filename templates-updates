@@ -1,0 +1,349 @@
+#!/usr/share/openqa/script/load_templates
+#
+# Fedora Machines, Products, TestSuites and JobTemplates
+#
+# use load_templates to load the file into the database
+#
+{
+  JobTemplates => [
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_selinux" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_selinux" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_selinux" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_services_start" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_services_start" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_services_start" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_service_manipulation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_update_cli" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_update_cli" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 42,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_update_cli" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_update_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_update_graphical" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_terminal" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_terminal" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_browser" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_browser" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_notifications_postinstall" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_notifications_postinstall" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_role_deploy_domain_controller" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_cockpit_default" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_cockpit_basic" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "realmd_join_cockpit" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "realmd_join_sssd" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_role_deploy_database_server" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_database_client" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_firewall_default" },
+                    },
+                  ],
+  Products     => [
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "updates-workstation",
+                      name      => "",
+                      settings  => [
+                        { key => "DESKTOP", value => "gnome" },
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "updates-kde",
+                      name      => "",
+                      settings  => [
+                        { key => "DESKTOP", value => "kde" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "updates-server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      version   => "*",
+                    },
+                  ],
+}

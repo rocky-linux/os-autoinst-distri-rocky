@@ -7,14 +7,6 @@ use tapnet;
 
 sub run {
     my $self=shift;
-    # clone host's /etc/hosts (for phx2 internal routing to work)
-    # must come *before* setup_tap_static or else it would overwrite
-    # its changes
-    clone_host_file("/etc/hosts");
-    # set up networking
-    setup_tap_static("10.0.2.110", "support.domain.local");
-    clone_host_file("/etc/resolv.conf");
-
     ## DNS / DHCP (dnsmasq)
     # create config
     assert_script_run "printf 'domain=domain.local\ndhcp-range=10.0.2.112,10.0.2.199\ndhcp-option=option:router,10.0.2.2' > /etc/dnsmasq.conf";

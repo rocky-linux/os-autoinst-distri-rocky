@@ -127,7 +127,7 @@ sub load_install_tests() {
 
     ## Networking
     if (get_var('ANACONDA_STATIC')) {
-        autotest::loadtest "tests/_network_static.pm";
+        autotest::loadtest "tests/_anaconda_network_static.pm";
     }
 
     ## Installation source
@@ -172,13 +172,9 @@ sub load_install_tests() {
     autotest::loadtest "tests/_do_install_and_reboot.pm";
 }
 
-sub load_postinstall_tests() {
-    # special case for the memory check test, as it doesn't need to boot
-    # the installed system: just load its test and return
-    if (get_var("MEMCHECK")) {
-        autotest::loadtest "tests/_memcheck.pm";
-        return;
-    }
+sub _load_early_postinstall_tests() {
+    # Early post-install test loading. Split out as a separate sub
+    # because we do this all twice on update tests.
 
     # Unlock encrypted storage volumes, if necessary. The test name here
     # follows the 'storage post-install' convention, but must be run earlier.
@@ -197,7 +193,34 @@ sub load_postinstall_tests() {
     unless (get_var("DESKTOP")) {
         autotest::loadtest "tests/_console_wait_login.pm";
     }
+}
 
+sub load_postinstall_tests() {
+    # special case for the memory check test, as it doesn't need to boot
+    # the installed system: just load its test and return
+    if (get_var("MEMCHECK")) {
+        autotest::loadtest "tests/_memcheck.pm";
+        return;
+    }
+
+    # load the early tests
+    _load_early_postinstall_tests();
+
+    # do standard post-install static network config if the var is set
+    # this is here not in early_postinstall_tests as there's no need
+    # to do it twice
+    if (get_var("POST_STATIC")) {
+        autotest::loadtest "tests/_post_network_static.pm";
+    }
+
+    # if scheduler passed an advisory, update packages from that advisory
+    # (intended for the updates testing workflow, so we install the updates
+    # to be tested)
+    if (get_var("ADVISORY")) {
+        autotest::loadtest "tests/_advisory_update.pm";
+        # now load the early boot tests again, as _advisory_update reboots
+        _load_early_postinstall_tests();
+    }
     # from now on, we have fully installed and booted system with root/specified user logged in
 
     # If there is a post-install test to verify storage configuration worked

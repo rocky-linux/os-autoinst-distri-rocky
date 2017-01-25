@@ -40,9 +40,20 @@ sub setup_tap_static {
         # add entry to /etc/hosts
         assert_script_run "echo '$ip $hostname $short' >> /etc/hosts";
     }
+    # use host's name servers (this is usually going to be correct,
+    # tests which don't want this can overwrite resolv.conf)
+    my @dns = get_host_dns();
+    my $dnstext = '';
+    for (my $i=0; $i < @dns; $i++) {
+        my $num = $i + 1;
+        $dnstext .= "\nDNS" . ${num} . "=" . $dns[$i];
+    }
     # bring up network. DEFROUTE is *vital* here
-    assert_script_run "printf 'DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes' > /etc/sysconfig/network-scripts/ifcfg-eth0";
-    script_run "systemctl restart NetworkManager.service";
+    my $conftext = "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes\nONBOOT=yes" . $dnstext;
+    assert_script_run "printf '${conftext}\n' > /etc/sysconfig/network-scripts/ifcfg-eth0";
+    assert_script_run "systemctl restart NetworkManager.service";
+    # the above doesn't seem to reliably set up resolv.conf, so...
+    clone_host_file "/etc/resolv.conf";
 }
 
 sub get_host_dns {
