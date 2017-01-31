@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "emergency_rescue"
+  ],
+  "area": [
+    {
+      "xpos": 1,
+      "ypos": 48,
+      "width": 142,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}
