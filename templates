@@ -1460,6 +1460,7 @@
                       flavor    => "universal",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1469,6 +1470,7 @@
                       flavor    => "Everything-boot-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1478,6 +1480,7 @@
                       flavor    => "Server-boot-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1487,6 +1490,7 @@
                       flavor    => "Server-dvd-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1496,7 +1500,8 @@
                       flavor    => "Atomic-dvd_ostree-iso",
                       name      => "",
                       settings  => [
-                        { key => "CANNED", value => "1" }
+                        { key => "CANNED", value => "1" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1506,7 +1511,8 @@
                       flavor    => "Workstation-boot-iso",
                       name      => "",
                       settings  => [
-                        { key => "DESKTOP", value => "gnome" }
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1517,7 +1523,8 @@
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
-                        { key => "DESKTOP", value => "gnome" }
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1528,7 +1535,8 @@
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
-                        { key => "DESKTOP", value => "kde" }
+                        { key => "DESKTOP", value => "kde" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1538,6 +1546,7 @@
                       flavor    => "universal",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1547,6 +1556,7 @@
                       flavor    => "Everything-boot-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1556,6 +1566,7 @@
                       flavor    => "Server-boot-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1565,6 +1576,7 @@
                       flavor    => "Server-dvd-iso",
                       name      => "",
                       settings  => [
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1574,7 +1586,8 @@
                       flavor    => "Workstation-boot-iso",
                       name      => "",
                       settings  => [
-                        { key => "DESKTOP", value => "gnome" }
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
@@ -1585,7 +1598,8 @@
                       name      => "",
                       settings  => [
                         { key => "LIVE", value => "1" },
-                        { key => "DESKTOP", value => "gnome" }
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                   },
@@ -1596,7 +1610,8 @@
                     name      => "",
                     settings  => [
                       { key => "LIVE", value => "1" },
-                      { key => "DESKTOP", value => "kde" }
+                      { key => "DESKTOP", value => "kde" },
+                      { key => "TEST_TARGET", value => "ISO" }
                                  ],
                     version   => "*",
                   },
@@ -1606,6 +1621,7 @@
                     flavor    => "Minimal-raw_xz-raw.xz",
                     name      => "",
                     settings  => [
+                        { key => "TEST_TARGET", value => "HDD_1" }
                                  ],
                     version   => "*",
                   }
@@ -1623,6 +1639,7 @@
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "TEST_TARGET", value => "NONE" },
                       ],
                     },
                     {
@@ -1844,6 +1861,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f%CURRREL%_minimal_2_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1856,6 +1874,7 @@
                         { key => "HDD_1", value => "disk_f%CURRREL%_desktop_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1867,6 +1886,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1879,6 +1899,7 @@
                         { key => "HDD_1", value => "disk_f%CURRREL%_kde_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "kde" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1892,6 +1913,7 @@
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1902,6 +1924,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f%PREVREL%_minimal_2_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1914,7 +1937,7 @@
                         { key => "HDD_1", value => "disk_f%PREVREL%_desktop_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
-
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1926,6 +1949,7 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f%PREVREL%_server_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1938,6 +1962,7 @@
                         { key => "HDD_1", value => "disk_f%PREVREL%_kde_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "kde" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1951,6 +1976,7 @@
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1963,6 +1989,7 @@
                         { key => "HDD_1", value => "disk_f%CURRREL%_desktop_3_i686.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -1975,6 +2002,7 @@
                         { key => "HDD_1", value => "disk_f%PREVREL%_desktop_3_i686.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
                     {
@@ -2344,6 +2372,7 @@
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "MEMCHECK", value => "1" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
+                        { key => "TEST_TARGET", value => "NONE" },
                       ],
                     },
                   ],
