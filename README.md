@@ -6,7 +6,7 @@ This repository contains tests and images for testing [Fedora](https://getfedora
 Issues
 ------
 
-For the present, issues (and pull requests) are tracked in [Phabricator](https://phab.qa.fedoraproject.org/). You can open issues against the `openqa_fedora` project [here](https://phab.qa.fedoraproject.org/maniphest/task/edit/form/default/?tags=openqa_fedora).
+For the present, issues (and pull requests - 'diffs') are tracked in [Fedora QA Phabricator](https://phab.qa.fedoraproject.org/). You can open issues against the `openqa_fedora` project [here](https://phab.qa.fedoraproject.org/maniphest/task/edit/form/default/?tags=openqa_fedora). See [the QA Phabricator wiki page](https://fedoraproject.org/wiki/QA:Phabricator#issues-diffs) for detailed instructions on filing issues and diffs. Note that this repository does not use the 'gitflow' system, so the main development branch is `master`: please branch from `master` and submit diffs against it. This is not a Python repository and has no tests or linting, so you do not need to follow the instructions regarding `virtualenv`.
 
 Test development
 ----------------
