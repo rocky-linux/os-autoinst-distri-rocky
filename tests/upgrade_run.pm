@@ -15,7 +15,12 @@ sub run {
     if ($release eq "rawhide") {
         $params .= " --nogpgcheck";
     }
-    assert_script_run "dnf ${params} system-upgrade download", 6000;
+
+    if (script_run "dnf ${params} system-upgrade download", 6000) {
+        record_soft_failure "dnf failed so retry with --allowerasing";
+        $params .= " --allowerasing";
+        assert_script_run "dnf ${params} system-upgrade download", 6000;
+    }
 
     upload_logs "/var/log/dnf.log";
     upload_logs "/var/log/dnf.rpm.log";
