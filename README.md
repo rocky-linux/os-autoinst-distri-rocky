@@ -77,9 +77,9 @@ and `test_flags()` method, inheriting from one of the classes mentioned above.
 5. Run test (see [openqa_fedora_tools repository](https://bitbucket.org/rajcze/openqa_fedora_tools)).
 6. Create needles (images) by using interactive mode and needles editor in WebUI.
 7. Add new Job template and Test suite into `templates` file.
-8. Add new Test suite and Test case into [`conf_test_suites.py`](https://bitbucket.org/rajcze/openqa_fedora_tools/src/develop/tools/openqa_trigger/conf_test_suites.py)
-file in openqa_fedora_tools repository.
-9. Open differential request via phabricator, set openqa_fedora as a project and repository.
+8. Add new Test suite and Test case into [`conf_test_suites.py`](https://pagure.io/fedora-qa/fedora_openqa/blob/master/f/fedora_openqa/conf_test_suites.py) file in fedora_openqa repository.
+9. Open differential request via phabricator, set os-autoinst-disti-fedora as a project and repository.
+10. Open differential request for fedora_openqa change if necessary.
 10. Mark your test in [phabricator page](https://phab.qa.fedoraproject.org/w/openqa/tests/) as done.
 
 ### Language handling
