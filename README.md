@@ -1,7 +1,7 @@
 openQA tests for the Fedora distribution
 ========================================
 
-This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). For additional tools, Installation Guide and Docker images, see [this repository](https://bitbucket.org/rajcze/openqa_fedora_tools).
+This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). The [fedora_openqa library and CLI](https://pagure.io/fedora-qa/fedora_openqa) are used for scheduling tests, and [createhdds](https://pagure.io/fedora-qa/createhdds) is used for creating base disk images for the test. For openQA installation instructions, see [the Fedora openQA wiki page](https://fedoraproject.org/wiki/OpenQA).
 
 Issues
 ------
