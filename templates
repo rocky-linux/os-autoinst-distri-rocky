@@ -30,7 +30,7 @@
                     },
                     {
                       machine    => { name => "ARM" },
-                      prio       => 60,
+                      prio       => 12,
                       product    => {
                                       arch    => "arm",
                                       distri  => "fedora",
@@ -250,7 +250,7 @@
                     },
                     {
                       machine    => { name => "ARM" },
-                      prio       => 62,
+                      prio       => 42,
                       product    => {
                                       arch    => "arm",
                                       distri  => "fedora",
@@ -294,7 +294,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -305,7 +305,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -316,7 +316,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 42,
+                      prio       => 22,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -349,7 +349,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 30,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -360,7 +360,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 22,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -371,7 +371,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 30,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -382,7 +382,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 22,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -448,7 +448,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 30,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -514,7 +514,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -525,7 +525,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -536,7 +536,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -547,7 +547,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -558,7 +558,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -569,7 +569,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 30,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -580,7 +580,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -591,7 +591,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1053,7 +1053,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1064,7 +1064,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1075,7 +1075,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1086,7 +1086,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1097,7 +1097,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1174,7 +1174,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1185,7 +1185,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1196,7 +1196,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 30,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1207,7 +1207,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 40,
+                      prio       => 20,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1218,7 +1218,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 11,
+                      prio       => 61,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1229,7 +1229,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 12,
+                      prio       => 62,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1240,7 +1240,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 12,
+                      prio       => 62,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1251,7 +1251,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 12,
+                      prio       => 62,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1273,7 +1273,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 17,
+                      prio       => 67,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1284,7 +1284,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 17,
+                      prio       => 67,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1295,7 +1295,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 82,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1306,7 +1306,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 22,
+                      prio       => 72,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1317,7 +1317,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 22,
+                      prio       => 72,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1328,7 +1328,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 82,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1339,7 +1339,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 82,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1350,7 +1350,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 42,
+                      prio       => 92,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1361,7 +1361,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 42,
+                      prio       => 92,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1372,7 +1372,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 42,
+                      prio       => 92,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1383,7 +1383,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 82,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1394,7 +1394,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 52,
+                      prio       => 92,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
@@ -1405,7 +1405,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 52,
+                      prio       => 92,
                       product    => {
                                       arch    => "i386",
                                       distri  => "fedora",
