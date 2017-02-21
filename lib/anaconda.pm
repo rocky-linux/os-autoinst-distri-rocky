@@ -33,10 +33,17 @@ sub select_disks {
     assert_and_click "anaconda_main_hub_install_destination";
 
     if (get_var('NUMDISKS') > 1) {
-        # Multi-disk case. Select however many disks the test needs. If
-        # $disks is 0, this will do nothing, and 0 disks will be selected.
-        for my $n (1 .. $args{disks}) {
-            assert_and_click "anaconda_install_destination_select_disk_$n";
+        if (get_var('OFW') && ($args{disks} == 1)) {
+            # we want to select only one disk
+            # for PowerPC this must be the second one that is empty.
+            assert_and_click "anaconda_install_destination_select_disk_2";
+        }
+        else {
+            # Multi-disk case. Select however many disks the test needs. If
+            # $disks is 0, this will do nothing, and 0 disks will be selected.
+            for my $n (1 .. $args{disks}) {
+                assert_and_click "anaconda_install_destination_select_disk_$n";
+            }
         }
     }
     else {
