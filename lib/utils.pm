@@ -325,10 +325,16 @@ sub _repo_setup_updates {
     }
     else {
         # bodhi client 0.9
-        # latest git python-fedora fixes bug which makes bodhi -D UPDATE_ID fail
+        # use git python-fedora for
+        # https://github.com/fedora-infra/python-fedora/pull/192
+        # until packages with that fix are pushed stable
         assert_script_run "git clone https://github.com/fedora-infra/python-fedora.git";
         assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 300;
     }
+    # log the exact packages in the update at test time, with their
+    # source packages and epochs. log is uploaded by _advisory_update
+    # and used for later comparison by _advisory_post
+    assert_script_run 'rpm -qp *.rpm --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | sort -u > /var/log/updatepkgs.txt';
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file

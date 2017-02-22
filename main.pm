@@ -257,6 +257,12 @@ sub load_postinstall_tests() {
         }
     }
 
+    # load the ADVISORY post-install test - this records which update
+    # packages were actually installed during the test
+    if (get_var("ADVISORY")) {
+        autotest::loadtest "tests/_advisory_post.pm";
+    }
+
     # we should shut down before uploading disk images
     if (get_var("STORE_HDD_1") || get_var("PUBLISH_HDD_1")) {
         autotest::loadtest "tests/_console_shutdown.pm";
