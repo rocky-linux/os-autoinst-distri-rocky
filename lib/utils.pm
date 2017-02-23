@@ -312,7 +312,7 @@ sub _repo_setup_compose {
     # and we don't want to bother testing or predicting its existence;
     # assert_script_run doesn't buy you much with sed anyway as it'll
     # return 0 even if it replaced nothing
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
     script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
 }
 
