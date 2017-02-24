@@ -49,7 +49,9 @@ sub run {
     assert_script_run "firewall-cmd --add-service=nfs";
     # workaround RHBZ #1402427: somehow the file is incorrectly labelled
     # even after a clean install with fixed selinux-policy
-    assert_script_run "restorecon /usr/bin/rpcbind";
+    # Bypass: do not execute restorecon if file do not exist
+    # (for PowerPC rpcbind not in same path)
+    assert_script_run 'for xx in /usr/bin/rpcbind /sbin/rpcbind; do [ -f $xx ] && restorecon $xx; done';
     # start the server
     assert_script_run "systemctl restart nfs-server.service";
     assert_script_run "systemctl is-active nfs-server.service";
@@ -57,6 +59,7 @@ sub run {
     # report ready, wait for children
     mutex_create('support_ready');
     wait_for_children;
+    # TODO we should add systematic data capture to help investigation when children failed.
 }
 
 sub test_flags {
