@@ -54,6 +54,12 @@ sub run {
     # things running in phx2 cannot reach; we must make sure the phx2
     # deployments use the phx2 nameservers.
     assert_script_run 'echo \'{"admin_password":"monkeys123","dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
+    # FIXME: workaround for RHBZ #1400293 on Fedora 24. Can be removed
+    # when Firefox is fixed.
+    my $release = lc(get_var('VERSION'));
+    if ($release ne "rawhide" && $release < 25) {
+        assert_script_run 'ipa-getcert resubmit -d /etc/httpd/alias -n Server-Cert -D $( uname -n )';
+    }
     # check the role status, should be 'running'
     validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^running/ };
     # check the admin password is listed in 'settings'
