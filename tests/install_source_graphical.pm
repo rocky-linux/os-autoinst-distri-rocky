@@ -49,8 +49,9 @@ sub run {
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")) {
         $repourl = get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
-        # strip the 'nfs:' for typing here
+        # strip the nfs and nfsvers prefix if present for typing here
         $repourl =~ s/^nfs://;
+        $repourl =~ s/^nfsvers=.://;
         type_safely $repourl;
     }
 

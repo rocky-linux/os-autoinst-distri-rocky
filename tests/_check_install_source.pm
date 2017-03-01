@@ -17,8 +17,9 @@ sub run {
     # check that the repo was used
     $self->root_console;
     if ($repourl =~ s/^nfs://) {
+        $repourl =~ s/^nfsvers=.://;
         # the above both checks if we're dealing with an NFS URL, and
-        # strips the 'nfs:' from it if so
+        # strips the 'nfs:' and 'nfsvers=.:' from it if so
         # message is in packaging.log up to F26, anaconda.log F27+
         assert_script_run "grep 'mounting ${repourl}' /tmp/packaging.log /tmp/anaconda.log";
     }
