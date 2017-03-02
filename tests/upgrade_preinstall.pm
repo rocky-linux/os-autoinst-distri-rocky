@@ -7,7 +7,7 @@ sub run {
     my $self = shift;
     # decrypt disks during boot if necessary
     if (get_var("ENCRYPT_PASSWORD")) {
-        $self->boot_decrypt(60);
+        boot_decrypt(60);
     }
 
     boot_to_login_screen;
@@ -22,7 +22,7 @@ sub run {
 
     # decrypt if necessary
     if (get_var("ENCRYPT_PASSWORD")) {
-        $self->boot_decrypt(60);
+        boot_decrypt(60);
     }
 
     boot_to_login_screen;

@@ -24,7 +24,7 @@ sub run {
     # fail immediately if we see a DNF error message
     die "DNF reported failure" if (check_screen "upgrade_fail", 15);
     if (get_var("ENCRYPT_PASSWORD")) {
-        $self->boot_decrypt(60);
+        boot_decrypt(60);
     }
     # in encrypted case we need to wait a bit so postinstall test
     # doesn't bogus match on the encryption prompt we just completed

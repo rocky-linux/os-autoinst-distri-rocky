@@ -9,7 +9,7 @@ sub run {
     # process to run
     $wait_time = 6000 if (get_var("UPGRADE"));
     # decrypt disks during boot
-    $self->boot_decrypt($wait_time);
+    boot_decrypt($wait_time);
 }
 
 sub test_flags {
