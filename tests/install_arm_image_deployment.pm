@@ -5,7 +5,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    assert_screen "console_initial_setup", 200;
+    assert_screen "console_initial_setup", 500;
     # IMHO it's better to use sleeps than to have needle for every text screen
     wait_still_screen 5;
 
