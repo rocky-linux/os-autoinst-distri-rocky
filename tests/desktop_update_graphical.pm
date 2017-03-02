@@ -48,10 +48,10 @@ sub run {
         mouse_hide;
     }
     # KDE annoyingly pops the notification up right over the install
-    # button, which doesn't help...wait for it to go away
-    if ($desktop eq 'kde') {
-        wait_still_screen 5;
-    }
+    # button, which doesn't help...wait for it to go away. Let's also
+    # wait on GNOME, as we've had tests fail at this point for no
+    # obvious reason, a wait may help.
+    wait_still_screen 5;
     assert_and_click 'desktop_package_tool_update_apply';
     # on GNOME, wait for reboots.
     if ($desktop eq 'gnome') {
