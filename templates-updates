@@ -7,6 +7,7 @@
 {
   JobTemplates => [
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -18,6 +19,7 @@
                       test_suite => { name => "base_selinux" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -29,6 +31,7 @@
                       test_suite => { name => "base_selinux" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 42,
                       product    => {
@@ -40,6 +43,7 @@
                       test_suite => { name => "base_selinux" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -51,6 +55,7 @@
                       test_suite => { name => "base_services_start" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -62,6 +67,7 @@
                       test_suite => { name => "base_services_start" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 42,
                       product    => {
@@ -73,6 +79,7 @@
                       test_suite => { name => "base_services_start" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -84,6 +91,7 @@
                       test_suite => { name => "base_service_manipulation" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -95,6 +103,7 @@
                       test_suite => { name => "base_service_manipulation" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 42,
                       product    => {
@@ -106,6 +115,7 @@
                       test_suite => { name => "base_service_manipulation" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -117,6 +127,7 @@
                       test_suite => { name => "base_update_cli" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -128,6 +139,7 @@
                       test_suite => { name => "base_update_cli" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 42,
                       product    => {
@@ -139,6 +151,7 @@
                       test_suite => { name => "base_update_cli" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -150,6 +163,7 @@
                       test_suite => { name => "desktop_update_graphical" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 32,
                       product    => {
@@ -161,6 +175,7 @@
                       test_suite => { name => "desktop_update_graphical" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -172,6 +187,7 @@
                       test_suite => { name => "desktop_terminal" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 32,
                       product    => {
@@ -183,6 +199,7 @@
                       test_suite => { name => "desktop_terminal" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -194,6 +211,7 @@
                       test_suite => { name => "desktop_browser" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 32,
                       product    => {
@@ -205,6 +223,7 @@
                       test_suite => { name => "desktop_browser" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -216,6 +235,7 @@
                       test_suite => { name => "desktop_notifications_postinstall" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 32,
                       product    => {
@@ -227,6 +247,7 @@
                       test_suite => { name => "desktop_notifications_postinstall" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -238,6 +259,7 @@
                       test_suite => { name => "server_role_deploy_domain_controller" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -249,6 +271,7 @@
                       test_suite => { name => "server_cockpit_default" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -260,6 +283,7 @@
                       test_suite => { name => "server_cockpit_basic" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -271,6 +295,7 @@
                       test_suite => { name => "realmd_join_cockpit" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -282,6 +307,7 @@
                       test_suite => { name => "realmd_join_sssd" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -293,6 +319,7 @@
                       test_suite => { name => "server_role_deploy_database_server" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
@@ -304,6 +331,7 @@
                       test_suite => { name => "server_database_client" },
                     },
                     {
+                      group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
