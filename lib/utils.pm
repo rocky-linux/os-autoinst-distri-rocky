@@ -340,7 +340,7 @@ sub _repo_setup_updates {
     # write a repo config file
     assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
     # run an update now
-    script_run "dnf -y update", 300;
+    script_run "dnf -y update", 600;
 }
 
 sub repo_setup {
