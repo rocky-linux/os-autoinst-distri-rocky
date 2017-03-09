@@ -1733,7 +1733,7 @@
                     {
                       name => "install_sata",
                       settings => [
-                        { key => "HDDMODEL", value => "ide-drive" },
+                        { key => "HDDMODEL", value => "ide-drive,bus=ahci0.0" },
                         { key => "ATACONTROLLER", value => "ich9-ahci" },
                       ],
                     },
