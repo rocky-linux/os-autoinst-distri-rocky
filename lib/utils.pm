@@ -309,14 +309,16 @@ sub _repo_setup_updates {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
-    # Fix URL for fedora.repo if this is a development release
-    # This is rather icky, but I can't think of any better way, really
-    # The problem here is that the 'baseurl' line in fedora.repo is
-    # always left as the correct URL for a *stable* release, we don't
-    # change it to the URL for a Branched release while the release is
-    # Branched, as it's too much annoying package work
     if (get_var("DEVELOPMENT")) {
+        # Fix URL for fedora.repo if this is a development release
+        # This is rather icky, but I can't think of any better way
+        # The problem is that the 'baseurl' line in fedora.repo is
+        # always left as the correct URL for a *stable* release, we
+        # don't change it to the URL for a Branched release while the
+        # release is Branched, as it's too much annoying package work
         assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
+        # Disable updates-testing so other bad updates don't break us
+        assert_script_run "dnf config-manager --set-disabled updates-testing";
     }
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
