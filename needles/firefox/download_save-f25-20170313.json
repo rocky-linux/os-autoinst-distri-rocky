@@ -1,0 +1,17 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "type": "match",
+      "width": 59,
+      "ypos": 478,
+      "xpos": 670,
+      "height": 14
+    }
+  ],
+  "tags": [
+    "",
+    "browser_download_save",
+    "firefox_download_save"
+  ]
+}
