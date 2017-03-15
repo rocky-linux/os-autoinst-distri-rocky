@@ -358,5 +358,10 @@ sub _repo_setup_updates {
 sub repo_setup {
     # Run the appropriate sub-function for the job
     get_var("ADVISORY") ? _repo_setup_updates : _repo_setup_compose;
+    # This repo does not always exist for Rawhide or Branched, and
+    # some things (at least realmd) try to update the repodata for
+    # it even though it is disabled, and fail. At present none of the
+    # tests needs it, so let's just unconditionally nuke it.
+    assert_script_run "rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo";
 }
 
