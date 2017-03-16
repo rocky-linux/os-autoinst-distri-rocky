@@ -17,6 +17,10 @@ sub run {
     repo_setup();
     # do the enrolment
     assert_script_run "echo 'monkeys123' | realm join --user=admin ipa001.domain.local", 300;
+    # set sssd debugging level higher (useful for debugging failures)
+    # optional as it's not really part of the test
+    script_run "dnf -y install sssd-tools", 180;
+    script_run "sss_debuglevel 6";
 }
 
 sub test_flags {

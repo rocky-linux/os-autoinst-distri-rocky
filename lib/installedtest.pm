@@ -54,6 +54,9 @@ sub post_fail_hook {
     unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
         upload_logs "/tmp/var_log.tar.gz";
     }
+
+    # Sometimes useful for diagnosing FreeIPA issues
+    upload_logs "/etc/nsswitch.conf", failok=>1;
 }
 
 1;
