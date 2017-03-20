@@ -12,6 +12,8 @@ sub run {
     # works. If we ever test other input-method based languages we can
     # generalize this out, for now we just inline Japanese
     if (get_var("LANGUAGE") eq 'japanese') {
+        # wait a bit for input switch to complete
+        sleep 3;
         # assume we can test input from whatever 'alt-f1' opens
         send_key "alt-f1";
         type_safely "yama";
