@@ -1621,7 +1621,8 @@
                     flavor    => "Minimal-raw_xz-raw.xz",
                     name      => "",
                     settings  => [
-                        { key => "TEST_TARGET", value => "HDD_1" }
+                        # HDD_2 gets posted by trigger and is always set to target disk image
+                        { key => "TEST_TARGET", value => "HDD_2" }
                                  ],
                     version   => "*",
                   }
