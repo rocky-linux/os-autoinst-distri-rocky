@@ -333,7 +333,7 @@ sub _repo_setup_updates {
     my $version = lc(get_var("VERSION"));
     if ($version eq 'rawhide' || $version > 25) {
         # bodhi client 2.x
-        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 300;
+        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
     }
     else {
         # bodhi client 0.9
@@ -341,7 +341,7 @@ sub _repo_setup_updates {
         # https://github.com/fedora-infra/python-fedora/pull/192
         # until packages with that fix are pushed stable
         assert_script_run "git clone https://github.com/fedora-infra/python-fedora.git";
-        assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 300;
+        assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 600;
     }
     # log the exact packages in the update at test time, with their
     # source packages and epochs. log is uploaded by _advisory_update
