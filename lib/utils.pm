@@ -224,8 +224,16 @@ sub do_bootloader {
             send_key "e";
             # ternary: 13 'downs' to reach the kernel line for installed
             # system, 2 for UEFI installer
-            my $presses = $args{postinstall} ? 13 : 2;
+            # since 20170328 PowerPC Rawhide and f26 are failing with 13
+            # but work with 12 and added sleep 1 in loop.
+            my $presses;
+            if (get_var('OFW')) {
+                $presses = $args{postinstall} ? 12 : 2;
+	    } else {
+                $presses = $args{postinstall} ? 13 : 2;
+            }
             foreach my $i (1..$presses) {
+                sleep 1; # seems to have missed one down if too fast.
                 send_key "down";
             }
             send_key "end";
@@ -234,6 +242,7 @@ sub do_bootloader {
         # in SLOF usb-xhci driver failed sometimes in powerpc
         type_safely " $args{params}";
     }
+    save_screenshot; # for debug purpose
     # ctrl-X boots from grub editor mode
     send_key "ctrl-x";
     # return boots all other cases
