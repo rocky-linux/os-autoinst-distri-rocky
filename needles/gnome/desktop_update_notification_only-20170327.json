@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 43,
+      "xpos": 163,
+      "height": 169,
+      "width": 40,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_update_notification_only",
+    "DESKTOP-gnome"
+  ]
+}
