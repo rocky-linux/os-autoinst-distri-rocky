@@ -60,7 +60,7 @@ sub run {
     # wait out animation
     sleep 3;
     my $user_login = get_var("USER_LOGIN") || "test";
-    unless $user_login eq 'false' {
+    unless ($user_login eq 'false') {
         assert_and_click "anaconda_install_user_creation";
         assert_screen "anaconda_install_user_creation_screen";
         # wait out animation
