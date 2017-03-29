@@ -2099,7 +2099,6 @@
                         { key => "PACKAGE_SET", value => "kde" },
                         { key => "POSTINSTALL", value => "_collect_data" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
-                        { key => "USER_LOGIN", value => "false" },
                       ],
                     },
                     {
