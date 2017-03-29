@@ -20,8 +20,8 @@ sub run {
     validate_script_output 'klist -k', sub { $_ =~ m/$qhost\@DOMAIN\.LOCAL/ };
     # check we can kinit with the host principal
     assert_script_run "kinit -k host/$hostname\@DOMAIN.LOCAL";
-    # switch to tty3
-    send_key "ctrl-alt-f3";
+    # switch to tty2 for login tests
+    send_key "ctrl-alt-f2";
     # try and login as test1, should work
     console_login(user=>'test1@DOMAIN.LOCAL', password=>'batterystaple');
     type_string "exit\n";
