@@ -13,6 +13,18 @@ sub run {
     $wait_time = 1800 if (get_var("KICKSTART"));
     $wait_time = 6000 if (get_var("UPGRADE") && !get_var("ENCRYPT_PASSWORD"));
 
+    # Handle pre-login initial setup if we're doing INSTALL_NO_USER
+    if (get_var("INSTALL_NO_USER") && !get_var("_setup_done")) {
+        if (get_var("DESKTOP") eq 'gnome') {
+            gnome_initial_setup(prelogin=>1, timeout=>$wait_time);
+        }
+        else {
+            anaconda_create_user(timeout=>$wait_time);
+            assert_and_click "initialsetup_finish_configuration";
+            set_var("_setup_done", 1);
+        }
+        $wait_time = 300;
+    }
     # Wait for the login screen
     boot_to_login_screen(timeout => $wait_time);
     # do user login unless USER_LOGIN is set to string 'false'
@@ -42,38 +54,18 @@ sub run {
         # do it if ADVISORY is set, as for the update testing flow,
         # START_AFTER_TEST is set but a no-op and this hasn't happened
         if (get_var("DESKTOP") eq 'gnome' && (get_var("ADVISORY") || !get_var("START_AFTER_TEST"))) {
-            # as this test gets loaded twice on the ADVISORY flow,
-            # keep track of whether this happened already
-            unless (get_var("_gis_done")) {
-                assert_screen "next_button", 120;
-                # wait a bit in case of animation
-                wait_still_screen 3;
-                for my $n (1..3) {
-                    # click 'Next' three times, moving the mouse to avoid
-                    # highlight problems, sleeping to give it time to get
-                    # to the next screen between clicks
-                    mouse_set(100, 100);
-                    wait_screen_change { assert_and_click "next_button"; };
-                    # for Japanese, we need to workaround a bug on the keyboard
-                    # selection screen
-                    if ($n == 1 && get_var("LANGUAGE") eq 'japanese') {
-                        if (!check_screen 'initial_setup_kana_kanji_selected', 5) {
-                            record_soft_failure 'kana kanji not selected: bgo#776189';
-                            assert_and_click 'initial_setup_kana_kanji';
-                        }
-                    }
-                }
-                # click 'Skip' one time
-                mouse_set(100,100);
-                wait_screen_change { assert_and_click "skip_button"; };
-                send_key "ret";
-                # wait for the stupid 'help' screen to show and kill it
-                assert_screen "getting_started";
-                send_key "alt-f4";
-                wait_still_screen 5;
-                # don't do it again on second load
-                set_var("_gis_done", 1);
+            # as this test gets loaded twice on the ADVISORY flow, and
+            # we might be on the INSTALL_NO_USER flow, check whether
+            # this happened already
+            unless (get_var("_setup_done")) {
+                gnome_initial_setup();
             }
+        }
+        if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
+            # wait for the stupid 'help' screen to show and kill it
+            assert_screen "getting_started";
+            send_key "alt-f4";
+            wait_still_screen 5;
         }
 
         # Move the mouse somewhere it won't highlight the match areas

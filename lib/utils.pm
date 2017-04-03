@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -365,3 +365,118 @@ sub repo_setup {
     assert_script_run "rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo";
 }
 
+sub gnome_initial_setup {
+    # Handle gnome-initial-setup, with variations for the pre-login
+    # mode (when no user was created during install) and post-login
+    # mode (when user was created during install)
+    my %args = (
+        prelogin => 0,
+        timeout => 120,
+        @_
+    );
+    my $nexts = 3;
+    if ($args{prelogin}) {
+        $nexts = 5;
+    }
+    assert_screen "next_button", $args{timeout};
+    # wait a bit in case of animation
+    wait_still_screen 3;
+    for my $n (1..$nexts) {
+        # click 'Next' $nexts times, moving the mouse to avoid
+        # highlight problems, sleeping to give it time to get
+        # to the next screen between clicks
+        mouse_set(100, 100);
+        wait_screen_change { assert_and_click "next_button"; };
+        # for Japanese, we need to workaround a bug on the keyboard
+        # selection screen
+        if ($n == 1 && get_var("LANGUAGE") eq 'japanese') {
+            if (!check_screen 'initial_setup_kana_kanji_selected', 5) {
+                record_soft_failure 'kana kanji not selected: bgo#776189';
+                assert_and_click 'initial_setup_kana_kanji';
+            }
+        }
+    }
+    # click 'Skip' one time
+    mouse_set(100,100);
+    wait_screen_change { assert_and_click "skip_button"; };
+    send_key "ret";
+    if ($args{prelogin}) {
+        # create user
+        my $user_login = get_var("USER_LOGIN") || "test";
+        my $user_password = get_var("USER_PASSWORD") || "weakpassword";
+        type_very_safely $user_login;
+        wait_screen_change { assert_and_click "next_button"; };
+        type_very_safely $user_password;
+        send_key "tab";
+        type_very_safely $user_password;
+        wait_screen_change { assert_and_click "next_button"; };
+        send_key "ret";
+    }
+    else {
+        # wait for the stupid 'help' screen to show and kill it
+        assert_screen "getting_started";
+        send_key "alt-f4";
+        wait_still_screen 5;
+        # don't do it again on second load
+    }
+    set_var("_setup_done", 1);
+}
+
+sub _type_user_password {
+    # convenience function used by anaconda_create_user, not meant
+    # for direct use
+    my $user_password = get_var("USER_PASSWORD") || "weakpassword";
+    if (get_var("SWITCHED_LAYOUT")) {
+        # we double the password, the second time using the native
+        # layout, so the password has both ASCII and native characters
+        desktop_switch_layout "ascii", "anaconda";
+        type_very_safely $user_password;
+        desktop_switch_layout "native", "anaconda";
+        type_very_safely $user_password;
+    }
+    else {
+        type_very_safely $user_password;
+    }
+}
+
+sub anaconda_create_user {
+    # Create a user, in the anaconda interface. This is here because
+    # the same code works both during install and for initial-setup,
+    # which runs post-install, so we can share it.
+    my %args = (
+        timeout => 90,
+        @_
+    );
+    my $user_login = get_var("USER_LOGIN") || "test";
+    assert_and_click "anaconda_install_user_creation", '', $args{timeout};
+    assert_screen "anaconda_install_user_creation_screen";
+    # wait out animation
+    wait_still_screen 2;
+    type_very_safely $user_login;
+    type_very_safely "\t\t\t\t";
+    _type_user_password();
+    wait_screen_change { send_key "tab"; };
+    wait_still_screen 2;
+    _type_user_password();
+    # even with all our slow typing this still *sometimes* seems to
+    # miss a character, so let's try again if we have a warning bar.
+    # But not if we're installing with a switched layout, as those
+    # will *always* result in a warning bar at this point (see below)
+    if (!get_var("SWITCHED_LAYOUT") && check_screen "anaconda_warning_bar", 3) {
+        wait_screen_change { send_key "shift-tab"; };
+        wait_still_screen 2;
+        _type_user_password();
+        wait_screen_change { send_key "tab"; };
+        wait_still_screen 2;
+        _type_user_password();
+    }
+    assert_and_click "anaconda_install_user_creation_make_admin";
+    assert_and_click "anaconda_spoke_done";
+    # since 20170105, we will get a warning here when the password
+    # contains non-ASCII characters. Assume only switched layouts
+    # produce non-ASCII characters, though this isn't strictly true
+    if (get_var('SWITCHED_LAYOUT') && check_screen "anaconda_warning_bar", 3) {
+        wait_still_screen 1;
+        assert_and_click "anaconda_spoke_done";
+    }
+}
