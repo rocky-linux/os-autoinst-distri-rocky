@@ -34,6 +34,8 @@ sub add_user {
 # it's at a console ready to start Firefox.
 sub start_webui {
     my ($user, $password) = @_;
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
+    assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.domain.local\n";
     wait_still_screen 5;
     assert_screen "freeipa_webui_login";

@@ -268,6 +268,8 @@ sub start_cockpit {
     # on localhost) shown. If $login is truth-y, also log in. Assumes
     # X and Firefox are installed.
     my $login = shift || 0;
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
+    assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     # run firefox directly in X as root. never do this, kids!
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
     assert_screen "cockpit_login";
