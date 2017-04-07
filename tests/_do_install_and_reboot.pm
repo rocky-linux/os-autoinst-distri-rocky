@@ -5,14 +5,12 @@ use utils;
 
 sub run {
     my $self = shift;
-    # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
-
     # Begin installation
     # Sometimes, the 'slide in from the top' animation messes with
     # this - by the time we click the button isn't where it was any
     # more. So wait a sec just in case.
-    sleep 1;
+    assert_screen "anaconda_main_hub_begin_installation", 300; #
+    wait_still_screen 2;
     assert_and_click "anaconda_main_hub_begin_installation";
 
     # Set root password
