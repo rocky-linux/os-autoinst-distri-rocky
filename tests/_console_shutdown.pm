@@ -19,12 +19,7 @@ sub run {
 # even if shutdown fails. we should have a separate test for shutdown/
 # logout/reboot stuff, might need some refactoring.
 sub test_flags {
-    # without anything - rollback to 'lastgood' snapshot if failed
-    # 'norollback' - don't rollback if failed
-    # 'fatal' - whole test suite is in danger if this fails
-    # 'milestone' - after this test succeeds, update 'lastgood'
-    # 'important' - if this fails, set the overall state to 'fail'
-    return {'norollback' => 1};
+    return { 'norollback' => 1, 'ignore_failure' => 1 };
 }
 
 1;
