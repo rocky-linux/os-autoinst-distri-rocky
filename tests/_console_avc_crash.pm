@@ -13,14 +13,15 @@ sub run {
     # anything at a console. the more advanced upstream 'console'
     # handling may help us here if we switch to it
     console_loadkeys_us;
-    # check there are no AVCs. We use ! because this returns 1
-    validate_script_output '! ausearch -m avc -ts yesterday 2>&1', sub { $_ =~ m/<no matches>/ };
-    # check there are no crashes
-    validate_script_output '! coredumpctl list 2>&1', sub { $_ =~ m/No coredumps found/ };
+    # check there are no AVCs. We expect an error here: if we don't
+    # get an error, it means there *are* AVCs.
+    record_soft_failure "AVC(s) found" unless (script_run 'ausearch -m avc -ts yesterday 2>&1');
+    # check there are no crashes. Similarly expect an error here
+    record_soft_failure "Crash(es) found" unless (script_run 'coredumpctl list 2>&1');
 }
 
 sub test_flags {
-    return { 'ignore_failure' => 1 };
+    return {};
 }
 
 1;
