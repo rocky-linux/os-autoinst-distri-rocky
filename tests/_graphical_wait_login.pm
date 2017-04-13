@@ -27,6 +27,8 @@ sub run {
     }
     # Wait for the login screen
     boot_to_login_screen(timeout => $wait_time);
+    # GDM 3.24.1 dumps a cursor in the middle of the screen here...
+    mouse_hide;
     # do user login unless USER_LOGIN is set to string 'false'
     unless (get_var("USER_LOGIN") eq "false") {
         if (get_var("DESKTOP") eq 'gnome') {
