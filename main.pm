@@ -172,26 +172,43 @@ sub load_install_tests() {
     autotest::loadtest "tests/_do_install_and_reboot.pm";
 }
 
-sub _load_early_postinstall_tests() {
+sub _load_instance {
+    # loads a specific 'instance' of a given test. See next function
+    # for more details.
+    my ($test, $instance) = @_;
+    $test .= "_${instance}" if $instance;
+    autotest::loadtest "${test}.pm";
+}
+
+sub _load_early_postinstall_tests {
     # Early post-install test loading. Split out as a separate sub
     # because we do this all twice on update tests.
+
+    # openQA isn't very good at handling jobs where the same module
+    # is loaded more than once, and fixing that will be a bit complex
+    # and no-one got around to it yet. So for now, we use a bit of a
+    # hack: for modules we know may get loaded multiple times, we have
+    # symlinks named _2, _3 etc. This function can be passed an arg
+    # specifying which 'instance' of the tests to use.
+    my ($instance) = @_;
+    $instance //= 0;
 
     # Unlock encrypted storage volumes, if necessary. The test name here
     # follows the 'storage post-install' convention, but must be run earlier.
     if (get_var("ENCRYPT_PASSWORD")) {
-        autotest::loadtest "tests/disk_guided_encrypted_postinstall.pm";
+        _load_instance("tests/disk_guided_encrypted_postinstall", $instance);
     }
 
     # Appropriate login method for install type
     if (get_var("DESKTOP")) {
-        autotest::loadtest "tests/_graphical_wait_login.pm";
+        _load_instance("tests/_graphical_wait_login", $instance);
     }
     # Test non-US input at this point, on language tests
     if (get_var("SWITCHED_LAYOUT") || get_var("INPUT_METHOD")) {
-        autotest::loadtest "tests/_graphical_input.pm";
+        _load_instance("tests/_graphical_input", $instance);
     }
     unless (get_var("DESKTOP")) {
-        autotest::loadtest "tests/_console_wait_login.pm";
+        _load_instance("tests/_console_wait_login", $instance);
     }
 }
 
@@ -219,7 +236,7 @@ sub load_postinstall_tests() {
     if (get_var("ADVISORY")) {
         autotest::loadtest "tests/_advisory_update.pm";
         # now load the early boot tests again, as _advisory_update reboots
-        _load_early_postinstall_tests();
+        _load_early_postinstall_tests(2);
     }
     # from now on, we have fully installed and booted system with root/specified user logged in
 
