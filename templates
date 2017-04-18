@@ -183,6 +183,17 @@
                       test_suite => { name => "install_default" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      prio       => 51,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Atomic-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
