@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 91,
+      "ypos": 262,
+      "xpos": 415,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "tags": [
+    "anaconda_blivet_part_devicetype_raid"
+  ],
+  "properties": []
+}

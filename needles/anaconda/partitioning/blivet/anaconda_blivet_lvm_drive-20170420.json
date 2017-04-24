@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 39,
+      "ypos": 186,
+      "width": 36,
+      "height": 35,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_lvm_drive"
+  ]
+}

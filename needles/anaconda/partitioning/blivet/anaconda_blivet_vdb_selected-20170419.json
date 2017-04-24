@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 368,
+      "ypos": 166,
+      "width": 51,
+      "height": 14,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "anaconda_blivet_vdb_selected"
+  ]
+}

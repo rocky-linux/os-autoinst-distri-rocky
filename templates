@@ -899,6 +899,61 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 90,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_ext3" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 90,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_no_swap" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 90,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_xfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 90,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_software_raid" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 90,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_lvmthin" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 50,
                       product    => {
                                       arch    => "x86_64",
@@ -1416,6 +1471,61 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_ext3" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_no_swap" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_xfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_software_raid" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_lvmthin" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 82,
                       product    => {
                                       arch    => "i386",
@@ -1873,6 +1983,43 @@
                       name => "install_no_swap",
                       settings => [
                         { key => "PARTITIONING", value => "custom_no_swap" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_ext3",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_ext3" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_no_swap",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_no_swap" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_xfs",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_xfs" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_software_raid",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_software_raid" },
+                        { key => "POSTINSTALL", value => "disk_custom_software_raid_postinstall" },
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_lvmthin",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_lvmthin" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },

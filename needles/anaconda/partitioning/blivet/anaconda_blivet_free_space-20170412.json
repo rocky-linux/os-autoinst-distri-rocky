@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "LANGUAGE-english",
+    "anaconda_blivet_free_space"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "xpos": 247,
+      "ypos": 336,
+      "width": 64,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

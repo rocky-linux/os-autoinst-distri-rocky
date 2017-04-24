@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_blivet_thinpool_part"
+  ],
+  "area": [
+    {
+      "xpos": 317,
+      "ypos": 338,
+      "width": 70,
+      "height": 12,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

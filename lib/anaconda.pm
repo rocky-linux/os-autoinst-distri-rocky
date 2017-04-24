@@ -8,7 +8,7 @@ use Exporter;
 use testapi;
 use utils;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -79,8 +79,11 @@ sub select_disks {
         assert_and_click "anaconda_spoke_done";
     }
 
-    # If this is a custom partitioning test, select custom partitioning.
-    if (get_var('PARTITIONING') =~ /^custom_/) {
+    # If this is a custom partitioning test, select custom partitioning. For testing blivet-gui,
+    # name of test module should start with custom_blivet_, otherwise it should start with custom_.
+    if (get_var('PARTITIONING') =~ /^custom_blivet_/) {
+        assert_and_click "anaconda_manual_blivet_partitioning";
+    } elsif (get_var('PARTITIONING') =~ /^custom_/) {
         assert_and_click "anaconda_manual_partitioning";
     }
 }
@@ -97,6 +100,71 @@ sub custom_scheme_select {
     # Move the mouse away from the menu
     mouse_set(10, 10);
     assert_and_click "anaconda_part_scheme_$scheme";
+}
+
+sub custom_blivet_add_partition {
+    # Used to add partition on blivet-gui partitioning screen
+    # in Anaconda. Should be called when blivet-gui is displayed and free space is selected.
+    # You can pass device type for partition (needle tagged anaconda_blivet_devicetype_$devicetype should exist),
+    # whether partitions should be of RAID1 (devicetype is then automatically handled) - you then
+    # need to have two disks added, size of that partition in MBs, desired filesystem of that partition
+    # (anaconda_blivet_part_fs_$filesystem should exist) and mountpoint of that partition (e. g. string "/boot").
+    my %args = (
+        devicetype => "",
+        raid1 => 0,
+        size => 0,
+        filesystem => "",
+        mountpoint => "",
+        @_
+    );
+    $args{devicetype} = "raid" if $args{raid1};
+
+    assert_and_click "anaconda_blivet_part_add";
+    mouse_set(10, 10);
+    if ($args{devicetype}) {
+        assert_and_click "anaconda_blivet_part_devicetype";
+        mouse_set(10, 10);
+        assert_and_click "anaconda_blivet_part_devicetype_$args{devicetype}";
+    }
+
+    if ($args{raid1}) {
+        # for RAID1, two disks should be selected
+        send_key "tab";
+        send_key "down";
+        send_key "spc";
+        assert_screen "anaconda_blivet_vdb_selected";
+
+        assert_and_click "anaconda_blivet_raidlevel_select";
+        mouse_set(10, 10);
+        assert_and_click "anaconda_blivet_raidlevel_raid1";
+    }
+
+    if ($args{size}) {
+        type_safely "\t\t";
+        # if we clicked on "raidlevel" before, we need to type only two tabs,
+        # otherwise size input box is still one tab away
+        if (!$args{raid1}) {
+            send_key "tab";
+        }
+        # size input can contain whole set of different values, so we can't match it with needle
+        type_safely $args{size} . "\n";
+    }
+    # if no filesystem was specified or filesystem is already selected, do nothing
+    if ($args{filesystem} && !check_screen("anaconda_blivet_part_fs_$args{filesystem}_selected", 5)) {
+        assert_and_click "anaconda_blivet_part_fs";
+        # Move the mouse away from the menu
+        mouse_set(10, 10);
+        assert_and_click "anaconda_blivet_part_fs_$args{filesystem}";
+    }
+    if ($args{mountpoint}) {
+        assert_and_click "anaconda_blivet_mountpoint";
+        type_safely $args{mountpoint} . "\n";
+    }
+    assert_and_click "anaconda_blivet_btn_ok";
+    # select "free space" in blivet-gui if it exists, so we could run this function again to add another partition
+    if (check_screen("anaconda_blivet_free_space", 5)) {
+        assert_and_click "anaconda_blivet_free_space";
+    }
 }
 
 sub custom_change_type {
