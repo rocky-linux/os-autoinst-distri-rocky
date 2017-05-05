@@ -11,7 +11,11 @@ sub run {
     assert_script_run 'rm -rf /root/.mozilla';
     # clear kerberos ticket so we don't auto-auth as 'test4'
     assert_script_run 'kdestroy -A';
-    start_webui("test1", "batterystaple");
+    # we use test3 for this test; this means it'll fail if the webUI
+    # test fails before creating test3 and setting its password, but
+    # changing test1's password can cause other client tests to fail
+    # if they try and auth as test1 while it's changed
+    start_webui("test3", "batterystaple");
     assert_and_click "freeipa_webui_actions";
     assert_and_click "freeipa_webui_reset_password_link";
     wait_still_screen 3;
@@ -34,13 +38,15 @@ sub run {
     # finishing (and handing off to freeipa_client_postinstall)
     wait_still_screen 5;
     # check we can kinit with changed password
-    assert_script_run 'printf "loremipsum" | kinit test1';
+    assert_script_run 'printf "loremipsum" | kinit test3';
     # change password via CLI (back to batterystaple, as that's what
     # freeipa_client test expects)
     assert_script_run 'dnf -y install freeipa-admintools';
-    assert_script_run 'printf "batterystaple\nbatterystaple" | ipa user-mod test1 --password';
+    assert_script_run 'printf "batterystaple\nbatterystaple" | ipa user-mod test3 --password';
     # check we can kinit again
-    assert_script_run 'printf "batterystaple" | kinit test1';
+    assert_script_run 'printf "batterystaple" | kinit test3';
+    # clear kerberos ticket for freeipa_client test
+    assert_script_run 'kdestroy -A';
     # we just stay here - freeipa_client will pick right up
 }
 
