@@ -107,7 +107,7 @@ sub custom_blivet_add_partition {
     # in Anaconda. Should be called when blivet-gui is displayed and free space is selected.
     # You can pass device type for partition (needle tagged anaconda_blivet_devicetype_$devicetype should exist),
     # whether partitions should be of RAID1 (devicetype is then automatically handled) - you then
-    # need to have two disks added, size of that partition in MBs, desired filesystem of that partition
+    # need to have two disks added, size of that partition in MiBs, desired filesystem of that partition
     # (anaconda_blivet_part_fs_$filesystem should exist) and mountpoint of that partition (e. g. string "/boot").
     my %args = (
         devicetype => "",
@@ -140,12 +140,11 @@ sub custom_blivet_add_partition {
     }
 
     if ($args{size}) {
-        type_safely "\t\t";
-        # if we clicked on "raidlevel" before, we need to type only two tabs,
-        # otherwise size input box is still one tab away
-        if (!$args{raid1}) {
-            send_key "tab";
-        }
+        assert_and_click "anaconda_blivet_size_unit";
+        assert_and_click "anaconda_blivet_size_unit_mib";
+
+        send_key "shift-tab";  # input is one tab back from unit selection listbox
+
         # size input can contain whole set of different values, so we can't match it with needle
         type_safely $args{size} . "\n";
     }
