@@ -4,8 +4,8 @@ use testapi;
 
 sub run {
     assert_screen "root_console";
-    # check that RAID is used
-    assert_script_run "cat /proc/mdstat | grep 'Personalities : \\\[raid1\\\]'";
+    # check that ext3 is used on root partition
+    assert_script_run "mount | grep 'on / type ext3'";
 }
 
 sub test_flags {

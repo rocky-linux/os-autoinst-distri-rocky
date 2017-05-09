@@ -1990,6 +1990,7 @@
                       name => "install_blivet_ext3",
                       settings => [
                         { key => "PARTITIONING", value => "custom_blivet_ext3" },
+                        { key => "POSTINSTALL", value => "disk_custom_ext3_postinstall" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
@@ -1997,6 +1998,7 @@
                       name => "install_blivet_no_swap",
                       settings => [
                         { key => "PARTITIONING", value => "custom_blivet_no_swap" },
+                        { key => "POSTINSTALL", value => "disk_custom_no_swap_postinstall" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
@@ -2004,6 +2006,7 @@
                       name => "install_blivet_xfs",
                       settings => [
                         { key => "PARTITIONING", value => "custom_blivet_xfs" },
+                        { key => "POSTINSTALL", value => "disk_custom_xfs_postinstall" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
@@ -2020,6 +2023,7 @@
                       name => "install_blivet_lvmthin",
                       settings => [
                         { key => "PARTITIONING", value => "custom_blivet_lvmthin" },
+                        { key => "POSTINSTALL", value => "disk_custom_lvmthin_postinstall" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
