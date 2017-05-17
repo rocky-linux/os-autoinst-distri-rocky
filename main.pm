@@ -97,13 +97,36 @@ $needle::cleanuphandler = \&cleanup_needles;
 
 
 sub load_upgrade_tests() {
-    # all upgrade tests consist of: preinstall phase (where packages are upgraded and
-    # dnf-plugin-system-upgrade is installed), run phase (where upgrade is run) and postinstall
-    # phase (where is checked if fedora was upgraded successfully)
+    # all upgrade tests include: boot phase (where bootloader and
+    # encryption are handled if necessary), preinstall phase (where
+    # packages are upgraded and dnf-plugin-system-upgrade installed),
+    # run phase (where upgrade is run) and postinstall phase (where
+    # is checked if fedora was upgraded successfully). The PREUPGRADE
+    # variable can be used to specify additional test modules to run
+    # after the preinstall phase but before the run phase, and the
+    # POSTINSTALL variable can be used to specify additional test
+    # modules to run after the upgrade postinstall phase.
+    autotest::loadtest "tests/upgrade_boot.pm";
+    # if static networking config is needed we must do it at this point
+    if (get_var("POST_STATIC")) {
+        autotest::loadtest "tests/_post_network_static.pm";
+    }
     autotest::loadtest "tests/upgrade_preinstall.pm";
+    # generic pre-upgrade test load
+    if (get_var("PREUPGRADE")) {
+        my @pus = split(/ /, get_var("PREUPGRADE"));
+        foreach my $pu (@pus) {
+            autotest::loadtest "tests/${pu}.pm";
+        }
+    }
     autotest::loadtest "tests/upgrade_run.pm";
-    # set postinstall test
-    set_var('POSTINSTALL', "upgrade_postinstall" );
+    # handle additional postinstall tests
+    if (get_var("POSTINSTALL")) {
+        set_var('POSTINSTALL', "upgrade_postinstall " . get_var("POSTINSTALL"));
+    }
+    else {
+        set_var('POSTINSTALL', "upgrade_postinstall");
+    }
 }
 
 sub load_install_tests() {
@@ -224,9 +247,11 @@ sub load_postinstall_tests() {
     _load_early_postinstall_tests();
 
     # do standard post-install static network config if the var is set
+    # and this is not an upgrade test (this is done elsewhere in the
+    # upgrade workflow)
     # this is here not in early_postinstall_tests as there's no need
     # to do it twice
-    if (get_var("POST_STATIC")) {
+    if (get_var("POST_STATIC") && !get_var("UPGRADE")) {
         autotest::loadtest "tests/_post_network_static.pm";
     }
 

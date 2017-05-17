@@ -10,8 +10,10 @@ sub run {
     my $self = shift;
     # login
     $self->root_console();
-    # use compose repo, disable u-t, etc.
-    repo_setup();
+    # use compose repo, disable u-t, etc. unless this is an upgrade
+    # test (in which case we're on the 'old' release at this point;
+    # one of the upgrade test modules does repo_setup later)
+    repo_setup() unless get_var("UPGRADE");
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
     assert_script_run 'dnf -y install haveged', 300;
@@ -60,14 +62,6 @@ sub run {
     if ($release ne "rawhide" && $release < 25) {
         assert_script_run 'ipa-getcert resubmit -d /etc/httpd/alias -n Server-Cert -D $( uname -n )';
     }
-    # check the role status, should be 'running'
-    validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^running/ };
-    # check the admin password is listed in 'settings'
-    validate_script_output 'rolectl settings domaincontroller/domain.local', sub {$_ =~m/dm_password = \w{5,}/ };
-    # sanitize the settings
-    assert_script_run 'rolectl sanitize domaincontroller/domain.local';
-    # check the password now shows as 'None'
-    validate_script_output 'rolectl settings domaincontroller/domain.local', sub {$_ =~ m/dm_password = None/ };
     # kinit as admin
     assert_script_run 'echo "monkeys123" | kinit admin';
     # set up an OTP for client001 enrolment (it will enrol with a kickstart)
@@ -86,17 +80,15 @@ sub run {
     # kinit as each user and set a new password
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test1@DOMAIN.LOCAL';
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test2@DOMAIN.LOCAL';
-    # we're all ready for other jobs to run!
-    mutex_create('freeipa_ready');
-    wait_for_children;
-    # once child jobs are done, stop the role
-    assert_script_run 'rolectl stop domaincontroller/domain.local';
-    # check role is stopped
-    validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^ready-to-start/ };
-    # decommission the role
-    assert_script_run 'rolectl decommission domaincontroller/domain.local', 300;
-    # check role is decommissioned
-    validate_script_output 'rolectl list instances', sub { $_ eq "" };
+    # we're ready for children to enrol, now
+    mutex_create("freeipa_ready");
+    # if upgrade test, wait for children to enrol before upgrade
+    if (get_var("UPGRADE")) {
+        my $children = get_children();
+        my $child_id = (keys %$children)[0];
+        mutex_lock('client_enrolled', $child_id);
+        mutex_unlock('client_enrolled');
+    }
 }
 
 

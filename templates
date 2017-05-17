@@ -1236,6 +1236,28 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "upgrade_server_domain_controller" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_realmd_join_sssd" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "upgrade_kde_64bit" },
                     },
                     {
@@ -2205,6 +2227,43 @@
                       ],
                     },
                     {
+                      name => "upgrade_server_domain_controller",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
+                        { key => "PREUPGRADE", value => "role_deploy_domain_controller" },
+                        { key => "POSTINSTALL", value => "role_deploy_domain_controller_check" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "GRUB", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "POST_STATIC", value => "10.0.2.100 ipa001.domain.local" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_realmd_join_sssd",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
+                        { key => "PREUPGRADE", value => "realmd_join_sssd" },
+                        { key => "POSTINSTALL", value => "freeipa_client" },
+                        { key => "PARALLEL_WITH", value => "upgrade_server_domain_controller" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "GRUB", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "POST_STATIC", value => "10.0.2.103 client003.domain.local" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
                       name => "upgrade_kde_64bit",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -2515,7 +2574,7 @@
                     {
                       name => "server_role_deploy_domain_controller",
                       settings => [
-                        { key => "POSTINSTALL", value => "role_deploy_domain_controller" },
+                        { key => "POSTINSTALL", value => "role_deploy_domain_controller role_deploy_domain_controller_check" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },

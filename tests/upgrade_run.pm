@@ -21,15 +21,22 @@ sub run {
     upload_logs "/var/log/dnf.rpm.log";
 
     script_run "dnf system-upgrade reboot", 0;
-    # fail immediately if we see a DNF error message
-    die "DNF reported failure" if (check_screen "upgrade_fail", 15);
+    # fail immediately if we see a DNF error message, but keep an eye
+    # out for the bootloader so we can handle it if requested
+    check_screen ["upgrade_fail", "bootloader"], 15;
+    die "DNF reported failure" if (match_has_tag "upgrade_fail");
+
+    # handle bootloader, if requested
+    if (get_var("GRUB_POSTINSTALL")) {
+        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"));
+    }
+
+    # decrypt, if encrypted
     if (get_var("ENCRYPT_PASSWORD")) {
         boot_decrypt(60);
-    }
-    # in encrypted case we need to wait a bit so postinstall test
-    # doesn't bogus match on the encryption prompt we just completed
-    # before it disappears from view
-    if (get_var("ENCRYPT_PASSWORD")) {
+        # in encrypted case we need to wait a bit so postinstall test
+        # doesn't bogus match on the encryption prompt we just completed
+        # before it disappears from view
         sleep 5;
     }
 }
