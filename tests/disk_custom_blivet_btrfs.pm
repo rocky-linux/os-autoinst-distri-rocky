@@ -11,15 +11,13 @@ sub run {
     assert_and_click "anaconda_spoke_done";
 
     custom_blivet_add_partition(size => 512, mountpoint => '/boot');
-    # add new LVM device
-    custom_blivet_add_partition(devicetype => 'lvm');
-    # select newly created LVM device for adding new partition
-    assert_and_click "anaconda_blivet_volumes_icon";
     custom_blivet_add_partition(size => 2048, filesystem => 'swap');
-    # add lvmthinpool
-    custom_blivet_add_partition(devicetype => 'lvmthin');
-    # select lvmthinpool for adding new partitions
-    assert_and_click "anaconda_blivet_thinpool_part";
+
+    # selecting "btrfs" as filesystem creates new BTRFS drive in blivet-gui
+    custom_blivet_add_partition(filesystem => 'btrfs');
+    # select newly created BTRFS drive (let's hope that BTRFS drive is only volume present)
+    assert_and_click "anaconda_blivet_volumes_icon";
+    # add root partition to btrfs drive
     custom_blivet_add_partition(mountpoint => '/');
 
     assert_and_click "anaconda_spoke_done";

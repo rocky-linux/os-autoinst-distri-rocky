@@ -899,7 +899,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 90,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -910,7 +910,18 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 90,
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_btrfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -921,7 +932,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 90,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -932,7 +943,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 90,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -943,7 +954,7 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 90,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
@@ -1489,6 +1500,17 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_blivet_btrfs" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 93,
+                      product    => {
+                                      arch    => "i386",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_blivet_no_swap" },
                     },
                     {
@@ -1991,6 +2013,14 @@
                       settings => [
                         { key => "PARTITIONING", value => "custom_blivet_ext3" },
                         { key => "POSTINSTALL", value => "disk_custom_ext3_postinstall" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                      ],
+                    },
+                    {
+                      name => "install_blivet_btrfs",
+                      settings => [
+                        { key => "PARTITIONING", value => "custom_blivet_btrfs" },
+                        { key => "POSTINSTALL", value => "disk_custom_btrfs_postinstall" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                       ],
                     },
