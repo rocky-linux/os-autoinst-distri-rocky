@@ -964,6 +964,72 @@
                       test_suite => { name => "install_blivet_lvmthin" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_ext3" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_btrfs" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 51,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_no_swap" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_xfs" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_software_raid" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_blivet_lvmthin" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 50,
                       product    => {
