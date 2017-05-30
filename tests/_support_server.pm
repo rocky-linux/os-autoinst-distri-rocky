@@ -20,7 +20,15 @@ sub run {
     ## ISCSI
 
     # start up iscsi target
-    assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
+    # different backing store for PowerPC and other arches
+    # on PowerPC, the installation disk is set on /dev/vdb
+    # so the iscsi backing store must be the /dev/vda
+    if (get_var('OFW')) {
+        assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vda\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
+    } else {
+        assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
+    }
+
     # open firewall port
     assert_script_run "firewall-cmd --add-service=iscsi-target";
     assert_script_run "systemctl restart tgtd.service";
