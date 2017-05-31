@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 409,
+      "ypos": 311,
+      "width": 100,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "anaconda_blivet_part_fs_ppc_prep_boot"
+  ],
+  "properties": []
+}
