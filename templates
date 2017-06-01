@@ -360,6 +360,39 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_system_logging" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_system_logging" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 22,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_system_logging" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
                                       arch    => "x86_64",
@@ -2431,6 +2464,17 @@
                       name => "base_update_cli",
                       settings => [
                         { key => "POSTINSTALL", value => "base_update_cli" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "base_system_logging",
+                      settings => [
+                        { key => "POSTINSTALL", value => "base_system_logging" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
