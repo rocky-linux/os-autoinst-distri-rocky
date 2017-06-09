@@ -6,6 +6,11 @@ use freeipa;
 
 sub run {
     my $self = shift;
+    # On the upgrade path, we don't have firefox / X installed yet
+    if (get_var("UPGRADE")) {
+        assert_script_run 'dnf -y groupinstall "base-x"', 300;
+        assert_script_run 'dnf -y install firefox', 120;
+    }
     # we're restarting firefox (instead of using the same one from
     # realmd_join_cockpit) so Firefox's trusted CA store refreshes and
     # it trusts the web server cert

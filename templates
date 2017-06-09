@@ -2245,14 +2245,14 @@
                       ],
                     },
                     {
-                      name => "upgrade_realmd_join_sssd",
+                      name => "upgrade_realmd_client",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "TEST_TARGET", value => "COMPOSE" },
                         { key => "PREUPGRADE", value => "realmd_join_sssd" },
-                        { key => "POSTINSTALL", value => "freeipa_client" },
+                        { key => "POSTINSTALL", value => "freeipa_webui freeipa_password_change freeipa_client" },
                         { key => "PARALLEL_WITH", value => "upgrade_server_domain_controller" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
