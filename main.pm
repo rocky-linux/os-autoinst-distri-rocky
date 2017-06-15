@@ -162,11 +162,6 @@ sub load_install_tests() {
         autotest::loadtest "tests/_check_install_source.pm";
     }
 
-    if (get_var('LIVE')) {
-        # No package set selection for lives.
-        set_var('PACKAGE_SET', "default");
-    }
-
     ## Select package set. Minimal is the default, if 'default' is specified, skip selection.
     autotest::loadtest "tests/_software_selection.pm";
 

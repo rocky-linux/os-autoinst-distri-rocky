@@ -7,8 +7,10 @@ sub run {
     $self->root_console(tty=>3);
     assert_script_run 'top -i -n20 -b > /var/tmp/top.log', 120;
     upload_logs '/var/tmp/top.log';
-    assert_script_run 'rpm -qa --queryformat "%{NAME}\n" | sort -u > /var/tmp/rpms.log';
-    upload_logs '/var/tmp/rpms.log';
+    unless (get_var("CANNED")) {
+        assert_script_run 'rpm -qa --queryformat "%{NAME}\n" | sort -u > /var/tmp/rpms.log';
+        upload_logs '/var/tmp/rpms.log';
+    }
     assert_script_run 'free > /var/tmp/free.log';
     upload_logs '/var/tmp/free.log';
     assert_script_run 'df > /var/tmp/df.log';
