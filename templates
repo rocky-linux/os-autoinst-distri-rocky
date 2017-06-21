@@ -1247,7 +1247,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "upgrade_realmd_join_sssd" },
+                      test_suite => { name => "upgrade_realmd_client" },
                     },
                     {
                       machine    => { name => "64bit" },
