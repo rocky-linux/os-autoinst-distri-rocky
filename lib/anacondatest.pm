@@ -62,16 +62,7 @@ sub root_console {
     my $self = shift;
     my %args = (
         @_);
-
-    if (get_var("LIVE")) {
-        send_key "ctrl-alt-f2";
-    }
-    else {
-        # Working around RHBZ 1222413, no console on tty2
-        send_key "ctrl-alt-f1";
-        send_key "ctrl-b";
-        send_key "2";
-    }
+    send_key "ctrl-alt-f2";
     console_login(user=>"root");
 }
 
