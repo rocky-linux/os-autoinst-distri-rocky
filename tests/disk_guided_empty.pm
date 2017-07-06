@@ -15,6 +15,8 @@ sub run {
         assert_screen "anaconda_install_destination_updates", 30;
     }
 
+    # try and workaround #1444225 by waiting a bit before clicking Done
+    sleep 2;
     assert_and_click "anaconda_spoke_done";
 
     # Anaconda hub
