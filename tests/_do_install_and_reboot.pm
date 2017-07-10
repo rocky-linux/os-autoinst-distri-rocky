@@ -14,7 +14,7 @@ sub run {
         if (check_screen "anaconda_main_hub_install_destination_warning", 1) {
             record_soft_failure "RHBZ #1444225 (INSTALLATION DESTINATION bug)";
             assert_and_click "anaconda_main_hub_install_destination";
-            wait_still screen 2;
+            wait_still_screen 2;
             assert_and_click "anaconda_spoke_done";
         }
     }
