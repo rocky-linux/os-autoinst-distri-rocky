@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -481,4 +481,42 @@ sub anaconda_create_user {
         wait_still_screen 1;
         assert_and_click "anaconda_spoke_done";
     }
+}
+
+sub check_desktop_clean {
+    # Check we're at a 'clean' desktop. This used to be a simple
+    # needle check, but Rawhide's default desktop is now one which
+    # changes over time, and the GNOME top bar is now translucent
+    # by default; together these changes mean it's impossible to
+    # make a reliable needle, so we need something more tricksy to
+    # cover that case. 'tries' is the amount of check cycles to run
+    # before giving up and failing; each cycle should take ~3 secs.
+    my %args = (
+        tries => 10,
+        @_
+    );
+    foreach my $i (1..$args{tries}) {
+        # we still *do* the needle check, for all cases it covers
+        return if (check_screen "graphical_desktop_clean", 1);
+        # now do the special GNOME case
+        if (get_var("DESKTOP") eq "gnome") {
+            send_key "alt-f1";
+            if (check_screen "overview_app_grid", 2) {
+                send_key "alt-f1";
+                wait_still_screen 3;
+                # go back to the desktop, if we're still at the app
+                # grid (can be a bit fuzzy depending on response lag)
+                while (check_screen "overview_app_grid", 1) {
+                    send_key "alt-f1";
+                    wait_still_screen 3;
+                }
+                return;
+            }
+        }
+        else {
+            # to keep the timing equal
+            sleep 2;
+        }
+    }
+    die "Clean desktop not reached!";
 }

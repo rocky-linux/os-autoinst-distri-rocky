@@ -89,7 +89,7 @@ sub run {
         # Move the mouse somewhere it won't highlight the match areas
         mouse_set(300, 200);
         # KDE can take ages to start up
-        assert_screen "graphical_desktop_clean", 120;
+        check_desktop_clean(tries=>40);
     }
 }
 

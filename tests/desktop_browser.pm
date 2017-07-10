@@ -14,7 +14,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    assert_screen 'graphical_desktop_clean';
+    check_desktop_clean;
     send_key 'alt-f1';
     # wait out animations
     wait_still_screen 2;

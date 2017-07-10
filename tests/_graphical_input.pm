@@ -26,7 +26,7 @@ sub run {
         send_key "esc";
         send_key "esc";
         send_key "esc";
-        assert_screen "graphical_desktop_clean";
+        check_desktop_clean;
     }
 }
 

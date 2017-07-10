@@ -65,7 +65,7 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
-    assert_screen 'graphical_desktop_clean', 90;
+    check_desktop_clean(tries=>30);
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
     # things that crash a few minutes after startup, etc.
