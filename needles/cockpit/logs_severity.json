@@ -10,6 +10,6 @@
     }
   ],
   "tags": [
-    "cockpit_logs_notices"
+    "cockpit_logs_severity"
   ]
 }

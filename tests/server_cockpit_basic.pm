@@ -11,12 +11,12 @@ sub run {
     assert_and_click "cockpit_logs";
     # the date dropdown changes and messes with the button locations, so wait
     wait_still_screen 2;
-    assert_and_click "cockpit_logs_notices";
+    assert_and_click "cockpit_logs_severity";
     wait_still_screen 2;
     # assume there's an entry, click it
-    assert_and_click "cockpit_logs_notices_entry";
+    assert_and_click "cockpit_logs_entry";
     # check we get to the appropriate detail screen
-    assert_screen "cockpit_logs_notices_detail";
+    assert_screen "cockpit_logs_detail";
     # go to the services screen
     assert_and_click "cockpit_services";
     wait_still_screen 2;
