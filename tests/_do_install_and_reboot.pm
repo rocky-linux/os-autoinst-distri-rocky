@@ -6,10 +6,21 @@ use utils;
 sub run {
     my $self = shift;
     # Begin installation
+    # Deal with RHBZ #1444225: if INSTALLATION DESTINATION is showing
+    # incomplete (which it never should at this point), take a quick
+    # trip through it to fix it
+    foreach my $i (1..150) {
+        last if (check_screen "anaconda_main_hub_begin_installation", 1);
+        if (check_screen "anaconda_main_hub_install_destination_warning", 1) {
+            record_soft_failure "RHBZ #1444225 (INSTALLATION DESTINATION bug)";
+            assert_and_click "anaconda_main_hub_install_destination";
+            wait_still screen 2;
+            assert_and_click "anaconda_spoke_done";
+        }
+    }
     # Sometimes, the 'slide in from the top' animation messes with
     # this - by the time we click the button isn't where it was any
-    # more. So wait a sec just in case.
-    assert_screen "anaconda_main_hub_begin_installation", 300; #
+    # more. So wait for screen to stop moving before we click.
     wait_still_screen 2;
     assert_and_click "anaconda_main_hub_begin_installation";
 

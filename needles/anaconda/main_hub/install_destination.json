@@ -10,6 +10,7 @@
     ],
     "tags": [
         "anaconda_main_hub_install_destination",
+        "anaconda_main_hub_install_destination_warning",
         "ENV-DISTRI-fedora"
     ]
 }
