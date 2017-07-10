@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "initial_setup_kana_kanji",
+    "LANGUAGE-japanese"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "xpos": 266,
+      "height": 15,
+      "width": 121,
+      "type": "match",
+      "ypos": 362
+    }
+  ]
+}
