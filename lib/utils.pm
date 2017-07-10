@@ -500,14 +500,14 @@ sub check_desktop_clean {
         return if (check_screen "graphical_desktop_clean", 1);
         # now do the special GNOME case
         if (get_var("DESKTOP") eq "gnome") {
-            send_key "alt-f1";
+            send_key "super";
             if (check_screen "overview_app_grid", 2) {
-                send_key "alt-f1";
+                send_key "super";
                 wait_still_screen 3;
                 # go back to the desktop, if we're still at the app
                 # grid (can be a bit fuzzy depending on response lag)
                 while (check_screen "overview_app_grid", 1) {
-                    send_key "alt-f1";
+                    send_key "super";
                     wait_still_screen 3;
                 }
                 return;
