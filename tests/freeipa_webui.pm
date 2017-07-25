@@ -9,6 +9,8 @@ sub run {
     # On the upgrade path, we don't have firefox / X installed yet
     if (get_var("UPGRADE")) {
         assert_script_run 'dnf -y groupinstall "base-x"', 300;
+        # FIXME: this should probably be in base-x...X seems to fail without
+        assert_script_run 'dnf -y install libglvnd-egl', 120;
         assert_script_run 'dnf -y install firefox', 120;
     }
     # we're restarting firefox (instead of using the same one from
