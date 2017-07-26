@@ -16,6 +16,8 @@ sub run {
             assert_and_click "anaconda_main_hub_install_destination";
             wait_still_screen 2;
             assert_and_click "anaconda_spoke_done";
+            # if this is an encrypted install, re-confirm passphrase
+            assert_and_click "anaconda_install_destination_save_passphrase" if (get_var("ENCRYPT_PASSWORD"));
         }
     }
     # Sometimes, the 'slide in from the top' animation messes with
