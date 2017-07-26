@@ -1809,7 +1809,8 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
-                        { key => "PART_TABLE_TYPE", value => "mbr"}
+                        { key => "PART_TABLE_TYPE", value => "mbr"},
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
                       ],
                     },
                     {
@@ -1821,7 +1822,8 @@
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "UEFI", value => "1"},
-                        { key => "PART_TABLE_TYPE", value => "gpt"}
+                        { key => "PART_TABLE_TYPE", value => "gpt"},
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
                       ],
                     },
                     {
@@ -1834,7 +1836,10 @@
                         { key => "QEMURAM", value => "1024"},
                         { key => "QEMU_NO_KVM", value => "1"},
                         { key => "TIMEOUT_SCALE", value => "5" },
-                        { key => "SERIALDEV", value => "ttyAMA0" }
+                        { key => "SERIALDEV", value => "ttyAMA0" },
+                        # we're running ARM tests on x86_64 for now as we have
+                        # no ARM workers
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
                       ],
                     },
                   ],
