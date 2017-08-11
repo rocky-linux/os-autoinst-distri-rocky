@@ -1903,7 +1903,8 @@
                       name      => "",
                       settings  => [
                         { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" }
+                        { key => "TEST_TARGET", value => "ISO" },
+                        { key => "HDDSIZEGB", value => "12" }
                                    ],
                       version   => "*",
                     },
