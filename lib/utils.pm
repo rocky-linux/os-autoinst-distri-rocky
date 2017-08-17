@@ -355,6 +355,12 @@ sub _repo_setup_updates {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
+    if (get_var("OFW")) {
+        # the uncommented baseurl line must be changed for PowerPC
+        # from download.fedoraproject.org/pub/fedora/linux/...
+        # to   download.fedoraproject.org/pub/fedora-secondary/...
+        script_run "sed -i -e 's,/pub/fedora/linux/,/pub/fedora-secondary/,g' /etc/yum.repos.d/fedora*.repo", 0;
+    }
     if (get_var("DEVELOPMENT")) {
         # Fix URL for fedora.repo if this is a development release
         # This is rather icky, but I can't think of any better way
