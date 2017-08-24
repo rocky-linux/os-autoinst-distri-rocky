@@ -20,8 +20,14 @@ sub run {
         $repourl =~ s/^nfsvers=.://;
         # the above both checks if we're dealing with an NFS URL, and
         # strips the 'nfs:' and 'nfsvers=.:' from it if so
-        # message is in packaging.log up to F26, anaconda.log F27+
-        assert_script_run "grep 'mounting ${repourl}' /tmp/packaging.log /tmp/anaconda.log";
+	if (get_var("OFW")) {
+            # for PowerPC mounting info may be not in anaconda.log
+            assert_script_run "mount |grep nfs |grep '${repourl}'";
+	}
+	else {
+            # message is in packaging.log up to F26, anaconda.log F27+
+            assert_script_run "grep 'mounting ${repourl}' /tmp/packaging.log /tmp/anaconda.log";
+	}
     }
     else {
         assert_script_run "grep \"added repo: 'anaconda'.*${repourl}\" /tmp/packaging.log";
