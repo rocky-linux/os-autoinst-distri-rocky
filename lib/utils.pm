@@ -98,6 +98,16 @@ sub desktop_switch_layout {
     assert_screen "${environment}_layout_${layout}", 3;
 }
 
+# this is used at the end of console_login to check if we got a prompt
+# indicating that we got a bash shell, but sourcing of /etc/bashrc
+# failed (the prompt looks different in this case). We treat this as
+# a soft failure.
+sub _console_login_finish {
+    if (match_has_tag "bash_noprofile") {
+        record_soft_failure "It looks like profile sourcing failed";
+    }
+}
+
 # this subroutine handles logging in as a root/specified user into console
 # it requires TTY to be already displayed (handled by the root_console()
 # method of distribution classes)
@@ -134,12 +144,12 @@ sub console_login {
 
     check_screen [$good, 'text_console_login'], 10;
     # if we're already logged in, all is good
-    return if (match_has_tag $good);
+    _console_login_finish() if (match_has_tag $good);
     # if we see the login prompt, type the username
     type_string("$args{user}\n") if (match_has_tag 'text_console_login');
     check_screen [$good, 'console_password_required'], 30;
     # on a live image, just the user name will be enough
-    return if (match_has_tag $good);
+    _console_login_finish() if (match_has_tag $good);
     # otherwise, type the password if we see the prompt
     if (match_has_tag 'console_password_required') {
         type_string "$args{password}";
@@ -155,6 +165,7 @@ sub console_login {
     }
     # make sure we reached the console
     assert_screen($good, 30);
+    _console_login_finish();
 }
 
 # load US layout (from a root console)
