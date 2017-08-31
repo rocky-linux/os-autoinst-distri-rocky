@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 198,
+      "type": "match",
+      "xpos": 588,
+      "height": 25,
+      "ypos": 394
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_no_notifications"
+  ]
+}
