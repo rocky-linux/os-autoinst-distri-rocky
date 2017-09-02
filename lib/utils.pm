@@ -394,6 +394,8 @@ sub gnome_initial_setup {
     assert_screen "next_button", $args{timeout};
     # wait a bit in case of animation
     wait_still_screen 3;
+    # GDM 3.24.1 dumps a cursor in the middle of the screen here...
+    mouse_hide if ($args{prelogin});
     for my $n (1..$nexts) {
         # click 'Next' $nexts times, moving the mouse to avoid
         # highlight problems, sleeping to give it time to get
