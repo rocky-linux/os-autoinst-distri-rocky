@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "bash_noprofile",
+    "root_console",
+    "root_logged_in"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "ypos": 97,
+      "type": "match",
+      "width": 77,
+      "xpos": 1,
+      "height": 13
+    }
+  ]
+}
