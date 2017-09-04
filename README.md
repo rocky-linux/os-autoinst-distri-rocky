@@ -69,18 +69,16 @@ There are also several modules that export utility functions, currently `utils`,
 
 ### New test development workflow
 
-1. Select test from [phabricator page](https://phab.qa.fedoraproject.org/w/openqa/tests/).
-2. Put each part of your test as a separate file into `tests/` directory, reimplementing `run()` method
+1. Put each part of your test as a separate file into `tests/` directory, reimplementing `run()` method
 and `test_flags()` method, inheriting from one of the classes mentioned above.
-3. Set correct variables (so that all test parts you have made are executed) in [WebUI -> Test suites](https://localhost:8080/admin/test_suites).
-4. Link your newly created Test suite to medium type in [WebUI -> Job groups](https://localhost:8080/admin/groups).
-5. Run test (see [openqa_fedora_tools repository](https://bitbucket.org/rajcze/openqa_fedora_tools)).
-6. Create needles (images) by using interactive mode and needles editor in WebUI.
-7. Add new Job template and Test suite into `templates` file (and `templates-updates`, if the test is applicable to the update testing workflow)
-8. Add new Test suite and Test case into [`conf_test_suites.py`](https://pagure.io/fedora-qa/fedora_openqa/blob/master/f/fedora_openqa/conf_test_suites.py) file in fedora_openqa repository.
-9. Open differential request via phabricator, set os-autoinst-disti-fedora as a project and repository.
-10. Open differential request for fedora_openqa change if necessary.
-10. Mark your test in [phabricator page](https://phab.qa.fedoraproject.org/w/openqa/tests/) as done.
+2. Set correct variables (so that all test parts you have made are executed) in [WebUI -> Test suites](https://localhost:8080/admin/test_suites).
+3. Link your newly created Test suite to medium type in [WebUI -> Job groups](https://localhost:8080/admin/groups).
+4. Run test (see [openqa_fedora_tools repository](https://bitbucket.org/rajcze/openqa_fedora_tools)).
+5. Create needles (images) by using interactive mode and needles editor in WebUI.
+6. Add new Job template and Test suite into `templates` file (and `templates-updates`, if the test is applicable to the update testing workflow)
+7. Add new Test suite and Test case into [`conf_test_suites.py`](https://pagure.io/fedora-qa/fedora_openqa/blob/master/f/fedora_openqa/conf_test_suites.py) file in fedora_openqa repository.
+8. Open pull request for the os-autoinst-distri-fedora changes in [Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora). Pagure uses a Github-style workflow (summary: fork the project via the web interface, push your changes to a branch on your fork, then use the web interface to submit a pull request). See the [Pagure documentation](https://docs.pagure.org/pagure/usage/index.html) for more details.
+9. Open a pull request in [fedora_openqa Pagure](https://pagure.io/fedora-qa/fedora_openqa) for any necessary fedora_openqa changes.
 
 ### Language handling
 
