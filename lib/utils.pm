@@ -341,7 +341,7 @@ sub _repo_setup_updates {
     # 'dnf install' calls will get the packages from the update.
     assert_script_run "mkdir -p /opt/update_repo";
     assert_script_run "cd /opt/update_repo";
-    assert_script_run "dnf -y install bodhi-client git createrepo", 300;
+    assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
     # download the packages
     my $version = lc(get_var("VERSION"));
     if ($version eq 'rawhide' || $version > 25) {
