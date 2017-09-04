@@ -6,7 +6,7 @@ This repository contains tests and images for testing [Fedora](https://getfedora
 Issues
 ------
 
-[Issues](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/issues) and [pull requests](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/pull-requests) are tracked in [fedora_openqa Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora). Pagure uses a Github-like pull request workflow, so if you're familiar with that, you can easily submit Pagure pull requests. If not, you can read up in the [Pagure documentation](https://docs.pagure.org/pagure/usage/index.html).
+[Issues](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/issues) and [pull requests](https://pagure.io/fedora-qa/os-autoinst-distri-fedora/pull-requests) are tracked in [os-autoinst-distri-fedora Pagure](https://pagure.io/fedora-qa/os-autoinst-distri-fedora). Pagure uses a Github-like pull request workflow, so if you're familiar with that, you can easily submit Pagure pull requests. If not, you can read up in the [Pagure documentation](https://docs.pagure.org/pagure/usage/index.html).
 
 Note that this repository does not use the 'gitflow' system, so the main development branch is `master`: please branch from `master` and submit diffs against it. This is not a Python repository and has no tests or linting.
 
