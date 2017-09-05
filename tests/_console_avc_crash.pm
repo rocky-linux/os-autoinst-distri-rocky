@@ -15,9 +15,20 @@ sub run {
     console_loadkeys_us;
     # check there are no AVCs. We expect an error here: if we don't
     # get an error, it means there *are* AVCs.
-    record_soft_failure "AVC(s) found" unless (script_run 'ausearch -m avc -ts yesterday 2>&1');
+    my $hook_run = 0;
+    unless (script_run 'ausearch -m avc -ts yesterday > /tmp/avcs.txt 2>&1') {
+        record_soft_failure "AVC(s) found (see avcs.txt log)";
+        upload_logs "/tmp/avcs.txt";
+        # Run the post-fail hook so we have all the logs
+        $self->post_fail_hook();
+        $hook_run = 1;
+    }
     # check there are no crashes. Similarly expect an error here
-    record_soft_failure "Crash(es) found" unless (script_run 'coredumpctl list 2>&1');
+    unless (script_run 'coredumpctl list > /tmp/coredumps.txt 2>&1') {
+        record_soft_failure "Crash(es) found (see coredumps.txt log)";
+        upload_logs "/tmp/coredumps.txt";
+        $self->post_fail_hook() unless ($hook_run);
+    }
 }
 
 sub test_flags {
