@@ -25,6 +25,10 @@ sub run {
     assert_script_run 'rolectl decommission domaincontroller/domain.local', 300;
     # check role is decommissioned
     validate_script_output 'rolectl list instances', sub { $_ eq "" };
+    # run post-fail hook to upload logs - even when this test passes
+    # there are often cases where we need to see the logs (e.g. client
+    # test failed due to server issue)
+    $self->post_fail_hook();
 }
 
 
