@@ -41,8 +41,16 @@ sub run {
     assert_and_click 'desktop_package_tool_update';
     # refresh updates
     assert_and_click 'desktop_package_tool_update_refresh', '', 120;
-    # wait for refresh, then apply updates
-    for my $n (1..5) {
+    # wait for refresh, then apply updates, using a C-style loop so we
+    # can reset it if needed due to RHBZ #1314991
+    for (my $n = 1; $n < 6; $n++) {
+        # Check if we see the 'cancelled by user action' error we get
+        # when #1314991 happens, if so, refresh and restart the loop
+        if (check_screen 'desktop_package_tool_update_bz1314991', 1) {
+            record_soft_failure "RHBZ #1314991 (background PK operation interfered with update)";
+            assert_and_click 'desktop_package_tool_update_refresh';
+            $n = 1;
+        }
         last if (check_screen 'desktop_package_tool_update_apply', 120);
         mouse_set 10, 10;
         mouse_hide;
