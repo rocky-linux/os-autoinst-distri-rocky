@@ -3,15 +3,8 @@
         {
             "height": 14,
             "type": "match",
-            "width": 41,
-            "xpos": 7,
-            "ypos": 95
-        },
-        {
-            "height": 14,
-            "type": "match",
-            "width": 17,
-            "xpos": 136,
+            "width": 27,
+            "xpos": 126,
             "ypos": 96
         }
     ],
