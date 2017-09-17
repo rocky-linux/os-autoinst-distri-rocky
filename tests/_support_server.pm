@@ -23,6 +23,8 @@ sub run {
     assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
     # open firewall port
     assert_script_run "firewall-cmd --add-service=iscsi-target";
+    # tgtd currently fails to run on f26 with SELinux enforcing
+    assert_script_run "setenforce Permissive";
     assert_script_run "systemctl restart tgtd.service";
     assert_script_run "systemctl is-active tgtd.service";
 
