@@ -15,6 +15,8 @@ sub run {
     assert_script_run 'dnf -y groupinstall "base-x"', 300;
     # FIXME: this should probably be in base-x...X seems to fail without
     assert_script_run 'dnf -y install libglvnd-egl', 120;
+    # try to avoid random weird font selection happening
+    assert_script_run 'dnf -y install dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts', 120;
     assert_script_run 'dnf -y install firefox', 120;
     start_cockpit(0);
     # quit firefox (return to console)
