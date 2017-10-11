@@ -2142,6 +2142,18 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "base_system_logging" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 30,
                       product    => {
                                       arch    => "ppc64le",
