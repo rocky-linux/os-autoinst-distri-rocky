@@ -199,7 +199,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "install_default_upload" },
@@ -210,7 +210,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "install_default" },
@@ -243,7 +243,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "install_no_user" },
@@ -287,7 +287,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_selinux" },
@@ -331,7 +331,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_services_start" },
@@ -386,7 +386,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_service_manipulation" },
@@ -463,7 +463,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "base_system_logging" },
@@ -518,7 +518,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "desktop_terminal" },
@@ -551,7 +551,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-dvd_ostree-iso",
+                                      flavor  => "Workstation Ostree-dvd_ostree-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "desktop_browser" },
@@ -3491,7 +3491,7 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "Workstation-dvd_ostree-iso",
+                      flavor    => "Workstation Ostree-dvd_ostree-iso",
                       name      => "",
                       settings  => [
                         { key => "CANNED", value => "1" },
