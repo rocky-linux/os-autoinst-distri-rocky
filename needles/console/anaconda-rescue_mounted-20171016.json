@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "width": 93,
+      "xpos": 1,
+      "height": 13,
+      "ypos": 513,
+      "type": "match"
+    },
+    {
+      "ypos": 658,
+      "type": "match",
+      "xpos": 55,
+      "width": 90,
+      "height": 13
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "rescue_mounted"
+  ]
+}
