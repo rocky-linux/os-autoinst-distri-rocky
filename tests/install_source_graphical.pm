@@ -45,7 +45,10 @@ sub run {
         type_safely $repourl;
 
         # select as mirror list
-        assert_and_click "anaconda_install_source_repo_select_mirrorlist";
+        send_key "tab";
+        send_key "tab";
+        send_key "down";
+        send_key "down";
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")) {
         $repourl = get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
