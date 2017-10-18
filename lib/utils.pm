@@ -144,12 +144,18 @@ sub console_login {
 
     check_screen [$good, 'text_console_login'], 10;
     # if we're already logged in, all is good
-    _console_login_finish() if (match_has_tag $good);
+    if (match_has_tag $good) {
+        _console_login_finish();
+        return;
+    }
     # if we see the login prompt, type the username
     type_string("$args{user}\n") if (match_has_tag 'text_console_login');
     check_screen [$good, 'console_password_required'], 30;
     # on a live image, just the user name will be enough
-    _console_login_finish() if (match_has_tag $good);
+    if (match_has_tag $good) {
+        _console_login_finish();
+        return;
+    }
     # otherwise, type the password if we see the prompt
     if (match_has_tag 'console_password_required') {
         type_string "$args{password}";
