@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "browser_launcher",
+    "firefox_launcher"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "width": 31,
+      "ypos": 209,
+      "type": "match",
+      "height": 31,
+      "xpos": 46
+    }
+  ]
+}

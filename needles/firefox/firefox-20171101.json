@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "width": 20,
+      "ypos": 74,
+      "height": 20,
+      "type": "match",
+      "xpos": 108
+    },
+    {
+      "ypos": 74,
+      "width": 24,
+      "height": 20,
+      "type": "match",
+      "xpos": 992
+    }
+  ],
+  "tags": [
+    "firefox",
+    "browser"
+  ],
+  "properties": []
+}

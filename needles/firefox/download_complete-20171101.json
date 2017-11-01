@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "browser_download_complete",
+    "firefox_download_complete"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "width": 16,
+      "ypos": 74,
+      "height": 19,
+      "type": "match",
+      "xpos": 894
+    }
+  ]
+}
