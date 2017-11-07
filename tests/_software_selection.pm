@@ -8,7 +8,7 @@ sub run {
 
     # Select package set. Minimal is the default, if 'default' is specified, skip selection.
     my $packageset = get_var('PACKAGE_SET', 'minimal');
-    if ($packageset eq 'default') {
+    if ($packageset eq 'default' || get_var('MODULAR')) {
         return
     }
 
