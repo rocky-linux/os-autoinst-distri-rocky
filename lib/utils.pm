@@ -328,7 +328,8 @@ sub _repo_setup_compose {
         # add a disabled non-modular release repo; we have to use this
         # to install some things we need for testing which aren't in
         # Modular Server composes
-        assert_script_run 'printf "[fedora]\nname=Fedora $releasever - $basearch\nmetalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch\nenabled=0\nmetadata_expire=7d\nrepo_gpgcheck=0\ntype=rpm\ngpgcheck=1\ngpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch\nskip_if_unavailable=True" > /etc/yum.repos.d/fedora.repo';
+        assert_script_run 'printf \'[fedora]\nname=Fedora $releasever - $basearch\nmetalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch\nenabled=0\nmetadata_expire=7d\nrepo_gpgcheck=0\ntype=rpm\ngpgcheck=1\ngpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch\nskip_if_unavailable=True\' > /etc/yum.repos.d/fedora.repo';
+        script_run 'cat /etc/yum.repos.d/fedora.repo';
         # FIXME use the compose repo, as per below - easier if the repo
         # files had commented-out baseurl lines
     }
