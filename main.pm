@@ -217,6 +217,13 @@ sub _load_early_postinstall_tests {
         _load_instance("tests/disk_guided_encrypted_postinstall", $instance);
     }
 
+    # For now, there's no possibility to get a graphical desktop on
+    # Modular composes, so short-circuit here for those
+    if (get_var("MODULAR")) {
+        _load_instance("tests/_console_wait_login", $instance);
+        return;
+    }
+
     # Appropriate login method for install type
     if (get_var("DESKTOP")) {
         _load_instance("tests/_graphical_wait_login", $instance);
