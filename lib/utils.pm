@@ -325,16 +325,18 @@ sub _repo_setup_compose {
     if (get_var("MODULAR")) {
         # dnf config-manager not currently available on modular composes
         assert_script_run "sed -i -e 's,enabled=1,enabled=0,g' /etc/yum.repos.d/fedora-modular-server-updates-testing.repo /etc/yum.repos.d/fedora-modular-server-updates.repo'";
+        # FIXME use the compose repo, as per below - easier if the repo
+        # files had commented-out baseurl lines
     }
     else {
         assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
+        # we use script_run here as the rawhide repo file won't always exist
+        # and we don't want to bother testing or predicting its existence;
+        # assert_script_run doesn't buy you much with sed anyway as it'll
+        # return 0 even if it replaced nothing
+        script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+        script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
     }
-    # we use script_run here as the rawhide repo file won't always exist
-    # and we don't want to bother testing or predicting its existence;
-    # assert_script_run doesn't buy you much with sed anyway as it'll
-    # return 0 even if it replaced nothing
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
 }
 
 sub _repo_setup_updates {
