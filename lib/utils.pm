@@ -322,7 +322,13 @@ sub _repo_setup_compose {
     # tools see only packages from the compose under test
     my $location = get_var("LOCATION");
     return unless $location;
-    assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
+    if (get_var("MODULAR")) {
+        # dnf config-manager not currently available on modular composes
+        assert_script_run "sed -i -e 's,enabled=1,enabled=0,g' /etc/yum.repos.d/fedora-modular-server-updates-testing.repo /etc/yum.repos.d/fedora-modular-server-updates.repo'";
+    }
+    else {
+        assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
+    }
     # we use script_run here as the rawhide repo file won't always exist
     # and we don't want to bother testing or predicting its existence;
     # assert_script_run doesn't buy you much with sed anyway as it'll
