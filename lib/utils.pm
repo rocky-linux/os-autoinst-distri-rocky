@@ -324,7 +324,7 @@ sub _repo_setup_compose {
     return unless $location;
     if (get_var("MODULAR")) {
         # dnf config-manager not currently available on modular composes
-        assert_script_run "sed -i -e 's,enabled=1,enabled=0,g' /etc/yum.repos.d/fedora-modular-server-updates-testing.repo /etc/yum.repos.d/fedora-modular-server-updates.repo'";
+        assert_script_run "sed -i -e 's,enabled=1,enabled=0,g' /etc/yum.repos.d/fedora-modular-server-updates-testing.repo /etc/yum.repos.d/fedora-modular-server-updates.repo";
         # FIXME use the compose repo, as per below - easier if the repo
         # files had commented-out baseurl lines
     }
