@@ -302,6 +302,8 @@ sub start_cockpit {
     # run firefox directly in X as root. never do this, kids!
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
     assert_screen "cockpit_login";
+    # this happened on early Modular Server composes...
+    record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
     wait_still_screen 5;
     if ($login) {
         type_safely "root";
