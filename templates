@@ -1806,6 +1806,30 @@
                       product    => {
                                       arch    => "ppc64le",
                                       distri  => "fedora",
+                                      flavor  => "Atomic-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Atomic-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default_upload" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
                                       flavor  => "Server-boot-iso",
                                       version => "*",
                                     },
@@ -3528,6 +3552,18 @@
                       name      => "",
                       settings  => [
                           { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "ppc64le",
+                      distri    => "fedora",
+                      flavor    => "Atomic-dvd_ostree-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "CANNED", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
