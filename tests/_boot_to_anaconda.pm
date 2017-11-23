@@ -61,8 +61,8 @@ sub run {
             assert_screen "anaconda_select_install_lang_selected", 3;
             assert_and_click "anaconda_select_install_lang_continue";
 
-            if ( check_screen "anaconda_rawhide_accept_fate" ) {
-                assert_and_click "anaconda_rawhide_accept_fate", '', 60;
+            if ( check_screen "anaconda_rawhide_accept_fate", 60 ) {
+                assert_and_click "anaconda_rawhide_accept_fate";
             }
 
             # wait for Anaconda hub to appear
