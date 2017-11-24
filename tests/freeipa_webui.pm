@@ -10,8 +10,8 @@ sub run {
     if (get_var("UPGRADE")) {
         assert_script_run 'dnf -y groupinstall "base-x"', 300;
         # FIXME: this should probably be in base-x...X seems to fail without
-        assert_script_run 'dnf -y install libglvnd-egl', 120;
-        assert_script_run 'dnf -y install firefox', 120;
+        assert_script_run 'dnf -y install libglvnd-egl', 160;
+        assert_script_run 'dnf -y install firefox', 160;
     }
     # we're restarting firefox (instead of using the same one from
     # realmd_join_cockpit) so Firefox's trusted CA store refreshes and

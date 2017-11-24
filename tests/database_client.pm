@@ -10,7 +10,7 @@ sub run {
     # use compose repo, disable u-t, etc.
     repo_setup();
     # install postgresql
-    assert_script_run "dnf -y install postgresql", 120;
+    assert_script_run "dnf -y install postgresql", 160;
     # wait for the server to be ready
     mutex_lock "db_ready";
     mutex_unlock "db_ready";

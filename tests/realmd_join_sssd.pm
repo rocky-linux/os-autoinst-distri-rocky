@@ -23,7 +23,7 @@ sub run {
     assert_script_run "echo 'monkeys123' | realm join --user=admin ipa001.domain.local", 300;
     # set sssd debugging level higher (useful for debugging failures)
     # optional as it's not really part of the test
-    script_run "dnf -y install sssd-tools", 180;
+    script_run "dnf -y install sssd-tools", 220;
     script_run "sss_debuglevel 6";
     # if upgrade test, report that we're enrolled
     mutex_create('client_enrolled') if get_var("UPGRADE");
