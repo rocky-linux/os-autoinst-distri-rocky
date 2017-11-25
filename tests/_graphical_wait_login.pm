@@ -81,9 +81,13 @@ sub run {
         }
         if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
             # wait for the stupid 'help' screen to show and kill it
-            assert_screen "getting_started";
-            send_key "alt-f4";
-            wait_still_screen 5;
+            if (check_screen "getting_started") {
+                send_key "alt-f4";
+                wait_still_screen 5;
+            }
+            else {
+                record_soft_failure "'getting started' missing (probably BGO#790811)";
+            }
         }
 
         # Move the mouse somewhere it won't highlight the match areas

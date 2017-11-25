@@ -462,9 +462,13 @@ sub gnome_initial_setup {
     }
     else {
         # wait for the stupid 'help' screen to show and kill it
-        assert_screen "getting_started";
-        send_key "alt-f4";
-        wait_still_screen 5;
+        if (check_screen "getting_started") {
+            send_key "alt-f4";
+            wait_still_screen 5;
+        }
+        else {
+            record_soft_failure "'getting started' missing (probably BGO#790811)";
+        }
         # don't do it again on second load
     }
     set_var("_setup_done", 1);
