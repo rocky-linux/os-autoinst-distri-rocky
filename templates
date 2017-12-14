@@ -3283,7 +3283,7 @@
                       settings  => [
                         { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMUVGA", value => "virtio"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
