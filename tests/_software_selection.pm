@@ -3,13 +3,28 @@ use strict;
 use testapi;
 
 sub run {
+    my $self = shift;
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
-    # Select package set. Minimal is the default, if 'default' is specified, skip selection.
+    # Select package set. Minimal is the default, if 'default' is specified, skip selection,
+    # but verify correct default in some cases
     my $packageset = get_var('PACKAGE_SET', 'minimal');
     if ($packageset eq 'default' || get_var('MODULAR')) {
-        return
+        # we can't or don't want to check the selected package set in these cases
+        return if (get_var('CANNED') || get_var('LIVE') || get_var('MEMCHECK'));
+        $self->root_console;
+        my $env = 'custom-environment';
+        if (get_var('SUBVARIANT') eq 'Server') {
+            $env = 'server-product-environment';
+        }
+        elsif (get_var('SUBVARIANT') eq 'Workstation') {
+            $env = 'workstation-product-environment';
+        }
+        assert_script_run "grep 'selected env' /tmp/packaging.log | tail -1 | grep $env";
+        send_key "ctrl-alt-f6";
+        assert_screen "anaconda_main_hub", 30;
+        return;
     }
 
     assert_and_click "anaconda_main_hub_select_packages";
