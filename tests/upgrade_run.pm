@@ -6,12 +6,16 @@ use utils;
 sub run {
     my $self = shift;
     my $release = lc(get_var("VERSION"));
+    my $relnum = $release;
+    if ($release eq "rawhide") {
+        $relnum = get_var("RAWREL", "rawhide");
+    }
     # disable screen blanking (download can take a long time)
     script_run "setterm -blank 0";
 
     # use compose repo
     repo_setup();
-    my $params = "-y --releasever=${release}";
+    my $params = "-y --releasever=${relnum}";
     if ($release eq "rawhide") {
         $params .= " --nogpgcheck";
     }
