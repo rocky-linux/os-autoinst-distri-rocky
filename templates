@@ -1533,6 +1533,17 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "server_filesystem_default" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "server_firewall_default" },
                     },
                     {
@@ -2530,6 +2541,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_kickstart_nfs" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_filesystem_default" },
                     },
                     {
                       group_name => "Fedora PowerPC",
@@ -4249,6 +4272,17 @@
                         { key => "POSTINSTALL", value => "firewall_configured" },
                         { key => "ROOT_PASSWORD", value => "anaconda" },
                         { key => "USER_LOGIN", value => "false" },
+                      ],
+                    },
+                    {
+                      name => "server_filesystem_default",
+                      settings => [
+                        { key => "POSTINSTALL", value => "server_filesystem_default" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                       ],
                     },
                     {
