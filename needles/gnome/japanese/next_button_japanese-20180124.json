@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "next_button"
+  ],
+  "area": [
+    {
+      "height": 14,
+      "type": "match",
+      "width": 33,
+      "ypos": 43,
+      "xpos": 949
+    }
+  ]
+}
