@@ -4484,6 +4484,60 @@
                                    ],
                       version   => "*",
                     },
+		    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "universal",
+                      name      => "",
+                      settings  => [
+                          { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "Server-dvd-iso",
+                      name      => "",
+                      settings  => [
+                          { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "Server-boot-iso",
+                      name      => "",
+                      settings  => [
+                          { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "Atomic-dvd_ostree-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "CANNED", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "AtomicHost-dvd_ostree-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "CANNED", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
                   ],
   TestSuites   => [
                     {
