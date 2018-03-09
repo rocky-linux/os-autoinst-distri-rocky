@@ -244,7 +244,7 @@
                                       arch    => "x86_64",
                                       distri  => "fedora",
                                       flavor  => "Workstation-live-iso",
-                                      version => "*",
+                                      version => "27",
                                     },
                       test_suite => { name => "install_no_user" },
                     },
@@ -4282,9 +4282,24 @@
                         { key => "LIVE", value => "1" },
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" }
+                        { key => "TEST_TARGET", value => "ISO" },
+                        { key => "ROOT_PASSWORD", => "false" },
+                        { key => "USER_LOGIN", => "false" }
                                    ],
                       version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "Workstation-live-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "LIVE", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "27",
                     },
                     {
                       arch      => "x86_64",
@@ -4359,9 +4374,24 @@
                         { key => "LIVE", value => "1" },
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" }
+                        { key => "TEST_TARGET", value => "ISO" },
+                        { key => "ROOT_PASSWORD", => "false" },
+                        { key => "USER_LOGIN", => "false" }
                                    ],
                       version   => "*",
+                    },
+                    {
+                      arch      => "i386",
+                      distri    => "fedora",
+                      flavor    => "Workstation-live-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "LIVE", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "27",
                     },
                     {
                       arch      => "i386",

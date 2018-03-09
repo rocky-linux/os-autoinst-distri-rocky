@@ -26,34 +26,37 @@ sub run {
     wait_still_screen 2;
     assert_and_click "anaconda_main_hub_begin_installation";
 
-    # Set root password
+    # Set root password, unless ROOT_PASSWORD is 'false' (meaning not
+    # to do this)
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
-    assert_and_click "anaconda_install_root_password";
-    assert_screen "anaconda_install_root_password_screen";
-    # wait out animation
-    wait_still_screen 2;
-    desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
-    if (get_var("IMAGETYPE") eq 'dvd-ostree') {
-        # we can't type SUPER safely for ostree installer tests, as
-        # the install completes quite fast and if we type too slow
-        # the USER CREATION spoke may be blocked
-        type_safely $root_password;
-        wait_screen_change { send_key "tab"; };
-        type_safely $root_password;
+    unless ($root_password eq 'false') {
+        assert_and_click "anaconda_install_root_password";
+        assert_screen "anaconda_install_root_password_screen";
+        # wait out animation
+        wait_still_screen 2;
+        desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
+        if (get_var("IMAGETYPE") eq 'dvd-ostree') {
+            # we can't type SUPER safely for ostree installer tests, as
+            # the install completes quite fast and if we type too slow
+            # the USER CREATION spoke may be blocked
+            type_safely $root_password;
+            wait_screen_change { send_key "tab"; };
+            type_safely $root_password;
+        }
+        else {
+            # these screens seems insanely subject to typing errors, so
+            # type super safely. This doesn't really slow the test down
+            # as we still get done before the install process is complete.
+            type_very_safely $root_password;
+            wait_screen_change { send_key "tab"; };
+            type_very_safely $root_password;
+        }
+        assert_and_click "anaconda_spoke_done";
     }
-    else {
-        # these screens seems insanely subject to typing errors, so
-        # type super safely. This doesn't really slow the test down
-        # as we still get done before the install process is complete.
-        type_very_safely $root_password;
-        wait_screen_change { send_key "tab"; };
-        type_very_safely $root_password;
-    }
-    assert_and_click "anaconda_spoke_done";
 
     # Wait out animation
     sleep 3;
-    # Set user details
+    # Set user details, unless the test is configured not to create one
     anaconda_create_user() unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
 
     # Check username (and hence keyboard layout) if non-English
