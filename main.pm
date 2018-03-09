@@ -142,6 +142,15 @@ sub load_install_tests() {
     # if this is a kickstart install, that's all folks
     return if (get_var("KICKSTART"));
 
+    # on Fedora 28+, root password and user creation spokes are
+    # suppressed on Workstation live install, so we do not want to
+    # try and use them. However we're also still testing F27 live
+    # respins, so we can't just do this in the templates yet, sadly.
+    if (get_var('LIVE') && get_var('DESKTOP') eq 'gnome') {
+        set_var('ROOT_PASSWORD', 'false');
+        set_var('USER_LOGIN', 'false');
+    }
+
     if (get_var('ANACONDA_TEXT')) {
         # since it differs much, handle text installation separately
         autotest::loadtest "tests/install_text.pm";
