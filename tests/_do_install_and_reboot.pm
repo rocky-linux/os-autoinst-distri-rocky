@@ -85,14 +85,14 @@ sub run {
         mouse_hide;
         # https://bugzilla.redhat.com/show_bug.cgi?id=1553935 - see
         # if anaconda disappeared in the last 60 seconds...
-        if (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+        if (get_var("LIVE") && get_var("DESKTOP") eq 'gnome') {
             last unless (check_screen "workstation_install_running", 1);
         }
         last if (check_screen "anaconda_install_done", $interval);
         $timeout -= $interval;
     }
     # https://bugzilla.redhat.com/show_bug.cgi?id=1553935
-    unless (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+    unless (get_var("LIVE") && get_var("DESKTOP") eq 'gnome') {
         assert_screen "anaconda_install_done";
     }
     # wait for transition to complete so we don't click in the sidebar
@@ -100,7 +100,7 @@ sub run {
     # for the memory check test, we *don't* want to leave
     unless (get_var("MEMCHECK")) {
         # https://bugzilla.redhat.com/show_bug.cgi?id=1553935
-        unless (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+        unless (get_var("LIVE") && get_var("DESKTOP") eq 'gnome') {
             assert_and_click "anaconda_install_done";
         }
         if (get_var('LIVE')) {
