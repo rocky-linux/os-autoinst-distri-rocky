@@ -83,15 +83,26 @@ sub run {
         # move the mouse a bit
         mouse_set 100, 100;
         mouse_hide;
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1553935 - see
+        # if anaconda disappeared in the last 60 seconds...
+        if (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+            last unless (check_screen "workstation_install_running", 1);
+        }
         last if (check_screen "anaconda_install_done", $interval);
         $timeout -= $interval;
     }
-    assert_screen "anaconda_install_done";
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1553935
+    unless (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+        assert_screen "anaconda_install_done";
+    }
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
     # for the memory check test, we *don't* want to leave
     unless (get_var("MEMCHECK")) {
-        assert_and_click "anaconda_install_done";
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1553935
+        unless (get_var("LIVE") && get_var("DESKTOP" eq 'gnome')) {
+            assert_and_click "anaconda_install_done";
+        }
         if (get_var('LIVE')) {
             # reboot from a console, it's more reliable than the desktop
             # runners
