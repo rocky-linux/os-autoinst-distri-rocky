@@ -148,7 +148,8 @@ sub load_install_tests() {
     # respins, so we can't just do this in the templates yet, sadly.
     if (get_var('LIVE') && get_var('DESKTOP') eq 'gnome') {
         set_var('ROOT_PASSWORD', 'false');
-        set_var('USER_LOGIN', 'false');
+        # this is effectively a forced install_no_user
+        set_var('INSTALL_NO_USER', 'false');
     }
 
     if (get_var('ANACONDA_TEXT')) {
