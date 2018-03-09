@@ -147,9 +147,9 @@ sub load_install_tests() {
     # try and use them. However we're also still testing F27 live
     # respins, so we can't just do this in the templates yet, sadly.
     if (get_var('LIVE') && get_var('DESKTOP') eq 'gnome') {
-        set_var('ROOT_PASSWORD', 'false');
+        set_var('INSTALLER_NO_ROOT', '1');
         # this is effectively a forced install_no_user
-        set_var('INSTALL_NO_USER', 'false');
+        set_var('INSTALL_NO_USER', '1');
     }
 
     if (get_var('ANACONDA_TEXT')) {

@@ -26,10 +26,9 @@ sub run {
     wait_still_screen 2;
     assert_and_click "anaconda_main_hub_begin_installation";
 
-    # Set root password, unless ROOT_PASSWORD is 'false' (meaning not
-    # to do this)
+    # Set root password, unless we don't want to or can't
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
-    unless ($root_password eq 'false') {
+    unless (get_var("INSTALLER_NO_ROOT")) {
         assert_and_click "anaconda_install_root_password";
         assert_screen "anaconda_install_root_password_screen";
         # wait out animation
@@ -87,6 +86,13 @@ sub run {
             # reboot from a console, it's more reliable than the desktop
             # runners
             $self->root_console;
+            # if we didn't set a root password during install, set it
+            # now...this is kinda icky, but I don't see a great option
+            if (get_var("INSTALLER_NO_ROOT")) {
+                assert_script_run "chroot /mnt/sysimage";
+                assert_script_run "echo $root_password | passwd --stdin root";
+                assert_script_run "exit";
+            }
             type_string "reboot\n";
         }
     }

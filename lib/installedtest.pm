@@ -10,24 +10,14 @@ use testapi;
 use utils;
 
 sub root_console {
-    # Switch to a default or specified TTY and log in as root, or
-    # log in as regular user and sudo if no root password.
+    # Switch to a default or specified TTY and log in as root.
     my $self = shift;
     my %args = (
         tty => 1, # what TTY to login to
         @_);
 
     send_key "ctrl-alt-f$args{tty}";
-    if (get_var("ROOT_PASSWORD") eq "false") {
-        console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
-        type_string "sudo su";
-        type_string get_var("USER_PASSWORD", "weakpassword");
-        send_key "ret";
-        assert_screen "root_console";
-    }
-    else {
-        console_login;
-    }
+    console_login;
 }
 
 sub post_fail_hook {
