@@ -76,7 +76,17 @@ sub run {
     if (lc(get_var('VERSION')) eq "rawhide") {
         $timeout = 2400;
     }
-    assert_screen "anaconda_install_done", $timeout;
+    # workstation especially has an unfortunate habit of kicking in
+    # the screensaver during install...
+    my $interval = 60;
+    while ($timeout > 0) {
+        # move the mouse a bit
+        mouse_set 100, 100;
+        mouse_hide;
+        last if (check_screen "anaconda_install_done", $interval);
+        $timeout -= $interval;
+    }
+    assert_screen "anaconda_install_done";
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
     # for the memory check test, we *don't* want to leave
