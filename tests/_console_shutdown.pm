@@ -10,7 +10,7 @@ sub run {
     # use the desktops' graphical shutdown methods, we just go to a
     # console and run 'poweroff'. We can write separate tests for
     # properly testing shutdown/reboot/log out from desktops.
-    $self->root_console(tty=>3);
+    $self->root_console(tty=>4);
     script_run("poweroff", 0);
     assert_shutdown 180;
 }
