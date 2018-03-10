@@ -371,6 +371,10 @@ sub _repo_setup_updates {
         assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
         # Disable updates-testing so other bad updates don't break us
         assert_script_run "dnf config-manager --set-disabled updates-testing";
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1552814
+        # this is the easiest workaround, it's not wrong as the repo
+        # is empty for branched anyway
+        assert_script_run "dnf config-manager --set-disabled updates";
     }
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
