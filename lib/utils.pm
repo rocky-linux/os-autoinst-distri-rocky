@@ -428,7 +428,15 @@ sub gnome_initial_setup {
     );
     my $nexts = 3;
     if ($args{prelogin}) {
-        $nexts = 5;
+        my $version = lc(get_var("VERSION"));
+        if ($version eq 'rawhide' || $version > 27) {
+            # several screens are suppressed in pre-login g-i-s:
+            # https://fedoraproject.org/wiki/Changes/ReduceInitialSetupRedundancy
+            $nexts = 2;
+        }
+        else {
+            $nexts = 5;
+        }
     }
     assert_screen "next_button", $args{timeout};
     # wait a bit in case of animation
