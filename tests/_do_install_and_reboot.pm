@@ -110,9 +110,7 @@ sub run {
             # if we didn't set a root password during install, set it
             # now...this is kinda icky, but I don't see a great option
             if (get_var("INSTALLER_NO_ROOT")) {
-                assert_script_run "chroot /mnt/sysimage";
-                assert_script_run "echo $root_password | passwd --stdin root";
-                assert_script_run "exit";
+                assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
             }
             type_string "reboot\n";
         }
