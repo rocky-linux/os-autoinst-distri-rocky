@@ -110,6 +110,8 @@ sub run {
             # if we didn't set a root password during install, set it
             # now...this is kinda icky, but I don't see a great option
             if (get_var("INSTALLER_NO_ROOT")) {
+                # https://bugzilla.redhat.com/show_bug.cgi?id=1553957
+                assert_script_run "setenforce 0";
                 assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
             }
             type_string "reboot\n";
