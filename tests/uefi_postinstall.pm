@@ -5,7 +5,7 @@ use testapi;
 sub run {
     my $self=shift;
     if (not( check_screen "root_console", 0)) {
-        $self->root_console(tty=>3);
+        $self->root_console(tty=>4);
     }
     assert_screen "root_console";
     # this test shows if the system is booted with efi
