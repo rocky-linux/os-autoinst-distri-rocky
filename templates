@@ -4176,6 +4176,7 @@
                       settings => [
                         { key => "BIOS", value => "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw" },
                         { key => "QEMU", value => "aarch64" },
+                        { key => "QEMUMACHINE", value => "virt"},
                         { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
