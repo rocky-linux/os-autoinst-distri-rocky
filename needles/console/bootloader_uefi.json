@@ -1,20 +1,20 @@
 {
-  "tags": [
-    "ENV-DISTRI-fedora",
-    "ENV-FLAVOR-server_boot",
-    "ENV-FLAVOR-workstation_live",
-    "ENV-UEFI-1",
-    "bootloader_uefi",
-    "bootloader"
-  ],
-  "area": [
-    {
-      "width": 140,
-      "height": 14,
-      "xpos": 126,
-      "type": "match",
-      "ypos": 140
-    }
-  ],
-  "properties": []
+    "area": [
+        {
+            "height": 19,
+            "type": "match",
+            "width": 140,
+            "xpos": 126,
+            "ypos": 460
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "ENV-DISTRI-fedora",
+        "ENV-FLAVOR-server_boot",
+        "ENV-FLAVOR-workstation_live",
+        "ENV-UEFI-1",
+        "bootloader_uefi",
+        "bootloader"
+    ]
 }
