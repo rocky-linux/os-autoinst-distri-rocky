@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 44,
+      "ypos": 41,
+      "height": 21,
+      "xpos": 965
+    }
+  ],
+  "tags": [
+    "skip_button",
+    "LANGUAGE-english"
+  ],
+  "properties": []
+}
