@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_blivet_part_fs_btrfs"
+  ],
+  "area": [
+    {
+      "xpos": 415,
+      "height": 18,
+      "ypos": 311,
+      "width": 32,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "width": 55,
+      "type": "match",
+      "xpos": 947,
+      "height": 25,
+      "ypos": 37
+    }
+  ],
+  "tags": [
+    "LANGUAGE-russian",
+    "next_button"
+  ]
+}

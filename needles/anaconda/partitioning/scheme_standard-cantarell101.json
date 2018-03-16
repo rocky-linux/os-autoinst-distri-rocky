@@ -1,0 +1,18 @@
+{
+  "tags": [
+    "anaconda_part_scheme_standard",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-server"
+  ],
+  "area": [
+    {
+      "xpos": 66,
+      "height": 20,
+      "ypos": 194,
+      "type": "match",
+      "width": 115
+    }
+  ],
+  "properties": []
+}

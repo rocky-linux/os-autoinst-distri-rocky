@@ -1,0 +1,17 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "type": "match",
+      "width": 48,
+      "height": 26,
+      "xpos": 23,
+      "ypos": 49
+    }
+  ],
+  "tags": [
+    "anaconda_spoke_done",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french"
+  ]
+}

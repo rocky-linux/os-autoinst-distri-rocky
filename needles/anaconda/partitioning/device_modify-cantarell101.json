@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_part_device_modify"
+  ],
+  "area": [
+    {
+      "ypos": 184,
+      "xpos": 789,
+      "height": 20,
+      "type": "match",
+      "width": 55
+    }
+  ],
+  "properties": []
+}

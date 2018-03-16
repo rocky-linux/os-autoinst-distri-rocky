@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "type": "match",
+      "width": 146,
+      "height": 18,
+      "xpos": 175,
+      "ypos": 153
+    }
+  ],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_install_user_creation_screen"
+  ]
+}

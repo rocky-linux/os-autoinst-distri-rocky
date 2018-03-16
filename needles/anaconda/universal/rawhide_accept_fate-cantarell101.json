@@ -1,0 +1,18 @@
+{
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server",
+    "LANGUAGE-english",
+    "anaconda_rawhide_accept_fate"
+  ],
+  "area": [
+    {
+      "type": "match",
+      "width": 100,
+      "ypos": 479,
+      "xpos": 649,
+      "height": 17
+    }
+  ]
+}

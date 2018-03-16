@@ -1,0 +1,24 @@
+{
+  "area": [
+    {
+      "ypos": 636,
+      "xpos": 664,
+      "height": 20,
+      "type": "match",
+      "width": 355
+    },
+    {
+      "ypos": 685,
+      "height": 16,
+      "xpos": 927,
+      "width": 77,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "anaconda_install_done",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french"
+  ],
+  "properties": []
+}

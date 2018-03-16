@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_blivet_part_fs_ext3"
+  ],
+  "area": [
+    {
+      "ypos": 369,
+      "xpos": 410,
+      "height": 21,
+      "width": 55,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}

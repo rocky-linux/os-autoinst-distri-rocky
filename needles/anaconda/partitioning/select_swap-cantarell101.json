@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 48,
+      "xpos": 51,
+      "height": 19,
+      "ypos": 228
+    }
+  ],
+  "tags": [
+    "anaconda_part_select_swap",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-generic_boot"
+  ],
+  "properties": []
+}

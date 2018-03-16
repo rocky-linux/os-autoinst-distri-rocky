@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "ypos": 558,
+      "height": 18,
+      "xpos": 746,
+      "type": "match",
+      "width": 43
+    }
+  ],
+  "tags": [
+    "anaconda_install_destination_target_login"
+  ]
+}

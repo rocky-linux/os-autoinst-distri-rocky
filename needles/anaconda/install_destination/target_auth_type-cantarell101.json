@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 88,
+      "height": 17,
+      "xpos": 433,
+      "ypos": 314
+    }
+  ],
+  "tags": [
+    "anaconda_install_destination_target_auth_type"
+  ],
+  "properties": []
+}

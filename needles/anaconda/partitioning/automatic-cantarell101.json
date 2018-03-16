@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 240,
+      "height": 17,
+      "xpos": 68,
+      "ypos": 167
+    }
+  ],
+  "tags": [
+    "anaconda_part_automatic",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-server"
+  ],
+  "properties": []
+}

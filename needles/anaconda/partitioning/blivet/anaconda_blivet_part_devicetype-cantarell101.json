@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "width": 208,
+      "type": "match",
+      "ypos": 173,
+      "xpos": 324,
+      "height": 26
+    }
+  ],
+  "tags": [
+    "anaconda_blivet_part_devicetype"
+  ]
+}

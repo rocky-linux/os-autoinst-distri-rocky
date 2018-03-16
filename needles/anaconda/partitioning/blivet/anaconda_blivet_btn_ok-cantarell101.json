@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "anaconda_blivet_btn_ok"
+  ],
+  "area": [
+    {
+      "xpos": 728,
+      "height": 26,
+      "ypos": 580,
+      "width": 71,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}
