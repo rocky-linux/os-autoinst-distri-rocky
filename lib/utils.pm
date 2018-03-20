@@ -229,12 +229,16 @@ sub do_bootloader {
         else {
             send_key "e";
             # 2 'downs' to reach the kernel line for UEFI installer,
-            # 13 'downs' on installed x86_64, 12 'downs' on installed
-            # aarch64 / ppc64 (there's a 'set_root' line on x86_64 but
-            # not on aarch64 or ppc64)
+            # 13 'downs' on installed x86_64. 12 'downs' on installed
+            # ppc64, because it doesn't have a 'set gfxpayload=keep'
+            # line. installed aarch64 is tricky: it should be 13, I
+            # think - it has a set gfxpayload=keep line - but it seems
+            # that on F27 installs (i.e. support_server) there is a
+            # 'set root' line, but on F28+ installs there is not, so
+            # the count is 12. So we have to do something gross.
             my $presses = 2;
             if ($args{postinstall}) {
-                if (get_var('OFW') || get_var('ARCH') eq 'aarch64') {
+                if (get_var('OFW') || (get_var('ARCH') eq 'aarch64' && get_var('TEST') ne 'support_server')) {
                     $presses = 12;
                 } else {
                     $presses = 13;
