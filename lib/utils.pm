@@ -228,15 +228,17 @@ sub do_bootloader {
         }
         else {
             send_key "e";
-            # ternary: 13 'downs' to reach the kernel line for installed
-            # system, 2 for UEFI installer
-            # since 20170328 PowerPC Rawhide and f26 are failing with 13
-            # but work with 12 and added sleep 1 in loop.
-            my $presses;
-            if (get_var('OFW')) {
-                $presses = $args{postinstall} ? 12 : 2;
-	    } else {
-                $presses = $args{postinstall} ? 13 : 2;
+            # 2 'downs' to reach the kernel line for UEFI installer,
+            # 13 'downs' on installed x86_64, 12 'downs' on installed
+            # aarch64 / ppc64 (there's a 'set_root' line on x86_64 but
+            # not on aarch64 or ppc64)
+            my $presses = 2;
+            if ($args{postinstall}) {
+                if (get_var('OFW') || get_var('ARCH') eq 'aarch64') {
+                    $presses = 12;
+                } else {
+                    $presses = 13;
+                }
             }
             foreach my $i (1..$presses) {
                 sleep 1; # seems to have missed one down if too fast.
