@@ -4182,6 +4182,7 @@
                         { key => "QEMUCPU", value => "host" },
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         { key => "UEFI", value => "1"},
+                        { key => "PART_TABLE_TYPE", value => "gpt"},
                         { key => "WORKER_CLASS", value => "qemu_aarch64" }
                       ],
                     },
