@@ -34,17 +34,27 @@ sub add_user {
 # it's at a console ready to start Firefox.
 sub start_webui {
     my ($user, $password) = @_;
+    # if we logged in as 'admin' we should land on the admin 'Active
+    # users' screen, otherwise we should land on the user's own page
+    my $user_screen = "freeipa_webui_user";
+    $user_screen = "freeipa_webui_users" if ($user eq 'admin');
+
     # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.domain.local\n";
     wait_still_screen 5;
-    assert_screen "freeipa_webui_login";
-    type_safely $user;
-    wait_screen_change { send_key "tab"; };
-    type_safely $password;
-    send_key "ret";
-    # if we logged in as 'admin' we should land on the admin 'Active
-    # users' screen, otherwise we should land on the user's own page
-    $user eq 'admin' ? assert_screen "freeipa_webui_users" : assert_screen "freeipa_webui_user";
+    # softfail on kerberos ticket bugs meaning we get auto-logged in
+    # as the requested user when we don't expect to be
+    if (check_screen $user_screen, 5) {
+        record_soft_failure "already logged in to web UI";
+    }
+    else {
+        assert_screen "freeipa_webui_login", 5;
+        type_safely $user;
+        wait_screen_change { send_key "tab"; };
+        type_safely $password;
+        send_key "ret";
+        assert_screen $user_screen;
+    }
     wait_still_screen 3;
 }
