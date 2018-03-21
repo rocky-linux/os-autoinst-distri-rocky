@@ -23,6 +23,10 @@ sub run {
     # it is, so let's use haveged
     assert_script_run "dnf ${extraparams} -y install haveged", 300;
     assert_script_run 'systemctl start haveged.service';
+    # per ab, this should get us extra debug logging from the web UI
+    # in error_log
+    assert_script_run 'mkdir -p /etc/ipa';
+    assert_script_run 'printf "[global]\ndebug = True\n" > /etc/ipa/server.conf';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # rolectl
     my @forwards = get_host_dns();
