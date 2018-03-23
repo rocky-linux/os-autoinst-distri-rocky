@@ -7,6 +7,10 @@ use freeipa;
 sub run {
     my $self = shift;
     console_login(user=>'root');
+    # check whether test3 exists, i.e. whether freeipa_webui at
+    # least managed to create it. if not, we may as well just
+    # die now, this test cannot work.
+    assert_script_run 'getent passwd test3@DOMAIN.LOCAL';
     # clear browser data so we don't go back to the 'admin' login
     assert_script_run 'rm -rf /root/.mozilla';
     # clear kerberos ticket so we don't auto-auth as 'test4'
