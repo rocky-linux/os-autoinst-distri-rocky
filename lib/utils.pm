@@ -331,12 +331,18 @@ sub _repo_setup_compose {
     my $location = get_var("LOCATION");
     return unless $location;
     assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
-    # we use script_run here as the rawhide repo file won't always exist
-    # and we don't want to bother testing or predicting its existence;
-    # assert_script_run doesn't buy you much with sed anyway as it'll
-    # return 0 even if it replaced nothing
+    # script_run returns the exit code, so 'unless' here means 'if the file exists'
+    unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
+            assert_script_run 'dnf config-manager --set-disabled updates-testing-modular updates-modular';
+    }
+    # we use script_run here as the rawhide and modular repo files
+    # won't always exist and we don't want to bother testing or
+    # predicting their existence; assert_script_run doesn't buy you
+    # much with sed as it'll return 0 even if it replaced nothing
     script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Modular/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Modular/source,g' /etc/yum.repos.d/{fedora-modular,fedora-rawhide-modular}.repo", 0;
+    # this is just for debugging
+    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide,fedora-modular,fedora-rawhide-modular}.repo", 0;
 }
 
 sub _repo_setup_updates {
@@ -368,6 +374,12 @@ sub _repo_setup_updates {
         # this is the easiest workaround, it's not wrong as the repo
         # is empty for branched anyway
         assert_script_run "dnf config-manager --set-disabled updates";
+        # same for Modular, if appropriate
+        unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
+            assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora-modular.repo";
+            assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
+            assert_script_run "dnf config-manager --set-disabled updates-modular";
+        }
     }
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
