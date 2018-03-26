@@ -330,26 +330,13 @@ sub _repo_setup_compose {
     # tools see only packages from the compose under test
     my $location = get_var("LOCATION");
     return unless $location;
-    if (get_var("MODULAR")) {
-        # dnf config-manager not currently available on modular composes
-        assert_script_run "sed -i -e 's,enabled=1,enabled=0,g' /etc/yum.repos.d/fedora-modular-server-updates-testing.repo /etc/yum.repos.d/fedora-modular-server-updates.repo";
-        # add a disabled non-modular release repo; we have to use this
-        # to install some things we need for testing which aren't in
-        # Modular Server composes
-        assert_script_run 'printf \'[fedora]\nname=Fedora $releasever - $basearch\nmetalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch\nenabled=0\nmetadata_expire=7d\nrepo_gpgcheck=0\ntype=rpm\ngpgcheck=1\ngpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch\nskip_if_unavailable=True\' > /etc/yum.repos.d/fedora.repo';
-        script_run 'cat /etc/yum.repos.d/fedora.repo';
-        # FIXME use the compose repo, as per below - easier if the repo
-        # files had commented-out baseurl lines
-    }
-    else {
-        assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
-        # we use script_run here as the rawhide repo file won't always exist
-        # and we don't want to bother testing or predicting its existence;
-        # assert_script_run doesn't buy you much with sed anyway as it'll
-        # return 0 even if it replaced nothing
-        script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-        script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-    }
+    assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
+    # we use script_run here as the rawhide repo file won't always exist
+    # and we don't want to bother testing or predicting its existence;
+    # assert_script_run doesn't buy you much with sed anyway as it'll
+    # return 0 even if it replaced nothing
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
 }
 
 sub _repo_setup_updates {
@@ -377,7 +364,7 @@ sub _repo_setup_updates {
         assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
         # Disable updates-testing so other bad updates don't break us
         assert_script_run "dnf config-manager --set-disabled updates-testing";
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1552814
+        # https://pagure.io/fedora-repos/issue/70
         # this is the easiest workaround, it's not wrong as the repo
         # is empty for branched anyway
         assert_script_run "dnf config-manager --set-disabled updates";
