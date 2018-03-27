@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "gnome_layout_native",
+    "LANGUAGE-russian"
+  ],
+  "area": [
+    {
+      "width": 33,
+      "type": "match",
+      "ypos": 6,
+      "xpos": 853,
+      "height": 13
+    }
+  ]
+}
