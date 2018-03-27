@@ -122,8 +122,8 @@ sub console_login {
     # if the switch lags a bit, this function will match one of the
     # logged-in needles for the console we switched from, and get out
     # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
-    # To avoid this, we'll sleep a couple of seconds before starting
-    sleep 2;
+    # To avoid this, we'll sleep a few seconds before starting
+    sleep 4;
 
     my $good = "";
     my $bad = "";
