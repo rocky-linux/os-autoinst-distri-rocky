@@ -58,7 +58,8 @@ sub run {
         if (get_var("SUBVARIANT") eq 'AtomicWorkstation') {
             if (check_screen "desktop_auth_required", 120) {
                 record_soft_failure "Update auth dialog on FAW - #1561853";
-                assert_and_click "desktop_auth_required";
+                type_very_safely $password;
+                send_key "ret";
             }
         }
 
