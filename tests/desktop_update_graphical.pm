@@ -39,8 +39,12 @@ sub run {
         }
     }
     assert_and_click 'desktop_package_tool_update';
-    # refresh updates
-    assert_and_click 'desktop_package_tool_update_refresh', '', 120;
+    # if this is KDE and it had already noticed the notification, we
+    # will already have the apply button at this point
+    unless (check_screen 'desktop_package_tool_update_apply', 5) {
+        # refresh updates
+        assert_and_click 'desktop_package_tool_update_refresh', '', 120;
+    }
     # wait for refresh, then apply updates, using a C-style loop so we
     # can reset it if needed due to RHBZ #1314991
     for (my $n = 1; $n < 6; $n++) {

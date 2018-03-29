@@ -21,6 +21,10 @@ sub prepare_test_packages {
     assert_script_run 'curl -o /etc/yum.repos.d/openqa-testrepo-1.repo https://fedorapeople.org/groups/qa/openqa-repos/openqa-testrepo-1.repo';
     # install the test packages from repo1
     assert_script_run 'dnf -y --disablerepo=* --enablerepo=openqa-testrepo-1 install python3-kickstart';
+    if (get_var("DESKTOP") eq 'kde' && get_var("TEST") eq 'desktop_update_graphical') {
+        # kick pkcon so our special update will definitely get installed
+        assert_script_run 'pkcon refresh force';
+    }
 }
 
 # check our test packages installed correctly (this is a test that dnf
