@@ -435,24 +435,44 @@ sub gnome_initial_setup {
         timeout => 120,
         @_
     );
-    my $nexts = 3;
+    my $version = lc(get_var("VERSION"));
+    # the pages we *may* need to click 'next' on. *NOTE*: 'language'
+    # is the 'welcome' page, and is in fact never truly skipped; if
+    # it's configured to be skipped, it just shows without the language
+    # selection widget (so it's a bare 'welcome' page). Current openQA
+    # tests never see 'eula' or 'network'. You can find the upstream
+    # list in gnome-initial-setup/gnome-initial-setup.c , and the skip
+    # config file for Fedora is vendor.conf in the package repo.
+    my @nexts = ('language', 'keyboard', 'privacy', 'timezone', 'software');
+    # now, we're going to figure out how many of them this test will
+    # *actually* see...
     if ($args{prelogin}) {
-        my $version = lc(get_var("VERSION"));
-        if ($version eq 'rawhide' || $version > 27) {
-            # several screens are suppressed in pre-login g-i-s:
-            # https://fedoraproject.org/wiki/Changes/ReduceInitialSetupRedundancy
-            $nexts = 2;
-        }
-        else {
-            $nexts = 5;
-        }
+        # 'language', 'keyboard' and 'timezone' are skipped on F28+ in
+        # the 'new user' mode by
+        # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
+        # except this doesn't seem to take effect on FAW:
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1474787#c16 ,
+        # and 'language' is never *really* skipped (see above)
+        @nexts = grep {$_ ne 'keyboard'} @nexts if (($version eq 'rawhide' || $version > 27) && get_var("SUBVARIANT") ne 'AtomicWorkstation');
+        @nexts = grep {$_ ne 'timezone'} @nexts if (($version eq 'rawhide' || $version > 27) && get_var("SUBVARIANT") ne 'AtomicWorkstation');
     }
+    else {
+        # 'timezone' and 'software' are suppressed for the 'existing user'
+        # form of g-i-s
+        @nexts = grep {$_ ne 'software'} @nexts;
+        @nexts = grep {$_ ne 'timezone'} @nexts;
+    }
+    # 'additional software sources' screen does not display on F28+:
+    # https://bugzilla.gnome.org/show_bug.cgi?id=794825
+    @nexts = grep {$_ ne 'software'} @nexts if ($version eq 'rawhide' || $version > 27);
+
     assert_screen "next_button", $args{timeout};
     # wait a bit in case of animation
     wait_still_screen 3;
     # GDM 3.24.1 dumps a cursor in the middle of the screen here...
     mouse_hide if ($args{prelogin});
-    for my $n (1..$nexts) {
+    for my $n (1..scalar(@nexts)) {
         # click 'Next' $nexts times, moving the mouse to avoid
         # highlight problems, sleeping to give it time to get
         # to the next screen between clicks
@@ -467,7 +487,7 @@ sub gnome_initial_setup {
             }
         }
     }
-    # click 'Skip' one time
+    # click 'Skip' one time (this is the 'goa' screen)
     mouse_set(100,100);
     wait_screen_change { assert_and_click "skip_button"; };
     send_key "ret";
