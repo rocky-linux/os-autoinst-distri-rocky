@@ -87,6 +87,11 @@ sub run {
         # the notifications bit
         assert_and_click 'desktop_expand_systray';
         assert_and_click 'desktop_systray_notifications';
+        # In F28+ we seem to get a network connection notification
+        # here. Let's dismiss it.
+        if (check_screen 'desktop_network_notification', 5) {
+            assert_and_click 'desktop_notification_dismiss';
+        }
     }
     if (get_var("BOOTFROM")) {
         # we should see an update notification and no others

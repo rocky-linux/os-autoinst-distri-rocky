@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_network_notification"
+  ],
+  "area": [
+    {
+      "xpos": 641,
+      "ypos": 430,
+      "width": 142,
+      "height": 21,
+      "type": "match"
+    }
+  ],
+  "properties": []
+}
