@@ -69,7 +69,7 @@ sub run {
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
     # things that crash a few minutes after startup, etc.
-    for my $n (1..20) {
+    for my $n (1..16) {
         sleep 30;
         mouse_set 10, 10;
         mouse_hide;
