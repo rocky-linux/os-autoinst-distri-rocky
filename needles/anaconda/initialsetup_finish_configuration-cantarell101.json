@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "initialsetup_finish_configuration"
+  ],
+  "area": [
+    {
+      "xpos": 841,
+      "ypos": 733,
+      "width": 161,
+      "type": "match",
+      "height": 12
+    }
+  ]
+}
