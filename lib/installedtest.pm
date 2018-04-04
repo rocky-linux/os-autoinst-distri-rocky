@@ -49,6 +49,11 @@ sub post_fail_hook {
         upload_logs "/var/spool/abrt/spoolabrt.tar.gz";
     }
 
+    # upload any core dump files caught by coredumpctl
+    unless (script_run "tar czvf /var/tmp/coredumps.tar.gz /var/lib/systemd/coredump/") {
+        upload_logs "/var/tmp/coredumps.tar.gz";
+    }
+
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
     unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
