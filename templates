@@ -4181,7 +4181,7 @@
                         { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 3072 },
                         { key => "QEMUCPU", value => "host" },
-                        { key => "TIMEOUT_SCALE", value => "5" },
+                        { key => "TIMEOUT_SCALE", value => "1.5" },
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
