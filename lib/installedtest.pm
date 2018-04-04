@@ -50,8 +50,8 @@ sub post_fail_hook {
     }
 
     # upload any core dump files caught by coredumpctl
-    unless (script_run "tar czvf /var/tmp/coredumps.tar.gz /var/lib/systemd/coredump/") {
-        upload_logs "/var/tmp/coredumps.tar.gz";
+    unless (script_run 'test -n "$(ls -A /var/lib/systemd/coredump)" && cd /var/lib/systemd/coredump && tar czvf coredump.tar.gz *') {
+        upload_logs "/var/lib/systemd/coredump/coredump.tar.gz";
     }
 
     # Upload /var/log
