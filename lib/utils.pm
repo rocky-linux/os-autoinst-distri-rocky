@@ -451,11 +451,9 @@ sub gnome_initial_setup {
         # the 'new user' mode by
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
-        # except this doesn't seem to take effect on FAW:
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1474787#c16 ,
-        # and 'language' is never *really* skipped (see above)
-        @nexts = grep {$_ ne 'keyboard'} @nexts if (($version eq 'rawhide' || $version > 27) && get_var("SUBVARIANT") ne 'AtomicWorkstation');
-        @nexts = grep {$_ ne 'timezone'} @nexts if (($version eq 'rawhide' || $version > 27) && get_var("SUBVARIANT") ne 'AtomicWorkstation');
+        # except 'language' is never *really* skipped (see above)
+        @nexts = grep {$_ ne 'keyboard'} @nexts if (($version eq 'rawhide' || $version > 27);
+        @nexts = grep {$_ ne 'timezone'} @nexts if (($version eq 'rawhide' || $version > 27);
     }
     else {
         # 'timezone' and 'software' are suppressed for the 'existing user'
