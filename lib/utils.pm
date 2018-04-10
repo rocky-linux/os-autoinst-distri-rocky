@@ -452,8 +452,8 @@ sub gnome_initial_setup {
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
         # except 'language' is never *really* skipped (see above)
-        @nexts = grep {$_ ne 'keyboard'} @nexts if (($version eq 'rawhide' || $version > 27);
-        @nexts = grep {$_ ne 'timezone'} @nexts if (($version eq 'rawhide' || $version > 27);
+        @nexts = grep {$_ ne 'keyboard'} @nexts if ($version eq 'rawhide' || $version > 27);
+        @nexts = grep {$_ ne 'timezone'} @nexts if ($version eq 'rawhide' || $version > 27);
     }
     else {
         # 'timezone' and 'software' are suppressed for the 'existing user'
