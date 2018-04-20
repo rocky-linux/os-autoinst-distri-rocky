@@ -4849,7 +4849,7 @@
                       name => "upgrade_server_domain_controller",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
+                        { key => "+HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "TEST_TARGET", value => "COMPOSE" },
                         { key => "PREUPGRADE", value => "role_deploy_domain_controller" },
@@ -4867,7 +4867,7 @@
                       name => "upgrade_realmd_client",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
+                        { key => "+HDD_1", value => "disk_f%CURRREL%_server_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "TEST_TARGET", value => "COMPOSE" },
                         { key => "PREUPGRADE", value => "realmd_join_sssd" },
@@ -4889,7 +4889,7 @@
                         { key => "USER_LOGIN", value => "test" },
                         { key => "USER_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_kde_3_x86_64.img" },
+                        { key => "+HDD_1", value => "disk_f%CURRREL%_kde_3_x86_64.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "kde" },
                         { key => "TEST_TARGET", value => "COMPOSE" },

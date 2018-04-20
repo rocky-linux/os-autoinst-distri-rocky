@@ -289,6 +289,30 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_server_domain_controller" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_realmd_client" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "updates-server",
                                       version => "*",
                                     },
@@ -782,9 +806,27 @@
                       version   => "*",
                     },
                     {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "updates-server-upgrade",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      version   => "*",
+                    },
+                    {
                       arch      => "ppc64le",
                       distri    => "fedora",
                       flavor    => "updates-server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "ppc64le",
+                      distri    => "fedora",
+                      flavor    => "updates-server-upgrade",
                       name      => "",
                       settings  => [
                                    ],
@@ -799,10 +841,28 @@
                                    ],
                       version   => "*",
                     },
-		    {
+                    {
+                      arch      => "ppc64",
+                      distri    => "fedora",
+                      flavor    => "updates-server-upgrade",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      version   => "*",
+                    },
+                    {
                       arch      => "aarch64",
                       distri    => "fedora",
                       flavor    => "updates-server",
+                      name      => "",
+                      settings  => [
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "updates-server-upgrade",
                       name      => "",
                       settings  => [
                                    ],

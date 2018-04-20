@@ -345,6 +345,28 @@ sub _repo_setup_compose {
     script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide,fedora-modular,fedora-rawhide-modular}.repo", 0;
 }
 
+sub _repo_setup_updates_development {
+    # Fix URL for fedora.repo if this is a development release
+    # This is rather icky, but I can't think of any better way
+    # The problem is that the 'baseurl' line in fedora.repo is
+    # always left as the correct URL for a *stable* release, we
+    # don't change it to the URL for a Branched release while the
+    # release is Branched, as it's too much annoying package work
+    assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
+    # Disable updates-testing so other bad updates don't break us
+    assert_script_run "dnf config-manager --set-disabled updates-testing";
+    # https://pagure.io/fedora-repos/issue/70
+    # this is the easiest workaround, it's not wrong as the repo
+    # is empty for branched anyway
+    assert_script_run "dnf config-manager --set-disabled updates";
+    # same for Modular, if appropriate
+    unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
+        assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora-modular.repo";
+        assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
+        assert_script_run "dnf config-manager --set-disabled updates-modular";
+    }
+}
+
 sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
@@ -360,27 +382,9 @@ sub _repo_setup_updates {
         # to   download.fedoraproject.org/pub/fedora-secondary/...
         script_run "sed -i -e 's,/pub/fedora/linux/,/pub/fedora-secondary/,g' /etc/yum.repos.d/fedora*.repo", 0;
     }
-    if (get_var("DEVELOPMENT")) {
-        # Fix URL for fedora.repo if this is a development release
-        # This is rather icky, but I can't think of any better way
-        # The problem is that the 'baseurl' line in fedora.repo is
-        # always left as the correct URL for a *stable* release, we
-        # don't change it to the URL for a Branched release while the
-        # release is Branched, as it's too much annoying package work
-        assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
-        # Disable updates-testing so other bad updates don't break us
-        assert_script_run "dnf config-manager --set-disabled updates-testing";
-        # https://pagure.io/fedora-repos/issue/70
-        # this is the easiest workaround, it's not wrong as the repo
-        # is empty for branched anyway
-        assert_script_run "dnf config-manager --set-disabled updates";
-        # same for Modular, if appropriate
-        unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
-            assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora-modular.repo";
-            assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
-            assert_script_run "dnf config-manager --set-disabled updates-modular";
-        }
-    }
+    # for non-upgrade tests, we want to do the 'development' changes
+    # *before* we set up the update repo...
+    _repo_setup_updates_development if (get_var("DEVELOPMENT") &! get_var("UPGRADE"));
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
     # be the case that a package from the update isn't installed *now*
@@ -404,6 +408,9 @@ sub _repo_setup_updates {
         assert_script_run "git clone https://github.com/fedora-infra/python-fedora.git";
         assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 600;
     }
+    # for upgrade tests, we want to do the 'development' changes *after*
+    # we set up the update repo
+    _repo_setup_updates_development if (get_var("DEVELOPMENT") && get_var("UPGRADE"));
     # log the exact packages in the update at test time, with their
     # source packages and epochs. log is uploaded by _advisory_update
     # and used for later comparison by _advisory_post
@@ -412,8 +419,8 @@ sub _repo_setup_updates {
     assert_script_run "createrepo .";
     # write a repo config file
     assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
-    # run an update now
-    script_run "dnf -y update", 600;
+    # run an update now (except for upgrade tests)
+    script_run "dnf -y update", 600 unless (get_var("UPGRADE"));
 }
 
 sub repo_setup {
