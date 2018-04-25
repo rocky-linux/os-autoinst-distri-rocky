@@ -50,8 +50,9 @@ sub run {
                 assert_and_click "live_start_anaconda_icon", '', 300;
             }
             my $language = get_var('LANGUAGE') || 'english';
-            # wait for anaconda to appear
-            assert_screen "anaconda_select_install_lang", 300;
+            # wait for anaconda to appear; we click to work around
+            # RHBZ #1566066 if it happens
+            assert_and_click "anaconda_select_install_lang", '', 300;
             # Select install language
             wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };
             type_safely $language;
