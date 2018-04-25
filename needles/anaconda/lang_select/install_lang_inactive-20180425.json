@@ -11,6 +11,6 @@
   ],
   "tags": [
     "ENV-DISTRI-fedora",
-    "anaconda_select_install_lang",
+    "anaconda_select_install_lang"
   ]
 }
