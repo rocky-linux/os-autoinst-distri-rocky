@@ -229,6 +229,18 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "updates-workstation-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_desktop_encrypted_64bit" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "updates-server",
                                       version => "*",
                                     },
@@ -780,6 +792,16 @@
                       arch      => "x86_64",
                       distri    => "fedora",
                       flavor    => "updates-workstation",
+                      name      => "",
+                      settings  => [
+                        { key => "DESKTOP", value => "gnome" },
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "updates-workstation-upgrade",
                       name      => "",
                       settings  => [
                         { key => "DESKTOP", value => "gnome" },
