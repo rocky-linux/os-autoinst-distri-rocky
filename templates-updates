@@ -505,6 +505,30 @@
                       product    => {
                                       arch    => "ppc64le",
                                       distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_server_domain_controller" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC Updates",
+                      machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_realmd_client" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC Updates",
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
                                       flavor  => "updates-server",
                                       version => "*",
                                     },
@@ -593,6 +617,30 @@
                                       version => "*",
                                     },
                       test_suite => { name => "server_firewall_default" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC Updates",
+                      machine    => { name => "ppc64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_server_domain_controller" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC Updates",
+                      machine    => { name => "ppc64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server-upgrade",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_realmd_client" },
                     },
                     {
                       group_name => "Fedora PowerPC Updates",
