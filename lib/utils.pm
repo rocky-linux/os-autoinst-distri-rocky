@@ -376,6 +376,12 @@ sub _repo_setup_updates {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
+    # fix up some errors in fedora-repos baseurls in F28:
+    # https://pagure.io/fedora-repos/issue/70
+    if (get_var("VERSION") == 28) {
+        assert_script_run 'sed -i -e "s,^\(#baseurl.*/\)os/$,\1,g" /etc/yum.repos.d/fedora*updates*.repo';
+        assert_script_run 'sed -i -e "s,/testing-modular/,,g" /etc/yum.repos.d/fedora*updates*.repo';
+    }
     if (get_var("OFW")) {
         # the uncommented baseurl line must be changed for PowerPC
         # from download.fedoraproject.org/pub/fedora/linux/...
