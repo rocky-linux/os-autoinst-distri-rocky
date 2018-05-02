@@ -395,19 +395,7 @@ sub _repo_setup_updates {
     assert_script_run "cd /opt/update_repo";
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
     # download the packages
-    my $version = lc(get_var("VERSION"));
-    if ($version eq 'rawhide' || $version > 25) {
-        # bodhi client 2.x
-        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
-    }
-    else {
-        # bodhi client 0.9
-        # use git python-fedora for
-        # https://github.com/fedora-infra/python-fedora/pull/192
-        # until packages with that fix are pushed stable
-        assert_script_run "git clone https://github.com/fedora-infra/python-fedora.git";
-        assert_script_run "PYTHONPATH=python-fedora/ bodhi -D " . get_var("ADVISORY"), 600;
-    }
+    assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
     # for upgrade tests, we want to do the 'development' changes *after*
     # we set up the update repo
     _repo_setup_updates_development if (get_var("DEVELOPMENT") && get_var("UPGRADE"));
