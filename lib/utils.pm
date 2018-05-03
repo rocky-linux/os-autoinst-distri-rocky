@@ -370,6 +370,13 @@ sub _repo_setup_updates_development {
     }
 }
 
+sub _repo_setup_updates_28_errors {
+    # fix up some errors in fedora-repos baseurls in F28:
+    # https://pagure.io/fedora-repos/issue/70
+    assert_script_run 'sed -i -e "s,^\(baseurl.*/\)os/$,\1,g" /etc/yum.repos.d/fedora*updates*.repo';
+    assert_script_run 'sed -i -e "s,/testing-modular/,/testing/,g" /etc/yum.repos.d/fedora*updates*.repo';
+}
+
 sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
@@ -379,12 +386,6 @@ sub _repo_setup_updates {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
-    # fix up some errors in fedora-repos baseurls in F28:
-    # https://pagure.io/fedora-repos/issue/70
-    if (get_var("VERSION") == 28) {
-        assert_script_run 'sed -i -e "s,^\(baseurl.*/\)os/$,\1,g" /etc/yum.repos.d/fedora*updates*.repo';
-        assert_script_run 'sed -i -e "s,/testing-modular/,/testing/,g" /etc/yum.repos.d/fedora*updates*.repo';
-    }
     if (get_var("OFW")) {
         # the uncommented baseurl line must be changed for PowerPC
         # from download.fedoraproject.org/pub/fedora/linux/...
@@ -392,8 +393,11 @@ sub _repo_setup_updates {
         script_run "sed -i -e 's,/pub/fedora/linux/,/pub/fedora-secondary/,g' /etc/yum.repos.d/fedora*.repo", 0;
     }
     # for non-upgrade tests, we want to do the 'development' changes
-    # *before* we set up the update repo...
-    _repo_setup_updates_development if (get_var("DEVELOPMENT") &! get_var("UPGRADE"));
+    # and f28 fixups *before* we set up the update repo...
+    unless (get_var("UPGRADE")) {
+        _repo_setup_updates_development if (get_var("DEVELOPMENT"));
+        _repo_setup_updates_28_errors if (get_var("VERSION") == 28);
+    }
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
     # be the case that a package from the update isn't installed *now*
@@ -405,14 +409,17 @@ sub _repo_setup_updates {
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
     # download the packages
     assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
-    # for upgrade tests, we want to do the 'development' changes *after*
-    # we set up the update repo
-    _repo_setup_updates_development if (get_var("DEVELOPMENT") && get_var("UPGRADE"));
-    if (get_var("UPGRADE") && get_var("VERSION") > 27 && get_var("CURRREL") < 28) {
-        # this gets really ugly, but the repo URLs changed between 27 and
-        # 28, so because we're using baseurl not metalink, we need to
-        # fix the locations up when doing upgrade tests to 28...
-        assert_script_run 'sed -i -e "s,/\$releasever/\$basearch/,/\$releasever/Everything/\$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
+    # for upgrade tests, we want to do the 'development' changes *after* we
+    # set up the update repo. We don't do the f28 fixups as we don't have
+    # f28 fedora-repos.
+    if (get_var("UPGRADE")) {
+        _repo_setup_updates_development if (get_var("DEVELOPMENT"));
+        if ( get_var("VERSION") > 27 && get_var("CURRREL") < 28) {
+            # this gets really ugly, but the repo URLs changed between 27 and
+            # 28, so because we're using baseurl not metalink, we need to
+            # fix the locations up when doing upgrade tests to 28...
+            assert_script_run 'sed -i -e "s,/\$releasever/\$basearch/,/\$releasever/Everything/\$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
+        }
     }
 
     # this can be used for debugging if something is going wrong
