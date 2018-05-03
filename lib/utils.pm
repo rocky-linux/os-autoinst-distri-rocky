@@ -341,8 +341,11 @@ sub _repo_setup_compose {
     # much with sed as it'll return 0 even if it replaced nothing
     script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
     script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Modular/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Modular/source,g' /etc/yum.repos.d/{fedora-modular,fedora-rawhide-modular}.repo", 0;
-    # this is just for debugging
-    script_run "cat /etc/yum.repos.d/{fedora,fedora-rawhide,fedora-modular,fedora-rawhide-modular}.repo", 0;
+
+    # this can be used for debugging if something is going wrong
+#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
+#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
+#    }
 }
 
 sub _repo_setup_updates_development {
@@ -409,8 +412,14 @@ sub _repo_setup_updates {
         # this gets really ugly, but the repo URLs changed between 27 and
         # 28, so because we're using baseurl not metalink, we need to
         # fix the locations up when doing upgrade tests to 28...
-        assert_script_run 'sed -i -e "s,/$releasever/$basearch/,/$releasever/Everything/$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
+        assert_script_run 'sed -i -e "s,/\$releasever/\$basearch/,/\$releasever/Everything/\$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
     }
+
+    # this can be used for debugging if something is going wrong
+#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
+#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
+#    }
+
     # log the exact packages in the update at test time, with their
     # source packages and epochs. log is uploaded by _advisory_update
     # and used for later comparison by _advisory_post
