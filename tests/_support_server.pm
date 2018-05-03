@@ -14,8 +14,11 @@ sub run {
     assert_script_run "firewall-cmd --add-service=dhcp";
     assert_script_run "firewall-cmd --add-service=dns";
     # start server
+    # FIXME: workaround RHBZ#1554390
+    assert_script_run "setenforce Permissive";
     assert_script_run "systemctl restart dnsmasq.service";
     assert_script_run "systemctl is-active dnsmasq.service";
+    assert_script_run "setenforce Enforcing";
 
     ## ISCSI
 
