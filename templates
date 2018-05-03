@@ -4112,7 +4112,8 @@
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "PART_TABLE_TYPE", value => "mbr"},
-                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                     {
@@ -4125,7 +4126,8 @@
                         { key => "QEMURAM", value => "2048"},
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
-                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                     {
@@ -4141,7 +4143,8 @@
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         # we're running ARM tests on x86_64 for now as we have
                         # no ARM workers
-                        { key => "WORKER_CLASS", value => "qemu_x86_64" }
+                        { key => "WORKER_CLASS", value => "qemu_x86_64" },
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                     {
@@ -4154,7 +4157,8 @@
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64le" },
-                        { key => "PART_TABLE_TYPE", value => "mbr"}
+                        { key => "PART_TABLE_TYPE", value => "mbr"},
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                     {
@@ -4167,7 +4171,8 @@
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64" },
-                        { key => "PART_TABLE_TYPE", value => "mbr"}
+                        { key => "PART_TABLE_TYPE", value => "mbr"},
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                     {
@@ -4185,7 +4190,8 @@
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
-                        { key => "WORKER_CLASS", value => "qemu_aarch64" }
+                        { key => "WORKER_CLASS", value => "qemu_aarch64" },
+                        { key => "QEMU_VIRTIO_RNG", value => "1"}
                       ],
                     },
                   ],
@@ -5116,7 +5122,6 @@
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
-                        { key => "QEMU_VIRTIO_RNG", value => "1" },
                       ],
                     },
                     {
@@ -5128,7 +5133,6 @@
                         { key => "START_AFTER_TEST", value => "install_arm_image_deployment_upload" },
                         { key => "NUMDISKS", value => "1" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
-                        { key => "QEMU_VIRTIO_RNG", value => "1" },
                         # set kernel arguments for DKB
                         { key => "APPEND", value => "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0" },
                       ],
