@@ -405,6 +405,12 @@ sub _repo_setup_updates {
     # for upgrade tests, we want to do the 'development' changes *after*
     # we set up the update repo
     _repo_setup_updates_development if (get_var("DEVELOPMENT") && get_var("UPGRADE"));
+    if (get_var("UPGRADE") && get_var("VERSION") > 27 && get_var("CURRREL") < 28) {
+        # this gets really ugly, but the repo URLs changed between 27 and
+        # 28, so because we're using baseurl not metalink, we need to
+        # fix the locations up when doing upgrade tests to 28...
+        assert_script_run 'sed -i -e "s,/$releasever/$basearch/,/$releasever/Everything/$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
+    }
     # log the exact packages in the update at test time, with their
     # source packages and epochs. log is uploaded by _advisory_update
     # and used for later comparison by _advisory_post
