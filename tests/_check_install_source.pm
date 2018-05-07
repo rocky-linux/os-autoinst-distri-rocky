@@ -30,7 +30,19 @@ sub run {
 	}
     }
     else {
-        assert_script_run "grep \"added repo: 'anaconda'.*${repourl}\" /tmp/packaging.log";
+        # there are only three hard problems in software development:
+        # naming things, cache expiry, off-by-one errors...and quoting
+        # we need single quotes (at the perl level) around the start
+        # of this, so the backslashes are not interpreted by perl but
+        # passed through to ultimately be interpreted by 'grep'
+        # itself. We need double quotes around $repourl so that *is*
+        # interpreted by perl. And we need quotes around the entire
+        # expression at the bash level, and single quotes around the
+        # text 'anaconda' at the level of grep, as the string we're
+        # actually matching on literally has 'anaconda' in it. We need
+        # (added|enabled) till F28 goes EOL: the log line was changed
+        # in Rawhide after F28 came out.
+        assert_script_run 'grep "\(added\|enabled\) repo: ' . "'anaconda'.*${repourl}" . '" /tmp/packaging.log';
     }
     send_key "ctrl-alt-f6";
 
