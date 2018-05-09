@@ -339,8 +339,8 @@ sub _repo_setup_compose {
     # won't always exist and we don't want to bother testing or
     # predicting their existence; assert_script_run doesn't buy you
     # much with sed as it'll return 0 even if it replaced nothing
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
-    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Modular/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Modular/source,g' /etc/yum.repos.d/{fedora-modular,fedora-rawhide-modular}.repo", 0;
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^mirrorlist,#mirrorlist,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Everything/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Everything/source,g' /etc/yum.repos.d/{fedora,fedora-rawhide}.repo", 0;
+    script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^mirrorlist,#mirrorlist,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Modular/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Modular/source,g' /etc/yum.repos.d/{fedora-modular,fedora-rawhide-modular}.repo", 0;
 
     # this can be used for debugging if something is going wrong
 #    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
@@ -348,56 +348,27 @@ sub _repo_setup_compose {
 #    }
 }
 
-sub _repo_setup_updates_development {
-    # Fix URL for fedora.repo if this is a development release
-    # This is rather icky, but I can't think of any better way
-    # The problem is that the 'baseurl' line in fedora.repo is
-    # always left as the correct URL for a *stable* release, we
-    # don't change it to the URL for a Branched release while the
-    # release is Branched, as it's too much annoying package work
-    assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora.repo";
-    # Disable updates-testing so other bad updates don't break us
-    assert_script_run "dnf config-manager --set-disabled updates-testing";
-    # https://pagure.io/fedora-repos/issue/70
-    # this is the easiest workaround, it's not wrong as the repo
-    # is empty for branched anyway
-    assert_script_run "dnf config-manager --set-disabled updates";
-    # same for Modular, if appropriate
-    unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
-        assert_script_run "sed -i -e 's,/releases/,/development/,g' /etc/yum.repos.d/fedora-modular.repo";
-        assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
-        assert_script_run "dnf config-manager --set-disabled updates-modular";
-    }
-}
-
-sub _repo_setup_updates_28_errors {
-    # fix up some errors in fedora-repos baseurls in F28:
-    # https://pagure.io/fedora-repos/issue/70
-    assert_script_run 'sed -i -e "s,^\(baseurl.*/\)os/$,\1,g" /etc/yum.repos.d/fedora*updates*.repo';
-    assert_script_run 'sed -i -e "s,/testing-modular/,/testing/,g" /etc/yum.repos.d/fedora*updates*.repo';
-}
-
 sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
-    # Use baseurl not metalink so we don't hit the timing issue where
+    # Use mirrorlist not metalink so we don't hit the timing issue where
     # the infra repo is updated but mirrormanager metadata checksums
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
-    assert_script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^#baseurl,baseurl,g' /etc/yum.repos.d/fedora*.repo";
-    if (get_var("OFW")) {
-        # the uncommented baseurl line must be changed for PowerPC
-        # from download.fedoraproject.org/pub/fedora/linux/...
-        # to   download.fedoraproject.org/pub/fedora-secondary/...
-        script_run "sed -i -e 's,/pub/fedora/linux/,/pub/fedora-secondary/,g' /etc/yum.repos.d/fedora*.repo", 0;
+    assert_script_run "sed -i -e 's,metalink,mirrorlist,g' /etc/yum.repos.d/fedora*.repo";
+    if (get_var("DEVELOPMENT")) {
+        # Disable updates-testing so other bad updates don't break us
+        # this will do nothing on upgrade tests as we're on a stable
+        # release at this point, but it won't *hurt* anything, so no
+        # need to except that case really
+        assert_script_run "dnf config-manager --set-disabled updates-testing";
+        # same for Modular, if appropriate
+        unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
+            assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
+        }
     }
-    # for non-upgrade tests, we want to do the 'development' changes
-    # and f28 fixups *before* we set up the update repo...
-    unless (get_var("UPGRADE")) {
-        _repo_setup_updates_development if (get_var("DEVELOPMENT"));
-        _repo_setup_updates_28_errors if (get_var("VERSION") == 28);
-    }
+
     # Set up an additional repo containing the update packages. We do
     # this rather than simply running a one-time update because it may
     # be the case that a package from the update isn't installed *now*
@@ -412,15 +383,6 @@ sub _repo_setup_updates {
     # for upgrade tests, we want to do the 'development' changes *after* we
     # set up the update repo. We don't do the f28 fixups as we don't have
     # f28 fedora-repos.
-    if (get_var("UPGRADE")) {
-        _repo_setup_updates_development if (get_var("DEVELOPMENT"));
-        if ( get_var("VERSION") > 27 && get_var("CURRREL") < 28) {
-            # this gets really ugly, but the repo URLs changed between 27 and
-            # 28, so because we're using baseurl not metalink, we need to
-            # fix the locations up when doing upgrade tests to 28...
-            assert_script_run 'sed -i -e "s,/\$releasever/\$basearch/,/\$releasever/Everything/\$basearch/,g" /etc/yum.repos.d/fedora*updates*.repo';
-        }
-    }
 
     # this can be used for debugging if something is going wrong
 #    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {

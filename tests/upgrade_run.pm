@@ -13,7 +13,7 @@ sub run {
     # disable screen blanking (download can take a long time)
     script_run "setterm -blank 0";
 
-    # use compose repo
+    # use compose repo (compose tests) or set up update repo (update tests)
     repo_setup();
     my $params = "-y --releasever=${relnum}";
     if ($release eq "rawhide") {

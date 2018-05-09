@@ -20,6 +20,9 @@ sub run {
     $self->root_console(tty=>3);
     # disable screen blanking (update can take a long time)
     script_run "setterm -blank 0";
+    # adjust repo files to use mirrorlist not metalink (to avoid
+    # metalink checksum timing issue causing infra repo to be rejected)
+    assert_script_run "sed -i -e 's,metalink,mirrorlist,g' /etc/yum.repos.d/fedora*.repo";
 }
 
 
