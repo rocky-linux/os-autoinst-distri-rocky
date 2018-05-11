@@ -35,14 +35,15 @@ sub run {
     check_screen ["upgrade_fail", "bootloader"], 15;
     die "DNF reported failure" if (match_has_tag "upgrade_fail");
 
-    # handle bootloader, if requested
+    # handle bootloader, if requested; set longer timeout as sometimes
+    # reboot here seems to take a long time
     if (get_var("GRUB_POSTINSTALL")) {
-        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"));
+        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>120);
     }
 
     # decrypt, if encrypted
     if (get_var("ENCRYPT_PASSWORD")) {
-        boot_decrypt(60);
+        boot_decrypt(120);
         # in encrypted case we need to wait a bit so postinstall test
         # doesn't bogus match on the encryption prompt we just completed
         # before it disappears from view

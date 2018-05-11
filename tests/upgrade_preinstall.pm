@@ -11,12 +11,12 @@ sub run {
 
     # handle bootloader, if requested
     if (get_var("GRUB_POSTINSTALL")) {
-        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"));
+        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>120);
     }
 
     # decrypt if necessary
     if (get_var("ENCRYPT_PASSWORD")) {
-        boot_decrypt(60);
+        boot_decrypt(120);
     }
 
     boot_to_login_screen;
