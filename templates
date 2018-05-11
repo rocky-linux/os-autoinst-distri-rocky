@@ -1500,6 +1500,17 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_arabic_language" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_asian_language" },
                     },
                     {
@@ -2539,6 +2550,18 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_arabic_language" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_asian_language" },
                     },
                     {
@@ -3260,6 +3283,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_cyrillic_language" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_arabic_language" },
                     },
                     {
                       group_name => "Fedora PowerPC",
@@ -4028,6 +4063,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_cyrillic_language" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_arabic_language" },
                     },
                     {
                       group_name => "Fedora AArch64",
@@ -5048,6 +5095,21 @@
                       name => "install_cyrillic_language",
                       settings => [
                         { key => "LANGUAGE", value => "russian" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "PACKAGE_SET", value => "workstation" },
+                        { key => "SWITCHED_LAYOUT", value => "1" },
+                        { key => "USER_LOGIN", value => "qwerty" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
+                        { key => "POSTINSTALL", value => "_console_login" },
+                        { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
+                        { key => "HDDSIZEGB", value => "12" },
+                      ],
+                    },
+                    {
+                      name => "install_arabic_language",
+                      settings => [
+                        { key => "LANGUAGE", value => "arabic" },
                         { key => "DESKTOP", value => "gnome" },
                         { key => "PACKAGE_SET", value => "workstation" },
                         { key => "SWITCHED_LAYOUT", value => "1" },

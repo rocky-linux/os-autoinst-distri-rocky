@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "LANGUAGE-arabic",
+    "skip_button"
+  ],
+  "area": [
+    {
+      "xpos": 19,
+      "ypos": 42,
+      "width": 40,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}
