@@ -62,11 +62,22 @@ sub run {
             assert_screen "anaconda_select_install_lang_selected", 3;
             assert_and_click "anaconda_select_install_lang_continue";
 
-            if ( check_screen "anaconda_rawhide_accept_fate", 60 ) {
-                assert_and_click "anaconda_rawhide_accept_fate";
+            # wait 60 secs for hub or Rawhide warning dialog to appear.
+            # If the hub appears, return - we're done now. If Rawhide
+            # warning dialog appears, accept it.
+            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub"], 60) {
+                if (match_has_tag("anaconda_rawhide_accept_fate")) {
+                    assert_and_click "anaconda_rawhide_accept_fate";
+                }
+                else {
+                    # this is when the hub appeared already, we're done
+                    return;
+                }
             }
-
-            # wait for Anaconda hub to appear
+            # This is where we get to if we accepted fate above, *or*
+            # didn't match anything: if the Rawhide warning didn't
+            # show by now it never will, so we'll just wait for the
+            # hub to show up.
             assert_screen "anaconda_main_hub", 900; #
         }
     }
