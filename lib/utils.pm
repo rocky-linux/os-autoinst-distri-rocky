@@ -488,7 +488,7 @@ sub gnome_initial_setup {
     }
     else {
         # wait for the stupid 'help' screen to show and kill it
-        if (check_screen "getting_started") {
+        if (check_screen "getting_started", 30) {
             send_key "alt-f4";
             wait_still_screen 5;
         }
