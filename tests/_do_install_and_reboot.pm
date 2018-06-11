@@ -54,7 +54,7 @@ sub run {
     }
 
     # Wait out animation
-    sleep 3;
+    sleep 8;
     # Set user details, unless the test is configured not to create one
     anaconda_create_user() unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
 
