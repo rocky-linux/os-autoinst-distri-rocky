@@ -187,6 +187,12 @@ sub custom_change_type {
     assert_and_click "anaconda_part_device_type";
     # Move the mouse away from the menu
     mouse_set(10, 10);
+    # workaround for bug aarch64 tests sometimes hit - menu doesn't
+    # open when clicked. just click it again.
+    if (check_screen "anaconda_part_device_type_active", 5) {
+        assert_and_click "anaconda_part_device_type_active";
+        mouse_set(10, 10);
+    }
     assert_and_click "anaconda_part_device_type_$type";
     assert_and_click "anaconda_part_update_settings";
 }

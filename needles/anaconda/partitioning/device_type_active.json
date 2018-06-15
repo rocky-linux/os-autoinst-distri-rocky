@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 494,
+      "ypos": 288,
+      "width": 84,
+      "height": 49,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_part_device_type_active"
+  ]
+}
