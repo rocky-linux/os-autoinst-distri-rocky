@@ -99,6 +99,12 @@ sub custom_scheme_select {
     assert_and_click "anaconda_part_scheme";
     # Move the mouse away from the menu
     mouse_set(10, 10);
+    # workaround for bug aarch64 tests sometimes hit - menu doesn't
+    # open when clicked. just click it again.
+    if (check_screen "anaconda_part_scheme_active", 5) {
+        assert_and_click "anaconda_part_scheme_active";
+        mouse_set(10, 10);
+    }
     assert_and_click "anaconda_part_scheme_$scheme";
 }
 

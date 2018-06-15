@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_part_scheme_active"
+  ],
+  "area": [
+    {
+      "xpos": 56,
+      "ypos": 242,
+      "width": 47,
+      "height": 40,
+      "type": "match"
+    }
+  ]
+}
