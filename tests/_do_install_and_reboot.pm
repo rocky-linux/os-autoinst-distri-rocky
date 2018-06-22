@@ -89,6 +89,22 @@ sub run {
     assert_screen "anaconda_install_done";
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
+    # on aarch64, the default console is set by kernel config to the
+    # serial console. we don't want this, it messes up decryption
+    # (as plymouth will expect the passphrase on the serial console,
+    # not the virtual console). Let's go fix this up now.
+    if (get_var("ARCH") eq "aarch64") {
+        $self->root_console();
+        # stick 'console=tty0' on the end of GRUB_CMDLINE_LINUX in
+        # the grub defaults file, and 'quiet' so we don't get kernel
+        # messages, which screws up some needles
+        assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" /mnt/sysimage/etc/default/grub';
+        # regenerate the bootloader config
+        assert_script_run "chroot /mnt/sysimage grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+        # let's just reboot from here, seems simplest
+        type_string "reboot\n" unless (get_var("MEMCHECK"));
+        return;
+    }
     # for the memory check test, we *don't* want to leave
     unless (get_var("MEMCHECK")) {
         assert_and_click "anaconda_install_done";
