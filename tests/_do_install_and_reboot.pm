@@ -97,7 +97,7 @@ sub run {
         $self->root_console();
         # stick 'console=tty0' on the end of GRUB_CMDLINE_LINUX in
         # the grub defaults file, and 'quiet' so we don't get kernel
-        # messages, which screws up some needles
+        # messages, which screws up some needles. RHBZ#1594402
         assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" /mnt/sysimage/etc/default/grub';
         # regenerate the bootloader config
         assert_script_run "chroot /mnt/sysimage grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
