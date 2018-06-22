@@ -19,6 +19,8 @@ sub run {
         $params .= "inst.repo=" . get_full_repo($repourl) . " ";
     }
     $params .= "inst.text " if get_var("ANACONDA_TEXT");
+    # makes text install on aarch64 work - RHBZ#1594402
+    $params .= "console=tty0" if (get_var("ARCH" eq "aarch64"));
     # inst.debug enables memory use tracking
     $params .= "debug" if get_var("MEMCHECK");
     # ternary: set $params to "" if it contains only spaces
