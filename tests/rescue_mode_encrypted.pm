@@ -18,7 +18,21 @@ sub run {
         # select "rescue system"
         if (get_var('UEFI')) {
             send_key "down";
-            send_key "ret";
+            # we need this on aarch64 till #1594402 is resolved
+            if (get_var('ARCH') eq 'aarch64') {
+                send_key "e";
+                # duped with do_bootloader, sadly...
+                send_key "down";
+                sleep 1;
+                send_key "down";
+                sleep 1;
+                send_key "end";
+                type_safely " console=tty0";
+                send_key "ctrl-x";
+            }
+            else {
+                send_key "ret";
+            }
         }
         else {
             type_string "r\n";
