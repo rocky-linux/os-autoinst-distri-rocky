@@ -179,6 +179,9 @@ sub console_loadkeys_us {
     if (get_var('LANGUAGE') eq 'french') {
         script_run "loqdkeys us", 0;
     }
+    elsif (get_var('LANGUAGE') eq 'japanese') {
+        script_run "loadkeys us", 0;
+    }
 }
 
 sub do_bootloader {

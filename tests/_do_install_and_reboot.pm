@@ -95,6 +95,11 @@ sub run {
     # not the virtual console). Let's go fix this up now.
     if (get_var("ARCH") eq "aarch64") {
         $self->root_console();
+        # somehow, by this point, localized keyboard layout has been
+        # loaded for this tty, so for French and Arabic at least we
+        # need to load the 'us' layout again for the next command to
+        # be typed correctly
+        console_loadkeys_us;
         # stick 'console=tty0' on the end of GRUB_CMDLINE_LINUX in
         # the grub defaults file, and 'quiet' so we don't get kernel
         # messages, which screws up some needles. RHBZ#1594402
