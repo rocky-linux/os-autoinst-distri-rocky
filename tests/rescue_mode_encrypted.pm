@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
     # handle bootloader screen
