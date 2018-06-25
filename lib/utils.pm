@@ -178,9 +178,12 @@ sub console_login {
 sub console_loadkeys_us {
     if (get_var('LANGUAGE') eq 'french') {
         script_run "loqdkeys us", 0;
+        # might take a few secs
+        sleep 3;
     }
     elsif (get_var('LANGUAGE') eq 'japanese') {
         script_run "loadkeys us", 0;
+        sleep 3;
     }
 }
 
