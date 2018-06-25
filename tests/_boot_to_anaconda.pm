@@ -20,6 +20,7 @@ sub run {
     }
     if (get_var("ANACONDA_TEXT")) {
         $params .= "inst.text ";
+        # we need this on aarch64 till #1594402 is resolved
         $params .= "console=tty0 " if (get_var("ARCH") eq "aarch64");
     }
     # inst.debug enables memory use tracking
