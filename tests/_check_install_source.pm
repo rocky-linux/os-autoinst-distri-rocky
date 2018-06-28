@@ -41,8 +41,12 @@ sub run {
         # text 'anaconda' at the level of grep, as the string we're
         # actually matching on literally has 'anaconda' in it. We need
         # (added|enabled) till F28 goes EOL: the log line was changed
-        # in Rawhide after F28 came out.
-        assert_script_run 'grep "\(added\|enabled\) repo: ' . "'anaconda'.*${repourl}" . '" /tmp/packaging.log';
+        # in Rawhide after F28 came out. ('anaconda'|'') is a work
+        # around for an anaconda bug that only appears in F29-era
+        # Rawhide, can be removed when a build with
+        # https://github.com/rhinstaller/anaconda/pull/1519
+        # is done.
+        assert_script_run 'grep "\(added\|enabled\) repo: ' . "\\('anaconda'\\|''\\).*${repourl}" . '" /tmp/packaging.log';
     }
     send_key "ctrl-alt-f6";
 
