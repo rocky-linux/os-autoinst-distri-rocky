@@ -28,49 +28,71 @@ sub run {
     assert_script_run 'mkdir -p /etc/ipa';
     assert_script_run 'printf "[global]\ndebug = True\n" > /etc/ipa/server.conf';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
-    # rolectl
+    # ipa-server-install / rolectl
     my @forwards = get_host_dns();
-    # we are now gonna work around a stupid bug in rolekit. we want to
-    # pass it a list of ipv4 DNS forwarders and have no ipv6 DNS
-    # forwarders. but it won't allow you to have a dns_forwarders array
-    # with a "ipv4" list but no "ipv6" list, any values in the "ipv6"
-    # list must be contactable (so we can't use real IPv6 DNS servers
-    # as we have no IPv6 connectivity), and if you use an empty list
-    # as the "ipv6" value you often hit a weird DBus error "unable to
-    # guess signature from an empty list". Fortunately, rolekit doesn't
-    # actually check that the values in the lists are really IPv6 /
-    # IPv4, it just turns all the values in each list into --forwarder
-    # args for ipa-server-install. So we can just stuff IPv4 values
-    # into both lists. rolekit bug:
-    # https://github.com/libre-server/rolekit/issues/64
-    # it should be fixed relatively soon.
-    my $fourlist;
-    my $sixlist;
-    if (scalar @forwards == 1) {
-        # we've only got one server, so dupe it, best we can do
-        $fourlist = '["' . $forwards[0] . '"]';
-        $sixlist = $fourlist;
+    # from here we branch: for F28 and earlier we use rolekit as
+    # always, for F29+ we deploy directly ourselves as rolekit is
+    # deprecated
+    my $version = get_var("VERSION");
+    # for upgrade tests we need to check CURRREL not VERSION
+    $version = get_var("CURRREL") if (get_var("UPGRADE"));
+    if ($version < 29 && $version ne 'Rawhide') {
+        # we are now gonna work around a stupid bug in rolekit. we want to
+        # pass it a list of ipv4 DNS forwarders and have no ipv6 DNS
+        # forwarders. but it won't allow you to have a dns_forwarders array
+        # with a "ipv4" list but no "ipv6" list, any values in the "ipv6"
+        # list must be contactable (so we can't use real IPv6 DNS servers
+        # as we have no IPv6 connectivity), and if you use an empty list
+        # as the "ipv6" value you often hit a weird DBus error "unable to
+        # guess signature from an empty list". Fortunately, rolekit doesn't
+        # actually check that the values in the lists are really IPv6 /
+        # IPv4, it just turns all the values in each list into --forwarder
+        # args for ipa-server-install. So we can just stuff IPv4 values
+        # into both lists. rolekit bug:
+        # https://github.com/libre-server/rolekit/issues/64
+        # it should be fixed relatively soon.
+        my $fourlist;
+        my $sixlist;
+        if (scalar @forwards == 1) {
+            # we've only got one server, so dupe it, best we can do
+            $fourlist = '["' . $forwards[0] . '"]';
+            $sixlist = $fourlist;
+        }
+        else {
+            # put the first value in the 'IPv4' list and all the others in
+            # the 'IPv6' list
+            $fourlist = '["' . shift(@forwards) . '"]';
+            $sixlist = '["' . join('","', @forwards) . '"]';
+        }
+        # deploy the domain controller role, specifying an admin password
+        # and the list of DNS server IPs as JSON via stdin. If we don't do
+        # this, rolectl defaults to using the root servers as forwarders
+        # (it does not copy the settings from resolv.conf), which give the
+        # public results for mirrors.fedoraproject.org, some of which
+        # things running in phx2 cannot reach; we must make sure the phx2
+        # deployments use the phx2 nameservers.
+        assert_script_run 'echo \'{"admin_password":"monkeys123","dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
     }
     else {
-        # put the first value in the 'IPv4' list and all the others in
-        # the 'IPv6' list
-        $fourlist = '["' . shift(@forwards) . '"]';
-        $sixlist = '["' . join('","', @forwards) . '"]';
+        # this is the other side of the version branch - we're on 29+,
+        # so no rolekit. First  install the necessary packages
+        assert_script_run "dnf -y groupinstall freeipa-server", 600;
+        # configure the firewall
+        for my $service (qw(freeipa-ldap freeipa-ldaps dns)) {
+            assert_script_run "firewall-cmd --permanent --add-service $service";
+        }
+        assert_script_run "systemctl restart firewalld.service";
+        # deploy the server
+        my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --no-reverse";
+        for my $fwd (@forwards) {
+            $args .= " --forwarder=$fwd";
+        }
+        assert_script_run "ipa-server-install $args", 1200;
+        # enable and start the systemd service
+        assert_script_run "systemctl enable ipa.service";
+        assert_script_run "systemctl start ipa.service", 300;
     }
-    # deploy the domain controller role, specifying an admin password
-    # and the list of DNS server IPs as JSON via stdin. If we don't do
-    # this, rolectl defaults to using the root servers as forwarders
-    # (it does not copy the settings from resolv.conf), which give the
-    # public results for mirrors.fedoraproject.org, some of which
-    # things running in phx2 cannot reach; we must make sure the phx2
-    # deployments use the phx2 nameservers.
-    assert_script_run 'echo \'{"admin_password":"monkeys123","dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
-    # FIXME: workaround for RHBZ #1400293 on Fedora 24. Can be removed
-    # when Firefox is fixed.
-    my $release = lc(get_var('VERSION'));
-    if ($release ne "rawhide" && $release < 25) {
-        assert_script_run 'ipa-getcert resubmit -d /etc/httpd/alias -n Server-Cert -D $( uname -n )';
-    }
+
     # kinit as admin
     assert_script_run 'echo "monkeys123" | kinit admin';
     # set up an OTP for client001 enrolment (it will enrol with a kickstart)
