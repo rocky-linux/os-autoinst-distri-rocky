@@ -12,8 +12,6 @@ sub run {
     # always, for F29+ we decommission directly ourselves as rolekit
     # is deprecated
     my $version = get_var("VERSION");
-    # for upgrade tests we need to check CURRREL not VERSION
-    $version = get_var("CURRREL") if (get_var("UPGRADE"));
     if ($version < 29 && $version ne 'Rawhide') {
         # check the role status, should be 'running'
         validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^running/ };
