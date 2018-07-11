@@ -10,12 +10,55 @@ sub run {
     my $self=shift;
     # use compose repo, disable u-t, etc.
     repo_setup();
-    # deploy the database server role
-    assert_script_run 'echo \'{"database":"openqa","owner":"openqa","password":"correcthorse"}\' | rolectl deploy databaseserver --settings-stdin', 300;
-    # check the role status, should be 'running'
-    validate_script_output 'rolectl status databaseserver/1', sub { $_ =~ m/^running/ };
-    # check 'settings' output looks vaguely right
-    validate_script_output 'rolectl settings databaseserver/1', sub {$_ =~ m/owner = openqa/ };
+    # from here we branch: for F28 and earlier we use rolekit as
+    # always, for F29+ we deploy directly ourselves as rolekit is
+    # deprecated
+    my $version = get_var("VERSION");
+    # for upgrade tests we need to check CURRREL not VERSION
+    $version = get_var("CURRREL") if (get_var("UPGRADE"));
+    if ($version < 29 && $version ne 'Rawhide') {
+        # deploy the database server role
+        assert_script_run 'echo \'{"database":"openqa","owner":"openqa","password":"correcthorse"}\' | rolectl deploy databaseserver --settings-stdin', 300;
+        # check the role status, should be 'running'
+        validate_script_output 'rolectl status databaseserver/1', sub { $_ =~ m/^running/ };
+        # check 'settings' output looks vaguely right
+        validate_script_output 'rolectl settings databaseserver/1', sub {$_ =~ m/owner = openqa/ };
+    }
+    else {
+        # deploy postgres directly ourselves. first, install packages...
+        assert_script_run 'dnf -y install postgresql-server postgresql-contrib', 300;
+        # configure the firewall
+        assert_script_run "firewall-cmd --permanent --add-service postgresql";
+        assert_script_run "systemctl restart firewalld.service";
+        # init the db
+        assert_script_run "/usr/bin/postgresql-setup --initdb";
+        # enable and start the systemd service
+        assert_script_run "systemctl enable postgresql.service";
+        assert_script_run "systemctl start postgresql.service";
+        # create the owner
+        assert_script_run 'su postgres -c "/usr/bin/createuser openqa"';
+        # create the database
+        assert_script_run 'su postgres -c "/usr/bin/createdb openqa -O openqa"';
+        # set the password. oh, god, the quotes. THE QUOTES. trying to
+        # get four layers of nested quotes properly escaped through
+        # perl, bash and postgres is futile, so we write the command
+        # to a file and call psql on the file
+        assert_script_run 'echo "ALTER ROLE openqa WITH PASSWORD \'correcthorse\'" > /tmp/cmd';
+        assert_script_run 'su postgres -c "psql openqa -f /tmp/cmd"';
+        # adjust postgresql.conf to allow network connections; sloppy
+        # version of how rolekit did it
+        assert_script_run 'sed -i -e "s,.*listen_addresses *=.*,listen_addresses=\'*\',g" /var/lib/pgsql/data/postgresql.conf';
+        # check that worked...
+        upload_logs "/var/lib/pgsql/data/postgresql.conf";
+        # adjust pg_hba.conf to use md5 authentication; sloppy version
+        # of how rolekit did it
+        assert_script_run 'sed -i -e "s,^host,#host,g" /var/lib/pgsql/data/pg_hba.conf';
+        assert_script_run 'echo "host    all             all             all                     md5" >> /var/lib/pgsql/data/pg_hba.conf';
+        # check that worked...
+        upload_logs "/var/lib/pgsql/data/pg_hba.conf";
+        # restart the service
+        assert_script_run "systemctl restart postgresql.service";
+    }
     # check we can connect to the database and create a table
     assert_script_run 'su postgres -c "psql openqa -c \'CREATE TABLE test (testcol int);\'"';
     # check we can add a row to the table
@@ -28,14 +71,26 @@ sub run {
     # we're all ready for other jobs to run!
     mutex_create('db_ready');
     wait_for_children;
-    # once child jobs are done, stop the role
-    assert_script_run 'rolectl stop databaseserver/1';
-    # check role is stopped
-    validate_script_output 'rolectl status databaseserver/1', sub { $_ =~ m/^ready-to-start/ };
-    # decommission the role
-    assert_script_run 'rolectl decommission databaseserver/1', 120;
-    # check role is decommissioned
-    validate_script_output 'rolectl list instances', sub { $_ eq "" };
+    if ($version < 29 && $version ne 'Rawhide') {
+        # once child jobs are done, stop the role
+        assert_script_run 'rolectl stop databaseserver/1';
+        # check role is stopped
+        validate_script_output 'rolectl status databaseserver/1', sub { $_ =~ m/^ready-to-start/ };
+        # decommission the role
+        assert_script_run 'rolectl decommission databaseserver/1', 120;
+        # check role is decommissioned
+        validate_script_output 'rolectl list instances', sub { $_ eq "" };
+    }
+    else {
+        # once child jobs are done, decommission the server a bit
+        assert_script_run 'su postgres -c "/usr/bin/dropdb -w --if-exists openqa"';
+        assert_script_run 'su postgres -c "/usr/bin/dropuser -w --if-exists openqa"';
+        # stop the server
+        assert_script_run 'systemctl stop postgresql.service';
+        # check server is stopped
+        assert_script_run '! systemctl is-active postgresql.service';
+        # FIXME check server is decommissioned...how?
+    }
 }
 
 
