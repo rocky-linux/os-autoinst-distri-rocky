@@ -21,6 +21,11 @@ sub run {
         assert_script_run "systemctl is-failed mcelog.service";
         record_soft_failure;
     }
+    # "Job foo.service/start deleted to break ordering cycle"-type
+    # message in the log indicates a service got taken out of the boot
+    # process to resolve some kind of dependency loop, see e.g.
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1600823
+    assert_script_run "! journalctl -b | grep 'deleted to break ordering'";
 }
 
 
