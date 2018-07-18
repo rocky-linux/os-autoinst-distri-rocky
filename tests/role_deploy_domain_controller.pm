@@ -88,7 +88,7 @@ sub run {
         }
         assert_script_run "systemctl restart firewalld.service";
         # deploy the server
-        my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --no-reverse";
+        my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.0.10.in-addr.arpa --allow-zone-overlap";
         for my $fwd (@forwards) {
             $args .= " --forwarder=$fwd";
         }
@@ -113,6 +113,9 @@ sub run {
     assert_script_run 'ipa hbacrule-disable allow_all';
     # allow immediate password changes (as we need to test this)
     assert_script_run 'ipa pwpolicy-mod --minlife=0';
+    # magic voodoo crap to allow reverse DNS client sync to work
+    # https://docs.pagure.org/bind-dyndb-ldap/BIND9/SyncPTR.html
+    assert_script_run 'ipa dnszone-mod domain.local. --allow-sync-ptr=TRUE';
     # kinit as each user and set a new password
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test1@DOMAIN.LOCAL';
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test2@DOMAIN.LOCAL';

@@ -39,6 +39,8 @@ sub run {
         assert_script_run '! systemctl is-active ipa.service';
         # decommission the server
         assert_script_run 'ipa-server-install -U --uninstall', 300;
+        # try and un-garble the screen that the above garbles...
+        assert_script_run 'clear';
         # FIXME check server is decommissioned...how?
     }
     # run post-fail hook to upload logs - even when this test passes
