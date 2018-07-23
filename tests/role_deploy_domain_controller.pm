@@ -78,7 +78,7 @@ sub run {
         # so no rolekit. First  install the necessary packages
         assert_script_run "dnf -y groupinstall freeipa-server", 600;
         # FIXME workaround RHBZ#1606541 until it's fixed
-        unless (script_run "ls -l /usr/sbin/setup-ds.pl") {
+        if (script_run "ls -l /usr/sbin/setup-ds.pl") {
             record_soft_failure "389-ds-base-legacy-tools missing - #1606541";
             assert_script_run "dnf -y install 389-ds-base-legacy-tools", 180;
         }
