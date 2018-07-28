@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 515,
+      "height": 20,
+      "type": "match",
+      "xpos": 258,
+      "width": 113
+    }
+  ],
+  "tags": [
+    "anaconda_rawhide_accept_fate",
+    "LANGUAGE-arabic"
+  ],
+  "properties": []
+}
