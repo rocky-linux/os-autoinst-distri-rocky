@@ -82,11 +82,6 @@ sub run {
             record_soft_failure "389-ds-base-legacy-tools missing - #1606541";
             assert_script_run "dnf -y install 389-ds-base-legacy-tools", 180;
         }
-        # FIXME workaround RHBZ#1607635 till it's fixed
-        unless (script_run "rpm -q softhsm | grep '2.3.0-3.fc29.2'") {
-            record_soft_failure "softhsm-2.3.0-3.fc29.2 known bad - #1607635";
-            assert_script_run "dnf -y downgrade https://kojipkgs.fedoraproject.org//packages/softhsm/2.3.0/3.fc28.1/x86_64/softhsm-2.3.0-3.fc28.1.x86_64.rpm https://kojipkgs.fedoraproject.org//packages/softhsm/2.3.0/3.fc28.1/ppc64le/softhsm-2.3.0-3.fc28.1.ppc64le.rpm https://kojipkgs.fedoraproject.org//packages/softhsm/2.3.0/3.fc28.1/ppc64/softhsm-2.3.0-3.fc28.1.ppc64.rpm https://kojipkgs.fedoraproject.org//packages/softhsm/2.3.0/3.fc28.1/aarch64/softhsm-2.3.0-3.fc28.1.aarch64.rpm";
-        }
         # configure the firewall
         for my $service (qw(freeipa-ldap freeipa-ldaps dns)) {
             assert_script_run "firewall-cmd --permanent --add-service $service";
