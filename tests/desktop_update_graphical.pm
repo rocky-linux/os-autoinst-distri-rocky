@@ -22,6 +22,7 @@ sub run {
     else {
         # this launches GNOME Software on GNOME, dunno for any other
         # desktop yet
+        sleep 3;
         menu_launch_type('update');
     }
     # GNOME Software has a welcome screen, get rid of it if it shows
