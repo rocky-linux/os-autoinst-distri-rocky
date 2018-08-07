@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "firefox_addon_add"
+  ],
+  "area": [
+    {
+      "height": 18,
+      "ypos": 508,
+      "width": 19,
+      "xpos": 462,
+      "type": "match"
+    }
+  ]
+}
