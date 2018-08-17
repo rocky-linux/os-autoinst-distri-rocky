@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_install_user_creation"
+  ],
+  "properties": [],
+  "area": [
+    {
+      "type": "match",
+      "width": 12,
+      "xpos": 513,
+      "ypos": 388,
+      "height": 29
+    }
+  ]
+}
