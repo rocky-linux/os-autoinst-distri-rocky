@@ -61,7 +61,27 @@ sub boot_to_login_screen {
         sleep 5;
         $count -= 1;
     }
-    assert_screen "login_screen", $args{timeout};
+    assert_screen ["login_screen", "grub_error_page"], $args{timeout};
+    # FIXME grub_error_page is a workaround for #1618928, can probably
+    # be removed when that bug is fixed.
+    my $loopcount = 10;
+    while (match_has_tag "grub_error_page") {
+        my $timeout = $args{timeout};
+        $timeout = 300 if ($timeout > 300);
+        # we cap 300 as the timeouts inside this loop at 300 as it
+        # should always be the right number - if this is a
+        # post-upgrade case or the kickstart install case, that
+        # already finished by now
+        send_key "spc";
+        $loopcount -= 1;
+        if ($loopcount == 0) {
+            # let's not loop forever...
+            assert_screen "login_screen", $timeout;
+        }
+        else {
+            assert_screen ["login_screen", "grub_error_page"], $timeout;
+        }
+    }
     if (match_has_tag "graphical_login") {
         wait_still_screen 10, 30;
         assert_screen "login_screen";
@@ -210,12 +230,24 @@ sub do_bootloader {
     );
     # if not postinstall not UEFI and not ofw, syslinux
     $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) ? "grub" : "syslinux";
-    if ($args{uefi}) {
-        # we use the firmware-type specific tags because we want to be
-        # sure we actually did a UEFI boot
-        assert_screen "bootloader_uefi", $args{timeout};
-    } else {
-        assert_screen "bootloader_bios", $args{timeout};
+    # we use the firmware-type specific tags because we want to be
+    # sure we actually did a UEFI boot
+    my $boottag = "bootloader_bios";
+    $boottag = "bootloader_uefi" if ($args{uefi});
+    # FIXME grub_error_page is a workaround for #1618928, can probably
+    # be removed when that bug is fixed
+    assert_screen [$boottag, "grub_error_page"], $args{timeout};
+    my $loopcount = 10;
+    while (match_has_tag "grub_error_page") {
+        send_key "spc";
+        $loopcount -= 1;
+        if ($loopcount == 0) {
+            # let's not loop forever
+            assert_screen $boottag;
+        }
+        else {
+            assert_screen [$boottag, "grub_error_page"];
+        }
     }
     if ($args{mutex}) {
         # cancel countdown
