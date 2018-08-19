@@ -46,6 +46,40 @@ sub desktop_vt {
     send_key "ctrl-alt-f${tty}";
 }
 
+sub _grub_error_loop {
+    # this is a loop used in a few different places to work around
+    # RHBZ#1618928, a bug where grub displays some error or debug
+    # messages in a pager on boot. We match on *either* the tag
+    # we're really looking for ('good') *or* the tag for this pager,
+    # then if we matched the pager, we loop (a maximum 10 times)
+    # pressing 'space' as long as we still match on the pager. As
+    # soon as we match the needle we were actually looking for, we
+    # escape. timeout is the time we should wait for the *first*
+    # match, timeoutcap is a cap on timeout for the *subsequent*
+    # matches; several of the users need this behaviour.
+    my %args = (
+        good => "someneedle",
+        timeout => 300,
+        timeoutcap => 60,
+        @_
+    );
+    my $timeout = $args{timeout};
+    assert_screen [$args{good}, "grub_error_page"], $timeout;
+    my $loopcount = 10;
+    while (match_has_tag "grub_error_page") {
+        $timeout = $args{timeoutcap} if ($timeout > $args{timeoutcap});
+        send_key "spc";
+        $loopcount -= 1;
+        if ($loopcount == 0) {
+            # let's not loop forever...
+            assert_screen $args{good}, $timeout;
+        }
+        else {
+            assert_screen [$args{good}, "grub_error_page"], $timeout;
+        }
+    }
+}
+
 # Wait for login screen to appear. Handle the annoying GPU buffer
 # problem where we see a stale copy of the login screen from the
 # previous boot. Will suffer a ~30 second delay if there's a chance
@@ -61,27 +95,10 @@ sub boot_to_login_screen {
         sleep 5;
         $count -= 1;
     }
-    assert_screen ["login_screen", "grub_error_page"], $args{timeout};
-    # FIXME grub_error_page is a workaround for #1618928, can probably
-    # be removed when that bug is fixed.
-    my $loopcount = 10;
-    while (match_has_tag "grub_error_page") {
-        my $timeout = $args{timeout};
-        $timeout = 300 if ($timeout > 300);
-        # we cap 300 as the timeouts inside this loop at 300 as it
-        # should always be the right number - if this is a
-        # post-upgrade case or the kickstart install case, that
-        # already finished by now
-        send_key "spc";
-        $loopcount -= 1;
-        if ($loopcount == 0) {
-            # let's not loop forever...
-            assert_screen "login_screen", $timeout;
-        }
-        else {
-            assert_screen ["login_screen", "grub_error_page"], $timeout;
-        }
-    }
+    # we cap the timeouts inside this loop at 300 as it should always
+    # be the right number - if this is a post-upgrade case or the
+    # kickstart install case, that already finished by now
+    _grub_error_loop(good=>"login_screen", timeout=>$args{timeout}, timeoutcap=>300);
     if (match_has_tag "graphical_login") {
         wait_still_screen 10, 30;
         assert_screen "login_screen";
@@ -234,21 +251,7 @@ sub do_bootloader {
     # sure we actually did a UEFI boot
     my $boottag = "bootloader_bios";
     $boottag = "bootloader_uefi" if ($args{uefi});
-    # FIXME grub_error_page is a workaround for #1618928, can probably
-    # be removed when that bug is fixed
-    assert_screen [$boottag, "grub_error_page"], $args{timeout};
-    my $loopcount = 10;
-    while (match_has_tag "grub_error_page") {
-        send_key "spc";
-        $loopcount -= 1;
-        if ($loopcount == 0) {
-            # let's not loop forever
-            assert_screen $boottag;
-        }
-        else {
-            assert_screen [$boottag, "grub_error_page"];
-        }
-    }
+    _grub_error_loop(good=>$boottag, timeout=>$args{timeout}, timeoutcap=>30);
     if ($args{mutex}) {
         # cancel countdown
         send_key "left";
@@ -307,7 +310,7 @@ sub get_milestone {
 sub boot_decrypt {
     # decrypt storage during boot; arg is timeout (in seconds)
     my $timeout = shift || 60;
-    assert_screen "boot_enter_passphrase", $timeout; #
+    _grub_error_loop(good=>"boot_enter_passphrase", timeout=>$timeout, timeoutcap=>60);
     type_string get_var("ENCRYPT_PASSWORD");
     send_key "ret";
 }
