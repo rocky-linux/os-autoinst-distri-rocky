@@ -39,7 +39,7 @@ sub run {
         # wait for the bootloader *here* - in a test that inherits from
         # anacondatest - so that if something goes wrong during install,
         # we get anaconda logs
-        assert_screen "bootloader", 1800;
+        assert_screen ["bootloader", "grub_error_page"], 1800;
     }
     else {
         if (get_var("ANACONDA_TEXT")) {
