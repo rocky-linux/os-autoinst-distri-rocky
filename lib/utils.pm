@@ -348,7 +348,12 @@ sub start_cockpit {
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     # run firefox directly in X as root. never do this, kids!
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
-    assert_screen "cockpit_login";
+    # As of 2018-08-24, X is starting slow in Rawhide, seemingly due
+    # to an SELinux denial...handle this, but softfail
+    unless (check_screen "cockpit_login", 30) {
+        record_soft_failure "X starting slowly! Maybe RHBZ#1622254";
+        assert_screen "cockpit_login", 30;
+    }
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
     wait_still_screen 5;
