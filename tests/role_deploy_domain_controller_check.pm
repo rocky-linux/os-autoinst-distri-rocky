@@ -23,6 +23,10 @@ sub run {
         validate_script_output 'rolectl settings domaincontroller/domain.local', sub {$_ =~ m/dm_password = None/ };
         # once child jobs are done, stop the role
         wait_for_children;
+        # run post-fail hook to upload logs - even when this test passes
+        # there are often cases where we need to see the logs (e.g. client
+        # test failed due to server issue)
+        $self->post_fail_hook();
         assert_script_run 'rolectl stop domaincontroller/domain.local';
         # check role is stopped
         validate_script_output 'rolectl status domaincontroller/domain.local', sub { $_ =~ m/^ready-to-start/ };
@@ -34,6 +38,10 @@ sub run {
     else {
         # once child jobs are done, stop the server
         wait_for_children;
+        # run post-fail hook to upload logs - even when this test passes
+        # there are often cases where we need to see the logs (e.g. client
+        # test failed due to server issue)
+        $self->post_fail_hook();
         assert_script_run 'systemctl stop ipa.service';
         # check server is stopped
         assert_script_run '! systemctl is-active ipa.service';
@@ -43,10 +51,6 @@ sub run {
         assert_script_run 'clear';
         # FIXME check server is decommissioned...how?
     }
-    # run post-fail hook to upload logs - even when this test passes
-    # there are often cases where we need to see the logs (e.g. client
-    # test failed due to server issue)
-    $self->post_fail_hook();
 }
 
 
