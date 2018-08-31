@@ -272,8 +272,10 @@ sub load_postinstall_tests() {
     # (intended for the updates testing workflow, so we install the updates
     # to be tested). Don't do this for UPGRADE tests, as the update gets
     # installed as part of the upgrade in that case and we don't need the
-    # extra reboot.
-    if (get_var("ADVISORY") && !get_var("UPGRADE")) {
+    # extra reboot. Don't do this for INSTALL test(s); these are checking
+    # that an installer image built from the update works and do not install
+    # the update themselves.
+    if (get_var("ADVISORY") && !get_var("UPGRADE") && !get_var("INSTALL")) {
         autotest::loadtest "tests/_advisory_update.pm";
         # now load the early boot tests again, as _advisory_update reboots
         _load_early_postinstall_tests(2);
@@ -315,8 +317,10 @@ sub load_postinstall_tests() {
     }
 
     # load the ADVISORY post-install test - this records which update
-    # packages were actually installed during the test
-    if (get_var("ADVISORY")) {
+    # packages were actually installed during the test. Don't do this
+    # for INSTALL test(s); these are checking that an installer image
+    # built from the update works and do not install the update themselves.
+    if (get_var("ADVISORY") && !get_var("INSTALL")) {
         autotest::loadtest "tests/_advisory_post.pm";
     }
 
@@ -343,9 +347,10 @@ if (get_var("ENTRYPOINT")) {
 elsif (get_var("UPGRADE")) {
     load_upgrade_tests;
 }
-elsif (!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) {
+elsif ((!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) || get_var("INSTALL")) {
     # for now we can assume START_AFTER_TEST and BOOTFROM mean the
-    # test picks up after an install, so we skip to post-install
+    # test picks up after an install, so we skip to post-install,
+    # unless the override INSTALL var is set
     load_install_tests;
 }
 

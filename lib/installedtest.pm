@@ -98,6 +98,11 @@ sub post_fail_hook {
 
     # Sometimes useful for diagnosing FreeIPA issues
     upload_logs "/etc/nsswitch.conf", failok=>1;
+
+    # for installer creation test
+    upload_logs "/root/imgbuild/pylorax.log", failok=>1;
+    upload_logs "/root/imgbuild/lorax.log", failok=>1;
+    upload_logs "/root/imgbuild/program.log", failok=>1;
 }
 
     # For update tests, let's do the update package info log stuff,
