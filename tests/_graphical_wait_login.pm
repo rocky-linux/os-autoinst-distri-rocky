@@ -52,18 +52,6 @@ sub run {
     }
     send_key "ret";
 
-    # An auth request for update check appears on FAW 28 at this
-    # point, until
-    # https://pagure.io/fedora-release/pull-request/131 is merged
-    # and built
-    if (get_var("SUBVARIANT") eq 'AtomicWorkstation') {
-        if (check_screen "desktop_auth_required", 120) {
-            record_soft_failure "Update auth dialog on FAW - #1561853";
-            type_very_safely $password;
-            send_key "ret";
-        }
-    }
-
     # Handle initial-setup, for GNOME, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
     # do it if ADVISORY is set, as for the update testing flow,
