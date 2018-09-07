@@ -5,6 +5,7 @@ use utils;
 
 sub run {
     my $self = shift;
+    my $version = get_var("VERSION");
     # If KICKSTART is set, then the wait_time needs to consider the
     # install time. if UPGRADE, we have to wait for the entire upgrade
     # unless ENCRYPT_PASSWORD is set (in which case the postinstall
@@ -69,7 +70,6 @@ sub run {
         # even though it shouldn't. Go back to the simpler line
         # commented below when that bug is fixed
         # unless (get_var("_setup_done")) {
-        my $version = get_var("VERSION");
         if (!get_var("_setup_done") || (($version > 28 || $version eq "Rawhide") && get_var("INSTALL_NO_USER"))) {
                 gnome_initial_setup();
         }
