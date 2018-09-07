@@ -59,25 +59,9 @@ sub run {
     if (get_var("DESKTOP") eq 'gnome' && (get_var("ADVISORY") || !get_var("START_AFTER_TEST"))) {
         # as this test gets loaded twice on the ADVISORY flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
-        # this happened already. Also, as of 2017-10 there's a bug
-        # in the F26 base image which stops g-i-s running at all;
-        # for update and upgrade testing purposes we don't want to
-        # fail, we just want to go ahead. So if we see the
-        # getting_started screen, just handle that instead.
+        # this happened already
         unless (get_var("_setup_done")) {
-            if (get_var("ADVISORY") || get_var("UPGRADE")) {
-                assert_screen ["next_button", "getting_started"], 120;
-                if (match_has_tag("next_button")) {
-                    gnome_initial_setup();
-                }
-                else {
-                    send_key "alt-f4";
-                    set_var("_setup_done", 1);
-                }
-            }
-            else {
                 gnome_initial_setup();
-            }
         }
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
