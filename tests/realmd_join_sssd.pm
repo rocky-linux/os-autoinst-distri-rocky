@@ -58,7 +58,7 @@ sub run {
         for my $fwd (@forwards) {
             $args .= " --forwarder=$fwd";
         }
-        assert_script_run "ipa-replica-install $args", 1200;
+        assert_script_run "ipa-replica-install $args", 1500;
 
         # don't use the other server for our DNS lookups any more, as we
         # should be independent of it
