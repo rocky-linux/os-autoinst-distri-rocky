@@ -25,32 +25,36 @@ sub run {
         }
         $wait_time = 300;
     }
-    # Wait for the login screen
-    boot_to_login_screen(timeout => $wait_time);
-    # if USER_LOGIN is set to string 'false', we're done here
-    return if (get_var("USER_LOGIN") eq "false");
+    # Wait for the login screen, unless we're doing an > 28 GNOME no
+    # user install, which transitions straight from g-i-s to logged-in
+    # desktop
+    unless (get_var("DESKTOP") eq 'gnome' && ($version > 28 || $version eq "Rawhide") && get_var("INSTALL_NO_USER")) {
+        boot_to_login_screen(timeout => $wait_time);
+        # if USER_LOGIN is set to string 'false', we're done here
+        return if (get_var("USER_LOGIN") eq "false");
 
-    # GDM 3.24.1 dumps a cursor in the middle of the screen here...
-    mouse_hide;
-    if (get_var("DESKTOP") eq 'gnome') {
-        # we have to hit enter to get the password dialog
+        # GDM 3.24.1 dumps a cursor in the middle of the screen here...
+        mouse_hide;
+        if (get_var("DESKTOP") eq 'gnome') {
+            # we have to hit enter to get the password dialog
+            send_key "ret";
+        }
+        assert_screen "graphical_login_input";
+        my $password = get_var("USER_PASSWORD", "weakpassword");
+        if (get_var("SWITCHED_LAYOUT")) {
+            # see _do_install_and_reboot; when layout is switched
+            # user password is doubled to contain both US and native
+            # chars
+            desktop_switch_layout 'ascii';
+            type_very_safely $password;
+            desktop_switch_layout 'native';
+            type_very_safely $password;
+        }
+        else {
+            type_very_safely $password;
+        }
         send_key "ret";
     }
-    assert_screen "graphical_login_input";
-    my $password = get_var("USER_PASSWORD", "weakpassword");
-    if (get_var("SWITCHED_LAYOUT")) {
-        # see _do_install_and_reboot; when layout is switched
-        # user password is doubled to contain both US and native
-        # chars
-        desktop_switch_layout 'ascii';
-        type_very_safely $password;
-        desktop_switch_layout 'native';
-        type_very_safely $password;
-    }
-    else {
-        type_very_safely $password;
-    }
-    send_key "ret";
 
     # Handle initial-setup, for GNOME, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
