@@ -1,0 +1,17 @@
+{
+  "properties": [],
+  "tags": [
+    "getting_started",
+    "LANGUAGE-english",
+    "LANGUAGE-arabic"
+  ],
+  "area": [
+    {
+      "width": 121,
+      "height": 30,
+      "type": "match",
+      "ypos": 123,
+      "xpos": 173
+    }
+  ]
+}
