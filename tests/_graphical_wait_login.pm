@@ -60,7 +60,13 @@ sub run {
         # as this test gets loaded twice on the ADVISORY flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
-        unless (get_var("_setup_done")) {
+        # FIXME 2018-09: #1625572 means g-i-s 'first login' mode runs
+        # after 'user creation' mode on F29 and Rawhide install tests,
+        # even though it shouldn't. Go back to the simpler line
+        # commented below when that bug is fixed
+        # unless (get_var("_setup_done")) {
+        my $version = get_var("VERSION");
+        if (!get_var("_setup_done") || (($version > 28 || $version eq "Rawhide") && get_var("INSTALL_NO_USER"))) {
                 gnome_initial_setup();
         }
     }
