@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 28,
+      "type": "match",
+      "width": 56,
+      "ypos": 52,
+      "height": 21
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_spoke_done"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "ypos": 341,
+      "height": 56,
+      "width": 79,
+      "type": "match",
+      "xpos": 501
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_part_fs",
+    "anaconda_part_fs_xfs_selected",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}

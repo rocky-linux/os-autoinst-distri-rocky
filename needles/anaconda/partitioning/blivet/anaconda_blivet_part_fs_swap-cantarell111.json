@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 411,
+      "width": 69,
+      "type": "match",
+      "ypos": 338,
+      "height": 26
+    }
+  ],
+  "tags": [
+    "anaconda_blivet_part_fs_swap"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "ypos": 192,
+      "height": 15,
+      "width": 100,
+      "type": "match",
+      "xpos": 59
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_source_on_the_network",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-server"
+  ]
+}
