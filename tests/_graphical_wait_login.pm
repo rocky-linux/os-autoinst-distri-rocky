@@ -70,19 +70,10 @@ sub run {
         }
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
-        # wait for the stupid 'help' screen to show and kill it. Also,
-        # FIXME 2018-09: #1625572 means g-i-s 'first login' mode runs
-        # after 'user creation' mode on F29 and Rawhide install tests,
-        # even though it shouldn't. So, let's check for that too.
-        if (check_screen ["next_button", "getting_started"], 120) {
-            if (match_has_tag "getting_started") {
-                send_key "alt-f4";
-                wait_still_screen 5;
-            }
-            else {
-                record_soft_failure "gnome-initial-setup ran in both modes, probably RHBZ#1625572";
-                gnome_initial_setup();
-            }
+        # wait for the stupid 'help' screen to show and kill it
+        if (check_screen "getting_started", 30) {
+            send_key "alt-f4";
+            wait_still_screen 5;
         }
         else {
             record_soft_failure "'getting started' missing (probably BGO#790811)";
