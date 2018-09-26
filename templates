@@ -1581,6 +1581,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "modularity_tests" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -2238,6 +2249,18 @@
                       test_suite => { name => "install_kickstart_user_creation" },
                     },
                     {
+              group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "modularity_tests" },
+                    },
+                    {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 20,
@@ -3222,6 +3245,18 @@
                       test_suite => { name => "install_kickstart_hdd" },
                     },
                     {
+              group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "modularity_tests" },
+                    },
+                    {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64" },
                       prio       => 30,
@@ -3760,6 +3795,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_kickstart_user_creation" },
+                    },
+                    {
+              group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "modularity_tests" },
                     },
                     {
                       group_name => "Fedora AArch64",
@@ -5201,6 +5248,17 @@
                       name => "base_selinux",
                       settings => [
                         { key => "POSTINSTALL", value => "base_selinux" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "modularity_tests",
+                      settings => [
+                        { key => "POSTINSTALL", value => "modularity_module_list modularity_enable_disable_module modularity_install_module modularity_update_norepo" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },

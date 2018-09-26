@@ -642,3 +642,10 @@ sub check_desktop_clean {
     }
     die "Clean desktop not reached!";
 }
+
+sub download_modularity_tests {
+# Download the modularity test script, place in the system and then
+# modify the access rights to make it executable.
+    assert_script_run 'curl -o /root/test.py https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/modular_functions.py';
+    assert_script_run 'chmod 755 /root/test.py';
+}
