@@ -436,9 +436,9 @@ sub _repo_setup_updates {
 #    }
 
     # log the exact packages in the update at test time, with their
-    # source packages and epochs. log is uploaded by _advisory_update
-    # and used for later comparison by _advisory_post
+    # source packages and epochs
     assert_script_run 'rpm -qp *.rpm --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | sort -u > /var/log/updatepkgs.txt';
+    upload_logs "/var/log/updatepkgs.txt";
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file

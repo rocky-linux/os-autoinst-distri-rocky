@@ -269,8 +269,10 @@ sub load_postinstall_tests() {
 
     # if scheduler passed an advisory, update packages from that advisory
     # (intended for the updates testing workflow, so we install the updates
-    # to be tested)
-    if (get_var("ADVISORY")) {
+    # to be tested). Don't do this for UPGRADE tests, as the update gets
+    # installed as part of the upgrade in that case and we don't need the
+    # extra reboot.
+    if (get_var("ADVISORY") && !get_var("UPGRADE")) {
         autotest::loadtest "tests/_advisory_update.pm";
         # now load the early boot tests again, as _advisory_update reboots
         _load_early_postinstall_tests(2);
