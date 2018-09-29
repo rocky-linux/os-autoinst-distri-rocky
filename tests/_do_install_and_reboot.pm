@@ -27,6 +27,8 @@ sub run {
     assert_and_click "anaconda_main_hub_begin_installation";
 
     # Set root password, unless we don't want to or can't
+    # can also hit a transition animation
+    wait_still_screen 2;
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     unless (get_var("INSTALLER_NO_ROOT")) {
         assert_and_click "anaconda_install_root_password";
