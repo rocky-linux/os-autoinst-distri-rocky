@@ -62,7 +62,13 @@ sub root_console {
     my $self = shift;
     my %args = (
         @_);
-    send_key "ctrl-alt-f2";
+    # Handle https://bugzilla.redhat.com/show_bug.cgi?id=1635033
+    if (get_var("LIVE") && get_var("DESKTOP") eq "gnome") {
+        send_key "ctrl-alt-f3";
+    }
+    else {
+        send_key "ctrl-alt-f2";
+    }
     console_login(user=>"root");
 }
 
