@@ -678,7 +678,7 @@
                                     },
                       test_suite => { name => "advisory_boot" },
                     },
-		    {
+                    {
                       group_name => "Fedora AArch64 Updates",
                       machine    => { name => "aarch64" },
                       prio       => 40,
