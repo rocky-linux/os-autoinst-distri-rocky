@@ -367,18 +367,6 @@
                       test_suite => { name => "advisory_boot" },
                     },
                     {
-                      group_name => "Fedora Updates",
-                      machine    => { name => "uefi" },
-                      prio       => 40,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "updates-server",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "advisory_boot" },
-                    },
-                    {
                       group_name => "Fedora PowerPC Updates",
                       machine    => { name => "ppc64le" },
                       prio       => 40,
