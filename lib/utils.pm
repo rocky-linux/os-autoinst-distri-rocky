@@ -153,7 +153,7 @@ sub console_login {
         user => "root",
         password => get_var("ROOT_PASSWORD", "weakpassword"),
         # default is 10 seconds, set below, 0 means 'default'
-        timeout => 0;
+        timeout => 0,
         @_);
     $args{timeout} ||= 10;
 
