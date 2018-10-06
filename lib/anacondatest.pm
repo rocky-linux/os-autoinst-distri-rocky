@@ -61,6 +61,9 @@ sub root_console {
     # Switch to an appropriate TTY and log in as root.
     my $self = shift;
     my %args = (
+        # 0 means use console_login's default, non-zero values
+        # passed to console_login
+        timeout => 0,
         @_);
     # Handle https://bugzilla.redhat.com/show_bug.cgi?id=1635033
     if (get_var("LIVE") && get_var("DESKTOP") eq "gnome") {
@@ -69,7 +72,7 @@ sub root_console {
     else {
         send_key "ctrl-alt-f2";
     }
-    console_login(user=>"root");
+    console_login(user=>"root", timeout=>$args{timeout});
 }
 
 1;

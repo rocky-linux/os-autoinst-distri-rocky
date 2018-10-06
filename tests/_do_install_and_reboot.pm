@@ -117,8 +117,9 @@ sub run {
         assert_and_click "anaconda_install_done";
         if (get_var('LIVE')) {
             # reboot from a console, it's more reliable than the desktop
-            # runners
-            $self->root_console;
+            # runners. As of 2018-10 switching to console after liveinst
+            # seems to take a long time, so use a longer timeout here
+            $self->root_console(timeout=>30);
             # if we didn't set a root password during install, set it
             # now...this is kinda icky, but I don't see a great option
             if (get_var("INSTALLER_NO_ROOT")) {

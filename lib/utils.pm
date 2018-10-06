@@ -152,7 +152,10 @@ sub console_login {
     my %args = (
         user => "root",
         password => get_var("ROOT_PASSWORD", "weakpassword"),
+        # default is 10 seconds, set below, 0 means 'default'
+        timeout => 0;
         @_);
+    $args{timeout} ||= 10;
 
     # There's a timing problem when we switch from a logged-in console
     # to a non-logged in console and immediately call this function;
@@ -179,7 +182,7 @@ sub console_login {
         sleep 2;
     }
 
-    check_screen [$good, 'text_console_login'], 10;
+    check_screen [$good, 'text_console_login'], $args{timeout};
     # if we're already logged in, all is good
     if (match_has_tag $good) {
         _console_login_finish();
