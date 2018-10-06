@@ -6,6 +6,18 @@ use mmapi;
 
 sub run {
     my $self = shift;
+    # make sure ipa.service actually came up successfully
+    my $count = 40;
+    while (1) {
+        $count -= 1;
+        die "Waited too long for ipa.service to show up!" if ($count == 0);
+        sleep 3;
+        # if it's active, we're done here
+        last unless script_run 'systemctl is-active ipa.service';
+        # if it's not...fail if it's failed
+        assert_script_run '! systemctl is-failed ipa.service';
+        # if we get here, it's activating, so loop around
+    }
     # if this is an update, notify clients that we're now up again
     mutex_create('server_upgraded') if get_var("UPGRADE");
     # from here we branch: for F28 and earlier we use rolekit as
