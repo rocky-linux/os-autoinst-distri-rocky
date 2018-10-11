@@ -46,7 +46,27 @@ sub run {
         # refresh updates
         assert_and_click 'desktop_package_tool_update_refresh', '', 120;
     }
-    for my $n (1..5) {
+    # wait for refresh, then apply updates, using a C-style loop so we
+    # can reset it if needed due to RHBZ #1314991. We will retry a max
+    # of two times if we hit refresh and wind up being told the system
+    # is up to date.
+    my $retries = 2;
+    for (my $n = 1; $n < 6; $n++) {
+        # TEST TEST Check if refresh completes and g-s thinks we're
+        # up-to-date, if so, refresh and restart the loop
+        if (check_screen 'desktop_package_tool_uptodate', 1) {
+            if ($retries == 2) {
+                record_soft_failure "Refresh did not find available update - #1638563. Retrying";
+            }
+            if ($retries > 0) {
+                assert_and_click 'desktop_package_tool_update_refresh';
+                $n = 1;
+            }
+            else {
+                die "Retried refresh too many times, giving up";
+            }
+            $retries -= 1;
+        }
         last if (check_screen 'desktop_package_tool_update_apply', 120);
         mouse_set 10, 10;
         mouse_hide;
