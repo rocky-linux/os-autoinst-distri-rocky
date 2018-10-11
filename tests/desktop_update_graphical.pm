@@ -46,20 +46,24 @@ sub run {
         # refresh updates
         assert_and_click 'desktop_package_tool_update_refresh', '', 120;
     }
-    # wait for refresh, then apply updates, using a C-style loop so we
-    # can reset it if needed due to RHBZ #1314991. We will retry a max
-    # of two times if we hit refresh and wind up being told the system
-    # is up to date.
+    # wait for refresh, then apply updates, moving the mouse every two
+    # minutes to avoid the idle screen blank kicking in. We use a C-
+    # style loop so we can reset it if needed due to RHBZ #1638563. We
+    # will retry a max of two times if we hit refresh and wind up
+    # being told the system is up to date.
     my $retries = 2;
     for (my $n = 1; $n < 6; $n++) {
-        # TEST TEST Check if refresh completes and g-s thinks we're
-        # up-to-date, if so, refresh and restart the loop
-        if (check_screen 'desktop_package_tool_uptodate', 1) {
+        if (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_uptodate'], 120) {
+            # if we see 'apply', we're done here, quit out of the loop
+            last if (match_has_tag 'desktop_package_tool_update_apply');
+            # otherwise, we hit uptodate, which is the bug case
             if ($retries == 2) {
+                # only record the soft fail on the *first* retry
                 record_soft_failure "Refresh did not find available update - #1638563. Retrying";
             }
             if ($retries > 0) {
                 assert_and_click 'desktop_package_tool_update_refresh';
+                # reset the loop counter so we get another 10 minutes
                 $n = 1;
             }
             else {
@@ -67,7 +71,7 @@ sub run {
             }
             $retries -= 1;
         }
-        last if (check_screen 'desktop_package_tool_update_apply', 120);
+        # move the mouse to stop the screen blanking on idle
         mouse_set 10, 10;
         mouse_hide;
     }
