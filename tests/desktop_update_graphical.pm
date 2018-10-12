@@ -53,10 +53,10 @@ sub run {
     # being told the system is up to date.
     my $retries = 2;
     for (my $n = 1; $n < 6; $n++) {
-        if (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_uptodate'], 120) {
+        if (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_refresh'], 120) {
             # if we see 'apply', we're done here, quit out of the loop
-            last if (match_has_tag 'desktop_package_tool_update_apply');
-            # otherwise, we hit uptodate, which is the bug case
+            last if (check_screen 'desktop_package_tool_update_apply', 1);
+            # otherwise, the refresh button came back - that's the bug
             if ($retries == 2) {
                 # only record the soft fail on the *first* retry
                 record_soft_failure "Refresh did not find available update - #1638563. Retrying";
