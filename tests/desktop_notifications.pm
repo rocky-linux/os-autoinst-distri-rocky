@@ -51,7 +51,7 @@ sub run {
         }
     }
     assert_script_run 'systemctl isolate graphical.target';
-    send_key 'ctrl-alt-f1';
+    # we trust systemd to switch us to the right tty here
     if (get_var("BOOTFROM")) {
         assert_screen 'graphical_login';
         wait_still_screen 3;
