@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "area": [
+    {
+      "xpos": 384,
+      "height": 17,
+      "width": 188,
+      "type": "match",
+      "ypos": 229
+    }
+  ],
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_install_user_creation_make_admin"
+  ]
+}
