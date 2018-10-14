@@ -4236,7 +4236,7 @@
                       settings  => [
                         { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "qxl"},
+                        { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "PART_TABLE_TYPE", value => "mbr"},
                         { key => "WORKER_CLASS", value => "qemu_x86_64" },
@@ -4249,7 +4249,7 @@
                       settings  => [
                         { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "qxl"},
+                        { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "UEFI", value => "1"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
@@ -4280,7 +4280,7 @@
                       settings => [
                         { key => "QEMU", value => "ppc64" },
                         { key => "OFW", value => 1 },
-                        { key => "QEMUVGA", value => "virtio" },
+                        { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64le" },
@@ -4294,7 +4294,7 @@
                       settings => [
                         { key => "QEMU", value => "ppc64" },
                         { key => "OFW", value => 1 },
-                        { key => "QEMUVGA", value => "virtio" },
+                        { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64" },
