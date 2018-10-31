@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader get_milestone boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -656,4 +656,19 @@ sub download_modularity_tests {
 # modify the access rights to make it executable.
     assert_script_run 'curl -o /root/test.py https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/modular_functions.py';
     assert_script_run 'chmod 755 /root/test.py';
+}
+
+sub quit_firefox {
+# Quit Firefox, handling the 'close multiple tabs' warning screen if
+# it shows up
+    send_key "ctrl-q";
+    # expect to get to either the tabs warning or a console
+    if (check_screen ["user_console", "root_console", "firefox_close_tabs"], 30) {
+        # if we hit a console, we're done
+        return unless match_has_tag "firefox_close_tabs";
+        # otherwise, POJITO
+        assert_and_click "firefox_close_tabs";
+    }
+    # it's a bit odd if we reach here, but could mean we quit to a
+    # desktop, or the firefox_close_tabs needle went stale...
 }

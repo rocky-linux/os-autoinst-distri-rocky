@@ -36,7 +36,7 @@ sub run {
     assert_and_click "freeipa_webui_logout";
     wait_still_screen 3;
     # close browser, back to console
-    send_key "ctrl-q";
+    quit_firefox;
     # we don't get back to a prompt instantly and keystrokes while X
     # is still shutting down are swallowed, so wait_still_screen before
     # finishing (and handing off to freeipa_client_postinstall)

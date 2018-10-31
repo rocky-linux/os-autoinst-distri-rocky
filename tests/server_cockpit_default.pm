@@ -12,7 +12,7 @@ sub run {
     # test cockpit web UI start
     start_cockpit(0);
     # quit firefox (return to console)
-    send_key "ctrl-q";
+    quit_firefox;
 }
 
 sub test_flags {
