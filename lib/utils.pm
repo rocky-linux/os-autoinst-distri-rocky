@@ -210,7 +210,13 @@ sub console_login {
         send_key "ret";
     }
     # make sure we reached the console
-    assert_screen($good, 30);
+    unless (check_screen($good, 30)) {
+        # as of 2018-10 we have a bug in sssd which makes this take
+        # unusually long in the FreeIPA tests, let's allow another 30
+        # secs, with a soft fail - RHBZ #1644919
+        record_soft_failure "Console login is taking a long time - #1644919?";
+        assert_screen($good, 30);
+    }
     _console_login_finish();
 }
 
