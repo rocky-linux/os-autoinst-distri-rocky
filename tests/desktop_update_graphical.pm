@@ -52,10 +52,21 @@ sub run {
     # will retry a max of two times if we hit refresh and wind up
     # being told the system is up to date.
     my $retries = 2;
+    my $dlhit = 0;
     for (my $n = 1; $n < 6; $n++) {
-        if (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_refresh'], 120) {
+        if (check_screen ['desktop_package_tool_update_download', 'desktop_package_tool_update_apply', 'desktop_package_tool_update_refresh'], 120) {
             # if we see 'apply', we're done here, quit out of the loop
-            last if (check_screen 'desktop_package_tool_update_apply', 1);
+            last if (match_has_tag 'desktop_package_tool_update_apply');
+            # if we see 'download', we're in the GNOME Software 3.30.5+
+            # two-step process - let's hit it, and go back to waiting
+            # for apply. If we hit it *twice*, that's unexpected, fail
+            if (match_has_tag 'desktop_package_tool_update_download') {
+                die "Update Download button showed up more than once!" if ($dlhit);
+                $dlhit = 1;
+                wait_screen_change { assert_and_click 'desktop_package_tool_update_download'; };
+                $n = 1;
+                next;
+            }
             # otherwise, the refresh button came back - that's the bug
             if ($retries == 2) {
                 # only record the soft fail on the *first* retry
