@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "anaconda_layout_ascii",
+    "anaconda_layout_us"
+  ],
+  "area": [
+    {
+      "type": "match",
+      "width": 35,
+      "ypos": 40,
+      "xpos": 826,
+      "height": 15
+    }
+  ],
+  "properties": []
+}
