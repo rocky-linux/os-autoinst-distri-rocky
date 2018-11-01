@@ -1,0 +1,16 @@
+{
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_layout_native"
+  ],
+  "area": [
+    {
+      "type": "match",
+      "width": 38,
+      "ypos": 40,
+      "height": 15,
+      "xpos": 825
+    }
+  ],
+  "properties": []
+}
