@@ -11,8 +11,17 @@ sub run {
     assert_script_run 'rpm -qa --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | sort -u > /tmp/allpkgs.txt';
     # this finds lines which appear in both files
     # http://www.unix.com/unix-for-dummies-questions-and-answers/34549-find-matching-lines-between-2-files.html
-    assert_script_run 'comm -12 /tmp/allpkgs.txt /var/log/updatepkgs.txt > /var/log/testedpkgs.txt';
-    upload_logs "/var/log/testedpkgs.txt";
+    if (script_run 'comm -12 /tmp/allpkgs.txt /var/log/updatepkgs.txt > /var/log/testedpkgs.txt') {
+        # occasionally, for some reason, it's unhappy about sorting;
+        # we shouldn't fail the test in this case, just upload the
+        # files so we can see why...
+        upload_logs "/tmp/allpkgs.txt", failok=>1;
+        upload_logs "/var/log/updatepkgs.txt", failok=>1;
+    }
+    else {
+        # here, it worked.
+        upload_logs "/var/log/testedpkgs.txt";
+    }
 }
 
 sub test_flags {
