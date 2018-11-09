@@ -18,10 +18,9 @@ sub run {
         upload_logs "/tmp/allpkgs.txt", failok=>1;
         upload_logs "/var/log/updatepkgs.txt", failok=>1;
     }
-    else {
-        # here, it worked.
-        upload_logs "/var/log/testedpkgs.txt";
-    }
+    # we'll try and upload the output even if comm 'failed', as it
+    # does in fact still write it in some cases
+    upload_logs "/var/log/testedpkgs.txt", failok=>1;
 }
 
 sub test_flags {
