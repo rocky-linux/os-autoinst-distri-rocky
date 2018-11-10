@@ -4670,7 +4670,7 @@
                       name => "support_server",
                       settings => [
                         { key => "NUMDISKS", value => "2" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_support_3_%ARCH%.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_4_%ARCH%.img" },
                         { key => "POSTINSTALL", value => "_support_server" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
