@@ -349,7 +349,7 @@ sub check_release {
     # number; often you will want to use `get_var('VERSION')`. Expects
     # a console prompt to be active when it is called.
     my $release = shift;
-    my $check_command = "grep SUPPORT_PRODUCT_VERSION /usr/lib/os.release.d/os-release-fedora";
+    my $check_command = "grep SUPPORT_PRODUCT_VERSION /etc/os-release";
     validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
 }
 
