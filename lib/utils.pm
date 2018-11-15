@@ -288,9 +288,27 @@ sub do_bootloader {
             # the count is 12. So we have to do something gross.
             my $presses = 2;
             if ($args{postinstall}) {
-                if (get_var('OFW') || (get_var('ARCH') eq 'aarch64' && get_var('TEST') ne 'support_server')) {
+                # we need to decide if BLS is in effect...this is fun
+                my $version = get_var("VERSION");
+                # support_server uses a disk image of version CURRREL
+                $version = get_var("CURRREL") if (get_var('TEST') eq 'support_server');
+                # use RAWREL to get a numeric version for Rawhide tests
+                $version = get_var("RAWREL") if ($version eq 'Rawhide');
+                # for upgrade tests, assume 'effective' version is the
+                # starting version; if BLS migration is applied during
+                # upgrade this will get REALLY tricky as we'll need to
+                # switch halfway through...
+                $version = get_var("CURRREL") if (get_var("TEST") =~ m/^upgrade_/);
+                $version = get_var("PREVREL") if (get_var("TEST") =~ m/^upgrade_2/);
+                if ($version > 29) {
+                    # this means 'BLS is active'; it seems that we always
+                    # need 3 presses on all arches with BLS
+                    $presses = 3;
+                }
+                elsif (get_var('OFW') || (get_var('ARCH') eq 'aarch64' && get_var('TEST') ne 'support_server')) {
                     $presses = 12;
-                } else {
+                }
+                else {
                     $presses = 13;
                 }
             }
