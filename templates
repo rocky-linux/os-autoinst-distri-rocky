@@ -4751,8 +4751,9 @@
                       settings => [
                         { key => "TEST_UPDATES", value => "1" },
                         { key => "GRUB", value => "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-openqa.img" },
-                        { key => "HDDMODEL", value => "virtio-scsi-pci" },
+                        { key => "HDDMODEL", value => "scsi-hd" },
                         { key => "CDMODEL", value => "scsi-cd" },
+                        { key => "SCSICONTROLLER", value => "virtio-scsi-pci" },
                       ],
                     },
                     {
