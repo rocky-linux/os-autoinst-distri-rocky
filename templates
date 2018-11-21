@@ -4308,7 +4308,6 @@
                       backend => "qemu",
                       name => "aarch64",
                       settings => [
-                        { key => "BIOS", value => "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw" },
                         { key => "QEMU", value => "aarch64" },
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUMACHINE", value => "virt"},
@@ -4317,8 +4316,8 @@
                         { key => "TIMEOUT_SCALE", value => "1.5" },
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         { key => "UEFI", value => "1"},
-                        { key => "UEFI_PFLASH_CODE", value => "/usr/share/edk2/aarch64/QEMU_EFI.fd"},
-                        { key => "UEFI_PFLASH_VARS", value => "/usr/share/edk2/aarch64/QEMU_VARS.fd"},
+                        { key => "UEFI_PFLASH_CODE", value => "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw"},
+                        { key => "UEFI_PFLASH_VARS", value => "/usr/share/edk2/aarch64/vars-template-pflash.raw"},
                         { key => "PART_TABLE_TYPE", value => "gpt"},
                         { key => "WORKER_CLASS", value => "qemu_aarch64" },
                         { key => "QEMU_VIRTIO_RNG", value => "1"}
