@@ -466,11 +466,6 @@ sub _repo_setup_updates {
     # source packages and epochs
     assert_script_run 'rpm -qp *.rpm --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | sort -u > /var/log/updatepkgs.txt';
     upload_logs "/var/log/updatepkgs.txt";
-    # HOTFIX for f29 2018-10: a rogue krb5 update went stable and broke
-    # the FreeIPA tests, grab the pending update that fixes that
-    if (get_var("VERSION") eq "29") {
-        assert_script_run "bodhi updates download --updateid FEDORA-2018-b1048ce2df", 600;
-    }
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file
