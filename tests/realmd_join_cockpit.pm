@@ -15,6 +15,10 @@ sub run {
     mutex_unlock "freeipa_ready";
     # do repo setup
     repo_setup();
+    # set sssd debugging level higher (useful for debugging failures)
+    # optional as it's not really part of the test
+    script_run "dnf -y install sssd-tools", 220;
+    script_run "sss_debuglevel 9";
     # run firefox and login to cockpit
     # note: we can't use wait_screen_change, wait_still_screen or
     # check_type_string in cockpit because of that fucking constantly
