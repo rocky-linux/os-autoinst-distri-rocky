@@ -278,44 +278,21 @@ sub do_bootloader {
         }
         else {
             send_key "e";
-            # 2 'downs' to reach the kernel line for UEFI installer,
-            # 13 'downs' on installed x86_64. 12 'downs' on installed
-            # ppc64, because it doesn't have a 'set gfxpayload=keep'
-            # line. installed aarch64 is tricky: it should be 13, I
-            # think - it has a set gfxpayload=keep line - but it seems
-            # that on F27 installs (i.e. support_server) there is a
-            # 'set root' line, but on F28+ installs there is not, so
-            # the count is 12. So we have to do something gross.
-            my $presses = 2;
-            if ($args{postinstall}) {
-                # we need to decide if BLS is in effect...this is fun
-                my $version = get_var("VERSION");
-                # support_server uses a disk image of version CURRREL
-                $version = get_var("CURRREL") if (get_var('TEST') eq 'support_server');
-                # use RAWREL to get a numeric version for Rawhide tests
-                $version = get_var("RAWREL") if ($version eq 'Rawhide');
-                # for upgrade tests, assume 'effective' version is the
-                # starting version; if BLS migration is applied during
-                # upgrade this will get REALLY tricky as we'll need to
-                # switch halfway through...
-                $version = get_var("CURRREL") if (get_var("TEST") =~ m/^upgrade_/);
-                $version = get_var("PREVREL") if (get_var("TEST") =~ m/^upgrade_2/);
-                if ($version > 29) {
-                    # this means 'BLS is active'; it seems that we always
-                    # need 3 presses on all arches with BLS
-                    $presses = 3;
-                }
-                elsif (get_var('OFW') || (get_var('ARCH') eq 'aarch64' && get_var('TEST') ne 'support_server')) {
-                    $presses = 12;
-                }
-                else {
-                    $presses = 13;
-                }
+            # we need to get to the 'linux' line here, and grub does
+            # not have any easy way to do that. Depending on the arch
+            # and the Fedora release, we may have to press 'down' 2
+            # times, or 13, or 12, or some other goddamn number. That
+            # got painful to keep track of, so let's go bottom-up:
+            # press 'down' 50 times to make sure we're at the bottom,
+            # then 'up' twice to reach the 'linux' line. This seems to
+            # work in every permutation I can think of to test.
+            for (1 .. 50) {
+                send_key 'down';
             }
-            foreach my $i (1..$presses) {
-                sleep 1; # seems to have missed one down if too fast.
-                send_key "down";
-            }
+            sleep 1;
+            send_key 'up';
+            sleep 1;
+            send_key 'up';
             send_key "end";
         }
         # Change type_string by type_safely because keyboard polling
