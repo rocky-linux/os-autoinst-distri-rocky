@@ -5148,7 +5148,7 @@
                       name => "install_shrink_ext4",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_shrink_ext4_mbr.img" },
+                        { key => "HDD_1", value => "disk_shrink_ext4.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
                     },
@@ -5156,7 +5156,7 @@
                       name => "install_shrink_ntfs",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "HDD_1", value => "disk_shrink_ntfs_mbr.img" },
+                        { key => "HDD_1", value => "disk_shrink_ntfs.img" },
                         { key => "PARTITIONING", value => "guided_shrink" },
                       ],
                     },
