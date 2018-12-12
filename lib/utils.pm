@@ -438,6 +438,11 @@ sub _repo_setup_updates {
     # source packages and epochs
     assert_script_run 'rpm -qp *.rpm --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | sort -u > /var/log/updatepkgs.txt';
     upload_logs "/var/log/updatepkgs.txt";
+    # also log just the binary package names: this is so we can check
+    # later whether any package from the update *should* have been
+    # installed, but was not
+    assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
+    upload_logs "/var/log/updatepkgnames.txt";
     # HOTFIX 2018-11: an authselect change broke FreeIPA, grab the
     # pending update that fixes that (F28 and F29)
     if (get_var("VERSION") eq "29") {
