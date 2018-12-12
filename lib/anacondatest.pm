@@ -29,24 +29,24 @@ sub post_fail_hook {
     # least send out *some* kinda info via the serial line
     my $hostip = testapi::host_ip();
     if (script_run "ping -c 2 ${hostip}") {
-        script_run 'printf "\n** X.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/X.log > /dev/ttyS0";
-        script_run 'printf "\n** ANACONDA.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/anaconda.log > /dev/ttyS0";
-        script_run 'printf "\n** PACKAGING.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/packaging.log > /dev/ttyS0";
-        script_run 'printf "\n** STORAGE.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/storage.log > /dev/ttyS0";
-        script_run 'printf "\n** SYSLOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/syslog > /dev/ttyS0";
-        script_run 'printf "\n** PROGRAM.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/program.log > /dev/ttyS0";
-        script_run 'printf "\n** DNF.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/dnf.log > /dev/ttyS0";
-        script_run 'printf "\n** DNF.LIBREPO.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/dnf.librepo.log > /dev/ttyS0";
-        script_run 'printf "\n** DNF.RPM.LOG **\n" > /dev/ttyS0';
-        script_run "cat /tmp/dnf.rpm.log > /dev/ttyS0";
+        script_run 'printf "\n** X.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/X.log > /dev/${serialdev}";
+        script_run 'printf "\n** ANACONDA.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/anaconda.log > /dev/${serialdev}";
+        script_run 'printf "\n** PACKAGING.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/packaging.log > /dev/${serialdev}";
+        script_run 'printf "\n** STORAGE.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/storage.log > /dev/${serialdev}";
+        script_run 'printf "\n** SYSLOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/syslog > /dev/${serialdev}";
+        script_run 'printf "\n** PROGRAM.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/program.log > /dev/${serialdev}";
+        script_run 'printf "\n** DNF.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/dnf.log > /dev/${serialdev}";
+        script_run 'printf "\n** DNF.LIBREPO.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/dnf.librepo.log > /dev/${serialdev}";
+        script_run 'printf "\n** DNF.RPM.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/dnf.rpm.log > /dev/${serialdev}";
         return;
     }
 

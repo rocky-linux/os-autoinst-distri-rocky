@@ -41,15 +41,15 @@ sub post_fail_hook {
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
     my $hostip = testapi::host_ip();
-    if (script_run "rpm -q tar" || script_run "ping -c 2 ${hostip}") {
-        script_run 'printf "\n** IP ADDR **\n" > /dev/ttyS0';
-        script_run "ip addr > /dev/ttyS0 2>&1";
-        script_run 'printf "\n** IP ROUTE **\n" > /dev/ttyS0';
-        script_run "ip route > /dev/ttyS0 2>&1";
-        script_run 'printf "\n** NETWORKMANAGER.SERVICE STATUS **\n" > /dev/ttyS0';
-        script_run "systemctl --no-pager status NetworkManager.service > /dev/ttyS0 2>&1";
-        script_run 'printf "\n** JOURNAL **\n" > /dev/ttyS0';
-        script_run "journalctl -b --no-pager > /dev/ttyS0";
+    if ((script_run "rpm -q tar") || (script_run "ping -c 2 ${hostip}")) {
+        script_run 'printf "\n** IP ADDR **\n" > /dev/' . $serialdev;
+        script_run "ip addr > /dev/${serialdev} 2>&1";
+        script_run 'printf "\n** IP ROUTE **\n" > /dev/' . $serialdev;
+        script_run "ip route > /dev/${serialdev} 2>&1";
+        script_run 'printf "\n** NETWORKMANAGER.SERVICE STATUS **\n" > /dev/' . $serialdev;
+        script_run "systemctl --no-pager status NetworkManager.service > /dev/${serialdev} 2>&1";
+        script_run 'printf "\n** JOURNAL **\n" > /dev/' . $serialdev;
+        script_run "journalctl -b --no-pager > /dev/${serialdev}";
         return;
     }
 
