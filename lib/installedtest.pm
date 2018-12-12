@@ -40,7 +40,7 @@ sub post_fail_hook {
 
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
-    my $hostip = $testapi::host_ip();
+    my $hostip = testapi::host_ip();
     if (script_run "rpm -q tar" || script_run "ping -c 2 ${hostip}") {
         script_run 'printf "\n** IP ADDR **\n" > /dev/ttyS0';
         script_run "ip addr > /dev/ttyS0 2>&1";

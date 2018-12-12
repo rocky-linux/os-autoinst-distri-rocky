@@ -27,7 +27,7 @@ sub post_fail_hook {
     $self->root_console();
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
-    my $hostip = $testapi::host_ip();
+    my $hostip = testapi::host_ip();
     if (script_run "ping -c 2 ${hostip}") {
         script_run 'printf "\n** X.LOG **\n" > /dev/ttyS0';
         script_run "cat /tmp/X.log > /dev/ttyS0";
