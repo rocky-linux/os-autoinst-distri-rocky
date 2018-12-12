@@ -37,7 +37,21 @@ sub post_fail_hook {
     # rely on dnf always working (it fails in emergency mode, not sure
     # why), so try it, then check if we have tar
     script_run "dnf -y install tar", 180;
-    assert_script_run "rpm -q tar";
+
+    # if we don't have tar or a network connection, we'll try and at
+    # least send out *some* kinda info via the serial line
+    my $hostip = $testapi::host_ip();
+    if (script_run "rpm -q tar" || script_run "ping -c 2 ${hostip}") {
+        script_run 'printf "\n** IP ADDR **\n" > /dev/ttyS0';
+        script_run "ip addr > /dev/ttyS0 2>&1";
+        script_run 'printf "\n** IP ROUTE **\n" > /dev/ttyS0';
+        script_run "ip route > /dev/ttyS0 2>&1";
+        script_run 'printf "\n** NETWORKMANAGER.SERVICE STATUS **\n" > /dev/ttyS0';
+        script_run "systemctl --no-pager status NetworkManager.service > /dev/ttyS0 2>&1";
+        script_run 'printf "\n** JOURNAL **\n" > /dev/ttyS0';
+        script_run "journalctl -b --no-pager > /dev/ttyS0";
+        return;
+    }
 
     # Note: script_run returns the exit code, so the logic looks weird.
     # We're testing that the directory exists and contains something.

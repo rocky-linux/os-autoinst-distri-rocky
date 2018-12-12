@@ -25,6 +25,31 @@ sub post_fail_hook {
 
     save_screenshot;
     $self->root_console();
+    # if we don't have tar or a network connection, we'll try and at
+    # least send out *some* kinda info via the serial line
+    my $hostip = $testapi::host_ip();
+    if (script_run "ping -c 2 ${hostip}") {
+        script_run 'printf "\n** X.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/X.log > /dev/ttyS0";
+        script_run 'printf "\n** ANACONDA.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/anaconda.log > /dev/ttyS0";
+        script_run 'printf "\n** PACKAGING.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/packaging.log > /dev/ttyS0";
+        script_run 'printf "\n** STORAGE.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/storage.log > /dev/ttyS0";
+        script_run 'printf "\n** SYSLOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/syslog > /dev/ttyS0";
+        script_run 'printf "\n** PROGRAM.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/program.log > /dev/ttyS0";
+        script_run 'printf "\n** DNF.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/dnf.log > /dev/ttyS0";
+        script_run 'printf "\n** DNF.LIBREPO.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/dnf.librepo.log > /dev/ttyS0";
+        script_run 'printf "\n** DNF.RPM.LOG **\n" > /dev/ttyS0';
+        script_run "cat /tmp/dnf.rpm.log > /dev/ttyS0";
+        return;
+    }
+
     upload_logs "/tmp/X.log", failok=>1;
     upload_logs "/tmp/anaconda.log", failok=>1;
     upload_logs "/tmp/packaging.log", failok=>1;
