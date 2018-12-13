@@ -1,0 +1,24 @@
+{
+  "tags": [
+    "anaconda_install_done",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-japanese"
+  ],
+  "area": [
+    {
+      "type": "match",
+      "height": 14,
+      "ypos": 640,
+      "width": 305,
+      "xpos": 706
+    },
+    {
+      "height": 14,
+      "type": "match",
+      "xpos": 943,
+      "ypos": 694,
+      "width": 41
+    }
+  ],
+  "properties": []
+}
