@@ -34,7 +34,7 @@ sub run {
         assert_and_click "anaconda_install_root_password";
         if (get_var("MEMCHECK")) {
             # work around https://bugzilla.redhat.com/show_bug.cgi?id=1659266
-            unless (check_screen "anaconda_install_root_password_screen") {
+            unless (check_screen "anaconda_install_root_password_screen", 30) {
                 record_soft_failure "UI may be frozen due to brc#1659266";
                 assert_screen "anaconda_install_root_password_screen", 300;
             }
