@@ -32,7 +32,15 @@ sub run {
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     unless (get_var("INSTALLER_NO_ROOT")) {
         assert_and_click "anaconda_install_root_password";
-        assert_screen "anaconda_install_root_password_screen";
+        if (get_var("MEMCHECK")) {
+            # work around https://bugzilla.redhat.com/show_bug.cgi?id=1659266
+            unless (check_screen "anaconda_install_root_password_screen") {
+                record_soft_failure "UI may be frozen due to brc#1659266";
+                assert_screen "anaconda_install_root_password_screen", 300;
+            }
+        else {
+            assert_screen "anaconda_install_root_password_screen";
+        }
         # wait out animation
         wait_still_screen 2;
         desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
