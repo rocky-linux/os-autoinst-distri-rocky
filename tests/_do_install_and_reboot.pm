@@ -38,6 +38,7 @@ sub run {
                 record_soft_failure "UI may be frozen due to brc#1659266";
                 assert_screen "anaconda_install_root_password_screen", 300;
             }
+        }
         else {
             assert_screen "anaconda_install_root_password_screen";
         }
