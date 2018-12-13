@@ -15,7 +15,7 @@ sub post_fail_hook {
 
     # if error dialog is shown, click "report" - it then creates directory structure for ABRT
     my $has_traceback = 0;
-    if (check_screen "anaconda_error", 10) {
+    if (check_screen "anaconda_error_report", 10) {
         assert_and_click "anaconda_error_report";
         $has_traceback = 1;
     } elsif (check_screen "anaconda_text_error", 10) {  # also for text install
