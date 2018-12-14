@@ -716,12 +716,17 @@ sub advisory_check_nonmatching_packages {
     # unnecessarily in post_fail_hook
     return if (get_var("_ACNMP_DONE"));
     script_run 'touch /tmp/installedupdatepkgs.txt';
-    script_run 'for pkg in $(cat /var/log/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done';
+    # this creates /tmp/installedupdatepkgs.txt as a sorted list of installed
+    # packages with the same name as packages from the update, in the same form
+    # as /var/log/updatepkgs.txt. The 'tail -1' tries to handle the problem of
+    # installonly packages like the kernel, where we wind up with *multiple*
+    # versions installed after the update; I'm hoping the last line of output
+    # for any given package is the most recent version, i.e. the one in the
+    # update.
+    script_run 'for pkg in $(cat /var/log/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | tail -1 >> /tmp/installedupdatepkgs.txt; done';
     script_run 'sort -u -o /tmp/installedupdatepkgs.txt /tmp/installedupdatepkgs.txt';
-    # now, /tmp/installedupdatepkgs.txt is a sorted list of installed packages
-    # with the same name as packages from the update, in the same form as
-    # /var/log/updatepkgs.txt; so if any line appears in installedupdatepkgs.txt
-    # but not updatepkgs.txt, we have a problem.
+    # if any line appears in installedupdatepkgs.txt but not updatepkgs.txt,
+    # we have a problem.
     if (script_run 'comm -23 /tmp/installedupdatepkgs.txt /var/log/updatepkgs.txt > /var/log/installednotupdatedpkgs.txt') {
         # occasionally, for some reason, it's unhappy about sorting;
         # we shouldn't fail the test in this case, just upload the
