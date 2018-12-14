@@ -31,6 +31,10 @@ sub post_fail_hook {
     }
     else {
         $self->root_console(tty=>6);
+        # fix up keyboard layout, if we failed before the test did this
+        # itself; if it's already been done, should be safe, will just
+        # fail and carry on
+        console_loadkeys_us;
     }
 
     # We can't rely on tar being in minimal installs, but we also can't
