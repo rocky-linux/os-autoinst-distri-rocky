@@ -13,12 +13,6 @@ sub run {
     # anything at a console. the more advanced upstream 'console'
     # handling may help us here if we switch to it
     console_loadkeys_us;
-    # work around #1600823 if it crops up
-    if (script_run "systemctl is-active NetworkManager.service") {
-        record_soft_failure "Network is not up (probably 1600823)";
-        # Try and start service
-        script_run "systemctl start NetworkManager.service";
-    }
     # check there are no AVCs. We expect an error here: if we don't
     # get an error, it means there *are* AVCs.
     my $hook_run = 0;
