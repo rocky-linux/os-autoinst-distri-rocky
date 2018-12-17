@@ -14,11 +14,8 @@ sub run {
     assert_script_run "firewall-cmd --add-service=dhcp";
     assert_script_run "firewall-cmd --add-service=dns";
     # start server
-    # FIXME: workaround RHBZ#1554390
-    assert_script_run "setenforce Permissive";
     assert_script_run "systemctl restart dnsmasq.service";
     assert_script_run "systemctl is-active dnsmasq.service";
-    assert_script_run "setenforce Enforcing";
 
     ## ISCSI
 
@@ -26,8 +23,6 @@ sub run {
     assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
     # open firewall port
     assert_script_run "firewall-cmd --add-service=iscsi-target";
-    # tgtd currently fails to run on f26 with SELinux enforcing
-    assert_script_run "setenforce Permissive";
     assert_script_run "systemctl restart tgtd.service";
     assert_script_run "systemctl is-active tgtd.service";
 
@@ -52,11 +47,6 @@ sub run {
     assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)' > /etc/exports";
     # open firewall port
     assert_script_run "firewall-cmd --add-service=nfs";
-    # workaround RHBZ #1402427: somehow the file is incorrectly labelled
-    # even after a clean install with fixed selinux-policy
-    # Bypass: do not execute restorecon if file do not exist
-    # (for PowerPC rpcbind not in same path)
-    assert_script_run 'for xx in /usr/bin/rpcbind /sbin/rpcbind; do [ -f $xx ] && restorecon $xx; done';
     # start the server
     assert_script_run "systemctl restart nfs-server.service";
     assert_script_run "systemctl is-active nfs-server.service";
