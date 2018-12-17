@@ -77,11 +77,6 @@ sub run {
         # this is the other side of the version branch - we're on 29+,
         # so no rolekit. First  install the necessary packages
         assert_script_run "dnf -y groupinstall freeipa-server", 600;
-        # FIXME workaround RHBZ#1606541 until it's fixed
-        if (script_run "ls -l /usr/sbin/setup-ds.pl") {
-            record_soft_failure "389-ds-base-legacy-tools missing - #1606541";
-            assert_script_run "dnf -y install 389-ds-base-legacy-tools", 180;
-        }
         # configure the firewall
         for my $service (qw(freeipa-ldap freeipa-ldaps dns)) {
             assert_script_run "firewall-cmd --permanent --add-service $service";
