@@ -42,10 +42,7 @@ sub start_webui {
     # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.domain.local\n";
-    unless (check_screen ["freeipa_webui_login", $user_screen], 30) {
-        record_soft_failure "X starting slowly! Maybe RHBZ#1622254";
-        assert_screen ["freeipa_webui_login", $user_screen], 30;
-    }
+    assert_screen ["freeipa_webui_login", $user_screen], 30;
     wait_still_screen 5;
     # softfail on kerberos ticket bugs meaning we get auto-logged in
     # as the requested user when we don't expect to be
