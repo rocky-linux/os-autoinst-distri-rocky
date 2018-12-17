@@ -81,9 +81,7 @@ sub run {
         # logged in (but don't fail if it doesn't as we're not testing
         # that)
         if (check_screen 'gnome_reboot_confirm', 15) {
-            # on F27+, default is Cancel, earlier, default is Restart
-            my $version = lc(get_var("VERSION"));
-            send_key 'tab' if ($version eq 'rawhide' || $version > 26);
+            send_key 'tab';
             send_key 'ret';
         }
         boot_to_login_screen;
