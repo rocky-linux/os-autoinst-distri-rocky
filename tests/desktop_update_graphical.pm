@@ -87,19 +87,7 @@ sub run {
         boot_to_login_screen;
     }
     else {
-        # KDE will prompt for authentication if any package is not
-        # signed. As of 2016-09-23, puiterwijk claims Rawhide packages
-        # will be autosigned 'by Monday', so if this happens, we're
-        # going to treat it as a soft fail, indicating the update
-        # mechanism works, but a package that should have been signed
-        # was not.
-        assert_screen ['desktop_package_tool_update_done', 'desktop_package_tool_update_authenticate'], 180;
-        if (match_has_tag('desktop_package_tool_update_authenticate')) {
-            record_soft_failure;
-            type_very_safely get_var('USER_PASSWORD', 'weakpassword');
-            send_key 'ret';
-            assert_screen 'desktop_package_tool_update_done', 180;
-        }
+        assert_screen 'desktop_package_tool_update_done', 180;
     }
     # back to console to verify updates
     $self->root_console(tty=>3);
