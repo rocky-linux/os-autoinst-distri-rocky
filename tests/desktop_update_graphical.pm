@@ -47,12 +47,10 @@ sub run {
         assert_and_click 'desktop_package_tool_update_refresh', '', 120;
     }
     # wait for refresh, then apply updates, moving the mouse every two
-    # minutes to avoid the idle screen blank kicking in. We use a C-
-    # style loop so we can reset it if needed due to RHBZ #1638563. We
-    # will retry a max of two times if we hit refresh and wind up
-    # being told the system is up to date.
-    my $retries = 2;
-    my $tags = ['desktop_package_tool_update_download', 'desktop_package_tool_update_apply', 'desktop_package_tool_update_refresh'];
+    # minutes to avoid the idle screen blank kicking in. Depending on
+    # whether this is KDE or GNOME and what Fedora release, we may see
+    # 'apply' right away, or 'download' then 'apply'.
+    my $tags = ['desktop_package_tool_update_download', 'desktop_package_tool_update_apply'];
     for (my $n = 1; $n < 6; $n++) {
         if (check_screen $tags, 120) {
             # if we see 'apply', we're done here, quit out of the loop
@@ -66,20 +64,6 @@ sub run {
                 $tags = ['desktop_package_tool_update_apply'];
                 next;
             }
-            # otherwise, the refresh button came back - that's the bug
-            if ($retries == 2) {
-                # only record the soft fail on the *first* retry
-                record_soft_failure "Refresh did not find available update - #1638563. Retrying";
-            }
-            if ($retries > 0) {
-                assert_and_click 'desktop_package_tool_update_refresh';
-                # reset the loop counter so we get another 10 minutes
-                $n = 1;
-            }
-            else {
-                die "Retried refresh too many times, giving up";
-            }
-            $retries -= 1;
         }
         # move the mouse to stop the screen blanking on idle
         mouse_set 10, 10;
