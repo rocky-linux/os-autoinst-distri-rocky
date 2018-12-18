@@ -5171,7 +5171,7 @@
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
-                        { key => "HDDSIZEGB", value => "12" },
+                        { key => "HDDSIZEGB", value => "13" },
                       ],
                     },
                     {
@@ -5186,7 +5186,7 @@
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
-                        { key => "HDDSIZEGB", value => "12" },
+                        { key => "HDDSIZEGB", value => "13" },
                       ],
                     },
                     {
@@ -5201,7 +5201,7 @@
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
-                        { key => "HDDSIZEGB", value => "12" },
+                        { key => "HDDSIZEGB", value => "13" },
                       ],
                     },
                     {
@@ -5216,7 +5216,7 @@
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
-                        { key => "HDDSIZEGB", value => "12" },
+                        { key => "HDDSIZEGB", value => "13" },
                       ],
                     },
                     {
