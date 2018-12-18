@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_ldraw"
+  ],
+  "area": [
+    {
+      "xpos": 490,
+      "ypos": 33,
+      "width": 122,
+      "height": 25,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_videos"
+  ],
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 5,
+      "width": 51,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

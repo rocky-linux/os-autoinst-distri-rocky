@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_rhythmbox"
+  ],
+  "area": [
+    {
+      "xpos": 469,
+      "ypos": 82,
+      "width": 85,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

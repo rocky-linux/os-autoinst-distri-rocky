@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -643,6 +643,50 @@ sub quit_firefox {
     # fine for older releases which don't have the bug, console_login
     # will just notice we're already logged in as root and return.
     console_login(user=>'root');
+}
+
+sub start_with_launcher {
+# Get the name of the needle with a launcher, find the launcher in the menu
+# and click on it to start the application.
+
+    # $launcher holds the launcher needle, but some of the apps are hidden in a submenu
+    # so this must be handled first to find the launcher needle.
+ 
+    my ($launcher,$submenu) = @_;
+    $submenu //= '';
+    
+    my $screen_to_check = $submenu || $launcher;
+
+    # Start the Activities page
+    send_key 'alt-f1';
+    wait_still_screen 5;
+
+    # Click on the menu icon to come into the menus
+    assert_and_click 'apps_activities';
+    wait_still_screen 5;
+
+    # Find the application launcher in the current menu page. 
+    # If it cannot be found there, hit PageDown to go to another page.
+
+    send_key_until_needlematch($screen_to_check, 'pgdn', 5, 3);
+
+    # If there was a submenu, click on that first.
+    if ($submenu) {
+        assert_and_click $submenu;
+        wait_still_screen 5;
+    }
+    # Click on the launcher
+    assert_and_click $launcher;
+    wait_still_screen 5;
+
+}
+
+sub quit_with_shortcut {
+# Quit the application using the Alt-F4 keyboard shortcut
+    send_key 'alt-f4';
+    wait_still_screen 5;
+    assert_screen 'workspace';
+
 }
 
 sub advisory_get_installed_packages {

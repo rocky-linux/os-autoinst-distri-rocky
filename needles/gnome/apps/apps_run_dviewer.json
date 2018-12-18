@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_dviewer"
+  ],
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 5,
+      "width": 127,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_fonts"
+  ],
+  "area": [
+    {
+      "xpos": 480,
+      "ypos": 72,
+      "width": 66,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_lcalc"
+  ],
+  "area": [
+    {
+      "xpos": 495,
+      "ypos": 36,
+      "width": 115,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

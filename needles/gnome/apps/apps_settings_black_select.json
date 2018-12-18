@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_settings_black_select"
+  ],
+  "area": [
+    {
+      "xpos": 863,
+      "ypos": 149,
+      "width": 50,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

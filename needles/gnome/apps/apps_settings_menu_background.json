@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_settings_menu_background"
+  ],
+  "area": [
+    {
+      "xpos": 39,
+      "ypos": 135,
+      "width": 88,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

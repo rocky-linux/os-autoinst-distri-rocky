@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_texteditor"
+  ],
+  "area": [
+    {
+      "xpos": 490,
+      "ypos": 170,
+      "width": 37,
+      "height": 42,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_weather_access"
+  ],
+  "area": [
+    {
+      "xpos": 601,
+      "ypos": 474,
+      "width": 105,
+      "height": 27,
+      "type": "ocr"
+    }
+  ]
+}

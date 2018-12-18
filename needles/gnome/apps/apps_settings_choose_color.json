@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_settings_choose_color"
+  ],
+  "area": [
+    {
+      "xpos": 616,
+      "ypos": 149,
+      "width": 47,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

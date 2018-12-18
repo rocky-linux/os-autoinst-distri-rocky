@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_scan"
+  ],
+  "area": [
+    {
+      "xpos": 467,
+      "ypos": 137,
+      "width": 92,
+      "height": 22,
+      "type": "match"
+    }
+  ]
+}

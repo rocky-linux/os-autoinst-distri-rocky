@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_clocks_access"
+  ],
+  "area": [
+    {
+      "xpos": 602,
+      "ypos": 478,
+      "width": 105,
+      "height": 21,
+      "type": "ocr"
+    }
+  ]
+}

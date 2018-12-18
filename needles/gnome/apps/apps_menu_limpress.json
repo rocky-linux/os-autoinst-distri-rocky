@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_limpress"
+  ],
+  "area": [
+    {
+      "xpos": 628,
+      "ypos": 453,
+      "width": 46,
+      "height": 40,
+      "type": "match"
+    }
+  ]
+}

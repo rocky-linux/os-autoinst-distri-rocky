@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_photos"
+  ],
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 4,
+      "width": 51,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

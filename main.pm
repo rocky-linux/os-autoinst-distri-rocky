@@ -18,6 +18,7 @@ use strict;
 use testapi;
 use autotest;
 use needle;
+use File::Basename;
 
 # distribution-specific implementations of expected methods
 my $distri = testapi::get_var("CASEDIR") . '/lib/fedoradistribution.pm';
@@ -323,6 +324,8 @@ sub load_postinstall_tests() {
     if (get_var("STORE_HDD_1") || get_var("PUBLISH_HDD_1")) {
         autotest::loadtest "tests/_console_shutdown.pm";
     }
+    
+
 }
 
 ## LOADING STARTS HERE
@@ -350,6 +353,22 @@ if (!get_var("ENTRYPOINT")) {
     load_postinstall_tests;
 }
 
+# load application start-stop tests 
+if (get_var("STARTSTOP")) {
+    my $desktop = get_var('DESKTOP');
+    my $casedir = get_var('CASEDIR');
+    # Find all tests from a directory defined by the DESKTOP variable
+    my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
+
+    # Load the terminal test extra, because it must run first for settings.
+    autotest::loadtest "tests/apps_startstop/${desktop}/terminal.pm";
+
+    # Load all desktop tests
+    foreach my $filepath (@apptests) {
+	    my $file = basename($filepath);
+        autotest::loadtest "tests/apps_startstop/${desktop}/${file}";
+    }
+}
 1;
 
 # vim: set sw=4 et:

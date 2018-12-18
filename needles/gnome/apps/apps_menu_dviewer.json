@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_dviewer"
+  ],
+  "area": [
+    {
+      "xpos": 349,
+      "ypos": 303,
+      "width": 44,
+      "height": 39,
+      "type": "match"
+    }
+  ]
+}

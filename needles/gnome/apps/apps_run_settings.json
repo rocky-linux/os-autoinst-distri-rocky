@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_settings"
+  ],
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 6,
+      "width": 62,
+      "height": 20,
+      "type": "ocr"
+    }
+  ]
+}

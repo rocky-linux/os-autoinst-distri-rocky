@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_boxes"
+  ],
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 5,
+      "width": 47,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_sundry"
+  ],
+  "area": [
+    {
+      "xpos": 350,
+      "ypos": 160,
+      "width": 12,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

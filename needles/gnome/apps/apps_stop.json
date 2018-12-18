@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_stop"
+  ],
+  "area": [
+    {
+      "xpos": 918,
+      "ypos": 81,
+      "width": 32,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

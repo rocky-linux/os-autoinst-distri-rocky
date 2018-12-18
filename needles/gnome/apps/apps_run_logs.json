@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_logs"
+  ],
+  "area": [
+    {
+      "xpos": 117,
+      "ypos": 5,
+      "width": 35,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

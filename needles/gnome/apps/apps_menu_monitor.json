@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_monitor"
+  ],
+  "area": [
+    {
+      "xpos": 763,
+      "ypos": 449,
+      "width": 54,
+      "height": 46,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_help"
+  ],
+  "area": [
+    {
+      "xpos": 116,
+      "ypos": 5,
+      "width": 35,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

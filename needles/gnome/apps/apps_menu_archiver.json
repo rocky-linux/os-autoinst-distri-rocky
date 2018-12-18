@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_archiver"
+  ],
+  "area": [
+    {
+      "xpos": 207,
+      "ypos": 325,
+      "width": 42,
+      "height": 30,
+      "type": "match"
+    }
+  ]
+}

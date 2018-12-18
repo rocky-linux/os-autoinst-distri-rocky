@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_limpress_start"
+  ],
+  "area": [
+    {
+      "xpos": 833,
+      "ypos": 679,
+      "width": 49,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

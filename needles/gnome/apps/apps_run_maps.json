@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_run_maps"
+  ],
+  "area": [
+    {
+      "xpos": 114,
+      "ypos": 5,
+      "width": 44,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

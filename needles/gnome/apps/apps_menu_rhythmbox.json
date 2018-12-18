@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_rhythmbox"
+  ],
+  "area": [
+    {
+      "xpos": 488,
+      "ypos": 576,
+      "width": 47,
+      "height": 59,
+      "type": "match"
+    }
+  ]
+}

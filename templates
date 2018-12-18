@@ -580,6 +580,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "apps_startstop" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 32,
                       product    => {
                                       arch    => "x86_64",
@@ -5576,6 +5587,16 @@
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "apps_startstop",
+                      settings => [
+                        { key => "DESKTOP", value => "gnome"},
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                        { key => "STARTSTOP", value => "true" },
                       ],
                     },
                     {

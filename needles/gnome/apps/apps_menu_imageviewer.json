@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_imageviewer"
+  ],
+  "area": [
+    {
+      "xpos": 349,
+      "ypos": 445,
+      "width": 35,
+      "height": 36,
+      "type": "match"
+    }
+  ]
+}
