@@ -175,10 +175,13 @@ sub console_login {
     # make sure we reached the console
     unless (check_screen($good, 30)) {
         # as of 2018-10 we have a bug in sssd which makes this take
-        # unusually long in the FreeIPA tests, let's allow another 30
-        # secs, with a soft fail - RHBZ #1644919
+        # unusually long in the FreeIPA tests, let's allow longer,
+        #with a soft fail - RHBZ #1644919
         record_soft_failure "Console login is taking a long time - #1644919?";
-        assert_screen($good, 30);
+        my $timeout = 30;
+        # even an extra 30 secs isn't long enough on aarch64...
+        $timeout= 90 if (get_var("ARCH") eq "aarch64");
+        assert_screen($good, $timeout);
     }
     _console_login_finish();
 }
