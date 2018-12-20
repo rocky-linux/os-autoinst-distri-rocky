@@ -20,6 +20,8 @@ sub run {
     validate_script_output 'klist -k', sub { $_ =~ m/$qhost\@DOMAIN\.LOCAL/ };
     # check we can kinit with the host principal
     assert_script_run "kinit -k host/$hostname\@DOMAIN.LOCAL";
+    # Set a longer timeout for login(1) to workaround RHBZ #1661273
+    assert_script_run 'echo "LOGIN_TIMEOUT 180" >> /etc/login.defs';
     # switch to tty2 for login tests
     send_key "ctrl-alt-f2";
     # try and login as test1, should work
