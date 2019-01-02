@@ -632,13 +632,17 @@ sub quit_firefox {
     send_key "ctrl-q";
     # expect to get to either the tabs warning or a console
     if (check_screen ["user_console", "root_console", "firefox_close_tabs"], 30) {
-        # if we hit a console, we're done
-        return unless match_has_tag "firefox_close_tabs";
-        # otherwise, POJITO
-        assert_and_click "firefox_close_tabs";
+        # if we hit the tabs warning, click it
+        assert_and_click "firefox_close_tabs" if (match_has_tag "firefox_close_tabs");
     }
-    # it's a bit odd if we reach here, but could mean we quit to a
-    # desktop, or the firefox_close_tabs needle went stale...
+    # FIXME workaround for RHBZ #1663050 - with systemd 240, at this
+    # point the tty quits and we wind up back at the login prompt
+    wait_still_screen 5;
+    # on all paths where we hit this sub, we want to be logged in as
+    # root, so let's just run through console_login again. This is
+    # fine for older releases which don't have the bug, console_login
+    # will just notice we're already logged in as root and return.
+    console_login(user=>'root');
 }
 
 sub advisory_get_installed_packages {
