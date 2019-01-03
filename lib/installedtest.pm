@@ -85,7 +85,7 @@ sub post_fail_hook {
     # For update tests, let's do the update package info log stuff,
     # it may be useful for diagnosing the cause of the failure
     advisory_get_installed_packages;
-    advisory_check_nonmatching_packages, fatal=>0;
+    advisory_check_nonmatching_packages(fatal=>0);
 
 1;
 
