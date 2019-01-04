@@ -51,6 +51,7 @@ sub run {
             if (get_var('LIVE')) {
                 if (get_var('DESKTOP') eq 'gnome') {
                     # workaround RHBZ #1663040 if necessary
+                    assert_screen "live_start_anaconda_icon", 300;
                     $self->root_console(timeout=>30);
                     unless (script_run "systemctl --is-failed systemd-hostnamed.service") {
                         record_soft_failure "systemd-hostnamed.service failed - likely RHBZ #1663040";
