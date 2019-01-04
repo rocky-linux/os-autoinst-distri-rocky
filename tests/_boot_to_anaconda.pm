@@ -49,6 +49,16 @@ sub run {
         } else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
+                if (get_var('DESKTOP') eq 'gnome') {
+                    # workaround RHBZ #1663040 if necessary
+                    $self->root_console(timeout=>30);
+                    unless (script_run "systemctl --is-failed systemd-hostnamed.service") {
+                        record_soft_failure "systemd-hostnamed.service failed - likely RHBZ #1663040";
+                        assert_script_run "setenforce Permissive";
+                        assert_script_run "systemctl restart systemd-hostnamed.service";
+                        desktop_vt;
+                    }
+                }
                 assert_and_click "live_start_anaconda_icon", '', 300;
             }
             my $language = get_var('LANGUAGE') || 'english';
