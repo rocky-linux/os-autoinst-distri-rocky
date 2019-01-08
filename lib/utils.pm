@@ -404,14 +404,6 @@ sub _repo_setup_updates {
     # installed, but was not
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
-    # HOTFIX 2018-11: an authselect change broke FreeIPA, grab the
-    # pending update that fixes that (F28 and F29)
-    if (get_var("VERSION") eq "29") {
-        assert_script_run "bodhi updates download --updateid FEDORA-2018-a7e4debd10", 600;
-    }
-    if (get_var("VERSION") eq "28") {
-        assert_script_run "bodhi updates download --updateid FEDORA-2018-892835660b", 600;
-    }
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file
