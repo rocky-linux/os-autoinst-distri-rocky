@@ -75,10 +75,12 @@ sub run {
             assert_screen "anaconda_select_install_lang_selected", 3;
             assert_and_click "anaconda_select_install_lang_continue";
 
-            # wait 60 secs for hub or Rawhide warning dialog to appear.
+            # wait 180 secs for hub or Rawhide warning dialog to appear
+            # (per https://bugzilla.redhat.com/show_bug.cgi?id=1666112
+            # the nag screen can take a LONG time to appear sometimes).
             # If the hub appears, return - we're done now. If Rawhide
             # warning dialog appears, accept it.
-            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub"], 60) {
+            if (check_screen ["anaconda_rawhide_accept_fate", "anaconda_main_hub"], 180) {
                 if (match_has_tag("anaconda_rawhide_accept_fate")) {
                     assert_and_click "anaconda_rawhide_accept_fate";
                 }
