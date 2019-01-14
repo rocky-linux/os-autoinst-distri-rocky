@@ -47,6 +47,8 @@ sub post_fail_hook {
         script_run "cat /tmp/dnf.librepo.log > /dev/${serialdev}";
         script_run 'printf "\n** DNF.RPM.LOG **\n" > /dev/' . $serialdev;
         script_run "cat /tmp/dnf.rpm.log > /dev/${serialdev}";
+        script_run 'printf "\n** DBUS.LOG **\n" > /dev/' . $serialdev;
+        script_run "cat /tmp/dbus.log > /dev/${serialdev}";
         return;
     }
 
@@ -59,6 +61,7 @@ sub post_fail_hook {
     upload_logs "/tmp/dnf.log", failok=>1;
     upload_logs "/tmp/dnf.librepo.log", failok=>1;
     upload_logs "/tmp/dnf.rpm.log", failok=>1;
+    upload_logs "/tmp/dbus.log", failok=>1;
 
     if ($has_traceback) {
         # Upload Anaconda traceback logs
