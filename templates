@@ -4421,7 +4421,9 @@
                         { key => "LIVE", value => "1" },
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" }
+                        { key => "TEST_TARGET", value => "ISO" },
+                        # FIXME this is a workaround for RHBZ #1663040 / #1666083
+                        { key => "GRUB", value => "enforcing=0" }
                                    ],
                       version   => "*",
                     },
