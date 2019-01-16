@@ -40,6 +40,12 @@ sub post_fail_hook {
             script_run "cat /run/initramfs/rdsosreport.txt > /dev/${serialdev}";
             return;
         }
+        script_run 'printf "\n** IP ADDR **\n" > /dev/' . $serialdev;
+        script_run "ip addr > /dev/${serialdev} 2>&1";
+        script_run 'printf "\n** IP ROUTE **\n" > /dev/' . $serialdev;
+        script_run "ip route > /dev/${serialdev} 2>&1";
+        script_run 'printf "\n** NETWORKMANAGER.SERVICE STATUS **\n" > /dev/' . $serialdev;
+        script_run "systemctl --no-pager -l status NetworkManager.service > /dev/${serialdev} 2>&1";
         script_run 'printf "\n** X.LOG **\n" > /dev/' . $serialdev;
         script_run "cat /tmp/X.log > /dev/${serialdev}";
         script_run 'printf "\n** ANACONDA.LOG **\n" > /dev/' . $serialdev;
