@@ -25,10 +25,21 @@ sub post_fail_hook {
 
     save_screenshot;
     $self->root_console();
+    # if we're in dracut, do things different
+    my $dracut = 0;
+    if (check_screen "root_console_dracut", 0) {
+        $dracut = 1;
+        script_run "dhclient";
+    }
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
     my $hostip = testapi::host_ip();
     if (script_run "ping -c 2 ${hostip}") {
+        if ($dracut) {
+            script_run 'printf "\n** RDSOSREPORT **\n" > /dev/' . $serialdev;
+            script_run "cat /run/initramfs/rdsosreport.txt > /dev/${serialdev}";
+            return;
+        }
         script_run 'printf "\n** X.LOG **\n" > /dev/' . $serialdev;
         script_run "cat /tmp/X.log > /dev/${serialdev}";
         script_run 'printf "\n** ANACONDA.LOG **\n" > /dev/' . $serialdev;
@@ -49,6 +60,12 @@ sub post_fail_hook {
         script_run "cat /tmp/dnf.rpm.log > /dev/${serialdev}";
         script_run 'printf "\n** DBUS.LOG **\n" > /dev/' . $serialdev;
         script_run "cat /tmp/dbus.log > /dev/${serialdev}";
+        return;
+    }
+
+    if ($dracut) {
+        upload_logs "/run/initramfs/rdsosreport.txt", failok=>1;
+        # that's all that's really useful, so...
         return;
     }
 

@@ -37,6 +37,13 @@ sub post_fail_hook {
         console_loadkeys_us;
     }
 
+    # if we're in dracut, do things different
+    my $dracut = 0;
+    if (check_screen "root_console_dracut", 0) {
+        $dracut = 1;
+        script_run "dhclient";
+    }
+
     # We can't rely on tar being in minimal installs, but we also can't
     # rely on dnf always working (it fails in emergency mode, not sure
     # why), so try it, then check if we have tar
@@ -46,6 +53,11 @@ sub post_fail_hook {
     # least send out *some* kinda info via the serial line
     my $hostip = testapi::host_ip();
     if ((script_run "rpm -q tar") || (script_run "ping -c 2 ${hostip}")) {
+        if ($dracut) {
+            script_run 'printf "\n** RDSOSREPORT **\n" > /dev/' . $serialdev;
+            script_run "cat /run/initramfs/rdsosreport.txt > /dev/${serialdev}";
+            return;
+        }
         script_run 'printf "\n** IP ADDR **\n" > /dev/' . $serialdev;
         script_run "ip addr > /dev/${serialdev} 2>&1";
         script_run 'printf "\n** IP ROUTE **\n" > /dev/' . $serialdev;
@@ -54,6 +66,12 @@ sub post_fail_hook {
         script_run "systemctl --no-pager -l status NetworkManager.service > /dev/${serialdev} 2>&1";
         script_run 'printf "\n** JOURNAL **\n" > /dev/' . $serialdev;
         script_run "journalctl -b --no-pager > /dev/${serialdev}";
+        return;
+    }
+
+    if ($dracut) {
+        upload_logs "/run/initramfs/rdsosreport.txt", failok=>1;
+        # that's all that's really useful, so...
         return;
     }
 
