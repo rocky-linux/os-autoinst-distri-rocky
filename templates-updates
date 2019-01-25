@@ -388,6 +388,18 @@
                                       flavor  => "updates-installer",
                                       version => "*",
                                     },
+                      test_suite => { name => "support_server" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-installer",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_default_update" },
                     },
                     {
@@ -984,9 +996,14 @@
                       name => "install_default_update",
                       settings => [
                         { key => "INSTALL", value => "1" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
                         { key => "ISO", value => "%ADVISORY%-netinst-%ARCH%.iso" },
+                        { key => "NICTYPE", value => "tap" },
                         { key => "PACKAGE_SET", value => "default" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "ADD_REPOSITORY_VARIATION", value => "nfs://10.0.2.110:/opt/update_repo" },
                         { key => "+START_AFTER_TEST", value => "installer_build" },
+                        { key => "WORKER_CLASS", value => "tap" },
                       ],
                     },
                   ],

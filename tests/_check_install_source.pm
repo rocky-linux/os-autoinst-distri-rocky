@@ -6,30 +6,37 @@ use anaconda;
 sub run {
     my $self = shift;
     my $repourl;
+    my $addrepourl;
     if (get_var("MIRRORLIST_GRAPHICAL")) {
         $repourl = get_mirrorlist_url();
     }
     else {
         $repourl = get_var("REPOSITORY_VARIATION", get_var("REPOSITORY_GRAPHICAL"));
-        $repourl = get_full_repo($repourl);
+        $repourl = get_full_repo($repourl) if ($repourl);
+        $addrepourl = get_var("ADD_REPOSITORY_VARIATION");
+        $addrepourl = get_full_repo($addrepourl) if ($addrepourl);
     }
 
     # check that the repo was used
     $self->root_console;
+    if ($addrepourl) {
+        if ($addrepourl =~ m,^nfs://,,) {
+            # this line tells us it set up a repo for our URL...
+            assert_script_run 'grep "repo addrepo.*' . ${addrepourl} . '" /tmp/packaging.log';
+            # ...this line tells us it added the repo called 'addrepo'...
+            assert_script_run 'grep "\(added\|enabled\) repo: .addrepo." /tmp/packaging.log';
+            # ...and this line tells us it worked (I hope)
+            assert_script_run 'grep "enabled repo.*nfs" /tmp/packaging.log';
+        }
+    }
     if ($repourl =~ s/^nfs://) {
         $repourl =~ s/^nfsvers=.://;
         # the above both checks if we're dealing with an NFS URL, and
         # strips the 'nfs:' and 'nfsvers=.:' from it if so
-	if (get_var("OFW")) {
-            # for PowerPC mounting info may be not in anaconda.log
-            assert_script_run "mount |grep nfs |grep '${repourl}'";
-	}
-	else {
-            # message is in packaging.log up to F26, anaconda.log F27+
-            assert_script_run "grep 'mounting ${repourl}' /tmp/packaging.log /tmp/anaconda.log";
-	}
+        # check the repo was actually mounted
+        assert_script_run "mount |grep nfs |grep '${repourl}'";
     }
-    else {
+    elsif ($repourl) {
         # there are only three hard problems in software development:
         # naming things, cache expiry, off-by-one errors...and quoting
         # we need single quotes (at the perl level) around the start
@@ -48,6 +55,13 @@ sub run {
         # is done.
         assert_script_run 'grep "\(added\|enabled\) repo: ' . "\\('anaconda'\\|''\\).*${repourl}" . '" /tmp/packaging.log';
     }
+    if ($repourl) {
+        # check we don't have an error indicating our repo wasn't used
+        assert_script_run '! grep "base repo.*not valid" /tmp/packaging.log';
+    }
+    # just for convenience - sometimes it's useful to see this log
+    # for a success case
+    upload_logs "/tmp/packaging.log", failok=>1;
     send_key "ctrl-alt-f6";
 
     # Anaconda hub

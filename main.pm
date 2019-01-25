@@ -169,7 +169,7 @@ sub load_install_tests() {
         autotest::loadtest "tests/install_source_graphical.pm";
         autotest::loadtest "tests/_check_install_source.pm";
     }
-    if (get_var("REPOSITORY_VARIATION")){
+    if (get_var("REPOSITORY_VARIATION") || get_var("ADD_REPOSITORY_VARIATION")) {
         autotest::loadtest "tests/_check_install_source.pm";
     }
 
