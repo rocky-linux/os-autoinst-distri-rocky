@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 23,
+      "xpos": 156,
+      "width": 51,
+      "ypos": 107,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_weather"
+  ]
+}
