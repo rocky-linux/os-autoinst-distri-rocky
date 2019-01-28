@@ -8,7 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    start_with_launcher('apps_menu_dviewer');
+    start_with_launcher('apps_menu_dviewer', 'apps_menu_utilities');
     # Check that is started
     assert_screen 'apps_run_dviewer';
     # Close the application
