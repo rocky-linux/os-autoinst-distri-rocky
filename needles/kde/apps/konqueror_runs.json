@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "konqueror_runs"
+  ],
+  "area": [
+    {
+      "xpos": 353,
+      "ypos": 9,
+      "width": 70,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}

@@ -370,8 +370,11 @@ if (get_var("STARTSTOP")) {
     # Find all tests from a directory defined by the DESKTOP variable
     my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
 
-    # Load the terminal test extra, because it must run first for settings.
-    autotest::loadtest "tests/apps_startstop/${desktop}/terminal.pm";
+    # Load the terminal test extra, because it must run first for settings
+    # when the desktop is Gnome.
+    if ($desktop eq 'gnome') {
+        autotest::loadtest "tests/apps_startstop/${desktop}/terminal.pm";
+    }   
 
     # Load all desktop tests
     foreach my $filepath (@apptests) {

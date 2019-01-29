@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmail_hedit_runs"
+  ],
+  "area": [
+    {
+      "xpos": 229,
+      "ypos": 8,
+      "width": 143,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

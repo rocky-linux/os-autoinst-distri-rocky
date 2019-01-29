@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kgpg_launch"
+  ],
+  "area": [
+    {
+      "xpos": 55,
+      "ypos": 362,
+      "width": 16,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

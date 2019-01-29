@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "konversation_connect"
+  ],
+  "area": [
+    {
+      "xpos": 398,
+      "ypos": 301,
+      "width": 13,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

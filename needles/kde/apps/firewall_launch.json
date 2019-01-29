@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "firewall_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 244,
+      "width": 23,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

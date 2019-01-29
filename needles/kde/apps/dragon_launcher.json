@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "dragon_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 364,
+      "width": 22,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

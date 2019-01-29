@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krfb_runs"
+  ],
+  "area": [
+    {
+      "xpos": 242,
+      "ypos": 8,
+      "width": 29,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kgpg_create_config"
+  ],
+  "area": [
+    {
+      "xpos": 410,
+      "ypos": 381,
+      "width": 93,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

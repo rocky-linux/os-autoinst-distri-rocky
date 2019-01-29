@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krusader_launch"
+  ],
+  "area": [
+    {
+      "xpos": 52,
+      "ypos": 366,
+      "width": 22,
+      "height": 22,
+      "type": "match"
+    }
+  ]
+}

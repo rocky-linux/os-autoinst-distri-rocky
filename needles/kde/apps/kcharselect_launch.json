@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kcharselect_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 324,
+      "width": 21,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kcalc_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 522,
+      "width": 20,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}

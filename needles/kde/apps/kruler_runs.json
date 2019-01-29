@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kruler_runs"
+  ],
+  "area": [
+    {
+      "xpos": 351,
+      "ypos": 28,
+      "width": 32,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

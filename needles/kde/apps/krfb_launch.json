@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krfb_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 363,
+      "width": 23,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

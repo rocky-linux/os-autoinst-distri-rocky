@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "akregator_runs"
+  ],
+  "area": [
+    {
+      "xpos": 435,
+      "ypos": 9,
+      "width": 68,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

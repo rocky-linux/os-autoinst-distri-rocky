@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kcharselect_runs"
+  ],
+  "area": [
+    {
+      "xpos": 379,
+      "ypos": 8,
+      "width": 83,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

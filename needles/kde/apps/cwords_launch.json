@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cwords_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 606,
+      "width": 20,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

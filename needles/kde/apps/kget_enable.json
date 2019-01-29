@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kget_enable"
+  ],
+  "area": [
+    {
+      "xpos": 321,
+      "ypos": 234,
+      "width": 48,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

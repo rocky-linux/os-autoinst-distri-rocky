@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krusader_runs"
+  ],
+  "area": [
+    {
+      "xpos": 310,
+      "ypos": 8,
+      "width": 64,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

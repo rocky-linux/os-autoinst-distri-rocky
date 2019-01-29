@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "dbusviewer_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 246,
+      "width": 21,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

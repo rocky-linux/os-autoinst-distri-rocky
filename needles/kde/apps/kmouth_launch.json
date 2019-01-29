@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmouth_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 525,
+      "width": 23,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

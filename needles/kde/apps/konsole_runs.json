@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "konsole_runs"
+  ],
+  "area": [
+    {
+      "xpos": 338,
+      "ypos": 8,
+      "width": 56,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

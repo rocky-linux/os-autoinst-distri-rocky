@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kde_finish"
+  ],
+  "area": [
+    {
+      "xpos": 349,
+      "ypos": 355,
+      "width": 48,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

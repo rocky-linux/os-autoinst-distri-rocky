@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kwallet_launch"
+  ],
+  "area": [
+    {
+      "xpos": 55,
+      "ypos": 609,
+      "width": 17,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

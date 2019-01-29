@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "dnfdragora_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 287,
+      "width": 23,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

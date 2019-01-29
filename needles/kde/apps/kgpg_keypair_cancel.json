@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kgpg_keypair_cancel"
+  ],
+  "area": [
+    {
+      "xpos": 411,
+      "ypos": 604,
+      "width": 65,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

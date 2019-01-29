@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "menu_favorites"
+  ],
+  "area": [
+    {
+      "xpos": 37,
+      "ypos": 654,
+      "width": 36,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}

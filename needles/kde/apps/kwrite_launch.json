@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kwrite_launch"
+  ],
+  "area": [
+    {
+      "xpos": 55,
+      "ypos": 566,
+      "width": 16,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

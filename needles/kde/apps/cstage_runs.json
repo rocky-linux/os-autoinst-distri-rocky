@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cstage_runs"
+  ],
+  "area": [
+    {
+      "xpos": 465,
+      "ypos": 7,
+      "width": 96,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

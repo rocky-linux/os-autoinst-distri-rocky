@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cpteditor_launch"
+  ],
+  "area": [
+    {
+      "xpos": 96,
+      "ypos": 280,
+      "width": 64,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

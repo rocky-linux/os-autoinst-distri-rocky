@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "ktorrent_runs"
+  ],
+  "area": [
+    {
+      "xpos": 340,
+      "ypos": 8,
+      "width": 59,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

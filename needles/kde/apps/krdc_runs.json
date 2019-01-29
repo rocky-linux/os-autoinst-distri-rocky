@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krdc_runs"
+  ],
+  "area": [
+    {
+      "xpos": 373,
+      "ypos": 9,
+      "width": 41,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}

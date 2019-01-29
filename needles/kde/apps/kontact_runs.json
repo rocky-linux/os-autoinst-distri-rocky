@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kontact_runs"
+  ],
+  "area": [
+    {
+      "xpos": 535,
+      "ypos": 8,
+      "width": 54,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "dnfdragora_runs"
+  ],
+  "area": [
+    {
+      "xpos": 445,
+      "ypos": 9,
+      "width": 74,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}

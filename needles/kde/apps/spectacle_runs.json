@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "spectacle_runs"
+  ],
+  "area": [
+    {
+      "xpos": 476,
+      "ypos": 57,
+      "width": 64,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

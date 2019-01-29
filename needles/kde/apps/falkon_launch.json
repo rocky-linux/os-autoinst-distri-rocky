@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "falkon_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 527,
+      "width": 21,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

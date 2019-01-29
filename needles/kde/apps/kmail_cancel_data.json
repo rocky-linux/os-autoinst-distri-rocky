@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmail_cancel_data"
+  ],
+  "area": [
+    {
+      "xpos": 657,
+      "ypos": 595,
+      "width": 20,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

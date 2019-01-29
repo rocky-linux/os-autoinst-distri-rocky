@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "konversation_launch"
+  ],
+  "area": [
+    {
+      "xpos": 52,
+      "ypos": 446,
+      "width": 23,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

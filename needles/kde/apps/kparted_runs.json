@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kparted_runs"
+  ],
+  "area": [
+    {
+      "xpos": 501,
+      "ypos": 7,
+      "width": 118,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

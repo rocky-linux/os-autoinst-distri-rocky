@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kde_ok"
+  ],
+  "area": [
+    {
+      "xpos": 548,
+      "ypos": 234,
+      "width": 41,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

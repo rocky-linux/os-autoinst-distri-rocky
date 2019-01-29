@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "menu_internet"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 369,
+      "width": 20,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

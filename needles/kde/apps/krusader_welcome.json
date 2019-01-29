@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "krusader_welcome"
+  ],
+  "area": [
+    {
+      "xpos": 421,
+      "ypos": 257,
+      "width": 46,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

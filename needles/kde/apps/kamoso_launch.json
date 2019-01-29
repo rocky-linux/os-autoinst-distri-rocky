@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kamoso_launch"
+  ],
+  "area": [
+    {
+      "xpos": 49,
+      "ypos": 242,
+      "width": 28,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

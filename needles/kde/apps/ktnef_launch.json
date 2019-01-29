@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "ktnef_launch"
+  ],
+  "area": [
+    {
+      "xpos": 54,
+      "ypos": 485,
+      "width": 18,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

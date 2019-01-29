@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kcolorchooser_launch"
+  ],
+  "area": [
+    {
+      "xpos": 54,
+      "ypos": 246,
+      "width": 18,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

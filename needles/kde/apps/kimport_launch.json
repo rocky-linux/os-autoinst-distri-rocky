@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kimport_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 457,
+      "width": 19,
+      "height": 10,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "relnotes_launch"
+  ],
+  "area": [
+    {
+      "xpos": 52,
+      "ypos": 526,
+      "width": 23,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

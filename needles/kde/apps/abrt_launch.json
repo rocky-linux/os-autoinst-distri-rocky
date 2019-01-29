@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "abrt_launch"
+  ],
+  "area": [
+    {
+      "xpos": 55,
+      "ypos": 360,
+      "width": 16,
+      "height": 27,
+      "type": "match"
+    }
+  ]
+}

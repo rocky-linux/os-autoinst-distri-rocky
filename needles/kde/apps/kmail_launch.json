@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmail_launch"
+  ],
+  "area": [
+    {
+      "xpos": 96,
+      "ypos": 521,
+      "width": 42,
+      "height": 28,
+      "type": "match"
+    }
+  ]
+}

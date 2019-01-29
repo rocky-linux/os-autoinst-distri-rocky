@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "menu_development"
+  ],
+  "area": [
+    {
+      "xpos": 52,
+      "ypos": 286,
+      "width": 21,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

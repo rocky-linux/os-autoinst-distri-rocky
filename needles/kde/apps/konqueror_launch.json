@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "konqueror_launch"
+  ],
+  "area": [
+    {
+      "xpos": 56,
+      "ypos": 612,
+      "width": 14,
+      "height": 13,
+      "type": "match"
+    }
+  ]
+}

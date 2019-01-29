@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmag_runs"
+  ],
+  "area": [
+    {
+      "xpos": 197,
+      "ypos": 9,
+      "width": 72,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

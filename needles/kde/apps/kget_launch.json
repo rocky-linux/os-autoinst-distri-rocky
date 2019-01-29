@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kget_launch"
+  ],
+  "area": [
+    {
+      "xpos": 55,
+      "ypos": 405,
+      "width": 17,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

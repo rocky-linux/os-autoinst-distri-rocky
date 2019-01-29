@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmouth_runs"
+  ],
+  "area": [
+    {
+      "xpos": 250,
+      "ypos": 9,
+      "width": 52,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}

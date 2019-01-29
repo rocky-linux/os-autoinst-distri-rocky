@@ -716,39 +716,68 @@ sub quit_firefox {
 
 sub start_with_launcher {
 # Get the name of the needle with a launcher, find the launcher in the menu
-# and click on it to start the application.
+# and click on it to start the application. This function works for the
+# Gnome desktop.
 
     # $launcher holds the launcher needle, but some of the apps are hidden in a submenu
     # so this must be handled first to find the launcher needle.
  
-    my ($launcher,$submenu) = @_;
+    my ($launcher,$submenu,$group) = @_;
     $submenu //= '';
+    $group //= '';
+    my $desktop = get_var('DESKTOP');
     
-    my $screen_to_check = $submenu || $launcher;
+    my $item_to_check = $submenu || $launcher;
+    # The following varies for different desktops.
+    if ($desktop eq 'gnome') {
+        # Start the Activities page
+        send_key 'alt-f1';
+        wait_still_screen 5;
 
-    # Start the Activities page
-    send_key 'alt-f1';
-    wait_still_screen 5;
+        # Click on the menu icon to come into the menus
+        assert_and_click 'apps_activities';
+        wait_still_screen 5;
 
-    # Click on the menu icon to come into the menus
-    assert_and_click 'apps_activities';
-    wait_still_screen 5;
+        # Find the application launcher in the current menu page. 
+        # If it cannot be found there, hit PageDown to go to another page.
 
-    # Find the application launcher in the current menu page. 
-    # If it cannot be found there, hit PageDown to go to another page.
+        send_key_until_needlematch($item_to_check, 'pgdn', 5, 3);
 
-    send_key_until_needlematch($screen_to_check, 'pgdn', 5, 3);
-
-    # If there was a submenu, click on that first.
-    if ($submenu) {
-        assert_and_click $submenu;
+        # If there was a submenu, click on that first.
+        if ($submenu) {
+            assert_and_click $submenu;
+            wait_still_screen 5;
+        }
+        # Click on the launcher
+        assert_and_click $launcher;
         wait_still_screen 5;
     }
-    # Click on the launcher
-    assert_and_click $launcher;
-    wait_still_screen 5;
+    elsif ($desktop eq 'kde'){
+        # Click on the KDE launcher icon
+        assert_and_click 'kde_menu_launcher';
+        wait_still_screen 2;
+        #mouse_set(10, 10);
+        
+        # Select the appropriate submenu 
+        assert_and_click $submenu;
+        wait_still_screen 2;
+        #mouse_set(10, 10);
 
+        # Select the appropriate menu subgroup where real launchers
+        # are placed, but only if requested
+        if ($group) {
+            assert_and_click $group;
+            wait_still_screen 2;
+            #mouse_set(10, 10);
+        }
+
+        # Find and click on the menu item to start the application
+        send_key_until_needlematch($launcher, 'down', 20, 5);
+        assert_and_click $launcher;
+        wait_still_screen 5;
+    } 
 }
+
 
 sub quit_with_shortcut {
 # Quit the application using the Alt-F4 keyboard shortcut

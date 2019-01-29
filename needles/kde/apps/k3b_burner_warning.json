@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "k3b_burner_warning"
+  ],
+  "area": [
+    {
+      "xpos": 519,
+      "ypos": 355,
+      "width": 55,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}

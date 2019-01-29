@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "ark_launch"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 251,
+      "width": 21,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

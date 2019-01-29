@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kcalc_runs"
+  ],
+  "area": [
+    {
+      "xpos": 112,
+      "ypos": 10,
+      "width": 39,
+      "height": 13,
+      "type": "match"
+    }
+  ]
+}

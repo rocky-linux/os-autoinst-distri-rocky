@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kamoso_runs"
+  ],
+  "area": [
+    {
+      "xpos": 322,
+      "ypos": 9,
+      "width": 58,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

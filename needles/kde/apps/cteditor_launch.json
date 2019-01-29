@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cteditor_launch"
+  ],
+  "area": [
+    {
+      "xpos": 97,
+      "ypos": 320,
+      "width": 63,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

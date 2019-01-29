@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "firewall_requires"
+  ],
+  "area": [
+    {
+      "xpos": 595,
+      "ypos": 422,
+      "width": 19,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

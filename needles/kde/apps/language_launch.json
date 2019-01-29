@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "language_launch"
+  ],
+  "area": [
+    {
+      "xpos": 51,
+      "ypos": 322,
+      "width": 24,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

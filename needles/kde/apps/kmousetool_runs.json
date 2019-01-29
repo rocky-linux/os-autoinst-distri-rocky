@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmousetool_runs"
+  ],
+  "area": [
+    {
+      "xpos": 267,
+      "ypos": 8,
+      "width": 84,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

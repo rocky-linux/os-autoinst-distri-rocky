@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "gwenview_runs"
+  ],
+  "area": [
+    {
+      "xpos": 285,
+      "ypos": 7,
+      "width": 72,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

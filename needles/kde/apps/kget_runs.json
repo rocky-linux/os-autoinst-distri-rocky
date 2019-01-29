@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kget_runs"
+  ],
+  "area": [
+    {
+      "xpos": 302,
+      "ypos": 7,
+      "width": 37,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

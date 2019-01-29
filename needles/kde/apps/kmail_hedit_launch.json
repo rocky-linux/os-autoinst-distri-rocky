@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "kmail_hedit_launch"
+  ],
+  "area": [
+    {
+      "xpos": 94,
+      "ypos": 560,
+      "width": 45,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}

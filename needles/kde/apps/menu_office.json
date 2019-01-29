@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "menu_office"
+  ],
+  "area": [
+    {
+      "xpos": 52,
+      "ypos": 484,
+      "width": 20,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "menu_administration"
+  ],
+  "area": [
+    {
+      "xpos": 53,
+      "ypos": 243,
+      "width": 21,
+      "height": 22,
+      "type": "match"
+    }
+  ]
+}
