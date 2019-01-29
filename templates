@@ -4249,6 +4249,7 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
+                        { key => "ARCH_BASE_MACHINE", value => "64bit" },
                         { key => "PART_TABLE_TYPE", value => "mbr"},
                         { key => "WORKER_CLASS", value => "qemu_x86_64" },
                         { key => "QEMU_VIRTIO_RNG", value => "1"}
@@ -4262,6 +4263,7 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUVGA", value => "std"},
                         { key => "QEMURAM", value => "2048"},
+                        { key => "ARCH_BASE_MACHINE", value => "64bit" },
                         { key => "UEFI", value => "1"},
                         { key => "UEFI_PFLASH_CODE", value => "/usr/share/edk2/ovmf/OVMF_CODE.fd"},
                         { key => "UEFI_PFLASH_VARS", value => "/usr/share/edk2/ovmf/OVMF_VARS.fd"},
@@ -4278,6 +4280,7 @@
                         { key => "QEMUCPUS", value => "2"},
                         { key => "QEMUMACHINE", value => "virt"},
                         { key => "QEMURAM", value => "1024"},
+                        { key => "ARCH_BASE_MACHINE", value => "ARM" },
                         { key => "QEMU_NO_KVM", value => "1"},
                         { key => "TIMEOUT_SCALE", value => "5" },
                         { key => "SERIALDEV", value => "ttyAMA0" },
@@ -4296,6 +4299,7 @@
                         { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
+                        { key => "ARCH_BASE_MACHINE", value => "pcc64le" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64le" },
                         { key => "PART_TABLE_TYPE", value => "mbr"},
                         { key => "QEMU_VIRTIO_RNG", value => "1"}
@@ -4310,6 +4314,7 @@
                         { key => "QEMUVGA", value => "std" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
+                        { key => "ARCH_BASE_MACHINE", value => "ppc64" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64" },
                         { key => "PART_TABLE_TYPE", value => "mbr"},
                         { key => "QEMU_VIRTIO_RNG", value => "1"}
@@ -4324,6 +4329,7 @@
                         { key => "QEMUMACHINE", value => "virt"},
                         { key => "QEMURAM", value => 3072 },
                         { key => "QEMUCPU", value => "host" },
+                        { key => "ARCH_BASE_MACHINE", value => "aarch64" },
                         { key => "TIMEOUT_SCALE", value => "1.5" },
                         { key => "SERIALDEV", value => "ttyAMA0" },
                         { key => "UEFI", value => "1"},
