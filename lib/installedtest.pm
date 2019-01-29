@@ -99,10 +99,26 @@ sub post_fail_hook {
     # Sometimes useful for diagnosing FreeIPA issues
     upload_logs "/etc/nsswitch.conf", failok=>1;
 
-    # for installer creation test
-    upload_logs "/root/imgbuild/pylorax.log", failok=>1;
-    upload_logs "/root/imgbuild/lorax.log", failok=>1;
-    upload_logs "/root/imgbuild/program.log", failok=>1;
+    if (get_var("FLAVOR") eq "updates-everything-boot-iso") {
+        # for installer creation test
+        script_run "df -h";
+        upload_logs "/root/imgbuild/pylorax.log", failok=>1;
+        upload_logs "/root/imgbuild/lorax.log", failok=>1;
+        upload_logs "/root/imgbuild/program.log", failok=>1;
+    }
+
+    if (get_var("FLAVOR") eq "updates-workstation-live-iso") {
+        # for live image creation test
+        script_run "df -h";
+        script_run 'mock -r openqa --chroot "ls -l /chroot_tmpdir/lmc-logs/anaconda"';
+        unless (script_run "mock -r openqa --copyout /chroot_tmpdir/lmc-logs/livemedia-out.log .") {
+            upload_logs "livemedia-out.log";
+        }
+        unless (script_run "mock -r openqa --copyout /chroot_tmpdir/lmc-logs/anaconda/ anaconda") {
+            assert_script_run "tar cvzf anaconda.tar.gz anaconda/";
+            upload_logs "anaconda.tar.gz";
+        }
+    }
 }
 
     # For update tests, let's do the update package info log stuff,

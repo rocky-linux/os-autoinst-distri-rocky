@@ -373,7 +373,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "updates-installer",
+                                      flavor  => "updates-everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "installer_build" },
@@ -385,7 +385,7 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "updates-installer",
+                                      flavor  => "updates-everything-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "support_server" },
@@ -397,10 +397,10 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "updates-installer",
+                                      flavor  => "updates-everything-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_default_update" },
+                      test_suite => { name => "install_default_update_netinst" },
                     },
                     {
                       group_name => "Fedora Updates",
@@ -409,10 +409,46 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "updates-installer",
+                                      flavor  => "updates-everything-boot-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_default_update" },
+                      test_suite => { name => "install_default_update_netinst" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "live_build" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default_update_live" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "uefi" },
+                      prio       => 41,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default_update_live" },
                     },
                     {
                       group_name => "Fedora PowerPC Updates",
@@ -921,9 +957,9 @@
                       version   => "*",
                     },
                     {
-                      arch      => "ppc64le",
+                      arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "updates-server",
+                      flavor    => "updates-everything-boot-iso",
                       name      => "",
                       settings  => [
                                    ],
@@ -932,7 +968,19 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "updates-installer",
+                      flavor    => "updates-workstation-live-iso",
+                      name      => "",
+                      settings  => [
+                        { key => "LIVE", value => "1" },
+                        { key => "PACKAGE_SET", value => "default" },
+                        { key => "DESKTOP", value => "gnome" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "ppc64le",
+                      distri    => "fedora",
+                      flavor    => "updates-server",
                       name      => "",
                       settings  => [
                                    ],
@@ -1005,7 +1053,19 @@
                       ],
                     },
                     {
-                      name => "install_default_update",
+                      name => "live_build",
+                      settings => [
+                        { key => "POSTINSTALL", value => "_live_build" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "+DESKTOP", value => "" },
+                        { key => "+LIVE", value => "" },
+                        { key => "HDD_1", value => "disk_f%VERSION%_minimal_3_%ARCH%.img" },
+                      ],
+                    },
+                    {
+                      name => "install_default_update_netinst",
                       settings => [
                         { key => "INSTALL", value => "1" },
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
@@ -1016,6 +1076,14 @@
                         { key => "ADD_REPOSITORY_VARIATION", value => "nfs://10.0.2.110:/opt/update_repo" },
                         { key => "+START_AFTER_TEST", value => "installer_build:%ARCH_BASE_MACHINE%" },
                         { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_default_update_live",
+                      settings => [
+                        { key => "INSTALL", value => "1" },
+                        { key => "ISO", value => "Fedora-%SUBVARIANT%-Live-%ARCH%-%ADVISORY_OR_TASK%.iso" },
+                        { key => "+START_AFTER_TEST", value => "live_build:%ARCH_BASE_MACHINE%" },
                       ],
                     },
                   ],
