@@ -268,14 +268,14 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/_post_network_static.pm";
     }
 
-    # if scheduler passed an advisory, update packages from that advisory
-    # (intended for the updates testing workflow, so we install the updates
-    # to be tested). Don't do this for UPGRADE tests, as the update gets
-    # installed as part of the upgrade in that case and we don't need the
-    # extra reboot. Don't do this for INSTALL test(s); these are checking
-    # that an installer image built from the update works and do not install
-    # the update themselves.
-    if (get_var("ADVISORY") && !get_var("UPGRADE") && !get_var("INSTALL")) {
+    # if scheduler passed an advisory or task ID, update packages from that
+    # advisory or task ID (intended for the updates testing workflow, so we
+    # install the updates to be tested). Don't do this for UPGRADE tests, as
+    # the update gets installed as part of the upgrade in that case and we
+    # don't need the extra reboot. Don't do this for INSTALL test(s); these
+    # are checking that an installer image built from the update works and do
+    # not install the update themselves in this manner
+    if (get_var("ADVISORY_OR_TASK") && !get_var("UPGRADE") && !get_var("INSTALL")) {
         autotest::loadtest "tests/_advisory_update.pm";
         # now load the early boot tests again, as _advisory_update reboots
         _load_early_postinstall_tests(2);
@@ -316,11 +316,11 @@ sub load_postinstall_tests() {
         }
     }
 
-    # load the ADVISORY post-install test - this records which update
-    # packages were actually installed during the test. Don't do this
-    # for INSTALL test(s); these are checking that an installer image
+    # load the ADVISORY / KOJITASK post-install test - this records which
+    # update or task packages were actually installed during the test. Don't
+    # do this for INSTALL test(s); these are checking that an installer image
     # built from the update works and do not install the update themselves.
-    if (get_var("ADVISORY") && !get_var("INSTALL")) {
+    if (get_var("ADVISORY_OR_TASK") && !get_var("INSTALL")) {
         autotest::loadtest "tests/_advisory_post.pm";
     }
 

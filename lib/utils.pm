@@ -375,17 +375,24 @@ sub _repo_setup_updates {
         }
     }
 
-    # Set up an additional repo containing the update packages. We do
-    # this rather than simply running a one-time update because it may
-    # be the case that a package from the update isn't installed *now*
-    # but will be installed by one of the tests; by setting up a repo
-    # containing the update and enabling it here, we ensure all later
-    # 'dnf install' calls will get the packages from the update.
+    # Set up an additional repo containing the update or task packages. We do
+    # this rather than simply running a one-time update because it may be the
+    # case that a package from the update isn't installed *now* but will be
+    # installed by one of the tests; by setting up a repo containing the
+    # update and enabling it here, we ensure all later 'dnf install' calls
+    # will get the packages from the update.
     assert_script_run "mkdir -p /opt/update_repo";
     assert_script_run "cd /opt/update_repo";
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
     # download the packages
-    assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
+    if (get_var("ADVISORY")) {
+        # regular update case
+        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
+    }
+    else {
+        # Koji task case (KOJITASK will be set)
+        assert_script_run "koji download-task --arch=" . get_var("ARCH") . " --arch=noarch " . get_var("KOJITASK"), 600;
+    }
     # for upgrade tests, we want to do the 'development' changes *after* we
     # set up the update repo. We don't do the f28 fixups as we don't have
     # f28 fedora-repos.
@@ -408,7 +415,7 @@ sub _repo_setup_updates {
     assert_script_run "createrepo .";
     # write a repo config file
     assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
-    # mark via a variable that we've set up the update repo and done
+    # mark via a variable that we've set up the update/task repo and done
     # all the logging stuff above
     set_var('_ADVISORY_REPO_DONE', '1');
     # run an update now (except for upgrade tests)
@@ -417,7 +424,7 @@ sub _repo_setup_updates {
 
 sub repo_setup {
     # Run the appropriate sub-function for the job
-    get_var("ADVISORY") ? _repo_setup_updates : _repo_setup_compose;
+    get_var("ADVISORY_OR_TASK") ? _repo_setup_updates : _repo_setup_compose;
     # This repo does not always exist for Rawhide or Branched, and
     # some things (at least realmd) try to update the repodata for
     # it even though it is disabled, and fail. At present none of the

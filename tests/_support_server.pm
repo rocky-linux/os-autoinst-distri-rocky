@@ -34,7 +34,7 @@ sub run {
     # get the kickstart
     assert_script_run "curl -o /export/root-user-crypted-net.ks https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
     # for update tests, set up the update repository and export it
-    if (get_var("ADVISORY")) {
+    if (get_var("ADVISORY_OR_TASK")) {
         assert_script_run "echo '/opt/update_repo 10.0.2.0/24(ro)' >> /etc/exports";
     }
     # for compose tests, we do all this stuff

@@ -87,6 +87,7 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `ISO` | contains filename of ISO that is used for booting. If `ISO_URL` is not set, file must exist in /var/lib/openqa/share/factory/iso. If `ISO_URL` is set, it will be downloaded to this name instead of its original name |
 | `ISO_URL` | contains URL for ISO to boot, openQA will download it |
 | `ADVISORY` | A Bodhi update ID. If set, the 'update testing' flow will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
+| `KOJITASK` | A Koji task ID. If set, the modified 'update testing' flow for testing scratch builds will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
 | `DISTRI` | contains distribution name (should be same as in WebUI, probably `fedora`) |
 | `VERSION` | contains version of distribution |
 | `DEVELOPMENT` | set for update tests if the update is for a development release (not a stable release) |

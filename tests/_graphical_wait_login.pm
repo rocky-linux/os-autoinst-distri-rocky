@@ -59,10 +59,10 @@ sub run {
 
     # Handle initial-setup, for GNOME, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
-    # do it if ADVISORY is set, as for the update testing flow,
+    # do it if ADVISORY_OR_TASK is set, as for the update testing flow,
     # START_AFTER_TEST is set but a no-op and this hasn't happened
-    if (get_var("DESKTOP") eq 'gnome' && (get_var("ADVISORY") || !get_var("START_AFTER_TEST"))) {
-        # as this test gets loaded twice on the ADVISORY flow, and
+    if (get_var("DESKTOP") eq 'gnome' && (get_var("ADVISORY_OR_TASK") || !get_var("START_AFTER_TEST"))) {
+        # as this test gets loaded twice on the ADVISORY_OR_TASK flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
         unless (get_var("_setup_done")) {

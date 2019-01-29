@@ -997,7 +997,7 @@
                       settings => [
                         { key => "INSTALL", value => "1" },
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
-                        { key => "ISO", value => "%ADVISORY%-netinst-%ARCH%.iso" },
+                        { key => "ISO", value => "%ADVISORY_OR_TASK%-netinst-%ARCH%.iso" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "PARALLEL_WITH", value => "support_server" },

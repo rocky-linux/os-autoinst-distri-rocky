@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     my $version = get_var("VERSION");
-    my $advisory = get_var("ADVISORY");
+    my $advortask = get_var("ADVISORY_OR_TASK");
     my $arch = get_var("ARCH");
     # we need lorax from u-t for f28 atm it seems
     my $loraxcmd = "dnf -y ";
@@ -30,8 +30,8 @@ sub run {
     }
     $cmd .= " --repo=/etc/yum.repos.d/advisory.repo ./results";
     assert_script_run $cmd, 1500;
-    assert_script_run "mv results/images/boot.iso ./${advisory}-netinst-${arch}.iso";
-    upload_asset "./${advisory}-netinst-x86_64.iso";
+    assert_script_run "mv results/images/boot.iso ./${advortask}-netinst-${arch}.iso";
+    upload_asset "./${advortask}-netinst-x86_64.iso";
 }
 
 sub test_flags {
