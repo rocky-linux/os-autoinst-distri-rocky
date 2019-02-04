@@ -712,6 +712,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_repository_hd_variation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -2127,6 +2138,18 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_repository_hd_variation" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 20,
                       product    => {
                                       arch    => "ppc64le",
@@ -3747,6 +3770,18 @@
                     {
                       group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_repository_hd_variation" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
                       prio       => 20,
                       product    => {
                                       arch    => "aarch64",
@@ -4939,6 +4974,15 @@
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_repository_hd_variation",
+                      settings => [
+                        { key => "PREINSTALL", value => "preinstall_iso_in_hd" },
+                        { key => "REPOSITORY_VARIATION", value => "hd:vdb1:/fedora_image.iso;" },
+                        { key => "NUMDISKS", value => "2" },
+                        { key => "HDD_2", value => "disk_full_mbr.img" },
                       ],
                     },
                     {

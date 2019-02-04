@@ -356,6 +356,17 @@ elsif ((!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) || get_var("INSTAL
     # for now we can assume START_AFTER_TEST and BOOTFROM mean the
     # test picks up after an install, so we skip to post-install,
     # unless the override INSTALL var is set
+
+    if (get_var("PREINSTALL")) {
+        # specified module supposed to first boot to rescue mode
+        # do any required actions before to exit rescue mode (triggering reboot).
+        # reboot will run through next normal install steps of load_install_tests.
+        my @pis = split(/ /, get_var("PREINSTALL"));
+        foreach my $pi (@pis) {
+            autotest::loadtest "tests/${pi}.pm";
+        }
+    }
+
     load_install_tests;
 }
 

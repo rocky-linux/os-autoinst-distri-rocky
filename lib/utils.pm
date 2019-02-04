@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -901,4 +901,19 @@ sub select_rescue_mode {
     }
 
     assert_screen "rescue_select", 120; # it takes time to start anaconda
+}
+
+sub copy_devcdrom_as_isofile {
+    # copy /dev/cdrom as iso file and verify checksum is same
+    # as cdrom previously retrieved from ISO_URL
+    my $isoname = shift;
+    assert_script_run "dd if=/dev/cdrom of=$isoname", 360;
+    # verify iso checksum
+    my $cdurl = get_var('ISO_URL');
+    my $cmd = <<EOF;
+urld="$cdurl"; urld=\${urld%/*}; chkf=\$(curl -fs \$urld/ |grep CHECKSUM | sed -E 's/.*href=.//; s/\".*//') && curl -f \$urld/\$chkf -o /tmp/x
+chkref=\$(grep -E 'SHA256.*dvd' /tmp/x | sed -e 's/.*= //') && echo "\$chkref $isoname" >/tmp/x
+sha256sum -c /tmp/x
+EOF
+    assert_script_run($_) foreach (split /\n/, $cmd);
 }

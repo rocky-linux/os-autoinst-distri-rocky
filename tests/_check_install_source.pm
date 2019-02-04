@@ -31,7 +31,10 @@ sub run {
             assert_script_run 'grep "enabled repo.*nfs" /tmp/packaging.log';
         }
     }
-    if ($repourl =~ s/^nfs://) {
+    if ($repourl =~ /^hd:/) {
+        assert_script_run "mount |grep 'fedora_image.iso'";
+    }
+    elsif ($repourl =~ s/^nfs://) {
         $repourl =~ s/^nfsvers=.://;
         # the above both checks if we're dealing with an NFS URL, and
         # strips the 'nfs:' and 'nfsvers=.:' from it if so

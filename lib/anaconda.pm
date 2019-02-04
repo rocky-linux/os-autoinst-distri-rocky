@@ -246,9 +246,9 @@ sub custom_delete_part {
 sub get_full_repo {
     my ($repourl) = @_;
     # trivial thing we kept repeating: fill out an HTTP or HTTPS
-    # repo URL with flavor and arch, leave NFS ones alone (as for
-    # NFS tests we just use a mounted ISO and the URL is complete)
-    if ($repourl !~ m/^nfs/) {
+    # repo URL with flavor and arch, leave hd & NFS ones alone
+    # (as for those tests we just use a mounted ISO and URL is complete)
+    if ($repourl !~ m/^(nfs|hd:)/) {
         # Everything variant doesn't exist for modular composes atm,
         # only Server
         my $variant = 'Everything';

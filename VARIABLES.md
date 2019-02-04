@@ -73,6 +73,7 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `USER_LOGIN` | string | not set | should be used with `USER_PASSWORD` (unless `false`) | when set, user login is set to this value. If not set, default value `test` is used for console installs, no login is done for graphical installs. If set to `false`, no user login will be done |
 | `USER_PASSWORD` | string | not set | should be used with `USER_LOGIN` | when set, user password is set to this value. If not set, default value `weakpassword` is used for console installs, no login is done for graphical installs |
 | `TEST_UPDATES` | boolean | `false`/not set | set to indicate that this test checks updates.img loading, so we should check for the expected effect of the updates image used for this testing |
+| `PREINSTALL` | string | not set | nothing | If set, specified module will be loaded before reboot and install; module supposed to be starting as rescue mode |
 | `POSTINSTALL` | string | not set | nothing | If set, `tests/(value)_postinstall.pm` will be loaded after install, boot, login, and other postinstall tests
 | `UEFI` | boolean | `false`/not set | nothing | whether to use UEFI, this variable isn't usually set in test suites but in machine definition |
 | `ANACONDA_TEXT` | boolean | `false`/not set | all | when specified, anaconda will run in text mode |
