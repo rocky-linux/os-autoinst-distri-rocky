@@ -719,6 +719,17 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_repository_nfsiso_variation" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
@@ -2145,6 +2156,18 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_repository_nfsiso_variation" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
@@ -3777,6 +3800,18 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "install_repository_nfsiso_variation" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
@@ -4831,7 +4866,7 @@
                       settings => [
                         { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "NUMDISKS", value => "2" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_support_4_%ARCH%.img" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_5_%ARCH%.img" },
                         { key => "POSTINSTALL", value => "_support_server" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -4970,6 +5005,16 @@
                       name => "install_repository_nfs_variation",
                       settings => [
                         { key => "REPOSITORY_VARIATION", value => "nfs:nfsvers=4:10.0.2.110:/repo" },
+                        { key => "PARALLEL_WITH", value => "support_server" },
+                        { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_repository_nfsiso_variation",
+                      settings => [
+                        { key => "REPOSITORY_VARIATION", value => "nfs:nfsvers=4:10.0.2.110:/iso/image.iso" },
                         { key => "PARALLEL_WITH", value => "support_server" },
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
                         { key => "NICTYPE", value => "tap" },

@@ -50,8 +50,12 @@ sub run {
         # put the updates image in the NFS repo (for testing this update
         # image delivery method)
         assert_script_run "curl -o /repo/images/updates.img https://fedorapeople.org/groups/qa/updates/updates-openqa.img";
+        # create the iso share
+        assert_script_run "mkdir -p /iso";
+        # recreate an iso file
+        copy_devcdrom_as_isofile('/iso/image.iso');
         # set up the exports
-        assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)' > /etc/exports";
+        assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)\n/iso 10.0.2.0/24(ro)' > /etc/exports";
     }
 
     # open firewall port

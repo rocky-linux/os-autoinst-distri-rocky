@@ -2,6 +2,7 @@ use base "anacondatest";
 use strict;
 use testapi;
 use anaconda;
+use File::Basename;
 
 sub run {
     my $self = shift;
@@ -38,6 +39,10 @@ sub run {
         $repourl =~ s/^nfsvers=.://;
         # the above both checks if we're dealing with an NFS URL, and
         # strips the 'nfs:' and 'nfsvers=.:' from it if so
+        # remove image.iso name when dealing with nfs iso
+        if ($repourl =~ /\.iso/) {
+            $repourl = dirname $repourl;
+        }
         # check the repo was actually mounted
         assert_script_run "mount |grep nfs |grep '${repourl}'";
     }
