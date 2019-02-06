@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 26,
+      "xpos": 668,
+      "width": 130,
+      "type": "match",
+      "ypos": 507
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_save_passphrase",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english"
+  ]
+}

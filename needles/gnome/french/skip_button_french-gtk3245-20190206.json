@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 44,
+      "ypos": 43,
+      "xpos": 958,
+      "height": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "skip_button"
+  ]
+}

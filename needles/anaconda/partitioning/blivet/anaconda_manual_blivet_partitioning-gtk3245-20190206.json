@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 443,
+      "height": 18,
+      "width": 131,
+      "ypos": 484
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "anaconda_manual_blivet_partitioning"
+  ]
+}

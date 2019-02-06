@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 312,
+      "height": 14,
+      "width": 21,
+      "type": "match",
+      "xpos": 720
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_size_unit"
+  ]
+}

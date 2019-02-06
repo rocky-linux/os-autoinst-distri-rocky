@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 88,
+      "type": "match",
+      "ypos": 36,
+      "xpos": 467,
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "getting_started"
+  ]
+}

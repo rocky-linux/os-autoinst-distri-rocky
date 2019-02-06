@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 521,
+      "width": 59,
+      "height": 16,
+      "xpos": 940,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_delete_all_btn",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english"
+  ]
+}

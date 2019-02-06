@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 136,
+      "height": 17,
+      "xpos": 22,
+      "type": "match",
+      "ypos": 644
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_install_destination_encrypt_data"
+  ]
+}
