@@ -413,13 +413,18 @@ sub _repo_setup_updates {
     upload_logs "/var/log/updatepkgnames.txt";
     # create the repo metadata
     assert_script_run "createrepo .";
-    # write a repo config file
-    assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
+    # write a repo config file, unless this is the support_server test
+    # and it is running on a different release than the update is for
+    # (in this case we need the repo to exist but do not want to use
+    # it on the actual support_server system)
+    unless (get_var("TEST") eq "support_server" && get_var("VERSION") ne get_var("CURRREL")) {
+        assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
+        # run an update now (except for upgrade tests)
+        script_run "dnf -y update", 600 unless (get_var("UPGRADE"));
+    }
     # mark via a variable that we've set up the update/task repo and done
     # all the logging stuff above
     set_var('_ADVISORY_REPO_DONE', '1');
-    # run an update now (except for upgrade tests)
-    script_run "dnf -y update", 600 unless (get_var("UPGRADE"));
 }
 
 sub repo_setup {
