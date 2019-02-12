@@ -1,18 +1,18 @@
 {
-  "area": [
-    {
-      "height": 19,
-      "xpos": 337,
-      "width": 67,
-      "type": "match",
-      "ypos": 419
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "DESKTOP-gnome",
-    "graphical_login",
-    "graphical_login_gdm_nologo",
-    "login_screen"
-  ]
+    "area": [
+        {
+            "height": 54,
+            "type": "match",
+            "width": 52,
+            "xpos": 347,
+            "ypos": 344
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "DESKTOP-gnome",
+        "graphical_login",
+        "graphical_login_gdm_nologo",
+        "login_screen"
+    ]
 }
