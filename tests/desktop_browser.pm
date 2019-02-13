@@ -23,13 +23,13 @@ sub run {
     wait_idle 5;
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
-    send_key 'ctrl-t';
+    assert_and_click 'browser_new_tab';
     wait_still_screen 2;
     wait_idle 3;
     # check FAS, typing slowly to avoid errors
     type_very_safely "https://admin.fedoraproject.org/accounts/\n";
     assert_screen "browser_fas_home";
-    send_key 'ctrl-t';
+    assert_and_click 'browser_new_tab';
     wait_still_screen 2;
     wait_idle 2;
     type_very_safely "https://kernel.org\n";
@@ -38,14 +38,14 @@ sub run {
     send_key 'ret';
     # browsers do...something...when the download completes, and we
     # expect there's a single click to make it go away and return
-    # browser to a state where ctrl-t will work
+    # browser to a state where we can open a new tab
     assert_and_click "browser_download_complete";
     # we'll check it actually downloaded later
     # add-on test: at present all desktops we test (KDE, GNOME) are
     # using Firefox by default so we do this unconditionally, but we
     # may need to conditionalize it if we ever test desktops whose
     # default browser doesn't support add-ons or uses different ones
-    send_key 'ctrl-t';
+    assert_and_click 'browser_new_tab';
     wait_still_screen 2;
     wait_idle 2;
     type_very_safely "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
