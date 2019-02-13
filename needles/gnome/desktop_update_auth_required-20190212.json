@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 251,
+      "type": "match",
+      "width": 46,
+      "xpos": 299,
+      "height": 32
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "desktop_update_auth_required"
+  ]
+}
