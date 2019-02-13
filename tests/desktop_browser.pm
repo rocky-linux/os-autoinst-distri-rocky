@@ -17,21 +17,23 @@ sub run {
     check_desktop_clean;
     send_key 'alt-f1';
     # wait out animations
-    wait_still_screen 2;
+    wait_still_screen(stilltime=>2, similarity_level=>45);
     assert_and_click 'browser_launcher';
     assert_screen 'browser';
-    wait_idle 5;
+    # wait_idle was deprecated, so we just have sleeps throughout
+    # this test, as firefox is very grind-y :(
+    sleep 5;
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
     assert_and_click 'browser_new_tab';
-    wait_still_screen 2;
-    wait_idle 3;
+    wait_still_screen(stilltime=>2, similarity_level=>45);
+    sleep 3;
     # check FAS, typing slowly to avoid errors
     type_very_safely "https://admin.fedoraproject.org/accounts/\n";
     assert_screen "browser_fas_home";
     assert_and_click 'browser_new_tab';
-    wait_still_screen 2;
-    wait_idle 2;
+    wait_still_screen(stilltime=>2, similarity_level=>45);
+    sleep 2;
     type_very_safely "https://kernel.org\n";
     assert_and_click "browser_kernelorg_patch";
     assert_and_click "browser_download_save";
@@ -46,8 +48,8 @@ sub run {
     # may need to conditionalize it if we ever test desktops whose
     # default browser doesn't support add-ons or uses different ones
     assert_and_click 'browser_new_tab';
-    wait_still_screen 2;
-    wait_idle 2;
+    wait_still_screen(stilltime=>2, similarity_level=>45);
+    sleep 2;
     type_very_safely "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
     assert_and_click "firefox_addon_add";
     assert_and_click "firefox_addon_install";
