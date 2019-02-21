@@ -304,6 +304,14 @@ sub menu_launch_type {
     send_key 'ret';
 }
 
+sub disable_firefox_studies {
+    # create a config file that disables Firefox's dumb 'shield
+    # studies' so they don't break tests:
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
+    assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
+    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/distribution.ini';
+}
+
 sub start_cockpit {
     # Starting from a console, get to a browser with Cockpit (running
     # on localhost) shown. If $login is truth-y, also log in. Assumes
@@ -763,12 +771,4 @@ sub advisory_check_nonmatching_packages {
             record_info $message;
         }
     }
-}
-
-sub disable_firefox_studies {
-    # create a config file that disables Firefox's dumb 'shield
-    # studies' so they don't break tests:
-    # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
-    assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
-    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/distribution.ini';
 }
