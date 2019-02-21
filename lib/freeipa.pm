@@ -41,6 +41,7 @@ sub start_webui {
 
     # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
+    disable_firefox_studies;
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.domain.local\n";
     assert_screen ["freeipa_webui_login", $user_screen], 30;
     wait_still_screen 5;

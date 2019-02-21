@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -311,6 +311,7 @@ sub start_cockpit {
     my $login = shift || 0;
     # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
+    disable_firefox_studies;
     # run firefox directly in X as root. never do this, kids!
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
     assert_screen "cockpit_login", 30;
@@ -762,4 +763,12 @@ sub advisory_check_nonmatching_packages {
             record_info $message;
         }
     }
+}
+
+sub disable_firefox_studies {
+    # create a config file that disables Firefox's dumb 'shield
+    # studies' so they don't break tests:
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
+    assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
+    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/distribution.ini';
 }
