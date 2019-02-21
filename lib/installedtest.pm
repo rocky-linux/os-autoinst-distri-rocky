@@ -23,6 +23,13 @@ sub root_console {
 sub post_fail_hook {
     my $self = shift;
 
+    # if we failed at a browser certificate error screen, click to get
+    # more info on the issue
+    if (check_screen 'browser_certificate_error', 3) {
+        assert_and_click 'browser_certificate_error';
+        save_screenshot;
+    }
+
     if (check_screen 'emergency_rescue', 3) {
         my $password = get_var("ROOT_PASSWORD", "weakpassword");
         type_string "$password\n";

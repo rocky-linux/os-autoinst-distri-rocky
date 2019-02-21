@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 801,
+      "ypos": 506,
+      "width": 75,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "browser_certificate_error",
+    "firefox_certificate_error"
+  ]
+}
