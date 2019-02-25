@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 75,
+      "height": 22,
+      "ypos": 43,
+      "type": "match",
+      "width": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "browser_refresh",
+    "firefox_refresh"
+  ]
+}
