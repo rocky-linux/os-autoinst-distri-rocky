@@ -309,7 +309,7 @@ sub disable_firefox_studies {
     # studies' so they don't break tests:
     # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
     assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
-    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/distribution.ini';
+    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/policies.json';
 }
 
 sub start_cockpit {
