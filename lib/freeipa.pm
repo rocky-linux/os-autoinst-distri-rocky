@@ -47,6 +47,7 @@ sub start_webui {
     if (match_has_tag "firefox_certificate_error") {
         # https://bugzilla.mozilla.org/show_bug.cgi?id=1530429
         record_soft_failure "Certificate validation error - likely Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1530429";
+        sleep 15;
         assert_and_click "firefox_refresh";
         assert_screen ["freeipa_webui_login", $user_screen], 30;
     }
