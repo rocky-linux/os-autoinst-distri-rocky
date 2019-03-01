@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 35,
+      "width": 209,
+      "xpos": 16,
+      "type": "match",
+      "ypos": 487
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-develop",
+    "anaconda_install_destination_reclaim_space_shrink_slider"
+  ]
+}
