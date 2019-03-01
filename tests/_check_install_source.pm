@@ -58,8 +58,14 @@ sub run {
         assert_script_run 'grep "\(added\|enabled\) repo: ' . "\\('anaconda'\\|''\\).*${repourl}" . '" /tmp/packaging.log';
     }
     if ($repourl) {
-        # check we don't have an error indicating our repo wasn't used
-        assert_script_run '! grep "base repo.*not valid" /tmp/packaging.log';
+        # check we don't have an error indicating our repo wasn't used.
+        # we except error with 'cdrom/file' in it because this error:
+        # base repo (cdrom/file:///run/install/repo) not valid -- removing it
+        # *always* happens when booting a netinst (that's just anaconda
+        # trying to use the image itself as a repo and failing because it's
+        # not a DVD), and this was causing false failures when running
+        # universal tests on netinsts
+        assert_script_run '! grep "base repo.*not valid" /tmp/packaging.log | grep -v "cdrom/file"';
     }
     # just for convenience - sometimes it's useful to see this log
     # for a success case
