@@ -3,6 +3,19 @@ use strict;
 use testapi;
 use utils;
 
+sub _open_new_tab {
+    # I hate life. ctrl-t seems to not always be reliable in openQA
+    # tests since 2019-01 or so, but the 'new tab' button is not
+    # always visible because GNOME might pop up a notification that
+    # blocks it. so, we try both.
+    if (check_screen 'browser_new_tab') {
+        assert_and_click 'browser_new_tab';
+    }
+    else {
+        send_key 'ctrl-t';
+    }
+}
+
 # we are very paranoid with waits and typing speed in this test
 # because the system can be very busy; it's effectively first boot of
 # a freshly installed system and we're running Firefox for the first
@@ -25,13 +38,13 @@ sub run {
     sleep 5;
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
-    assert_and_click 'browser_new_tab';
+    _open_new_tab;
     wait_still_screen(stilltime=>2, similarity_level=>45);
     sleep 3;
     # check FAS, typing slowly to avoid errors
     type_very_safely "https://admin.fedoraproject.org/accounts/\n";
     assert_screen "browser_fas_home";
-    assert_and_click 'browser_new_tab';
+    _open_new_tab;
     wait_still_screen(stilltime=>2, similarity_level=>45);
     sleep 2;
     type_very_safely "https://kernel.org\n";
@@ -47,7 +60,7 @@ sub run {
     # using Firefox by default so we do this unconditionally, but we
     # may need to conditionalize it if we ever test desktops whose
     # default browser doesn't support add-ons or uses different ones
-    assert_and_click 'browser_new_tab';
+    _open_new_tab;
     wait_still_screen(stilltime=>2, similarity_level=>45);
     sleep 2;
     type_very_safely "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
