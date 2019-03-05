@@ -238,7 +238,19 @@ sub do_bootloader {
     # sure we actually did a UEFI boot
     my $boottag = "bootloader_bios";
     $boottag = "bootloader_uefi" if ($args{uefi});
-    assert_screen $boottag, $args{timeout};
+    assert_screen [$boottag, "upgrade_complete"], $args{timeout};
+    if (match_has_tag "upgrade_complete") {
+        # this is a workaround for RHBZ #1674045 during upgrades
+        # let's check we didn't just happen to catch it for the
+        # brief time it's displayed normally...
+        sleep 10;
+        if (check_screen "upgrade_complete") {
+            record_soft_failure "Upgrade hung at end - probably RHBZ #1674045";
+            power 'reset';
+        }
+        # now let's just assume we'll get to the bootloader soon
+        assert_screen $boottag, 60;
+    }
     if ($args{mutex}) {
         # cancel countdown
         send_key "left";
