@@ -66,7 +66,7 @@ sub run {
             # Needle filtering in main.pm ensures we will only look for the
             # appropriate language, here
             assert_and_click "anaconda_select_install_lang_filtered";
-            assert_screen "anaconda_select_install_lang_selected", 3;
+            assert_screen "anaconda_select_install_lang_selected", 10;
             assert_and_click "anaconda_select_install_lang_continue";
 
             # wait 180 secs for hub or Rawhide warning dialog to appear
