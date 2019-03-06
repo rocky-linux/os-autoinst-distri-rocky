@@ -465,6 +465,12 @@ sub _repo_setup_updates {
     # it on the actual support_server system)
     unless (get_var("TEST") eq "support_server" && get_var("VERSION") ne get_var("CURRREL")) {
         assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
+        # FIXME 2019-03-06: as we haven't had an F30 compose for days,
+        # buildroot and 'fedora' repo are mismatched. Enable the f30-build
+        # repo for now to deal with this. Remove once we have a compose
+        if (get_var("VERSION") eq "30") {
+            assert_script_run 'printf "[f30-build]\nname=f30-build repo\nbaseurl=https://kojipkgs.fedoraproject.org/repos/f30-build/latest/\$basearch/\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/f30-build.repo';
+        }
         # run an update now (except for upgrade tests)
         script_run "dnf -y update", 600 unless (get_var("UPGRADE"));
     }
