@@ -10,6 +10,11 @@ sub run {
     # use a tty console for repo config and package prep
     $self->root_console(tty=>3);
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
+    # disable the f30-build repo for this test as it makes GNOME
+    # Software choke - https://gitlab.gnome.org/GNOME/gnome-software/issues/603
+    if (get_var("VERSION") eq "30" && get_var("ADVISORY_OR_TASK")) {
+        assert_script_run 'dnf config-manager --set-disabled f30-build';
+    }
     prepare_test_packages;
     # get back to the desktop
     desktop_vt;
