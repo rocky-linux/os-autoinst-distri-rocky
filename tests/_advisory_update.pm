@@ -17,7 +17,8 @@ sub run {
         # in openQA: x86_64, ppc64le, and aarch64.
         assert_script_run "dracut -f";
         assert_script_run 'grub2-mkconfig -o $(readlink -m /etc/grub2.cfg)';
-        assert_script_run "grub2-install /dev/vda" unless (get_var("UEFI"));
+        my $instdev = get_var("OFW") ? '/dev/vda1' : '/dev/vda';
+        assert_script_run "grub2-install $instdev" unless (get_var("UEFI"));
     }
     # reboot, in case any of the updates need a reboot to apply
     script_run "reboot", 0;
