@@ -430,6 +430,17 @@ sub _repo_setup_updates {
     # update and enabling it here, we ensure all later 'dnf install' calls
     # will get the packages from the update.
     assert_script_run "mkdir -p /opt/update_repo";
+    # if NUMDISKS is above 1, assume we want to put the update repo on
+    # the other disk (to avoid huge updates exhausting space on the main
+    # disk)
+    if (get_var("NUMDISKS") > 1) {
+        # I think the disk will always be vdb. This creates a single large
+        # partition.
+        assert_script_run "echo 'type=83' | sfdisk /dev/vdb";
+        assert_script_run "mkfs.ext4 /dev/vdb1";
+        assert_script_run "echo '/dev/vdb1 /opt/update_repo ext4 defaults 1 2' >> /etc/fstab";
+        assert_script_run "mount /opt/update_repo";
+    }
     assert_script_run "cd /opt/update_repo";
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
     # download the packages
