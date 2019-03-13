@@ -4737,7 +4737,7 @@
                     {
                       name => "support_server",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_1", value => "disk_f%CURRREL%_support_4_%ARCH%.img" },
                         { key => "POSTINSTALL", value => "_support_server" },
@@ -5051,7 +5051,7 @@
                     {
                       name => "upgrade_server_domain_controller",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "+HDD_1", value => "disk_f%CURRREL%_server_3_%ARCH%.img" },
                         { key => "UPGRADE", value => "1" },
@@ -5438,7 +5438,7 @@
                     {
                       name => "server_role_deploy_domain_controller",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "POSTINSTALL", value => "role_deploy_domain_controller role_deploy_domain_controller_check" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -5529,7 +5529,7 @@
                     {
                       name => "server_freeipa_replication_master",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "POSTINSTALL", value => "role_deploy_domain_controller role_deploy_domain_controller_check" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -5547,7 +5547,7 @@
                     {
                       name => "server_freeipa_replication_replica",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "POSTINSTALL", value => "realmd_join_sssd" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -5584,7 +5584,7 @@
                     {
                       name => "server_role_deploy_database_server",
                       settings => [
-                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER, value => "0" },
+                        { key => "PARALLEL_CANCEL_WHOLE_CLUSTER", value => "0" },
                         { key => "POSTINSTALL", value => "role_deploy_database_server" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
