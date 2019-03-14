@@ -5663,7 +5663,6 @@
                     {
                       name => "apps_startstop",
                       settings => [
-                        { key => "DESKTOP", value => "gnome"},
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
