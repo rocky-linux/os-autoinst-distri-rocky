@@ -580,6 +580,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_notifications_live" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
@@ -591,14 +602,14 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 32,
+                      prio       => 40,
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
-                      test_suite => { name => "desktop_notifications_live" },
+                      test_suite => { name => "apps_startstop" },
                     },
                     {
                       machine    => { name => "64bit" },
