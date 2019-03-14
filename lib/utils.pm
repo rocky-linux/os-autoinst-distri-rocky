@@ -485,7 +485,7 @@ sub _repo_setup_updates {
             assert_script_run 'printf "[f30-build]\nname=f30-build repo\nbaseurl=https://kojipkgs.fedoraproject.org/repos/f30-build/latest/\$basearch/\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/f30-build.repo';
         }
         # run an update now (except for upgrade tests)
-        script_run "dnf -y update", 600 unless (get_var("UPGRADE"));
+        script_run "dnf -y update", 900 unless (get_var("UPGRADE"));
     }
     # mark via a variable that we've set up the update/task repo and done
     # all the logging stuff above
