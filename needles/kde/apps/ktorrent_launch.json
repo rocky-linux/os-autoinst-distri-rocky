@@ -1,14 +1,14 @@
 {
   "properties": [],
   "tags": [
-    "dragon_launch"
+    "ktorrent_launch"
   ],
   "area": [
     {
       "xpos": 51,
-      "ypos": 364,
-      "width": 22,
-      "height": 20,
+      "ypos": 243,
+      "width": 31,
+      "height": 25,
       "type": "match"
     }
   ]

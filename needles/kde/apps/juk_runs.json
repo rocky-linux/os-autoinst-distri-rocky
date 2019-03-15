@@ -1,13 +1,13 @@
 {
   "properties": [],
   "tags": [
-    "users_runs"
+    "juk_runs"
   ],
   "area": [
     {
-      "xpos": 468,
-      "ypos": 116,
-      "width": 96,
+      "xpos": 498,
+      "ypos": 122,
+      "width": 28,
       "height": 19,
       "type": "match"
     }

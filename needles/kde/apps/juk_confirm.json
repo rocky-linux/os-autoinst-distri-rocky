@@ -1,13 +1,13 @@
 {
   "properties": [],
   "tags": [
-    "ktorrent_launch"
+    "juk_confirm"
   ],
   "area": [
     {
-      "xpos": 57,
-      "ypos": 242,
-      "width": 12,
+      "xpos": 584,
+      "ypos": 415,
+      "width": 48,
       "height": 18,
       "type": "match"
     }

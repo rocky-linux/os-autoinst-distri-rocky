@@ -12,7 +12,7 @@ sub run {
     start_with_launcher('dnfdragora_launch', 'menu_applications','menu_administration');
     # Check that it is started
     assert_screen 'dnfdragora_runs';
-    sleep 30;
+    sleep 60;
     wait_still_screen 5;
     # Close the application
     quit_with_shortcut();
