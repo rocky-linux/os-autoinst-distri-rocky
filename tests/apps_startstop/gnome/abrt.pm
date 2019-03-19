@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('apps_menu_abrt', 'apps_menu_sundry');
+    start_with_launcher('apps_menu_abrt', 'apps_menu_utilities');
     # Check that it is started
     assert_screen 'apps_run_abrt';
     # Close the application
