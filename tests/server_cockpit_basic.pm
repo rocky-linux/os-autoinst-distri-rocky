@@ -5,6 +5,7 @@ use utils;
 
 sub run {
     my $self=shift;
+    bypass_1691487;
     # run firefox and login to cockpit
     start_cockpit(1);
     # go to the logs screen

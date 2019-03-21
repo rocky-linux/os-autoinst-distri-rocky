@@ -21,6 +21,7 @@ sub run {
         $server_ip = '10.0.2.107';
         $server_mutex = 'replica_ready';
     }
+    bypass_1691487;
     assert_script_run "printf 'search domain.local\nnameserver ${server_ip}' > /etc/resolv.conf";
     assert_script_run "sed -i -e '/^DNS.*/d' /etc/sysconfig/network-scripts/ifcfg-eth0";
     assert_script_run "printf '\nDNS1=${server_ip}\n' >> /etc/sysconfig/network-scripts/ifcfg-eth0";
