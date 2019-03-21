@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_add_network_disk"
+  ],
+  "area": [
+    {
+      "xpos": 50,
+      "ypos": 380,
+      "width": 56,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}
