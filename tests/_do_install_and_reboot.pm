@@ -3,6 +3,19 @@ use strict;
 use testapi;
 use utils;
 
+
+sub enable_abrt_and_quit {
+     # Chroot in the newly installed system
+     script_run "chroot /mnt/sysimage/";
+     # Switch on ABRT systemwide
+     script_run "abrt-auto-reporting 1";
+     # Exit the chroot
+     type_string "exit\n";
+     # Reboot the installed machine
+     type_string "reboot\n";
+
+}
+
 sub run {
     my $self = shift;
     # Begin installation
@@ -93,7 +106,17 @@ sub run {
     # not the virtual console). Let's go fix this up now.
     # for the memory check test, we *don't* want to leave
     unless (get_var("MEMCHECK")) {
-        assert_and_click "anaconda_install_done";
+    # If the variable for system-wide ABRT is set to system, switch 
+    # the system usage of ABRT on, before rebooting the installation, 
+    # so that the VM can start with the new settings.
+        if (get_var("ABRT") eq "system" && !get_var("LIVE"))  {
+            $self->root_console(timeout=>30);
+            enable_abrt_and_quit();
+        }
+        else {
+            assert_and_click "anaconda_install_done";
+        }
+        
         if (get_var('LIVE')) {
             # reboot from a console, it's more reliable than the desktop
             # runners. As of 2018-10 switching to console after liveinst
@@ -106,7 +129,12 @@ sub run {
                 assert_script_run "setenforce 0";
                 assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
             }
-            type_string "reboot\n";
+            if (get_var("ABRT") eq "system") {
+                enable_abrt_and_quit();
+            }
+            else {
+                type_string "reboot\n";
+            }
         }
     }
 }
