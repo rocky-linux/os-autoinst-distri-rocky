@@ -10,8 +10,10 @@ sub run {
     
     # Start the application
     start_with_launcher('firefox_launch','menu_applications','menu_internet');
-    # Check that it is started
-    assert_screen 'firefox_runs';
+    # Check that it is started; this needle is from
+    # needles/firefox, it already existed before the 'apps' tests
+    # were created
+    assert_screen 'firefox';
     # Close the application
     send_key 'alt-f4';
     wait_still_screen 2;

@@ -10,8 +10,10 @@ sub run {
     my $self = shift;
     # Start the application
     start_with_launcher('apps_menu_firefox');
-    # check that the applicatin is running
-    assert_screen 'apps_run_firefox';
+    # check that the application is running; this needle is from
+    # needles/firefox, it already existed before the 'apps' tests
+    # were created
+    assert_screen 'firefox';
     # Close the application, but since Firefox needs special handling
     # we are not using the common routine, but deal with this individually instead
     send_key 'alt-f4';
