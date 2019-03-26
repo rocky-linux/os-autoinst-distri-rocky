@@ -11,6 +11,6 @@
   "properties": [],
   "tags": [
     "DESKTOP-gnome",
-    "desktop_update_auth_required"
+    "auth_required"
   ]
 }
