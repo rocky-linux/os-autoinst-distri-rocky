@@ -13,6 +13,7 @@ sub run {
     # Deal with the welcome screens
     while (check_screen('krusader_welcome', '1')){
         assert_and_click 'krusader_welcome';
+        wait_still_screen 3;
     }
     # Settings close
     assert_and_click 'krusader_settings_close';
