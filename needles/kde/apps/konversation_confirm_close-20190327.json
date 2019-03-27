@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 288,
+      "type": "match",
+      "width": 54,
+      "height": 19,
+      "xpos": 357
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "konversation_confirm_close"
+  ]
+}

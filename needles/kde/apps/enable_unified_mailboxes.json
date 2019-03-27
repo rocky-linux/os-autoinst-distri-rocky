@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 231,
+      "ypos": 303,
+      "width": 115,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "enable_unified_mailboxes"
+  ]
+}

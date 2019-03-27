@@ -10,8 +10,15 @@ sub run {
     
     # Start the application
     start_with_launcher('kontact_launch','menu_applications','menu_office');
+    # Enable unified mailboxes, if they appear
+    if (check_screen("enable_unified_mailboxes", 1)) {
+        assert_and_click "enable_unified_mailboxes";
+    }
     # Get rid of personal data
     assert_and_click 'kontact_provide_data';
+    if (check_screen("enable_unified_mailboxes", 1)) {
+        assert_and_click "enable_unified_mailboxes";
+    }
     # Check that it is started
     assert_screen 'kontact_runs';
     # Close the application

@@ -10,8 +10,15 @@ sub run {
     
     # Start the application
     start_with_launcher('kmail_launch','menu_applications','menu_internet');
+    # Enable unified mailboxes, if they appear
+    if (check_screen("enable_unified_mailboxes", 1)) {
+        assert_and_click "enable_unified_mailboxes";
+    }
     # Cancel Kmail data wizard
     assert_and_click 'kmail_cancel_data';
+    if (check_screen("kmail_cancel_data", 1)) {
+        assert_and_click "kmail_cancel_data";
+    }
     # Check that it is started
     assert_screen 'kmail_runs';
     # Close the application
