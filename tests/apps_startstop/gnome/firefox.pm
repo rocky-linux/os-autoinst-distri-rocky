@@ -16,9 +16,12 @@ sub run {
     assert_screen 'firefox';
     # Close the application, but since Firefox needs special handling
     # we are not using the common routine, but deal with this individually instead
-    send_key 'alt-f4';
+    assert_and_click 'apps_stop';
+    wait_still_screen 2;
     # deal with warning screen
-    assert_and_click 'apps_run_firefox_stop';
+    if (check_screen("apps_run_firefox_stop", 1)) {
+        assert_and_click 'apps_run_firefox_stop';
+    }
     wait_still_screen 2;
     # check that the application has stopped
     assert_screen 'workspace';
