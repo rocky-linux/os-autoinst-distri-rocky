@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "deskset_select_color"
+  ],
+  "area": [
+    {
+      "xpos": 437,
+      "ypos": 215,
+      "width": 29,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}
