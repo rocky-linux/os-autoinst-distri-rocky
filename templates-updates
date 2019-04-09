@@ -352,6 +352,42 @@
                                       flavor  => "updates-server",
                                       version => "*",
                                     },
+                      test_suite => { name => "server_freeipa_replication_master" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_freeipa_replication_replica" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_freeipa_replication_client" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-server",
+                                      version => "*",
+                                    },
                       test_suite => { name => "server_firewall_default" },
                     },
                     {
