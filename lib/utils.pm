@@ -157,42 +157,40 @@ sub console_login {
         sleep 2;
     }
 
-    check_screen [$good, 'text_console_login'], $args{timeout};
+    assert_screen [$good, 'text_console_login'], $args{timeout};
     # if we're already logged in, all is good
     if (match_has_tag $good) {
         _console_login_finish();
         return;
     }
-    # if we see the login prompt, type the username
-    type_string("$args{user}\n") if (match_has_tag 'text_console_login');
-    check_screen [$good, 'console_password_required'], 30;
+    # otherwise, we saw the login prompt, type the username
+    type_string("$args{user}\n");
+    assert_screen [$good, 'console_password_required'], 30;
     # on a live image, just the user name will be enough
     if (match_has_tag $good) {
         _console_login_finish();
         return;
     }
-    # otherwise, type the password if we see the prompt
-    if (match_has_tag 'console_password_required') {
+    # otherwise, type the password
+    type_string "$args{password}";
+    if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
+        # see _do_install_and_reboot; when layout is switched
+        # user password is doubled to contain both US and native
+        # chars
+        console_switch_layout;
         type_string "$args{password}";
-        if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
-            # see _do_install_and_reboot; when layout is switched
-            # user password is doubled to contain both US and native
-            # chars
-            console_switch_layout;
-            type_string "$args{password}";
-            console_switch_layout;
-        }
-        send_key "ret";
+        console_switch_layout;
     }
+    send_key "ret";
     # make sure we reached the console
     unless (check_screen($good, 30)) {
         # as of 2018-10 we have a bug in sssd which makes this take
         # unusually long in the FreeIPA tests, let's allow longer,
-        #with a soft fail - RHBZ #1644919
+        # with a soft fail - RHBZ #1644919
         record_soft_failure "Console login is taking a long time - #1644919?";
         my $timeout = 30;
         # even an extra 30 secs isn't long enough on aarch64...
-        $timeout= 90 if (get_var("ARCH") eq "aarch64");
+        $timeout = 90 if (get_var("ARCH") eq "aarch64");
         assert_screen($good, $timeout);
     }
     _console_login_finish();
