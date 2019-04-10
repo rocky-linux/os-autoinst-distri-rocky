@@ -30,7 +30,7 @@ sub run {
         if (check_screen "auth_required", 10) {
             record_soft_failure "spurious 'auth required' - https://gitlab.gnome.org/GNOME/gnome-software/issues/582";
             # bit sloppy but correct for both...
-            type_safely "weakpassword\n";
+            type_very_safely "weakpassword\n";
         }
         # this launches GNOME Software on GNOME, dunno for any other
         # desktop yet
