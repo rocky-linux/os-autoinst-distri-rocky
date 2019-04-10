@@ -64,6 +64,12 @@ sub run {
             $fourlist = '["' . shift(@forwards) . '"]';
             $sixlist = '["' . join('","', @forwards) . '"]';
         }
+        # this is hideous, but we need --allow-zone-overlap for reverse
+        # DNS stuff to work, and there's no good way to make rolekit do
+        # that. so we monkeypatch it in!
+        assert_script_run 'sed -i -e "s/\'ipa-server-install\', \'-U\',/\'ipa-server-install\', \'-U\', \'--allow-zone-overlap\',/" /usr/lib/rolekit/roles/domaincontroller/role.py';
+        # to check that worked right...
+        upload_logs "/usr/lib/rolekit/roles/domaincontroller/role.py";
         # deploy the domain controller role, specifying an admin password
         # and the list of DNS server IPs as JSON via stdin. If we don't do
         # this, rolectl defaults to using the root servers as forwarders
@@ -71,7 +77,7 @@ sub run {
         # public results for mirrors.fedoraproject.org, some of which
         # things running in phx2 cannot reach; we must make sure the phx2
         # deployments use the phx2 nameservers.
-        assert_script_run 'echo \'{"admin_password":"monkeys123","dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
+        assert_script_run 'echo \'{"admin_password":"monkeys123","reverse_zone":["2.0.10.in-addr.arpa"],"dns_forwarders":{"ipv4":' . $fourlist . ',"ipv6":' . $sixlist .'}}\' | rolectl deploy domaincontroller --name=domain.local --settings-stdin', 1200;
     }
     else {
         # this is the other side of the version branch - we're on 29+,
