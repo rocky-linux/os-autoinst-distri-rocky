@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -858,4 +858,47 @@ sub advisory_check_nonmatching_packages {
             record_info $message;
         }
     }
+}
+
+sub select_rescue_mode {
+    # handle bootloader screen
+    assert_screen "bootloader", 30;
+    if (get_var('OFW')) {
+        # select "rescue system" directly
+        send_key "down";
+        send_key "down";
+        send_key "ret";
+    }
+    else {
+        # select troubleshooting
+        send_key "down";
+        send_key "ret";
+        # select "rescue system"
+        if (get_var('UEFI')) {
+            send_key "down";
+            # we need this on aarch64 till #1661288 is resolved
+            if (get_var('ARCH') eq 'aarch64') {
+                send_key "e";
+                # duped with do_bootloader, sadly...
+                for (1 .. 50) {
+                    send_key 'down';
+                }
+                sleep 1;
+                send_key 'up';
+                sleep 1;
+                send_key 'up';
+                send_key "end";
+                type_safely " console=tty0";
+                send_key "ctrl-x";
+            }
+            else {
+                send_key "ret";
+            }
+        }
+        else {
+            type_string "r\n";
+        }
+    }
+
+    assert_screen "rescue_select", 120; # it takes time to start anaconda
 }

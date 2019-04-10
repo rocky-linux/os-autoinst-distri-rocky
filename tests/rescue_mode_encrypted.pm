@@ -4,46 +4,7 @@ use testapi;
 use utils;
 
 sub run {
-    # handle bootloader screen
-    assert_screen "bootloader", 30;
-    if (get_var('OFW')) {
-        # select "rescue system" directly
-        send_key "down";
-        send_key "down";
-        send_key "ret";
-    }
-    else {
-        # select troubleshooting
-        send_key "down";
-        send_key "ret";
-        # select "rescue system"
-        if (get_var('UEFI')) {
-            send_key "down";
-            # we need this on aarch64 till #1661288 is resolved
-            if (get_var('ARCH') eq 'aarch64') {
-                send_key "e";
-                # duped with do_bootloader, sadly...
-                for (1 .. 50) {
-                    send_key 'down';
-                }
-                sleep 1;
-                send_key 'up';
-                sleep 1;
-                send_key 'up';
-                send_key "end";
-                type_safely " console=tty0";
-                send_key "ctrl-x";
-            }
-            else {
-                send_key "ret";
-            }
-        }
-        else {
-            type_string "r\n";
-        }
-    }
-
-    assert_screen "rescue_select", 120; # it takes time to start anaconda
+    select_rescue_mode;
     # continue
     type_string "1\n";
     assert_screen "rescue_enter_pass", 60; # it might take time to scan all disks
