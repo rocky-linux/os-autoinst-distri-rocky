@@ -5025,7 +5025,7 @@
                       name => "install_repository_hd_variation",
                       settings => [
                         { key => "PREINSTALL", value => "preinstall_iso_in_hd" },
-                        { key => "REPOSITORY_VARIATION", value => "hd:vdb1:/fedora_image.iso;" },
+                        { key => "REPOSITORY_VARIATION", value => "hd:vdb1:/fedora_image.iso" },
                         { key => "NUMDISKS", value => "2" },
                         { key => "HDD_2", value => "disk_full_mbr.img" },
                       ],
