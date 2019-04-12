@@ -8,7 +8,7 @@ sub run {
     # select rescue shell and expect shell prompt
     type_string "3\n";
     send_key "ret";
-    assert_screen "rescue_shell_prompt", 5; # should be shell prompt
+    assert_screen "root_console", 5; # should be shell prompt
     assert_script_run "fdisk -l | head -n20";
     assert_script_run "mkdir -p /hd";
     assert_script_run "mount /dev/vdb1 /hd";
