@@ -114,7 +114,7 @@ sub post_fail_hook {
         upload_logs "/root/imgbuild/program.log", failok=>1;
     }
 
-    if (get_var("FLAVOR") eq "updates-workstation-live-iso") {
+    if (get_var("TEST") eq "live_build") {
         # for live image creation test
         script_run "df -h";
         script_run 'mock -r openqa --chroot "ls -l /chroot_tmpdir/lmc-logs/anaconda"';
