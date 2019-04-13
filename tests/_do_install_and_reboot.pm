@@ -136,6 +136,7 @@ sub run {
             # https://bugzilla.redhat.com/show_bug.cgi?id=1699099
             # remove when fixed
             $self->root_console(timeout=>30);
+            console_loadkeys_us;
             assert_script_run 'sed -i -e "s,SELINUX=enforcing,SELINUX=permissive,g" /mnt/sysimage/etc/selinux/config';
             type_string "reboot\n" unless (get_var("LIVE"));
         }
