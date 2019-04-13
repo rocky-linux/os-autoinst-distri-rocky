@@ -469,9 +469,9 @@ sub _repo_setup_updates {
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
     # FIXME pull in the fix for #1698200 which causes base_services_start
-    # to fail always; remove when stable
+    # to fail always; remove after next F30 compose (2019-04-12)
     if (get_var("VERSION") eq "30") {
-        assert_script_run "bodhi updates download --updateid FEDORA-2019-b514a5c8a3", 600;
+        assert_script_run "bodhi updates download --updateid FEDORA-2019-7cb094d99a", 600;
     }
     # create the repo metadata
     assert_script_run "createrepo .";
