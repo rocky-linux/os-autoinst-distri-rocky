@@ -31,6 +31,12 @@ sub run {
             record_soft_failure "spurious 'auth required' - https://gitlab.gnome.org/GNOME/gnome-software/issues/582";
             # bit sloppy but correct for both...
             type_very_safely "weakpassword\n";
+            # as of 2019-04 when we hit this bug it seems to ask for
+            # auth *twice*, so handle that
+            sleep 3;
+            if (check_screen "auth_required", 1) {
+                type_very_safely "weakpassword\n";
+            }
         }
         # this launches GNOME Software on GNOME, dunno for any other
         # desktop yet
