@@ -131,15 +131,6 @@ sub run {
             $self->root_console(timeout=>30);
             enable_abrt_and_quit();
         }
-        elsif ((get_var("DESKTOP") eq "gnome") && ($version eq "30" || $version eq "rawhide") && get_var("ADVISORY") ne "FEDORA-2019-ac2a21ff07") {
-            # FIXME workaround for
-            # https://bugzilla.redhat.com/show_bug.cgi?id=1699099
-            # remove when fixed
-            $self->root_console(timeout=>30);
-            console_loadkeys_us;
-            script_run 'sed -i -e "s,SELINUX=enforcing,SELINUX=permissive,g" /mnt/sysimage/etc/selinux/config';
-            type_string "reboot\n" unless (get_var("LIVE"));
-        }
         else {
             assert_and_click "anaconda_install_done";
         }
