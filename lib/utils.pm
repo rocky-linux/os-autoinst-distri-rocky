@@ -61,19 +61,7 @@ sub boot_to_login_screen {
         sleep 5;
         $count -= 1;
     }
-    assert_screen ["login_screen", "upgrade_complete"], $args{timeout};
-    if (match_has_tag "upgrade_complete") {
-        # this is a workaround for RHBZ #1674045 during upgrades
-        # let's check we didn't just happen to catch it for the
-        # brief time it's displayed normally...
-        sleep 10;
-        if (check_screen "upgrade_complete") {
-            record_soft_failure "Upgrade hung at end - probably RHBZ #1674045";
-            power 'reset';
-        }
-        # now let's just assume we'll get to a graphical login screen soonish
-        assert_screen "login_screen", 300;
-    }
+    assert_screen "login_screen", $args{timeout};
     if (match_has_tag "graphical_login") {
         wait_still_screen 10, 30;
         assert_screen "login_screen";
@@ -236,21 +224,7 @@ sub do_bootloader {
     # sure we actually did a UEFI boot
     my $boottag = "bootloader_bios";
     $boottag = "bootloader_uefi" if ($args{uefi});
-    assert_screen [$boottag, "upgrade_complete"], $args{timeout};
-    if (match_has_tag "upgrade_complete") {
-        # this is a workaround for RHBZ #1674045 during upgrades
-        # let's check we didn't just happen to catch it for the
-        # brief time it's displayed normally, and catch the boot
-        # loader if it shows up
-        unless (check_screen $boottag, 10) {
-            if (check_screen "upgrade_complete") {
-                record_soft_failure "Upgrade hung at end - probably RHBZ #1674045";
-                power 'reset';
-            }
-            # now let's just assume we'll get to the bootloader soon
-            assert_screen $boottag, 60;
-        }
-    }
+    assert_screen $boottag, $args{timeout};
     if ($args{mutex}) {
         # cancel countdown
         send_key "left";
@@ -299,20 +273,7 @@ sub do_bootloader {
 sub boot_decrypt {
     # decrypt storage during boot; arg is timeout (in seconds)
     my $timeout = shift || 60;
-    assert_screen ["boot_enter_passphrase", "upgrade_complete"], $timeout;
-    if (match_has_tag "upgrade_complete") {
-        # this is a workaround for RHBZ #1674045 during upgrades
-        # let's check we didn't just happen to catch it for the
-        # brief time it's displayed normally...
-        sleep 10;
-        if (check_screen "upgrade_complete") {
-            record_soft_failure "Upgrade hung at end - probably RHBZ #1674045";
-            power 'reset';
-        }
-        # now let's just assume we'll get to a graphical login screen soonish
-        assert_screen "boot_enter_passphrase", 300;
-    }
-
+    assert_screen "boot_enter_passphrase", $timeout;
     type_string get_var("ENCRYPT_PASSWORD");
     send_key "ret";
 }
