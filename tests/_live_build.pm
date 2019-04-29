@@ -14,6 +14,8 @@ sub run {
     assert_script_run "setenforce Permissive";
     # install the tools we need
     assert_script_run "dnf -y install mock git pykickstart tar", 120;
+    # FIXME workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1704488
+    assert_script_run "systemctl restart dbus-broker" if ($version > 29);
     # make the update/task repo and the serial device available inside the mock root
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_enable\'] = True" > /etc/mock/openqa.cfg';
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/opt/update_repo\', \'/opt/update_repo\'))" >> /etc/mock/openqa.cfg';
