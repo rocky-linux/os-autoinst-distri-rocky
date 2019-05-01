@@ -4589,7 +4589,7 @@
                       settings  => [
                         { key => "DESKTOP", value => "gnome" },
                         { key => "TEST_TARGET", value => "ISO" },
-                        { key => "HDDSIZEGB", value => "12" }
+                        { key => "HDDSIZEGB", value => "13" }
                                    ],
                       version   => "*",
                     },
@@ -5455,7 +5455,7 @@
                       name => "install_package_set_kde",
                       settings => [
                         { key => "DESKTOP", value => "kde" },
-                        { key => "HDDSIZEGB", value => "11" },
+                        { key => "HDDSIZEGB", value => "12" },
                         { key => "PACKAGE_SET", value => "kde" },
                         { key => "POSTINSTALL", value => "_collect_data" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
