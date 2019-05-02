@@ -27,6 +27,9 @@ sub run {
     # in error_log
     assert_script_run 'mkdir -p /etc/ipa';
     assert_script_run 'printf "[global]\ndebug = True\n" > /etc/ipa/server.conf';
+    # per ab, this gets us more debugging for bind
+    assert_script_run 'mkdir -p /etc/systemd/system/named-pkcs11.service.d';
+    assert_script_run 'printf "[Service]\nEnvironment=OPTIONS=-d5\n" > /etc/systemd/system/named-pkcs11.service.d/debug.conf';
     # read DNS server IPs from host's /etc/resolv.conf for passing to
     # ipa-server-install / rolectl
     my @forwards = get_host_dns();

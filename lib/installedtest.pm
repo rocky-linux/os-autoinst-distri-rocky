@@ -97,6 +97,11 @@ sub post_fail_hook {
         upload_logs "/var/lib/systemd/coredump/coredump.tar.gz";
     }
 
+    # upload bind log (for FreeIPA server test)
+    unless (script_run 'test -f /var/named/data/named.run') {
+        upload_logs "/var/named/data/named.run";
+    }
+
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
     unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
