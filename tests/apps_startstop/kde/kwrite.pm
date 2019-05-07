@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kwrite_launch','menu_applications','menu_utilities');
+    menu_launch_type 'kwrite';
     # Check that it is started
     assert_screen 'kwrite_runs';
     # Close the application

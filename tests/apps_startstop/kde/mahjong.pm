@@ -9,10 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('menu_boardgames', 'menu_applications','menu_games');
-    # Games are hidden even deeper in menus, so let us fix that here.
-    assert_and_click 'mahjong_launch';
-    wait_still_screen 2;
+    menu_launch_type 'kmahjong';
     # Check that it is started
     assert_screen 'mahjong_runs';
     # Close the application

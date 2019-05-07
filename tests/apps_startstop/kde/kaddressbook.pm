@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kaddressbook_launch','menu_applications','menu_office');
+    menu_launch_type 'kaddressbook';
     # Check that it is started
     assert_screen 'kaddressbook_runs';
     # Close the application

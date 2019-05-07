@@ -8,8 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     
-    # Start the application
-    start_with_launcher('cteditor_launch','menu_applications','menu_internet');
+    menu_launch_type 'contactthemeeditor';
     # Check that it is started
     assert_screen 'cteditor_runs';
     # Close the application

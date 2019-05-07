@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('pimexporter_launch','menu_applications','menu_internet');
+    menu_launch_type 'pim';
     # Check that it is started
     assert_screen 'pimexporter_runs';
     # Close the application

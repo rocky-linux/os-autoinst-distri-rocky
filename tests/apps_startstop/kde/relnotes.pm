@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('relnotes_launch','menu_applications','menu_system');
+    menu_launch_type 'release notes';
     # Check that it is started
     assert_screen 'relnotes_runs';
     # Close the application

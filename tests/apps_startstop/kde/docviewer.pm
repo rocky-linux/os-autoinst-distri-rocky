@@ -7,9 +7,9 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
-    start_with_launcher('docviewer_launch', 'menu_applications','menu_graphics');
+    menu_launch_type 'okular';
     # Check that it is started
     assert_screen 'docviewer_runs';
     # Close the application

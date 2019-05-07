@@ -9,10 +9,16 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('firewall_launch', 'menu_applications','menu_administration');
+    menu_launch_type 'firewall';
+    sleep 5;
     # Firewall requires password to be entered and confirmed to start.
-    type_very_safely(get_var('ROOT_PASSWORD','weakpassword'));
+    # View password
+    assert_screen "auth_required";
+    my $password = get_var('ROOT_PASSWORD','weakpassword');
+    type_very_safely $password;
     send_key 'ret';
+    sleep 5;
+
     # Check that it is started
     assert_screen 'firewall_runs';
     # Close the application

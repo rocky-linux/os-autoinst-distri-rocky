@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('juk_launch','menu_applications','menu_multimedia');
+    menu_launch_type 'juk';
     # Dismiss a setting window
     assert_and_click 'juk_cancel';
     wait_still_screen 2;

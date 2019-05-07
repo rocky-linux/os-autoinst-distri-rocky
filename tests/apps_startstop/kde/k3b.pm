@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('k3b_launch','menu_applications','menu_multimedia');
+    menu_launch_type 'k3b';
     # Get rid of no burner warning
     assert_and_click 'k3b_burner_warning';
     # Check that it is started

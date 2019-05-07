@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('infocenter_launch','menu_applications','menu_system');
+    menu_launch_type 'info';
     # Check that it is started
     assert_screen 'infocenter_runs';
     # Close the application

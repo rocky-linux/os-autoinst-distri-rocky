@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('konversation_launch','menu_applications','menu_internet');
+    menu_launch_type 'konversation';
     # Connect to Freenode
     assert_and_click 'konversation_connect';
     # Check that it is started

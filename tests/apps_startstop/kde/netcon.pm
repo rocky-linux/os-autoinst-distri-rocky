@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('netcon_launch','menu_applications','menu_settings');
+    menu_launch_type 'network configuration';
     # Check that it is started
     assert_screen 'netcon_runs';
     # Close the application

@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kimport_launch','menu_applications','menu_utilities');
+    menu_launch_type 'akonadiimportwizard';
     # Click ok to go further
     assert_and_click 'kde_ok';
     wait_still_screen 2;

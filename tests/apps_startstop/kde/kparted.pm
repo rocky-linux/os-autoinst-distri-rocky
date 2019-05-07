@@ -9,7 +9,8 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kparted_launch','menu_applications','menu_system');
+    menu_launch_type 'partition editor';
+    wait_still_screen 2;
     # Provide root password to run the application
     type_very_safely(get_var("ROOT_PASSWORD", "weakpassword"));
     send_key 'ret';

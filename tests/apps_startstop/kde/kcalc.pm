@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kcalc_launch','menu_applications','menu_utilities');
+    menu_launch_type 'kcalc';
     # Check that it is started
     assert_screen 'kcalc_runs';
     # Close the application

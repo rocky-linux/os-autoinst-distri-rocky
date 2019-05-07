@@ -7,9 +7,8 @@ use utils;
 
 sub run {
     my $self = shift;
-    
     # Start the application
-    start_with_launcher('akregator_launch','menu_applications','menu_internet');
+    menu_launch_type('akregator');
     # Check that it is started
     assert_screen 'akregator_runs';
     # Close the application

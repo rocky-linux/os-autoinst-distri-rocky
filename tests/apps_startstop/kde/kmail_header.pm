@@ -9,8 +9,8 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kmail_hedit_launch','menu_applications','menu_internet');
-    # Check that it is started
+    menu_launch_type 'kmail header';
+    # Check that the application runs
     assert_screen 'kmail_hedit_runs';
     # Close the application
     quit_with_shortcut();

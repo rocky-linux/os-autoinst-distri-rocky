@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('ktnef_launch','menu_applications','menu_internet');
+    menu_launch_type 'ktnef';
     # Check that it is started
     assert_screen 'ktnef_runs';
     # Close the application

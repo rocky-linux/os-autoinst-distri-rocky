@@ -8,8 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     
-    # Start the application
-    start_with_launcher('cwords_launch','menu_applications','menu_office');
+    menu_launch_type 'calligra words';
     # Check that it is started
     assert_screen 'cwords_runs';
     # Close the application

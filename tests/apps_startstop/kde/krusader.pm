@@ -9,14 +9,22 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('krusader_launch','menu_applications','menu_utilities');
+    menu_launch_type "krusader";
     # Deal with the welcome screens
-    while (check_screen('krusader_welcome', '1')){
-        assert_and_click 'krusader_welcome';
-        wait_still_screen 3;
+    assert_screen ["krusader_welcome", "krusader_settings_close"];
+    while (match_has_tag "krusader_welcome") {
+        assert_and_click "krusader_welcome";
+        assert_screen ["krusader_welcome", "krusader_settings_close"];
     }
     # Settings close
-    assert_and_click 'krusader_settings_close';
+    assert_screen ["krusader_settings_close", "kde_ok"];
+    while (match_has_tag "kde_ok") {
+        assert_and_click "kde_ok";
+        assert_screen ["krusader_settings_close", "kde_ok"]
+    }
+    
+    assert_and_click "krusader_settings_close";
+    
     wait_still_screen 2;
     # Check that it is started
     assert_screen 'krusader_runs';
@@ -27,7 +35,6 @@ sub run {
 sub test_flags {
     return {always_rollback => 1};
 }
-
 
 1;
 

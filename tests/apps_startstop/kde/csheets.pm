@@ -7,9 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
-    # Start the application
-    start_with_launcher('csheets_launch','menu_applications','menu_office');
+    menu_launch_type 'calligra sheets';
     # Check that it is started
     assert_screen 'csheets_runs';
     # Close the application

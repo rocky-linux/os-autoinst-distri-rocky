@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('firefox_launch','menu_applications','menu_internet');
+    menu_launch_type 'firefox';
     # Check that it is started; this needle is from
     # needles/firefox, it already existed before the 'apps' tests
     # were created

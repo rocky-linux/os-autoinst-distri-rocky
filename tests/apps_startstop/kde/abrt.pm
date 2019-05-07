@@ -7,9 +7,8 @@ use utils;
 
 sub run {
     my $self = shift;
-    
     # Start the application
-    start_with_launcher('abrt_launch', 'menu_applications','menu_system');
+    menu_launch_type('abrt');
     # Check that it is started
     assert_screen 'abrt_runs';
     # Close the application

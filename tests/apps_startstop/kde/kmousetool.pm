@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kmousetool_launch','menu_applications','menu_utilities');
+    menu_launch_type 'kmousetool';
     # Check that it is started
     assert_screen 'kmousetool_runs';
     # Close the application

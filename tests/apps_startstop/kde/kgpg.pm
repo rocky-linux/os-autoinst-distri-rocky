@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kgpg_launch','menu_applications','menu_utilities');
+    menu_launch_type 'kgpg';
     # Deal with the first wizard screen
     assert_and_click 'kgpg_next';
     wait_still_screen 2;

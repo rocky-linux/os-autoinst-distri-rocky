@@ -7,9 +7,8 @@ use utils;
 
 sub run {
     my $self = shift;
-    
-    # Start the application
-    start_with_launcher('ark_launch','menu_applications','menu_utilities');
+    # Start the application with command
+    menu_launch_type 'ark';
     # Check that it is started
     assert_screen 'ark_runs';
     # Close the application

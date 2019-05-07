@@ -9,10 +9,14 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kmouth_launch','menu_applications','menu_utilities');
+    menu_launch_type 'kmouth';
+    sleep 2;
     # Deal with the welcome screens
-    while (check_screen('kde_next', '1')){
-        assert_and_click 'kde_next';
+    assert_screen ["kde_next", "kde_finish"];
+    while (match_has_tag "kde_next") {
+        assert_and_click "kde_next"; 
+        sleep 2;
+        assert_screen ["kde_next", "kde_finish"];
     }
     # Settings close
     assert_and_click 'kde_finish';

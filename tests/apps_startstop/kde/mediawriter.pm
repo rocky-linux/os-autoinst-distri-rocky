@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('fmw_launch','menu_applications','menu_system');
+    menu_launch_type 'mediawriter';
     # Check that it is started
     assert_screen 'fmw_runs';
     # Close the application

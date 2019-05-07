@@ -9,11 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('menu_graphics_more_apps', 'menu_applications','menu_graphics');
-    # Games are hidden even deeper in menus, so let us fix that here.
-    send_key_until_needlematch('kruler_launch', 'down', 6, 2);
-    assert_and_click 'kruler_launch';
-    wait_still_screen 2;
+    menu_launch_type 'kruler';
     # Check that it is started
     assert_screen 'kruler_runs';
     # Close the application

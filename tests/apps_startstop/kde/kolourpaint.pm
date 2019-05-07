@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kolourpaint_launch','menu_applications','menu_graphics');
+    menu_launch_type 'kolourpaint';
     # Check that it is started
     assert_screen 'kolourpaint_runs';
     # Close the application

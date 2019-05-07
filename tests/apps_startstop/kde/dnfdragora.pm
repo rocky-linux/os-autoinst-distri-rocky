@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('dnfdragora_launch', 'menu_applications','menu_administration');
+    menu_launch_type 'dnfdragora';
     # Check that it is started
     assert_screen 'dnfdragora_runs';
     sleep 60;

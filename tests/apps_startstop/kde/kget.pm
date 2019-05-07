@@ -7,9 +7,9 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
-    start_with_launcher('kget_launch','menu_applications','menu_internet');
+    menu_launch_type 'kget';
     # Enable as default application
     assert_and_click 'kget_enable';
     # Check that it is started

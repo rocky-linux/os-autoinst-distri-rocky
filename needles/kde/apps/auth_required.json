@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "auth_required"
+  ],
+  "area": [
+    {
+      "xpos": 273,
+      "ypos": 226,
+      "width": 35,
+      "height": 34,
+      "type": "match"
+    }
+  ]
+}

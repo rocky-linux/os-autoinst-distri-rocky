@@ -7,9 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
-    # Start the application
-    start_with_launcher('cstage_launch','menu_applications','menu_office');
+    menu_launch_type 'calligra stage';
     # Check that it is started
     assert_screen 'cstage_runs';
     # Close the application

@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('dolphin_launch','menu_applications','menu_system');
+    menu_launch_type 'dolphin';
     # Check that it is started
     assert_screen 'dolphin_runs';
     # Close the application

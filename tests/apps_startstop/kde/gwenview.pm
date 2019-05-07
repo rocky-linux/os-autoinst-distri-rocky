@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('gwenview_launch','menu_applications','menu_graphics');
+    menu_launch_type 'gwenview';
     # Check that it is started
     assert_screen 'gwenview_runs';
     # Close the application

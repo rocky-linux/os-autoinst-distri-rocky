@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('kontact_launch','menu_applications','menu_office');
+    menu_launch_type 'kontact';
     # Enable unified mailboxes, if they appear
     if (check_screen("enable_unified_mailboxes", 1)) {
         assert_and_click "enable_unified_mailboxes";
