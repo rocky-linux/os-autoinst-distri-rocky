@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 104,
+      "ypos": 39,
+      "width": 683,
+      "height": 32,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "topbar_atomic"
+  ]
+}

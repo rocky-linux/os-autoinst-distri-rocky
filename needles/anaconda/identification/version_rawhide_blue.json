@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 740,
+      "ypos": 12,
+      "width": 148,
+      "height": 19,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "version_rawhide_ident"
+  ]
+}

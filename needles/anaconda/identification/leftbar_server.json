@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "leftbar_server"
+  ],
+  "area": [
+    {
+      "xpos": 9,
+      "ypos": 10,
+      "width": 134,
+      "height": 747,
+      "type": "match"
+    }
+  ]
+}

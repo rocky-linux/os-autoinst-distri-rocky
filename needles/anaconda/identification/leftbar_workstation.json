@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "leftbar_workstation"
+  ],
+  "area": [
+    {
+      "xpos": 9,
+      "ypos": 44,
+      "width": 139,
+      "height": 701,
+      "type": "match"
+    }
+  ]
+}

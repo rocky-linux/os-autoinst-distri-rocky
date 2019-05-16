@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "topbar_generic"
+  ],
+  "area": [
+    {
+      "xpos": 105,
+      "ypos": 38,
+      "width": 683,
+      "height": 32,
+      "type": "match"
+    }
+  ]
+}

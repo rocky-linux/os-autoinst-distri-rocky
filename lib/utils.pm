@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click click_unwanted_notifications/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -684,12 +684,12 @@ sub start_with_launcher {
 
     # $launcher holds the launcher needle, but some of the apps are hidden in a submenu
     # so this must be handled first to find the launcher needle.
- 
+
     my ($launcher,$submenu,$group) = @_;
     $submenu //= '';
     $group //= '';
     my $desktop = get_var('DESKTOP');
-    
+
     my $item_to_check = $submenu || $launcher;
     # The following varies for different desktops.
     if ($desktop eq 'gnome') {
@@ -701,7 +701,7 @@ sub start_with_launcher {
         assert_and_click 'overview_app_grid';
         wait_still_screen 5;
 
-        # Find the application launcher in the current menu page. 
+        # Find the application launcher in the current menu page.
         # If it cannot be found there, hit PageDown to go to another page.
 
         send_key_until_needlematch($item_to_check, 'pgdn', 5, 3);
@@ -719,17 +719,17 @@ sub start_with_launcher {
         # Click on the KDE launcher icon
         assert_and_click 'kde_menu_launcher';
         wait_still_screen 2;
-        
-        # Select the appropriate submenu 
+
+        # Select the appropriate submenu
         assert_and_click $submenu;
         wait_still_screen 2;
 
         # Select the appropriate menu subgroup where real launchers
         # are placed, but only if requested
         if ($group) {
-	    send_key_until_needlematch($group, 'down', 20, 3);
-	    send_key 'ret';
-	    #assert_and_click $group;
+            send_key_until_needlematch($group, 'down', 20, 3);
+            send_key 'ret';
+            #assert_and_click $group;
             wait_still_screen 2;
         }
 
@@ -737,7 +737,7 @@ sub start_with_launcher {
         send_key_until_needlematch($launcher, 'down', 40, 3);
         send_key 'ret';
         wait_still_screen 5;
-    } 
+    }
 }
 
 
@@ -748,7 +748,6 @@ sub quit_with_shortcut {
     assert_screen 'workspace';
 
 }
-
 
 sub lo_dismiss_tip {
     # identify and close a 'tip of the day' window that shows on start
@@ -903,6 +902,82 @@ sub get_release_number {
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
     return $version
+    }
+
+sub tell_source {
+    # This helper function identifies the Subvariant of the tested system.
+    # For the purposes of identification testing, we are only interested
+    # if the system is Workstation, Server, or something else, because,
+    # except Workstation and Server, there are no graphical differences
+    # between various spins and isos.
+    my $iso = get_var('SUBVARIANT');
+    if ($iso eq 'Workstation' or $iso eq 'Server') {
+        $iso = lc($iso);
+    }
+    elsif ($iso eq 'AtomicHost') {
+        $iso = 'atomic';
+    }
+    else {
+        $iso = 'generic';
+    }
+    return $iso;
+}
+
+sub check_left_bar {
+    # This method is used by identification tests to check whether the Anaconda
+    # bar on the left side of the screen corresponds with the correct version.
+    # It looks different for Server, Workstation and others.
+    my $source = tell_source;
+    assert_screen "leftbar_${source}";
+}
+
+sub check_top_bar {
+    # This method is used by identification tests to check whether the
+    # top bar in Anaconda corresponds with the correct version of the spin.
+    my $source = tell_source;
+    assert_screen "topbar_${source}";
+}
+
+sub check_prerelease {
+    # This method is used by identification tests to check if
+    # Anaconda shows the PRERELEASE info for Rawhide versions.
+    # As it seems, the rules for showing the PRERELEASE are not
+    # as simple as it may look like. It seems to me, that the PRERELEASE
+    # is shown on Rawhide intallations, which is pretty easy to test because
+    # the "VERSION" variable is Rawhide. On Final RC, the PRERELEASE should
+    # be turned off, while it should be present between before that.
+    # When Fedora is branched, the "VERSION" changes to the version number
+    # and this is not changed even with Final, so we cannot test that.
+    # Investigating the history, I noticed that all nightly builds have
+    # that prerelease turned on. And also, it is there on a Beta candidate.
+    # We can test for that.
+
+    my $beta = get_var('ISO');
+    my $nightly = get_var('BUILD');
+    my $version = get_var('VERSION');
+    # Let us see if the installed system is one that needs to have the prerelease
+    # note shown, default is NO.
+    my $prerelease = 0;
+    if ($beta =~ /Beta/ or $version eq "Rawhide") {
+        $prerelease = 1;
+    }
+    # If the image is a nightly build or test build, it is not clear whether
+    # the prerelease should be there or not, but according to what we decided
+    # this is not a big issue. This piece of code can be used later, when
+    # we decide differently.
+    elsif ($nightly =~ /\.[nt]\.\d+/) {
+        my $prerelease = 10;
+    }
+    # For all prerelease requiring ISOs, assert that prerelease is there.
+    if ($prerelease == 1) {
+        assert_screen "prerelease_note";
+    }
+    elsif ($prerelease == 0) {
+       # If the prerelease note is shown, where it should not be, die!
+       if (check_screen "prerelease_note") {
+            die "The PRERELEASE tag is shown, but it should NOT be.";
+       }
+    }
 }
 
 sub _assert_and_click {
@@ -923,6 +998,69 @@ sub _assert_and_click {
         $args{mousehide} //= 0;
         return assert_and_click($mustmatch, $args{button}, $args{timeout}, 0, $args{dclick});
     }
+}
+
+sub check_version {
+    # This function checks if the correct version is display during installation
+    # in Anaconda, i.e. nonlive media showing Rawhide when Rawhide and version numbers
+    # when not Rawhide, while live media always showing version numbers.
+
+    my $version = lc(get_var('VERSION'));
+    if ($version eq 'rawhide' && get_var('LIVE')) {
+        $version = get_var('RAWREL');
+    }
+    assert_screen "version_${version}_ident";
+}
+
+sub spell_version_number {
+    my $version = shift;
+    my %ones = (
+        "0" => "Zero",
+        "1" => "One",
+        "2" => "Two",
+        "3" => "Three",
+        "4" => "Four",
+        "5" => "Five",
+        "6" => "Six",
+        "7" => "Seven",
+        "8" => "Eight",
+        "9" => "Nine",
+    );
+    my %tens = (
+        "2" => "Twenty",
+        "3" => "Thirty",
+        "4" => "Fourty",
+        "5" => "Fifty",
+        "6" => "Sixty",
+        "7" => "Seventy",
+        "8" => "Eighty",
+        "9" => "Ninety",
+    );
+
+    my $ten = substr($version, 0, 1);
+    my $one = substr($version, 1, 1);
+    my $speltnum = "";
+    if ($one eq "0") {
+        $speltnum = "$tens{$ten}";
+    }
+    else {
+        $speltnum = "$tens{$ten} $ones{$one}";
+    }
+    return $speltnum;
+}
+
+sub rec_log {
+    my ($line, $condition, $failref) = @_;
+    if ($condition) {
+        $line = "${line} - SUCCEEDED\n";
+    }
+    else {
+        push @$failref, $line;
+        $line = "${line} - FAILED\n";
+    }
+    my $file = "/tmp/os-release.log";
+    script_run "echo \"$line\" >> $file";
+
 }
 
 sub click_unwanted_notifications {

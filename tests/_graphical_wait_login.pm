@@ -84,6 +84,12 @@ sub run {
     mouse_set(300, 800);
     # KDE can take ages to start up
     check_desktop_clean(tries=>40);
+    # If we want to check that there is a correct wallpaper used, as a part
+    # of self identification test, we will do it here.
+    if (get_var('IDENTIFICATION') eq 'true') {
+        my $version = get_var('VERSION');
+        assert_screen "${version}_wallpaper";
+    }
 }
 
 sub test_flags {

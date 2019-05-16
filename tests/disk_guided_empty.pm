@@ -2,9 +2,13 @@ use base "anacondatest";
 use strict;
 use testapi;
 use anaconda;
+use utils;
 
 sub run {
     my $self = shift;
+    # If we want to test graphics during installation, we need to
+    # call the test suite with an "IDENTIFICATION=true" variable.
+    my $identification = get_var('IDENTIFICATION');
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one disk is selected.
     select_disks();
@@ -14,6 +18,13 @@ sub run {
     if (get_var('TEST_UPDATES')){
         assert_screen "anaconda_install_destination_updates", 30;
     }
+   # Here the self identification test code is placed.
+   my $branched = get_var('VERSION');
+   if ($identification eq 'true' or $branched ne "Rawhide") {
+       check_top_bar(); # See utils.pm
+       check_prerelease();
+       check_version();
+   }
 
     assert_and_click "anaconda_spoke_done";
 

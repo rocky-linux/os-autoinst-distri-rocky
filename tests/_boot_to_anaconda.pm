@@ -39,6 +39,8 @@ sub run {
     # call do_bootloader with postinstall=0, the params, and the mutex
     do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
 
+    # Read variables for identification tests (see further).
+    my $identification = get_var('IDENTIFICATION');
     # proceed to installer
     if (get_var("KICKSTART")) {
         # wait for the bootloader *here* - in a test that inherits from
@@ -53,7 +55,8 @@ sub run {
             type_string "2\n";
             # wait for text version of Anaconda main hub
             assert_screen "anaconda_main_hub_text", 300;
-        } else {
+        }
+        else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
                 _assert_and_click("live_start_anaconda_icon", timeout=>300);
@@ -85,6 +88,16 @@ sub run {
                     return;
                 }
             }
+
+            # If we want to test self identification, in the test suite
+            # we set "identification" to "true".
+            # Here, we will watch for the graphical elements in Anaconda main hub.
+            my $branched = get_var('VERSION');
+            if ($identification eq 'true' or $branched ne "Rawhide") {
+                check_left_bar(); # See utils.pm
+                check_prerelease();
+                check_version();
+            }
             # This is where we get to if we accepted fate above, *or*
             # didn't match anything: if the Rawhide warning didn't
             # show by now it never will, so we'll just wait for the
@@ -93,7 +106,6 @@ sub run {
         }
     }
 }
-
 
 sub test_flags {
     return { fatal => 1 };

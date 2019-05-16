@@ -40,6 +40,12 @@ sub _set_root_password {
             wait_screen_change { send_key "tab"; };
             type_very_safely $root_password;
         }
+        # Another screen to test identification on
+        my $identification = get_var('IDENTIFICATION');
+        if ($identification eq 'true') {
+            check_top_bar();
+            check_prerelease();
+        }
         assert_and_click "anaconda_spoke_done";
     }
 }
@@ -73,6 +79,19 @@ sub run {
     # more. So wait for screen to stop moving before we click.
     wait_still_screen 2;
     assert_and_click "anaconda_main_hub_begin_installation";
+
+    # If we want to test identification we will do it
+    # on several places in this procedure, such as
+    # on this screen and also on password creation screens
+    # etc.
+    my $identification = get_var('IDENTIFICATION');
+    my $branched = get_var('VERSION');
+    if ($identification eq 'true' or $branched ne "Rawhide") {
+        check_left_bar();
+        check_prerelease();
+        check_version();
+    }
+
     unless ($rootuserdone) {
         _do_root_and_user();
         # With the slow typing - especially with SWITCHED_LAYOUT - we

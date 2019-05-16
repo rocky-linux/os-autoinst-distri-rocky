@@ -1,5 +1,6 @@
 #!/usr/share/openqa/script/load_templates
 #
+#
 # Fedora Machines, Products, TestSuites and JobTemplates
 #
 # use load_templates to load the file into the database
@@ -16,6 +17,17 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_default_upload" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -73,6 +85,17 @@
                       test_suite => { name => "install_default_upload" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
+                    },
+                    {
                       machine    => { name => "uefi" },
                       prio       => 11,
                       product    => {
@@ -161,6 +184,17 @@
                       test_suite => { name => "install_default_upload" },
                     },
                     {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
+                    },
+                    {
                       machine    => { name => "uefi" },
                       prio       => 16,
                       product    => {
@@ -203,6 +237,17 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_default_upload" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Silverblue-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
                     },
                     {
                       machine    => { name => "uefi" },
@@ -4120,6 +4165,7 @@
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "POSTINSTALL", value => "_collect_data" },
+                        { key => "IDENTIFICATION", value => "true" },
                       ],
                     },
                     {
@@ -5071,6 +5117,16 @@
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
                         { key => "STARTSTOP", value => "true" },
+                      ],
+                    },
+                    {
+                      name => "release_identification",
+                      settings => [
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                        { key => "ENTRYPOINT", value => "text_login_gui fedora_release os_release" },
+                        { key => "USER_LOGIN", value => "false" },
                       ],
                     },
                     {
