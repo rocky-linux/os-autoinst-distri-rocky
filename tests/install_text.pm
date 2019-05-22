@@ -62,7 +62,7 @@ sub run {
     send_key "ret";
     wait_still_screen 5;
     # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
-    if (get_release_number() > 30) {
+    if (get_release_number() < 31) {
         # typing "4\n" on abrt screen causes system to reboot, so be careful
         run_with_error_check(sub {type_string "4\n"}, "anaconda_text_error"); # use password
     }
