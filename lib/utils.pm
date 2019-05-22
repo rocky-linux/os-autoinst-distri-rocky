@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -879,4 +879,14 @@ sub bypass_1691487 {
         record_soft_failure 'brc#1691487 bypass';
         script_run 'echo "trial bypass dup chars brc#1691487"';
     }
+}
+
+sub get_release_number {
+    # return the release number; so usually VERSION, but for Rawhide,
+    # we return RAWREL. This allows us to avoid constantly doing stuff
+    # like `if ($version eq "Rawhide" || $version > 30)`.
+    my $version = get_var("VERSION");
+    my $rawrel = get_var("RAWREL", "Rawhide");
+    return $rawrel if ($version eq "Rawhide");
+    return $version
 }

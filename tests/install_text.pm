@@ -61,8 +61,11 @@ sub run {
     type_string get_var("USER_LOGIN", "test");
     send_key "ret";
     wait_still_screen 5;
-    # typing "4\n" on abrt screen causes system to reboot, so be careful
-    run_with_error_check(sub {type_string "4\n"}, "anaconda_text_error"); # use password
+    # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
+    if (get_release_number() > 30) {
+        # typing "4\n" on abrt screen causes system to reboot, so be careful
+        run_with_error_check(sub {type_string "4\n"}, "anaconda_text_error"); # use password
+    }
     wait_still_screen 5;
     type_string "5\n"; # set password
     wait_still_screen 5;
