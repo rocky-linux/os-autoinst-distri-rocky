@@ -570,7 +570,7 @@ sub anaconda_create_user {
         @_
     );
     my $user_login = get_var("USER_LOGIN") || "test";
-    assert_and_click "anaconda_install_user_creation", '', $args{timeout};
+    assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
     assert_screen "anaconda_install_user_creation_screen";
     # wait out animation
     wait_still_screen 2;

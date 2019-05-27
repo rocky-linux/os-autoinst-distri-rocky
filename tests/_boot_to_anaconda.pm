@@ -56,12 +56,12 @@ sub run {
         } else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
-                assert_and_click "live_start_anaconda_icon", '', 300;
+                assert_and_click("live_start_anaconda_icon", timeout=>300);
             }
             my $language = get_var('LANGUAGE') || 'english';
             # wait for anaconda to appear; we click to work around
             # RHBZ #1566066 if it happens
-            assert_and_click "anaconda_select_install_lang", '', 300;
+            assert_and_click("anaconda_select_install_lang", timeout=>300);
             # Select install language
             wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };
             type_safely $language;
