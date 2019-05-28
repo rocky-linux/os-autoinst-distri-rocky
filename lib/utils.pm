@@ -897,7 +897,7 @@ sub _assert_and_click {
         return assert_and_click($mustmatch, %args);
     }
     else {
-	$args{timeout}   //= $bmwqemu::default_timeout;
+        $args{timeout}   //= $bmwqemu::default_timeout;
         $args{button}    //= 'left';
         $args{dclick}    //= 0;
         $args{mousehide} //= 0;
