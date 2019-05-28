@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -570,7 +570,7 @@ sub anaconda_create_user {
         @_
     );
     my $user_login = get_var("USER_LOGIN") || "test";
-    assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
+    _assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
     assert_screen "anaconda_install_user_creation_screen";
     # wait out animation
     wait_still_screen 2;
@@ -883,4 +883,24 @@ sub get_release_number {
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
     return $version
+}
+
+sub _assert_and_click {
+    # this is a wrapper around assert_and_click which handles this:
+    # https://github.com/os-autoinst/os-autoinst/pull/1075/files
+    # it changed the signature without any backward compatibility, so
+    # earlier os-autoinsts require an *array* of args, but later ones
+    # require a *hash* of args. This works with both.
+    my $version = $OpenQA::Isotovideo::Interface::version;
+    my ($mustmatch, %args) = @_;
+    if ($version > 13) {
+        return assert_and_click($mustmatch, %args);
+    }
+    else {
+	$args{timeout}   //= $bmwqemu::default_timeout;
+        $args{button}    //= 'left';
+        $args{dclick}    //= 0;
+        $args{mousehide} //= 0;
+        return assert_and_click($mustmatch, $args{button}, $args{timeout}, 0, $args{dclick});
+    }
 }
