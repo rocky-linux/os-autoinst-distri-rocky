@@ -15,6 +15,11 @@ sub run {
     desktop_vt;
     # run the updater
     if ($desktop eq 'kde') {
+        # if the permanent pop-up notification appeared, get rid of
+        # it, as it blocks the refresh button...
+        if (check_screen "desktop_update_notification_popup", 10) {
+            assert_and_click "desktop_update_notification_popup";
+        }
         # KDE team tells me the 'preferred' update method is the
         # systray applet
         assert_and_click 'desktop_expand_systray';

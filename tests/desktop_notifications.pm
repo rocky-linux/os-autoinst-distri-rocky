@@ -79,8 +79,25 @@ sub run {
         # have to click where we know it is
         mouse_set 512, 10;
         mouse_click;
+        if (get_var("BOOTFROM")) {
+            # we should see an update notification and no others
+            assert_screen "desktop_update_notification_only";
+        }
+        else {
+            # for the live case there should be *no* notifications
+            assert_screen "desktop_no_notifications";
+        }
     }
-    elsif ($desktop eq 'kde' && !get_var("BOOTFROM")) {
+    elsif ($desktop eq 'kde') {
+        if (get_var("BOOTFROM")) {
+            assert_screen "desktop_update_notification";
+            # this is the case from F30 and earlier where we know this
+            # was the *only* notification; at this point we've passed
+            return if match_has_tag "desktop_update_notification_only";
+            # otherwise, we need to close the update notification then
+            # check there are no others
+            assert_and_click "desktop_update_notification";
+        }
         # the order and number of systray icons varies in KDE, so we
         # can't really just use a systray 'no notifications' needle.
         # instead open up the 'extended systray' thingy and click on
@@ -92,13 +109,9 @@ sub run {
         if (check_screen 'desktop_network_notification', 5) {
             assert_and_click 'desktop_notification_dismiss';
         }
-    }
-    if (get_var("BOOTFROM")) {
-        # we should see an update notification and no others
-        assert_screen "desktop_update_notification_only";
-    }
-    else {
-        # for the live case there should be *no* notifications
+        # on live path, we should not have got any other notification;
+        # on installed path, we saw an update notification and closed
+        # it, and now there should be no *other* notifications
         assert_screen "desktop_no_notifications";
     }
 }

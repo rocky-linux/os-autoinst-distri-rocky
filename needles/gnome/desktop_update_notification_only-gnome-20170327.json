@@ -11,6 +11,7 @@
   "properties": [],
   "tags": [
     "desktop_update_notification_only",
+    "desktop_update_notification",
     "DESKTOP-gnome"
   ]
 }
