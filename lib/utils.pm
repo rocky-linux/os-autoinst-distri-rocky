@@ -402,6 +402,24 @@ sub _repo_setup_updates {
     }
     assert_script_run "cd /opt/update_repo";
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
+
+    # FIXME workaround bodhi updates download bug in 4.0.2-1; remove this
+    # once 4.0.2-2+ goes stable
+    my $sysrelease = get_var("VERSION");
+    my $hdd1;
+    my $bootfrom;
+    $hdd1 = get_var("HDD_1");
+    $bootfrom = get_var("BOOTFROM");
+    $sysrelease = $1 if ($hdd1 =~ /disk_f(\d+)/ && $bootfrom eq 'c');
+    if ($sysrelease > 28) {
+        assert_script_run "mkdir bodhi4022";
+        assert_script_run "cd bodhi4022";
+        assert_script_run "koji download-build --arch=noarch --arch=x86_64 bodhi-4.0.2-2.fc${sysrelease}";
+        assert_script_run "dnf update *.rpm";
+        assert_script_run "cd ..";
+        assert_script_run "rm -rf bodhi4022";
+    }
+
     # download the packages
     if (get_var("ADVISORY")) {
         # regular update case
