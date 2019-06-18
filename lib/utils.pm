@@ -415,7 +415,7 @@ sub _repo_setup_updates {
         assert_script_run "mkdir bodhi4022";
         assert_script_run "cd bodhi4022";
         assert_script_run "koji download-build --arch=noarch --arch=x86_64 bodhi-4.0.2-2.fc${sysrelease}";
-        assert_script_run "dnf update *.rpm";
+        assert_script_run "dnf -y update *.rpm";
         assert_script_run "cd ..";
         assert_script_run "rm -rf bodhi4022";
     }
