@@ -706,7 +706,7 @@ sub start_with_launcher {
         wait_still_screen 5;
 
         # Click on the menu icon to come into the menus
-        assert_and_click 'apps_activities';
+        assert_and_click 'overview_app_grid';
         wait_still_screen 5;
 
         # Find the application launcher in the current menu page. 
