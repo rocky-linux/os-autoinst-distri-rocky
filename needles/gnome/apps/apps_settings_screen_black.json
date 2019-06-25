@@ -1,0 +1,16 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_settings_screen_black",
+    "workspace"
+  ],
+  "area": [
+    {
+      "xpos": 382,
+      "ypos": 280,
+      "width": 238,
+      "height": 171,
+      "type": "match"
+    }
+  ]
+}
