@@ -132,8 +132,6 @@ sub run {
          assert_script_run "chroot /mnt/sysimage abrt-auto-reporting 1";
     }
     if (grep {$_ eq 'rootpw'} @actions) {
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1553957
-        assert_script_run "setenforce 0";
         assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
