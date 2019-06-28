@@ -132,7 +132,12 @@ sub run {
          assert_script_run "chroot /mnt/sysimage abrt-auto-reporting 1";
     }
     if (grep {$_ eq 'rootpw'} @actions) {
-        assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
+        my $mount = "/mnt/sysimage";
+        if (get_var("CANNED")) {
+            # finding the actual host system root is fun for ostree...
+            $mount = "/mnt/sysimage/ostree/deploy/fedora/deploy/*.?";
+        }
+        assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
 }
