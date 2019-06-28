@@ -4,18 +4,6 @@ use testapi;
 use utils;
 
 
-sub enable_abrt_and_quit {
-     # Chroot in the newly installed system
-     script_run "chroot /mnt/sysimage/";
-     # Switch on ABRT systemwide
-     script_run "abrt-auto-reporting 1";
-     # Exit the chroot
-     type_string "exit\n";
-     # Reboot the installed machine
-     type_string "reboot\n";
-
-}
-
 sub run {
     my $self = shift;
     # Begin installation
@@ -101,60 +89,54 @@ sub run {
     assert_screen "anaconda_install_done";
     # wait for transition to complete so we don't click in the sidebar
     wait_still_screen 3;
-    # on aarch64, the default console is set by kernel config to the
-    # serial console. we don't want this, it messes up decryption
-    # (as plymouth will expect the passphrase on the serial console,
-    # not the virtual console). Let's go fix this up now.
-    if (get_var("ARCH") eq "aarch64") {
-        $self->root_console();
+    # if this is a live install, let's go ahead and quit the installer
+    # in all cases, just to make sure quitting doesn't crash etc.
+    assert_and_click "anaconda_install_done" if (get_var('LIVE'));
+    # there are various things we might have to do at a console here
+    # before we actually reboot. let's figure them all out first...
+    my @actions;
+    push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
+    push (@actions, 'abrt') if (get_var("ABRT") eq "system");
+    push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
+    # memcheck test doesn't need to reboot at all. Rebooting from GUI
+    # for lives is unreliable. And if we're already doing something
+    # else at a console, we may as well reboot from there too
+    push (@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
+    # If we have no actions, let's just go ahead and reboot now,
+    # unless this is memcheck
+    unless (@actions) {
+        unless (get_var("MEMCHECK")) {
+            assert_and_click "anaconda_install_done";
+        }
+        return undef;
+    }
+    # OK, if we're here, we got actions, so head to a console. Switch
+    # to console after liveinst sometimes takes a while, so 30 secs
+    $self->root_console(timeout=>30);
+    if (grep {$_ eq 'consoletty0'} @actions) {
         # somehow, by this point, localized keyboard layout has been
         # loaded for this tty, so for French and Arabic at least we
         # need to load the 'us' layout again for the next command to
         # be typed correctly
         console_loadkeys_us;
-        # stick 'console=tty0' on the end of GRUB_CMDLINE_LINUX in
-        # the grub defaults file, and 'quiet' so we don't get kernel
-        # messages, which screws up some needles. RHBZ#1661288
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1661288 results
+        # in boot messages going to serial console on aarch64, we need
+        # them on tty0. We also need 'quiet' so we don't get kernel
+        # messages, which screw up some needles
         assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" /mnt/sysimage/etc/default/grub';
         # regenerate the bootloader config
         assert_script_run "chroot /mnt/sysimage grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
-        # let's just reboot from here, seems simplest
-        type_string "reboot\n" unless (get_var("MEMCHECK"));
-        return;
     }
-    # for the memory check test, we *don't* want to leave
-    unless (get_var("MEMCHECK")) {
-    # If the variable for system-wide ABRT is set to system, switch 
-    # the system usage of ABRT on, before rebooting the installation, 
-    # so that the VM can start with the new settings.
-        if (get_var("ABRT") eq "system" && !get_var("LIVE"))  {
-            $self->root_console(timeout=>30);
-            enable_abrt_and_quit();
-        }
-        else {
-            assert_and_click "anaconda_install_done";
-        }
-        
-        if (get_var('LIVE')) {
-            # reboot from a console, it's more reliable than the desktop
-            # runners. As of 2018-10 switching to console after liveinst
-            # seems to take a long time, so use a longer timeout here
-            $self->root_console(timeout=>30);
-            # if we didn't set a root password during install, set it
-            # now...this is kinda icky, but I don't see a great option
-            if (get_var("INSTALLER_NO_ROOT")) {
-                # https://bugzilla.redhat.com/show_bug.cgi?id=1553957
-                assert_script_run "setenforce 0";
-                assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
-            }
-            if (get_var("ABRT") eq "system") {
-                enable_abrt_and_quit();
-            }
-            else {
-                type_string "reboot\n";
-            }
-        }
+    if (grep {$_ eq 'abrt'} @actions) {
+         # Chroot in the newly installed system and switch on ABRT systemwide
+         assert_script_run "chroot /mnt/sysimage abrt-auto-reporting 1";
     }
+    if (grep {$_ eq 'rootpw'} @actions) {
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1553957
+        assert_script_run "setenforce 0";
+        assert_script_run "echo 'root:$root_password' | chpasswd -R /mnt/sysimage";
+    }
+    type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
 }
 
 sub test_flags {
