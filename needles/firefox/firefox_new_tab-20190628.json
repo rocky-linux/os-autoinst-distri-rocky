@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 683,
+      "height": 18,
+      "ypos": 36,
+      "width": 16,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "browser_new_tab",
+    "firefox_new_tab"
+  ]
+}
