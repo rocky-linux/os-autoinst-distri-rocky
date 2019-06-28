@@ -250,17 +250,6 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 50,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Silverblue-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_no_user" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
