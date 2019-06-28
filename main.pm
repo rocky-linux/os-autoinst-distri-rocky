@@ -143,11 +143,12 @@ sub load_install_tests() {
     # if this is a kickstart install, that's all folks
     return if (get_var("KICKSTART"));
 
-    # on Fedora 28+, root password and user creation spokes are
-    # suppressed on Workstation live install, so we do not want to
-    # try and use them. However we're also still testing F27 live
-    # respins, so we can't just do this in the templates yet, sadly.
-    if (get_var('LIVE') && get_var('DESKTOP') eq 'gnome') {
+    # Root password and user creation spokes are suppressed on
+    # Workstation live install and Silverblue DVD install, so we do
+    # not want to try and use them. Setting this in the templates is
+    # tricky as it gets set for post-install tests too that way, and
+    # we don't want that
+    if ((get_var('LIVE') || get_var('CANNED')) && get_var('DESKTOP') eq 'gnome') {
         set_var('INSTALLER_NO_ROOT', '1');
         # this is effectively a forced install_no_user
         set_var('INSTALL_NO_USER', '1');
