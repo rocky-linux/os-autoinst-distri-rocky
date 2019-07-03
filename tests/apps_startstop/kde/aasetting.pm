@@ -34,8 +34,8 @@ sub run {
     # to get rid of that, because it can be later displayed
     # over some applications preventing OpenQA to find
     # correct buttons, which creates false positives.
-    if (check_screen('kde_updates_available')) {
-        assert_and_click "kde_updates_available_close";
+    if (check_screen "desktop_update_notification_popup", 10) {
+        assert_and_click "desktop_update_notification_popup";
     }
 }
 
