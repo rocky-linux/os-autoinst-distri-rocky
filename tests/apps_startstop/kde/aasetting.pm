@@ -30,6 +30,13 @@ sub run {
     wait_still_screen 2;
     # Close the application
     assert_and_click "kde_ok";
+    # If Updates Available notification is shown, we want
+    # to get rid of that, because it can be later displayed
+    # over some applications preventing OpenQA to find
+    # correct buttons, which creates false positives.
+    if (check_screen('kde_updates_available')) {
+        assert_and_click "kde_updates_available_close";
+    }
 }
 
 sub test_flags {
