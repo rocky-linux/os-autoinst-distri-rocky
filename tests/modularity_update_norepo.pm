@@ -14,13 +14,13 @@ sub run {
     assert_script_run('dnf update -y');
 
     # Enable and install the nodejs module, stream 8.
-    assert_script_run('/root/test.py -m nodejs -s 8 -a enable,install -f hard');
+    assert_script_run('/root/test.py -m nodejs -s 11 -a enable,install -f hard');
 
     # Update the system without modular repos.
     assert_script_run('dnf update --disablerepo=\*modular -y');
 
     # Check that the same version is listed in the installed modules.
-    assert_script_run('/root/test.py -m nodejs -s 8 -a checkinstall -f hard');
+    assert_script_run('/root/test.py -m nodejs -s 11 -a checkinstall -f hard');
 }
 
 1;

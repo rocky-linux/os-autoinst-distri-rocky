@@ -12,10 +12,10 @@ sub run {
     download_modularity_tests();
 
     # Check that modularity works and that a particular module is available in the system.
-    assert_script_run('/root/test.py -m dwm -s 6.0 -a list');
+    assert_script_run('/root/test.py -m dwm -s 6.1 -a list');
 
     # Check that module can be enabled and disabled.
-    assert_script_run('/root/test.py -m dwm -s 6.0 -a enable,disable -f hard');
+    assert_script_run('/root/test.py -m dwm -s 6.1 -a enable,disable -f hard');
 }
 
 1;
