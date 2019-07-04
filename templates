@@ -679,6 +679,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_fileconflicts" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_repoclosure" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
                                       arch    => "x86_64",
@@ -2114,6 +2136,30 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_fileconflicts" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_repoclosure" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 30,
                       product    => {
                                       arch    => "ppc64le",
@@ -2942,6 +2988,30 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_fileconflicts" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "ppc64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_repoclosure" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64" },
                       prio       => 30,
                       product    => {
                                       arch    => "ppc64",
@@ -3754,6 +3824,30 @@
                                       version => "*",
                                     },
                       test_suite => { name => "support_server" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_fileconflicts" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 10,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "mediakit_repoclosure" },
                     },
                     {
                       group_name => "Fedora AArch64",
@@ -5862,6 +5956,30 @@
                         { key => "MEMCHECK", value => "1" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "TEST_TARGET", value => "NONE" },
+                      ],
+                    },
+                    {
+                      name => "mediakit_fileconflicts",
+                      settings => [
+                        # we use support server image here as we know it's available
+                        # and there's no need to wait on an install to run this
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_5_%ARCH%.img" },
+                        { key => "POSTINSTALL", value => "mediakit_fileconflicts" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                      ],
+                    },
+                    {
+                      name => "mediakit_repoclosure",
+                      settings => [
+                        # we use support server image here as we know it's available
+                        # and there's no need to wait on an install to run this
+                        { key => "HDD_1", value => "disk_f%CURRREL%_support_5_%ARCH%.img" },
+                        { key => "POSTINSTALL", value => "mediakit_repoclosure" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
                       ],
                     },
                     {
