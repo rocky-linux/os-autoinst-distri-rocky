@@ -29,7 +29,9 @@ sub type_safely {
 sub type_very_safely {
     my $string = shift;
     type_string($string, wait_screen_change => 1, max_interval => 1);
-    wait_still_screen 5;
+    # similarity level 45 as there will commonly be a flashing
+    # cursor and the default level (47) is slightly too tight
+    wait_still_screen(stilltime=>5, similarity_level=>45);
 }
 
 # Figure out what tty the desktop is on, switch to it. Assumes we're
