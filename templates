@@ -177,28 +177,6 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      machine    => { name => "uefi" },
-                      prio       => 51,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 50,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
                                       flavor  => "AtomicHost-dvd_ostree-iso",
                                       version => "*",
                                     },
@@ -1960,30 +1938,6 @@
                       product    => {
                                       arch    => "ppc64le",
                                       distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      group_name => "Fedora PowerPC",
-                      machine    => { name => "ppc64le" },
-                      prio       => 10,
-                      product    => {
-                                      arch    => "ppc64le",
-                                      distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default_upload" },
-                    },
-                    {
-                      group_name => "Fedora PowerPC",
-                      machine    => { name => "ppc64le" },
-                      prio       => 10,
-                      product    => {
-                                      arch    => "ppc64le",
-                                      distri  => "fedora",
                                       flavor  => "AtomicHost-dvd_ostree-iso",
                                       version => "*",
                                     },
@@ -3645,30 +3599,6 @@
                                     },
                       test_suite => { name => "server_firewall_default" },
                     },
-		    {
-                      group_name => "Fedora AArch64",
-                      machine    => { name => "aarch64" },
-                      prio       => 10,
-                      product    => {
-                                      arch    => "aarch64",
-                                      distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      group_name => "Fedora AArch64",
-                      machine    => { name => "aarch64" },
-                      prio       => 10,
-                      product    => {
-                                      arch    => "aarch64",
-                                      distri  => "fedora",
-                                      flavor  => "Atomic-dvd_ostree-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default_upload" },
-                    },
                     {
                       group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
@@ -4643,18 +4573,6 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "Atomic-dvd_ostree-iso",
-                      name      => "",
-                      settings  => [
-                        { key => "CANNED", value => "1" },
-                        { key => "PACKAGE_SET", value => "default" },
-                        { key => "TEST_TARGET", value => "ISO" }
-                                   ],
-                      version   => "*",
-                    },
-                    {
-                      arch      => "x86_64",
-                      distri    => "fedora",
                       flavor    => "AtomicHost-dvd_ostree-iso",
                       name      => "",
                       settings  => [
@@ -4837,18 +4755,6 @@
                     {
                       arch      => "ppc64le",
                       distri    => "fedora",
-                      flavor    => "Atomic-dvd_ostree-iso",
-                      name      => "",
-                      settings  => [
-                        { key => "CANNED", value => "1" },
-                        { key => "PACKAGE_SET", value => "default" },
-                        { key => "TEST_TARGET", value => "ISO" }
-                                   ],
-                      version   => "*",
-                    },
-                    {
-                      arch      => "ppc64le",
-                      distri    => "fedora",
                       flavor    => "AtomicHost-dvd_ostree-iso",
                       name      => "",
                       settings  => [
@@ -4915,18 +4821,6 @@
                       name      => "",
                       settings  => [
                           { key => "TEST_TARGET", value => "ISO" }
-                                   ],
-                      version   => "*",
-                    },
-                    {
-                      arch      => "aarch64",
-                      distri    => "fedora",
-                      flavor    => "Atomic-dvd_ostree-iso",
-                      name      => "",
-                      settings  => [
-                        { key => "CANNED", value => "1" },
-                        { key => "PACKAGE_SET", value => "default" },
-                        { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
