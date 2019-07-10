@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 727,
+      "type": "match",
+      "width": 414,
+      "xpos": 441,
+      "height": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_warning_bar"
+  ]
+}
