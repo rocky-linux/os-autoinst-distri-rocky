@@ -21,10 +21,10 @@ sub run {
     # go to the services screen
     assert_and_click "cockpit_services";
     wait_still_screen 2;
-    # assume auditd is there, click it
-    assert_and_click "cockpit_services_auditd";
-    # check we get to the appropriate detail screen
-    assert_screen "cockpit_services_auditd_detail";
+    # click on an entry
+    assert_and_click "cockpit_services_entry";
+    # check we get to a detail screen
+    assert_screen "cockpit_services_detail";
 }
 
 sub test_flags {
