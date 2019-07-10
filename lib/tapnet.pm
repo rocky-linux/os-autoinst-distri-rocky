@@ -52,12 +52,6 @@ sub setup_tap_static {
     my $conftext = "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes\nONBOOT=yes" . $dnstext;
     assert_script_run "printf '${conftext}\n' > /etc/sysconfig/network-scripts/ifcfg-eth0";
     assert_script_run "systemctl restart NetworkManager.service";
-    # FIXME workaround for
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1727411
-    # remove when that's resolved
-    script_run 'nmcli con down "Wired connection 1"';
-    script_run 'nmcli con down "System eth0"';
-    script_run 'nmcli con up "System eth0"';
     # the above doesn't seem to reliably set up resolv.conf, so...
     clone_host_file "/etc/resolv.conf";
 }
