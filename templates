@@ -4712,7 +4712,7 @@
                     {
                       name => "modularity_tests",
                       settings => [
-                        { key => "POSTINSTALL", value => "modularity_module_list modularity_enable_disable_module modularity_install_module" },
+                        { key => "POSTINSTALL", value => "modularity_module_list modularity_enable_disable_module modularity_install_module modularity_checkdefaults" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
