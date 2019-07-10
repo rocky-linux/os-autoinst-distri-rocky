@@ -31,8 +31,12 @@ sub run {
     # run the updater
     if ($desktop eq 'kde') {
         # if the permanent pop-up notification appeared, get rid of
-        # it, as it blocks the refresh button...
-        if (check_screen "desktop_update_notification_popup", 10) {
+        # it, as it blocks the refresh button. For extra fun, we can
+        # get *more than one* of them, so just keep clicking till
+        # they're all gone, up to 10 at least
+        my $count = 10;
+        while (check_screen "desktop_update_notification_popup", 10 && $count > 0) {
+            $count -=1;
             assert_and_click "desktop_update_notification_popup";
         }
         # KDE team tells me the 'preferred' update method is the
