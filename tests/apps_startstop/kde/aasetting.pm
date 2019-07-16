@@ -30,11 +30,15 @@ sub run {
     wait_still_screen 2;
     # Close the application
     assert_and_click "kde_ok";
-    # If Updates Available notification is shown, we want
+    # If Updates Available notification(s) is/are shown, we want
     # to get rid of that, because it can be later displayed
-    # over some applications preventing OpenQA to find
-    # correct buttons, which creates false positives.
-    if (check_screen "desktop_update_notification_popup", 10) {
+    # over some applications preventing openQA to find
+    # correct buttons, which creates false positives. See
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 for
+    # KDE showing multiple notifications
+    my $count = 10;
+    while ($count > 0 && check_screen "desktop_update_notification_popup", 5) {
+        $count -= 1;
         assert_and_click "desktop_update_notification_popup";
     }
 }
