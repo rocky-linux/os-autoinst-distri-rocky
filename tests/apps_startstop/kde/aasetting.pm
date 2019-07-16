@@ -41,6 +41,12 @@ sub run {
         $count -= 1;
         assert_and_click "desktop_update_notification_popup";
     }
+    # also close akonadi_migration_agent notification if it shows up
+    # otherwise it makes wait_still_screen always time out
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1716005
+    if (check_screen "akonadi_migration_agent", 10) {
+        assert_and_click "akonadi_migration_agent";
+    }
 }
 
 sub test_flags {
