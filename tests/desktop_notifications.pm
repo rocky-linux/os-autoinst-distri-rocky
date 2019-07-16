@@ -100,6 +100,7 @@ sub run {
             # KDE showing multiple notifications
             my $count = 10;
             while (check_screen "desktop_update_notification", 5 && $count > 0) {
+                $count -= 1;
                 assert_and_click "desktop_update_notification";
             }
         }
