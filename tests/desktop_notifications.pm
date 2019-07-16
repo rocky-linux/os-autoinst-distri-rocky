@@ -94,9 +94,14 @@ sub run {
             # this is the case from F30 and earlier where we know this
             # was the *only* notification; at this point we've passed
             return if match_has_tag "desktop_update_notification_only";
-            # otherwise, we need to close the update notification then
-            # check there are no others
-            assert_and_click "desktop_update_notification";
+            # otherwise, we need to close the update notification(s)
+            # then check there are no others; see
+            # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 for
+            # KDE showing multiple notifications
+            my $count = 10;
+            while (check_screen "desktop_update_notification", 5 && $count > 0) {
+                assert_and_click "desktop_update_notification";
+            }
         }
         # the order and number of systray icons varies in KDE, so we
         # can't really just use a systray 'no notifications' needle.
