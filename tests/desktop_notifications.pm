@@ -98,10 +98,16 @@ sub run {
             # then check there are no others; see
             # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 for
             # KDE showing multiple notifications
-            my $count = 10;
-            while (check_screen "desktop_update_notification", 5 && $count > 0) {
-                $count -= 1;
-                assert_and_click "desktop_update_notification";
+            my @closed = click_unwanted_notifications;
+            if (grep {$_ eq 'akonadi'} @closed) {
+                # this isn't an SELinux denial or a crash, so it's not
+                # a hard failure...
+                record_soft_failure "stuck akonadi_migration_agent notification - RHBZ #1716005";
+            }
+            my @upnotes = grep {$_ eq 'update'} @closed;
+            if (scalar @upnotes > 1) {
+                # Also not a hard failure, but worth noting
+                record_soft_failure "multiple update notifications - RHBZ #1730482";
             }
         }
         # the order and number of systray icons varies in KDE, so we

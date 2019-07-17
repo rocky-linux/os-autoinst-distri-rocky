@@ -30,23 +30,8 @@ sub run {
     wait_still_screen 2;
     # Close the application
     assert_and_click "kde_ok";
-    # If Updates Available notification(s) is/are shown, we want
-    # to get rid of that, because it can be later displayed
-    # over some applications preventing openQA to find
-    # correct buttons, which creates false positives. See
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 for
-    # KDE showing multiple notifications
-    my $count = 10;
-    while ($count > 0 && check_screen "desktop_update_notification_popup", 5) {
-        $count -= 1;
-        assert_and_click "desktop_update_notification_popup";
-    }
-    # also close akonadi_migration_agent notification if it shows up
-    # otherwise it makes wait_still_screen always time out
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1716005
-    if (check_screen "akonadi_migration_agent", 10) {
-        assert_and_click "akonadi_migration_agent";
-    }
+    # get rid of unwanted notifications that interfere with tests
+    click_unwanted_notifications;
 }
 
 sub test_flags {

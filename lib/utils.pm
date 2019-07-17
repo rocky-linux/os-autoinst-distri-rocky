@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click click_unwanted_notifications/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -910,4 +910,27 @@ sub _assert_and_click {
         $args{mousehide} //= 0;
         return assert_and_click($mustmatch, $args{button}, $args{timeout}, 0, $args{dclick});
     }
+}
+
+sub click_unwanted_notifications {
+    # there are a few KDE tests where at some point we want to click
+    # on all visible 'update available' notifications (there can be
+    # more than one, thanks to
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 ) and the
+    # buggy 'akonadi_migration_agent' notification if it's showing -
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1716005
+    # Returns an array indicating which notifications it closed
+    wait_still_screen 5;
+    my $count = 10;
+    my @closed;
+    while ($count > 0 && check_screen "desktop_update_notification_popup", 5) {
+        $count -= 1;
+        push (@closed, 'update');
+        assert_and_click "desktop_update_notification_popup";
+    }
+    if (check_screen "akonadi_migration_agent", 5) {
+        assert_and_click "akonadi_migration_agent";
+        push (@closed, 'akonadi');
+    }
+    return @closed;
 }
