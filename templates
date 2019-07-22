@@ -3727,7 +3727,7 @@
                       settings  => [
                         { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMUVGA", value => "virtio"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "ARCH_BASE_MACHINE", value => "64bit" },
                         { key => "PART_TABLE_TYPE", value => "mbr"},
@@ -3741,7 +3741,7 @@
                       settings  => [
                         { key => "QEMUCPU", value => "Nehalem" },
                         { key => "QEMUCPUS", value => "2"},
-                        { key => "QEMUVGA", value => "std"},
+                        { key => "QEMUVGA", value => "virtio"},
                         { key => "QEMURAM", value => "2048"},
                         { key => "ARCH_BASE_MACHINE", value => "64bit" },
                         { key => "UEFI", value => "1"},
@@ -3776,7 +3776,7 @@
                       settings => [
                         { key => "QEMU", value => "ppc64" },
                         { key => "OFW", value => 1 },
-                        { key => "QEMUVGA", value => "std" },
+                        { key => "QEMUVGA", value => "virtio" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
                         { key => "ARCH_BASE_MACHINE", value => "ppc64le" },
