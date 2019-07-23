@@ -4,16 +4,7 @@ use testapi;
 use utils;
 
 
-sub run {
-    my $self = shift;
-    # Begin installation
-    assert_screen "anaconda_main_hub_begin_installation", 300;
-    # Sometimes, the 'slide in from the top' animation messes with
-    # this - by the time we click the button isn't where it was any
-    # more. So wait for screen to stop moving before we click.
-    wait_still_screen 2;
-    assert_and_click "anaconda_main_hub_begin_installation";
-
+sub _set_root_password {
     # Set root password, unless we don't want to or can't
     # can also hit a transition animation
     wait_still_screen 2;
@@ -51,22 +42,45 @@ sub run {
         }
         assert_and_click "anaconda_spoke_done";
     }
+}
 
+sub _do_root_and_user {
+    _set_root_password();
     # Wait out animation
     sleep 8;
     # Set user details, unless the test is configured not to create one
     anaconda_create_user() unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
-
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
         assert_screen "anaconda_install_user_created";
     }
+}
 
-    # With the slow typing - especially with SWITCHED_LAYOUT - we
-    # may not complete user creation until anaconda reaches post-install,
-    # which causes a 'Finish configuration' button
-    if (check_screen "anaconda_install_finish_configuration", 5) {
-        assert_and_click "anaconda_install_finish_configuration";
+sub run {
+    my $self = shift;
+    # From F31 onwards (after Fedora-Rawhide-20190722.n.1), user and
+    # root password spokes are moved to main hub, so we must do those
+    # before we run the install.
+    my $rootuserdone = 0;
+    assert_screen ["anaconda_main_hub_begin_installation", "anaconda_install_root_password"], 300;
+    if (match_has_tag "anaconda_install_root_password") {
+        _do_root_and_user();
+        $rootuserdone = 1;
+    }
+    # Begin installation
+    # Sometimes, the 'slide in from the top' animation messes with
+    # this - by the time we click the button isn't where it was any
+    # more. So wait for screen to stop moving before we click.
+    wait_still_screen 2;
+    assert_and_click "anaconda_main_hub_begin_installation";
+    unless ($rootuserdone) {
+        _do_root_and_user();
+        # With the slow typing - especially with SWITCHED_LAYOUT - we
+        # may not complete user creation until anaconda reaches post-install,
+        # which causes a 'Finish configuration' button
+        if (check_screen "anaconda_install_finish_configuration", 5) {
+            assert_and_click "anaconda_install_finish_configuration";
+        }
     }
 
     # Wait for install to end. Give Rawhide a bit longer, in case
@@ -137,6 +151,7 @@ sub run {
             # finding the actual host system root is fun for ostree...
             $mount = "/mnt/sysimage/ostree/deploy/fedora/deploy/*.?";
         }
+        my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
