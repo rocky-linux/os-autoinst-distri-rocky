@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click click_unwanted_notifications/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number _assert_and_click click_unwanted_notifications/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -744,6 +744,16 @@ sub quit_with_shortcut {
     wait_still_screen 5;
     assert_screen 'workspace';
 
+}
+
+
+sub lo_dismiss_tip {
+    # identify and close a 'tip of the day' window that shows on start
+    # of all LibreOffice apps. For the 'app startup' tests.
+    assert_screen ["libreoffice_tip", "libreoffice_any"];
+    # we use check_screen here just in case both needles match and
+    # libreoffice_any 'won'
+    send_key 'esc' if (check_screen "libreoffice_tip", 2);
 }
 
 sub advisory_get_installed_packages {
