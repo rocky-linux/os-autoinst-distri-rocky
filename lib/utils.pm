@@ -322,7 +322,7 @@ sub start_cockpit {
     disable_firefox_studies;
     # run firefox directly in X as root. never do this, kids!
     type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
-    assert_screen "cockpit_login", 30;
+    assert_screen "cockpit_login", 45;
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
     # login screen has a flashing cursor so screen is not still at level 47
