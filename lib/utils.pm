@@ -21,7 +21,9 @@ sub run_with_error_check {
 sub type_safely {
     my $string = shift;
     type_string($string, wait_screen_change => 3, max_interval => 20);
-    wait_still_screen 2;
+    # similarity level 45 as there will commonly be a flashing
+    # cursor and the default level (47) is slightly too tight
+    wait_still_screen(stilltime=>2, similarity_level=>45);
 }
 
 # high-level 'type this string extremely safely and rather slow'
