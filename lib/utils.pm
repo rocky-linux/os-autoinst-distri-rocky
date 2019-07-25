@@ -325,7 +325,8 @@ sub start_cockpit {
     assert_screen "cockpit_login", 30;
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
-    wait_still_screen 5;
+    # login screen has a flashing cursor so screen is not still at level 47
+    wait_still_screen(stilltime=>5, similarity_level=>45);
     if ($login) {
         type_safely "root";
         wait_screen_change { send_key "tab"; };
