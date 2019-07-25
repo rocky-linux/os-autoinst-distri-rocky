@@ -20,7 +20,7 @@ sub run {
     assert_screen "cockpit_logs_detail";
     # go to the services screen
     assert_and_click "cockpit_services";
-    wait_still_screen 2;
+    wait_still_screen 5;
     # click on an entry
     assert_and_click "cockpit_services_entry";
     # check we get to the appropriate detail screen...but this click
