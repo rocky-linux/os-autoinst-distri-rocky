@@ -651,6 +651,8 @@ sub download_modularity_tests {
 # Download the modularity test script, place in the system and then
 # modify the access rights to make it executable.
     my ($whitelist) = @_;
+    # we need python3-yaml for the script to run
+    assert_script_run 'dnf -y install python3-yaml', 180;
     assert_script_run 'curl -o /root/test.py https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/modular_functions.py';
     if ($whitelist eq 'whitelist') {
 	assert_script_run 'curl -o /root/whitelist https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/whitelist';
