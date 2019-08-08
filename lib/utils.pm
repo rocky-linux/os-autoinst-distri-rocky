@@ -653,7 +653,7 @@ sub download_modularity_tests {
     my ($whitelist) = @_;
     # we need python3-yaml for the script to run
     assert_script_run 'dnf -y install python3-yaml', 180;
-    assert_script_run 'curl -o /root/test.py https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/modular_functions.py';
+    assert_script_run 'curl -o /root/test.py https://pagure.io/fork/adamwill/fedora-qa/modularity_testing_scripts/raw/more-fixes/f/modular_functions.py';
     if ($whitelist eq 'whitelist') {
 	assert_script_run 'curl -o /root/whitelist https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/whitelist';
     }
