@@ -1,6 +1,7 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
     check_desktop_clean;
