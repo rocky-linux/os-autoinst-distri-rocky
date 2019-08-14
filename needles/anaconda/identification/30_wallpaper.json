@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "xpos": 847,
-      "ypos": 722,
-      "width": 163,
-      "height": 38,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "30_wallpaper"
-  ]
+    "area": [
+        {
+            "height": 38,
+            "type": "match",
+            "width": 163,
+            "xpos": 437,
+            "ypos": 672
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "30_wallpaper"
+    ]
 }
