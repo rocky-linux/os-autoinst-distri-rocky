@@ -581,6 +581,39 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_background" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 22,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_background" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Silverblue-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_background" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
                                       arch    => "x86_64",
@@ -2937,6 +2970,18 @@
                       test_suite => { name => "desktop_browser" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Silverblue-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_background" },
+                    },
+                    {
                       group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 10,
@@ -4165,7 +4210,6 @@
                       settings => [
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "POSTINSTALL", value => "_collect_data" },
-                        { key => "IDENTIFICATION", value => "true" },
                       ],
                     },
                     {
@@ -5105,6 +5149,15 @@
                       name => "desktop_notifications_postinstall",
                       settings => [
                         { key => "ENTRYPOINT", value => "desktop_notifications" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "desktop_background",
+                      settings => [
+                        { key => "POSTINSTALL", value => "desktop_background" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
