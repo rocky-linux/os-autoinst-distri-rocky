@@ -437,8 +437,8 @@ sub _repo_setup_updates {
     upload_logs "/var/log/updatepkgnames.txt";
     # FIXME: workaround for broken lorax-29.29-1.fc29, remove when
     # FEDORA-2019-8a3aa00d5e goes stable
-    my $relnum = get_release_number;
-    if ($relnum == 29) {
+    my $version = get_var("VERSION");
+    if ($version == 29) {
         assert_script_run "bodhi updates download --updateid FEDORA-2019-8a3aa00d5e", 600;
     }
     # create the repo metadata
@@ -910,7 +910,7 @@ sub get_release_number {
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
     return $version
-    }
+}
 
 sub tell_source {
     # This helper function identifies the Subvariant of the tested system.
