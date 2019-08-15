@@ -435,6 +435,12 @@ sub _repo_setup_updates {
     # installed, but was not
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
+    # FIXME: workaround for broken lorax-29.29-1.fc29, remove when
+    # FEDORA-2019-8a3aa00d5e goes stable
+    my $relnum = get_release_number;
+    if ($relnum == 29) {
+        assert_script_run "bodhi updates download --updateid FEDORA-2019-8a3aa00d5e", 600;
+    }
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file, unless this is the support_server test
