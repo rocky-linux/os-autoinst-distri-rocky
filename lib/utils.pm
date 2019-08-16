@@ -887,6 +887,9 @@ sub copy_devcdrom_as_isofile {
     assert_script_run "dd if=/dev/cdrom of=$isoname", 360;
     # verify iso checksum
     my $cdurl = get_var('ISO_URL');
+    # ISO_URL may not be set if we POSTed manually or something; just assume
+    # we're OK in that case
+    return unless $cdurl;
     my $cmd = <<EOF;
 urld="$cdurl"; urld=\${urld%/*}; chkf=\$(curl -fs \$urld/ |grep CHECKSUM | sed -E 's/.*href=.//; s/\".*//') && curl -f \$urld/\$chkf -o /tmp/x
 chkref=\$(grep -E 'SHA256.*dvd' /tmp/x | sed -e 's/.*= //') && echo "\$chkref $isoname" >/tmp/x
