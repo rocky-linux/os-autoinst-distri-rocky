@@ -51,6 +51,14 @@ sub post_fail_hook {
         script_run "dhclient";
     }
 
+    # if this is an ostree (CANNED) install, we need to upload from
+    # the ostree deploy root
+    my $root = "";
+    if (get_var("CANNED")) {
+        # finding the actual host system root is fun for ostree...
+        $root = "/ostree/deploy/fedora/deploy/*.?";
+    }
+
     # We can't rely on tar being in minimal installs, but we also can't
     # rely on dnf always working (it fails in emergency mode, not sure
     # why), so try it, then check if we have tar
@@ -84,32 +92,32 @@ sub post_fail_hook {
 
     # Note: script_run returns the exit code, so the logic looks weird.
     # We're testing that the directory exists and contains something.
-    unless (script_run 'test -n "$(ls -A /var/tmp/abrt)" && cd /var/tmp/abrt && tar czvf tmpabrt.tar.gz *') {
-        upload_logs "/var/tmp/abrt/tmpabrt.tar.gz";
+    unless (script_run 'test -n "$(ls -A ' . $root . '/var/tmp/abrt)" && cd ' . $root . '/var/tmp/abrt && tar czvf tmpabrt.tar.gz *') {
+        upload_logs "$root/var/tmp/abrt/tmpabrt.tar.gz";
     }
 
-    unless (script_run 'test -n "$(ls -A /var/spool/abrt)" && cd /var/spool/abrt && tar czvf spoolabrt.tar.gz *') {
-        upload_logs "/var/spool/abrt/spoolabrt.tar.gz";
+    unless (script_run 'test -n "$(ls -A ' . $root . '/var/spool/abrt)" && cd ' . $root . '/var/spool/abrt && tar czvf spoolabrt.tar.gz *') {
+        upload_logs "$root/var/spool/abrt/spoolabrt.tar.gz";
     }
 
     # upload any core dump files caught by coredumpctl
-    unless (script_run 'test -n "$(ls -A /var/lib/systemd/coredump)" && cd /var/lib/systemd/coredump && tar czvf coredump.tar.gz *') {
-        upload_logs "/var/lib/systemd/coredump/coredump.tar.gz";
+    unless (script_run 'test -n "$(ls -A ' . $root . '/var/lib/systemd/coredump)" && cd ' . $root . '/var/lib/systemd/coredump && tar czvf coredump.tar.gz *') {
+        upload_logs "$root/var/lib/systemd/coredump/coredump.tar.gz";
     }
 
     # upload bind log (for FreeIPA server test)
-    unless (script_run 'test -f /var/named/data/named.run') {
-        upload_logs "/var/named/data/named.run";
+    unless (script_run "test -f $root/var/named/data/named.run") {
+        upload_logs "$root/var/named/data/named.run";
     }
 
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
-    unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
+    unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' $root/var/log") {
         upload_logs "/tmp/var_log.tar.gz";
     }
 
     # Sometimes useful for diagnosing FreeIPA issues
-    upload_logs "/etc/nsswitch.conf", failok=>1;
+    upload_logs "$root/etc/nsswitch.conf", failok=>1;
 
     if (get_var("FLAVOR") eq "updates-everything-boot-iso") {
         # for installer creation test
