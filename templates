@@ -1718,6 +1718,28 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_pxeboot" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 31,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_pxeboot" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
@@ -2864,6 +2886,18 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_pxeboot" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 20,
                       product    => {
                                       arch    => "ppc64le",
@@ -3788,6 +3822,18 @@
                     {
                       group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_pxeboot" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
                       prio       => 20,
                       product    => {
                                       arch    => "aarch64",
@@ -4344,6 +4390,22 @@
                         { key => "REPOSITORY_VARIATION", value => "nfs:nfsvers=4:10.0.2.110:/iso/image.iso" },
                         { key => "PARALLEL_WITH", value => "support_server" },
                         { key => "INSTALL_UNLOCK", value => "support_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_pxeboot",
+                      settings => [
+                        # this delays VM boot so we can wait till the PXE server
+                        # is ready
+                        { key => "DELAYED_START", value => "1" },
+                        # this is to ensure the test never 'accidentally' passes
+                        # by falling back to boot from ISO
+                        { key => "+ISO", value => "" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
+                        { key => "PXEBOOT", value => "once" },
+                        { key => "PARALLEL_WITH", value => "support_server:%ARCH_BASE_MACHINE%" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
                       ],

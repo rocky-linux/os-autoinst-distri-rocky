@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 204,
+      "ypos": 279,
+      "width": 223,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "bootloader",
+    "bootloader_bios"
+  ]
+}

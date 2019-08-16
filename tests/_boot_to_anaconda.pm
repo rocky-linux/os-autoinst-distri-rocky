@@ -1,11 +1,22 @@
 use base "anacondatest";
 use strict;
+use lockapi;
 use testapi;
 use utils;
 use anaconda;
 
 sub run {
     my $self = shift;
+    if (get_var("PXEBOOT")) {
+        # PXE tests have DELAYED_START set, so VM is not running yet,
+        # because if we boot immediately PXE will time out waiting for
+        # DHCP before the support server is ready. So we wait here for
+        # support server to be ready, then go ahead and start the VM
+        mutex_lock "support_ready";
+        mutex_unlock "support_ready";
+        resume_vm;
+    }
+
     # construct the kernel params. the trick here is to wind up with
     # spaced params if GRUB or GRUBADD is set, and just spaces if not,
     # then check if we got all spaces. We wind up with a harmless
@@ -36,8 +47,12 @@ sub run {
     # set mutex wait if necessary
     my $mutex = get_var("INSTALL_UNLOCK");
 
+    # we need a longer timeout for the PXE boot test
+    my $timeout = 30;
+    $timeout = 120 if (get_var("PXEBOOT"));
+
     # call do_bootloader with postinstall=0, the params, and the mutex
-    do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex);
+    do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex, timeout=>$timeout);
 
     # Read variables for identification tests (see further).
     my $identification = get_var('IDENTIFICATION');
