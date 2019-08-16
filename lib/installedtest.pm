@@ -55,8 +55,7 @@ sub post_fail_hook {
     # the ostree deploy root
     my $root = "";
     if (get_var("CANNED")) {
-        # finding the actual host system root is fun for ostree...
-        $root = "/ostree/deploy/fedora/deploy/*.?";
+        $root = "/ostree/deploy/fedora";
     }
 
     # We can't rely on tar being in minimal installs, but we also can't
