@@ -56,14 +56,12 @@ sub run {
         # interpreted by perl. And we need quotes around the entire
         # expression at the bash level, and single quotes around the
         # text 'anaconda' at the level of grep, as the string we're
-        # actually matching on literally has 'anaconda' in it. We need
-        # (added|enabled) till F28 goes EOL: the log line was changed
-        # in Rawhide after F28 came out. ('anaconda'|'') is a work
-        # around for an anaconda bug that only appears in F29-era
-        # Rawhide, can be removed when a build with
-        # https://github.com/rhinstaller/anaconda/pull/1519
-        # is done.
-        assert_script_run 'grep "\(added\|enabled\) repo: ' . "\\('anaconda'\\|''\\).*${repourl}" . '" /tmp/packaging.log';
+        # actually matching on literally has 'anaconda' in it.
+        # ('anaconda'|'') is a workaround for an anaconda bug that
+        # happens since 2018-06, can be removed after
+        # https://github.com/rhinstaller/anaconda/pull/1519 is merged
+        # and all previous releases go EOL.
+        assert_script_run 'grep "enabled repo: ' . "\\('anaconda'\\|''\\).*${repourl}" . '" /tmp/packaging.log';
     }
     if ($repourl) {
         # check we don't have an error indicating our repo wasn't used.
