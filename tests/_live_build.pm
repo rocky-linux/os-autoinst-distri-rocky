@@ -23,7 +23,7 @@ sub run {
     # now add the side repo to the config
     assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n\"\"\"" >> /etc/mock/openqa.cfg';
     # replace metalink with mirrorlist so we don't get slow mirrors
-    assert_script_run "sed -i -e 's,metalink,mirrorlist,g' /etc/mock/openqa.cfg";
+    repos_mirrorlist("/etc/mock/openqa.cfg");
     # upload the config so we can check it's OK
     upload_logs "/etc/mock/openqa.cfg";
     # now check out the kickstarts

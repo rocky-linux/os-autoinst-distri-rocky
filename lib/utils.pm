@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -341,6 +341,16 @@ sub start_cockpit {
     }
 }
 
+sub repos_mirrorlist {
+    # Use mirrorlist not metalink so we don't hit the timing issue where
+    # the infra repo is updated but mirrormanager metadata checksums
+    # have not been updated, and the infra repo is rejected as its
+    # metadata checksum isn't known to MM
+    my $files = shift;
+    my $files ||= "/etc/yum.repos.d/fedora*.repo";
+    assert_script_run "sed -i -e 's,metalink,mirrorlist,g' ${files}";
+}
+
 sub _repo_setup_compose {
     # Appropriate repo setup steps for testing a compose
     # disable updates-testing and updates and use the compose location
@@ -370,11 +380,7 @@ sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
-    # Use mirrorlist not metalink so we don't hit the timing issue where
-    # the infra repo is updated but mirrormanager metadata checksums
-    # have not been updated, and the infra repo is rejected as its
-    # metadata checksum isn't known to MM
-    assert_script_run "sed -i -e 's,metalink,mirrorlist,g' /etc/yum.repos.d/fedora*.repo";
+    _repos_mirrorlist();
     if (get_var("DEVELOPMENT")) {
         # Disable updates-testing so other bad updates don't break us
         # this will do nothing on upgrade tests as we're on a stable
