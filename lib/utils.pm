@@ -983,7 +983,7 @@ sub check_prerelease {
     # this is not a big issue. This piece of code can be used later, when
     # we decide differently.
     elsif ($nightly =~ /\.[nt]\.\d+/) {
-        my $prerelease = 10;
+        $prerelease = 10;
     }
     # For all prerelease requiring ISOs, assert that prerelease is there.
     if ($prerelease == 1) {
