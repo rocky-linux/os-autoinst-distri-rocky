@@ -1034,6 +1034,8 @@ sub check_version {
 
 sub spell_version_number {
     my $version = shift;
+    # spelt version of Rawhide is...Rawhide
+    return "Rawhide" if ($version eq 'Rawhide');
     my %ones = (
         "0" => "Zero",
         "1" => "One",
@@ -1070,7 +1072,8 @@ sub spell_version_number {
 }
 
 sub rec_log {
-    my ($line, $condition, $failref) = @_;
+    my ($line, $condition, $failref, $filename) = @_;
+    $filename ||= '/tmp/os-release.log';
     if ($condition) {
         $line = "${line} - SUCCEEDED\n";
     }
@@ -1078,8 +1081,7 @@ sub rec_log {
         push @$failref, $line;
         $line = "${line} - FAILED\n";
     }
-    my $file = "/tmp/os-release.log";
-    script_run "echo \"$line\" >> $file";
+    script_run "echo \"$line\" >> $filename";
 
 }
 

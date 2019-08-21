@@ -36,6 +36,7 @@ sub run {
         my $id = get_var("DISTRI"); # Should be "fedora"
         my $name = ucfirst($id);
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
+        my $varstr = spell_version_number($version_id);
         my $target = lc($version_id);
         if ($version_id eq "Rawhide") {
                 $version_id = get_var("RAWREL");
@@ -48,8 +49,6 @@ sub run {
         # Everything image.
         my $variant_id = "";
         my $variant = "generic";
-        my $varstr = "Rawhide";
-        $varstr = spell_version_number($version_id) unless ($target eq 'rawhide');
 
         # now replace the values with the correct ones if we are testing a
         # subvariant that maps to a known variant
