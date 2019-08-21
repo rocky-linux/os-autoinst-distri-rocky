@@ -1,15 +1,15 @@
 {
-  "properties": [],
-  "tags": [
-    "topbar_server"
-  ],
-  "area": [
-    {
-      "xpos": 106,
-      "ypos": 43,
-      "width": 625,
-      "height": 36,
-      "type": "match"
-    }
-  ]
+    "area": [
+        {
+            "height": 36,
+            "type": "match",
+            "width": 465,
+            "xpos": 226,
+            "ypos": 43
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "topbar_server"
+    ]
 }
