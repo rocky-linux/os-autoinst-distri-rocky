@@ -934,6 +934,9 @@ sub tell_source {
     elsif ($iso eq 'AtomicHost') {
         $iso = 'atomic';
     }
+    elsif ($iso eq 'Silverblue') {
+        $iso = 'workstation';
+    }
     else {
         $iso = 'generic';
     }
