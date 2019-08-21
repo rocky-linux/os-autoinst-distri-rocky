@@ -380,7 +380,7 @@ sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
-    _repos_mirrorlist();
+    repos_mirrorlist();
     if (get_var("DEVELOPMENT")) {
         # Disable updates-testing so other bad updates don't break us
         # this will do nothing on upgrade tests as we're on a stable
