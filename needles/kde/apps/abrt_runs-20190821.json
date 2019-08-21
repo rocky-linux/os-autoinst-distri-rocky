@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 439,
+      "width": 144,
+      "ypos": 14,
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "abrt_runs"
+  ]
+}
