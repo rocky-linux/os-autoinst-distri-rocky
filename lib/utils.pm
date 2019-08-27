@@ -970,15 +970,17 @@ sub check_prerelease {
     # and this is not changed even with Final, so we cannot test that.
     # Investigating the history, I noticed that all nightly builds have
     # that prerelease turned on. And also, it is there on a Beta candidate.
-    # We can test for that.
+    # We can test for that. For update tests, if DEVELOPMENT is set the
+    # prerelease tags should appear, otherwise they should not.
 
     my $beta = get_var('ISO');
     my $nightly = get_var('BUILD');
     my $version = get_var('VERSION');
+    my $development = get_var('DEVELOPMENT');
     # Let us see if the installed system is one that needs to have the prerelease
     # note shown, default is NO.
     my $prerelease = 0;
-    if ($beta =~ /Beta/ or $version eq "Rawhide") {
+    if ($beta =~ /Beta/ or $version eq "Rawhide" or $development) {
         $prerelease = 1;
     }
     # If the image is a nightly build or test build, it is not clear whether
