@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 517,
+      "xpos": 509,
+      "width": 21,
+      "type": "match",
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_part_fs_xfs"
+  ]
+}
