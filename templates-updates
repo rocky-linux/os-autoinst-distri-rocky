@@ -979,6 +979,7 @@
                       name => "live_build",
                       settings => [
                         { key => "POSTINSTALL", value => "_live_build" },
+                        { key => "GRUB_POSTINSTALL", value => "selinux=0" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         { key => "BOOTFROM", value => "c" },

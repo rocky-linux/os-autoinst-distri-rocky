@@ -10,8 +10,6 @@ sub run {
     my $arch = get_var("ARCH");
     my $subv = get_var("SUBVARIANT");
     my $lcsubv = lc($subv);
-    # we need to be in permissive mode or the built image has selinux issues
-    assert_script_run "setenforce Permissive";
     # install the tools we need
     assert_script_run "dnf -y install mock git pykickstart tar", 120;
     # make the update/task repo and the serial device available inside the mock root
