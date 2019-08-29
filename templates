@@ -2910,6 +2910,30 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_package_set_kde" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_updates_img_local" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 20,
                       product    => {
                                       arch    => "ppc64le",
@@ -2930,6 +2954,66 @@
                                       version => "*",
                                     },
                       test_suite => { name => "server_firewall_default" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_freeipa_replication_master" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_freeipa_replication_replica" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "server_freeipa_replication_client" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 50,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Silverblue-dvd_ostree-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "release_identification" },
                     },
                     {
                       group_name => "Fedora PowerPC",
