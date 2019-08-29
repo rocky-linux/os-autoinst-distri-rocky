@@ -2058,6 +2058,18 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 62,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Everything-boot-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_default" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 10,
                       product    => {
                                       arch    => "ppc64le",
@@ -4180,6 +4192,16 @@
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "DESKTOP", value => "gnome" },
                         { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "ppc64le",
+                      distri    => "fedora",
+                      flavor    => "Everything-boot-iso",
+                      name      => "",
+                      settings  => [
+                          { key => "TEST_TARGET", value => "ISO" }
                                    ],
                       version   => "*",
                     },
