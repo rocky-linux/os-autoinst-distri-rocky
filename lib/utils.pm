@@ -39,10 +39,12 @@ sub type_very_safely {
 # Figure out what tty the desktop is on, switch to it. Assumes we're
 # at a root console
 sub desktop_vt {
-    # use ps to find the tty of Xwayland or Xorg
+    # use loginctl or ps to find the tty of test's session (loginctl)
+    # or Xwayland or Xorg (ps); as of 2019-09 on F31 update tests
+    # ps -C is giving 'tty?', so adding loginctl works around that
     my $xout;
     # don't fail test if we don't find any process, just guess tty1
-    eval { $xout = script_output 'ps -C Xwayland,Xorg -o tty --no-headers'; };
+    eval { $xout = script_output ' loginctl | grep test; ps -C Xwayland,Xorg -o tty --no-headers'; };
     my $tty = 1; # default
     while ($xout =~ /tty(\d)/g) {
         $tty = $1; # most recent match is probably best
