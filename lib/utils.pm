@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type start_cockpit repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist/;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
@@ -314,33 +314,6 @@ sub disable_firefox_studies {
     # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
     assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
     assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/policies.json';
-}
-
-sub start_cockpit {
-    # Starting from a console, get to a browser with Cockpit (running
-    # on localhost) shown. If $login is truth-y, also log in. Assumes
-    # X and Firefox are installed.
-    my $login = shift || 0;
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
-    assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
-    disable_firefox_studies;
-    # run firefox directly in X as root. never do this, kids!
-    type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
-    assert_screen "cockpit_login", 45;
-    # this happened on early Modular Server composes...
-    record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
-    # login screen has a flashing cursor so screen is not still at level 47
-    wait_still_screen(stilltime=>5, similarity_level=>45);
-    if ($login) {
-        type_safely "root";
-        wait_screen_change { send_key "tab"; };
-        type_safely get_var("ROOT_PASSWORD", "weakpassword");
-        send_key "ret";
-        assert_screen "cockpit_main";
-        # wait for any animation or other weirdness
-        # can't use wait_still_screen because of that damn graph
-        sleep 3;
-    }
 }
 
 sub repos_mirrorlist {

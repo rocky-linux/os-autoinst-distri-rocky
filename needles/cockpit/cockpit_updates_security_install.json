@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cockpit_updates_security_install"
+  ],
+  "area": [
+    {
+      "xpos": 619,
+      "ypos": 267,
+      "width": 93,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

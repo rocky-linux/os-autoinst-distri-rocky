@@ -852,6 +852,17 @@
                                       flavor  => "Server-dvd-iso",
                                       version => "*",
                                     },
+                      test_suite => { name => "server_cockpit_updates" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
                       test_suite => { name => "realmd_join_cockpit" },
                     },
                     {
@@ -5271,6 +5282,20 @@
                       name => "server_cockpit_basic",
                       settings => [
                         { key => "POSTINSTALL", value => "server_cockpit_basic" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        # to understand the '+' values in this test and the next,
+                        # see the `jobs_from_update` docstring in fedora_openqa
+                        # schedule.py
+                        { key => "+START_AFTER_TEST", value => "server_cockpit_default" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "+HDD_1", value => "disk_%MACHINE%_cockpit.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "server_cockpit_updates",
+                      settings => [
+                        { key => "POSTINSTALL", value => "server_cockpit_updates server_cockpit_autoupdate" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
                         # to understand the '+' values in this test and the next,

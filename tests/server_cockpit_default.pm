@@ -2,6 +2,7 @@ use base "installedtest";
 use strict;
 use testapi;
 use utils;
+use cockpit;
 
 sub run {
     my $self = shift;

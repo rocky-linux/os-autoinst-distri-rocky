@@ -4,6 +4,7 @@ use testapi;
 use lockapi;
 use utils;
 use tapnet;
+use cockpit;
 
 sub run {
     my $self = shift;

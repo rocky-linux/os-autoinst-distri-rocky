@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "cockpit_updates_restart_confirm"
+  ],
+  "area": [
+    {
+      "xpos": 576,
+      "ypos": 260,
+      "width": 46,
+      "height": 15,
+      "type": "match"
+    }
+  ]
+}
