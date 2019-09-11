@@ -22,7 +22,14 @@ sub run {
    my $branched = get_var('VERSION');
    if ($identification eq 'true' or $branched ne "Rawhide") {
        check_top_bar(); # See utils.pm
-       check_prerelease();
+       # disabled because we have issues with false needle matches
+       # on the pre-release note when it's dark red text on a dark
+       # blue background - os-autoinst greyscales images before
+       # comparing, and they wind up the same shade of grey, so we
+       # will get a 'match' for the pre-release needle even if the
+       # text is not there at all:
+       # https://progress.opensuse.org/issues/56822
+       # check_prerelease();
        check_version();
    }
 
