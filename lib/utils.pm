@@ -979,6 +979,8 @@ sub check_prerelease {
     # prerelease tags should appear, otherwise they should not.
 
     my $beta = get_var('ISO');
+    # install_pxeboot tests have ISO blanked, so we must use ISO_URL
+    my $beta ||= get_var('ISO_URL');
     my $nightly = get_var('BUILD');
     my $version = get_var('VERSION');
     my $development = get_var('DEVELOPMENT');

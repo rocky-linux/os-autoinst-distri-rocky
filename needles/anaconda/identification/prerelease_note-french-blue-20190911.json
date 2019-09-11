@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 764,
+      "type": "match",
+      "height": 25,
+      "ypos": 35,
+      "width": 138
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-french",
+    "prerelease_note"
+  ]
+}
