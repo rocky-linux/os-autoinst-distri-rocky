@@ -23,6 +23,8 @@ sub run {
         assert_and_click 'apps_run_firefox_stop';
     }
     wait_still_screen 2;
+    # Register application
+    register_application("firefox");
     # check that the application has stopped
     assert_screen 'workspace';
 }

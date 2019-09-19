@@ -12,6 +12,8 @@ sub run {
     start_with_launcher('apps_menu_monitor', 'apps_menu_utilities');
     # Check that is started
     assert_screen 'apps_run_monitor';
+    # Register application
+    register_application("gnome-system-monitor");
     # Close the application
     quit_with_shortcut();
 }

@@ -15,6 +15,8 @@ sub run {
     # Check that is started
     assert_and_click 'apps_run_limpress_start';
     assert_screen 'apps_run_limpress';
+    # Register application
+    register_application("libreoffice-impress");
     # Close the application
     quit_with_shortcut();
 }

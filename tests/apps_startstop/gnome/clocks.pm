@@ -14,6 +14,8 @@ sub run {
         assert_and_click 'apps_run_access';
     }
     assert_screen 'apps_run_clocks';
+    # Register application
+    register_application("gnome-clocks");
     # close the application
     quit_with_shortcut();
     

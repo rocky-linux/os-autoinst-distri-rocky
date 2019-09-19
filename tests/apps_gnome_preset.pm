@@ -8,18 +8,25 @@ use utils;
 
 sub run {
     my $self = shift;
-    # open the application
+    # open the application, let use the method that does not require any needles, 
+    # because this way, the terminal will always start even if some needles
+    # might fail because of changing background in various releases.
     send_key 'alt-f1';
     wait_still_screen 2;
     type_very_safely 'terminal';
     send_key 'ret';  
     wait_still_screen 5;
 
-    # Register application
-    register_application("gnome-terminal");
-
-    # Close the application
+    # When the application opens, run command in it to set the background to black
+    type_very_safely "gsettings set org.gnome.desktop.background picture-uri ''";
+    send_key 'ret';
+    wait_still_screen 2;
+    type_very_safely "gsettings set org.gnome.desktop.background primary-color '#000000'";
+    send_key 'ret';
+    wait_still_screen 2;
     quit_with_shortcut();
+    # check that is has changed color
+    assert_screen 'apps_settings_screen_black';
 }
 
 # If this test fails, the others will probably start failing too, 

@@ -12,6 +12,8 @@ sub run {
     start_with_launcher('apps_menu_videos');
     # Check that is started
     assert_screen 'apps_run_videos';
+    # Register application
+    register_application("totem");
     # Close the application
     quit_with_shortcut();
 }

@@ -16,6 +16,8 @@ sub run {
         assert_and_click 'apps_run_access';
     }
     assert_screen 'apps_run_maps';
+    # Register application
+    register_application("gnome-maps");
     # Close the application
     quit_with_shortcut();
     

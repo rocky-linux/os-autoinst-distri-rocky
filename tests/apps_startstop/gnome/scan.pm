@@ -12,6 +12,8 @@ sub run {
     start_with_launcher('apps_menu_scan');
     # Check that is started
     assert_screen 'apps_run_scan';
+    # Register application
+    register_application("simple-scan");
     # Close the application
     quit_with_shortcut();
     

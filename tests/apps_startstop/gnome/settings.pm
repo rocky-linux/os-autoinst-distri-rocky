@@ -22,6 +22,8 @@ sub run {
 
     # check that the screen really is black
     assert_screen 'workspace';
+    # Register application
+    register_application("gnome-control-center");
     
 }
 

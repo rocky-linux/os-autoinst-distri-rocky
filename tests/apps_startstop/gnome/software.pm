@@ -18,6 +18,8 @@ sub run {
         wait_still_screen 2;
     }
     assert_screen 'apps_run_software';
+    # Register application
+    register_application("gnome-software");
     # Close the application
     quit_with_shortcut();
     

@@ -379,19 +379,22 @@ if (!get_var("ENTRYPOINT")) {
 if (get_var("STARTSTOP")) {
     my $desktop = get_var('DESKTOP');
     my $casedir = get_var('CASEDIR');
-    # Find all tests from a directory defined by the DESKTOP variable
-    my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
 
-    # Load the terminal test extra, because it must run first for settings
-    # when the desktop is Gnome.
     if ($desktop eq 'gnome') {
-        autotest::loadtest "tests/apps_startstop/${desktop}/terminal.pm";
+        # Run this test to preset the environment
+        autotest::loadtest "tests/apps_gnome_preset.pm";
     }   
 
-    # Load all desktop tests
+    # Find all tests from a directory defined by the DESKTOP variable
+    my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
+    # Now load them
     foreach my $filepath (@apptests) {
-	    my $file = basename($filepath);
+        my $file = basename($filepath);
         autotest::loadtest "tests/apps_startstop/${desktop}/${file}";
+    }
+    if ($desktop eq 'gnome') {
+        # Run this test to check if required application have registered.
+        autotest::loadtest "tests/workstation_core_applications.pm";
     }
 }
 1;

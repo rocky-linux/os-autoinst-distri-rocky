@@ -12,6 +12,8 @@ sub run {
     start_with_launcher('apps_menu_imageviewer', 'apps_menu_utilities');
     # Check that is started
     assert_screen 'apps_run_imageviewer';
+    # Register application
+    register_application("image-viewer");
     # Close the application
     quit_with_shortcut();
 }

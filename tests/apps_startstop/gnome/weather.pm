@@ -15,6 +15,8 @@ sub run {
     }
     wait_still_screen 2;
     assert_screen 'apps_run_weather';
+    # Register application
+    register_application("gnome-weather");
     # close the application
     quit_with_shortcut();
     

@@ -11,6 +11,8 @@ sub run {
     start_with_launcher('apps_menu_help', 'apps_menu_utilities');
     # Check that is started
     assert_screen 'apps_run_help';
+    # Register application
+    register_application("gnome-help");
     # Close the application
     quit_with_shortcut();
 }

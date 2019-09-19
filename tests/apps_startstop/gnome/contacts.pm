@@ -12,6 +12,8 @@ sub run {
     start_with_launcher('apps_menu_contacts');
     # Check that is started
     assert_screen 'apps_run_contacts';
+    # Register application
+    register_application("gnome-contacts");
     # Close the application
     quit_with_shortcut();
 }

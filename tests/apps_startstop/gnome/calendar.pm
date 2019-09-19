@@ -17,6 +17,8 @@ sub run {
     }
     wait_still_screen 2;
     assert_screen 'apps_run_calendar';
+    # Register application
+    register_application("gnome-calendar");
     # close the application
     quit_with_shortcut();
     

@@ -21,6 +21,8 @@ sub run {
         send_key 'ret';
         assert_screen 'apps_run_boxes';
     }
+    # Register application
+    register_application("gnome-boxes");
     # Close the application
     quit_with_shortcut();
     

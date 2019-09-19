@@ -14,6 +14,8 @@ sub run {
     lo_dismiss_tip;
     # Check that is started
     assert_screen 'apps_run_lwriter';
+    # Register application
+    register_application("libreoffice-writer");
     # Close the application
     quit_with_shortcut();
 }

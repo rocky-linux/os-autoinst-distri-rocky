@@ -11,6 +11,8 @@ sub run {
     start_with_launcher('apps_menu_files');
     # Check that is started
     assert_screen 'apps_run_files';
+    # Register application
+    register_application("nautilus");
     # Close the application
     quit_with_shortcut();
     
