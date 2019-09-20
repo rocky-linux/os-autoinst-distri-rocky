@@ -349,7 +349,7 @@ sub repos_mirrorlist {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     my $files = shift;
-    my $files ||= "/etc/yum.repos.d/fedora*.repo";
+    $files ||= "/etc/yum.repos.d/fedora*.repo";
     assert_script_run "sed -i -e 's,metalink,mirrorlist,g' ${files}";
 }
 
@@ -980,7 +980,7 @@ sub check_prerelease {
 
     my $beta = get_var('ISO');
     # install_pxeboot tests have ISO blanked, so we must use ISO_URL
-    my $beta ||= get_var('ISO_URL');
+    $beta ||= get_var('ISO_URL');
     my $nightly = get_var('BUILD');
     my $version = get_var('VERSION');
     my $development = get_var('DEVELOPMENT');
