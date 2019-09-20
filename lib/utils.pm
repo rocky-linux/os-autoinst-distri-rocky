@@ -417,13 +417,17 @@ sub _repo_setup_updates {
     assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
 
     # download the packages
-    if (get_var("ADVISORY")) {
+    if (get_var("ADVISORY_NVRS")) {
         # regular update case
-        assert_script_run "bodhi updates download --updateid " . get_var("ADVISORY"), 600;
+        foreach my $nvr (split(/ /, get_var("ADVISORY_NVRS"))) {
+            assert_script_run "koji download-build --arch=" . get_var("ARCH") . " --arch=noarch $nvr", 600;
     }
-    else {
+    elsif (get_var("KOJITASK")) {
         # Koji task case (KOJITASK will be set)
         assert_script_run "koji download-task --arch=" . get_var("ARCH") . " --arch=noarch " . get_var("KOJITASK"), 600;
+    }
+    else {
+        die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do";
     }
     # for upgrade tests, we want to do the 'development' changes *after* we
     # set up the update repo. We don't do the f28 fixups as we don't have
