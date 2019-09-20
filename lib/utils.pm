@@ -421,6 +421,7 @@ sub _repo_setup_updates {
         # regular update case
         foreach my $nvr (split(/ /, get_var("ADVISORY_NVRS"))) {
             assert_script_run "koji download-build --arch=" . get_var("ARCH") . " --arch=noarch $nvr", 600;
+        }
     }
     elsif (get_var("KOJITASK")) {
         # Koji task case (KOJITASK will be set)
