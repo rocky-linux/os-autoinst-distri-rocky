@@ -34,6 +34,10 @@ sub run {
         # correct variables to compare the system data with.
         # First, we know the basic stuff
         my $id = get_var("DISTRI"); # Should be "fedora"
+        my $silvertag = get_var("BUILD"); # Takes the build string for Silverblue variants.
+        # Cut the "Fedora-XX-" part of the build number and leave the XXXXXXXX.n.X part.
+        $silvertag =~ s/\D+\d\d-//g; 
+
         my $name = ucfirst($id);
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
         my $varstr = spell_version_number($version_id);
@@ -67,8 +71,17 @@ sub run {
         }
 
         my $version = "$version_id ($varstr)";
+        # Version looks differently when the build is a Silverblue. We need to form
+        # a different string here, including the silverblue tag.
+        if ($subvariant eq "Silverblue") {
+            $version = "$version_id.$silvertag ($varstr)";
+        }
         my $platform_id = "platform:f$version_id";
         my $pretty = "$name $version_id ($varstr)";
+        # Same problem is when testing the PRETTY_NAME.
+        if ($subvariant eq "Silverblue") {
+            $pretty = "$name $version_id.$silvertag ($varstr)";
+        }
 
         #Now. we can start testing the real values from the installed system.
         my @fails = ();
