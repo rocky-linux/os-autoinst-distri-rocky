@@ -37,9 +37,9 @@ sub _pxe_setup {
         assert_script_run "cp /var/tmp/fedora/boot/efi/EFI/fedora/{shim.efi,grubx64.efi} /var/lib/tftpboot";
         # bootloader configs
         # BIOS
-        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Fedora 64-bit\n  menu default\n  kernel fedora/vmlinuz\n  append initrd=fedora/initrd.img inst.repo=nfs:nfsvers=4:10.0.2.110:/repo ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
+        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Fedora 64-bit\n  menu default\n  kernel fedora/vmlinuz\n  append initrd=fedora/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
         # UEFI
-        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linuxefi fedora/vmlinuz ip=dhcp inst.repo=nfs:nfsvers=4:10.0.2.110:/repo\n  initrdefi fedora/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
+        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linuxefi fedora/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrdefi fedora/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/grub.cfg";
@@ -53,7 +53,7 @@ sub _pxe_setup {
         # install a network bootloader to tftp root
         assert_script_run "grub2-mknetdir --net-directory=/var/lib/tftpboot";
         # bootloader config
-        assert_script_run "printf 'set default=0\nset timeout=5\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linux fedora/vmlinuz ip=dhcp inst.repo=nfs:nfsvers=4:10.0.2.110:/repo\n  initrd fedora/initrd.img\n}' >> /var/lib/tftpboot/boot/grub2/grub.cfg";
+        assert_script_run "printf 'set default=0\nset timeout=5\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linux fedora/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrd fedora/initrd.img\n}' >> /var/lib/tftpboot/boot/grub2/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/boot/grub2/grub.cfg";
@@ -65,7 +65,7 @@ sub _pxe_setup {
         # bootloader, no need to install packages)
         assert_script_run "cp /boot/efi/EFI/fedora/{shim.efi,grubaa64.efi} /var/lib/tftpboot";
         # bootloader config
-        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linux fedora/vmlinuz ip=dhcp inst.repo=nfs:nfsvers=4:10.0.2.110:/repo\n  initrd fedora/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
+        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Fedora 64-bit\"  --class fedora --class gnu-linux --class gnu --class os {\n  linux fedora/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrd fedora/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/grub.cfg";
@@ -78,6 +78,13 @@ sub _pxe_setup {
     $kernpath = "ppc/ppc64" if ($arch eq 'ppc64le');
     assert_script_run "curl -o /var/lib/tftpboot/fedora/vmlinuz $location/Everything/${arch}/os/${kernpath}/vmlinuz";
     assert_script_run "curl -o /var/lib/tftpboot/fedora/initrd.img $location/Everything/${arch}/os/${kernpath}/initrd.img";
+    # get a kickstart to embed in the initramfs, for testing:
+    # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
+    assert_script_run "curl -o ks.cfg https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
+    # tweak the repo config in it
+    assert_script_run "sed -i -e 's,^url.*,nfs --server 10.0.2.110 --dir /repo --opts nfsvers=4,g' ks.cfg";
+    # embed it
+    assert_script_run "echo ks.cfg | cpio -c -o >> /var/lib/tftpboot/fedora/initrd.img";
     # chown root
     assert_script_run "chown -R dnsmasq /var/lib/tftpboot";
     assert_script_run "restorecon -vr /var/lib/tftpboot";

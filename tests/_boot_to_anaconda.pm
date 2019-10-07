@@ -60,7 +60,10 @@ sub run {
     if (get_var("KICKSTART")) {
         # wait for the bootloader *here* - in a test that inherits from
         # anacondatest - so that if something goes wrong during install,
-        # we get anaconda logs
+        # we get anaconda logs. sleep a bit first so we don't get a
+        # match for the installer bootloader if it hangs around for a
+        # while after do_bootloader finishes (in PXE case it does)
+        sleep 20;
         assert_screen "bootloader", 1800;
     }
     else {
