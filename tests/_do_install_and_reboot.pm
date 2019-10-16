@@ -44,7 +44,11 @@ sub _set_root_password {
         my $identification = get_var('IDENTIFICATION');
         if ($identification eq 'true') {
             check_top_bar();
-            check_prerelease();
+            # we don't check version or pre-release because here those
+            # texts appear on the banner which makes the needling
+            # complex and fragile (banner is different between variants,
+            # and has a gradient so for RTL languages the background color
+            # differs; pre-release text is also translated)
         }
         assert_and_click "anaconda_spoke_done";
     }
