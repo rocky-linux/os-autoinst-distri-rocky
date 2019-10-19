@@ -9,7 +9,7 @@ sub _open_new_tab {
     # always visible because GNOME might pop up a notification that
     # blocks it. so, we try both.
     if (check_screen 'browser_new_tab') {
-        assert_and_click 'browser_new_tab';
+        click_lastmatch;
     }
     else {
         send_key 'ctrl-t';
