@@ -21,6 +21,8 @@ sub run {
         }
         else {
             anaconda_create_user(timeout=>$wait_time);
+            # wait out animation
+            wait_still_screen 3;
             assert_and_click "initialsetup_finish_configuration";
             set_var("_setup_done", 1);
         }
