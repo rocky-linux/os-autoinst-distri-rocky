@@ -21,6 +21,7 @@ sub run {
         $version = get_var('RAWREL');
     }
 
+    bypass_1691487;
     # Create the expected content of the release file
     # and compare it with its real counterpart.
     my $expected = "Fedora release $version ($speltnum)";
