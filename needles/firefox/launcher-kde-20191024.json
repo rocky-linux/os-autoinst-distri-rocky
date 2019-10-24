@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 233,
+      "xpos": 36,
+      "height": 21,
+      "type": "match",
+      "width": 21
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "browser_launcher",
+    "firefox_launcher"
+  ]
+}
