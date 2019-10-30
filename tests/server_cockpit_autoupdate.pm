@@ -15,6 +15,9 @@ sub run {
     # Navigate to the Update screen
     select_cockpit_update();
 
+    # FIXME Workaround for RHBZ #1765685 - remove when it's fixed
+    sleep 15;
+
     # Switch on automatic updates
     assert_and_click 'cockpit_updates_auto', '', 120;
     assert_and_click 'cockpit_updates_dnf_install', '', 120;
