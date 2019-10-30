@@ -425,11 +425,6 @@ sub _repo_setup_updates {
     # installed, but was not
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
-    # FIXME: workaround #1757948 as it showed up in F30 now. Remove
-    # when the update goes stable and the base image is rebuilt
-    if (get_var("VERSION") eq "30") {
-        assert_script_run "bodhi updates download --updateid=FEDORA-2019-cb9dd3e345", 180;
-    }
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file, unless this is the support_server test
