@@ -102,7 +102,7 @@ sub run {
             if (grep {$_ eq 'akonadi'} @closed) {
                 # this isn't an SELinux denial or a crash, so it's not
                 # a hard failure...
-                record_soft_failure "stuck akonadi_migration_agent notification - RHBZ #1716005";
+                record_soft_failure "stuck akonadi_migration_agent popup - RHBZ #1716005";
             }
             my @upnotes = grep {$_ eq 'update'} @closed;
             if (scalar @upnotes > 1) {
@@ -119,7 +119,11 @@ sub run {
         # In F28+ we seem to get a network connection notification
         # here. Let's dismiss it.
         if (check_screen 'desktop_network_notification', 5) {
-            assert_and_click 'desktop_notification_dismiss';
+            click_lastmatch;
+        }
+        # In F32+ we may also get an 'akonadi did something' message
+        if (check_screen 'akonadi_migration_notification', 5) {
+            click_lastmatch;
         }
         # on live path, we should not have got any other notification;
         # on installed path, we saw an update notification and closed

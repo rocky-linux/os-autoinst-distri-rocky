@@ -1078,7 +1078,7 @@ sub click_unwanted_notifications {
     # on all visible 'update available' notifications (there can be
     # more than one, thanks to
     # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 ) and the
-    # buggy 'akonadi_migration_agent' notification if it's showing -
+    # buggy 'akonadi_migration_agent_running' popup if it's showing -
     # https://bugzilla.redhat.com/show_bug.cgi?id=1716005
     # Returns an array indicating which notifications it closed
     wait_still_screen 5;
@@ -1087,10 +1087,10 @@ sub click_unwanted_notifications {
     while ($count > 0 && check_screen "desktop_update_notification_popup", 5) {
         $count -= 1;
         push (@closed, 'update');
-        assert_and_click "desktop_update_notification_popup";
+        click_lastmatch;
     }
-    if (check_screen "akonadi_migration_agent", 5) {
-        assert_and_click "akonadi_migration_agent";
+    if (check_screen "akonadi_migration_agent_running", 5) {
+        click_lastmatch;
         push (@closed, 'akonadi');
     }
     return @closed;
