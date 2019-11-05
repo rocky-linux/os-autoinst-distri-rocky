@@ -14,6 +14,12 @@ sub run {
     $wait_time = 1800 if (get_var("KICKSTART"));
     $wait_time = 6000 if (get_var("UPGRADE") && !get_var("ENCRYPT_PASSWORD"));
 
+    # handle bootloader, if requested
+    if (get_var("GRUB_POSTINSTALL")) {
+        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
+        $wait_time = 300;
+    }
+
     # Handle pre-login initial setup if we're doing INSTALL_NO_USER
     if (get_var("INSTALL_NO_USER") && !get_var("_setup_done")) {
         if (get_var("DESKTOP") eq 'gnome') {

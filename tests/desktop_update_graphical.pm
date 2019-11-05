@@ -13,20 +13,6 @@ sub run {
     prepare_test_packages;
     # get back to the desktop
     desktop_vt;
-    # work around https://gitlab.gnome.org/GNOME/gnome-software/issues/582
-    # if it happens. As of 2019-05, seeing something similar on KDE too
-    if (check_screen "auth_required", 10) {
-        record_soft_failure "spurious 'auth required' - https://gitlab.gnome.org/GNOME/gnome-software/issues/582";
-        assert_and_click "auth_required" if ($desktop eq 'kde');
-        # bit sloppy but correct for both...
-        type_very_safely "weakpassword\n";
-        # as of 2019-04 when we hit this bug it seems to ask for
-        # auth *twice*, so handle that
-        sleep 3;
-        if (check_screen "auth_required", 1) {
-            type_very_safely "weakpassword\n";
-        }
-    }
 
     # run the updater
     if ($desktop eq 'kde') {

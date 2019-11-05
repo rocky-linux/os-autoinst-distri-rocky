@@ -54,6 +54,21 @@ sub desktop_vt {
         $tty = $1; # most recent match is probably best
     }
     send_key "ctrl-alt-f${tty}";
+    # work around https://gitlab.gnome.org/GNOME/gnome-software/issues/582
+    # if it happens. As of 2019-05, seeing something similar on KDE too
+    my $desktop = get_var('DESKTOP');
+    if (check_screen "auth_required", 10) {
+        record_soft_failure "spurious 'auth required' - https://gitlab.gnome.org/GNOME/gnome-software/issues/582";
+        assert_and_click "auth_required" if ($desktop eq 'kde');
+        # bit sloppy but correct for both...
+        type_very_safely "weakpassword\n";
+        # as of 2019-04 when we hit this bug it seems to ask for
+        # auth *twice*, so handle that
+        sleep 3;
+        if (check_screen "auth_required", 1) {
+            type_very_safely "weakpassword\n";
+        }
+    }
 }
 
 # Wait for login screen to appear. Handle the annoying GPU buffer
@@ -513,9 +528,12 @@ sub gnome_initial_setup {
             }
         }
     }
-    # click 'Skip' one time (this is the 'goa' screen)
-    mouse_set(100,100);
-    wait_screen_change { assert_and_click "skip_button"; };
+    unless (get_var("VNC_CLIENT")) {
+        # click 'Skip' one time (this is the 'goa' screen). We don't
+        # get it on VNC_CLIENT case as network isn't working (yet)
+        mouse_set(100,100);
+        wait_screen_change { assert_and_click "skip_button"; };
+    }
     send_key "ret";
     if ($args{prelogin}) {
         # create user

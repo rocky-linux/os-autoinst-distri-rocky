@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 615,
+      "ypos": 437,
+      "width": 43,
+      "height": 14,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "boxes_allow_inhibit"
+  ]
+}

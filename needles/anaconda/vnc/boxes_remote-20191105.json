@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 115,
+      "ypos": 130,
+      "width": 50,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "boxes_remote"
+  ]
+}

@@ -3,6 +3,7 @@ use strict;
 use lockapi;
 use testapi;
 use utils;
+use tapnet;
 use anaconda;
 
 sub run {
@@ -51,13 +52,16 @@ sub run {
     my $timeout = 30;
     $timeout = 120 if (get_var("PXEBOOT"));
 
-    # call do_bootloader with postinstall=0, the params, and the mutex
-    do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex, timeout=>$timeout);
+    # call do_bootloader with postinstall=0, the params, and the mutex,
+    # unless we're a VNC install client (no bootloader there)
+    unless (get_var("VNC_CLIENT")) {
+        do_bootloader(postinstall=>0, params=>$params, mutex=>$mutex, timeout=>$timeout);
+    }
 
     # Read variables for identification tests (see further).
     my $identification = get_var('IDENTIFICATION');
     # proceed to installer
-    if (get_var("KICKSTART")) {
+    if (get_var("KICKSTART") || get_var("VNC_SERVER")) {
         # wait for the bootloader *here* - in a test that inherits from
         # anacondatest - so that if something goes wrong during install,
         # we get anaconda logs. sleep a bit first so we don't get a
