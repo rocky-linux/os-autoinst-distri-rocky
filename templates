@@ -1548,6 +1548,17 @@
                       test_suite => { name => "upgrade_minimal_64bit" },
                     },
                     {
+                      machine    => { name => "uefi" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_minimal_uefi" },
+                    },
+                    {
                       machine    => { name => "64bit" },
                       prio       => 30,
                       product    => {
@@ -1623,6 +1634,17 @@
                                       version => "*",
                                     },
                       test_suite => { name => "upgrade_2_minimal_64bit" },
+                    },
+                    {
+                      machine    => { name => "uefi" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "upgrade_2_minimal_uefi" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -5017,6 +5039,17 @@
                       ],
                     },
                     {
+                      name => "upgrade_minimal_uefi",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
+                      ],
+                    },
+                    {
                       name => "upgrade_desktop_64bit",
                       settings => [
                         { key => "ROOT_PASSWORD", value => "weakpassword" },
@@ -5113,6 +5146,17 @@
                         { key => "USER_LOGIN", value => "false" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_f%PREVREL%_minimal_3_%ARCH%.img" },
+                        { key => "UPGRADE", value => "1" },
+                        { key => "TEST_TARGET", value => "COMPOSE" },
+                      ],
+                    },
+                    {
+                      name => "upgrade_2_minimal_uefi",
+                      settings => [
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "USER_LOGIN", value => "false" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_f%PREVREL%_minimal-uefi_3_%ARCH%.img" },
                         { key => "UPGRADE", value => "1" },
                         { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
