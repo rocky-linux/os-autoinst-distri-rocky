@@ -15,9 +15,16 @@ sub root_console {
     my %args = (
         tty => 1, # what TTY to login to
         @_);
-
-    send_key "ctrl-alt-f$args{tty}";
-    console_login;
+    if (get_var("SERIAL_CONSOLE")) {
+        # select the first virtio terminal, for now we assume we can
+        # always use that (we may have to make this smarter in future)
+        select_console("root-virtio-terminal");
+    }
+    else {
+        # For normal terminal emulation, use key combo to reach a tty
+        send_key "ctrl-alt-f$args{tty}";
+    }
+    console_login; # Do the login.
 }
 
 sub post_fail_hook {

@@ -702,6 +702,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_anaconda_serial_console" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 31,
                       product    => {
                                       arch    => "x86_64",
@@ -2389,6 +2400,18 @@
                     {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_anaconda_serial_console" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
                       prio       => 31,
                       product    => {
                                       arch    => "ppc64le",
@@ -3473,6 +3496,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_anaconda_text" },
+                    },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "universal",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_anaconda_serial_console" },
                     },
                     {
                       group_name => "Fedora AArch64",
@@ -4683,6 +4718,19 @@
                       name => "install_anaconda_text",
                       settings => [
                         { key => "ANACONDA_TEXT", value => "1" },
+                      ],
+                    },
+                    {
+                      name => "install_anaconda_serial_console",
+                      settings => [
+                        { key => "ANACONDA_TEXT", value => "1" },
+                        { key => "SERIAL_CONSOLE", value => "1" },
+                        # we want one console for anaconda and one for a root
+                        # terminal
+                        { key => "VIRTIO_CONSOLE_NUM", value => "2" },
+                        # we don't need to check this here and it doesn't work
+                        # with serial console
+                        { key => "NO_UEFI_POST", value => "1" },
                       ],
                     },
                     {

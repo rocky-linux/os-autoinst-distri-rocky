@@ -15,9 +15,21 @@ our @application_list;
 
 sub run_with_error_check {
     my ($func, $error_screen) = @_;
-    die "Error screen appeared" if (check_screen $error_screen, 5);
-    $func->();
-    die "Error screen appeared" if (check_screen $error_screen, 5);
+    # Check screen does not work for serial console, so we need to use
+    # different checking mechanism for it.
+    if (testapi::is_serial_terminal) {
+        # by using 'unless' and 'expect_not_found=>1' here we avoid
+        # the web UI showing each failure to see the error message as
+        # a 'failed match'
+        die "Error screen appeared" unless (wait_serial($error_screen, timeout=>5, expect_not_found=>1));
+        $func->();
+        die "Error screen appeared" unless (wait_serial($error_screen, timeout=>5, expect_not_found=>1));
+    }
+    else {
+        die "Error screen appeared" if (check_screen $error_screen, 5);
+        $func->();
+        die "Error screen appeared" if (check_screen $error_screen, 5);
+    }
 }
 
 # high-level 'type this string quite safely but reasonably fast'
@@ -78,18 +90,27 @@ sub desktop_vt {
 sub boot_to_login_screen {
     my %args = @_;
     $args{timeout} //= 300;
-    # we may start at a screen that matches one of the needles; if so,
-    # wait till we don't (e.g. when rebooting at end of live install,
-    # we match text_console_login until the console disappears)
-    my $count = 5;
-    while (check_screen("login_screen", 3) && $count > 0) {
-        sleep 5;
-        $count -= 1;
+    if (testapi::is_serial_terminal) {
+        # For serial console, just wait for the login prompt
+        unless (wait_serial "login:", timeout=>$args{timeout}) {
+            die "No login prompt shown on serial console.";
+        }
     }
-    assert_screen "login_screen", $args{timeout};
-    if (match_has_tag "graphical_login") {
-        wait_still_screen 10, 30;
-        assert_screen "login_screen";
+    else {
+        # we may start at a screen that matches one of the needles; if so,
+        # wait till we don't (e.g. when rebooting at end of live install,
+        # we match text_console_login until the console disappears).
+        # The following is true for non-serial console.
+        my $count = 5;
+        while (check_screen("login_screen", 3) && $count > 0) {
+           sleep 5;
+           $count -= 1;
+        }
+       assert_screen "login_screen", $args{timeout};
+       if (match_has_tag "graphical_login") {
+           wait_still_screen 10, 30;
+           assert_screen "login_screen";
+       }
     }
 }
 
@@ -128,8 +149,16 @@ sub desktop_switch_layout {
 # failed (the prompt looks different in this case). We treat this as
 # a soft failure.
 sub _console_login_finish {
-    if (match_has_tag "bash_noprofile") {
-        record_soft_failure "It looks like profile sourcing failed";
+    # The check differs according to the console used.
+    if (testapi::is_serial_terminal) {
+        unless (wait_serial("-bash-.*[#\$]", timeout=>5, expect_not_found=>1)) {
+            record_soft_failure "It looks like profile sourcing failed";
+        }
+    }
+    else {
+        if (match_has_tag "bash_noprofile") {
+            record_soft_failure "It looks like profile sourcing failed";
+        }
     }
 }
 
@@ -145,66 +174,94 @@ sub console_login {
         @_);
     $args{timeout} ||= 10;
 
-    # There's a timing problem when we switch from a logged-in console
-    # to a non-logged in console and immediately call this function;
-    # if the switch lags a bit, this function will match one of the
-    # logged-in needles for the console we switched from, and get out
-    # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
-    # To avoid this, we'll sleep a few seconds before starting
-    sleep 4;
-
-    my $good = "";
-    my $bad = "";
-    if ($args{user} eq "root") {
-        $good = "root_console";
-        $bad = "user_console";
+    # Since we do not test many serial console tests, and we probably
+    # only want to test serial console on a minimal installation only,
+    # let us not do all the magic to handle different console logins
+    # and let us simplify the process.
+    # We will check if we are logged in, and if so, we will log out to
+    # enable a new proper login based on the user variable.
+    if (get_var("SERIAL_CONSOLE")) {
+        # Check for the usual prompt.
+        if (wait_serial("~\][#\$]", timeout=>5, quiet=>1)) {
+            type_string "logout\n";
+            # Wait a bit to let the logout properly finish.
+            sleep 10;
+        }
+        # Do the new login.
+        type_string $args{user};
+        type_string "\n";
+        sleep 2;
+        type_string $args{password};
+        type_string "\n";
+        # Let's perform a simple login test. This is the same as
+        # whoami, but has the advantage of existing in installer env
+        assert_script_run "id -un";
+        unless (wait_serial $args{user}, timeout=>5) {
+            die "Logging onto the serial console has failed.";
+        }
     }
     else {
-        $good = "user_console";
-        $bad = "root_console";
-    }
+        # There's a timing problem when we switch from a logged-in console
+        # to a non-logged in console and immediately call this function;
+        # if the switch lags a bit, this function will match one of the
+        # logged-in needles for the console we switched from, and get out
+        # of sync (e.g. https://openqa.stg.fedoraproject.org/tests/1664 )
+        # To avoid this, we'll sleep a few seconds before starting
+        sleep 4;
 
-    if (check_screen $bad, 0) {
-        # we don't want to 'wait' for this as it won't return
-        script_run "exit", 0;
-        sleep 2;
-    }
+        my $good = "";
+        my $bad = "";
+        if ($args{user} eq "root") {
+            $good = "root_console";
+            $bad = "user_console";
+        }
+        else {
+            $good = "user_console";
+            $bad = "root_console";
+        }
 
-    assert_screen [$good, 'text_console_login'], $args{timeout};
-    # if we're already logged in, all is good
-    if (match_has_tag $good) {
-        _console_login_finish();
-        return;
-    }
-    # otherwise, we saw the login prompt, type the username
-    type_string("$args{user}\n");
-    assert_screen [$good, 'console_password_required'], 30;
-    # on a live image, just the user name will be enough
-    if (match_has_tag $good) {
-        _console_login_finish();
-        return;
-    }
-    # otherwise, type the password
-    type_string "$args{password}";
-    if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
-        # see _do_install_and_reboot; when layout is switched
-        # user password is doubled to contain both US and native
-        # chars
-        console_switch_layout;
+        if (check_screen $bad, 0) {
+            # we don't want to 'wait' for this as it won't return
+            script_run "exit", 0;
+            sleep 2;
+        }
+
+        assert_screen [$good, 'text_console_login'], $args{timeout};
+        # if we're already logged in, all is good
+        if (match_has_tag $good) {
+            _console_login_finish();
+            return;
+        }
+        # otherwise, we saw the login prompt, type the username
+        type_string("$args{user}\n");
+        assert_screen [$good, 'console_password_required'], 30;
+        # on a live image, just the user name will be enough
+        if (match_has_tag $good) {
+            _console_login_finish();
+            return;
+        }
+        # otherwise, type the password
         type_string "$args{password}";
-        console_switch_layout;
-    }
-    send_key "ret";
-    # make sure we reached the console
-    unless (check_screen($good, 30)) {
-        # as of 2018-10 we have a bug in sssd which makes this take
-        # unusually long in the FreeIPA tests, let's allow longer,
-        # with a soft fail - RHBZ #1644919
-        record_soft_failure "Console login is taking a long time - #1644919?";
-        my $timeout = 30;
-        # even an extra 30 secs isn't long enough on aarch64...
-        $timeout = 90 if (get_var("ARCH") eq "aarch64");
-        assert_screen($good, $timeout);
+        if (get_var("SWITCHED_LAYOUT") and $args{user} ne "root") {
+            # see _do_install_and_reboot; when layout is switched
+            # user password is doubled to contain both US and native
+            # chars
+            console_switch_layout;
+            type_string "$args{password}";
+            console_switch_layout;
+        }
+        send_key "ret";
+        # make sure we reached the console
+        unless (check_screen($good, 30)) {
+            # as of 2018-10 we have a bug in sssd which makes this take
+            # unusually long in the FreeIPA tests, let's allow longer,
+            # with a soft fail - RHBZ #1644919
+            record_soft_failure "Console login is taking a long time - #1644919?";
+            my $timeout = 30;
+            # even an extra 30 secs isn't long enough on aarch64...
+            $timeout = 90 if (get_var("ARCH") eq "aarch64");
+            assert_screen($good, $timeout);
+        }
     }
     _console_login_finish();
 }

@@ -120,6 +120,14 @@ sub root_console {
     if (get_var("LIVE") && get_var("DESKTOP") eq "gnome") {
         send_key "ctrl-alt-f3";
     }
+    elsif (get_var("SERIAL_CONSOLE")) {
+        # select first virtio terminal, we rely on anaconda having run
+        # a root shell on it for us
+        select_console("root-virtio-terminal");
+        # as we don't have any live image serial install tests, we
+        # know we don't need to login
+        return;
+    }
     else {
         send_key "ctrl-alt-f2";
     }

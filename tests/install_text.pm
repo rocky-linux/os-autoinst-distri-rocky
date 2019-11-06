@@ -3,11 +3,38 @@ use strict;
 use testapi;
 use utils;
 
+
+# this enables you to send a command and some post-command wait time
+# in one step and also distinguishes between serial console and normal
+# VNC based console and handles the wait times differently.
+sub console_type_wait {
+    my ($string, $wait) = @_;
+    $wait ||= 5;
+    type_string $string;
+    if (testapi::is_serial_terminal) {
+        sleep $wait;
+    }
+    else {
+        wait_still_screen $wait;
+    }
+}
+
 sub run {
     my $self = shift;
-    assert_screen "anaconda_main_hub_text";
-    # IMHO it's better to use sleeps than to have needle for every text screen
-    wait_still_screen 5;
+
+    # First, preset the environment according to the chosen console. This test
+    # can run both on a VNC based console, or a serial console.
+    if (get_var("SERIAL_CONSOLE")) {
+        select_console('root-virtio-terminal1');
+        unless (testapi::is_serial_terminal) {
+            die "The test does not run on a serial console when it should.";
+        }
+    }
+    else {
+        assert_screen "anaconda_main_hub_text";
+        # IMHO it's better to use sleeps than to have needle for every text screen
+        wait_still_screen 5;
+    }
 
     # prepare for different number of spokes (e. g. as in Atomic DVD)
     my %spoke_number = (
@@ -21,77 +48,76 @@ sub run {
         "user" => 8
     );
 
+    # The error message that we are going to check for in the text installation
+    # must be different for serial console and a VNC terminal emulator.
+    my $error = "";
+    if (testapi::is_serial_terminal) {
+        $error = "unknown error has occured";
+    }
+    else {
+        $error = "anaconda_text_error";
+    }
+
     # Set timezone
-    run_with_error_check(sub {type_string $spoke_number{"timezone"} . "\n"}, "anaconda_text_error");
-    wait_still_screen 5;
-    type_string "1\n"; # Set timezone
-    wait_still_screen 5;
-    type_string "1\n"; # Europe
-    wait_still_screen 5;
-    type_string "37\n"; # Prague
-    wait_still_screen 7;
+    run_with_error_check(sub {console_type_wait($spoke_number{"timezone"} . "\n")}, $error);
+    console_type_wait("1\n"); # Set timezone
+    console_type_wait("1\n"); # Europe
+    console_type_wait("37\n", 7); # Prague
 
     # Select disk
-    run_with_error_check(sub {type_string $spoke_number{"destination"} . "\n"}, "anaconda_text_error");
-    wait_still_screen 5;
-    type_string "c\n"; # first disk selected, continue
-    wait_still_screen 5;
-    type_string "c\n"; # use all space selected, continue
-    wait_still_screen 5;
-    type_string "c\n"; # LVM selected, continue
-    wait_still_screen 7;
+    run_with_error_check(sub {console_type_wait($spoke_number{"destination"} . "\n")}, $error);
+    console_type_wait("c\n"); # first disk selected, continue
+    console_type_wait("c\n"); # use all space selected, continue
+    console_type_wait("c\n", 7); # LVM selected, continue
 
     # Set root password
-    run_with_error_check(sub {type_string $spoke_number{"rootpwd"} . "\n"}, "anaconda_text_error");
-    wait_still_screen 5;
-    type_string get_var("ROOT_PASSWORD", "weakpassword");
-    send_key "ret";
-    wait_still_screen 5;
-    type_string get_var("ROOT_PASSWORD", "weakpassword");
-    send_key "ret";
-    wait_still_screen 7;
+    my $rootpwd = get_var("ROOT_PASSWORD", "weakpassword");
+    run_with_error_check(sub {console_type_wait($spoke_number{"rootpwd"} . "\n")}, $error);
+    console_type_wait("$rootpwd\n");
+    console_type_wait("$rootpwd\n");
 
     # Create user
-    run_with_error_check(sub {type_string $spoke_number{"user"} . "\n"}, "anaconda_text_error");
-    wait_still_screen 5;
-    type_string "1\n"; # create new
-    wait_still_screen 5;
-    type_string "3\n"; # set username
-    wait_still_screen 5;
-    type_string get_var("USER_LOGIN", "test");
-    send_key "ret";
-    wait_still_screen 5;
+    my $userpwd = get_var("USER_PASSWORD", "weakpassword");
+    my $username = get_var("USER_LOGIN", "test");
+    run_with_error_check(sub {console_type_wait($spoke_number{"user"} . "\n")}, $error);
+    console_type_wait("1\n"); # create new
+    console_type_wait("3\n"); # set username
+    console_type_wait("$username\n");
     # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
     if (get_release_number() < 31) {
         # typing "4\n" on abrt screen causes system to reboot, so be careful
-        run_with_error_check(sub {type_string "4\n"}, "anaconda_text_error"); # use password
+        run_with_error_check(sub {console_type_wait("4\n")}, $error); # use password
     }
-    wait_still_screen 5;
-    type_string "5\n"; # set password
-    wait_still_screen 5;
-    type_string get_var("USER_PASSWORD", "weakpassword");
-    send_key "ret";
-    wait_still_screen 5;
-    type_string get_var("USER_PASSWORD", "weakpassword");
-    send_key "ret";
-    wait_still_screen 5;
-    type_string "6\n"; # make him an administrator
-    wait_still_screen 5;
-    type_string "c\n";
-    wait_still_screen 7;
+    console_type_wait("5\n"); # set password
+    console_type_wait("$userpwd\n");
+    console_type_wait("$userpwd\n");
+    console_type_wait("6\n"); # make him an administrator
+    console_type_wait("c\n", 7);
 
     my $counter = 0;
-    while (check_screen "anaconda_main_hub_text_unfinished", 2) {
-        if ($counter > 10) {
-            die "There are unfinished spokes in Anaconda";
+    if (testapi::is_serial_terminal) {
+        while (wait_serial("[!]", timeout=>5, quiet=>1)) {
+            if ($counter > 10) {
+                die "There are unfinished spokes in Anaconda";
+            }
+            sleep 10;
+            $counter++;
+            console_type_wait("r\n"); # refresh
         }
-        sleep 10;
-        $counter++;
-        type_string "r\n"; # refresh
+    }
+    else {
+        while (check_screen "anaconda_main_hub_text_unfinished", 2) {
+            if ($counter > 10) {
+                die "There are unfinished spokes in Anaconda";
+            }
+            sleep 10;
+            $counter++;
+            console_type_wait("r\n"); # refresh
+        }
     }
 
     # begin installation
-    type_string "b\n";
+    console_type_wait("b\n");
 
     # Wait for install to end. Give Rawhide a bit longer, in case
     # we're on a debug kernel, debug kernel installs are really slow.
@@ -99,8 +125,23 @@ sub run {
     if (lc(get_var('VERSION')) eq "rawhide") {
         $timeout = 2400;
     }
-    assert_screen "anaconda_install_text_done", $timeout;
-    type_string "\n";
+
+    if (testapi::is_serial_terminal) {
+        wait_serial("Installation complete", timeout=>$timeout);
+        if (get_var("SERIAL_CONSOLE") && get_var("OFW")) {
+            $self->root_console();
+            # we need to force the system to load a console on both hvc1
+            # and hvc2 for ppc64 serial console post-install tests
+            assert_script_run 'chroot /mnt/sysimage systemctl enable serial-getty@hvc1';
+            assert_script_run 'chroot /mnt/sysimage systemctl enable serial-getty@hvc2';
+            # back to anaconda ui
+            select_console("root-virtio-terminal1");
+        }
+    }
+    else {
+        assert_screen "anaconda_install_text_done", $timeout;
+    }
+    console_type_wait("\n");
 }
 
 
