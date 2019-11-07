@@ -687,10 +687,10 @@ sub quit_firefox {
     # root, so let's just run through console_login again. This is
     # fine for older releases which don't have the bug, console_login
     # will just notice we're already logged in as root and return.
-    # Timeout is set to 30 as sometimes it seems to take a while to
+    # Timeout is set to 45 as sometimes it seems to take a while to
     # get back to a console, e.g.
-    # https://openqa.fedoraproject.org/tests/437570
-    console_login(user=>'root', timeout=>30);
+    # https://openqa.stg.fedoraproject.org/tests/666186
+    console_login(user=>'root', timeout=>45);
 }
 
 sub start_with_launcher {
