@@ -2483,6 +2483,50 @@
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vnc_server" },
+                    },
+                    {
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vnc_client" },
+                    },
+                    {
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_server" },
+                    },
+                    {
+                      machine    => { name => "ppc64le" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_client" },
+                    },
+                    {
                       group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 20,
@@ -3525,6 +3569,50 @@
                                       version => "*",
                                     },
                       test_suite => { name => "install_repository_hd_variation" },
+                    },
+                    {
+                      machine    => { name => "aarch64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vnc_server" },
+                    },
+                    {
+                      machine    => { name => "aarch64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vnc_client" },
+                    },
+                    {
+                      machine    => { name => "aarch64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_server" },
+                    },
+                    {
+                      machine    => { name => "aarch64" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_client" },
                     },
                     {
                       group_name => "Fedora AArch64",
