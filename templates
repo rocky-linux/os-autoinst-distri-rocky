@@ -4286,6 +4286,10 @@
                         { key => "QEMUVGA", value => "virtio" },
                         { key => "QEMURAM", value => 4096 },
                         { key => "QEMUCPU", value => "host" },
+                        # pseries-4.0 is a workaround for
+                        # https://bugzilla.redhat.com/show_bug.cgi?id=1769600
+                        # usb=off is an os-autoinst default when QEMUMACHINE is not set
+                        { key => "QEMUMACHINE", value => "pseries-4.0 usb=off" },
                         { key => "ARCH_BASE_MACHINE", value => "ppc64le" },
                         { key => "WORKER_CLASS", value => "qemu_ppc64le" },
                         { key => "PART_TABLE_TYPE", value => "mbr"},
