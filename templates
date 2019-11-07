@@ -823,6 +823,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_server" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 40,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Server-dvd-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "install_vncconnect_client" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 20,
                       product    => {
                                       arch    => "x86_64",
@@ -5157,6 +5179,35 @@
                         { key => "HDD_1", value => "disk_f%CURRREL%_desktop_4_x86_64.img" },
                         { key => "PARALLEL_WITH", value => "install_vnc_server" },
                         { key => "PREINSTALL", value => "_graphical_wait_login _vnc_client_connect" },
+                        { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_vncconnect_server",
+                      settings => [
+                        { key => "VNC_SERVER", value => "1" },
+                        { key => "GRUB", value => "inst.vnc inst.vncconnect=10.0.2.117:5500 net.ifnames=0 biosdevname=0 ip=10.0.2.116::10.0.2.2:255.255.255.0:vnc003.domain.local:eth0:off" },
+                        # it's important that we set PARALLEL_WITH *here* and
+                        # not for the client test due to mutex locking - we
+                        # want the client test to be the 'parent' as it makes
+                        # the mutex stuff simpler
+                        { key => "PARALLEL_WITH", value => "install_vncconnect_client" },
+                        { key => "INSTALL_UNLOCK", value => "vncconnect_client_ready" },
+                        { key => "NICTYPE", value => "tap" },
+                        { key => "WORKER_CLASS", value => "tap" },
+                      ],
+                    },
+                    {
+                      name => "install_vncconnect_client",
+                      settings => [
+                        { key => "VNC_CLIENT", value => "1" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "INSTALL", value => "1" },
+                        { key => "DESKTOP", value => "gnome" },
+                        { key => "HDD_1", value => "disk_f%CURRREL%_desktop_4_x86_64.img" },
+                        { key => "PREINSTALL", value => "_graphical_wait_login _vncconnect_client_setup" },
                         { key => "GRUB_POSTINSTALL", value => "net.ifnames=0 biosdevname=0" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
