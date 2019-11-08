@@ -79,6 +79,7 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `ANACONDA_TEXT` | boolean | `false`/not set | all | when specified, anaconda will run in text mode |
 | `ANACONDA_STATIC` | string (IPv4 address) | not set | `ANACONDA_TEXT` | If set, will set up static networking using the chosen IP address during install |
 | `POST_STATIC` | string (space-separated IPv4 address and hostname) | not set | nothing | If set, will set up static networking using the chosen IP address and hostname during early post-install |
+| `NO_UEFI_POST` | boolean | `false`/not set | nothing | If set, `uefi_postinstall` test will not be loaded even if `UEFI` is set (can be useful for non-English tests to avoid `uefi_postinstall` running loadkeys) |
 
 Run variables
 -------------

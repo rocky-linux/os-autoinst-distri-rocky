@@ -298,7 +298,7 @@ sub load_postinstall_tests() {
     }
     autotest::loadtest $storagepost if ($storagepost);
 
-    if (get_var("UEFI")) {
+    if (get_var("UEFI") &! get_var("NO_UEFI_POST")) {
         autotest::loadtest "tests/uefi_postinstall.pm";
     }
 

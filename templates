@@ -5177,6 +5177,7 @@
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "HDDSIZEGB", value => "13" },
                         { key => "QEMU_DISABLE_SNAPSHOTS", value => "1" },
+                        { key => "NO_UEFI_POST", value => "1" },
                       ],
                     },
                     {
