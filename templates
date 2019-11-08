@@ -5176,6 +5176,7 @@
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "HDDSIZEGB", value => "13" },
+                        { key => "QEMU_DISABLE_SNAPSHOTS", value => "1" },
                       ],
                     },
                     {
@@ -5191,6 +5192,7 @@
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "HDDSIZEGB", value => "13" },
+                        { key => "QEMU_DISABLE_SNAPSHOTS", value => "1" },
                       ],
                     },
                     {
@@ -5206,6 +5208,7 @@
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "HDDSIZEGB", value => "13" },
+                        { key => "QEMU_DISABLE_SNAPSHOTS", value => "1" },
                       ],
                     },
                     {
@@ -5221,6 +5224,7 @@
                         { key => "POSTINSTALL", value => "_console_login" },
                         { key => "REPOSITORY_VARIATION", value => "%LOCATION%" },
                         { key => "HDDSIZEGB", value => "13" },
+                        { key => "QEMU_DISABLE_SNAPSHOTS", value => "1" },
                       ],
                     },
                     {
