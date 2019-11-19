@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "printing_print_completed"
+  ],
+  "area": [
+    {
+      "xpos": 356,
+      "ypos": 49,
+      "width": 76,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

@@ -460,6 +460,28 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_printing" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "KDE-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_printing" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 22,
                       product    => {
                                       arch    => "x86_64",
@@ -1929,6 +1951,18 @@
                                       version => "*",
                                     },
                       test_suite => { name => "desktop_terminal" },
+                    },
+                    {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 20,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Workstation-live-iso",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_printing" },
                     },
                     {
                       group_name => "Fedora PowerPC",
@@ -5386,6 +5420,15 @@
                       name => "desktop_update_graphical",
                       settings => [
                         { key => "POSTINSTALL", value => "desktop_update_graphical" },
+                        { key => "START_AFTER_TEST", value => "install_default_upload" },
+                        { key => "BOOTFROM", value => "c" },
+                        { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
+                      ],
+                    },
+                    {
+                      name => "desktop_printing",
+                      settings => [
+                        { key => "POSTINSTALL", value => "desktop_printing" },
                         { key => "START_AFTER_TEST", value => "install_default_upload" },
                         { key => "BOOTFROM", value => "c" },
                         { key => "HDD_1", value => "disk_%FLAVOR%_%MACHINE%.qcow2" },
