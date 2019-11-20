@@ -2506,6 +2506,7 @@
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 40,
                       product    => {
@@ -2517,6 +2518,7 @@
                       test_suite => { name => "install_vnc_server" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 40,
                       product    => {
@@ -2528,6 +2530,7 @@
                       test_suite => { name => "install_vnc_client" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 40,
                       product    => {
@@ -2539,6 +2542,7 @@
                       test_suite => { name => "install_vncconnect_server" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
                       machine    => { name => "ppc64le" },
                       prio       => 40,
                       product    => {
@@ -3606,6 +3610,7 @@
                       test_suite => { name => "install_repository_hd_variation" },
                     },
                     {
+                      group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 40,
                       product    => {
@@ -3617,6 +3622,7 @@
                       test_suite => { name => "install_vnc_server" },
                     },
                     {
+                      group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 40,
                       product    => {
@@ -3628,6 +3634,7 @@
                       test_suite => { name => "install_vnc_client" },
                     },
                     {
+                      group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 40,
                       product    => {
@@ -3639,6 +3646,7 @@
                       test_suite => { name => "install_vncconnect_server" },
                     },
                     {
+                      group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 40,
                       product    => {
