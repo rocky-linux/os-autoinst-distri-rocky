@@ -709,7 +709,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_anaconda_serial_console" },
+                      test_suite => { name => "install_serial_console" },
                     },
                     {
                       machine    => { name => "64bit" },
@@ -2407,7 +2407,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_anaconda_serial_console" },
+                      test_suite => { name => "install_serial_console" },
                     },
                     {
                       group_name => "Fedora PowerPC",
@@ -3511,7 +3511,7 @@
                                       flavor  => "universal",
                                       version => "*",
                                     },
-                      test_suite => { name => "install_anaconda_serial_console" },
+                      test_suite => { name => "install_serial_console" },
                     },
                     {
                       group_name => "Fedora AArch64",
@@ -4729,7 +4729,7 @@
                       ],
                     },
                     {
-                      name => "install_anaconda_serial_console",
+                      name => "install_serial_console",
                       settings => [
                         { key => "ANACONDA_TEXT", value => "1" },
                         { key => "SERIAL_CONSOLE", value => "1" },
