@@ -18,7 +18,7 @@ sub root_console {
     if (get_var("SERIAL_CONSOLE")) {
         # select the first virtio terminal, for now we assume we can
         # always use that (we may have to make this smarter in future)
-        select_console("root-virtio-terminal");
+        select_console("virtio-console");
     }
     else {
         # For normal terminal emulation, use key combo to reach a tty

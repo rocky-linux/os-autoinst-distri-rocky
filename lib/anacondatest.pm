@@ -123,7 +123,7 @@ sub root_console {
     elsif (get_var("SERIAL_CONSOLE")) {
         # select first virtio terminal, we rely on anaconda having run
         # a root shell on it for us
-        select_console("root-virtio-terminal");
+        select_console("virtio-console");
         # as we don't have any live image serial install tests, we
         # know we don't need to login
         return;

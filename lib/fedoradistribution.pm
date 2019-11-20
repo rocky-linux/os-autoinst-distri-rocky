@@ -22,11 +22,13 @@ sub init() {
     my ($self) = @_;
 
     $self->SUPER::init();
-    # This initiates the serial console as "root-virtio-terminal".
+    # Initialize the first virtio serial console as "virtio-console"
     if (check_var('BACKEND', 'qemu')) {
-        $self->add_console('root-virtio-terminal', 'virtio-terminal', {});
+        $self->add_console('virtio-console', 'virtio-console', {});
         for (my $num = 1; $num < get_var('VIRTIO_CONSOLE_NUM', 1); $num++) {
-            $self->add_console('root-virtio-terminal' . $num, 'virtio-terminal', {socked_path => cwd() . '/virtio_console' . $num});
+            # initialize second virtio serial console as
+            # "virtio-console1", third as "virtio-console2" etc.
+            $self->add_console('virtio-console' . $num, 'virtio-console', {socked_path => cwd() . '/virtio_console' . $num});
         }
     }
 }

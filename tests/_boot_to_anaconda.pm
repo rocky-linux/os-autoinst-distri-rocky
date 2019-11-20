@@ -47,13 +47,13 @@ sub run {
         # displaying information but does not accept key strokes. Therefore,
         # let us use a real virtio console here.
         if (get_var("SERIAL_CONSOLE")) {
-            # this is icky. on ppc64 (OFW), virtio-terminal is hvc1 and
-            # virtio-terminal1 is hvc2, because the 'standard' serial
+            # this is icky. on ppc64 (OFW), virtio-console is hvc1 and
+            # virtio-console1 is hvc2, because the 'standard' serial
             # terminal is hvc0 (the firmware does this or something).
             # On other arches, the 'standard' serial terminal is ttyS0,
-            # so virtio-terminal becomes hvc0 and virtio-terminal1 is
+            # so virtio-console becomes hvc0 and virtio-console1 is
             # hvc1. We want anaconda to wind up on the console that is
-            # virtio-terminal1 in both cases
+            # virtio-console1 in both cases
             if (get_var("OFW")) {
                 $params .= "console=hvc2 ";
             }
@@ -96,9 +96,9 @@ sub run {
         if (get_var("ANACONDA_TEXT")) {
             # select that we don't want to start VNC; we want to run in text mode
             if (get_var("SERIAL_CONSOLE")) {
-                # we direct the installer to virtio-terminal1, and use
-                # virtio-terminal as a root console
-                select_console('root-virtio-terminal1');
+                # we direct the installer to virtio-console1, and use
+                # virtio-console as a root console
+                select_console('virtio-console1');
                 unless (wait_serial "Use text mode", timeout=>120) { die "Anaconda has not started."; }
                 type_string "2\n";
                 unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
