@@ -129,11 +129,16 @@ sub run {
     if (testapi::is_serial_terminal) {
         wait_serial("Installation complete", timeout=>$timeout);
         if (get_var("SERIAL_CONSOLE") && get_var("OFW")) {
+            # for some reason the check for a prompt times out here, even
+            # though '# ' is clearly in the terminal log; hack it out
+            my $origprompt = $testapi::distri->{serial_term_prompt};
+            $testapi::distri->{serial_term_prompt} = '';
             $self->root_console();
             # we need to force the system to load a console on both hvc1
             # and hvc2 for ppc64 serial console post-install tests
             assert_script_run 'chroot /mnt/sysimage systemctl enable serial-getty@hvc1';
             assert_script_run 'chroot /mnt/sysimage systemctl enable serial-getty@hvc2';
+            $testapi::distri->{serial_term_prompt} = $origprompt;
             # back to anaconda ui
             select_console("virtio-console1");
         }
