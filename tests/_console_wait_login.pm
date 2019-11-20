@@ -21,7 +21,7 @@ sub run {
     # do user login unless USER_LOGIN is set to string 'false'
     unless (get_var("USER_LOGIN") eq "false") {
         # this avoids us waiting 90 seconds for a # to show up
-        my $origprompt = $self->{serial_term_prompt};
+        my $origprompt = $testapi::distri->{serial_term_prompt};
         $testapi::distri->{serial_term_prompt} = '$ ';
         console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
         $testapi::distri->{serial_term_prompt} = $origprompt;
