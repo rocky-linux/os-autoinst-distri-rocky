@@ -1857,6 +1857,17 @@
                     },
                     {
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "Cloud_Base-qcow2-qcow2",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "cloud_autocloud" },
+                    },
+                    {
+                      machine    => { name => "64bit" },
                       prio       => 61,
                       product    => {
                                       arch    => "i386",
@@ -3416,6 +3427,18 @@
                       test_suite => { name => "desktop_background" },
                     },
                     {
+                      group_name => "Fedora PowerPC",
+                      machine    => { name => "ppc64le" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "ppc64le",
+                                      distri  => "fedora",
+                                      flavor  => "Cloud_Base-qcow2-qcow2",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "cloud_autocloud" },
+                    },
+                    {
                       group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 10,
@@ -4291,6 +4314,18 @@
                                     },
                       test_suite => { name => "server_firewall_default" },
                     },
+                    {
+                      group_name => "Fedora AArch64",
+                      machine    => { name => "aarch64" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "aarch64",
+                                      distri  => "fedora",
+                                      flavor  => "Cloud_Base-qcow2-qcow2",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "cloud_autocloud" },
+                    },
                   ],
   Machines     => [
                     {
@@ -4470,6 +4505,19 @@
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "DESKTOP", value => "kde" },
                         { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "x86_64",
+                      distri    => "fedora",
+                      flavor    => "Cloud_Base-qcow2-qcow2",
+                      name      => "",
+                      settings  => [
+                        { key => "ISO", value => "cloudinit.iso" },
+                        { key => "TEST_TARGET", value => "HDD_1" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
                                    ],
                       version   => "*",
                     },
@@ -4655,6 +4703,19 @@
                       version   => "*",
                     },
                     {
+                      arch      => "ppc64le",
+                      distri    => "fedora",
+                      flavor    => "Cloud_Base-qcow2-qcow2",
+                      name      => "",
+                      settings  => [
+                        { key => "ISO", value => "cloudinit.iso" },
+                        { key => "TEST_TARGET", value => "HDD_1" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
+                                   ],
+                      version   => "*",
+                    },
+                    {
                       arch      => "aarch64",
                       distri    => "fedora",
                       flavor    => "universal",
@@ -4693,6 +4754,19 @@
                         { key => "CANNED", value => "1" },
                         { key => "PACKAGE_SET", value => "default" },
                         { key => "TEST_TARGET", value => "ISO" }
+                                   ],
+                      version   => "*",
+                    },
+                    {
+                      arch      => "aarch64",
+                      distri    => "fedora",
+                      flavor    => "Cloud_Base-qcow2-qcow2",
+                      name      => "",
+                      settings  => [
+                        { key => "ISO", value => "cloudinit.iso" },
+                        { key => "TEST_TARGET", value => "HDD_1" },
+                        { key => "ROOT_PASSWORD", value => "weakpassword" },
+                        { key => "BOOTFROM", value => "c" },
                                    ],
                       version   => "*",
                     },
@@ -5885,6 +5959,12 @@
                       name => "install_no_user",
                       settings => [
                         { key => "INSTALL_NO_USER", value => "1" },
+                      ],
+                    },
+                    {
+                      name => "cloud_autocloud",
+                      settings => [
+                        { key => "POSTINSTALL", value => "autocloud" },
                       ],
                     },
                   ],
