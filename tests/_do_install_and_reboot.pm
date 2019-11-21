@@ -139,6 +139,10 @@ sub run {
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
     push (@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
+    # our approach for taking all these actions doesn't work on VNC
+    # installs, fortunately we don't need any of them in that case
+    # yet, so for now let's just flush the list here if we're VNC
+    @actions = () if (get_var("VNC_CLIENT"));
     # If we have no actions, let's just go ahead and reboot now,
     # unless this is memcheck
     unless (@actions) {
