@@ -4959,7 +4959,7 @@
                         { key => "KICKSTART", value => "1" },
                         { key => "USER_LOGIN", value => "false" },
                         { key => "ROOT_PASSWORD", value => "111111" },
-                        { key => "PARALLEL_WITH", value => "support_server:%ARCH_BASE_MACHINE%" },
+                        { key => "PARALLEL_WITH", value => "support_server@%ARCH_BASE_MACHINE%" },
                         { key => "NICTYPE", value => "tap" },
                         { key => "WORKER_CLASS", value => "tap" },
                       ],
