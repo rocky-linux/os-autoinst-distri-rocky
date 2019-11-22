@@ -113,7 +113,11 @@ sub run {
         else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
-                _assert_and_click("live_start_anaconda_icon", timeout=>300);
+                assert_screen "live_start_anaconda_icon", 300;
+                # seems that clicking as soon as we see it sometimes
+                # fails on KDE, so wait a bit then click it
+                sleep 5;
+                click_lastmatch;
             }
             my $language = get_var('LANGUAGE') || 'english';
             # wait for anaconda to appear; we click to work around
