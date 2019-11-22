@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 123,
+      "height": 16,
+      "ypos": 8,
+      "xpos": 340,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pimexporter_runs"
+  ]
+}
