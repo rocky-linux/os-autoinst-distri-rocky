@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 343,
+      "height": 21,
+      "width": 264,
+      "ypos": 213
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-french",
+    "anaconda_install_user_creation_make_admin"
+  ]
+}

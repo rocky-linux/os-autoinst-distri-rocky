@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 19,
+      "xpos": 543,
+      "ypos": 340,
+      "width": 51
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "cockpit_updates_restart_ignore"
+  ]
+}

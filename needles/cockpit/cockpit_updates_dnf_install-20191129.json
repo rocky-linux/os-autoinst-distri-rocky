@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 900,
+      "height": 17,
+      "ypos": 326,
+      "width": 43,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "cockpit_updates_dnf_install"
+  ]
+}

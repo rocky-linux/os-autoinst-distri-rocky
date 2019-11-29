@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 246,
+      "width": 38,
+      "xpos": 807,
+      "height": 16,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "freeipa_webui_add_button"
+  ]
+}
