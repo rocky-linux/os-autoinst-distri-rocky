@@ -19,8 +19,8 @@ sub run {
     assert_and_click 'apps_stop';
     wait_still_screen 2;
     # deal with warning screen
-    if (check_screen("apps_run_firefox_stop", 1)) {
-        assert_and_click 'apps_run_firefox_stop';
+    if (check_screen("firefox_close_tabs", 1)) {
+        click_lastmatch;
     }
     wait_still_screen 2;
     # Register application
