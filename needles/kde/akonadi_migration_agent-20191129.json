@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 668,
+      "type": "match",
+      "width": 23,
+      "height": 17,
+      "xpos": 932
+    },
+    {
+      "type": "match",
+      "ypos": 644,
+      "height": 10,
+      "width": 15,
+      "xpos": 966
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "akonadi_migration_agent_running"
+  ]
+}
