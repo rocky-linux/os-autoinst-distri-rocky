@@ -2099,28 +2099,6 @@
                     },
                     {
                       machine    => { name => "64bit" },
-                      prio       => 82,
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "upgrade_desktop_32bit" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 92,
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "universal",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "upgrade_2_desktop_32bit" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
                       prio       => 92,
                       product    => {
                                       arch    => "i386",
@@ -5284,32 +5262,6 @@
                         { key => "UPGRADE", value => "1" },
                         { key => "DESKTOP", value => "gnome" },
                         { key => "ENCRYPT_PASSWORD", value => "weakpassword" },
-                        { key => "TEST_TARGET", value => "COMPOSE" },
-                      ],
-                    },
-                    {
-                      name => "upgrade_desktop_32bit",
-                      settings => [
-                        { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "USER_LOGIN", value => "test" },
-                        { key => "USER_PASSWORD", value => "weakpassword" },
-                        { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f%CURRREL%_desktop_4_i686.img" },
-                        { key => "UPGRADE", value => "1" },
-                        { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "COMPOSE" },
-                      ],
-                    },
-                    {
-                      name => "upgrade_2_desktop_32bit",
-                      settings => [
-                        { key => "ROOT_PASSWORD", value => "weakpassword" },
-                        { key => "USER_LOGIN", value => "test" },
-                        { key => "USER_PASSWORD", value => "weakpassword" },
-                        { key => "BOOTFROM", value => "c" },
-                        { key => "HDD_1", value => "disk_f%PREVREL%_desktop_4_i686.img" },
-                        { key => "UPGRADE", value => "1" },
-                        { key => "DESKTOP", value => "gnome" },
                         { key => "TEST_TARGET", value => "COMPOSE" },
                       ],
                     },
