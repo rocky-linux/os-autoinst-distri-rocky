@@ -134,50 +134,6 @@
                       product    => {
                                       arch    => "x86_64",
                                       distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 100,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "memory_check" },
-                    },
-                    {
-                      machine    => { name => "uefi" },
-                      prio       => 100,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "memory_check" },
-                    },
-                    {
-                      machine    => { name => "uefi" },
-                      prio       => 16,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 15,
-                      product    => {
-                                      arch    => "x86_64",
-                                      distri  => "fedora",
                                       flavor  => "KDE-live-iso",
                                       version => "*",
                                     },
@@ -1928,28 +1884,6 @@
                                       arch    => "i386",
                                       distri  => "fedora",
                                       flavor  => "Everything-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "install_default" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 100,
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
-                                      version => "*",
-                                    },
-                      test_suite => { name => "memory_check" },
-                    },
-                    {
-                      machine    => { name => "64bit" },
-                      prio       => 67,
-                      product    => {
-                                      arch    => "i386",
-                                      distri  => "fedora",
-                                      flavor  => "Workstation-boot-iso",
                                       version => "*",
                                     },
                       test_suite => { name => "install_default" },
@@ -4473,18 +4407,6 @@
                     {
                       arch      => "x86_64",
                       distri    => "fedora",
-                      flavor    => "Workstation-boot-iso",
-                      name      => "",
-                      settings  => [
-                        { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" },
-                        { key => "HDDSIZEGB", value => "13" }
-                                   ],
-                      version   => "*",
-                    },
-                    {
-                      arch      => "x86_64",
-                      distri    => "fedora",
                       flavor    => "Workstation-live-iso",
                       name      => "",
                       settings  => [
@@ -4558,18 +4480,6 @@
                       name      => "",
                       settings  => [
                         { key => "TEST_TARGET", value => "ISO" }
-                                   ],
-                      version   => "*",
-                    },
-                    {
-                      arch      => "i386",
-                      distri    => "fedora",
-                      flavor    => "Workstation-boot-iso",
-                      name      => "",
-                      settings  => [
-                        { key => "DESKTOP", value => "gnome" },
-                        { key => "TEST_TARGET", value => "ISO" },
-                        { key => "HDDSIZEGB", value => "12" }
                                    ],
                       version   => "*",
                     },
