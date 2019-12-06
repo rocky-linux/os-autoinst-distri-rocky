@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "ypos": 364,
-      "width": 25,
-      "height": 14,
-      "xpos": 702,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "freeipa_webui_add_button"
-  ]
+    "area": [
+        {
+            "height": 14,
+            "type": "match",
+            "width": 32,
+            "xpos": 698,
+            "ypos": 364
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "freeipa_webui_add_button"
+    ]
 }
