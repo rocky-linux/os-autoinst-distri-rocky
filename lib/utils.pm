@@ -503,9 +503,18 @@ sub _repo_setup_updates {
     # installed, but was not
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
-    # FIXME workaround #1766451; remove this once the updates are all
-    # stable
-    assert_script_run "koji download-build --arch=" . get_var("ARCH") . " --arch=noarch jss-4.6.2-2.fc" . get_var("VERSION"), 600;
+    # FIXME make sure we have good selinux-policy/container-selinux
+    # to avoid issues in GNOME Software and/or upower; remove when
+    # updates go stable
+    my $seladvisory = "FEDORA-2019-fefda9dd5e"; # F31
+    $seladvisory = "FEDORA-2019-e9d8868185" if (get_var("VERSION") eq "30");
+    assert_script_run "bodhi updates download --updateid=$seladvisory", 180;
+    # FIXME hopefully avoid certificate errors particularly in freeipa
+    # tests; remove when updates go stable
+    my $nssadvisory = "FEDORA-2019-ff27bbf69a"; # F31
+    $nssadvisory = "FEDORA-2019-8fbc65ef9e" if (get_var("VERSION") eq "30");
+    assert_script_run "bodhi updates download --updateid=$nssadvisory", 180;
+
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file, unless this is the support_server test
