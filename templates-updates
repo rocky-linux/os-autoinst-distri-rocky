@@ -249,6 +249,30 @@
                     {
                       group_name => "Fedora Updates",
                       machine    => { name => "64bit" },
+                      prio       => 30,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-workstation",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_printing" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
+                      prio       => 32,
+                      product    => {
+                                      arch    => "x86_64",
+                                      distri  => "fedora",
+                                      flavor  => "updates-kde",
+                                      version => "*",
+                                    },
+                      test_suite => { name => "desktop_printing" },
+                    },
+                    {
+                      group_name => "Fedora Updates",
+                      machine    => { name => "64bit" },
                       prio       => 40,
                       product    => {
                                       arch    => "x86_64",
