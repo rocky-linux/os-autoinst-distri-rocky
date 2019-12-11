@@ -437,6 +437,7 @@ sub _repo_setup_updates {
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
+    my $version = get_var("VERSION");
     repos_mirrorlist();
     if (get_var("DEVELOPMENT")) {
         # Disable updates-testing so other bad updates don't break us
@@ -504,13 +505,30 @@ sub _repo_setup_updates {
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
 
+    # we periodically need to pull an update from updates-testing in
+    # to fix some bug or other. so, here's an organized way to do it.
+    # we do this here so the workaround packages are in the repo data
+    # but *not* in the package lists generated above (those should
+    # only include packages from the update under test). we'll define
+    # a hash of releases and update IDs. if no workarounds are needed
+    # for any release, the hash can be empty and this will do nothing
+    my %workarounds = (
+        "30" => ['FEDORA-2019-9ff3036c0a'],
+        "31" => ['FEDORA-2019-6f121fa8a0']
+    );
+    # then we'll download each update for our release:
+    my $advisories = $workarounds{$version};
+    foreach my $advisory (@$advisories) {
+        assert_script_run "bodhi updates download --updateid=$advisory", 180;
+    }
+
     # create the repo metadata
     assert_script_run "createrepo .";
     # write a repo config file, unless this is the support_server test
     # and it is running on a different release than the update is for
     # (in this case we need the repo to exist but do not want to use
     # it on the actual support_server system)
-    unless (get_var("TEST") eq "support_server" && get_var("VERSION") ne get_var("CURRREL")) {
+    unless (get_var("TEST") eq "support_server" && $version ne get_var("CURRREL")) {
         assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
         # run an update now (except for upgrade tests)
         script_run "dnf -y update", 900 unless (get_var("UPGRADE"));
