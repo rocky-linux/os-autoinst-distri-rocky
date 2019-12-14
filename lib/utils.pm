@@ -237,9 +237,11 @@ sub console_login {
         assert_screen [$good, 'console_password_required'], 30;
         # on a live image, just the user name will be enough
         if (match_has_tag $good) {
-            # clear the screen (so the remaining login prompt text doesn't
-            # confuse subsequent runs of this)
-            type_string "clear\n";
+            # clear the screen (so the remaining login prompt text
+            # doesn't confuse subsequent runs of this)
+            my $clearstr = "clear\n";
+            $clearstr = "cleqr\n" if (get_var("LANGUAGE") eq 'french');
+            type_string $clearstr;
             _console_login_finish();
             return;
         }
@@ -265,9 +267,11 @@ sub console_login {
             $timeout = 90 if (get_var("ARCH") eq "aarch64");
             assert_screen($good, $timeout);
         }
-        # clear the screen (so the remaining login prompt text doesn't
-        # confuse subsequent runs of this)
-        type_string "clear\n";
+        # clear the screen (so the remaining login prompt text
+        # doesn't confuse subsequent runs of this)
+        my $clearstr = "clear\n";
+        $clearstr = "cleqr\n" if (get_var("LANGUAGE") eq 'french');
+        type_string $clearstr;
     }
     _console_login_finish();
 }
