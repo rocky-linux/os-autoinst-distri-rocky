@@ -26,7 +26,19 @@ sub run {
     # check_type_string in cockpit because of that fucking constantly
     # scrolling graph
     start_cockpit(1);
-    assert_and_click "cockpit_join_domain_button";
+    # on cockpit 209+ we have to scroll down before the button is
+    # visible
+    if (check_screen "cockpit_join_domain_button", 5) {
+        click_lastmatch;
+    }
+    else {
+        # to activate the right pane
+        assert_and_click "cockpit_main";
+        send_key "pgdn";
+        # wait out scroll...
+        wait_still_screen 2;
+        assert_and_click "cockpit_join_domain_button", 5;
+    }
     assert_screen "cockpit_join_domain";
     send_key "tab";
     sleep 3;
