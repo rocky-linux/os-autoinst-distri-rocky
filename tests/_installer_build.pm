@@ -8,19 +8,10 @@ sub run {
     my $version = get_var("VERSION");
     my $advortask = get_var("ADVISORY_OR_TASK");
     my $arch = get_var("ARCH");
-    # we need lorax from u-t for f28 atm it seems
-    my $loraxcmd = "dnf -y ";
-    $loraxcmd .= "--enablerepo=updates-testing " if (get_var("VERSION") eq "28");
-    $loraxcmd .= "install lorax";
-    assert_script_run $loraxcmd, 90;
+    assert_script_run "dnf -y install lorax", 90;
     # this 'temporary file cleanup' thing can actually wipe bits of
     # the lorax install root while lorax is still running...
     assert_script_run "systemctl stop systemd-tmpfiles-clean.timer";
-    # dracut-fips doesn't exist any more; this breaks f28 builds as
-    # it *did* exist when f28 came out, so lorax tries to use
-    # dracut-fips from the frozen release repo with newer lorax from
-    # the updates repo which obsoletes it, and gets confused
-    assert_script_run 'sed -i -e "s,dracut-fips,,g" /usr/share/lorax/templates.d/99-generic/runtime-install.tmpl';
     assert_script_run "mkdir -p /root/imgbuild";
     assert_script_run "pushd /root/imgbuild";
     assert_script_run "setenforce Permissive";
