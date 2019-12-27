@@ -57,7 +57,7 @@ sub _set_root_password {
 sub _do_root_and_user {
     _set_root_password();
     # Wait out animation
-    sleep 8;
+    wait_still_screen 8;
     # Set user details, unless the test is configured not to create one
     anaconda_create_user() unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
     # Check username (and hence keyboard layout) if non-English
