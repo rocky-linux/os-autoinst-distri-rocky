@@ -16,7 +16,7 @@ use Cwd;
 
 # importing whole testapi creates circular dependency, so import only
 # necessary functions from testapi
-use testapi qw(check_var get_var send_key type_string wait_idle assert_screen);
+use testapi qw(check_var get_var send_key type_string assert_screen);
 
 sub init() {
     my ($self) = @_;
