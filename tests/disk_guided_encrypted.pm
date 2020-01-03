@@ -15,7 +15,7 @@ sub run {
     assert_and_click "anaconda_spoke_done";
 
     # type password for disk encryption
-    wait_idle 5;
+    sleep 5;
     if (get_var("SWITCHED_LAYOUT")) {
         desktop_switch_layout "ascii", "anaconda";
     }
