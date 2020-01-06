@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "ypos": 353,
+      "xpos": 341,
+      "height": 61,
+      "width": 344,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "'password' prompt text is left-aligned, should be right-aligned - https://bugzilla.redhat.com/show_bug.cgi?id=1783689"
+    }
+  ],
+  "tags": [
+    "DESKTOP-gnome",
+    "LANGUAGE-arabic",
+    "graphical_login_input"
+  ]
+}
