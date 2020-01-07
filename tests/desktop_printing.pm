@@ -30,9 +30,9 @@ sub run {
     }
 
     # Open the text editor and print the file.
-    send_key "alt-f2";
+    wait_screen_change { send_key "alt-f2"; };
     wait_still_screen(stilltime=>5, similarity_level=>45);
-    type_safely "$editor /home/test/testfile.txt\n";
+    type_very_safely "$editor /home/test/testfile.txt\n";
     wait_still_screen(stilltime=>5, similarity_level=>44);
     # Print the file using the Cups-PDF printer
     send_key "ctrl-p";
