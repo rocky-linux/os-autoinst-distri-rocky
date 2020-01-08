@@ -51,7 +51,7 @@ sub start_webui {
         assert_and_click "firefox_refresh";
         assert_screen ["freeipa_webui_login", $user_screen], 30;
     }
-    wait_still_screen 5;
+    wait_still_screen(stilltime=>5, similarity_level=>45);
     # softfail on kerberos ticket bugs meaning we get auto-logged in
     # as the requested user when we don't expect to be
     if (match_has_tag $user_screen) {
