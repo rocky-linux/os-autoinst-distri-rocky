@@ -50,9 +50,6 @@ sub run {
     type_string("monkeys123", 4);
     sleep 3;
     assert_and_click "cockpit_join_button";
-    # check we hit the progress screen, so we fail faster if it's
-    # broken
-    assert_screen "cockpit_join_progress";
     # join involves package installs, so it may take some time
     assert_screen "cockpit_join_complete", 300;
     # quit browser to return to console
