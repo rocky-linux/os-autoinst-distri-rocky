@@ -757,19 +757,10 @@ sub quit_firefox {
     # expect to get to either the tabs warning or a console
     if (check_screen ["user_console", "root_console", "firefox_close_tabs"], 30) {
         # if we hit the tabs warning, click it
-        assert_and_click "firefox_close_tabs" if (match_has_tag "firefox_close_tabs");
+        click_lastmatch if (match_has_tag "firefox_close_tabs");
     }
-    # FIXME workaround for RHBZ #1663050 - with systemd 240, at this
-    # point the tty quits and we wind up back at the login prompt
-    wait_still_screen 5;
-    # on all paths where we hit this sub, we want to be logged in as
-    # root, so let's just run through console_login again. This is
-    # fine for older releases which don't have the bug, console_login
-    # will just notice we're already logged in as root and return.
-    # Timeout is set to 45 as sometimes it seems to take a while to
-    # get back to a console, e.g.
-    # https://openqa.stg.fedoraproject.org/tests/666186
-    console_login(user=>'root', timeout=>45);
+    # it's a bit odd if we reach here, but could mean we quit to a
+    # desktop, or the firefox_close_tabs needle went stale...
 }
 
 sub start_with_launcher {
