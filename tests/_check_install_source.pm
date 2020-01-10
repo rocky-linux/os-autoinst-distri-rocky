@@ -20,9 +20,7 @@ sub run {
 
     # check that the repo was used
     $self->root_console;
-    # inst.addrepo doesn't actually work in < F29, so don't check it
-    my $version = lc(get_var("VERSION"));
-    if ($addrepourl && ($version eq 'rawhide' || $version > 28)) {
+    if ($addrepourl) {
         if ($addrepourl =~ m,^nfs://,,) {
             # this line tells us it set up a repo for our URL...
             assert_script_run 'grep "repo addrepo.*' . ${addrepourl} . '" /tmp/packaging.log';
