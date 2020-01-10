@@ -15,8 +15,6 @@ sub run {
     # set up imudp module
     assert_script_run 'sed -i -e "s,#module(load=\"imudp\"),module(load=\"imudp\"),g" /etc/rsyslog.conf';
     assert_script_run 'sed -i -e "s,#input(type=\"imudp\",input(type=\"imudp\",g" /etc/rsyslog.conf';
-    # for debugging
-    upload_logs "/etc/rsyslog.conf";
     # open firewall port
     assert_script_run 'firewall-cmd --permanent --add-port=514/udp';
     assert_script_run 'firewall-cmd --reload';
