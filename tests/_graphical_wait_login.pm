@@ -34,10 +34,10 @@ sub run {
         }
         $wait_time = 300;
     }
-    # Wait for the login screen, unless we're doing an > 28 GNOME no
-    # user install, which transitions straight from g-i-s to logged-in
+    # Wait for the login screen, unless we're doing a GNOME no user
+    # install, which transitions straight from g-i-s to logged-in
     # desktop
-    unless (get_var("DESKTOP") eq 'gnome' && ($version > 28 || $version eq "Rawhide") && get_var("INSTALL_NO_USER")) {
+    unless (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         boot_to_login_screen(timeout => $wait_time);
         # if USER_LOGIN is set to string 'false', we're done here
         return if (get_var("USER_LOGIN") eq "false");
