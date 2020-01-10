@@ -443,6 +443,10 @@ sub _repo_setup_updates {
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
     my $version = get_var("VERSION");
     repos_mirrorlist();
+    # this can be used for debugging repo config if something is wrong
+#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
+#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
+#    }
     if (get_var("DEVELOPMENT")) {
         # Disable updates-testing so other bad updates don't break us
         # this will do nothing on upgrade tests as we're on a stable
@@ -490,14 +494,6 @@ sub _repo_setup_updates {
     else {
         die "Neither ADVISORY_NVRS nor KOJITASK set! Don't know what to do";
     }
-    # for upgrade tests, we want to do the 'development' changes *after* we
-    # set up the update repo. We don't do the f28 fixups as we don't have
-    # f28 fedora-repos.
-
-    # this can be used for debugging if something is going wrong
-#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
-#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
-#    }
 
     # log the exact packages in the update at test time, with their
     # source packages and epochs
