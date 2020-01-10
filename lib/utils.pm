@@ -578,8 +578,8 @@ sub gnome_initial_setup {
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
         # except 'language' is never *really* skipped (see above)
-        @nexts = grep {$_ ne 'keyboard'} @nexts if ($version eq 'rawhide' || $version > 27);
-        @nexts = grep {$_ ne 'timezone'} @nexts if ($version eq 'rawhide' || $version > 27);
+        @nexts = grep {$_ ne 'keyboard'} @nexts;
+        @nexts = grep {$_ ne 'timezone'} @nexts;
     }
     else {
         # 'timezone' and 'software' are suppressed for the 'existing user'
@@ -589,7 +589,7 @@ sub gnome_initial_setup {
     }
     # 'additional software sources' screen does not display on F28+:
     # https://bugzilla.gnome.org/show_bug.cgi?id=794825
-    @nexts = grep {$_ ne 'software'} @nexts if ($version eq 'rawhide' || $version > 27);
+    @nexts = grep {$_ ne 'software'} @nexts;
 
     assert_screen "next_button", $args{timeout};
     # wait a bit in case of animation
