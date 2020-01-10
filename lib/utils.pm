@@ -670,7 +670,7 @@ sub anaconda_create_user {
         @_
     );
     my $user_login = get_var("USER_LOGIN") || "test";
-    _assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
+    assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
     assert_screen "anaconda_install_user_creation_screen";
     # wait out animation
     wait_still_screen 2;
@@ -1086,26 +1086,6 @@ sub check_prerelease {
        if (check_screen "prerelease_note") {
             die "The PRERELEASE tag is shown, but it should NOT be.";
        }
-    }
-}
-
-sub _assert_and_click {
-    # this is a wrapper around assert_and_click which handles this:
-    # https://github.com/os-autoinst/os-autoinst/pull/1075/files
-    # it changed the signature without any backward compatibility, so
-    # earlier os-autoinsts require an *array* of args, but later ones
-    # require a *hash* of args. This works with both.
-    my $version = $OpenQA::Isotovideo::Interface::version;
-    my ($mustmatch, %args) = @_;
-    if ($version > 13) {
-        return assert_and_click($mustmatch, %args);
-    }
-    else {
-        $args{timeout}   //= $bmwqemu::default_timeout;
-        $args{button}    //= 'left';
-        $args{dclick}    //= 0;
-        $args{mousehide} //= 0;
-        return assert_and_click($mustmatch, $args{button}, $args{timeout}, 0, $args{dclick});
     }
 }
 

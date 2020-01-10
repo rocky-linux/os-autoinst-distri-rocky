@@ -48,7 +48,7 @@ sub run {
     # already be visible at this point, we may not need to refresh
     unless (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download'], 5) {
         # refresh updates
-        _assert_and_click('desktop_package_tool_update_refresh', timeout=>120);
+        assert_and_click('desktop_package_tool_update_refresh', timeout=>120);
     }
     # wait for refresh, then apply updates, moving the mouse every two
     # minutes to avoid the idle screen blank kicking in. Depending on

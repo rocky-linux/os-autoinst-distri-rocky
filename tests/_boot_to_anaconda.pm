@@ -113,17 +113,17 @@ sub run {
         else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
-                _assert_and_click("live_start_anaconda_icon", timeout=>300);
+                assert_and_click("live_start_anaconda_icon", timeout=>300);
                 unless (check_screen "anaconda_select_install_lang", 180) {
                     # click it again - on KDE since 2019-10 or so it seems
                     # like the first attempt sometimes just doesn't work
-                    _assert_and_click("live_start_anaconda_icon", timeout=>300);
+                    assert_and_click("live_start_anaconda_icon", timeout=>300);
                 }
             }
             my $language = get_var('LANGUAGE') || 'english';
             # wait for anaconda to appear; we click to work around
             # RHBZ #1566066 if it happens
-            _assert_and_click("anaconda_select_install_lang", timeout=>300);
+            assert_and_click("anaconda_select_install_lang", timeout=>300);
             # Select install language
             wait_screen_change { assert_and_click "anaconda_select_install_lang_input"; };
             type_safely $language;
