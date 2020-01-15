@@ -14,7 +14,7 @@ sub run {
     menu_launch_type('boxes');
     assert_and_click('boxes_new_connection');
     assert_and_click('boxes_remote');
-    type_safely("vnc://10.0.2.114:5901\n");
+    type_very_safely("vnc://10.0.2.114:5901\n");
     assert_and_click('boxes_allow_inhibit');
     assert_and_click('boxes_fullscreen');
 }

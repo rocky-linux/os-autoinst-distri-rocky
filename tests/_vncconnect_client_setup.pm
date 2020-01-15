@@ -16,7 +16,7 @@ sub run {
     desktop_vt;
     menu_launch_type 'terminal';
     wait_still_screen 5;
-    type_safely "vncviewer -FullScreen -listen\n";
+    type_very_safely "vncviewer -FullScreen -listen\n";
     mutex_create 'vncconnect_client_ready';
 }
 
