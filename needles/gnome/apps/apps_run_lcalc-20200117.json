@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 36,
+      "width": 111,
+      "height": 20,
+      "type": "match",
+      "xpos": 496
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_lcalc",
+    "libreoffice_any"
+  ]
+}

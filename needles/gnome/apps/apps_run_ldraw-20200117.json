@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 491,
+      "height": 25,
+      "type": "match",
+      "ypos": 33,
+      "width": 119
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_ldraw",
+    "libreoffice_any"
+  ]
+}

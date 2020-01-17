@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 10,
+      "type": "match",
+      "height": 22,
+      "ypos": 558,
+      "width": 120
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_run_software"
+  ]
+}
