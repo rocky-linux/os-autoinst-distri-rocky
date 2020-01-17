@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 410,
+      "width": 124,
+      "ypos": 197,
+      "type": "match",
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_fs_efi_filesystem"
+  ]
+}

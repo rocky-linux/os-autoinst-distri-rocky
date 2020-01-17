@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "ypos": 282,
+      "width": 140,
+      "height": 20,
+      "type": "match",
+      "xpos": 64
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_part_scheme_lvmthin",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-server"
+  ]
+}

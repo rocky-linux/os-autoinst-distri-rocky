@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 30,
+      "type": "match",
+      "ypos": 259,
+      "width": 27,
+      "xpos": 145
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_reclaim_space_first_partition",
+    "ENV-DISTRI-fedora"
+  ]
+}

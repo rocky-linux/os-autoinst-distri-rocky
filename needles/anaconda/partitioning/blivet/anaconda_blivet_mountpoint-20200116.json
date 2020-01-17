@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 324,
+      "ypos": 483,
+      "width": 215,
+      "type": "match",
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "anaconda_blivet_mountpoint"
+  ]
+}

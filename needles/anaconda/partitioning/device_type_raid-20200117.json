@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 508,
+      "type": "match",
+      "height": 23,
+      "ypos": 338,
+      "width": 68
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_part_device_type_raid",
+    "ENV-DISTRI-fedora"
+  ]
+}

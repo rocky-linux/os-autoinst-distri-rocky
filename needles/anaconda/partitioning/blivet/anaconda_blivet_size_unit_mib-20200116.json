@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 714,
+      "width": 25,
+      "ypos": 286,
+      "type": "match",
+      "height": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_size_unit_mib"
+  ]
+}

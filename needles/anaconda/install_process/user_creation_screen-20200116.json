@@ -1,0 +1,32 @@
+{
+  "area": [
+    {
+      "xpos": 270,
+      "type": "match",
+      "height": 17,
+      "ypos": 153,
+      "width": 69
+    },
+    {
+      "width": 62,
+      "ypos": 280,
+      "height": 17,
+      "type": "match",
+      "xpos": 279
+    },
+    {
+      "type": "match",
+      "height": 24,
+      "ypos": 43,
+      "width": 57,
+      "xpos": 10
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_user_creation_screen",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-english",
+    "ENV-FLAVOR-server"
+  ]
+}
