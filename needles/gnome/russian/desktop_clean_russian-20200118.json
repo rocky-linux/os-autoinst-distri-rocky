@@ -1,0 +1,25 @@
+{
+  "area": [
+    {
+      "xpos": 12,
+      "width": 44,
+      "ypos": 8,
+      "height": 15,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "height": 18,
+      "ypos": 4,
+      "width": 43,
+      "xpos": 968
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-fedora",
+    "LANGUAGE-russian",
+    "graphical_desktop_clean"
+  ]
+}

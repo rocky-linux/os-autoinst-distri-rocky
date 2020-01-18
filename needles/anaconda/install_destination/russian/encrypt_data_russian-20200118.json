@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "type": "match",
+      "width": 162,
+      "ypos": 577,
+      "xpos": 21
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_install_destination_encrypt_data"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 92,
+      "ypos": 537,
+      "height": 17,
+      "type": "match",
+      "xpos": 700
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_rawhide_accept_fate"
+  ]
+}

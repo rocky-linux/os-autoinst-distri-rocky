@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 604,
+      "ypos": 196,
+      "width": 125,
+      "type": "match",
+      "height": 20
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_select_install_lang_filtered",
+    "anaconda_select_install_lang_selected"
+  ]
+}
