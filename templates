@@ -3573,7 +3573,7 @@
                       test_suite => { name => "install_kickstart_user_creation" },
                     },
                     {
-              group_name => "Fedora AArch64",
+                      group_name => "Fedora AArch64",
                       machine    => { name => "aarch64" },
                       prio       => 30,
                       product    => {
