@@ -43,7 +43,7 @@ sub start_webui {
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
     disable_firefox_studies;
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.domain.local\n";
-    assert_screen ["freeipa_webui_login", $user_screen, "firefox_certificate_error"], 30;
+    assert_screen ["freeipa_webui_login", $user_screen, "firefox_certificate_error"], 60;
     if (match_has_tag "firefox_certificate_error") {
         # https://bugzilla.mozilla.org/show_bug.cgi?id=1530429
         record_soft_failure "Certificate validation error - likely Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1530429";
