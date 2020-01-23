@@ -1,0 +1,43 @@
+#!/bin/python3
+
+"""This is a sanity check for the Fedora Intermediate Format (fif) converter and loader. It reads
+in templates.old.json and templates-updates.old.json - which are expected to be our original-format
+templates in JSON format - runs them through the converter to the intermediate format, then runs
+them through the loader *from* the intermediate format, and (via DeepDiff, thanks jskladan!) checks
+that the results are equivalent to the input, pace a couple of expected differences.
+"""
+
+from deepdiff import DeepDiff
+import json
+import subprocess
+
+with open('templates.old.json', 'r') as tempfh:
+    origtemp = json.load(tempfh)
+with open('templates-updates.old.json', 'r') as updfh:
+    origupd = json.load(updfh)
+
+# run the converter
+subprocess.run(['./fifconverter.py'])
+# run the loader on the converted files
+subprocess.run(['./fifloader.py', '--write', 'templates.fif.json', 'templates-updates.fif.json'])
+with open('generated.json', 'r') as generatedfh:
+    generated = json.load(generatedfh)
+
+# merge origs
+origtemp['Products'].extend(origupd['Products'])
+origtemp['TestSuites'].extend(origupd['TestSuites'])
+origtemp['JobTemplates'].extend(origupd['JobTemplates'])
+
+for item in generated['Products']:
+    # we generate the product names in the converter, our original
+    # templates don't have them
+    item['name'] = ""
+for item in generated['JobTemplates']:
+    if item['group_name'] == 'fedora':
+        # we don't explicitly specify this in our original templates,
+        # but the converter adds it (rather than relying on openQA
+        # to guess when loading)
+        del item['group_name']
+ddiff = DeepDiff(origtemp, generated, ignore_order=True, report_repetition=True)
+# if this is just {}, we're good
+print(ddiff)

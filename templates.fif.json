@@ -1,0 +1,2064 @@
+{
+    "Machines": {
+        "64bit": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "64bit",
+                "PART_TABLE_TYPE": "mbr",
+                "QEMUCPU": "Nehalem",
+                "QEMUCPUS": "2",
+                "QEMURAM": "2048",
+                "QEMUVGA": "virtio",
+                "QEMU_VIRTIO_RNG": "1",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
+        },
+        "ARM": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "ARM",
+                "QEMU": "arm",
+                "QEMUCPUS": "2",
+                "QEMUMACHINE": "virt",
+                "QEMURAM": "1024",
+                "QEMU_NO_KVM": "1",
+                "QEMU_VIRTIO_RNG": "1",
+                "SERIALDEV": "ttyAMA0",
+                "TIMEOUT_SCALE": "5",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
+        },
+        "aarch64": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "aarch64",
+                "PART_TABLE_TYPE": "gpt",
+                "QEMU": "aarch64",
+                "QEMUCPU": "host",
+                "QEMUCPUS": "2",
+                "QEMUMACHINE": "virt",
+                "QEMURAM": 3072,
+                "QEMU_VIRTIO_RNG": "1",
+                "SERIALDEV": "ttyAMA0",
+                "TIMEOUT_SCALE": "1.5",
+                "UEFI": "1",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/aarch64/vars-template-pflash.raw",
+                "WORKER_CLASS": "qemu_aarch64"
+            }
+        },
+        "ppc64le": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "ppc64le",
+                "OFW": 1,
+                "PART_TABLE_TYPE": "mbr",
+                "QEMU": "ppc64",
+                "QEMUCPU": "host",
+                "QEMURAM": 4096,
+                "QEMUVGA": "virtio",
+                "QEMU_VIRTIO_RNG": "1",
+                "WORKER_CLASS": "qemu_ppc64le"
+            }
+        },
+        "uefi": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "64bit",
+                "PART_TABLE_TYPE": "gpt",
+                "QEMUCPU": "Nehalem",
+                "QEMUCPUS": "2",
+                "QEMURAM": "2048",
+                "QEMUVGA": "virtio",
+                "QEMU_VIRTIO_RNG": "1",
+                "UEFI": "1",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
+        }
+    },
+    "Products": {
+        "fedora-Cloud_Base-qcow2-qcow2-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "fedora-Everything-boot-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Everything-boot-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Everything-boot-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Everything-boot-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-KDE-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "KDE-live-iso",
+            "settings": {
+                "DESKTOP": "kde",
+                "LIVE": "1",
+                "PACKAGE_SET": "default",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Minimal-raw_xz-raw.xz-arm-*": {
+            "arch": "arm",
+            "distri": "fedora",
+            "flavor": "Minimal-raw_xz-raw.xz",
+            "settings": {
+                "TEST_TARGET": "HDD_2"
+            },
+            "version": "*"
+        },
+        "fedora-Server-boot-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Server-boot-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-boot-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Server-boot-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-boot-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Server-boot-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-dvd-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Server-dvd-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-dvd-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Server-dvd-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-dvd-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Server-dvd-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Silverblue-dvd_ostree-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Silverblue-dvd_ostree-iso",
+            "settings": {
+                "CANNED": "1",
+                "DESKTOP": "gnome",
+                "PACKAGE_SET": "default",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Silverblue-dvd_ostree-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Silverblue-dvd_ostree-iso",
+            "settings": {
+                "CANNED": "1",
+                "DESKTOP": "gnome",
+                "PACKAGE_SET": "default",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Workstation-live-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Workstation-live-iso",
+            "settings": {
+                "DESKTOP": "gnome",
+                "HDDSIZEGB": "13",
+                "LIVE": "1",
+                "PACKAGE_SET": "default",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Workstation-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Workstation-live-iso",
+            "settings": {
+                "DESKTOP": "gnome",
+                "LIVE": "1",
+                "PACKAGE_SET": "default",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-universal-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "universal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-universal-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "universal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-universal-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "universal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        }
+    },
+    "Profiles": {
+        "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Cloud_Base-qcow2-qcow2-aarch64-*"
+        },
+        "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*"
+        },
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-*"
+        },
+        "fedora-Everything-boot-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Everything-boot-iso-ppc64le-*"
+        },
+        "fedora-Everything-boot-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Everything-boot-iso-x86_64-*"
+        },
+        "fedora-Everything-boot-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Everything-boot-iso-x86_64-*"
+        },
+        "fedora-KDE-live-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-KDE-live-iso-x86_64-*"
+        },
+        "fedora-KDE-live-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-KDE-live-iso-x86_64-*"
+        },
+        "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": {
+            "machine": "ARM",
+            "product": "fedora-Minimal-raw_xz-raw.xz-arm-*"
+        },
+        "fedora-Server-boot-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Server-boot-iso-aarch64-*"
+        },
+        "fedora-Server-boot-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Server-boot-iso-ppc64le-*"
+        },
+        "fedora-Server-boot-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Server-boot-iso-x86_64-*"
+        },
+        "fedora-Server-boot-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Server-boot-iso-x86_64-*"
+        },
+        "fedora-Server-dvd-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Server-dvd-iso-aarch64-*"
+        },
+        "fedora-Server-dvd-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Server-dvd-iso-ppc64le-*"
+        },
+        "fedora-Server-dvd-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Server-dvd-iso-x86_64-*"
+        },
+        "fedora-Server-dvd-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Server-dvd-iso-x86_64-*"
+        },
+        "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Silverblue-dvd_ostree-iso-ppc64le-*"
+        },
+        "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Silverblue-dvd_ostree-iso-x86_64-*"
+        },
+        "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Silverblue-dvd_ostree-iso-x86_64-*"
+        },
+        "fedora-Workstation-live-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Workstation-live-iso-ppc64le-*"
+        },
+        "fedora-Workstation-live-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Workstation-live-iso-x86_64-*"
+        },
+        "fedora-Workstation-live-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Workstation-live-iso-x86_64-*"
+        },
+        "fedora-universal-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-universal-aarch64-*"
+        },
+        "fedora-universal-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-universal-ppc64le-*"
+        },
+        "fedora-universal-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-universal-x86_64-*"
+        },
+        "fedora-universal-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-universal-x86_64-*"
+        }
+    },
+    "TestSuites": {
+        "apps_startstop": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "STARTSTOP": "true",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "base_reboot_unmount": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 50,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_reboot_unmount",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_selinux": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_selinux",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_service_manipulation": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_service_manipulation",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_services_start": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_services_start",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_services_start_arm": {
+            "profiles": {
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42
+            },
+            "settings": {
+                "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NUMDISKS": "1",
+                "POSTINSTALL": "base_services_start",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_arm_image_deployment_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_system_logging": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_system_logging",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_update_cli": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_update_cli",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "cloud_autocloud": {
+            "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 30,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 30,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "POSTINSTALL": "autocloud"
+            }
+        },
+        "desktop_background": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_background",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "desktop_browser": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_browser",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "desktop_notifications_live": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 32,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "ENTRYPOINT": "desktop_notifications"
+            }
+        },
+        "desktop_notifications_postinstall": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 32,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "ENTRYPOINT": "desktop_notifications",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "desktop_printing": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_printing",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "desktop_terminal": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_terminal",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "desktop_update_graphical": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 32,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_update_graphical",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
+        "install_anaconda_text": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "ANACONDA_TEXT": "1"
+            }
+        },
+        "install_arabic_language": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "13",
+                "LANGUAGE": "arabic",
+                "PACKAGE_SET": "workstation",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "ROOT_PASSWORD": "weakpassword",
+                "SWITCHED_LAYOUT": "1",
+                "USER_LOGIN": "qwerty"
+            }
+        },
+        "install_arm_image_deployment_upload": {
+            "profiles": {
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 12
+            },
+            "settings": {
+                "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
+                "ENTRYPOINT": "install_arm_image_deployment _console_shutdown",
+                "HDD_1": "%HDD_2%",
+                "NUMDISKS": "1",
+                "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
+            }
+        },
+        "install_asian_language": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "13",
+                "INPUT_METHOD": "1",
+                "LANGUAGE": "japanese",
+                "PACKAGE_SET": "workstation",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "qwerty"
+            }
+        },
+        "install_blivet_btrfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_btrfs",
+                "POSTINSTALL": "disk_custom_btrfs_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_blivet_ext3": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_ext3",
+                "POSTINSTALL": "disk_custom_ext3_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_blivet_lvmthin": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_lvmthin",
+                "POSTINSTALL": "disk_custom_lvmthin_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_blivet_no_swap": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 50,
+                "fedora-universal-ppc64le-*-ppc64le": 50,
+                "fedora-universal-x86_64-*-64bit": 50,
+                "fedora-universal-x86_64-*-uefi": 51
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_no_swap",
+                "POSTINSTALL": "disk_custom_no_swap_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_blivet_software_raid": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "NUMDISKS": "2",
+                "PARTITIONING": "custom_blivet_software_raid",
+                "POSTINSTALL": "disk_custom_software_raid_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_blivet_xfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_xfs",
+                "POSTINSTALL": "disk_custom_xfs_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_btrfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_btrfs",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_cyrillic_language": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "13",
+                "LANGUAGE": "russian",
+                "PACKAGE_SET": "workstation",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "ROOT_PASSWORD": "weakpassword",
+                "SWITCHED_LAYOUT": "1",
+                "USER_LOGIN": "qwerty"
+            }
+        },
+        "install_default": {
+            "profiles": {
+                "fedora-Everything-boot-iso-ppc64le-*-ppc64le": 62,
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 10,
+                "fedora-Everything-boot-iso-x86_64-*-uefi": 11,
+                "fedora-KDE-live-iso-x86_64-*-uefi": 16,
+                "fedora-Server-boot-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-boot-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-boot-iso-x86_64-*-64bit": 10,
+                "fedora-Server-boot-iso-x86_64-*-uefi": 11,
+                "fedora-Server-dvd-iso-x86_64-*-uefi": 11,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": 51,
+                "fedora-Workstation-live-iso-x86_64-*-uefi": 11
+            },
+            "settings": {
+                "PACKAGE_SET": "default",
+                "POSTINSTALL": "_collect_data"
+            }
+        },
+        "install_default_upload": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 15,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "PACKAGE_SET": "default",
+                "POSTINSTALL": "_collect_data",
+                "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
+            }
+        },
+        "install_delete_partial": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "HDD_1": "disk_full_%PART_TABLE_TYPE%.img",
+                "PARTITIONING": "guided_delete_partial",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_delete_pata": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 20,
+                "fedora-universal-x86_64-*-uefi": 21
+            },
+            "settings": {
+                "HDDMODEL": "ide-hd",
+                "HDD_1": "disk_full_mbr.img",
+                "PARTITIONING": "guided_delete_all"
+            }
+        },
+        "install_european_language": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "13",
+                "LANGUAGE": "french",
+                "NO_UEFI_POST": "1",
+                "PACKAGE_SET": "workstation",
+                "POSTINSTALL": "_console_login",
+                "QEMU_DISABLE_SNAPSHOTS": "1",
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "qwerty"
+            }
+        },
+        "install_ext3": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_ext3",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_iscsi": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "ANACONDA_STATIC": "10.0.2.111",
+                "INSTALL_UNLOCK": "support_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "PARTITIONING": "custom_iscsi",
+                "ROOT_PASSWORD": "weakpassword",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_kickstart_firewall_configured": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "GRUB": "inst.ks=http://fedorapeople.org/groups/qa/kickstarts/firewall-configured-net.ks",
+                "KICKSTART": "1",
+                "POSTINSTALL": "firewall_configured",
+                "ROOT_PASSWORD": "anaconda",
+                "USER_LOGIN": "false"
+            }
+        },
+        "install_kickstart_firewall_disabled": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "GRUB": "inst.ks=http://fedorapeople.org/groups/qa/kickstarts/firewall-disabled-net.ks",
+                "KICKSTART": "1",
+                "POSTINSTALL": "firewall_disabled",
+                "ROOT_PASSWORD": "anaconda",
+                "USER_LOGIN": "false"
+            }
+        },
+        "install_kickstart_hdd": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "GRUB": "inst.ks=hd:vdb1:/root-user-crypted-net.ks",
+                "HDD_2": "disk_ks_3.img",
+                "KICKSTART": "1",
+                "NUMDISKS": "2",
+                "ROOT_PASSWORD": "111111",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "test"
+            }
+        },
+        "install_kickstart_nfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "GRUB": "inst.ks=nfs:10.0.2.110:/export/root-user-crypted-net.ks",
+                "INSTALL_UNLOCK": "support_ready",
+                "KICKSTART": "1",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "ROOT_PASSWORD": "111111",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_kickstart_user_creation": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "GRUB": "inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks",
+                "KICKSTART": "1",
+                "ROOT_PASSWORD": "111111",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "test"
+            }
+        },
+        "install_lvmthin": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_lvmthin",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_mirrorlist_graphical": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "MIRRORLIST_GRAPHICAL": "1"
+            }
+        },
+        "install_multi": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20,
+                "fedora-universal-x86_64-*-uefi": 21
+            },
+            "settings": {
+                "HDD_2": "disk_full_mbr.img",
+                "NUMDISKS": "2",
+                "PARTITIONING": "guided_multi",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_multi_empty": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "NUMDISKS": "2",
+                "PARTITIONING": "guided_multi_empty_all",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_no_swap": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 50,
+                "fedora-universal-ppc64le-*-ppc64le": 50,
+                "fedora-universal-x86_64-*-64bit": 50,
+                "fedora-universal-x86_64-*-uefi": 51
+            },
+            "settings": {
+                "PARTITIONING": "custom_no_swap",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_no_user": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 21
+            },
+            "settings": {
+                "INSTALL_NO_USER": "1"
+            }
+        },
+        "install_package_set_kde": {
+            "profiles": {
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 50
+            },
+            "settings": {
+                "DESKTOP": "kde",
+                "HDDSIZEGB": "12",
+                "PACKAGE_SET": "kde",
+                "POSTINSTALL": "_collect_data",
+                "REPOSITORY_VARIATION": "%LOCATION%"
+            }
+        },
+        "install_package_set_minimal": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "PACKAGE_SET": "minimal",
+                "POSTINSTALL": "_collect_data"
+            }
+        },
+        "install_pxeboot": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "+ISO": "",
+                "DELAYED_START": "1",
+                "KICKSTART": "1",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server@%ARCH_BASE_MACHINE%",
+                "PXEBOOT": "once",
+                "ROOT_PASSWORD": "111111",
+                "TEST_TARGET": "COMPOSE",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_repository_hd_variation": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "HDD_2": "disk_full_mbr.img",
+                "NUMDISKS": "2",
+                "PREINSTALL": "preinstall_iso_in_hd",
+                "REPOSITORY_VARIATION": "hd:vdb1:/fedora_image.iso"
+            }
+        },
+        "install_repository_http_graphical": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "REPOSITORY_GRAPHICAL": "%LOCATION%"
+            }
+        },
+        "install_repository_http_variation": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "REPOSITORY_VARIATION": "%LOCATION%"
+            }
+        },
+        "install_repository_nfs_graphical": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "INSTALL_UNLOCK": "support_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "REPOSITORY_GRAPHICAL": "nfs:nfsvers=4:10.0.2.110:/repo",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_repository_nfs_variation": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "INSTALL_UNLOCK": "support_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "REPOSITORY_VARIATION": "nfs:nfsvers=4:10.0.2.110:/repo",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_repository_nfsiso_variation": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "INSTALL_UNLOCK": "support_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "REPOSITORY_VARIATION": "nfs:nfsvers=4:10.0.2.110:/iso/image.iso",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_rescue_encrypted": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 31,
+                "fedora-universal-ppc64le-*-ppc64le": 31,
+                "fedora-universal-x86_64-*-64bit": 31,
+                "fedora-universal-x86_64-*-uefi": 32
+            },
+            "settings": {
+                "BOOTFROM": "d",
+                "ENTRYPOINT": "rescue_mode_encrypted",
+                "HDD_1": "disk_%MACHINE%_encrypted.qcow2",
+                "START_AFTER_TEST": "install_simple_encrypted"
+            }
+        },
+        "install_sata": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 20,
+                "fedora-universal-x86_64-*-uefi": 21
+            },
+            "settings": {
+                "ATACONTROLLER": "ich9-ahci",
+                "HDDMODEL": "ide-drive,bus=ahci0.0"
+            }
+        },
+        "install_scsi_updates_img": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "CDMODEL": "scsi-cd",
+                "GRUB": "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-openqa.img",
+                "HDDMODEL": "scsi-hd",
+                "SCSICONTROLLER": "virtio-scsi-pci",
+                "TEST_UPDATES": "1"
+            }
+        },
+        "install_serial_console": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "ANACONDA_TEXT": "1",
+                "NO_UEFI_POST": "1",
+                "SERIAL_CONSOLE": "1",
+                "VIRTIO_CONSOLE_NUM": "2"
+            }
+        },
+        "install_shrink_ext4": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "HDD_1": "disk_shrink_ext4.img",
+                "PARTITIONING": "guided_shrink",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_shrink_ntfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "HDD_1": "disk_shrink_ntfs.img",
+                "PARTITIONING": "guided_shrink",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_simple_encrypted": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "STORE_HDD_1": "disk_%MACHINE%_encrypted.qcow2"
+            }
+        },
+        "install_simple_free_space": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "HDD_1": "disk_freespace_%PART_TABLE_TYPE%.img",
+                "PARTITIONING": "guided_free_space",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_software_raid": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-x86_64-*-uefi": 31
+            },
+            "settings": {
+                "NUMDISKS": "2",
+                "PARTITIONING": "custom_software_raid",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_updates_img_local": {
+            "profiles": {
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "GRUB": "inst.updates=hd:LABEL=UPDATES_IMG:/updates.img",
+                "HDD_2": "disk_updates_img_2.img",
+                "NUMDISKS": "2",
+                "TEST_UPDATES": "1"
+            }
+        },
+        "install_updates_nfs": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "GRUB": "inst.stage2=nfs:nfsvers=4:10.0.2.110:/repo",
+                "INSTALL_UNLOCK": "support_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "support_server",
+                "TEST_UPDATES": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_vnc_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
+                "INSTALL": "1",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "install_vnc_server",
+                "PREINSTALL": "_graphical_wait_login _vnc_client_connect",
+                "VNC_CLIENT": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_vnc_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "GRUB": "inst.vnc net.ifnames=0 biosdevname=0 ip=10.0.2.114::10.0.2.2:255.255.255.0:vnc001.domain.local:eth0:off",
+                "NICTYPE": "tap",
+                "VNC_SERVER": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_vncconnect_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
+                "INSTALL": "1",
+                "NICTYPE": "tap",
+                "PREINSTALL": "_graphical_wait_login _vncconnect_client_setup",
+                "VNC_CLIENT": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_vncconnect_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "GRUB": "inst.vnc inst.vncconnect=10.0.2.117:5500 net.ifnames=0 biosdevname=0 ip=10.0.2.116::10.0.2.2:255.255.255.0:vnc003.domain.local:eth0:off",
+                "INSTALL_UNLOCK": "vncconnect_client_ready",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "install_vncconnect_client",
+                "VNC_SERVER": "1",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "install_xfs": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_xfs",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "mediakit_fileconflicts": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
+                "POSTINSTALL": "mediakit_fileconflicts",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
+        "mediakit_repoclosure": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
+                "POSTINSTALL": "mediakit_repoclosure",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
+        "memory_check": {
+            "settings": {
+                "MEMCHECK": "1",
+                "PACKAGE_SET": "default",
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "TEST_TARGET": "NONE"
+            }
+        },
+        "modularity_tests": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "modularity_module_list modularity_enable_disable_module modularity_install_module modularity_checkdefaults",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "realmd_join_cockpit": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
+                "+START_AFTER_TEST": "server_cockpit_default",
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "server_role_deploy_domain_controller",
+                "POSTINSTALL": "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client",
+                "POST_STATIC": "10.0.2.102 client002.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "realmd_join_sssd": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "server_role_deploy_domain_controller",
+                "POSTINSTALL": "realmd_join_sssd freeipa_client",
+                "POST_STATIC": "10.0.2.103 client003.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "release_identification": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 50,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 50,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "ENTRYPOINT": "text_login_gui fedora_release os_release",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_cockpit_basic": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
+                "+START_AFTER_TEST": "server_cockpit_default",
+                "BOOTFROM": "c",
+                "POSTINSTALL": "server_cockpit_basic",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_cockpit_default": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "_setup_browser server_cockpit_default",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_cockpit_updates": {
+            "profiles": {
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
+                "+START_AFTER_TEST": "server_cockpit_default",
+                "BOOTFROM": "c",
+                "POSTINSTALL": "server_cockpit_updates server_cockpit_autoupdate",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_database_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "server_role_deploy_database_server",
+                "POSTINSTALL": "database_client",
+                "POST_STATIC": "10.0.2.105 dbclient.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_filesystem_default": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "server_filesystem_default",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_firewall_default": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "server_firewall_default",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "server_freeipa_replication_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "FREEIPA_REPLICA_CLIENT": "1",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "server_freeipa_replication_replica",
+                "POSTINSTALL": "realmd_join_sssd freeipa_client",
+                "POST_STATIC": "10.0.2.108 client005.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_freeipa_replication_master": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "FREEIPA_REPLICA_MASTER": "1",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "role_deploy_domain_controller role_deploy_domain_controller_check",
+                "POST_STATIC": "10.0.2.106 ipa002.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_freeipa_replication_replica": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "FREEIPA_REPLICA": "1",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "PARALLEL_WITH": "server_freeipa_replication_master",
+                "POSTINSTALL": "realmd_join_sssd",
+                "POST_STATIC": "10.0.2.107 ipa003.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_realmd_join_kickstart": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "GRUB": "inst.ks=hd:vdb1:/freeipaclient.ks",
+                "HDD_2": "disk_ks_3.img",
+                "INSTALL_UNLOCK": "freeipa_ready",
+                "KICKSTART": "1",
+                "NICTYPE": "tap",
+                "NUMDISKS": "2",
+                "PARALLEL_WITH": "server_role_deploy_domain_controller",
+                "POSTINSTALL": "freeipa_client",
+                "ROOT_PASSWORD": "anaconda",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_remote_logging_client": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "server_remote_logging_server",
+                "POSTINSTALL": "server_remote_logging_client",
+                "POST_STATIC": "10.0.2.113 rsyslogclient.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_remote_logging_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "server_remote_logging_server",
+                "POST_STATIC": "10.0.2.112 rsyslogserver.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_role_deploy_database_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "role_deploy_database_server",
+                "POST_STATIC": "10.0.2.104 db.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "server_role_deploy_domain_controller": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "role_deploy_domain_controller role_deploy_domain_controller_check",
+                "POST_STATIC": "10.0.2.100 ipa001.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "support_server": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10,
+                "fedora-universal-aarch64-*-aarch64": 10,
+                "fedora-universal-ppc64le-*-ppc64le": 10,
+                "fedora-universal-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
+                "NICTYPE": "tap",
+                "NUMDISKS": "2",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "_support_server",
+                "POST_STATIC": "10.0.2.110 support.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "NONE",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "upgrade_2_desktop_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "HDD_1": "disk_f%PREVREL%_desktop_4_x86_64.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_2_desktop_encrypted_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDD_1": "disk_f%PREVREL%_desktopencrypt_x86_64.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_2_kde_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "kde",
+                "HDD_1": "disk_f%PREVREL%_kde_4_x86_64.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_2_minimal_64bit": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%PREVREL%_minimal_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false"
+            }
+        },
+        "upgrade_2_minimal_uefi": {
+            "profiles": {
+                "fedora-universal-x86_64-*-uefi": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%PREVREL%_minimal-uefi_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false"
+            }
+        },
+        "upgrade_2_realmd_client": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_f%PREVREL%_server_3_%ARCH%.img",
+                "BOOTFROM": "c",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "upgrade_2_server_domain_controller",
+                "POSTINSTALL": "_setup_browser freeipa_webui freeipa_password_change freeipa_client",
+                "POST_STATIC": "10.0.2.103 client003.domain.local",
+                "PREUPGRADE": "realmd_join_sssd",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "upgrade_2_server_64bit": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 40,
+                "fedora-universal-ppc64le-*-ppc64le": 40,
+                "fedora-universal-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%PREVREL%_server_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_2_server_domain_controller": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_f%PREVREL%_server_3_%ARCH%.img",
+                "BOOTFROM": "c",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "role_deploy_domain_controller_check",
+                "POST_STATIC": "10.0.2.100 ipa001.domain.local",
+                "PREUPGRADE": "role_deploy_domain_controller",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "upgrade_desktop_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_x86_64.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_desktop_encrypted_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "DESKTOP": "gnome",
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "HDD_1": "disk_f%CURRREL%_desktopencrypt_x86_64.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_kde_64bit": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_f%CURRREL%_kde_4_x86_64.img",
+                "BOOTFROM": "c",
+                "DESKTOP": "kde",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_minimal_64bit": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%CURRREL%_minimal_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false"
+            }
+        },
+        "upgrade_minimal_uefi": {
+            "profiles": {
+                "fedora-universal-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false"
+            }
+        },
+        "upgrade_realmd_client": {
+            "profiles": {
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_f%CURRREL%_server_3_%ARCH%.img",
+                "BOOTFROM": "c",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "upgrade_server_domain_controller",
+                "POSTINSTALL": "_setup_browser freeipa_webui freeipa_password_change freeipa_client",
+                "POST_STATIC": "10.0.2.103 client003.domain.local",
+                "PREUPGRADE": "realmd_join_sssd",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "upgrade_server_64bit": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_f%CURRREL%_server_3_%ARCH%.img",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "test",
+                "USER_PASSWORD": "weakpassword"
+            }
+        },
+        "upgrade_server_domain_controller": {
+            "profiles": {
+                "fedora-universal-ppc64le-*-ppc64le": 30,
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "+HDD_1": "disk_f%CURRREL%_server_3_%ARCH%.img",
+                "BOOTFROM": "c",
+                "GRUB": "net.ifnames=0 biosdevname=0",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "role_deploy_domain_controller_check",
+                "POST_STATIC": "10.0.2.100 ipa001.domain.local",
+                "PREUPGRADE": "role_deploy_domain_controller",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "COMPOSE",
+                "UPGRADE": "1",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        }
+    }
+}
