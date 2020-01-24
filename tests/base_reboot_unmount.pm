@@ -17,6 +17,7 @@ sub test_routine {
 }
 
 sub run {
+    my $self = shift;
     bypass_1691487 unless (get_var("DESKTOP"));
     # switch to TTY3 for both graphical and console tests
     $self->root_console(tty=>3);
@@ -26,7 +27,7 @@ sub run {
     type_safely "reboot\n";
     # This time, we will need to login manually.
     boot_to_login_screen;
-    console_login;
+    $self->root_console(tty=>3);
 
     # Run the tests for the second time.
     test_routine();
