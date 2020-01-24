@@ -74,7 +74,7 @@ def merge_inputs(inputs):
         try:
             with open(input, 'r') as inputfh:
                 data = json.load(inputfh)
-        except err:
+        except Exception as err:
             print("Reading input file {} failed!".format(input))
             sys.exit(str(err))
 
