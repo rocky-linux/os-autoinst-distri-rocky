@@ -321,6 +321,13 @@
                 "fedora-updates-server-x86_64-*-64bit": 40
             }
         },
+        "server_cockpit_updates": {
+            "profiles": {
+                "fedora-updates-server-aarch64-*-aarch64": 40,
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40
+            }
+        },
         "server_database_client": {
             "profiles": {
                 "fedora-updates-server-aarch64-*-aarch64": 40,
@@ -347,6 +354,20 @@
         },
         "server_freeipa_replication_replica": {
             "profiles": {
+                "fedora-updates-server-x86_64-*-64bit": 40
+            }
+        },
+        "server_remote_logging_client": {
+            "profiles": {
+                "fedora-updates-server-aarch64-*-aarch64": 40,
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40
+            }
+        },
+        "server_remote_logging_server": {
+            "profiles": {
+                "fedora-updates-server-aarch64-*-aarch64": 40,
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
                 "fedora-updates-server-x86_64-*-64bit": 40
             }
         },
