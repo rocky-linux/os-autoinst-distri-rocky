@@ -5,7 +5,6 @@ use utils;
 
 
 sub test_routine {
-    my $self = shift;
     # Save the result of the error tracking grep operation on journalctl output.
     script_run 'journalctl -b | grep -E "dirty bit|data may be corrupt|recovery|unmounted|recovering" > errors.txt';
     # Count the number of errors.
@@ -18,9 +17,9 @@ sub test_routine {
 }
 
 sub run {
-    # Seems that the first login is handled by the _console_wait_login(), so
-    # we can start with testing right away.
-
+    bypass_1691487 unless (get_var("DESKTOP"));
+    # switch to TTY3 for both graphical and console tests
+    $self->root_console(tty=>3);
     # Run test for the first time
     test_routine();
     # Reboot the system.
