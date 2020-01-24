@@ -188,6 +188,24 @@
                 "fedora-updates-workstation-x86_64-*-64bit": 40
             }
         },
+        "base_reboot_unmount": {
+            "profiles": {
+                "fedora-updates-kde-x86_64-*-64bit": 42,
+                "fedora-updates-server-aarch64-*-aarch64": 40,
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40,
+                "fedora-updates-workstation-x86_64-*-64bit": 40
+            }
+        },
+        "base_system_logging": {
+            "profiles": {
+                "fedora-updates-kde-x86_64-*-64bit": 42,
+                "fedora-updates-server-aarch64-*-aarch64": 40,
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40,
+                "fedora-updates-workstation-x86_64-*-64bit": 40
+            }
+        },
         "desktop_background": {
             "profiles": {
                 "fedora-updates-kde-x86_64-*-64bit": 32,
