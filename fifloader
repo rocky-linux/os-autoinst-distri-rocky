@@ -119,23 +119,21 @@ def generate_job_templates(machines, products, profiles, testsuites):
             print("Warning: no profiles for test suite {}".format(name))
             continue
         for (profile, prio) in suite['profiles'].items():
-            jobtemplate = {'test_suite': {'name': name}, 'prio': prio}
+            jobtemplate = {'test_suite_name': name, 'prio': prio}
             # x86_64 compose
             jobtemplate['group_name'] = 'fedora'
-            jobtemplate['machine'] = {'name': profiles[profile]['machine']}
+            jobtemplate['machine_name'] = profiles[profile]['machine']
             product = products[profiles[profile]['product']]
-            jobtemplate['product'] = {
-                'arch': product['arch'],
-                'flavor': product['flavor'],
-                'distri': product['distri'],
-                'version': product['version']
-            }
-            if jobtemplate['machine']['name'] == 'ppc64le':
+            jobtemplate['arch'] = product['arch']
+            jobtemplate['flavor'] = product['flavor']
+            jobtemplate['distri'] = product['distri']
+            jobtemplate['version']= product['version']
+            if jobtemplate['machine_name'] == 'ppc64le':
                 if 'updates' in product['flavor']:
                     jobtemplate['group_name'] = "Fedora PowerPC Updates"
                 else:
                     jobtemplate['group_name'] = "Fedora PowerPC"
-            elif jobtemplate['machine']['name'] == 'aarch64':
+            elif jobtemplate['machine_name'] == 'aarch64':
                 if 'updates' in product['flavor']:
                     jobtemplate['group_name'] = "Fedora AArch64 Updates"
                 else:
