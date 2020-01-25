@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "openqa-testsuite.json",
+  "title": "Upstream openQA single test suite schema",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "settings": { "$ref": "openqa-settingsarray.json" }
+  },
+  "additionalProperties": false
+}

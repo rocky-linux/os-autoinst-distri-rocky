@@ -1,0 +1,88 @@
+{
+    "Machines": {
+        "64bit": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "64bit",
+                "PART_TABLE_TYPE": "mbr",
+                "QEMUCPU": "Nehalem",
+                "QEMUCPUS": "2",
+                "QEMURAM": "2048",
+                "QEMUVGA": "virtio",
+                "QEMU_VIRTIO_RNG": "1",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
+        },
+        "ppc64le": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "ppc64le",
+                "OFW": 1,
+                "PART_TABLE_TYPE": "mbr",
+                "QEMU": "ppc64",
+                "QEMUCPU": "host",
+                "QEMURAM": 4096,
+                "QEMUVGA": "virtio",
+                "QEMU_VIRTIO_RNG": "1",
+                "WORKER_CLASS": "qemu_ppc64le"
+            }
+        }
+    },
+    "Products": {
+        "fedora-Server-dvd-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "Server-dvd-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Server-dvd-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Server-dvd-iso",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        }
+    },
+    "Profiles": {
+        "fedora-Server-dvd-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-Server-dvd-iso-ppc64le-*"
+        },
+        "fedora-Server-dvd-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Server-dvd-iso-x86_64-*"
+        }
+    },
+    "TestSuites": {
+        "base_selinux": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_selinux",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
+        "install_default_upload": {
+            "profiles": {
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "PACKAGE_SET": "default",
+                "POSTINSTALL": "_collect_data",
+                "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "openqa-jobgroup.json",
+  "title": "Upstream openQA single job group schema",
+  "type": "object",
+  "required": [
+    "group_name",
+    "template"
+  ],
+  "properties": {
+    "group_name": { "type": "string" },
+    "template": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,6 +1,0 @@
-- hosts: all
-  tasks:
-    - name: Run test
-      command: ls -la
-      args:
-        chdir: '{{ zuul.project.src_dir }}'

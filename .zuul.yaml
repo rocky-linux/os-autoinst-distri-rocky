@@ -1,8 +1,9 @@
 - job:
-    name: os-autoinst-test
-    run: ci/run.yaml
+    name: os-autoinst-tox
+    run: ci/tox.yaml
+    nodeset: fedora-31-vm
 
 - project:
     check:
       jobs:
-        - os-autoinst-test
+        - os-autoinst-tox

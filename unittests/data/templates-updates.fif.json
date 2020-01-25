@@ -1,0 +1,48 @@
+{
+    "Products": {
+        "fedora-updates-server-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "updates-server",
+            "settings": {},
+            "version": "*"
+        },
+        "fedora-updates-server-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-server",
+            "settings": {},
+            "version": "*"
+        }
+    },
+    "Profiles": {
+        "fedora-updates-server-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-updates-server-ppc64le-*"
+        },
+        "fedora-updates-server-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-updates-server-x86_64-*"
+        }
+    },
+    "TestSuites": {
+        "advisory_boot": {
+            "profiles": {
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "ADVISORY_BOOT_TEST": "1",
+                "BOOTFROM": "c",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
+        },
+        "base_selinux": {
+            "profiles": {
+                "fedora-updates-server-ppc64le-*-ppc64le": 40,
+                "fedora-updates-server-x86_64-*-64bit": 40
+            }
+        }
+    }
+}

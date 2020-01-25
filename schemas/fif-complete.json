@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fif-complete.json",
+  "type": "object",
+  "title": "Schema for complete Fedora Intermediate Format (FIF) openQA job template data",
+  "required": [
+    "Machines",
+    "Products",
+    "Profiles",
+    "TestSuites"
+  ],
+  "properties": {
+    "Machines": { "$ref": "fif-machines.json" },
+    "Products": { "$ref": "fif-products.json" },
+    "Profiles": { "$ref": "fif-profiles.json" },
+    "TestSuites": { "$ref": "fif-testsuites.json" },
+    "JobTemplates": { "$ref": "openqa-jobtemplates.json" }
+  },
+  "additionalProperties": false
+}
+

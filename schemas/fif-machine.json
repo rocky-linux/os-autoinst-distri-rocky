@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fif-machine.json",
+  "title": "FIF single machine schema",
+  "type": "object",
+  "required": [
+    "backend",
+    "settings"
+  ],
+  "properties": {
+    "backend": { "type": "string" },
+    "settings": { "$ref": "fif-settingshash.json" }
+  },
+  "additionalProperties": false
+}

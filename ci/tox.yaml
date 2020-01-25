@@ -1,0 +1,14 @@
+- hosts: all
+  tasks:
+    - name: Ensure tox is installed
+      include_role:
+        name: ensure-tox
+    - name: Install all Python versions to test
+      package:
+        name: ['python37', 'python38', 'python39']
+        state: present
+      become: yes
+    - name: Run tox
+      command: tox
+      args:
+        chdir: '{{ zuul.project.src_dir }}'

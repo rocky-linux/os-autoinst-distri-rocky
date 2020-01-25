@@ -1,4 +1,23 @@
-#!/bin/python3
+#!/usr/bin/python3
+
+# Copyright (C) 2020 Red Hat
+#
+# This file is part of os-autoinst-distri-fedora.
+#
+# os-autoinst-distri-fedora is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation, either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Author: Adam Williamson <awilliam@redhat.com>
 
 """This is an openQA template loader/converter for FIF, the Fedora Intermediate Format. It reads
 from one or more files expected to contain FIF JSON-formatted template data; read on for details
@@ -56,12 +75,48 @@ loader will combine those into a single complete TestSuite entry with the `profi
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 
-def merge_inputs(inputs):
-    """Merge multiple input files. Expects JSON file names. Returns
-    a 5-tuple of machines, products, profiles, testsuites and
+import jsonschema
+
+SCHEMAPATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'schemas')
+
+def schema_validate(instance, fif=True, complete=True, schemapath=SCHEMAPATH):
+    """Validate some input against one of our JSON schemas. We have
+    'complete' and 'incomplete' schemas for FIF and the upstream
+    template format. The 'complete' schemas expect the validated
+    input to contain a complete set of data (everything needed for
+    an openQA deployment to actually run tests). The 'incomplete'
+    schemas expect the validated input to contain at least *some*
+    valid data - they are intended for validating input files which
+    will be combined into 'complete' data, or which will be loaded
+    without --clean, to add to an existing configuration.
+    """
+    filename = 'openqa-'
+    if fif:
+        filename = 'fif-'
+    if complete:
+        filename += 'complete.json'
+    else:
+        filename += 'incomplete.json'
+    base_uri = "file://{0}/".format(schemapath)
+    resolver = jsonschema.RefResolver(base_uri, None)
+    schemafile = os.path.join(schemapath, filename)
+    with open(schemafile, 'r') as schemafh:
+        schema = json.load(schemafh)
+    # raises an exception if it fails
+    jsonschema.validate(instance=instance, schema=schema, resolver=resolver)
+    return True
+
+# you could refactor this just using a couple of dicts, but I don't
+# think that would really make it *better*
+# pylint:disable=too-many-locals, too-many-branches
+def merge_inputs(inputs, validate=False, clean=False):
+    """Merge multiple input files. Expects JSON file names. Optionally
+    validates the input files before merging, and the merged output.
+    Returns a 5-tuple of machines, products, profiles, testsuites and
     jobtemplates (the first four as dicts, the fifth as a list).
     """
     machines = {}
@@ -70,20 +125,25 @@ def merge_inputs(inputs):
     testsuites = {}
     jobtemplates = []
 
-    for input in inputs:
+    for _input in inputs:
         try:
-            with open(input, 'r') as inputfh:
+            with open(_input, 'r') as inputfh:
                 data = json.load(inputfh)
+        # we're just wrapping the exception a bit, so this is fine
+        # pylint:disable=broad-except
         except Exception as err:
-            print("Reading input file {} failed!".format(input))
+            print("Reading input file {} failed!".format(_input))
             sys.exit(str(err))
+        # validate against incomplete schema
+        if validate:
+            schema_validate(data, fif=True, complete=False)
 
         # simple merges for all these
         for (datatype, tgt) in (
-            ('Machines', machines),
-            ('Products', products),
-            ('Profiles', profiles),
-            ('JobTemplates', jobtemplates),
+                ('Machines', machines),
+                ('Products', products),
+                ('Profiles', profiles),
+                ('JobTemplates', jobtemplates),
         ):
             if datatype in data:
                 if datatype == 'JobTemplates':
@@ -106,9 +166,27 @@ def merge_inputs(inputs):
                 except KeyError:
                     testsuites[name] = newsuite
 
+    # validate combined data, against complete schema if clean is True
+    # (as we'd expect data to be loaded with --clean to be complete),
+    # incomplete schema otherwise
+    if validate:
+        merged = {}
+        if machines:
+            merged['Machines'] = machines
+        if products:
+            merged['Products'] = products
+        if profiles:
+            merged['Profiles'] = profiles
+        if testsuites:
+            merged['TestSuites'] = testsuites
+        if jobtemplates:
+            merged['JobTemplates'] = jobtemplates
+        schema_validate(merged, fif=True, complete=clean)
+        print("Input template data is valid")
+
     return (machines, products, profiles, testsuites, jobtemplates)
 
-def generate_job_templates(machines, products, profiles, testsuites):
+def generate_job_templates(products, profiles, testsuites):
     """Given machines, products, profiles and testsuites (after
     merging, but still in intermediate format), generates job
     templates and returns them as a list.
@@ -127,7 +205,7 @@ def generate_job_templates(machines, products, profiles, testsuites):
             jobtemplate['arch'] = product['arch']
             jobtemplate['flavor'] = product['flavor']
             jobtemplate['distri'] = product['distri']
-            jobtemplate['version']= product['version']
+            jobtemplate['version'] = product['version']
             if jobtemplate['machine_name'] == 'ppc64le':
                 if 'updates' in product['flavor']:
                     jobtemplate['group_name'] = "Fedora PowerPC Updates"
@@ -139,8 +217,8 @@ def generate_job_templates(machines, products, profiles, testsuites):
                 else:
                     jobtemplate['group_name'] = "Fedora AArch64"
             elif 'updates' in product['flavor']:
-                    # x86_64 updates
-                    jobtemplate['group_name'] = "Fedora Updates"
+                # x86_64 updates
+                jobtemplate['group_name'] = "Fedora Updates"
             jobtemplates.append(jobtemplate)
     return jobtemplates
 
@@ -171,20 +249,24 @@ def reverse_qol(machines, products, testsuites):
             converted.append({'key': key, 'value': value})
         return converted
 
+    # drop profiles from test suites - these are only used for job
+    # template generation and should not be in final output. if suite
+    # *only* contained profiles, drop it
+    for suite in testsuites.values():
+        del suite['profiles']
+    testsuites = {name: suite for (name, suite) in testsuites.items() if suite}
+
     machines = to_list_of_dicts(machines)
     products = to_list_of_dicts(products)
     testsuites = to_list_of_dicts(testsuites)
     for datatype in (machines, products, testsuites):
         for item in datatype:
-            item['settings'] = dumb_settings(item['settings'])
-            if 'profiles' in item:
-                # this is only part of the intermediate format, should
-                # not be in the final output
-                del item['profiles']
+            if 'settings' in item:
+                item['settings'] = dumb_settings(item['settings'])
 
     return (machines, products, testsuites)
 
-def parse_args():
+def parse_args(args):
     """Parse arguments with argparse."""
     parser = argparse.ArgumentParser(description=(
         "Alternative openQA template loader/generator, using a more "
@@ -214,24 +296,35 @@ def parse_args():
         "upstream loader and behaves as documented there.",
         action='store_true')
     parser.add_argument(
+        '--no-validate', help="Do not do schema validation on input "
+        "or output data", action='store_false', dest='validate')
+    parser.add_argument(
         'files', help="Input JSON files", nargs='+')
-    return parser.parse_args()
+    return parser.parse_args(args)
 
-def run():
+def run(args):
     """Read in arguments and run the appropriate steps."""
-    args = parse_args()
-    if not args.write and not args.load:
-        sys.exit("Neither --write nor --load specified! Doing nothing.")
-    (machines, products, profiles, testsuites, jobtemplates) = merge_inputs(args.files)
-    jobtemplates.extend(generate_job_templates(machines, products, profiles, testsuites))
+    args = parse_args(args)
+    if not args.validate and not args.write and not args.load:
+        sys.exit("--no-validate specified and neither --write nor --load specified! Doing nothing.")
+    (machines, products, profiles, testsuites, jobtemplates) = merge_inputs(
+        args.files, validate=args.validate, clean=args.clean)
+    jobtemplates.extend(generate_job_templates(products, profiles, testsuites))
     (machines, products, testsuites) = reverse_qol(machines, products, testsuites)
     # now produce the output in upstream-compatible format
-    out = {
-        'JobTemplates': jobtemplates,
-        'Machines': machines,
-        'Products': products,
-        'TestSuites': testsuites
-    }
+    out = {}
+    if jobtemplates:
+        out['JobTemplates'] = jobtemplates
+    if machines:
+        out['Machines'] = machines
+    if products:
+        out['Products'] = products
+    if testsuites:
+        out['TestSuites'] = testsuites
+    if args.validate:
+        # validate generated data against upstream schema
+        schema_validate(out, fif=False, complete=args.clean)
+        print("Generated template data is valid")
     if args.write:
         # write generated output to given filename
         with open(args.filename, 'w') as outfh:
@@ -252,7 +345,7 @@ def run():
 def main():
     """Main loop."""
     try:
-        run()
+        run(args=sys.argv[1:])
     except KeyboardInterrupt:
         sys.stderr.write("Interrupted, exiting...\n")
         sys.exit(1)

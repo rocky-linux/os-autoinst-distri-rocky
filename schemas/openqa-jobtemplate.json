@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "openqa-jobtemplate.json",
+  "title": "Upstream openQA single job template schema",
+  "type": "object",
+  "title": "A single job template schema",
+  "allOf": [
+    {
+      "oneOf": [
+        { "required": [ "test_suite" ] },
+        { "required": [ "test_suite_name" ] }
+      ]
+    },
+    {
+      "oneOf": [
+        { "required": [ "machine" ] },
+        { "required": [ "machine_name" ] }
+      ]
+    },
+    {
+      "oneOf": [
+        { "required": [ "product" ] },
+        { "required": [
+            "arch",
+            "distri",
+            "flavor",
+            "version"
+          ]
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "group_name": { "type": "string" },
+    "machine": {
+      "type": "object",
+      "required": [ "name" ],
+      "properties": {
+        "name": { "type": "string" }
+      }
+    },
+    "machine_name": { "type": "string" },
+    "prio": { "type": "number" },
+    "product": { "$ref": "openqa-product.json" },
+    "arch": { "type": "string" },
+    "distri": { "type": "string" },
+    "flavor": { "type": "string" },
+    "version": { "type": "string" },
+    "test_suite": {
+      "type": "object",
+      "required": [ "name" ],
+      "properties": {
+        "name": { "type": "string" }
+      }
+    },
+    "test_suite_name": { "type": "string" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "openqa-product.json",
+  "title": "Upstream openQA single product schema",
+  "type": "object",
+  "required": [
+    "arch",
+    "distri",
+    "flavor",
+    "version"
+  ],
+  "properties": {
+    "arch": { "type": "string" },
+    "distri": { "type": "string" },
+    "flavor": { "type": "string" },
+    "version": { "type": "string" },
+    "settings": { "$ref": "openqa-settingsarray.json" },
+    "name": { "type": "string" },
+    "description": { "type": "string" }
+  },
+  "additionalProperties": false
+}

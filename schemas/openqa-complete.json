@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "openqa-complete.json",
+  "type": "object",
+  "title": "Schema for complete upstream format openQA job template data",
+  "required": [
+    "Machines",
+    "TestSuites",
+    "Products"
+  ],
+  "anyOf": [
+    {"required": [ "JobTemplates" ]},
+    {"required": [ "JobGroups" ]}
+  ],
+  "properties": {
+    "Machines": { "$ref": "openqa-machines.json" },
+    "TestSuites": { "$ref": "openqa-testsuites.json" },
+    "Products": { "$ref": "openqa-products.json" },
+    "JobTemplates": { "$ref": "openqa-jobtemplates.json" },
+    "JobGroups": { "$ref": "openqa-jobgroups.json" }
+  },
+  "additionalProperties": false
+}
