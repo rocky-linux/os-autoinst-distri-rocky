@@ -1434,9 +1434,13 @@
             }
         },
         "memory_check": {
+            "profiles": {
+                "fedora-Everything-boot-iso-x86_64-*-64bit": 30,
+                "fedora-Everything-boot-iso-x86_64-*-uefi": 31
+            },
             "settings": {
                 "MEMCHECK": "1",
-                "PACKAGE_SET": "default",
+                "PACKAGE_SET": "workstation",
                 "REPOSITORY_VARIATION": "%LOCATION%",
                 "TEST_TARGET": "NONE"
             }
