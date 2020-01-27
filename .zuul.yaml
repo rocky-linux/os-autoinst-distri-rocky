@@ -1,0 +1,8 @@
+- job:
+    name: os-autoinst-test
+    run: ci/run.yaml
+
+- project:
+    check:
+      jobs:
+        - os-autoinst-test
