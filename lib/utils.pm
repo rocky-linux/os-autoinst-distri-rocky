@@ -513,9 +513,9 @@ sub _repo_setup_updates {
     # a hash of releases and update IDs. if no workarounds are needed
     # for any release, the hash can be empty and this will do nothing
     my %workarounds = (
-        # cockpit 210 so we get the fixed main screen
-        "30" => ["FEDORA-2020-8ff69018de"],
-        "31" => []
+        "30" => [],
+        # libdnf fix for #1795004
+        "31" => ["FEDORA-2020-980b80f9d9"]
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
