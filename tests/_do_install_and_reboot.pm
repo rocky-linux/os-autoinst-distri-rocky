@@ -154,6 +154,12 @@ sub run {
     # OK, if we're here, we got actions, so head to a console. Switch
     # to console after liveinst sometimes takes a while, so 30 secs
     $self->root_console(timeout=>30);
+    # this is something a couple of actions may need to know
+    my $mount = "/mnt/sysimage";
+    if (get_var("CANNED")) {
+        # finding the actual host system root is fun for ostree...
+        $mount = "/mnt/sysimage/ostree/deploy/fedora*/deploy/*.?";
+    }
     if (grep {$_ eq 'consoletty0'} @actions) {
         # somehow, by this point, localized keyboard layout has been
         # loaded for this tty, so for French and Arabic at least we
@@ -164,20 +170,15 @@ sub run {
         # in boot messages going to serial console on aarch64, we need
         # them on tty0. We also need 'quiet' so we don't get kernel
         # messages, which screw up some needles
-        assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" /mnt/sysimage/etc/default/grub';
+        assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" ' . $mount . '/etc/default/grub';
         # regenerate the bootloader config
-        assert_script_run "chroot /mnt/sysimage grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+        assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
     }
     if (grep {$_ eq 'abrt'} @actions) {
          # Chroot in the newly installed system and switch on ABRT systemwide
-         assert_script_run "chroot /mnt/sysimage abrt-auto-reporting 1";
+         assert_script_run "chroot $mount abrt-auto-reporting 1";
     }
     if (grep {$_ eq 'rootpw'} @actions) {
-        my $mount = "/mnt/sysimage";
-        if (get_var("CANNED")) {
-            # finding the actual host system root is fun for ostree...
-            $mount = "/mnt/sysimage/ostree/deploy/fedora/deploy/*.?";
-        }
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
     }

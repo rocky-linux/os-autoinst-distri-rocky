@@ -15,6 +15,16 @@ sub run {
         $wait_time = 180;
     }
 
+    # handle initial-setup, if we're expecting it (the variable is set
+    # and this is an install test)
+    my $testname = get_var("TEST");
+    if (get_var("CONSOLE_INITIAL_SETUP") && index($testname, 'install') != -1) {
+        assert_screen "console_initial_setup", $wait_time;
+        type_string "q\n";
+        type_string "yes\n";
+        $wait_time = 180;
+    }
+
     # Wait for the text login
     boot_to_login_screen(timeout => $wait_time);
 

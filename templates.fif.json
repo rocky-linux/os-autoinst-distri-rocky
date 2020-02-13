@@ -133,6 +133,30 @@
             },
             "version": "*"
         },
+        "fedora-IoT-dvd_ostree-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "IoT-dvd_ostree-iso",
+            "settings": {
+                "CANNED": "1",
+                "PACKAGE_SET": "default",
+                "CONSOLE_INITIAL_SETUP": "1",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-IoT-dvd_ostree-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "IoT-dvd_ostree-iso",
+            "settings": {
+                "CANNED": "1",
+                "PACKAGE_SET": "default",
+                "CONSOLE_INITIAL_SETUP": "1",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "fedora-KDE-live-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
@@ -310,6 +334,18 @@
             "machine": "uefi",
             "product": "fedora-Everything-boot-iso-x86_64-*"
         },
+        "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-IoT-dvd_ostree-iso-aarch64-*"
+        },
+        "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-IoT-dvd_ostree-iso-x86_64-*"
+        },
+        "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-IoT-dvd_ostree-iso-x86_64-*"
+        },
         "fedora-KDE-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-KDE-live-iso-x86_64-*"
@@ -411,6 +447,8 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 50,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
@@ -431,6 +469,8 @@
         },
         "base_selinux": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
@@ -451,6 +491,8 @@
         },
         "base_service_manipulation": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
@@ -471,6 +513,8 @@
         },
         "base_services_start": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
@@ -505,6 +549,8 @@
         },
         "base_system_logging": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
@@ -819,6 +865,7 @@
         },
         "install_default": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-uefi": 21,
                 "fedora-Everything-boot-iso-ppc64le-*-ppc64le": 62,
                 "fedora-Everything-boot-iso-x86_64-*-64bit": 10,
                 "fedora-Everything-boot-iso-x86_64-*-uefi": 11,
@@ -838,6 +885,8 @@
         },
         "install_default_upload": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 15,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
@@ -1502,6 +1551,8 @@
         },
         "release_identification": {
             "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 50,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 50,

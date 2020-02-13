@@ -34,15 +34,15 @@ sub run {
         # correct variables to compare the system data with.
         # First, we know the basic stuff
         my $id = get_var("DISTRI"); # Should be "fedora"
-        my $isovar = get_var("ISO"); # Takes the build string for Silverblue variants.
+        my $isovar = get_var("ISO"); # Takes the build string for canned variants.
         # Split the ISO variable at "-" and read fields 4 (release version)
         # and 5 (the build number).
-        my ($sbver, $sbnum) = (split /-/, $isovar)[4, 5];
+        my ($cannedver, $cannednum) = (split /-/, $isovar)[4, 5];
         # Get rid of the ".iso" part of the tag.
-        $sbnum =~ s/\.iso//g;
-        # Now, we merge the fields into one expression to create the correct Silverblue tag
+        $cannednum =~ s/\.iso//g;
+        # Now, we merge the fields into one expression to create the correct canned tag
         # that will contain both the version number and the build number.
-        my $silvertag = "$sbver.$sbnum";
+        my $cannedtag = "$cannedver.$cannednum";
         my $name = ucfirst($id);
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
         my $varstr = spell_version_number($version_id);
@@ -69,6 +69,7 @@ sub run {
             CoreOS => ["coreos", "CoreOS"],
             KDE => ["kde", "KDE Plasma"],
             Silverblue => ["workstation", "Workstation Edition"],
+            IoT => ["iot", "IoT Edition"],
         );
         if (exists($variants{$subvariant})) {
             ($variant_id, $variant) = @{$variants{$subvariant}};
@@ -76,16 +77,18 @@ sub run {
         }
 
         my $version = "$version_id ($varstr)";
-        # Version looks differently when the build is a Silverblue. We need to form
-        # a different string here by using the above createad silvertag.
-        if ($subvariant eq "Silverblue") {
-            $version = "$silvertag ($varstr)";
+        # Version looks different when the build is canned (because
+        # rpm-ostree fiddles around with it, documented at
+        # https://github.com/projectatomic/rpm-ostree/blob/master/docs/manual/treefile.md )
+        # We need to form a different string here by using the above created cannedtag.
+        if (get_var("CANNED")) {
+            $version = "$cannedtag ($varstr)";
         }
         my $platform_id = "platform:f$version_id";
         my $pretty = "$name $version_id ($varstr)";
         # Same problem is when testing the PRETTY_NAME.
-        if ($subvariant eq "Silverblue") {
-            $pretty = "$name $silvertag ($varstr)";
+        if (get_var("CANNED")) {
+            $pretty = "$name $cannedtag ($varstr)";
         }
 
         #Now. we can start testing the real values from the installed system.
