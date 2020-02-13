@@ -1,4 +1,7 @@
 package anacondatest;
+
+use strict;
+
 use base 'basetest';
 
 # base class for all Anaconda (installation) tests

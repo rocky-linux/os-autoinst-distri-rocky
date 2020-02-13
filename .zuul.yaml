@@ -3,7 +3,13 @@
     run: ci/tox.yaml
     nodeset: fedora-31-vm
 
+- job:
+    name: os-autoinst-perl
+    run: ci/perl.yaml
+    nodeset: fedora-31-vm
+
 - project:
     check:
       jobs:
         - os-autoinst-tox
+        - os-autoinst-perl

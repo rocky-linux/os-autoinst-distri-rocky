@@ -1,4 +1,7 @@
 package installedtest;
+
+use strict;
+
 use base 'basetest';
 
 # base class for tests that run on installed system

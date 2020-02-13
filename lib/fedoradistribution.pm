@@ -1,4 +1,7 @@
 package fedoradistribution;
+
+use strict;
+
 use base 'distribution';
 use Cwd;
 
