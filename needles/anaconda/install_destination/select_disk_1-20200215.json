@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 39,
+      "width": 17,
+      "ypos": 290,
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_install_destination_select_disk_1",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}
