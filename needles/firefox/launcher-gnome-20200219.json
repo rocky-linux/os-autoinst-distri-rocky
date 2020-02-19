@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 18,
+      "width": 47,
+      "height": 49,
+      "type": "match",
+      "ypos": 176
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "browser_launcher",
+    "firefox_launcher"
+  ]
+}
