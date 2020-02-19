@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 270,
+      "type": "match",
+      "height": 13,
+      "width": 145,
+      "xpos": 28
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_workstation_selected"
+  ]
+}
