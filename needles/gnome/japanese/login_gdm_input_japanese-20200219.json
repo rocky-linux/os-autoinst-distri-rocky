@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 73,
+      "height": 40,
+      "ypos": 438,
+      "type": "match",
+      "xpos": 398
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "graphical_login_input"
+  ]
+}
