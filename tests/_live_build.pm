@@ -19,7 +19,7 @@ sub run {
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/opt/update_repo\', \'/opt/update_repo\'))" >> /etc/mock/openqa.cfg';
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/dev/' . $serialdev . '\', \'/dev/' . $serialdev . '\'))" >> /etc/mock/openqa.cfg';
     # add the side repo to the config
-    assert_script_run 'printf "config_opts[\'yum.conf\'] += \"\"\"\n[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n\"\"\"" >> /etc/mock/openqa.cfg';
+    assert_script_run 'printf "config_opts[\'dnf.conf\'] += \"\"\"\n[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n\"\"\"" >> /etc/mock/openqa.cfg';
     # replace metalink with mirrorlist so we don't get slow mirrors
     repos_mirrorlist("/etc/mock/openqa.cfg");
     # upload the config so we can check it's OK
