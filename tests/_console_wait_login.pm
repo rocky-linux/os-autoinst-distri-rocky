@@ -15,10 +15,11 @@ sub run {
         $wait_time = 180;
     }
 
-    # handle initial-setup, if we're expecting it (the variable is set
-    # and this is an install test)
+    # handle initial-setup, if we're expecting it (IoT < F32 install test)
     my $testname = get_var("TEST");
-    if (get_var("CONSOLE_INITIAL_SETUP") && index($testname, 'install') != -1) {
+    my $subvariant = get_var("SUBVARIANT");
+    my $version = get_release_number;
+    if ($subvariant eq "IoT" && $version < 32 && index($testname, 'install') != -1) {
         assert_screen "console_initial_setup", $wait_time;
         type_string "q\n";
         type_string "yes\n";

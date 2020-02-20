@@ -140,7 +140,6 @@
             "settings": {
                 "CANNED": "1",
                 "PACKAGE_SET": "default",
-                "CONSOLE_INITIAL_SETUP": "1",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -152,7 +151,6 @@
             "settings": {
                 "CANNED": "1",
                 "PACKAGE_SET": "default",
-                "CONSOLE_INITIAL_SETUP": "1",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
