@@ -49,7 +49,7 @@ sub run {
     assert_and_click "anaconda_spoke_done";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 50; #
+    assert_screen "anaconda_main_hub", 90; #
 
 }
 
