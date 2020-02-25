@@ -14,6 +14,7 @@ sub run {
     type_very_safely 'terminal';
     send_key 'ret';  
     wait_still_screen 5;
+    assert_screen "apps_run_terminal";
 
     # Register application
     register_application("gnome-terminal");
