@@ -34,10 +34,19 @@ sub run {
         # correct variables to compare the system data with.
         # First, we know the basic stuff
         my $id = get_var("DISTRI"); # Should be "fedora"
-        my $isovar = get_var("ISO"); # Takes the build string for canned variants.
-        # Split the ISO variable at "-" and read fields 4 (release version)
-        # and 5 (the build number).
-        my ($cannedver, $cannednum) = (split /-/, $isovar)[4, 5];
+        # extract expected version components from ISO name for canned variants,
+        # which have their os-release rewritten by rpm-ostree, see:
+        # https://github.com/projectatomic/rpm-ostree/blob/master/docs/manual/treefile.md
+        # we use the ISO name because rpm-ostree uses elements from the compose
+        # ID for nightlies, but from the label for candidate composes; BUILD
+        # always gives us the compose ID, but the ISO name contains the compose
+        # ID for nightlies but the label for candidate composes, so it works for
+        # our purposes here.
+        my $isovar = get_var("ISO");
+        # Split the ISO variable at "-" and read second-to-last (release
+        # number) and last (compose ID: date and respin, label: major and
+        # minor) fields.
+        my ($cannedver, $cannednum) = (split /-/, $isovar)[-2, -1];
         # Get rid of the ".iso" part of the tag.
         $cannednum =~ s/\.iso//g;
         # Now, we merge the fields into one expression to create the correct canned tag
@@ -77,10 +86,8 @@ sub run {
         }
 
         my $version = "$version_id ($varstr)";
-        # Version looks different when the build is canned (because
-        # rpm-ostree fiddles around with it, documented at
-        # https://github.com/projectatomic/rpm-ostree/blob/master/docs/manual/treefile.md )
-        # We need to form a different string here by using the above created cannedtag.
+        # for canned variants, we need to form a different string here by using
+        # the above created cannedtag. See earlier comment
         if (get_var("CANNED")) {
             $version = "$cannedtag ($varstr)";
         }
