@@ -40,26 +40,15 @@ sub select_disks {
         }
     }
     else {
-        # Single disk cases.
+        # Single disk case.
         if ($args{disks} == 0) {
-            # Clicking will *de*-select...unless we're running into
-            # FIXME #1805553, in which case we should do nothing
-            if (check_screen "anaconda_install_destination_disk_selected") {
-                assert_and_click "anaconda_install_destination_select_disk_1";
-            }
-            else {
-                record_soft_failure "Single disk not selected as install target - #1805553";
-            }
+            # Clicking will *de*-select.
+            assert_and_click "anaconda_install_destination_select_disk_1";
         }
         elsif ($args{disks} > 1) {
             die "Only one disk is connected! Cannot select $args{disks} disks.";
         }
-        # For exactly 1 disk, we don't need to do anything, unless
-        # we run into FIXME #1805553...
-        unless (check_screen "anaconda_install_destination_disk_selected") {
-            record_soft_failure "Single disk not selected as install target - #1805553";
-            assert_and_click "anaconda_install_destination_select_disk_1";
-        }
+        # For exactly 1 disk, we don't need to do anything.
     }
 
     # Handle network disks.
