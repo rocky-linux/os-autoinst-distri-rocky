@@ -707,7 +707,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "13",
+                "HDDSIZEGB": "15",
                 "LANGUAGE": "arabic",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -739,7 +739,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "13",
+                "HDDSIZEGB": "15",
                 "INPUT_METHOD": "1",
                 "LANGUAGE": "japanese",
                 "PACKAGE_SET": "workstation",
@@ -850,7 +850,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "13",
+                "HDDSIZEGB": "15",
                 "LANGUAGE": "russian",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -933,7 +933,7 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "13",
+                "HDDSIZEGB": "15",
                 "LANGUAGE": "french",
                 "NO_UEFI_POST": "1",
                 "PACKAGE_SET": "workstation",
