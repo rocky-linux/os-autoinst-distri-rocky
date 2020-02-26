@@ -514,8 +514,8 @@ sub _repo_setup_updates {
     # for any release, the hash can be empty and this will do nothing
     my %workarounds = (
         "30" => [],
-        # libdnf fix for #1795004
-        "31" => ["FEDORA-2020-980b80f9d9"]
+        "31" => [],
+        "32" => ["FEDORA-2020-755d29d4b0"]
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
