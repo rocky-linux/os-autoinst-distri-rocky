@@ -6,6 +6,8 @@ use utils;
 sub run {
     my $self = shift;
     # upgrader should be installed on up-to-date system
+    my $version = get_var("CURRREL");
+    setup_workaround_repo $version;
     assert_script_run 'dnf -y update --refresh', 1800;
     script_run "reboot", 0;
 

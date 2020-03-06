@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -412,6 +412,50 @@ sub repos_mirrorlist {
     assert_script_run "sed -i -e 's,metalink,mirrorlist,g' ${files}";
 }
 
+sub cleanup_workaround_repo {
+    # clean up the workaround repo (see next).
+    script_run "rm -rf /opt/workarounds_repo";
+    script_run "rm -f /etc/yum.repos.d/workarounds.repo";
+}
+
+sub setup_workaround_repo {
+    # we periodically need to pull an update from updates-testing in
+    # to fix some bug or other. so, here's an organized way to do it.
+    # we do this here so the workaround packages are in the repo data
+    # but *not* in the package lists generated above (those should
+    # only include packages from the update under test). we'll define
+    # a hash of releases and update IDs. if no workarounds are needed
+    # for any release, the hash can be empty and this will do nothing
+    my $version = shift || get_var("VERSION");
+    cleanup_workaround_repo;
+    script_run "dnf -y install bodhi-client createrepo", 300;
+    # write a repo config file, unless this is the support_server test
+    # and it is running on a different release than the update is for
+    # (in this case we need the repo to exist but do not want to use
+    # it on the actual support_server system)
+    unless (get_var("TEST") eq "support_server" && $version ne get_var("CURRREL")) {
+        assert_script_run 'printf "[workarounds]\nname=Workarounds repo\nbaseurl=file:///opt/workarounds_repo\nenabled=1\nmetadata_expire=1\ngpgcheck=0" > /etc/yum.repos.d/workarounds.repo';
+    }
+    assert_script_run "mkdir -p /opt/workarounds_repo";
+    assert_script_run "pushd /opt/workarounds_repo";
+    my %workarounds = (
+        # disable modules on upgrade (#1767351)
+        "30" => ["FEDORA-2020-02ee4b1a1c"],
+        # disable modules on upgrade (#1767351)
+        "31" => ["FEDORA-2020-717d521d35"],
+        # fix for lmod breaking console output tests
+        "32" => ["FEDORA-2020-755d29d4b0"]
+    );
+    # then we'll download each update for our release:
+    my $advisories = $workarounds{$version};
+    foreach my $advisory (@$advisories) {
+        assert_script_run "bodhi updates download --updateid=$advisory", 180;
+    }
+    # and create repo metadata
+    assert_script_run "createrepo .";
+    assert_script_run "popd";
+}
+
 sub _repo_setup_compose {
     # Appropriate repo setup steps for testing a compose
     # disable updates-testing and updates and use the compose location
@@ -458,6 +502,8 @@ sub _repo_setup_updates {
             assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
         }
     }
+    # set up the workaround repo
+    setup_workaround_repo;
 
     # Set up an additional repo containing the update or task packages. We do
     # this rather than simply running a one-time update because it may be the
@@ -478,7 +524,7 @@ sub _repo_setup_updates {
         assert_script_run "mount /opt/update_repo";
     }
     assert_script_run "cd /opt/update_repo";
-    assert_script_run "dnf -y install bodhi-client git createrepo koji", 300;
+    script_run "dnf -y install bodhi-client git createrepo koji", 300;
 
     # download the packages
     if (get_var("ADVISORY_NVRS")) {
@@ -504,25 +550,6 @@ sub _repo_setup_updates {
     # installed, but was not
     assert_script_run 'rpm -qp *.rpm --qf "%{NAME} " > /var/log/updatepkgnames.txt';
     upload_logs "/var/log/updatepkgnames.txt";
-
-    # we periodically need to pull an update from updates-testing in
-    # to fix some bug or other. so, here's an organized way to do it.
-    # we do this here so the workaround packages are in the repo data
-    # but *not* in the package lists generated above (those should
-    # only include packages from the update under test). we'll define
-    # a hash of releases and update IDs. if no workarounds are needed
-    # for any release, the hash can be empty and this will do nothing
-    my %workarounds = (
-        "30" => [],
-        "31" => [],
-        # fix for lmod breaking console output tests
-        "32" => ["FEDORA-2020-755d29d4b0"]
-    );
-    # then we'll download each update for our release:
-    my $advisories = $workarounds{$version};
-    foreach my $advisory (@$advisories) {
-        assert_script_run "bodhi updates download --updateid=$advisory", 180;
-    }
 
     # create the repo metadata
     assert_script_run "createrepo .";

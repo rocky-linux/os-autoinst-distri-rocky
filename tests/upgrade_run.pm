@@ -14,6 +14,7 @@ sub run {
     script_run "setterm -blank 0";
 
     # use compose repo (compose tests) or set up update repo (update tests)
+    cleanup_workaround_repo;
     repo_setup();
     my $params = "-y --releasever=${relnum}";
     if ($release eq "rawhide") {
