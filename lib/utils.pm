@@ -515,9 +515,8 @@ sub _repo_setup_updates {
     my %workarounds = (
         "30" => [],
         "31" => [],
-        # fix for lmod breaking console output tests, fix for UEFI
-        # bootloader installs
-        "32" => ["FEDORA-2020-755d29d4b0", "FEDORA-2020-8ef75170b3"]
+        # fix for lmod breaking console output tests
+        "32" => ["FEDORA-2020-755d29d4b0"]
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
