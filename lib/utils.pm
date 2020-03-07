@@ -443,8 +443,8 @@ sub setup_workaround_repo {
         "30" => ["FEDORA-2020-02ee4b1a1c"],
         # disable modules on upgrade (#1767351)
         "31" => ["FEDORA-2020-717d521d35"],
-        # fix for lmod breaking console output tests
-        "32" => ["FEDORA-2020-755d29d4b0"]
+        # fix for lmod breaking console output tests, f32 backgrounds
+        "32" => ["FEDORA-2020-755d29d4b0", "FEDORA-2020-ed62604eca"]
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
