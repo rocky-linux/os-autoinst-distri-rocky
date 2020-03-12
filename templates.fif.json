@@ -1929,6 +1929,7 @@
         },
         "upgrade_2_realmd_client": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
@@ -1966,6 +1967,7 @@
         },
         "upgrade_2_server_domain_controller": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-x86_64-*-64bit": 30
             },
             "settings": {
