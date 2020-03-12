@@ -1663,6 +1663,7 @@
         },
         "server_freeipa_replication_client": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1684,6 +1685,7 @@
         },
         "server_freeipa_replication_master": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1705,6 +1707,7 @@
         },
         "server_freeipa_replication_replica": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -2058,6 +2061,7 @@
         },
         "upgrade_realmd_client": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-ppc64le-*-ppc64le": 30,
                 "fedora-universal-x86_64-*-64bit": 30
             },
@@ -2096,6 +2100,7 @@
         },
         "upgrade_server_domain_controller": {
             "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 30,
                 "fedora-universal-ppc64le-*-ppc64le": 30,
                 "fedora-universal-x86_64-*-64bit": 30
             },
