@@ -1747,6 +1747,7 @@
         },
         "server_remote_logging_client": {
             "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1766,6 +1767,7 @@
         },
         "server_remote_logging_server": {
             "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
