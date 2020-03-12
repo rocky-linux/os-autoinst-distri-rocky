@@ -7,6 +7,12 @@ sub run {
     my $self = shift;
     # upgrader should be installed on up-to-date system
     my $version = get_var("CURRREL");
+    # ok this is dumb but I need to fix it fast and can't think of a
+    # better way in a hurry. We want the pre-upgrade release version.
+    my $testname = get_var("TEST");
+    if (index($testname, "upgrade_2") != -1) {
+        $version = get_var("PREVREL");
+    }
     setup_workaround_repo $version;
     assert_script_run 'dnf -y update --refresh', 1800;
     script_run "reboot", 0;
