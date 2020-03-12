@@ -1,6 +1,9 @@
 {
   "properties": [],
-  "tags": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "prerelease_note"
+  ],
   "area": [
     {
       "xpos": 675,
