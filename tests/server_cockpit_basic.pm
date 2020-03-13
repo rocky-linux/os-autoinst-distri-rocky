@@ -24,7 +24,7 @@ sub run {
     assert_and_click "cockpit_services_entry";
     # check we get to the appropriate detail screen...but this click
     # often gets lost for some reason, so retry it once
-    assert_and_click "cockpit_services_entry" unless (check_screen "cockpit_services_detail");
+    assert_and_click "cockpit_services_entry" unless (check_screen "cockpit_services_detail", 10);
     assert_screen "cockpit_services_detail";
 }
 
