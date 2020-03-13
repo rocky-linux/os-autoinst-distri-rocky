@@ -1663,7 +1663,7 @@
         },
         "server_freeipa_replication_client": {
             "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1685,7 +1685,7 @@
         },
         "server_freeipa_replication_master": {
             "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1707,7 +1707,7 @@
         },
         "server_freeipa_replication_replica": {
             "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 20
             },
