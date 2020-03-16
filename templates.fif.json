@@ -1502,7 +1502,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "modularity_module_list modularity_enable_disable_module modularity_install_module modularity_checkdefaults",
+                "POSTINSTALL": "modularity_module_list modularity_enable_disable_module modularity_install_module",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_default_upload",
                 "USER_LOGIN": "false"
