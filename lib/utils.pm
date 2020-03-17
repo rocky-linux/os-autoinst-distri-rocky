@@ -439,8 +439,8 @@ sub setup_workaround_repo {
     assert_script_run "mkdir -p /opt/workarounds_repo";
     assert_script_run "pushd /opt/workarounds_repo";
     my %workarounds = (
-        "30" => [""],
-        "31" => [""],
+        "30" => [],
+        "31" => [],
         # fix for lmod breaking console output tests, latest pki to
         # avoid broken FreeIPA upgrades (it can't go backwards)
         "32" => ["FEDORA-2020-755d29d4b0", "FEDORA-2020-5f05c3ec46"]
