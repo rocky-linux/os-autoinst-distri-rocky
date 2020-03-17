@@ -826,6 +826,9 @@ sub start_with_launcher {
             wait_still_screen 5;
         }
         # Click on the launcher
+        if (!check_screen($launcher)) {
+            send_key_until_needlematch($launcher, 'down', 5, 6);
+        }
         assert_and_click $launcher;
         wait_still_screen 5;
     }

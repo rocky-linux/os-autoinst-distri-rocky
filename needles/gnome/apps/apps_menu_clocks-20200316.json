@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_clocks"
+  ],
+  "area": [
+    {
+      "xpos": 632,
+      "ypos": 177,
+      "width": 36,
+      "height": 33,
+      "type": "match"
+    }
+  ]
+}

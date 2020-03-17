@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_calendar"
+  ],
+  "area": [
+    {
+      "xpos": 355,
+      "ypos": 182,
+      "width": 41,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}

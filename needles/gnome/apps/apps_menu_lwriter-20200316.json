@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_lwriter"
+  ],
+  "area": [
+    {
+      "xpos": 219,
+      "ypos": 462,
+      "width": 40,
+      "height": 31,
+      "type": "match"
+    }
+  ]
+}

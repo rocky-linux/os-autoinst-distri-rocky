@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_weather"
+  ],
+  "area": [
+    {
+      "xpos": 765,
+      "ypos": 583,
+      "width": 44,
+      "height": 42,
+      "type": "match"
+    }
+  ]
+}

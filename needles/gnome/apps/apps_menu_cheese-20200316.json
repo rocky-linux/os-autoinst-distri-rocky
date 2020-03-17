@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_cheese"
+  ],
+  "area": [
+    {
+      "xpos": 492,
+      "ypos": 174,
+      "width": 41,
+      "height": 34,
+      "type": "match"
+    }
+  ]
+}

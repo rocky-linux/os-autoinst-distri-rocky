@@ -1,13 +1,13 @@
 {
   "properties": [],
   "tags": [
-    "apps_menu_ldraw"
+    "apps_menu_fonts"
   ],
   "area": [
     {
-      "xpos": 488,
-      "ypos": 451,
-      "width": 48,
+      "xpos": 772,
+      "ypos": 473,
+      "width": 45,
       "height": 46,
       "type": "match"
     }

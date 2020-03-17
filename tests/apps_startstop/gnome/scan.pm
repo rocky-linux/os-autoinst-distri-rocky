@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     
     # Start the application
-    start_with_launcher('apps_menu_scan');
+    start_with_launcher('apps_menu_scan', 'apps_menu_utilities');
     # Check that is started
     assert_screen 'apps_run_scan';
     # Register application

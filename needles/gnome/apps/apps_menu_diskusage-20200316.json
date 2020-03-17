@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_diskusage"
+  ],
+  "area": [
+    {
+      "xpos": 769,
+      "ypos": 288,
+      "width": 45,
+      "height": 42,
+      "type": "match"
+    }
+  ]
+}

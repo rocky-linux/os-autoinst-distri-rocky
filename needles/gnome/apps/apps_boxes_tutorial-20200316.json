@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_boxes_tutorial"
+  ],
+  "area": [
+    {
+      "xpos": 447,
+      "ypos": 131,
+      "width": 130,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "apps_menu_firefox"
+  ],
+  "area": [
+    {
+      "xpos": 351,
+      "ypos": 320,
+      "width": 48,
+      "height": 26,
+      "type": "match"
+    }
+  ]
+}
