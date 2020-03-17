@@ -40,7 +40,7 @@ sub run {
     assert_script_run 'mock -r openqa --chroot "mkdir -p /chroot_tmpdir"';
     assert_script_run "mock -r openqa --copyin openqa.ks /chroot_tmpdir";
     # PULL SOME LEVERS! PULL SOME LEVERS!
-    assert_script_run "mock -r openqa --enable-network --old-chroot --chroot \"/sbin/livemedia-creator --ks /chroot_tmpdir/openqa.ks --logfile /chroot_tmpdir/lmc-logs/livemedia-out.log --no-virt --resultdir /chroot_tmpdir/lmc --project Fedora-${subv}-Live --make-iso --volid FWL-${advortask} --iso-only --iso-name Fedora-${subv}-Live-${arch}-${advortask}.iso --releasever ${version} --macboot\"", 3000;
+    assert_script_run "mock -r openqa --enable-network --old-chroot --chroot \"/sbin/livemedia-creator --ks /chroot_tmpdir/openqa.ks --logfile /chroot_tmpdir/lmc-logs/livemedia-out.log --no-virt --resultdir /chroot_tmpdir/lmc --project Fedora-${subv}-Live --make-iso --volid FWL-${advortask} --iso-only --iso-name Fedora-${subv}-Live-${arch}-${advortask}.iso --releasever ${version} --macboot\"", 3600;
     unless (script_run "mock -r openqa --copyout /chroot_tmpdir/lmc-logs/livemedia-out.log .") {
         upload_logs "livemedia-out.log";
     }
