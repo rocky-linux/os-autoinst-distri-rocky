@@ -77,7 +77,7 @@ sub run {
             AtomicHost => ["atomic.host", "Atomic Host"],
             CoreOS => ["coreos", "CoreOS"],
             KDE => ["kde", "KDE Plasma"],
-            Silverblue => ["workstation", "Workstation Edition"],
+            Silverblue => ["silverblue", "Silverblue"],
             IoT => ["iot", "IoT Edition"],
         );
         if (exists($variants{$subvariant})) {
