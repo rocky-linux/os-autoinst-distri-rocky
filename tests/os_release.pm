@@ -53,12 +53,15 @@ sub run {
         # that will contain both the version number and the build number.
         my $cannedtag = "$cannedver.$cannednum";
         my $name = ucfirst($id);
+        my $rawrel = get_var("RAWREL", '');
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
+        # IoT has a branch that acts more or less like Rawhide, but has
+        # its version as the Rawhide release number, not 'Rawhide'. This
+        # handles that
+        $version_id = 'Rawhide' if ($version_id eq $rawrel);
         my $varstr = spell_version_number($version_id);
         my $target = lc($version_id);
-        if ($version_id eq "Rawhide") {
-                $version_id = get_var("RAWREL");
-        }
+        $version_id = $rawrel if ($version_id eq "Rawhide");
 
         # the 'generic' os-release in fedora-release has no VARIANT or
         # VARIANT_ID and the string used in values like VERSION, that in other

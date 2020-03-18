@@ -12,19 +12,22 @@ use utils;
 sub run {
     my $self = shift;
     # Version as defined in the VERSION variable.
-    my $version = get_var('VERSION');
+    my $tospell = get_var('VERSION');
+    my $expectver = get_var('VERSION');
+    # Rawhide release number.
+    my $rawrel = get_var('RAWREL', '');
+    # IoT has a branch that acts more or less like Rawhide, but has
+    # its version as the Rawhide release number, not 'Rawhide'. This
+    # handles that
+    $tospell = 'Rawhide' if ($tospell eq $rawrel);
+    # this is the Rawhide release number, which we expect to see.
+    $expectver = $rawrel if ($expectver eq "Rawhide");
     # Create a spelt form of the version number.
-    my $speltnum = spell_version_number($version);
-
-    if ($version eq "Rawhide") {
-        # this is the Rawhide release number, which we expect to see.
-        $version = get_var('RAWREL');
-    }
-
+    my $speltnum = spell_version_number($tospell);
     bypass_1691487;
     # Create the expected content of the release file
     # and compare it with its real counterpart.
-    my $expected = "Fedora release $version ($speltnum)";
+    my $expected = "Fedora release $expectver ($speltnum)";
     validate_script_output 'cat /etc/fedora-release', sub { $_ eq $expected };
 }
 
