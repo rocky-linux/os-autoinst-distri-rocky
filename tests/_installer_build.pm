@@ -16,6 +16,10 @@ sub run {
     assert_script_run "pushd /root/imgbuild";
     assert_script_run "setenforce Permissive";
     my $cmd = "lorax -p Fedora -v ${version} -r ${version} --repo=/etc/yum.repos.d/fedora.repo";
+    # rootfs in F30 installer images seems to have got very big at
+    # some point, let's work around that for now:
+    # https://bodhi.fedoraproject.org/updates/FEDORA-2020-1070052d10#comment-1284223
+    $cmd .= " --rootfs-size 3" if ($version eq 30);
     unless (get_var("DEVELOPMENT")) {
         $cmd .= " --isfinal --repo=/etc/yum.repos.d/fedora-updates.repo";
     }
