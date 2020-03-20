@@ -1,15 +1,14 @@
 {
   "properties": [],
   "tags": [
-    "konsole_runs",
-    "apps_run_terminal"
+    "log_out_confirm"
   ],
   "area": [
     {
-      "xpos": 338,
-      "ypos": 8,
+      "xpos": 595,
+      "ypos": 441,
       "width": 56,
-      "height": 15,
+      "height": 22,
       "type": "match"
     }
   ]

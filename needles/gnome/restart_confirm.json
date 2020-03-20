@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "restart_confirm"
+  ],
+  "area": [
+    {
+      "xpos": 486,
+      "ypos": 461,
+      "width": 55,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

@@ -27,7 +27,7 @@ sub _open_new_tab {
 
 sub run {
     my $self = shift;
-    check_desktop_clean;
+    check_desktop;
     send_key 'alt-f1';
     # wait out animations
     wait_still_screen(stilltime=>2, similarity_level=>45);

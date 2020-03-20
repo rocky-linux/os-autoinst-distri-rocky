@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "power_off_entry"
+  ],
+  "area": [
+    {
+      "xpos": 753,
+      "ypos": 227,
+      "width": 93,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

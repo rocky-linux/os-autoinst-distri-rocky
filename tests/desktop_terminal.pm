@@ -5,7 +5,7 @@ use utils;
 
 sub run {
     my $self=shift;
-    check_desktop_clean;
+    check_desktop;
     menu_launch_type('terminal');
     wait_still_screen 5;
     # need to be root

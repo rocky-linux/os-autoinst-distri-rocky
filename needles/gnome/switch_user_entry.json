@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "switch_user_entry"
+  ],
+  "area": [
+    {
+      "xpos": 758,
+      "ypos": 289,
+      "width": 96,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}

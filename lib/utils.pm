@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop_clean download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper_kde/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -727,42 +727,18 @@ sub anaconda_create_user {
     }
 }
 
-sub check_desktop_clean {
-    # Check we're at a 'clean' desktop. This used to be a simple
-    # needle check, but Rawhide's default desktop is now one which
-    # changes over time, and the GNOME top bar is now translucent
-    # by default; together these changes mean it's impossible to
-    # make a reliable needle, so we need something more tricksy to
-    # cover that case. 'tries' is the amount of check cycles to run
-    # before giving up and failing; each cycle should take ~3 secs.
-    my %args = (
-        tries => 10,
-        @_
-    );
-    foreach my $i (1..$args{tries}) {
-        # we still *do* the needle check, for all cases it covers
-        return if (check_screen "graphical_desktop_clean", 1);
-        # now do the special GNOME case
-        if (get_var("DESKTOP") eq "gnome") {
-            send_key "super";
-            if (check_screen "overview_app_grid", 2) {
-                send_key "super";
-                wait_still_screen 3;
-                # go back to the desktop, if we're still at the app
-                # grid (can be a bit fuzzy depending on response lag)
-                while (check_screen "overview_app_grid", 1) {
-                    send_key "super";
-                    wait_still_screen 3;
-                }
-                return;
-            }
-        }
-        else {
-            # to keep the timing equal
-            sleep 2;
-        }
-    }
-    die "Clean desktop not reached!";
+sub check_desktop {
+    # Check we're at a desktop. We do this by looking for the "apps"
+    # menu button ("Activities" button on GNOME, kicker button on
+    # KDE). This is set up as a helper function because, for a while,
+    # GNOME made the top bar translucent by default *and* we had an
+    # animated background by default, which made doing this solely
+    # with needle matches hard, so we had a workaround of trying to
+    # open the overview with the super key and match on the app grid
+    # icon. But GNOME has gone back to the top bar being a solid color
+    # by default, so we don't have this problem any more and this is
+    # back to just being a simple needle match.
+    assert_screen "apps_menu_button", 30;
 }
 
 sub download_modularity_tests {
@@ -1201,6 +1177,38 @@ sub register_application {
     my $application = shift;
     push(@application_list, $application);
     print("APPLICATION REGISTERED: $application \n");
+}
+
+# The KDE desktop tests are very difficult to maintain, because the transparency
+# of the menu requires a lot of different needles to cover the elements. 
+# Therefore it is useful to change the background to a solid colour. 
+# Since many needles have been already created with a black background
+# we will keep it that way. The following code has been taken from the
+# KDE startstop tests but it is good to have it here, because it will be
+# needed more often now, it seems.
+sub solidify_wallpaper_kde {
+    # Run the Desktop settings
+    hold_key 'alt';
+    send_key 'd';
+    send_key 's';
+    release_key 'alt';
+    # Select type of background
+    assert_and_click "deskset_select_type";
+    wait_still_screen 2;
+    # Select plain color type
+    assert_and_click "deskset_plain_color";
+    wait_still_screen 2;
+    # Open colors selection
+    assert_and_click "deskset_select_color";
+    wait_still_screen 2;
+    # Select black
+    assert_and_click "deskset_select_black";
+    wait_still_screen 2;
+    # Confirm
+    assert_and_click "kde_ok";
+    wait_still_screen 2;
+    # Close the application
+    assert_and_click "kde_ok";
 }
 
 1;

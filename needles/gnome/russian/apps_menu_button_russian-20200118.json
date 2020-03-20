@@ -20,6 +20,6 @@
     "DESKTOP-gnome",
     "ENV-DISTRI-fedora",
     "LANGUAGE-russian",
-    "graphical_desktop_clean"
+    "apps_menu_button"
   ]
 }

@@ -72,6 +72,10 @@ for environment in ("anaconda", "gnome"):
 for pkgset in ("kde", "workstation", "minimal"):
     testliterals.append(f"anaconda_{pkgset}_highlighted")
     testliterals.append(f"anaconda_{pkgset}_selected")
+# desktop_login stuff
+for user in ("jack", "jim"):
+    testliterals.append(f"login_{user}")
+    testliterals.append(f"user_confirm_{user}")
 # partitioning stuff, there's a bunch of this, all in anaconda.pm
 # multiple things use this
 for part in ("swap", "root"):

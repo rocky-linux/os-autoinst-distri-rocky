@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "user_confirm_jack"
+  ],
+  "area": [
+    {
+      "xpos": 93,
+      "ypos": 137,
+      "width": 40,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

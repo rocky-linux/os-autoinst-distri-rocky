@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "system_menu_button"
+  ],
+  "area": [
+    {
+      "xpos": 969,
+      "ypos": 2,
+      "width": 45,
+      "height": 25,
+      "type": "match"
+    }
+  ]
+}

@@ -29,7 +29,7 @@ sub run {
         send_key "esc";
         send_key "esc";
         send_key "esc";
-        check_desktop_clean;
+        check_desktop;
     }
 }
 

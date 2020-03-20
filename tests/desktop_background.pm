@@ -4,7 +4,7 @@ use testapi;
 use utils;
 
 sub run {
-    check_desktop_clean;
+    check_desktop;
     # If we want to check that there is a correct background used, as a part
     # of self identification test, we will do it here. For now we don't do
     # this for Rawhide as Rawhide doesn't have its own backgrounds and we

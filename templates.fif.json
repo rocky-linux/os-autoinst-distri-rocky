@@ -609,6 +609,19 @@
                 "START_AFTER_TEST": "install_default_upload"
             }
         },
+        "desktop_login": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_login",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
         "desktop_browser": {
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
