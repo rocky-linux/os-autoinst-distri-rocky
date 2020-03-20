@@ -28,7 +28,7 @@ sub run {
     assert_screen 'autoupdate_planned_time';
 
     # Quit Cockpit
-    send_key "ctrl-q";
+    quit_firefox;
     sleep 3;
 
     # Check that the dnf-automatic service has started

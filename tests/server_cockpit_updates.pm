@@ -47,7 +47,7 @@ sub run {
         # needed and if so, we will restart Firefox and login again.
         #
         if (check_screen("cockpit_updates_reconnect", 1)) {
-            send_key "ctrl-q";
+            quit_firefox;
             sleep 5;
             start_cockpit(1);
             select_cockpit_update();
@@ -68,7 +68,7 @@ sub run {
     assert_screen 'cockpit_updates_updated';
 
     # Switch off Cockpit
-    send_key "ctrl-q";
+    quit_firefox;
 
     # Wait a couple of seconds for the terminal to settle down, the command was
     # entered incorrectly which resulted in a failure.
