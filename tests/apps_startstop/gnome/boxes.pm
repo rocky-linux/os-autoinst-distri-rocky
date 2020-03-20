@@ -10,20 +10,14 @@ sub run {
     
     # Start the application
     start_with_launcher('apps_menu_boxes');
-    # handling 'auth required' screen appearing as a soft fail,
-    # check that is started
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1692972
-    assert_screen ['apps_boxes_tutorial', 'auth_required'];
-    if (match_has_tag 'auth_required') {
-        record_soft_failure "Firewall authentication screen appeared - RHBZ #1692972";
-        my $user_password = get_var("USER_PASSWORD") || "weakpassword";
-        type_very_safely $user_password;
-        send_key 'ret';
-        assert_screen 'apps_boxes_tutorial';
+    # We get tutorial on F32+, directly to main UI on F<32; we can
+    # drop the 'direct to main UI' path once F32 is stable
+    assert_screen ['apps_boxes_tutorial', 'apps_run_boxes'];
+    if (match_has_tag 'apps_boxes_tutorial') {
+        # Let us get rid of the Tutorial window.
+        send_key 'esc';
+        assert_screen 'apps_run_boxes';
     }
-    # Let us get rid of the Tutorial window.
-    send_key 'esc';
-    assert_screen 'apps_run_boxes';
 
     # Register application
     register_application("gnome-boxes");
