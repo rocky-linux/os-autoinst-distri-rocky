@@ -10,7 +10,11 @@ sub run {
     
     # Start the application
     menu_launch_type 'konqueror';
-    # Check that it is started
+    # Confirm the Locations dialog if it is present
+    if (check_screen "konqueror_locations") {
+        assert_and_click "kde_ok";
+    }
+    # Check that Konqueror has started
     assert_screen 'konqueror_runs';
     # Close the application
     quit_with_shortcut();
