@@ -79,7 +79,7 @@ sub run {
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         # wait for the stupid 'help' screen to show and kill it
-        if (check_screen "getting_started", 30) {
+        if (check_screen "getting_started", 45) {
             send_key "alt-f4";
             wait_still_screen 5;
         }
