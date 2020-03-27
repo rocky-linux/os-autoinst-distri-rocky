@@ -16,7 +16,7 @@ sub run {
     select_cockpit_update();
 
     # FIXME Workaround for RHBZ #1765685 - remove when it's fixed
-    sleep 15;
+    sleep 30;
 
     # Switch on automatic updates
     assert_and_click 'cockpit_updates_auto', '', 120;
