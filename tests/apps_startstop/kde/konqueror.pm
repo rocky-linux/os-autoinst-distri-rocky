@@ -7,7 +7,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    
     # Start the application
     menu_launch_type 'konqueror';
     # Check that it is started

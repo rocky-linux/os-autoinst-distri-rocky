@@ -21,6 +21,7 @@ use testapi;
 use autotest;
 use needle;
 use File::Basename;
+use utils;
 
 # distribution-specific implementations of expected methods
 my $distri = testapi::get_var("CASEDIR") . '/lib/fedoradistribution.pm';
@@ -393,10 +394,23 @@ if (get_var("STARTSTOP")) {
 
     # Find all tests from a directory defined by the DESKTOP variable
     my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
+    # We need to know the release number in order to make a decision based
+    # on the version - see later.
+    my $release = utils::get_release_number();
     # Now load them
     foreach my $filepath (@apptests) {
         my $file = basename($filepath);
-        autotest::loadtest "tests/apps_startstop/${desktop}/${file}";
+        # Konqueror has been removed from default installed applications and
+        # its test was constantly failing. The following will only run the
+        # Konqueror tests when the version is less than 32. Other tests
+        # should stay unaffected by this change.
+        # FIXME: Revert this change when we are done testing older versions.
+        if (($file eq "konqueror.pm") and ($release >= 32)) {
+            print "\nSkipping the Konqueror test in this version.\n";
+        }
+        else {
+            autotest::loadtest "tests/apps_startstop/${desktop}/${file}";
+        }
     }
     if ($desktop eq 'gnome') {
         # Run this test to check if required application have registered.
