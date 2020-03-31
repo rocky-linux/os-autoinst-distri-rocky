@@ -7,13 +7,15 @@ use utils;
 
 sub run {
     my $self = shift;
-    
-    # Start the application
-    menu_launch_type 'konqueror';
-    # Check that it is started
-    assert_screen 'konqueror_runs';
-    # Close the application
-    quit_with_shortcut();
+    my $version = get_var("VERSION");
+    if ($version < 32) || ($version ne "Rawhide") {
+        # Start the application
+        menu_launch_type 'konqueror';
+        # Check that it is started
+        assert_screen 'konqueror_runs';
+        # Close the application
+        quit_with_shortcut();
+    }
 }
 
 sub test_flags {
