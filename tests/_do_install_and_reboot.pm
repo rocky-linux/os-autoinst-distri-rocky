@@ -139,6 +139,12 @@ sub run {
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
     push (@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
+    # Patch for https://bugzilla.redhat.com/show_bug.cgi?id=1817004
+    # Allow ppc64le Silverblue to boot after install
+    if ((get_var("ARCH") eq 'ppc64le') && \
+        (get_var("SUBVARIANT") eq "Silverblue")) {
+        push (@actions, 'grubregen');
+    }
     # our approach for taking all these actions doesn't work on VNC
     # installs, fortunately we don't need any of them in that case
     # yet, so for now let's just flush the list here if we're VNC
@@ -181,6 +187,10 @@ sub run {
     if (grep {$_ eq 'rootpw'} @actions) {
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
+    }
+    if (grep {$_ eq 'grubregen'} @actions) {
+        record_soft_failure  "brc#1817004, Regenerate grub.cfg for reboot success";
+        assert_script_run "chroot $mount grub2-mkconfig -o /boot/grub2/grub.cfg";
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
 }
