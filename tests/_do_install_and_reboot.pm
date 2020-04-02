@@ -133,17 +133,16 @@ sub run {
     # before we actually reboot. let's figure them all out first...
     my @actions;
     push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
-    push (@actions, 'abrt') if (get_var("ABRT") eq "system");
+    push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
+    # Patch for https://bugzilla.redhat.com/show_bug.cgi?id=1817004
+    # Allow ppc64le Silverblue to boot after install
+    if (check_var('ARCH', 'ppc64le') && check_var('SUBVARIANT', 'Silverblue')) {
+        push (@actions, 'grubregen');
+    }
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
-    # Patch for https://bugzilla.redhat.com/show_bug.cgi?id=1817004
-    # Allow ppc64le Silverblue to boot after install
-    if ((get_var("ARCH") eq 'ppc64le') && \
-        (get_var("SUBVARIANT") eq "Silverblue")) {
-        push (@actions, 'grubregen');
-    }
     push (@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
     # our approach for taking all these actions doesn't work on VNC
     # installs, fortunately we don't need any of them in that case
