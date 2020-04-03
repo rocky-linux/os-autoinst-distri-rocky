@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 581,
+      "width": 74,
+      "height": 16,
+      "ypos": 433,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-fedora",
+    "anaconda_error",
+    "anaconda_error_report"
+  ]
+}
