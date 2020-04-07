@@ -65,6 +65,16 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
+    else {
+        # the "live boot" branch; we may need to work around
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1821499
+        # we should wind up at desktop now, but with that bug we
+        # hit GDM instead
+        if (check_screen "graphical_login", 30) {
+            record_soft_failure "Hit GDM unexpectedly - #1821499";
+            send_key 'ret';
+        }
+    }
     check_desktop_clean(tries=>30);
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
