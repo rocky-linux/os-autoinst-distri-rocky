@@ -24,6 +24,9 @@ sub run {
     $self->root_console(tty=>3);
     # ensure we actually have some package updates available
     prepare_test_packages;
+    # set GDM to debugging mode; seems to be needed as part of the
+    # #1821499 workaround
+    assert_script_run 'printf "[debug]\nEnable=true\n" > /etc/gdm/custom.conf';
     if ($desktop eq 'gnome') {
         # On GNOME, move the clock forward if needed, because it won't
         # check for updates before 6am(!)
@@ -72,7 +75,6 @@ sub run {
         # hit GDM instead
         if (check_screen "graphical_login", 30) {
             record_soft_failure "Hit GDM unexpectedly - #1821499";
-            sleep 5;
             send_key 'ret';
         }
     }
