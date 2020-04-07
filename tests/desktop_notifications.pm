@@ -24,9 +24,6 @@ sub run {
     $self->root_console(tty=>3);
     # ensure we actually have some package updates available
     prepare_test_packages;
-    # set GDM to debugging mode; seems to be needed as part of the
-    # #1821499 workaround
-    assert_script_run 'printf "[debug]\nEnable=true\n" > /etc/gdm/custom.conf';
     if ($desktop eq 'gnome') {
         # On GNOME, move the clock forward if needed, because it won't
         # check for updates before 6am(!)
@@ -67,16 +64,6 @@ sub run {
         assert_screen "graphical_login_input";
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
-    }
-    else {
-        # the "live boot" branch; we may need to work around
-        # https://bugzilla.redhat.com/show_bug.cgi?id=1821499
-        # we should wind up at desktop now, but with that bug we
-        # hit GDM instead
-        if (check_screen "graphical_login", 30) {
-            record_soft_failure "Hit GDM unexpectedly - #1821499";
-            send_key 'ret';
-        }
     }
     check_desktop_clean(tries=>30);
     # now, WE WAIT. this is just an unconditional wait - rather than
