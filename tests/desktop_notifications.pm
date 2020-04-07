@@ -72,6 +72,7 @@ sub run {
         # hit GDM instead
         if (check_screen "graphical_login", 30) {
             record_soft_failure "Hit GDM unexpectedly - #1821499";
+            sleep 5;
             send_key 'ret';
         }
     }
