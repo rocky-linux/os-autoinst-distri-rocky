@@ -21,7 +21,8 @@ sub run {
         do_bootloader(postinstall=>0, params=>'3');
     }
     boot_to_login_screen;
-    $self->root_console(tty=>3);
+    # use tty1 to avoid RHBZ #1821499 on F32 Workstation live
+    $self->root_console(tty=>1);
     # ensure we actually have some package updates available
     prepare_test_packages;
     if ($desktop eq 'gnome') {
@@ -50,7 +51,8 @@ sub run {
             console_login(user=>'root', password=>get_var('ROOT_PASSWORD', 'weakpassword'));
         }
     }
-    assert_script_run 'systemctl isolate graphical.target';
+    # can't use assert_script_run here as long as we're on tty1
+    type_string "systemctl isolate graphical.target\n";
     # we trust systemd to switch us to the right tty here
     if (get_var("BOOTFROM")) {
         assert_screen 'graphical_login';
