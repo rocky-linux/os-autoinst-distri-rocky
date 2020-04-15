@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 99,
+      "ypos": 483,
+      "xpos": 129,
+      "width": 144
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "32_background"
+  ]
+}
