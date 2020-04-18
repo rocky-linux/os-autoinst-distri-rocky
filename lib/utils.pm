@@ -738,7 +738,11 @@ sub check_desktop {
     # icon. But GNOME has gone back to the top bar being a solid color
     # by default, so we don't have this problem any more and this is
     # back to just being a simple needle match.
-    assert_screen "apps_menu_button", 30;
+    my %args = (
+        timeout => 30,
+        @_
+    );
+    assert_screen "apps_menu_button", $args{timeout};
 }
 
 sub download_modularity_tests {

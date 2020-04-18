@@ -67,7 +67,7 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
-    check_desktop(tries=>30);
+    check_desktop(timeout=>90);
     # now, WE WAIT. this is just an unconditional wait - rather than
     # breaking if we see an update notification appear - so we catch
     # things that crash a few minutes after startup, etc.

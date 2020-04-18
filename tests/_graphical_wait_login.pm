@@ -91,7 +91,7 @@ sub run {
     # Move the mouse somewhere it won't highlight the match areas
     mouse_set(300, 800);
     # KDE can take ages to start up
-    check_desktop(tries=>40);
+    check_desktop(timeout=>120);
 }
 
 sub test_flags {
