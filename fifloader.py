@@ -340,7 +340,7 @@ def run(args):
         if args.update:
             loadargs.append('--update')
         loadargs.append('-')
-        subprocess.run(loadargs, input=json.dumps(out), text=True)
+        subprocess.run(loadargs, input=json.dumps(out), text=True, check=True)
 
 def main():
     """Main loop."""
