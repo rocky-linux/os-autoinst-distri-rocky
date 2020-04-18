@@ -1,25 +1,18 @@
 {
-  "area": [
-    {
-      "xpos": 12,
-      "width": 44,
-      "ypos": 8,
-      "height": 15,
-      "type": "match"
-    },
-    {
-      "type": "match",
-      "height": 18,
-      "ypos": 4,
-      "width": 43,
-      "xpos": 968
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "DESKTOP-gnome",
-    "ENV-DISTRI-fedora",
-    "LANGUAGE-russian",
-    "apps_menu_button"
-  ]
+    "area": [
+        {
+            "height": 15,
+            "type": "match",
+            "width": 44,
+            "xpos": 12,
+            "ypos": 8
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "DESKTOP-gnome",
+        "ENV-DISTRI-fedora",
+        "LANGUAGE-russian",
+        "apps_menu_button"
+    ]
 }
