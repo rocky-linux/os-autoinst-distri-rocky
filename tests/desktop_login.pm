@@ -139,7 +139,11 @@ sub logout_user {
 sub switch_user {
     # Switch the user, i.e. leave the current user logged in and
     # log in another user simultaneously.
-    if (check_screen "system_menu_button") {
+    send_key "ret";
+    if (check_screen "locked_screen_switch_user") {
+        assert_and_click "locked_screen_switch_user";
+    }
+    elsif (check_screen "system_menu_button") {
         # The system_menu_button indicates that we are in an active
         # and unlocked session, where user switching differs
         # from a locked but active session.
@@ -149,10 +153,6 @@ sub switch_user {
         wait_still_screen 5;
         # Add sleep to slow down the process a bit
         sleep 10;
-    }
-    else {
-        # When the screen is locked, use the icon.
-        assert_and_click "locked_screen_switch_user";
     }
 }
 

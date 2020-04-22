@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "locked_screen_switch_user"
+  ],
+  "area": [
+    {
+      "xpos": 964,
+      "ypos": 709,
+      "width": 21,
+      "height": 19,
+      "type": "match"
+    }
+  ]
+}
