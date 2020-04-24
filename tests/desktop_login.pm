@@ -140,7 +140,7 @@ sub switch_user {
     # Switch the user, i.e. leave the current user logged in and
     # log in another user simultaneously.
     send_key "ret";
-    if (check_screen "locked_screen_switch_user") {
+    if (check_screen "locked_screen_switch_user", 5) {
         assert_and_click "locked_screen_switch_user";
     }
     elsif (check_screen "system_menu_button") {
