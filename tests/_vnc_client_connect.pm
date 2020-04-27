@@ -12,6 +12,11 @@ sub run {
     assert_script_run "ping -c 2 10.0.2.114";
     desktop_vt;
     menu_launch_type('boxes');
+    assert_screen ['apps_boxes_tutorial', 'boxes_new_connection'];
+    if (match_has_tag 'apps_boxes_tutorial') {
+        # Let us get rid of the Tutorial window.
+        send_key 'esc';
+    }
     assert_and_click('boxes_new_connection');
     assert_and_click('boxes_remote');
     type_very_safely("vnc://10.0.2.114:5901\n");
