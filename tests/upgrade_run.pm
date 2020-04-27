@@ -21,6 +21,12 @@ sub run {
         $params .= " --nogpgcheck";
     }
 
+    # FIXME workaround for #1811234 affecting F30 -> F31 upgrades
+    # remove when bug is fixed or F30 goes EOL
+    if (get_var("UPGRADE") && $relnum eq "31" && get_var("CURRREL") eq "30") {
+        assert_script_run "dnf -y module reset maven", 120;
+    }
+
     if (script_run "dnf ${params} system-upgrade download", 6000) {
         record_soft_failure "dnf failed so retry with --allowerasing";
         $params .= " --allowerasing";
