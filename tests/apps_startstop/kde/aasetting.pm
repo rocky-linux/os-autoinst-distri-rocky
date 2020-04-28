@@ -8,7 +8,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    solidify_wallpaper_kde;
+    solidify_wallpaper;
     # get rid of unwanted notifications that interfere with tests
     click_unwanted_notifications;
 }

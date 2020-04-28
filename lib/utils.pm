@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper_kde/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -1190,29 +1190,46 @@ sub register_application {
 # we will keep it that way. The following code has been taken from the
 # KDE startstop tests but it is good to have it here, because it will be
 # needed more often now, it seems.
-sub solidify_wallpaper_kde {
+sub solidify_wallpaper {
+    my $desktop = get_var("DESKTOP");
+    if ($desktop eq "KDE") {
     # Run the Desktop settings
-    hold_key 'alt';
-    send_key 'd';
-    send_key 's';
-    release_key 'alt';
-    # Select type of background
-    assert_and_click "deskset_select_type";
-    wait_still_screen 2;
-    # Select plain color type
-    assert_and_click "deskset_plain_color";
-    wait_still_screen 2;
-    # Open colors selection
-    assert_and_click "deskset_select_color";
-    wait_still_screen 2;
-    # Select black
-    assert_and_click "deskset_select_black";
-    wait_still_screen 2;
-    # Confirm
-    assert_and_click "kde_ok";
-    wait_still_screen 2;
-    # Close the application
-    assert_and_click "kde_ok";
+        hold_key 'alt';
+        send_key 'd';
+        send_key 's';
+        release_key 'alt';
+        # Select type of background
+        assert_and_click "deskset_select_type";
+        wait_still_screen 2;
+        # Select plain color type
+        assert_and_click "deskset_plain_color";
+        wait_still_screen 2;
+        # Open colors selection
+        assert_and_click "deskset_select_color";
+        wait_still_screen 2;
+        # Select black
+        assert_and_click "deskset_select_black";
+        wait_still_screen 2;
+        # Confirm
+        assert_and_click "kde_ok";
+        wait_still_screen 2;
+        # Close the application
+        assert_and_click "kde_ok";
+    }
+    elsif ($desktop eq "gnome") {
+        # Start the terminal to set up backgrounds.
+        menu_launch_type "gnome-terminal";
+        # When the application opens, run command in it to set the background to black
+        type_very_safely "gsettings set org.gnome.desktop.background picture-uri ''";
+        send_key 'ret';
+        wait_still_screen 2;
+        type_very_safely "gsettings set org.gnome.desktop.background primary-color '#000000'";
+        send_key 'ret';
+        wait_still_screen 2;
+        quit_with_shortcut();
+        # check that is has changed color
+        assert_screen 'apps_settings_screen_black';
+    }
 }
 
 1;

@@ -203,7 +203,7 @@ sub run {
     our $desktop = get_var("DESKTOP");
     # Get rid of the KDE wallpaper and make background black.
     if ($desktop eq "kde") {
-        solidify_wallpaper_kde;
+        solidify_wallpaper;
         # also get rid of the wallpaper on SDDM screen. This is system
         # wide so we only need do it once
         menu_launch_type $term;
@@ -243,9 +243,9 @@ sub run {
 
     # Log in with the first user account.
     login_user(user=>"jack", password=>$jackpass);
-    if ($desktop eq "kde") {
-        solidify_wallpaper_kde;
-    }
+    # Because some of the desktop candiness is based on semi-transparent items that change colours
+    # with every background change, we want to get rid of the background and make it a solid color.
+    solidify_wallpaper;
     check_user_logged_in("jack");
     # Log out the user.
     logout_user();
@@ -258,8 +258,9 @@ sub run {
     else {
         # If not, we are in KDE and we will log in normally.
         login_user(user=>"jim", password=>$jimpass);
-        solidify_wallpaper_kde;
     }
+    # The backgrounds must be solid for both newly created users to take effect in the login session.
+    solidify_wallpaper;
     check_user_logged_in("jim");
     # And this time reboot the system using the menu.
     reboot_system();
