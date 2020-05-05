@@ -1192,7 +1192,7 @@ sub register_application {
 # needed more often now, it seems.
 sub solidify_wallpaper {
     my $desktop = get_var("DESKTOP");
-    if ($desktop eq "KDE") {
+    if ($desktop eq "kde") {
     # Run the Desktop settings
         hold_key 'alt';
         send_key 'd';
