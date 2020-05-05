@@ -1219,6 +1219,8 @@ sub solidify_wallpaper {
     elsif ($desktop eq "gnome") {
         # Start the terminal to set up backgrounds.
         menu_launch_type "gnome-terminal";
+        # wait to be sure it's fully open
+        wait_still_screen 5;
         # When the application opens, run command in it to set the background to black
         type_very_safely "gsettings set org.gnome.desktop.background picture-uri ''";
         send_key 'ret';
