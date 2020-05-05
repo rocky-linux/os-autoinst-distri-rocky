@@ -8,7 +8,7 @@ use Exporter;
 use testapi;
 use utils;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -173,6 +173,52 @@ sub custom_blivet_add_partition {
         assert_and_click "anaconda_blivet_free_space";
     }
 }
+
+sub custom_blivet_format_partition {
+    # This subroutine formats a selected partition. To use it, you must select the 
+    # partition by other means before you format it using this routine.
+    # You have to create a needle for any non-existing filesystem that is
+    # passed via the $type, such as anaconda_blivet_part_select_ext4.
+    my %args = @_;
+    # Start editing the partition and select the Format option
+    assert_and_click "anaconda_blivet_part_edit";
+    assert_and_click "anaconda_blivet_part_format";
+    # Select the appropriate filesystem type.
+    assert_and_click "anaconda_blivet_part_drop_select";
+    assert_and_click "anaconda_blivet_part_select_$args{type}";
+    wait_still_screen 2;
+    # Fill in the label if needed.
+    send_key "tab";
+    if ($args{label}) {
+        type_very_safely $args{label};
+    }
+    # Fill in the mountpoint.
+    send_key "tab";
+    type_very_safely $args{mountpoint};
+    assert_and_click "anaconda_blivet_part_format_button";
+}
+
+sub custom_blivet_resize_partition {
+    # This subroutine resizes the selected (active) partition to a given value. Note, that
+    # if the selected value is bigger than the available space, it will only be
+    # resized to fill up the available space no matter the number. 
+    # This routine cannot will not be able to select a particular partition!!!
+    my %args = @_;
+    # Start editing the partition and select the Resize option
+    assert_and_click "anaconda_blivet_part_edit";
+    assert_and_click "anaconda_blivet_part_resize";
+    # Select the appropriate units. Note, that there must a be needle existing
+    # for each possible unit that you might want to use, such as 
+    # "anaconda_blivet_size_unit_gib".
+    assert_and_click "anaconda_blivet_part_drop_select";
+    assert_and_click "anaconda_blivet_size_unit_$args{units}";
+    # Move back to the value field.
+    send_key "shift-tab";
+    # Type in the new size.
+    type_very_safely $args{size};
+    assert_and_click "anaconda_blivet_part_resize_button";
+}
+
 
 sub custom_change_type {
     # Used to set different device types for specified partition (e.g.

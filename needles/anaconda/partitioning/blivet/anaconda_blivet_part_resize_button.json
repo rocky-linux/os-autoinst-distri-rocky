@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_resize_button"
+  ],
+  "area": [
+    {
+      "xpos": 718,
+      "ypos": 434,
+      "width": 41,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

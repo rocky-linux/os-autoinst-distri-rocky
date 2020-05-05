@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 320,
+      "ypos": 419,
+      "type": "match",
+      "width": 171,
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-english",
+    "anaconda_blivet_part_fs",
+    "anaconda_blivet_part_fs_ext4_selected"
+  ]
+}
