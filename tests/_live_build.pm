@@ -10,6 +10,16 @@ sub run {
     my $arch = get_var("ARCH");
     my $subv = get_var("SUBVARIANT");
     my $lcsubv = lc($subv);
+    if (get_var("NUMDISKS") > 2) {
+        # put /var/lib/mock on the third disk, so we don't run out of
+        # space on the main disk. The second disk will have already
+        # been claimed for the update repo.
+        assert_script_run "echo 'type=83' | sfdisk /dev/vdc";
+        assert_script_run "mkfs.ext4 /dev/vdc1";
+        assert_script_run "echo '/dev/vdc1 /var/lib/mock ext4 defaults 1 2' >> /etc/fstab";
+        assert_script_run "mkdir -p /var/lib/mock";
+        assert_script_run "mount /var/lib/mock";
+    }
     # install the tools we need
     assert_script_run "dnf -y install mock git pykickstart tar", 120;
     # base mock config on original

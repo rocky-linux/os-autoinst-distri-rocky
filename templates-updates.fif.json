@@ -287,7 +287,8 @@
                 "BOOTFROM": "c",
                 "GRUB_POSTINSTALL": "selinux=0",
                 "HDD_1": "disk_f%VERSION%_minimal_3_%ARCH%.img",
-                "NUMDISKS": "2",
+                "HDDSIZEGB_3": "25",
+                "NUMDISKS": "3",
                 "POSTINSTALL": "_live_build",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
