@@ -398,8 +398,11 @@ sub disable_firefox_studies {
     # create a config file that disables Firefox's dumb 'shield
     # studies' so they don't break tests:
     # https://bugzilla.mozilla.org/show_bug.cgi?id=1529626
+    # and also disables the password manager stuff so that doesn't
+    # break password entry:
+    # https://bugzilla.mozilla.org/show_bug.cgi?id=1635833
     assert_script_run 'mkdir -p $(rpm --eval %_libdir)/firefox/distribution';
-    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true}}\' > $(rpm --eval %_libdir)/firefox/distribution/policies.json';
+    assert_script_run 'printf \'{"policies": {"DisableFirefoxStudies": true, "OfferToSaveLogins": false}}\' > $(rpm --eval %_libdir)/firefox/distribution/policies.json';
 }
 
 sub repos_mirrorlist {
