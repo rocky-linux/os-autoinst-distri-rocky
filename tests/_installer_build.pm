@@ -6,6 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     my $version = get_var("VERSION");
+    my $currrel = get_var("CURRREL");
     my $advortask = get_var("ADVISORY_OR_TASK");
     my $arch = get_var("ARCH");
     assert_script_run "dnf -y install lorax", 90;
@@ -20,7 +21,7 @@ sub run {
     # some point, let's work around that for now:
     # https://bodhi.fedoraproject.org/updates/FEDORA-2020-1070052d10#comment-1284223
     $cmd .= " --rootfs-size 3" if ($version eq 30);
-    unless (get_var("DEVELOPMENT")) {
+    unless ($version > $currrel) {
         $cmd .= " --isfinal --repo=/etc/yum.repos.d/fedora-updates.repo";
     }
     $cmd .= " --repo=/etc/yum.repos.d/advisory.repo ./results";

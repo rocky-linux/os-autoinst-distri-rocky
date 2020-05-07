@@ -488,12 +488,13 @@ sub _repo_setup_updates {
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
     my $version = get_var("VERSION");
+    my $currrel = get_var("CURRREL", "0");
     repos_mirrorlist();
     # this can be used for debugging repo config if something is wrong
 #    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
 #        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
 #    }
-    if (get_var("DEVELOPMENT")) {
+    if ($version > $currrel) {
         # Disable updates-testing so other bad updates don't break us
         # this will do nothing on upgrade tests as we're on a stable
         # release at this point, but it won't *hurt* anything, so no
@@ -1046,38 +1047,83 @@ sub check_top_bar {
 
 sub check_prerelease {
     # This method is used by identification tests to check if
-    # Anaconda shows the PRERELEASE info for Rawhide versions.
-    # As it seems, the rules for showing the PRERELEASE are not
-    # as simple as it may look like. It seems to me, that the PRERELEASE
-    # is shown on Rawhide intallations, which is pretty easy to test because
-    # the "VERSION" variable is Rawhide. On Final RC, the PRERELEASE should
-    # be turned off, while it should be present between before that.
-    # When Fedora is branched, the "VERSION" changes to the version number
-    # and this is not changed even with Final, so we cannot test that.
-    # Investigating the history, I noticed that all nightly builds have
-    # that prerelease turned on. And also, it is there on a Beta candidate.
-    # We can test for that. For update tests, if DEVELOPMENT is set the
-    # prerelease tags should appear, otherwise they should not.
+    # Anaconda shows the PRERELEASE tag on various screens. These are
+    # the rules anaconda follows for deciding whether to do this, as
+    # of 2020-05-07:
 
-    my $beta = get_var('ISO');
-    # install_pxeboot tests have ISO blanked, so we must use ISO_URL
-    $beta ||= get_var('ISO_URL');
-    my $nightly = get_var('BUILD');
+    # 1. If there's a /.buildstamp and/or /tmp/product/.buildstamp file
+    # the installer environment, and/or the environment variable
+    # PRODBUILDPATH is set and points to a file that exists, it reads
+    # config from those file(s), in that order of precedence, and if
+    # the key 'IsFinal' exists in the section 'Main', its value is
+    # used as anaconda's `product.isFinal`. Installer images built by
+    # lorax have this buildstamp file, and it always sets IsFinal: if
+    # --isfinal was passed to lorax it is set to True, if not it is set
+    # to False. Whether lorax is run with --isfinal can be specified
+    # in the Pungi config, but there's also a heuristic: it usually
+    # defaults to False, but if the compose has a label and it's an
+    # 'RC' or 'Update' or 'SecurityFix' compose (see definition of
+    # SUPPORTED_MILESTONES in productmd.composeinfo), the default is
+    # True. AFAICS, Fedora's pungi configs don't explicitly set this,
+    # but rely on the heuristic. So for installer images, we expect
+    # isFinal to be True for RC candidate composes and post-release
+    # nightly Cloud, IoT etc. composes (these are also marked as 'RC'
+    # composes), but False for Rawhide and Branched nightly composes
+    # and Beta candidate composes. For installer images built by our
+    # own _installer_build test, we control whether --isfinal is set
+    # or not; we pass it if the update is for a stable release, we do
+    # not pass it if the update is for Branched. Live images do not
+    # have the buildstamp file.
+
+    # 2. If there's no buildstamp file, the value of the environment
+    # variable ANACONDA_ISFINAL is used as `product.isFinal`, default
+    # of False if that environment var is not set. The live installer
+    # wrapper script sets ANACONDA_ISFINAL based on the release field
+    # of whatever package provides system-release: if it starts with
+    # "0.", it sets ANACONA_ISFINAL to "false", otherwise it sets it
+    # to "true". So for live images, we expect isFinal to be True
+    # unless the fedora-release-common package release starts with 0.
+
+    # 3. If `product.isFinal` is False, the pre-release warning and
+    # tags are shown; if it is False, they are not shown.
+
+    # We don't really need to check this stuff for update tests, as
+    # the only installer images we test on updates are ones we build
+    # ourselves; there's no value to this check for those really.
+    # For compose tests, we will expect to see the pre-release tags if
+    # the compose is Rawhide, or a Beta candidate, or it's a nightly
+    # and we're checking an installer image. If it's an RC or Updates
+    # candidate, or a respin release, we expect NOT to see the tags.
+    # If it's a nightly and we're checking a live image, we don't do
+    # the check.
+
+    # bail if this is an update test
+    return if (get_var("ADVISORY OR TASK"));
+
+    # 0 means "tags MUST NOT be shown", 1 means "tags MUST be shown",
+    # any other value means we don't care
+    my $prerelease = 10;
+
+    # if this is RC or update compose we absolutely *MUST NOT* see tags
+    my $label = get_var("LABEL");
+    $prerelease = 0 if ($label =~ /^(RC|Update)-/);
+    # if it's a Beta compose we *MUST* see tags
+    $prerelease = 1 if ($label =~ /^Beta-/);
     my $version = get_var('VERSION');
-    my $development = get_var('DEVELOPMENT');
-    # Let us see if the installed system is one that needs to have the prerelease
-    # note shown, default is NO.
-    my $prerelease = 0;
-    if ($beta =~ /Beta/ or $version eq "Rawhide" or $development) {
-        $prerelease = 1;
-    }
-    # If the image is a nightly build or test build, it is not clear whether
-    # the prerelease should be there or not, but according to what we decided
-    # this is not a big issue. This piece of code can be used later, when
-    # we decide differently.
-    elsif ($nightly =~ /\.[nt]\.\d+/) {
-        $prerelease = 10;
-    }
+    # if it's Rawhide we *MUST* see tags
+    $prerelease = 1 if ($version eq "Rawhide");
+    my $build = get_var('BUILD');
+    # if it's a nightly installer image we should see tags
+    $prerelease = 1 if ($build =~ /\.n\.\d+/ && !get_var("LIVE"));
+    # if it's a respin compose we *MUST NOT* see tags
+    $prerelease = 0 if ($build =~ /Respin/);
+    # we *could* go to a console and parse fedora-release-common
+    # to decide if a nightly live image should have tags or not, but
+    # it seems absurd as we're almost reinventing the code that
+    # decides whether to show the tags, at that point, and it's not
+    # really a big deal either way whether a nightly live image has
+    # the tags or not. So we don't.
+
     # For all prerelease requiring ISOs, assert that prerelease is there.
     if ($prerelease == 1) {
         assert_screen "prerelease_note";

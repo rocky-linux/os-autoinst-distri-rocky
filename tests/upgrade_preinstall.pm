@@ -11,7 +11,7 @@ sub run {
     # better way in a hurry. We want the pre-upgrade release version.
     my $testname = get_var("TEST");
     if (index($testname, "upgrade_2") != -1) {
-        $version = get_var("PREVREL");
+        $version = get_var("UP2REL");
     }
     setup_workaround_repo $version;
     assert_script_run 'dnf -y update --refresh', 1800;

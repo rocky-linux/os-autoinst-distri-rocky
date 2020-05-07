@@ -23,7 +23,7 @@ sub run {
 
     # FIXME workaround for #1811234 affecting F30 -> F31 upgrades
     # remove when bug is fixed or F30 goes EOL
-    if (get_var("UPGRADE") && $relnum eq "31" && get_var("CURRREL") eq "30") {
+    if (get_var("UPGRADE") && $relnum eq "31" && get_var("UP1REL") eq "30") {
         assert_script_run "dnf -y module reset maven", 120;
     }
 
