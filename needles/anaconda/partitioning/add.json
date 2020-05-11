@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_part_add"
+  ],
+  "area": [
+    {
+      "xpos": 22,
+      "ypos": 630,
+      "width": 53,
+      "height": 14,
+      "type": "match"
+    }
+  ]
+}
