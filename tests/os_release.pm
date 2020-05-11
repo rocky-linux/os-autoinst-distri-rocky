@@ -91,8 +91,17 @@ sub run {
         # If fedora-release-common release starts with a 0, we'll have
         # "Prerelease" in varstr
         my $reltag = script_output 'rpm -q fedora-release-common --qf "%{RELEASE}\n"';
-        $varstr .= " Prerelease" if (index($reltag, "0.") == 0);
-
+        if (index($reltag, "0.") == 0) {
+            $varstr .= " Prerelease";
+            # ...however, we shouldn't just wave this through if we're
+            # an RC candidate or update compose, those should never be
+            # done with a 0.x fedora-release-common. so let's blow up
+            # here if so
+            my $label = get_var("LABEL");
+            if ($label =~ /^(RC|Update)-/) {
+                die "RC candidate or update compose should not have 0.x versioned fedora-release!";
+            }
+        }
         my $version = "$version_id ($varstr)";
         # for canned variants, we need to form a different string here by using
         # the above created cannedtag. See earlier comment
