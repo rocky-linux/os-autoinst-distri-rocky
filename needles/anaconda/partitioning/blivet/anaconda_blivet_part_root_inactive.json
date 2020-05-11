@@ -1,14 +1,14 @@
 {
   "properties": [],
   "tags": [
-    "anaconda_blivet_part_root_inactive"
+    "anaconda_blivet_part_inactive_root"
   ],
   "area": [
     {
-      "xpos": 559,
+      "xpos": 581,
       "ypos": 186,
-      "width": 45,
-      "height": 16,
+      "width": 23,
+      "height": 18,
       "type": "match"
     }
   ]

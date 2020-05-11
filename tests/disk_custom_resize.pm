@@ -4,6 +4,15 @@ use testapi;
 use anaconda;
 use utils;
 
+sub goto_mountpoint {
+    my $counter = 20;
+    while (!check_screen "anaconda_part_mountpoint_selected" and $counter > 0) {
+        send_key "tab";
+        $counter += 1;
+        sleep 1;
+    }
+}
+
 sub run {
     my $self = shift;
     # Navigate to "Installation destionation" and select blivet-gui 
@@ -26,24 +35,25 @@ sub run {
     #
     assert_and_click "anaconda_part_select_boot";
     # navigate to "Mountpoint"
-    while (!check_screen "anaconda_part_mountpoint_selected") {
-            send_key "tab";
-    }
+    goto_mountpoint();
     type_very_safely "/boot";
     assert_and_click "anaconda_part_device_reformat";
     assert_and_click "anaconda_part_update_settings";
 
-    # Then mount the Swap partition.
-    assert_and_click "anaconda_part_select_swap";
-    assert_and_click "anaconda_part_device_reformat";
-    assert_and_click "anaconda_part_update_settings";
+    # For UEFI based images, we need to reassign the efi boot
+    # mountpoint as well
+    if (get_var("UEFI") == 1) {
+        assert_and_click "anaconda_part_select_efiboot";
+        goto_mountpoint();
+        type_very_safely "/boot/efi";
+        assert_and_click "anaconda_part_device_reformat";
+        assert_and_click "anaconda_part_update_settings";
+    }
 
     # Now resize and format the current root partition
     assert_and_click "anaconda_part_select_root";
     # Navigate to Mountpoint
-    while (!check_screen "anaconda_part_mountpoint_selected") {
-        send_key "tab";
-    }
+    goto_mountpoint();
     type_very_safely "/";
     # Skip to the Size window
     send_key "tab";
@@ -62,6 +72,11 @@ sub run {
     type_very_safely "/home";
     send_key "tab";
     assert_and_click "anaconda_part_add_mountpoint";
+
+    # Then mount the Swap partition.
+    assert_and_click "anaconda_part_select_swap";
+    assert_and_click "anaconda_part_device_reformat";
+    assert_and_click "anaconda_part_update_settings";
 
     # Close the spoke.
     assert_and_click "anaconda_spoke_done";

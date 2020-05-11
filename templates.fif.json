@@ -273,6 +273,7 @@
             "flavor": "Workstation-live-iso",
             "settings": {
                 "DESKTOP": "gnome",
+                "HDDSIZEGB": "20",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -622,6 +623,34 @@
                 "START_AFTER_TEST": "install_default_upload"
             }
         },
+        "install_blivet_resize": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-x86_64-*-uefi": 30,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_resize",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "INSTALL": "1"
+            }
+        },
+        "install_resize": {
+            "profiles": {
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Workstation-live-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "PARTITIONING": "custom_resize",
+                "START_AFTER_TEST": "install_default_upload",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "INSTALL": "1",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
         "desktop_browser": {
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
@@ -886,8 +915,7 @@
                 "fedora-Server-boot-iso-x86_64-*-64bit": 10,
                 "fedora-Server-boot-iso-x86_64-*-uefi": 11,
                 "fedora-Server-dvd-iso-x86_64-*-uefi": 11,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": 51,
-                "fedora-Workstation-live-iso-x86_64-*-uefi": 11
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-uefi": 51
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -905,7 +933,8 @@
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 10,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 10
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 10,
+                "fedora-Workstation-live-iso-x86_64-*-uefi": 10
             },
             "settings": {
                 "PACKAGE_SET": "default",
