@@ -91,7 +91,7 @@ sub run {
         # If fedora-release-common release starts with a 0, we'll have
         # "Prerelease" in varstr
         my $reltag = script_output 'rpm -q fedora-release-common --qf "%{RELEASE}\n"';
-        $varstr .= " Prerelease" if (index($reltag, "0." == 0));
+        $varstr .= " Prerelease" if (index($reltag, "0.") == 0);
 
         my $version = "$version_id ($varstr)";
         # for canned variants, we need to form a different string here by using
