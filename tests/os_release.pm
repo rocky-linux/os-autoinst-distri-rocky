@@ -96,9 +96,9 @@ sub run {
             # ...however, we shouldn't just wave this through if we're
             # an RC candidate or update compose, those should never be
             # done with a 0.x fedora-release-common. so let's blow up
-            # here if so
+            # here if so. unless it's IoT, because IoT is weird
             my $label = get_var("LABEL");
-            if ($label =~ /^(RC|Update)-/) {
+            if ($label =~ /^(RC|Update)-/ && $subvariant ne "IoT") {
                 die "RC candidate or update compose should not have 0.x versioned fedora-release!";
             }
         }
