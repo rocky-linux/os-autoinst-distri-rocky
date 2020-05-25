@@ -54,6 +54,8 @@ sub adduser {
     if ($desktop eq "gnome") {
         assert_script_run "mkdir /home/$login/.config";
         assert_script_run "echo 'yes' >> /home/$login/.config/gnome-initial-setup-done";
+        assert_script_run "chown -R $login.$login /home/$login/.config";
+        assert_script_run "restorecon -vr /home/$login/.config";
     }
     if ($args{termstop}) {
         type_very_safely "exit\n";
