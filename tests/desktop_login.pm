@@ -243,6 +243,8 @@ sub run {
 
     # Log in with the first user account.
     login_user(user=>"jack", password=>$jackpass);
+    # give it a few seconds to settle before we launch stuff
+    wait_still_screen 5;
     # Because some of the desktop candiness is based on semi-transparent items that change colours
     # with every background change, we want to get rid of the background and make it a solid color.
     solidify_wallpaper;
@@ -259,6 +261,8 @@ sub run {
         # If not, we are in KDE and we will log in normally.
         login_user(user=>"jim", password=>$jimpass);
     }
+    # give it a few seconds to settle before we launch stuff
+    wait_still_screen 5;
     # The backgrounds must be solid for both newly created users to take effect in the login session.
     solidify_wallpaper;
     check_user_logged_in("jim");
