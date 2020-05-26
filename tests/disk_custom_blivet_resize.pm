@@ -42,7 +42,7 @@ sub run {
     }
 
     # Select the boot partition and reformat it and remount.
-    activate("bootpart");
+    activate("boot");
     # Boot is the only ext4 partition on that scheme, so we will use that to make a needle.
     wait_still_screen 5;
     custom_blivet_format_partition(type => 'ext4', label => 'boot', mountpoint => '/boot');
