@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # upgrader should be installed on up-to-date system
-    my $version = get_var("CURRREL");
+    my $version = get_var("UP1REL");
     # ok this is dumb but I need to fix it fast and can't think of a
     # better way in a hurry. We want the pre-upgrade release version.
     my $testname = get_var("TEST");
