@@ -1548,6 +1548,43 @@
                 "USER_LOGIN": "false"
             }
         },
+        "podman": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "podman",
+                "POST_STATIC": "10.0.2.114 podman001.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "podman_client": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "podman",
+                "POSTINSTALL": "_podman_client",
+                "POST_STATIC": "10.0.2.115 podclient001.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
         "realmd_join_cockpit": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,

@@ -12,7 +12,7 @@ sub run {
     # handle bootloader, if requested
     if (get_var("GRUB_POSTINSTALL")) {
         do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
-        $wait_time = 180;
+        $wait_time = 240;
     }
 
     # handle initial-setup, if we're expecting it (IoT < F32 install test)
