@@ -1492,6 +1492,19 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
+        "iot_greenboot": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "iot_greenboot",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload"
+            }
+        },
         "mediakit_fileconflicts": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
