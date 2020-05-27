@@ -444,9 +444,7 @@ sub setup_workaround_repo {
     my %workarounds = (
         "30" => [],
         "31" => [],
-        # fix for lmod breaking console output tests, latest pki to
-        # avoid broken FreeIPA upgrades (it can't go backwards)
-        "32" => ["FEDORA-2020-755d29d4b0", "FEDORA-2020-5f05c3ec46"]
+        "32" => []
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
