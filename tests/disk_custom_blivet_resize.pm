@@ -11,7 +11,6 @@ sub activate {
     # times to make sure the proper partition gets activated.
     my $partition = shift;
     my $count = 12;
-    print("PARTITION VARIABLE: $partition");
     while (check_screen "anaconda_blivet_part_inactive_$partition" and $count > 0) {
         assert_and_click "anaconda_blivet_part_inactive_$partition";
         sleep 5;
