@@ -185,7 +185,7 @@ sub custom_blivet_format_partition {
     assert_and_click "anaconda_blivet_part_format";
     # Select the appropriate filesystem type.
     assert_and_click "anaconda_blivet_part_drop_select";
-    assert_and_click "anaconda_blivet_part_select_$args{type}";
+    assert_and_click "anaconda_blivet_part_fs_$args{type}";
     wait_still_screen 2;
     # Fill in the label if needed.
     send_key "tab";

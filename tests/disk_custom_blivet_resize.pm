@@ -36,7 +36,7 @@ sub run {
     # partition first.
     if (get_var("UEFI") == 1) {
         #The efi partition should be already activated. So reformat it and remount.
-        custom_blivet_format_partition(type => 'efi', label => 'efiboot', mountpoint => '/boot/efi');
+        custom_blivet_format_partition(type => 'efi_filesystem', label => 'efiboot', mountpoint => '/boot/efi');
         wait_still_screen 5;
     }
 
