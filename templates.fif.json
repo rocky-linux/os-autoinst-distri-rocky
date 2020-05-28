@@ -639,7 +639,7 @@
         "install_resize_lvm": {
             "profiles": {
                 "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live-iso-x86_64-*-uefi": 30
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
             },
             "settings": {
                 "PARTITIONING": "custom_resize_lvm",
