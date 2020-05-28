@@ -78,9 +78,8 @@ for user in ("jack", "jim"):
     testliterals.append(f"user_confirm_{user}")
 # partitioning stuff, there's a bunch of this, all in anaconda.pm
 # multiple things use this
-for part in ("swap", "root", "ext4", "efi", "boot"):
+for part in ("swap", "root", "efi", "boot"):
     testliterals.append(f"anaconda_part_select_{part}")
-    testliterals.append(f"anaconda_blivet_part_select_{part}")
     testliterals.append(f"anaconda_blivet_part_inactive_{part}")
 # select_disks
 for num in range(1, 10):

@@ -178,7 +178,7 @@ sub custom_blivet_format_partition {
     # This subroutine formats a selected partition. To use it, you must select the 
     # partition by other means before you format it using this routine.
     # You have to create a needle for any non-existing filesystem that is
-    # passed via the $type, such as anaconda_blivet_part_select_ext4.
+    # passed via the $type, such as anaconda_blivet_part_fs_ext4.
     my %args = @_;
     # Start editing the partition and select the Format option
     assert_and_click "anaconda_blivet_part_edit";
