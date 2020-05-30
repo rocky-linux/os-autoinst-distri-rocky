@@ -39,7 +39,9 @@ sub start_cockpit {
 
 sub select_cockpit_update {
     # This method navigates to to the updates screen
-    assert_and_click "cockpit_software_updates", '', 120;
+    assert_screen ["cockpit_software_updates", "cockpit_leftbar_scroll"], 120;
+    click_lastmatch;
+    assert_and_click "cockpit_software_updates" if (match_has_tag "cockpit_leftbar_scroll");
     # wait for the updates to download
     assert_screen 'cockpit_updates_check', 300;
 }

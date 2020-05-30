@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 704,
+      "type": "match",
+      "height": 18,
+      "width": 50,
+      "ypos": 359
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "autoupdate_planned_time"
+  ]
+}

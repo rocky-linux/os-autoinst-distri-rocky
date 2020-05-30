@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 741,
+      "type": "match",
+      "width": 151,
+      "height": 18,
+      "ypos": 568
+    },
+    {
+      "type": "match",
+      "height": 13,
+      "width": 48,
+      "ypos": 570,
+      "xpos": 655
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "cockpit_join_complete"
+  ]
+}
