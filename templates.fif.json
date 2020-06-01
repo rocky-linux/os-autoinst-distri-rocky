@@ -644,7 +644,7 @@
             },
             "settings": {
                 "PARTITIONING": "custom_resize_lvm",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
                 "INSTALL": "1",
                 "ROOT_PASSWORD": "weakpassword"
             }
