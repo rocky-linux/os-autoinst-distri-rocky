@@ -625,25 +625,25 @@
         },
         "install_blivet_resize_lvm": {
             "profiles": {
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_resize_lvm",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
                 "INSTALL": "1"
             }
         },
         "install_resize_lvm": {
             "profiles": {
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
+                "fedora-universal-aarch64-*-aarch64": 20,
+                "fedora-universal-ppc64le-*-ppc64le": 20,
+                "fedora-universal-x86_64-*-64bit": 20
             },
             "settings": {
                 "PARTITIONING": "custom_resize_lvm",
-                "START_AFTER_TEST": "install_default_upload",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "INSTALL": "1",
                 "ROOT_PASSWORD": "weakpassword"
