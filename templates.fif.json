@@ -1518,6 +1518,20 @@
                 "START_AFTER_TEST": "install_default_upload"
             }
         },
+	"iot_rpmostree_rebase": {
+                "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "iot_rpmostree_rebase",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false"
+            }
+        },
         "mediakit_fileconflicts": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
