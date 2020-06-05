@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 138,
+      "width": 36,
+      "height": 15,
+      "ypos": 9,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_layout_ascii",
+    "gnome_layout_us",
+    "LANGUAGE-arabic"
+  ]
+}

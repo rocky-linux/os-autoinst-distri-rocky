@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 657,
+      "type": "match",
+      "height": 15,
+      "width": 18,
+      "ypos": 335
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_fs_select",
+    "anaconda_blivet_part_drop_select"
+  ]
+}
