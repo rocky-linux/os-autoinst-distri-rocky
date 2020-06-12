@@ -617,7 +617,14 @@ sub gnome_initial_setup {
     # https://bugzilla.gnome.org/show_bug.cgi?id=794825
     @nexts = grep {$_ ne 'software'} @nexts;
 
-    assert_screen "next_button", $args{timeout};
+    assert_screen ["next_button", "auth_required"], $args{timeout};
+    # workaround auth dialog appearing to change timezone even
+    # though timezone screen is disabled
+    if (match_has_tag("auth_required")) {
+        record_soft_failure "Unexpected authentication required: https://gitlab.gnome.org/GNOME/gnome-initial-setup/-/issues/106";
+        send_key "esc";
+        assert_screen "next_button";
+    }
     # wait a bit in case of animation
     wait_still_screen 3;
     # GDM 3.24.1 dumps a cursor in the middle of the screen here...
