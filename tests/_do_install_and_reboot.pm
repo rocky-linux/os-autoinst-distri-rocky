@@ -56,10 +56,12 @@ sub _set_root_password {
 
 sub _do_root_and_user {
     _set_root_password();
-    # Wait out animation
-    wait_still_screen 8;
     # Set user details, unless the test is configured not to create one
-    anaconda_create_user() unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER"));
+    unless (get_var("USER_LOGIN") eq 'false' || get_var("INSTALL_NO_USER")) {
+        # Wait out animation
+        wait_still_screen 8;
+        anaconda_create_user();
+    }
     # Check username (and hence keyboard layout) if non-English
     if (get_var('LANGUAGE')) {
         assert_screen "anaconda_install_user_created";
@@ -81,7 +83,7 @@ sub run {
     # Sometimes, the 'slide in from the top' animation messes with
     # this - by the time we click the button isn't where it was any
     # more. So wait for screen to stop moving before we click.
-    wait_still_screen 2;
+    wait_still_screen 8;
     assert_and_click "anaconda_main_hub_begin_installation";
 
     # If we want to test identification we will do it
