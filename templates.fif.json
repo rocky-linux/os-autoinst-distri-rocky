@@ -447,15 +447,15 @@
         "base_reboot_unmount": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
-                "fedora-KDE-live-iso-x86_64-*-64bit": 50,
-                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 50,
-                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 50
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -466,48 +466,74 @@
                 "USER_LOGIN": "false"
             }
         },
-        "base_selinux": {
+        "base_reboot_unmount_cloud": {
+            "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "POSTINSTALL": "base_reboot_unmount"
+            }
+        },
+        "base_system_logging": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
-                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
-                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "base_selinux",
+                "POSTINSTALL": "base_system_logging",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_default_upload",
                 "USER_LOGIN": "false"
             }
         },
-        "base_service_manipulation": {
+        "base_system_logging_cloud": {
             "profiles": {
-                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
-                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
-                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
-                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "POSTINSTALL": "base_system_logging"
+            }
+        },
+        "base_update_cli": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "base_service_manipulation",
+                "POSTINSTALL": "base_update_cli",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_default_upload",
                 "USER_LOGIN": "false"
+            }
+        },
+        "base_update_cli_cloud": {
+            "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "POSTINSTALL": "base_update_cli"
             }
         },
         "base_services_start": {
@@ -546,43 +572,78 @@
                 "USER_LOGIN": "false"
             }
         },
-        "base_system_logging": {
+        "base_services_start_cloud": {
             "profiles": {
-                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
-                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "POSTINSTALL": "base_services_start"
+            }
+        },
+        "base_selinux": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "base_system_logging",
+                "POSTINSTALL": "base_selinux",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_default_upload",
                 "USER_LOGIN": "false"
             }
         },
-        "base_update_cli": {
+        "base_selinux_cloud": {
             "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
-                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
-                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 20,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "POSTINSTALL": "base_selinux"
+            }
+        },
+        "base_service_manipulation": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "base_update_cli",
+                "POSTINSTALL": "base_service_manipulation",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_default_upload",
                 "USER_LOGIN": "false"
+            }
+        },
+        "base_service_manipulation_cloud": {
+            "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "POSTINSTALL": "base_service_manipulation"
             }
         },
         "cloud_autocloud": {
