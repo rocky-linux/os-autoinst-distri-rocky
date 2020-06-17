@@ -627,6 +627,11 @@ sub gnome_initial_setup {
     }
     # wait a bit in case of animation
     wait_still_screen 3;
+    # one more check for frickin auth_required
+   if (check_screen "auth_required") {
+        record_soft_failure "Unexpected authentication required: https://gitlab.gnome.org/GNOME/gnome-initial-setup/-/issues/106";
+        send_key "esc";
+    }
     # GDM 3.24.1 dumps a cursor in the middle of the screen here...
     mouse_hide if ($args{prelogin});
     for my $n (1..scalar(@nexts)) {
