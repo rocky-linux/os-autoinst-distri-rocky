@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 20,
+      "xpos": 91,
+      "width": 449,
+      "ypos": 326
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "bootloader",
+    "bootloader_bios",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}
