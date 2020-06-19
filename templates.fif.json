@@ -1553,6 +1553,19 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
+        "iot_clevis": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "ENCRYPT_PASSWORD": "weakpassword",
+                "POSTINSTALL": "iot_clevis",
+                "QEMUTPM": "instance",
+                "ROOT_PASSWORD": "weakpassword",
+                "WORKER_CLASS": "tpm"
+            }
+        },
         "iot_greenboot": {
             "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
