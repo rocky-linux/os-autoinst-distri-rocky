@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 14,
+      "xpos": 205,
+      "width": 206,
+      "ypos": 322
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "screen you reach on encrypted IoT installs, with no actual decryption prompt - https://pagure.io/fedora-iot/issue/30"
+    }
+  ],
+  "tags": [
+    "boot_enter_passphrase"
+  ]
+}
