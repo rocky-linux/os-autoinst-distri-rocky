@@ -56,8 +56,9 @@ sub post_fail_hook {
 
     # We can't rely on tar being in minimal installs, but we also can't
     # rely on dnf always working (it fails in emergency mode, not sure
-    # why), so try it, then check if we have tar
-    script_run "dnf -y install tar", 180;
+    # why), so try it. if we don't get a return code, process may be
+    # stuck waiting on network or something, so hit ctrl-c
+    send_key "ctrl-c" unless (script_run "dnf -y install tar", 180);
 
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
