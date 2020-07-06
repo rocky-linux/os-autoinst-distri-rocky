@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "ypos": 470,
+      "width": 74,
+      "height": 15,
+      "xpos": 208,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "https://bugzilla.redhat.com/show_bug.cgi?id=1854225"
+    }
+  ],
+  "tags": [
+    "freeipa_webui_policy_any_host"
+  ]
+}
