@@ -9,7 +9,7 @@ use base 'basetest';
 # should be used when with tests, where system is already installed, e. g all parts
 # of upgrade tests, postinstall phases...
 
-use testapi;
+use testapi qw(is_serial_terminal :DEFAULT);
 use utils;
 
 sub root_console {
@@ -58,7 +58,11 @@ sub post_fail_hook {
     # rely on dnf always working (it fails in emergency mode, not sure
     # why), so try it. if we don't get a return code, process may be
     # stuck waiting on network or something, so hit ctrl-c
-    send_key "ctrl-c" unless (script_run "dnf -y install tar", 180);
+    unless (script_run "dnf -y install tar", 180) {
+        unless (is_serial_terminal) {
+            send_key "ctrl-c";
+        }
+    }
 
     # if we don't have tar or a network connection, we'll try and at
     # least send out *some* kinda info via the serial line
