@@ -381,24 +381,6 @@ sub check_release {
     validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
 }
 
-sub menu_launch_type {
-    # Launch an application in a graphical environment, by opening a
-    # launcher, typing the specified string and hitting enter. Pass
-    # the string to be typed to launch whatever it is you want.
-    my $app = shift;
-    # super does not work on KDE, because fml
-    send_key 'alt-f1';
-    # srsly KDE y u so slo
-    wait_still_screen 3;
-    my $relnum = get_release_number;
-    if (get_var("DESKTOP") eq "gnome" && $relnum > 32) {
-        # FIXME: workaround https://pagure.io/background-logo-extension/issue/26
-        assert_and_click "overview_search_box";
-    }
-    type_very_safely $app;
-    send_key 'ret';
-}
-
 sub disable_firefox_studies {
     # create a config file that disables Firefox's dumb 'shield
     # studies' so they don't break tests:
@@ -1027,6 +1009,24 @@ sub get_release_number {
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
     return $version
+}
+
+sub menu_launch_type {
+    # Launch an application in a graphical environment, by opening a
+    # launcher, typing the specified string and hitting enter. Pass
+    # the string to be typed to launch whatever it is you want.
+    my $app = shift;
+    # super does not work on KDE, because fml
+    send_key 'alt-f1';
+    # srsly KDE y u so slo
+    wait_still_screen 3;
+    my $relnum = get_release_number;
+    if (get_var("DESKTOP") eq "gnome" && $relnum > 32) {
+        # FIXME: workaround https://pagure.io/background-logo-extension/issue/26
+        assert_and_click "overview_search_box";
+    }
+    type_very_safely $app;
+    send_key 'ret';
 }
 
 sub tell_source {
