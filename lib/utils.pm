@@ -52,6 +52,16 @@ sub type_very_safely {
     wait_still_screen(stilltime=>5, similarity_level=>45);
 }
 
+sub get_release_number {
+    # return the release number; so usually VERSION, but for Rawhide,
+    # we return RAWREL. This allows us to avoid constantly doing stuff
+    # like `if ($version eq "Rawhide" || $version > 30)`.
+    my $version = get_var("VERSION");
+    my $rawrel = get_var("RAWREL", "Rawhide");
+    return $rawrel if ($version eq "Rawhide");
+    return $version
+}
+
 # Figure out what tty the desktop is on, switch to it. Assumes we're
 # at a root console
 sub desktop_vt {
@@ -814,7 +824,18 @@ sub start_with_launcher {
         }
         # Click on the launcher
         if (!check_screen($launcher)) {
-            send_key_until_needlematch($launcher, 'down', 5, 6);
+            # On F33+, this subwindow thingy scrolls horizontally,
+            # but only after we hit 'down' twice to get into it.
+            # On F32 and earlier, it just scrolls vertically
+            my $relnum = get_release_number;
+            if ($relnum > 32) {
+                send_key 'down';
+                send_key 'down';
+                send_key_until_needlematch($launcher, 'right', 5, 6);
+            }
+            else {
+                send_key_until_needlematch($launcher, 'down', 5, 6);
+            }
         }
         assert_and_click $launcher;
         wait_still_screen 5;
@@ -999,16 +1020,6 @@ sub bypass_1691487 {
         record_soft_failure 'brc#1691487 bypass';
         script_run 'echo "trial bypass dup chars brc#1691487"';
     }
-}
-
-sub get_release_number {
-    # return the release number; so usually VERSION, but for Rawhide,
-    # we return RAWREL. This allows us to avoid constantly doing stuff
-    # like `if ($version eq "Rawhide" || $version > 30)`.
-    my $version = get_var("VERSION");
-    my $rawrel = get_var("RAWREL", "Rawhide");
-    return $rawrel if ($version eq "Rawhide");
-    return $version
 }
 
 sub workaround_ble26 {
