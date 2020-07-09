@@ -11,6 +11,7 @@ sub run {
     # open the application
     send_key 'alt-f1';
     wait_still_screen 2;
+    workaround_ble26;
     type_very_safely 'terminal';
     send_key 'ret';  
     wait_still_screen 5;
