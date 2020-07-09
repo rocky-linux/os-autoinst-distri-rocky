@@ -9,6 +9,7 @@ sub run {
     my $self = shift;
     # start the settings application
     send_key 'alt-f1';
+    workaround_ble26;
     type_very_safely 'settings';
     send_key 'ret';
     

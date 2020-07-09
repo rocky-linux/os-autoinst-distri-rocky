@@ -18,11 +18,7 @@ sub run {
     if (get_var("LANGUAGE") eq 'japanese') {
         # wait a bit for input switch to complete
         sleep 3;
-        my $relnum = get_release_number;
-        if (get_var("DESKTOP") eq "gnome" && $relnum > 32) {
-            # FIXME: workaround https://pagure.io/background-logo-extension/issue/26
-            assert_and_click "overview_search_box";
-        }
+        workaround_ble26;
 
         # assume we can test input from whatever 'alt-f1' opened
         type_safely "yama";
