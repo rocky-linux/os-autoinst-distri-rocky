@@ -390,6 +390,11 @@ sub menu_launch_type {
     send_key 'alt-f1';
     # srsly KDE y u so slo
     wait_still_screen 3;
+    my $relnum = get_release_number;
+    if (get_var("DESKTOP") eq "gnome" && $relnum > 32) {
+        # FIXME: workaround https://pagure.io/background-logo-extension/issue/26
+        assert_and_click "overview_search_box";
+    }
     type_very_safely $app;
     send_key 'ret';
 }
