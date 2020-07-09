@@ -1020,6 +1020,7 @@ sub workaround_ble26 {
         # FIXME: workaround https://pagure.io/background-logo-extension/issue/26
         assert_and_click "overview_search_box";
     }
+}
 
 
 sub menu_launch_type {
