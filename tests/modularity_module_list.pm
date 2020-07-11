@@ -13,10 +13,6 @@ sub run {
     # It does not check the content of the further listed lists for any
     # particular packages, modules or streams.
 
-    # Install modular repos if necessary (since fedora-repos-33-0.8
-    # they are not installed by default)
-    script_run('dnf -y install fedora-repos-modular', 180);
-
     # Check that modularity works and dnf can list the modules.
     assert_script_run('dnf module list');
 
