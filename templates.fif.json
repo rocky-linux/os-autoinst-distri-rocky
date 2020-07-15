@@ -1570,7 +1570,7 @@
                 "START_AFTER_TEST": "install_default_upload"
             }
         },
-	"iot_rpmostree_rebase": {
+        "iot_rpmostree_rebase": {
                 "profiles": {
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
@@ -1584,6 +1584,46 @@
                 "USER_LOGIN": "false"
             }
         },
+        "iot_zezere_ignition": {
+                "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0 zezere.url=http://172.16.2.118",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "iot_zezere_server",
+                "POSTINSTALL": "iot_zezere_ignition",
+                "POST_STATIC": "172.16.2.119 zezere001.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+        "iot_zezere_server": {
+            "profiles": {
+                "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
+                "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
+                "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
+                "NICTYPE": "tap",
+                "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
+                "POSTINSTALL": "_iot_zezere_server _setup_browser _iot_zezere_remote",
+                "POST_STATIC": "172.16.2.118 zezere002.domain.local",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "install_default_upload",
+                "TEST_TARGET": "NONE",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap"
+            }
+        },
+
         "mediakit_fileconflicts": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,

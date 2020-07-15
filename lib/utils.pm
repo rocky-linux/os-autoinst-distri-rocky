@@ -455,6 +455,9 @@ sub setup_workaround_repo {
 }
 
 sub _repo_setup_compose {
+    # doesn't work for IoT, anything that hits this in an IoT path
+    # must work with default mirror config...
+    return if (get_var("SUBVARIANT") eq "IoT");
     # Appropriate repo setup steps for testing a compose
     # disable updates-testing and updates and use the compose location
     # as the target for fedora and rawhide rather than mirrorlist, so

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 299,
+      "ypos": 157,
+      "width": 142,
+      "height": 15,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "zezere_ssh_key"
+  ]
+}
