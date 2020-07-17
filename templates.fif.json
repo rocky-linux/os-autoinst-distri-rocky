@@ -129,6 +129,7 @@
             "distri": "fedora",
             "flavor": "Everything-boot-iso",
             "settings": {
+                "QEMURAM": 3072,
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -199,6 +200,7 @@
             "distri": "fedora",
             "flavor": "Server-boot-iso",
             "settings": {
+                "QEMURAM": 3072,
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
