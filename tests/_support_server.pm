@@ -96,7 +96,7 @@ sub run {
     my $self=shift;
     ## DNS / DHCP (dnsmasq)
     # create config
-    assert_script_run "printf 'domain=domain.local\ndhcp-range=10.0.2.112,10.0.2.199\ndhcp-option=option:router,10.0.2.2\n' > /etc/dnsmasq.conf";
+    assert_script_run "printf 'domain=domain.local\ndhcp-range=10.0.2.150,10.0.2.199\ndhcp-option=option:router,10.0.2.2\n' > /etc/dnsmasq.conf";
     # do PXE setup if this is not an update test
     _pxe_setup() unless (get_var("ADVISORY_OR_TASK"));
     # open firewall ports
