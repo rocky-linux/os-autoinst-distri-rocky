@@ -1449,6 +1449,7 @@
                 "INSTALL_UNLOCK": "support_ready",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "support_server",
+                "QEMURAM": "3072",
                 "TEST_UPDATES": "1",
                 "WORKER_CLASS": "tap"
             }
