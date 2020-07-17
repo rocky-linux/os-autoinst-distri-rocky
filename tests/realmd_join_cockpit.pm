@@ -10,7 +10,7 @@ sub run {
     my $self = shift;
     # use FreeIPA server as DNS server
     bypass_1691487;
-    assert_script_run "printf 'search domain.local\nnameserver 10.0.2.100' > /etc/resolv.conf";
+    assert_script_run "printf 'search domain.local\nnameserver 172.16.2.100' > /etc/resolv.conf";
     # wait for the server to be ready (do it now just to make sure name
     # resolution is working before we proceed)
     mutex_lock "freeipa_ready";

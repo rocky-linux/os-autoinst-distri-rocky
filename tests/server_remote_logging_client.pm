@@ -12,7 +12,7 @@ sub run {
     script_run "dnf -y install rsyslog", 180;
     script_run "systemctl enable --now rsyslog.service";
     # set up forwarding
-    assert_script_run "printf 'action(type=\"omfwd\"\nTarget=\"10.0.2.112\" Port=\"514\" Protocol=\"udp\")' >> /etc/rsyslog.conf";
+    assert_script_run "printf 'action(type=\"omfwd\"\nTarget=\"172.16.2.112\" Port=\"514\" Protocol=\"udp\")' >> /etc/rsyslog.conf";
     # for debugging
     upload_logs "/etc/rsyslog.conf";
     # wait for server to be ready, then restart rsyslog

@@ -10,15 +10,15 @@ sub run {
     my $self=shift;
     # use FreeIPA server or replica as DNS server
     my $server = 'ipa001.domain.local';
-    my $server_ip = '10.0.2.100';
+    my $server_ip = '172.16.2.100';
     my $server_mutex = 'freeipa_ready';
     if (get_var("FREEIPA_REPLICA")) {
         $server = 'ipa002.domain.local';
-        $server_ip = '10.0.2.106';
+        $server_ip = '172.16.2.106';
     }
     if (get_var("FREEIPA_REPLICA_CLIENT")) {
         $server = 'ipa003.domain.local';
-        $server_ip = '10.0.2.107';
+        $server_ip = '172.16.2.107';
         $server_mutex = 'replica_ready';
     }
     bypass_1691487;

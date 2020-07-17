@@ -8,7 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     $self->root_console(tty=>3);
-    setup_tap_static('10.0.2.117', 'vnc004.domain.local');
+    setup_tap_static('172.16.2.117', 'vnc004.domain.local');
     # install tigervnc (Boxes doesn't do reverse VNC)
     assert_script_run "dnf -y install tigervnc", 180;
     # take down the firewall

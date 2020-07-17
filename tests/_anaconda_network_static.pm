@@ -16,7 +16,7 @@ sub run {
     # netmask is automatically set
     type_safely "\t\t";
     # assume gateway
-    type_safely "10.0.2.2";
+    type_safely "172.16.2.2";
     # move to DNS servers
     type_safely "\n\t\t\t";
     # set DNS from host

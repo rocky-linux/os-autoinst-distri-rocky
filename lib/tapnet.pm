@@ -49,7 +49,7 @@ sub setup_tap_static {
         $dnstext .= "\nDNS" . ${num} . "=" . $dns[$i];
     }
     # bring up network. DEFROUTE is *vital* here
-    my $conftext = "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=10.0.2.2\nPREFIX=24\nDEFROUTE=yes\nONBOOT=yes" . $dnstext;
+    my $conftext = "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=172.16.2.2\nPREFIX=24\nDEFROUTE=yes\nONBOOT=yes" . $dnstext;
     assert_script_run "printf '${conftext}\n' > /etc/sysconfig/network-scripts/ifcfg-eth0";
     assert_script_run "systemctl restart NetworkManager.service";
     # FIXME workaround for

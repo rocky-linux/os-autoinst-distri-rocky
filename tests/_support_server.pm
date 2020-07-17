@@ -82,7 +82,7 @@ sub _pxe_setup {
     # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
     assert_script_run "curl -o ks.cfg https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
     # tweak the repo config in it
-    assert_script_run "sed -i -e 's,^url.*,nfs --server 10.0.2.110 --dir /repo --opts nfsvers=4,g' ks.cfg";
+    assert_script_run "sed -i -e 's,^url.*,nfs --server 172.16.2.110 --dir /repo --opts nfsvers=4,g' ks.cfg";
     # embed it
     assert_script_run "echo ks.cfg | cpio -c -o >> /var/lib/tftpboot/fedora/initrd.img";
     # chown root
@@ -96,7 +96,7 @@ sub run {
     my $self=shift;
     ## DNS / DHCP (dnsmasq)
     # create config
-    assert_script_run "printf 'domain=domain.local\ndhcp-range=10.0.2.150,10.0.2.199\ndhcp-option=option:router,10.0.2.2\n' > /etc/dnsmasq.conf";
+    assert_script_run "printf 'domain=domain.local\ndhcp-range=172.16.2.150,172.16.2.199\ndhcp-option=option:router,172.16.2.2\n' > /etc/dnsmasq.conf";
     # do PXE setup if this is not an update test
     _pxe_setup() unless (get_var("ADVISORY_OR_TASK"));
     # open firewall ports
@@ -123,7 +123,7 @@ sub run {
     assert_script_run "curl -o /export/root-user-crypted-net.ks https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
     # for update tests, set up the update repository and export it
     if (get_var("ADVISORY_OR_TASK")) {
-        assert_script_run "echo '/opt/update_repo 10.0.2.0/24(ro)' >> /etc/exports";
+        assert_script_run "echo '/opt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";
     }
     # for compose tests, we do all this stuff
     else {
@@ -144,7 +144,7 @@ sub run {
         # recreate an iso file
         copy_devcdrom_as_isofile('/iso/image.iso');
         # set up the exports
-        assert_script_run "printf '/export 10.0.2.0/24(ro)\n/repo 10.0.2.0/24(ro)\n/iso 10.0.2.0/24(ro)' > /etc/exports";
+        assert_script_run "printf '/export 172.16.2.0/24(ro)\n/repo 172.16.2.0/24(ro)\n/iso 172.16.2.0/24(ro)' > /etc/exports";
     }
 
     # open firewall port
