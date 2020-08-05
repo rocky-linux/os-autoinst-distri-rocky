@@ -14,6 +14,10 @@ sub run {
     start_cockpit(0);
     # quit firefox (return to console)
     quit_firefox;
+    # we don't get back to a prompt instantly and keystrokes while X
+    # is still shutting down are swallowed, so wait_still_screen before
+    # finishing (and handing off to next test)
+    wait_still_screen 5;
 }
 
 sub test_flags {
