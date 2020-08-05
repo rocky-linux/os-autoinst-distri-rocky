@@ -43,8 +43,9 @@ sub run {
     # quit browser to return to console
     quit_firefox;
     # we don't get back to a prompt instantly and keystrokes while X
-    # is still shutting down are swallowed, so wait_still_screen before
-    # finishing (and handing off to freeipa_client_postinstall)
+    # is still shutting down are swallowed, so be careful before
+    # finishing (and handing off to next test)
+    assert_screen "root_console";
     wait_still_screen 5;
     # set permanent passwords for both accounts
     assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test3@DOMAIN.LOCAL';
