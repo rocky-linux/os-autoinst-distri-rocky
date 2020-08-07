@@ -74,6 +74,7 @@ sub run {
     for my $n (1..16) {
         sleep 30;
         mouse_set 10, 10;
+        send_key "spc";
         mouse_hide;
     }
     if ($desktop eq 'gnome') {
