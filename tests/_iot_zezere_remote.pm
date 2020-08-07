@@ -43,7 +43,7 @@ sub run {
     # exit
     quit_firefox;
     # wait for the provision request to go through
-    sleep 30;
+    sleep 60;
     # ssh into iot host and create key file
     assert_script_run 'ssh -o StrictHostKeyChecking=no root@172.16.2.119 touch /tmp/zezerekeyfile';
 }
