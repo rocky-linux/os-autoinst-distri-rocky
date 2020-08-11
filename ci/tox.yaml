@@ -9,6 +9,6 @@
         state: present
       become: yes
     - name: Run tox
-      command: tox
+      command: "{{ tox_executable }}"
       args:
         chdir: '{{ zuul.project.src_dir }}'
