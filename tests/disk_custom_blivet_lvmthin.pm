@@ -23,7 +23,6 @@ sub run {
     custom_blivet_add_partition(devicetype => 'lvm');
     # select newly created LVM device for adding new partition
     assert_and_click "anaconda_blivet_volumes_icon";
-    custom_blivet_add_partition(size => 2048, filesystem => 'swap');
     # add lvmthinpool
     custom_blivet_add_partition(devicetype => 'lvmthin');
     # select lvmthinpool for adding new partitions

@@ -19,7 +19,6 @@ sub run {
     }
 
     custom_blivet_add_partition(size => 512, mountpoint => '/boot');
-    custom_blivet_add_partition(size => 2048, filesystem => 'swap');
 
     # selecting "btrfs" as filesystem creates new BTRFS drive in blivet-gui
     custom_blivet_add_partition(filesystem => 'btrfs');

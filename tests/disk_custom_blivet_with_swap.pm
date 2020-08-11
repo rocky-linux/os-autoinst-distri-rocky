@@ -19,10 +19,9 @@ sub run {
     }
 
     custom_blivet_add_partition(size => 512, mountpoint => '/boot');
+    custom_blivet_add_partition(size => 2048, filesystem => 'swap');
     custom_blivet_add_partition(mountpoint => '/');
 
-    assert_and_click "anaconda_spoke_done";
-    # click "done" second time, because it warns us about missing swap partition
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
 

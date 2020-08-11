@@ -892,6 +892,19 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
+        "install_blivet_with_swap": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 50,
+                "fedora-universal-ppc64le-*-ppc64le": 50,
+                "fedora-universal-x86_64-*-64bit": 50,
+                "fedora-universal-x86_64-*-uefi": 51
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_with_swap",
+                "POSTINSTALL": "disk_custom_with_swap_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
         "install_blivet_software_raid": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,
@@ -1183,6 +1196,18 @@
             "settings": {
                 "NUMDISKS": "2",
                 "PARTITIONING": "guided_multi_empty_all",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
+        "install_with_swap": {
+            "profiles": {
+                "fedora-universal-aarch64-*-aarch64": 50,
+                "fedora-universal-ppc64le-*-ppc64le": 50,
+                "fedora-universal-x86_64-*-64bit": 50,
+                "fedora-universal-x86_64-*-uefi": 51
+            },
+            "settings": {
+                "PARTITIONING": "custom_with_swap",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },

@@ -19,7 +19,6 @@ sub run {
     }
 
     custom_blivet_add_partition(size => 512, mountpoint => '/boot');
-    custom_blivet_add_partition(size => 2048, filesystem => 'swap');
     custom_blivet_add_partition(filesystem => 'ext3', mountpoint => '/');
 
     assert_and_click "anaconda_spoke_done";

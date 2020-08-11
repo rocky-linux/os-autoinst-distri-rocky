@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use utils;
 use anaconda;
 
 sub run {
@@ -12,11 +13,17 @@ sub run {
 
     # Manual partitioning spoke should be displayed
     assert_and_click "anaconda_part_automatic";
-    custom_delete_part('swap');
-    assert_and_click "anaconda_spoke_done";
-    # Deleting swap shows a warning and requires a second click to confirm
-    # Wait a sec first, otherwise sometimes we click too fast
-    sleep 1;
+    # Make / smaller
+    send_key_until_needlematch("anaconda_part_mountpoint_selected", "tab", 20);
+    # One tab on from 'mount point selected' is 'size'
+    send_key "tab";
+    type_very_safely "8 GiB";
+    assert_and_click "anaconda_part_update_settings";
+    # Add swap
+    assert_and_click "anaconda_part_add";
+    type_very_safely "swap";
+    send_key "tab";
+    assert_and_click "anaconda_part_add_mountpoint";
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";
 
