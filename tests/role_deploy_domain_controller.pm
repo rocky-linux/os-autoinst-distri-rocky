@@ -41,7 +41,7 @@ sub run {
     }
     assert_script_run "systemctl restart firewalld.service";
     # deploy the server
-    my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.0.10.in-addr.arpa --allow-zone-overlap";
+    my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.16.172.in-addr.arpa --allow-zone-overlap";
     for my $fwd (@forwards) {
         $args .= " --forwarder=$fwd";
     }
