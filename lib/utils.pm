@@ -439,10 +439,9 @@ sub setup_workaround_repo {
     assert_script_run "mkdir -p /opt/workarounds_repo";
     assert_script_run "pushd /opt/workarounds_repo";
     my %workarounds = (
-        "30" => [],
-        # gnome-initial-setup timezone bug fix
-        "31" => ["FEDORA-2020-da78f28e61"],
-        "32" => ["FEDORA-2020-74b4efe302"]
+        "31" => [],
+        "32" => [],
+        "33" => []
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
