@@ -446,7 +446,18 @@ sub setup_workaround_repo {
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
     foreach my $advisory (@$advisories) {
-        assert_script_run "bodhi updates download --updateid=$advisory", 180;
+        my $count = 3;
+        my $success = 0;
+        while ($count) {
+            if (script_run "bodhi updates download --updateid=$advisory", 180) {
+                $count -= 1;
+            }
+            else {
+                $count = 0;
+                $success = 1;
+            }
+        }
+        die "Workaround update download failed!" unless $success;
     }
     # and create repo metadata
     assert_script_run "createrepo .";
