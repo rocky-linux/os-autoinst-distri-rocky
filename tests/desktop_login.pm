@@ -165,18 +165,19 @@ sub reboot_system {
         # we can access the operationg system switching controls.
         assert_and_click "system_menu_button";
         assert_and_click "power_entry";
-        if ($desktop eq "gnome") {
-            # In Gnome, some of the entries are brought together, while in KDE they are
-            # split and it does not seem correct to me to assign restarting tags to
-            # needles powering off the machine. So I split this for KDE and Gnome.
-            # This holds true for Gnome:
+        my $relnum = get_release_number;
+        if ($desktop eq "gnome" && $relnum < 33) {
+            # In GNOME before F33, some of the entries are brought together, while
+            # in KDE and GNOME from F33 onwards they are split and it does not seem
+            # correct to me to assign restarting tags to needles powering off the
+            # machine. So I split this for KDE and GNOME < F33:
             assert_and_click "power_off_entry";
             assert_and_click "restart_confirm";
         }
         else {
-            # And for KDE:
+            # And for KDE and GNOME >= F33:
             assert_and_click "reboot_entry";
-            assert_and_click "log_out_confirm";
+            assert_and_click "restart_confirm";
         }
     }
     # When we are outside KDE (not logged in), the only way to reboot is to click
