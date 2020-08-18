@@ -629,6 +629,9 @@ sub gnome_initial_setup {
     # https://bugzilla.gnome.org/show_bug.cgi?id=794825
     @nexts = grep {$_ ne 'software'} @nexts;
 
+    # note: in g-i-s 3.37.91 and later, the first screen has a "Start
+    # Setup" button, not a "Next" button. For code simplicity, we just
+    # have a needle for that button which has the next_button tag
     assert_screen ["next_button", "auth_required"], $args{timeout};
     # workaround auth dialog appearing to change timezone even
     # though timezone screen is disabled
