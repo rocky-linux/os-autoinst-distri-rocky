@@ -28,9 +28,11 @@ sub run {
     validate_script_output "podman container ls", sub { m/fedora-httpd/ };
     # Test apache is working
     assert_script_run "curl http://localhost";
-    # Open the firewall
-    assert_script_run "firewall-cmd --permanent --zone=internal --add-interface=cni-podman0";
-    assert_script_run "firewall-cmd --permanent --zone=internal --add-port=80/tcp";
+    # Open the firewall, except on CoreOS where it's not installed
+    unless (get_var("SUBVARIANT") eq "CoreOS") {
+        assert_script_run "firewall-cmd --permanent --zone=internal --add-interface=cni-podman0";
+        assert_script_run "firewall-cmd --permanent --zone=internal --add-port=80/tcp";
+    }
     # tell client we're ready and wait for it to send the message
     mutex_create("podman_server_ready");
     my $children = get_children();

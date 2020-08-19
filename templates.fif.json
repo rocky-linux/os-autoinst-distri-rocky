@@ -115,6 +115,17 @@
             },
             "version": "*"
         },
+        "fedora-CoreOS-colive-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "CoreOS-colive-iso",
+            "settings": {
+                "CANNED": "1",
+                "TEST_TARGET": "ISO",
+                "USER_LOGIN": "false"
+            },
+            "version": "*"
+        },
         "fedora-Everything-boot-iso-ppc64le-*": {
             "arch": "ppc64le",
             "distri": "fedora",
@@ -323,6 +334,10 @@
             "machine": "64bit",
             "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-*"
         },
+        "fedora-CoreOS-colive-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-CoreOS-colive-iso-x86_64-*"
+        },
         "fedora-Everything-boot-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
             "product": "fedora-Everything-boot-iso-ppc64le-*"
@@ -448,6 +463,7 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
@@ -480,6 +496,7 @@
         },
         "base_system_logging": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
@@ -540,6 +557,7 @@
         },
         "base_services_start": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
@@ -586,6 +604,7 @@
         },
         "base_selinux": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
@@ -618,6 +637,7 @@
         },
         "base_service_manipulation": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
@@ -986,6 +1006,7 @@
         },
         "install_default_upload": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 15,
@@ -1704,6 +1725,7 @@
         },
         "podman": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
@@ -1721,6 +1743,7 @@
         },
         "podman_client": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40
             },
@@ -1777,6 +1800,7 @@
         },
         "release_identification": {
             "profiles": {
+                "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 50,
