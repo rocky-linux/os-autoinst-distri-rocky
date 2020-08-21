@@ -42,10 +42,10 @@ sub run {
     assert_and_click "zezere_provision_schedule";
     # exit
     quit_firefox;
-    # wait for the provision request to go through
-    sleep 60;
-    # ssh into iot host and create key file
-    assert_script_run 'ssh -o StrictHostKeyChecking=no root@172.16.2.119 touch /tmp/zezerekeyfile';
+    # time before the provision request goes through is kinda hard to
+    # predict, so we'll just try over and over for up to 10 minutes
+    # and bail as soon as it works
+    assert_script_run "until ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@172.16.2.119 touch /tmp/zezerekeyfile; do sleep 10; done", 600;
 }
 
 
