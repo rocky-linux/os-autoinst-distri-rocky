@@ -24,7 +24,7 @@ sub run {
     assert_and_click "freeipa_webui_reset_password_link";
     wait_still_screen 3;
     type_safely "batterystaple";
-    type_safely "\t\t";
+    type_safely "\t";
     type_safely "loremipsum";
     wait_screen_change { send_key "tab"; };
     type_safely "loremipsum";
