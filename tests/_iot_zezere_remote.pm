@@ -45,7 +45,7 @@ sub run {
     # time before the provision request goes through is kinda hard to
     # predict, so we'll just try over and over for up to 10 minutes
     # and bail as soon as it works
-    assert_script_run "until ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@172.16.2.119 touch /tmp/zezerekeyfile; do sleep 10; done", 600;
+    assert_script_run 'until ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no root@172.16.2.119 touch /tmp/zezerekeyfile; do sleep 10; done', 600;
 }
 
 
