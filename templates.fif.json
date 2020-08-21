@@ -1488,7 +1488,6 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
@@ -1520,7 +1519,6 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
@@ -1616,7 +1614,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0 zezere.url=http://172.16.2.118",
+                "GRUB_POSTINSTALL": "zezere.url=http://172.16.2.118",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "iot_zezere_server",
@@ -1635,7 +1633,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -1712,7 +1709,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "POSTINSTALL": "podman",
@@ -1730,7 +1726,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "podman",
@@ -1752,7 +1747,6 @@
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "server_role_deploy_domain_controller",
                 "POSTINSTALL": "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client",
@@ -1770,7 +1764,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "server_role_deploy_domain_controller",
@@ -1854,7 +1847,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "server_role_deploy_database_server",
@@ -1904,8 +1896,6 @@
             "settings": {
                 "BOOTFROM": "c",
                 "FREEIPA_REPLICA_CLIENT": "1",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "server_freeipa_replication_replica",
@@ -1926,8 +1916,6 @@
             "settings": {
                 "BOOTFROM": "c",
                 "FREEIPA_REPLICA_MASTER": "1",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -1948,8 +1936,6 @@
             "settings": {
                 "BOOTFROM": "c",
                 "FREEIPA_REPLICA": "1",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -1990,7 +1976,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "server_remote_logging_server",
@@ -2010,7 +1995,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2030,7 +2014,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2050,8 +2033,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
@@ -2074,7 +2055,6 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "HDD_1": "disk_f%CURRREL%_support_5_%ARCH%.img",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
@@ -2169,8 +2149,6 @@
             "settings": {
                 "+HDD_1": "disk_f%UP2REL%_server_3_%ARCH%.img",
                 "BOOTFROM": "c",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "upgrade_2_server_domain_controller",
                 "POSTINSTALL": "_setup_browser freeipa_webui freeipa_password_change freeipa_client",
@@ -2207,8 +2185,6 @@
             "settings": {
                 "+HDD_1": "disk_f%UP2REL%_server_3_%ARCH%.img",
                 "BOOTFROM": "c",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
                 "POSTINSTALL": "role_deploy_domain_controller_check",
@@ -2304,8 +2280,6 @@
             "settings": {
                 "+HDD_1": "disk_f%UP1REL%_server_3_%ARCH%.img",
                 "BOOTFROM": "c",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "upgrade_server_domain_controller",
                 "POSTINSTALL": "_setup_browser freeipa_webui freeipa_password_change freeipa_client",
@@ -2343,8 +2317,6 @@
             "settings": {
                 "+HDD_1": "disk_f%UP1REL%_server_3_%ARCH%.img",
                 "BOOTFROM": "c",
-                "GRUB": "net.ifnames=0 biosdevname=0",
-                "GRUB_POSTINSTALL": "net.ifnames=0 biosdevname=0",
                 "NICTYPE": "tap",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
                 "POSTINSTALL": "role_deploy_domain_controller_check",

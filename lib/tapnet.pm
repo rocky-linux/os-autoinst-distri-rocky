@@ -43,21 +43,16 @@ sub setup_tap_static {
     # use host's name servers (this is usually going to be correct,
     # tests which don't want this can overwrite resolv.conf)
     my @dns = get_host_dns();
-    my $dnstext = '';
-    for (my $i=0; $i < @dns; $i++) {
-        my $num = $i + 1;
-        $dnstext .= "\nDNS" . ${num} . "=" . $dns[$i];
-    }
-    # bring up network. DEFROUTE is *vital* here
-    my $conftext = "DEVICE=eth0\nBOOTPROTO=none\nIPADDR=$ip\nGATEWAY=172.16.2.2\nPREFIX=24\nDEFROUTE=yes\nONBOOT=yes" . $dnstext;
-    assert_script_run "printf '${conftext}\n' > /etc/sysconfig/network-scripts/ifcfg-eth0";
-    assert_script_run "systemctl restart NetworkManager.service";
-    # FIXME workaround for
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1739148
-    # remove when that's resolved
-    script_run 'nmcli con down "Wired connection 1"';
-    script_run 'nmcli con down "System eth0"';
-    script_run 'nmcli con up "System eth0"';
+    my $dnstext = 'ipv4.dns "' . join(", ", @dns) . '"';
+    # bring up network
+    # this gets us the name of the first connection in the list,
+    # which should be what we want
+    my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
+    assert_script_run "nmcli con mod '$connection' ipv4.method manual ipv4.addr $ip/24 ipv4.gateway 172.16.2.2 $dnstext";
+    assert_script_run "nmcli con down '$connection'";
+    assert_script_run "nmcli con up '$connection'";
+    # for debugging
+    assert_script_run "nmcli -t con show '$connection'";
     # the above doesn't seem to reliably set up resolv.conf, so...
     clone_host_file "/etc/resolv.conf";
 }

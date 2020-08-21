@@ -23,8 +23,10 @@ sub run {
     }
     bypass_1691487;
     assert_script_run "printf 'search domain.local\nnameserver ${server_ip}' > /etc/resolv.conf";
-    assert_script_run "sed -i -e '/^DNS.*/d' /etc/sysconfig/network-scripts/ifcfg-eth0";
-    assert_script_run "printf '\nDNS1=${server_ip}\n' >> /etc/sysconfig/network-scripts/ifcfg-eth0";
+    # this gets us the name of the first connection in the list,
+    # which should be what we want
+    my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
+    assert_script_run "nmcli con mod '$connection' ipv4.dns '$server_ip'";
     # wait for the server or replica to be ready (do it now just to be
     # sure name resolution is working before we proceed)
     mutex_lock $server_mutex;
