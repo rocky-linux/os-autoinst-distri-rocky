@@ -440,9 +440,9 @@ sub setup_workaround_repo {
     assert_script_run "pushd /opt/workarounds_repo";
     my %workarounds = (
         "31" => [],
-        # krb5 reversions to fix RHBZ#1868482
-        "32" => ["FEDORA-2020-d10a284af3"],
-        "33" => ["FEDORA-2020-58970d693c"]
+        # FreeIPA 4.8.9 to make the UI consistent across releases
+        "32" => ["FEDORA-2020-dc32a8de93"],
+        "33" => []
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
