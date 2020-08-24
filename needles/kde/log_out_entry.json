@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "type": "match",
-      "xpos": 76,
-      "height": 20,
-      "width": 55,
-      "ypos": 281
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "log_out_entry"
-  ]
+    "area": [
+        {
+            "height": 15,
+            "type": "match",
+            "width": 52,
+            "xpos": 77,
+            "ypos": 283
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "log_out_entry"
+    ]
 }
