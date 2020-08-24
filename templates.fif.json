@@ -1111,7 +1111,7 @@
             },
             "settings": {
                 "GRUB": "inst.ks=hd:vdb1:/root-user-crypted-net.ks",
-                "HDD_2": "disk_ks_3.img",
+                "HDD_2": "disk_ks_4.img",
                 "KICKSTART": "1",
                 "NUMDISKS": "2",
                 "ROOT_PASSWORD": "111111",
@@ -1970,7 +1970,7 @@
             },
             "settings": {
                 "GRUB": "inst.ks=hd:vdb1:/freeipaclient.ks",
-                "HDD_2": "disk_ks_3.img",
+                "HDD_2": "disk_ks_4.img",
                 "INSTALL_UNLOCK": "freeipa_ready",
                 "KICKSTART": "1",
                 "NICTYPE": "tap",
