@@ -110,6 +110,11 @@ sub post_fail_hook {
         upload_logs "/var/named/data/named.run";
     }
 
+    # update PostgreSQL initialization log (for database_server test)
+    unless (script_run 'test -f /var/lib/pgsql/initdb_postgresql.log') {
+        upload_logs "/var/lib/pgsql/initdb_postgresql.log";
+    }
+
     # Upload /var/log
     # lastlog can mess up tar sometimes and it's not much use
     unless (script_run "tar czvf /tmp/var_log.tar.gz --exclude='lastlog' /var/log") {
