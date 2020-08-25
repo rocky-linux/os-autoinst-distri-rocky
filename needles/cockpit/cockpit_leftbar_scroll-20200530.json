@@ -1,22 +1,15 @@
 {
-  "area": [
-    {
-      "xpos": 270,
-      "type": "match",
-      "height": 15,
-      "ypos": 744,
-      "width": 73
-    },
-    {
-      "xpos": 196,
-      "ypos": 711,
-      "width": 43,
-      "height": 55,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "cockpit_leftbar_scroll"
-  ]
+    "area": [
+        {
+            "height": 55,
+            "type": "match",
+            "width": 43,
+            "xpos": 196,
+            "ypos": 711
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "cockpit_leftbar_scroll"
+    ]
 }
