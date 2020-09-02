@@ -52,6 +52,12 @@ sub run {
         # Now, we merge the fields into one expression to create the correct canned tag
         # that will contain both the version number and the build number.
         my $cannedtag = "$cannedver.$cannednum";
+        # If this is a CoreOS build, though, throw all that away and
+        # just use the build version
+        my $build = get_var("BUILD");
+        if ($build =~ /^Fedora-CoreOS/) {
+            $cannedtag = (split /-/, $build)[-1];
+        }
         my $name = ucfirst($id);
         my $rawrel = get_var("RAWREL", '');
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
@@ -113,6 +119,10 @@ sub run {
         # Same problem is when testing the PRETTY_NAME.
         if (get_var("CANNED")) {
             $pretty = "$name $cannedtag ($varstr)";
+            # ...and FCOS uses a different format, sigh
+            if ($build =~ /^Fedora-CoreOS/) {
+                $pretty = "Fedora CoreOS $cannedtag";
+            }
         }
 
         #Now. we can start testing the real values from the installed system.
