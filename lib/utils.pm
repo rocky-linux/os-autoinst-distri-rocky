@@ -944,22 +944,23 @@ sub advisory_check_nonmatching_packages {
     # versions installed after the update; I'm hoping the last line of output
     # for any given package is the most recent version, i.e. the one in the
     # update.
-    script_run 'for pkg in $(cat /var/log/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" | tail -1 >> /tmp/installedupdatepkgs.txt; done';
+    script_run 'for pkg in $(cat /var/log/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --last | head -1 | cut -d" " -f1 | xargs rpm -q --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done';
     script_run 'sort -u -o /tmp/installedupdatepkgs.txt /tmp/installedupdatepkgs.txt';
+    # for debugging, may as well always upload these, can't hurt anything
+    upload_logs "/tmp/installedupdatepkgs.txt", failok=>1;
+    upload_logs "/var/log/updatepkgs.txt", failok=>1;
     # if any line appears in installedupdatepkgs.txt but not updatepkgs.txt,
     # we have a problem.
     if (script_run 'comm -23 /tmp/installedupdatepkgs.txt /var/log/updatepkgs.txt > /var/log/installednotupdatedpkgs.txt') {
         # occasionally, for some reason, it's unhappy about sorting;
-        # we shouldn't fail the test in this case, just upload the
-        # files so we can see why...
-        upload_logs "/tmp/installedupdatepkgs.txt", failok=>1;
-        upload_logs "/var/log/updatepkgs.txt", failok=>1;
+        # we shouldn't fail the test in this case, just make a note
+        # of it so we can look why...
+        diag "Installed vs. all update package comparison unexpectedly returned non-zero!";
     }
     # this exits 1 if the file is zero-length, 0 if it's longer
     # if it's 0, that's *BAD*: we want to upload the file and fail
     unless (script_run 'test -s /var/log/installednotupdatedpkgs.txt') {
         upload_logs "/var/log/installednotupdatedpkgs.txt", failok=>1;
-        upload_logs "/var/log/updatepkgs.txt", failok=>1;
         my $message = "Package(s) from update not installed when it should have been! See installednotupdatedpkgs.txt";
         if ($args{fatal}) {
             set_var("_ACNMP_DONE", "1");
