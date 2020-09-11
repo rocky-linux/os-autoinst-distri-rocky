@@ -50,11 +50,14 @@ sub run {
     type_very_safely "https://kernel.org\n";
     assert_and_click "browser_kernelorg_patch";
     assert_and_click "browser_download_save";
+    sleep 2;
     send_key 'ret';
+    wait_still_screen 3;
     # browsers do...something...when the download completes, and we
     # expect there's a single click to make it go away and return
     # browser to a state where we can open a new tab
     assert_and_click "browser_download_complete";
+    wait_still_screen 2;
     # we'll check it actually downloaded later
     # add-on test: at present all desktops we test (KDE, GNOME) are
     # using Firefox by default so we do this unconditionally, but we
