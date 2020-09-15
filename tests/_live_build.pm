@@ -30,6 +30,8 @@ sub run {
     assert_script_run 'echo "config_opts[\'plugin_conf\'][\'bind_mount_opts\'][\'dirs\'].append((\'/dev/' . $serialdev . '\', \'/dev/' . $serialdev . '\'))" >> /etc/mock/openqa.cfg';
     # add the side repo to the config
     assert_script_run 'printf "config_opts[\'dnf.conf\'] += \"\"\"\n[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n\"\"\"" >> /etc/mock/openqa.cfg';
+    # and the workarounds repo
+    assert_script_run 'printf "config_opts[\'dnf.conf\'] += \"\"\"\n[workarounds]\nname=Workarounds repo\nbaseurl=file:///opt/workarounds_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0\n\"\"\"" >> /etc/mock/openqa.cfg';
     # replace metalink with mirrorlist so we don't get slow mirrors
     repos_mirrorlist("/etc/mock/openqa.cfg");
     # upload the config so we can check it's OK
@@ -40,6 +42,8 @@ sub run {
     assert_script_run "git checkout f${version}";
     # now add the side repo to fedora-repo-not-rawhide.ks
     assert_script_run 'echo "repo --name=advisory --baseurl=file:///opt/update_repo" >> fedora-repo-not-rawhide.ks';
+    # and the workarounds repo
+    assert_script_run 'echo "repo --name=workarounds --baseurl=file:///opt/workarounds_repo" >> fedora-repo-not-rawhide.ks';
     # now flatten the kickstart
     assert_script_run "ksflatten -c fedora-live-${lcsubv}.ks -o openqa.ks";
     # upload the kickstart so we can check it
