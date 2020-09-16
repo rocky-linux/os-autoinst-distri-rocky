@@ -49,6 +49,7 @@ sub run {
     sleep 2;
     type_very_safely "https://kernel.org\n";
     assert_and_click "browser_kernelorg_patch";
+    wait_still_screen 2;
     assert_and_click "browser_download_save";
     sleep 2;
     send_key 'ret';
