@@ -27,6 +27,9 @@ sub run {
     # which should be what we want
     my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
     assert_script_run "nmcli con mod '$connection' ipv4.dns '$server_ip'";
+    assert_script_run "nmcli con down '$connection'";
+    assert_script_run "nmcli con up '$connection'";
+
     # wait for the server or replica to be ready (do it now just to be
     # sure name resolution is working before we proceed)
     mutex_lock $server_mutex;

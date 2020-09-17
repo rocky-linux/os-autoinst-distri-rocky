@@ -11,6 +11,12 @@ sub run {
     # use FreeIPA server as DNS server
     bypass_1691487;
     assert_script_run "printf 'search domain.local\nnameserver 172.16.2.100' > /etc/resolv.conf";
+    # this gets us the name of the first connection in the list,
+    # which should be what we want
+    my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
+    assert_script_run "nmcli con mod '$connection' ipv4.dns '172.16.2.100'";
+    assert_script_run "nmcli con down '$connection'";
+    assert_script_run "nmcli con up '$connection'";
     # wait for the server to be ready (do it now just to make sure name
     # resolution is working before we proceed)
     mutex_lock "freeipa_ready";
