@@ -19,6 +19,14 @@ sub run {
     # aren't in Modular Server composes)
     my $extraparams = '';
     $extraparams = '--enablerepo=fedora' if (get_var("MODULAR"));
+    # disable systemd-resolved, it kinda conflicts with FreeIPA's
+    # bind: https://bugzilla.redhat.com/show_bug.cgi?id=1880628
+    unless (script_run "systemctl is-active systemd-resolved.service") {
+        script_run "systemctl stop systemd-resolved.service";
+        script_run "systemctl disable systemd-resolved.service";
+        script_run "rm -f /etc/resolv.conf";
+        script_run "systemctl restart NetworkManager";
+    }
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
     assert_script_run "dnf ${extraparams} -y install haveged", 300;

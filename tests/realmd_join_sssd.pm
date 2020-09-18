@@ -41,6 +41,15 @@ sub run {
     # do the enrolment
     if (get_var("FREEIPA_REPLICA")) {
         # here we're enrolling not just as a client, but as a replica
+        # disable systemd-resolved, it kinda conflicts with FreeIPA's
+        # bind: https://bugzilla.redhat.com/show_bug.cgi?id=1880628
+        unless (script_run "systemctl is-active systemd-resolved.service") {
+            script_run "systemctl stop systemd-resolved.service";
+            script_run "systemctl disable systemd-resolved.service";
+            script_run "rm -f /etc/resolv.conf";
+            script_run "systemctl restart NetworkManager";
+        }
+
         # install server packages
         assert_script_run "dnf -y groupinstall freeipa-server", 600;
 
