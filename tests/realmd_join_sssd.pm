@@ -66,11 +66,6 @@ sub run {
         }
         assert_script_run "ipa-replica-install $args", 1500;
 
-        # don't use the other server for our DNS lookups any more, as we
-        # should be independent of it
-        my ($ip, $hostname) = split(/ /, get_var("POST_STATIC"));
-        setup_tap_static($ip, $hostname);
-
         # enable and start the systemd service
         assert_script_run "systemctl enable ipa.service";
         assert_script_run "systemctl start ipa.service", 300;
