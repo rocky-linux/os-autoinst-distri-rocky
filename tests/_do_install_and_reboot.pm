@@ -137,11 +137,6 @@ sub run {
     push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
     push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
-    # Patch for https://bugzilla.redhat.com/show_bug.cgi?id=1817004
-    # Allow ppc64le Silverblue to boot after install
-    if (check_var('ARCH', 'ppc64le') && check_var('SUBVARIANT', 'Silverblue')) {
-        push (@actions, 'grubregen');
-    }
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
@@ -188,10 +183,6 @@ sub run {
     if (grep {$_ eq 'rootpw'} @actions) {
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
-    }
-    if (grep {$_ eq 'grubregen'} @actions) {
-        record_soft_failure  "brc#1817004, Regenerate grub.cfg for reboot success";
-        assert_script_run "chroot $mount grub2-mkconfig -o /boot/grub2/grub.cfg";
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
 }
