@@ -39,6 +39,8 @@ sub run {
     type_very_safely "/boot";
     assert_and_click "anaconda_part_device_reformat";
     assert_and_click "anaconda_part_update_settings";
+    # give it a second or two to update
+    wait_still_screen 2;
 
     # For UEFI based images, we need to reassign the efi boot
     # mountpoint as well
@@ -48,6 +50,8 @@ sub run {
         type_very_safely "/boot/efi";
         assert_and_click "anaconda_part_device_reformat";
         assert_and_click "anaconda_part_update_settings";
+        # give it a second or two to update
+        wait_still_screen 2;
     }
 
     # Now resize and format the current root partition
@@ -61,6 +65,8 @@ sub run {
     # Reformat and update the partition
     assert_and_click "anaconda_part_device_reformat";
     assert_and_click "anaconda_part_update_settings";
+    # give it a second or two to update
+    wait_still_screen 2;
 
     # Add new /home partition into the emptied space.
     assert_and_click "anaconda_part_add";
