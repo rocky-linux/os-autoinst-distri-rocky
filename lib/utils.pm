@@ -537,7 +537,7 @@ sub _repo_setup_updates {
         assert_script_run "mount /opt/update_repo";
     }
     assert_script_run "cd /opt/update_repo";
-    script_run "dnf -y install bodhi-client git createrepo koji", 300;
+    script_run "dnf -y install bodhi-client createrepo koji", 300;
 
     # download the packages
     if (get_var("ADVISORY_NVRS")) {
