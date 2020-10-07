@@ -543,7 +543,13 @@ sub _repo_setup_updates {
     if (get_var("ADVISORY_NVRS")) {
         # regular update case
         foreach my $nvr (split(/ /, get_var("ADVISORY_NVRS"))) {
-            assert_script_run "koji download-build --arch=" . get_var("ARCH") . " --arch=noarch $nvr", 600;
+            if (script_run "koji download-build --arch=" . get_var("ARCH") . " --arch=noarch $nvr 2> download.log", 600) {
+                # if the error was because the build has no packages
+                # for our arch, that's okay, skip it. otherwise, die
+                if (script_run "grep 'No .*available for $nvr' download.log") {
+                    die "koji download-build failed!";
+                }
+            }
         }
     }
     elsif (get_var("KOJITASK")) {
