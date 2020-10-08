@@ -10,19 +10,12 @@ sub run {
     
     # Start the application
     menu_launch_type "krusader";
-    # Deal with the welcome screens
-    assert_screen ["krusader_welcome", "krusader_settings_close"];
-    while (match_has_tag "krusader_welcome") {
-        assert_and_click "krusader_welcome";
-        assert_screen ["krusader_welcome", "krusader_settings_close"];
-    }
-    # Settings close
-    assert_screen ["krusader_settings_close", "kde_ok"];
+    # Deal with the welcome screens, which all have an OK button
+    assert_screen ["kde_ok", "krusader_settings_close"];
     while (match_has_tag "kde_ok") {
         assert_and_click "kde_ok";
-        assert_screen ["krusader_settings_close", "kde_ok"]
+        assert_screen ["kde_ok", "krusader_settings_close"];
     }
-    
     assert_and_click "krusader_settings_close";
     
     wait_still_screen 2;
