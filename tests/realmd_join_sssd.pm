@@ -22,7 +22,6 @@ sub run {
         $server_mutex = 'replica_ready';
     }
     bypass_1691487;
-    assert_script_run "printf 'search domain.local\nnameserver ${server_ip}' > /etc/resolv.conf";
     # this gets us the name of the first connection in the list,
     # which should be what we want
     my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
@@ -41,15 +40,6 @@ sub run {
     # do the enrolment
     if (get_var("FREEIPA_REPLICA")) {
         # here we're enrolling not just as a client, but as a replica
-        # disable systemd-resolved, it kinda conflicts with FreeIPA's
-        # bind: https://bugzilla.redhat.com/show_bug.cgi?id=1880628
-        unless (script_run "systemctl is-active systemd-resolved.service") {
-            script_run "systemctl stop systemd-resolved.service";
-            script_run "systemctl disable systemd-resolved.service";
-            script_run "rm -f /etc/resolv.conf";
-            script_run "systemctl restart NetworkManager";
-        }
-
         # install server packages
         assert_script_run "dnf -y groupinstall freeipa-server", 600;
 
@@ -58,10 +48,6 @@ sub run {
         assert_script_run "dnf -y install haveged", 300;
         assert_script_run 'systemctl start haveged.service';
 
-        # read DNS server IPs from host's /etc/resolv.conf for passing to
-        # ipa-replica-install
-        my @forwards = get_host_dns();
-
         # configure the firewall
         for my $service (qw(freeipa-ldap freeipa-ldaps dns)) {
             assert_script_run "firewall-cmd --permanent --add-service $service";
@@ -69,10 +55,8 @@ sub run {
         assert_script_run "systemctl restart firewalld.service";
 
         # deploy as a replica
-        my $args = "--setup-dns --setup-ca --allow-zone-overlap -U --principal admin --admin-password monkeys123";
-        for my $fwd (@forwards) {
-            $args .= " --forwarder=$fwd";
-        }
+        my ($ip, $hostname) = split(/ /, get_var("POST_STATIC"));
+        my $args = "--ip-address=$ip --setup-dns --auto-forwarders --setup-ca --allow-zone-overlap -U --principal admin --admin-password monkeys123";
         assert_script_run "ipa-replica-install $args", 1500;
 
         # enable and start the systemd service

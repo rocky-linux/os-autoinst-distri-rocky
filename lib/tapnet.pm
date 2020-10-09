@@ -53,8 +53,6 @@ sub setup_tap_static {
     assert_script_run "nmcli con up '$connection'";
     # for debugging
     assert_script_run "nmcli -t con show '$connection'";
-    # the above doesn't seem to reliably set up resolv.conf, so...
-    clone_host_file "/etc/resolv.conf";
 }
 
 sub get_host_dns {

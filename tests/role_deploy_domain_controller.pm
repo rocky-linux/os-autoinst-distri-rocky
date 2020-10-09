@@ -19,14 +19,6 @@ sub run {
     # aren't in Modular Server composes)
     my $extraparams = '';
     $extraparams = '--enablerepo=fedora' if (get_var("MODULAR"));
-    # disable systemd-resolved, it kinda conflicts with FreeIPA's
-    # bind: https://bugzilla.redhat.com/show_bug.cgi?id=1880628
-    unless (script_run "systemctl is-active systemd-resolved.service") {
-        script_run "systemctl stop systemd-resolved.service";
-        script_run "systemctl disable systemd-resolved.service";
-        script_run "rm -f /etc/resolv.conf";
-        script_run "systemctl restart NetworkManager";
-    }
     # we need a lot of entropy for this, and we don't care how good
     # it is, so let's use haveged
     assert_script_run "dnf ${extraparams} -y install haveged", 300;
@@ -38,9 +30,6 @@ sub run {
     # per ab, this gets us more debugging for bind
     assert_script_run 'mkdir -p /etc/systemd/system/named-pkcs11.service.d';
     assert_script_run 'printf "[Service]\nEnvironment=OPTIONS=-d5\n" > /etc/systemd/system/named-pkcs11.service.d/debug.conf';
-    # read DNS server IPs from host's /etc/resolv.conf for passing to
-    # ipa-server-install / rolectl
-    my @forwards = get_host_dns();
     # First install the necessary packages
     assert_script_run "dnf -y groupinstall freeipa-server", 600;
     # configure the firewall
@@ -49,10 +38,7 @@ sub run {
     }
     assert_script_run "systemctl restart firewalld.service";
     # deploy the server
-    my $args = "-U --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.16.172.in-addr.arpa --allow-zone-overlap";
-    for my $fwd (@forwards) {
-        $args .= " --forwarder=$fwd";
-    }
+    my $args = "-U --auto-forwarders --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.16.172.in-addr.arpa --allow-zone-overlap";
     assert_script_run "ipa-server-install $args", 1200;
     # enable and start the systemd service
     assert_script_run "systemctl enable ipa.service";
