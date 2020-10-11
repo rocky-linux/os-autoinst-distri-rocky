@@ -441,8 +441,7 @@ sub setup_workaround_repo {
     my %workarounds = (
         "31" => [],
         "32" => [],
-        # freeipa: https://bugzilla.redhat.com/show_bug.cgi?id=1886205
-        "33" => ["FEDORA-2020-e9e815177e"]
+        "33" => []
     );
     # then we'll download each update for our release:
     my $advisories = $workarounds{$version};
