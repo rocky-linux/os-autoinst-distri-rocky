@@ -78,59 +78,40 @@ sub run {
         mouse_hide;
     }
     if ($desktop eq 'gnome') {
-        # of course, we have no idea what'll be in the clock, so we just
-        # have to click where we know it is
+        # click the clock to show notifications. of course, we have no
+        # idea what'll be in the clock, so we just have to click where
+        # we know it is
         mouse_set 512, 10;
         mouse_click;
-        if (get_var("BOOTFROM")) {
-            # we should see an update notification and no others
-            assert_screen "desktop_update_notification_only";
-        }
-        else {
-            # for the live case there should be *no* notifications
-            assert_screen "desktop_no_notifications";
-        }
     }
-    elsif ($desktop eq 'kde') {
+    if ($desktop eq 'kde') {
         if (get_var("BOOTFROM")) {
-            assert_screen "desktop_update_notification";
-            # this is the case from F30 and earlier where we know this
-            # was the *only* notification; at this point we've passed
-            return if match_has_tag "desktop_update_notification_only";
-            # otherwise, we need to close the update notification(s)
-            # then check there are no others; see
-            # https://bugzilla.redhat.com/show_bug.cgi?id=1730482 for
-            # KDE showing multiple notifications
-            my @closed = click_unwanted_notifications;
-            if (grep {$_ eq 'akonadi'} @closed) {
-                # this isn't an SELinux denial or a crash, so it's not
-                # a hard failure...
-                record_soft_failure "stuck akonadi_migration_agent popup - RHBZ #1716005";
-            }
-            my @upnotes = grep {$_ eq 'update'} @closed;
-            if (scalar @upnotes > 1) {
-                # Also not a hard failure, but worth noting
-                record_soft_failure "multiple update notifications - RHBZ #1730482";
-            }
+            # first check the systray update notification is there
+            assert_screen "desktop_update_notification_systray";
         }
-        # the order and number of systray icons varies in KDE, so we
-        # can't really just use a systray 'no notifications' needle.
-        # instead open up the 'extended systray' thingy and click on
-        # the notifications bit
-        assert_and_click 'desktop_expand_systray';
-        assert_and_click 'desktop_systray_notifications';
-        # In F28+ we seem to get a network connection notification
-        # here. Let's dismiss it.
-        if (check_screen 'desktop_network_notification', 5) {
+        # now open the notifications view in the systray
+        if (check_screen 'desktop_icon_notifications') {
+            # this is the little bell thing KDE sometimes shows if
+            # there's been a notification recently...
             click_lastmatch;
         }
-        # In F32+ we may also get an 'akonadi did something' message
+        else {
+            # ...otherwise you have to expand the systray and click
+            # "Notifications"
+            assert_and_click 'desktop_expand_systray';
+            assert_and_click 'desktop_systray_notifications';
+        }
+        # In F32+ we may get an 'akonadi did something' message
         if (check_screen 'akonadi_migration_notification', 5) {
             click_lastmatch;
         }
-        # on live path, we should not have got any other notification;
-        # on installed path, we saw an update notification and closed
-        # it, and now there should be no *other* notifications
+    }
+    if (get_var("BOOTFROM")) {
+        # we should see an update notification and no others
+        assert_screen "desktop_update_notification_only";
+    }
+    else {
+        # for the live case there should be *no* notifications
         assert_screen "desktop_no_notifications";
     }
 }
