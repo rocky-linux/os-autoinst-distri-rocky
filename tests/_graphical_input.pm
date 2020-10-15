@@ -18,7 +18,6 @@ sub run {
     if (get_var("LANGUAGE") eq 'japanese') {
         # wait a bit for input switch to complete
         sleep 3;
-        workaround_ble26;
 
         # assume we can test input from whatever 'alt-f1' opened
         type_safely "yama";
