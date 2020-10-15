@@ -20,7 +20,7 @@ sub run {
     # we're reinventing assert_script_run instead of using it so
     # we can type safely
     type_very_safely "ls && echo 'ls OK' > /dev/ttyS0\n";
-    wait_serial "ls OK" || die "terminal command failed";
+    die "terminal command failed" unless defined wait_serial "ls OK";
 }
 
 sub test_flags {
