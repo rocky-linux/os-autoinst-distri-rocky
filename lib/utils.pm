@@ -839,11 +839,6 @@ sub start_with_launcher {
         if ($submenu) {
             assert_and_click $submenu;
             wait_still_screen 5;
-            # workaround for https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/2878
-            send_key 'esc';
-            wait_still_screen 3;
-            assert_and_click $submenu;
-            wait_still_screen 3;
         }
         # Click on the launcher
         if (!check_screen($launcher)) {
