@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 16,
+      "ypos": 382,
+      "xpos": 706,
+      "width": 83,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "desktop_systray_notifications"
+  ]
+}
