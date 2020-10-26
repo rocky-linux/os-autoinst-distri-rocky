@@ -119,11 +119,7 @@ sub root_console {
         # passed to console_login
         timeout => 0,
         @_);
-    # Handle https://bugzilla.redhat.com/show_bug.cgi?id=1635033
-    if (get_var("LIVE") && get_var("DESKTOP") eq "gnome") {
-        send_key "ctrl-alt-f3";
-    }
-    elsif (get_var("SERIAL_CONSOLE")) {
+    if (get_var("SERIAL_CONSOLE")) {
         # select first virtio terminal, we rely on anaconda having run
         # a root shell on it for us
         select_console("virtio-console");
@@ -132,7 +128,8 @@ sub root_console {
         return;
     }
     else {
-        send_key "ctrl-alt-f2";
+        # tty3 has a shell on all f31+ installer and live images
+        send_key "ctrl-alt-f3";
     }
     console_login(user=>"root", timeout=>$args{timeout});
 }
