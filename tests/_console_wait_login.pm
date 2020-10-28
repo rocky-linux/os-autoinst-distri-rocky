@@ -15,15 +15,9 @@ sub run {
         $wait_time = 240;
     }
 
-    # handle initial-setup, if we're expecting it (IoT < F32 install test)
-    my $testname = get_var("TEST");
-    my $subvariant = get_var("SUBVARIANT");
-    my $version = get_release_number;
-    if ($subvariant eq "IoT" && $version < 32 && index($testname, 'install') != -1) {
-        assert_screen "console_initial_setup", $wait_time;
-        type_string "q\n";
-        type_string "yes\n";
-        $wait_time = 180;
+    # handle initial-setup, if we're expecting it (ARM disk image)
+    if (get_var("INSTALL_NO_USER")) {
+        console_initial_setup;
     }
 
     # Wait for the text login

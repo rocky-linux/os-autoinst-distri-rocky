@@ -24,8 +24,8 @@
                 "QEMU_NO_KVM": "1",
                 "QEMU_VIRTIO_RNG": "1",
                 "SERIALDEV": "ttyAMA0",
-                "TIMEOUT_SCALE": "5",
-                "WORKER_CLASS": "qemu_x86_64"
+                "TIMEOUT_SCALE": "1.5",
+                "WORKER_CLASS": "qemu_aarch64"
             }
         },
         "aarch64": {
@@ -179,11 +179,21 @@
             },
             "version": "*"
         },
+        "fedora-Minimal-raw_xz-raw.xz-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Minimal-raw_xz-raw.xz",
+            "settings": {
+                "TEST_TARGET": "HDD_2"
+            },
+            "version": "*"
+        },
         "fedora-Minimal-raw_xz-raw.xz-arm-*": {
             "arch": "arm",
             "distri": "fedora",
             "flavor": "Minimal-raw_xz-raw.xz",
             "settings": {
+                "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
                 "TEST_TARGET": "HDD_2"
             },
             "version": "*"
@@ -243,6 +253,15 @@
             },
             "version": "*"
         },
+        "fedora-Server-raw_xz-raw.xz-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Server-raw_xz-raw.xz",
+            "settings": {
+                "TEST_TARGET": "HDD_2"
+            },
+            "version": "*"
+        },
         "fedora-Silverblue-dvd_ostree-iso-ppc64le-*": {
             "arch": "ppc64le",
             "distri": "fedora",
@@ -290,6 +309,16 @@
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-Workstation-raw_xz-raw.xz-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "Workstation-raw_xz-raw.xz",
+            "settings": {
+                "DESKTOP": "gnome",
+                "TEST_TARGET": "HDD_2"
             },
             "version": "*"
         },
@@ -370,6 +399,10 @@
             "machine": "uefi",
             "product": "fedora-KDE-live-iso-x86_64-*"
         },
+        "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Minimal-raw_xz-raw.xz-aarch64-*"
+        },
         "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": {
             "machine": "ARM",
             "product": "fedora-Minimal-raw_xz-raw.xz-arm-*"
@@ -406,6 +439,10 @@
             "machine": "uefi",
             "product": "fedora-Server-dvd-iso-x86_64-*"
         },
+        "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Server-raw_xz-raw.xz-aarch64-*"
+        },
         "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
             "product": "fedora-Silverblue-dvd_ostree-iso-ppc64le-*"
@@ -429,6 +466,10 @@
         "fedora-Workstation-live-iso-x86_64-*-uefi": {
             "machine": "uefi",
             "product": "fedora-Workstation-live-iso-x86_64-*"
+        },
+        "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-Workstation-raw_xz-raw.xz-aarch64-*"
         },
         "fedora-universal-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -580,10 +621,12 @@
         },
         "base_services_start_arm": {
             "profiles": {
-                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42,
+                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
+                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
             },
             "settings": {
-                "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "NUMDISKS": "1",
                 "POSTINSTALL": "base_services_start",
@@ -843,12 +886,15 @@
         },
         "install_arm_image_deployment_upload": {
             "profiles": {
-                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 12
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 12,
+                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 12,
+                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 12,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 12
             },
             "settings": {
-                "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
-                "ENTRYPOINT": "install_arm_image_deployment _console_shutdown",
                 "HDD_1": "%HDD_2%",
+                "IMAGE_DEPLOY": "1",
+                "INSTALL_NO_USER": "1",
                 "NUMDISKS": "1",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }

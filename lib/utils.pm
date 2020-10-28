@@ -7,7 +7,7 @@ use Exporter;
 
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo console_initial_setup gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile bypass_1691487 get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -66,11 +66,15 @@ sub get_release_number {
 # at a root console
 sub desktop_vt {
     # use loginctl or ps to find the tty of test's session (loginctl)
-    # or Xwayland or Xorg (ps); as of 2019-09 on F31 update tests
-    # ps -C is giving 'tty?', so adding loginctl works around that
+    # or gnome-session, Xwayland or Xorg (ps); as of 2019-09 we often
+    # get tty? for Xwayland and Xorg processes, so using loginctl can
+    # help
     my $xout;
-    # don't fail test if we don't find any process, just guess tty1
-    eval { $xout = script_output ' loginctl | grep test; ps -C Xwayland,Xorg -o tty --no-headers'; };
+    # don't fail test if we don't find any process, just guess tty1.
+    # os-autoinst calls the script with 'bash -e' which causes it to
+    # stop as soon as any command fails, so we use ||: to make the
+    # first grep return 0 even if it matches nothing
+    eval { $xout = script_output ' loginctl | grep test ||:; ps -e | egrep "(gnome-session|Xwayland|Xorg)" | grep -o tty[0-9]' };
     my $tty = 1; # default
     while ($xout =~ /tty(\d)/g) {
         $tty = $1; # most recent match is probably best
@@ -594,6 +598,60 @@ sub repo_setup {
     # it even though it is disabled, and fail. At present none of the
     # tests needs it, so let's just unconditionally nuke it.
     assert_script_run "rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo";
+}
+
+sub console_initial_setup {
+    # Handle console initial-setup. Currently used only for ARM disk
+    # image tests.
+    assert_screen "console_initial_setup", 500;
+    # IMHO it's better to use sleeps than to have needle for every text screen
+    wait_still_screen 5;
+
+    # Set timezone
+    type_string "2\n";
+    wait_still_screen 5;
+    type_string "1\n"; # Set timezone
+    wait_still_screen 5;
+    type_string "1\n"; # Europe
+    wait_still_screen 5;
+    type_string "37\n"; # Prague
+    wait_still_screen 7;
+
+    # Set root password
+    type_string "4\n";
+    wait_still_screen 5;
+    type_string get_var("ROOT_PASSWORD") || "weakpassword";
+    send_key "ret";
+    wait_still_screen 5;
+    type_string get_var("ROOT_PASSWORD") || "weakpassword";
+    send_key "ret";
+    wait_still_screen 7;
+
+    # Create user
+    type_string "5\n";
+    wait_still_screen 5;
+    type_string "1\n"; # create new
+    wait_still_screen 5;
+    type_string "3\n"; # set username
+    wait_still_screen 5;
+    type_string get_var("USER_LOGIN", "test");
+    send_key "ret";
+    wait_still_screen 5;
+    type_string "5\n"; # set password
+    wait_still_screen 5;
+    type_string get_var("USER_PASSWORD", "weakpassword");
+    send_key "ret";
+    wait_still_screen 5;
+    type_string get_var("USER_PASSWORD", "weakpassword");
+    send_key "ret";
+    wait_still_screen 5;
+    type_string "6\n"; # make him an administrator
+    wait_still_screen 5;
+    type_string "c\n";
+    wait_still_screen 7;
+
+    assert_screen "console_initial_setup_done", 30;
+    type_string "c\n"; # continue
 }
 
 sub gnome_initial_setup {

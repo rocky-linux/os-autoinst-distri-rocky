@@ -365,10 +365,11 @@ if (get_var("ENTRYPOINT")) {
 elsif (get_var("UPGRADE")) {
     load_upgrade_tests;
 }
-elsif ((!get_var("START_AFTER_TEST") && !get_var("BOOTFROM")) || get_var("INSTALL")) {
+elsif ((!get_var("START_AFTER_TEST") && !get_var("BOOTFROM") && !get_var("IMAGE_DEPLOY")) || get_var("INSTALL")) {
     # for now we can assume START_AFTER_TEST and BOOTFROM mean the
-    # test picks up after an install, so we skip to post-install,
-    # unless the override INSTALL var is set
+    # test picks up after an install, and IMAGE_DEPLOY means we're
+    # deploying a disk image (no installer) so in those cases we skip
+    # to post-install, unless the override INSTALL var is set
 
     if (get_var("PREINSTALL")) {
         # specified module supposed to first boot to rescue mode

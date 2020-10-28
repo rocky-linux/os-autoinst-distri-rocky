@@ -5,6 +5,7 @@ use utils;
 
 sub run {
     my $self = shift;
+    my $password = get_var("USER_PASSWORD", "weakpassword");
     my $version = get_var("VERSION");
     # If KICKSTART is set, then the wait_time needs to consider the
     # install time. if UPGRADE, we have to wait for the entire upgrade
@@ -49,7 +50,6 @@ sub run {
             send_key "ret";
         }
         assert_screen "graphical_login_input";
-        my $password = get_var("USER_PASSWORD", "weakpassword");
         if (get_var("SWITCHED_LAYOUT")) {
             # see _do_install_and_reboot; when layout is switched
             # user password is doubled to contain both US and native
@@ -85,6 +85,17 @@ sub run {
         }
         else {
             record_soft_failure "'getting started' missing (probably BGO#790811)";
+        }
+        # if this was an image deployment, we also need to create
+        # root user now, for subsequent tests to work
+        if (get_var("IMAGE_DEPLOY")) {
+            send_key "ctrl-alt-f3";
+            console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
+            type_string "sudo su\n";
+            type_string "$password\n";
+            my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
+            assert_script_run "echo 'root:$root_password' | chpasswd";
+            desktop_vt;
         }
     }
 

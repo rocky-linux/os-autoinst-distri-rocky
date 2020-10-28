@@ -211,7 +211,7 @@ def generate_job_templates(products, profiles, testsuites):
                     jobtemplate['group_name'] = "Fedora PowerPC Updates"
                 else:
                     jobtemplate['group_name'] = "Fedora PowerPC"
-            elif jobtemplate['machine_name'] == 'aarch64':
+            elif jobtemplate['machine_name'] in ('aarch64', 'ARM'):
                 if 'updates' in product['flavor']:
                     jobtemplate['group_name'] = "Fedora AArch64 Updates"
                 else:
