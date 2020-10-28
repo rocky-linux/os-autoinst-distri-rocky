@@ -33,9 +33,12 @@ sub root_console {
 sub post_fail_hook {
     my $self = shift;
 
-    if (check_screen 'emergency_rescue', 3) {
-        my $password = get_var("ROOT_PASSWORD", "weakpassword");
-        type_string "$password\n";
+    if (check_screen ['emergency_rescue', 'emergency_rescue_nopassword'], 3) {
+        if (match_has_tag 'emergency_rescue') {
+            my $password = get_var("ROOT_PASSWORD", "weakpassword");
+            type_string "$password";
+        }
+        send_key 'ret';
         # bring up network so we can upload logs
         assert_script_run "dhclient";
     }
