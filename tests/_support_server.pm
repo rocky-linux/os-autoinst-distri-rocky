@@ -94,6 +94,13 @@ sub _pxe_setup {
 
 sub run {
     my $self=shift;
+    # disable systemd-resolved, it conflicts with dnsmasq
+    unless (script_run "systemctl is-active systemd-resolved.service") {
+        script_run "systemctl stop systemd-resolved.service";
+        script_run "systemctl disable systemd-resolved.service";
+        script_run "rm -f /etc/resolv.conf";
+        script_run "systemctl restart NetworkManager";
+    }
     ## DNS / DHCP (dnsmasq)
     # create config
     assert_script_run "printf 'domain=domain.local\ndhcp-range=172.16.2.150,172.16.2.199\ndhcp-option=option:router,172.16.2.2\n' > /etc/dnsmasq.conf";
