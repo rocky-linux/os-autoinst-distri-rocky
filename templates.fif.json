@@ -1559,7 +1559,7 @@
                 "INSTALL": "1",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "install_vnc_server",
-                "PREINSTALL": "_graphical_wait_login _vnc_client_connect",
+                "PREINSTALL": "_vnc_client_connect_pre _graphical_wait_login _vnc_client_connect",
                 "VNC_CLIENT": "1",
                 "WORKER_CLASS": "tap"
             }
@@ -1589,7 +1589,7 @@
                 "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
-                "PREINSTALL": "_graphical_wait_login _vncconnect_client_setup",
+                "PREINSTALL": "_vncconnect_client_setup_pre _graphical_wait_login _vncconnect_client_setup",
                 "VNC_CLIENT": "1",
                 "WORKER_CLASS": "tap"
             }
