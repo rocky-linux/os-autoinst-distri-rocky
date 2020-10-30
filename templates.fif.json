@@ -85,6 +85,7 @@
             "flavor": "Cloud_Base-qcow2-qcow2",
             "settings": {
                 "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
                 "ISO": "cloudinit.iso",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "HDD_1"
@@ -121,6 +122,7 @@
             "flavor": "CoreOS-colive-iso",
             "settings": {
                 "CANNED": "1",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "TEST_TARGET": "ISO",
                 "USER_LOGIN": "false"
             },
@@ -151,6 +153,7 @@
             "flavor": "IoT-dvd_ostree-iso",
             "settings": {
                 "CANNED": "1",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
             },
@@ -162,6 +165,7 @@
             "flavor": "IoT-dvd_ostree-iso",
             "settings": {
                 "CANNED": "1",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
             },
@@ -172,6 +176,7 @@
             "distri": "fedora",
             "flavor": "KDE-live-iso",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "DESKTOP": "kde",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
@@ -184,6 +189,7 @@
             "distri": "fedora",
             "flavor": "Minimal-raw_xz-raw.xz",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "TEST_TARGET": "HDD_2"
             },
             "version": "*"
@@ -194,6 +200,7 @@
             "flavor": "Minimal-raw_xz-raw.xz",
             "settings": {
                 "APPEND": "rw root=LABEL=_/ rootwait console=ttyAMA0 console=tty0 consoleblank=0",
+                "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "TEST_TARGET": "HDD_2"
             },
             "version": "*"
@@ -231,6 +238,7 @@
             "distri": "fedora",
             "flavor": "Server-dvd-iso",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -240,6 +248,7 @@
             "distri": "fedora",
             "flavor": "Server-dvd-iso",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -249,6 +258,7 @@
             "distri": "fedora",
             "flavor": "Server-dvd-iso",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -258,6 +268,7 @@
             "distri": "fedora",
             "flavor": "Server-raw_xz-raw.xz",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "TEST_TARGET": "HDD_2"
             },
             "version": "*"
@@ -268,6 +279,7 @@
             "flavor": "Silverblue-dvd_ostree-iso",
             "settings": {
                 "CANNED": "1",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "DESKTOP": "gnome",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -280,6 +292,7 @@
             "flavor": "Silverblue-dvd_ostree-iso",
             "settings": {
                 "CANNED": "1",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "DESKTOP": "gnome",
                 "PACKAGE_SET": "default",
                 "TEST_TARGET": "ISO"
@@ -292,6 +305,7 @@
             "flavor": "Workstation-live-iso",
             "settings": {
                 "DESKTOP": "gnome",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "HDDSIZEGB": "20",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
@@ -305,6 +319,7 @@
             "flavor": "Workstation-live-iso",
             "settings": {
                 "DESKTOP": "gnome",
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "HDDSIZEGB": "20",
                 "LIVE": "1",
                 "PACKAGE_SET": "default",
@@ -317,6 +332,7 @@
             "distri": "fedora",
             "flavor": "Workstation-raw_xz-raw.xz",
             "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_arm_image_deployment_upload",
                 "DESKTOP": "gnome",
                 "TEST_TARGET": "HDD_2"
             },
@@ -499,11 +515,14 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "STARTSTOP": "true",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "base_reboot_unmount": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
@@ -521,22 +540,15 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_reboot_unmount",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_reboot_unmount_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
-            },
-            "settings": {
-                "POSTINSTALL": "base_reboot_unmount"
             }
         },
         "base_system_logging": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 20,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
@@ -554,22 +566,15 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_system_logging",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_system_logging_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
-            },
-            "settings": {
-                "POSTINSTALL": "base_system_logging"
             }
         },
         "base_update_cli": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
@@ -582,71 +587,45 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_update_cli",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_update_cli_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20
-            },
-            "settings": {
-                "POSTINSTALL": "base_update_cli"
             }
         },
         "base_services_start": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42,
+                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
                 "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 40
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_services_start",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_services_start_arm": {
-            "profiles": {
-                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42,
-                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
-                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
-            },
-            "settings": {
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "NUMDISKS": "1",
-                "POSTINSTALL": "base_services_start",
-                "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_arm_image_deployment_upload",
-                "USER_LOGIN": "false"
-            }
-        },
-        "base_services_start_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "POSTINSTALL": "base_services_start"
             }
         },
         "base_selinux": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
@@ -664,22 +643,15 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_selinux",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_selinux_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "POSTINSTALL": "base_selinux"
             }
         },
         "base_service_manipulation": {
             "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 40,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
@@ -697,18 +669,8 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_service_manipulation",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
-            }
-        },
-        "base_service_manipulation_cloud": {
-            "profiles": {
-                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "POSTINSTALL": "base_service_manipulation"
             }
         },
         "cloud_autocloud": {
@@ -733,7 +695,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_background",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "desktop_login": {
@@ -746,7 +708,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_login",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "install_blivet_resize_lvm": {
@@ -787,7 +749,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_browser",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "desktop_notifications_live": {
@@ -810,7 +772,7 @@
                 "BOOTFROM": "c",
                 "ENTRYPOINT": "desktop_notifications",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "desktop_printing": {
@@ -823,7 +785,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_printing",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "desktop_terminal": {
@@ -838,7 +800,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_terminal",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "desktop_update_graphical": {
@@ -851,7 +813,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "desktop_update_graphical",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "install_anaconda_text": {
@@ -1644,7 +1606,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "iot_greenboot",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "iot_rpmostree_overlay": {
@@ -1657,7 +1619,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "iot_rpmostree_overlay",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload"
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "iot_rpmostree_rebase": {
@@ -1670,7 +1632,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "iot_rpmostree_rebase",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
@@ -1688,7 +1650,7 @@
                 "POSTINSTALL": "iot_zezere_ignition",
                 "POST_STATIC": "172.16.2.119 zezere001.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1706,7 +1668,7 @@
                 "POSTINSTALL": "_iot_zezere_server _setup_browser _iot_zezere_remote",
                 "POST_STATIC": "172.16.2.118 zezere002.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "TEST_TARGET": "NONE",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
@@ -1765,7 +1727,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "modularity_module_list modularity_enable_disable_module modularity_install_module",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
@@ -1782,7 +1744,7 @@
                 "POSTINSTALL": "podman",
                 "POST_STATIC": "172.16.2.114 podman001.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1801,7 +1763,7 @@
                 "POSTINSTALL": "_podman_client",
                 "POST_STATIC": "172.16.2.115 podclient001.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1839,7 +1801,7 @@
                 "POSTINSTALL": "realmd_join_sssd freeipa_client",
                 "POST_STATIC": "172.16.2.103 client003.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1861,7 +1823,7 @@
                 "BOOTFROM": "c",
                 "ENTRYPOINT": "text_login_gui fedora_release os_release",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
@@ -1891,7 +1853,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "_setup_browser server_cockpit_default",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "USER_LOGIN": "false"
             }
@@ -1923,7 +1885,7 @@
                 "POSTINSTALL": "database_client",
                 "POST_STATIC": "172.16.2.105 dbclient.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1939,7 +1901,7 @@
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "server_filesystem_default",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
@@ -1953,7 +1915,7 @@
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "server_firewall_default",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
@@ -1972,7 +1934,7 @@
                 "POSTINSTALL": "realmd_join_sssd freeipa_client",
                 "POST_STATIC": "172.16.2.108 client005.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -1992,7 +1954,7 @@
                 "POSTINSTALL": "role_deploy_domain_controller role_deploy_domain_controller_check",
                 "POST_STATIC": "172.16.2.106 ipa002.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -2013,7 +1975,7 @@
                 "POSTINSTALL": "realmd_join_sssd",
                 "POST_STATIC": "172.16.2.107 ipa003.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -2052,7 +2014,7 @@
                 "POSTINSTALL": "server_remote_logging_client",
                 "POST_STATIC": "172.16.2.113 rsyslogclient.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -2071,7 +2033,7 @@
                 "POSTINSTALL": "server_remote_logging_server",
                 "POST_STATIC": "172.16.2.112 rsyslogserver.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -2090,7 +2052,7 @@
                 "POSTINSTALL": "role_deploy_database_server",
                 "POST_STATIC": "172.16.2.104 db.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
@@ -2109,7 +2071,7 @@
                 "POSTINSTALL": "role_deploy_domain_controller role_deploy_domain_controller_check",
                 "POST_STATIC": "172.16.2.100 ipa001.domain.local",
                 "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_default_upload",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
