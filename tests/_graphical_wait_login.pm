@@ -50,6 +50,9 @@ sub run {
             send_key "ret";
         }
         assert_screen "graphical_login_input";
+        # seems like we often double-type on aarch64 if we start right
+        # away
+        wait_still_screen 5;
         if (get_var("SWITCHED_LAYOUT")) {
             # see _do_install_and_reboot; when layout is switched
             # user password is doubled to contain both US and native
