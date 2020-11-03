@@ -62,12 +62,10 @@ sub run {
             # if we see 'download', we're in the GNOME Software 3.30.5+
             # two-step process - let's hit it, and continue waiting for
             # for apply (only)
-            if (match_has_tag 'desktop_package_tool_update_download') {
-                wait_screen_change { assert_and_click 'desktop_package_tool_update_download'; };
-                $n -= 1 if ($n > 1);
-                $tags = ['desktop_package_tool_update_apply'];
-                next;
-            }
+            wait_screen_change { click_lastmatch; };
+            $n -= 1 if ($n > 1);
+            $tags = ['desktop_package_tool_update_apply'];
+            next;
         }
         # move the mouse to stop the screen blanking on idle
         mouse_set 10, 10;

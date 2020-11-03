@@ -703,34 +703,6 @@
                 "POSTINSTALL": "autocloud"
             }
         },
-        "desktop_background": {
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
-                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
-                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "desktop_background",
-                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
-            }
-        },
-        "desktop_login": {
-            "profiles": {
-                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
-                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "desktop_login",
-                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
-            }
-        },
         "install_blivet_resize_lvm": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 20,
@@ -758,13 +730,43 @@
                 "START_AFTER_TEST": "install_lvm_ext4"
             }
         },
+        "desktop_background": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 22,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_background",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_login": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_login",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "desktop_browser": {
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -800,7 +802,8 @@
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 20,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -815,7 +818,8 @@
                 "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
                 "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 20
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 20,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 22
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -828,7 +832,8 @@
             "profiles": {
                 "fedora-KDE-live-iso-x86_64-*-64bit": 32,
                 "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Workstation-live-iso-x86_64-*-64bit": 30
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 30,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 32
             },
             "settings": {
                 "BOOTFROM": "c",

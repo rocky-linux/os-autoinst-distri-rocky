@@ -32,7 +32,7 @@ sub run {
     # wait out animations
     wait_still_screen(stilltime=>2, similarity_level=>45);
     assert_and_click 'browser_launcher';
-    assert_screen 'browser';
+    assert_screen 'browser', 45;
     # firefox is quite grindy on startup, let it settle
     wait_still_screen(stilltime=>5, similarity_level=>45);
     # open a new tab so we don't race with the default page load
