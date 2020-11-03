@@ -739,7 +739,7 @@
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_resize_lvm",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
+                "HDD_1": "disk_f%PREVREL%_desktop_4_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
                 "INSTALL": "1"
             }
@@ -752,7 +752,7 @@
             },
             "settings": {
                 "PARTITIONING": "custom_resize_lvm",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
+                "HDD_1": "disk_f%PREVREL%_desktop_4_%ARCH%.img",
                 "INSTALL": "1",
                 "ROOT_PASSWORD": "weakpassword"
             }
