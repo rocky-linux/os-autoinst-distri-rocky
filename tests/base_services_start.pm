@@ -16,15 +16,16 @@ sub run {
     # if we have 0 failed services, we're good
     my $ret = script_run "grep '0 loaded units' /tmp/failed.txt";
     return if $ret == 0;
-    # if only mcelog failed, that's a soft fail
+    # if only hcn-init failed, that's a soft fail, see:
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1894654
     $ret = script_run "grep '1 loaded units' /tmp/failed.txt";
     if ($ret != 0) {
         die "More than one services failed to start";
     }
     else {
-        # fail if it's something other than mcelog
-        assert_script_run "systemctl is-failed mcelog.service";
-        record_soft_failure;
+        # fail if it's something other than hcn-init
+        assert_script_run "systemctl is-failed hcn-init.service";
+        record_soft_failure "hcn-init failed - https://bugzilla.redhat.com/show_bug.cgi?id=1894654";
     }
 }
 
