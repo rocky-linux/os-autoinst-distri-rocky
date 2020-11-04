@@ -874,11 +874,10 @@
                 "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 12
             },
             "settings": {
-                "HDD_1": "%HDD_2%",
                 "IMAGE_DEPLOY": "1",
                 "INSTALL_NO_USER": "1",
-                "NUMDISKS": "1",
-                "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
+                "NUMDISKS": "2",
+                "STORE_HDD_2": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }
         },
         "install_asian_language": {

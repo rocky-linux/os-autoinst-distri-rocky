@@ -343,7 +343,7 @@ sub load_postinstall_tests() {
     }
 
     # we should shut down before uploading disk images
-    if (get_var("STORE_HDD_1") || get_var("PUBLISH_HDD_1")) {
+    if (get_var("STORE_HDD_1") || get_var("STORE_HDD_2") || get_var("PUBLISH_HDD_1")) {
         autotest::loadtest "tests/_console_shutdown.pm";
     }
     
