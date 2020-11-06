@@ -913,19 +913,6 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_ext3": {
-            "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 40,
-                "fedora-universal-ppc64le-*-ppc64le": 40,
-                "fedora-universal-x86_64-*-64bit": 40,
-                "fedora-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_ext3",
-                "POSTINSTALL": "disk_custom_ext3_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
         "install_blivet_lvmthin": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,
@@ -1093,18 +1080,6 @@
                 "REPOSITORY_VARIATION": "%LOCATION%",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "qwerty"
-            }
-        },
-        "install_ext3": {
-            "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 40,
-                "fedora-universal-ppc64le-*-ppc64le": 40,
-                "fedora-universal-x86_64-*-64bit": 40,
-                "fedora-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_ext3",
-                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "install_iscsi": {
