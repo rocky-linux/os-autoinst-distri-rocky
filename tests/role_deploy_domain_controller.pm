@@ -38,7 +38,7 @@ sub run {
     }
     assert_script_run "systemctl restart firewalld.service";
     # deploy the server
-    my $args = "-U --auto-forwarders --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --no-dnssec-validation --reverse-zone=2.16.172.in-addr.arpa --allow-zone-overlap";
+    my $args = "-U --auto-forwarders --realm=DOMAIN.LOCAL --domain=domain.local --ds-password=monkeys123 --admin-password=monkeys123 --setup-dns --reverse-zone=2.16.172.in-addr.arpa --allow-zone-overlap";
     assert_script_run "ipa-server-install $args", 1200;
     # enable and start the systemd service
     assert_script_run "systemctl enable ipa.service";
