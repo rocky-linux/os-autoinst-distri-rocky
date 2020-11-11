@@ -27,13 +27,13 @@ sub run {
     # optional as it's not really part of the test
     script_run "dnf -y install sssd-tools", 220;
     script_run "sss_debuglevel 9";
+    my $cockpitver = script_output 'rpm -q cockpit --queryformat "%{VERSION}\n"';
     # run firefox and login to cockpit
     # note: we can't use wait_screen_change, wait_still_screen or
     # check_type_string in cockpit because of that fucking constantly
     # scrolling graph
     start_cockpit(1);
-    # on cockpit 209+ we have to scroll down before the button is
-    # visible
+    # we may have to scroll down before the button is visible
     if (check_screen "cockpit_join_domain_button", 5) {
         click_lastmatch;
     }
@@ -46,8 +46,10 @@ sub run {
         assert_and_click "cockpit_join_domain_button", 5;
     }
     assert_screen "cockpit_join_domain";
-    send_key "tab";
-    sleep 3;
+    # we need to hit tab three times to reach 'Domain address' in
+    # cockpit 232: https://github.com/cockpit-project/cockpit/issues/14895
+    my $tabs = $cockpitver eq "232" ? "\t\t\t" : "\t";
+    type_string($tabs, 4);
     type_string("ipa001.domain.local", 4);
     type_string("\t\t", 4);
     type_string("admin", 4);
