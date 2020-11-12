@@ -191,15 +191,16 @@ sub run {
     my $jackpass = "kozapanijezibaby";
     my $jimpass = "babajagakozaroza";
     our $desktop = get_var("DESKTOP");
-    # Get rid of the KDE wallpaper and make background black.
+    # replace the wallpaper with a black image, this should work for
+    # all desktops. Takes effect after a logout / login cycle
+    $self->root_console(tty=>3);
+    assert_script_run "dnf -y install GraphicsMagick", 300;
+    assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.png";
+    assert_script_run 'for i in /usr/share/backgrounds/f*/default/*.png; do ln -sf /usr/share/backgrounds/black.png $i; done';
     if ($desktop eq "kde") {
-        solidify_wallpaper;
-        # also get rid of the wallpaper on SDDM screen. This is system
-        # wide so we only need do it once
-        $self->root_console(tty=>3);
+        # use solid blue background for SDDM
         assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf.user";
     }
-    $self->root_console(tty=>3);
     adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass, termstop=>0);
     if ($desktop eq "gnome") {
         # In Gnome, we can create a passwordless user that can provide his password upon
@@ -223,9 +224,6 @@ sub run {
 
     # Log in with the first user account.
     login_user(user=>"jack", password=>$jackpass);
-    # Because some of the desktop candiness is based on semi-transparent items that change colours
-    # with every background change, we want to get rid of the background and make it a solid color.
-    solidify_wallpaper;
     check_user_logged_in("jack");
     # Log out the user.
     logout_user();
@@ -239,8 +237,6 @@ sub run {
         # If not, we are in KDE and we will log in normally.
         login_user(user=>"jim", password=>$jimpass);
     }
-    # The backgrounds must be solid for both newly created users to take effect in the login session.
-    solidify_wallpaper;
     check_user_logged_in("jim");
     # And this time reboot the system using the menu.
     reboot_system();
