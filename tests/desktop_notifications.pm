@@ -56,7 +56,7 @@ sub run {
     # we trust systemd to switch us to the right tty here
     if (get_var("BOOTFROM")) {
         assert_screen 'graphical_login';
-        wait_still_screen 3;
+        wait_still_screen 10, 30;
         # GDM 3.24.1 dumps a cursor in the middle of the screen here...
         mouse_hide;
         if (get_var("DESKTOP") eq 'gnome') {
