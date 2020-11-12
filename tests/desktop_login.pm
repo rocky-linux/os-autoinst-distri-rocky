@@ -29,9 +29,7 @@ sub adduser {
     assert_script_run "useradd -c '$name' $login";
     if ($password ne "askuser") {
         # If we want to create a user with a defined password.
-        type_very_safely "passwd $login\n";
-        type_password $password;
-        type_password $password;
+        assert_script_run "echo '$login:$password' | chpasswd";
     }
     else {
         # If we want to create a user without a password,
