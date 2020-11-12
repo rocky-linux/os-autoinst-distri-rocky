@@ -30,7 +30,7 @@ sub run {
     check_desktop;
     send_key 'alt-f1';
     # wait out animations
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime=>4, similarity_level=>45);
     assert_and_click 'browser_launcher';
     assert_screen 'browser', 45;
     # firefox is quite grindy on startup, let it settle
