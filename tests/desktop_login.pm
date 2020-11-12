@@ -87,11 +87,9 @@ sub login_user {
     if ($method eq "create") {
         # With users that do not have passwords, we need to make an extra round
         # of password typing.
-        type_very_safely $password;
-        send_key "ret";
+        type_very_safely "$password\n";
     }
-    type_very_safely $password;
-    send_key "ret";
+    type_very_safely "$password\n";
     check_desktop if ($args{checklogin});
     wait_still_screen 5;
 }
