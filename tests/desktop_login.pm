@@ -21,19 +21,11 @@ sub type_password {
 sub adduser {
     # Add user to the system.
     my %args = @_;
-    $args{termstart} //= 1;
     $args{termstop} //= 1;
     my $name = $args{name};
     my $login = $args{login};
     my $password = $args{password};
 
-    if ($args{termstart}) {
-        menu_launch_type $term;
-        wait_still_screen 2;
-        assert_screen "apps_run_terminal";
-        type_very_safely "sudo -i\n";
-        type_password $syspwd;
-    }
     assert_script_run "useradd -c '$name' $login";
     if ($password ne "askuser") {
         # If we want to create a user with a defined password.
@@ -58,8 +50,7 @@ sub adduser {
         assert_script_run "restorecon -vr /home/$login/.config";
     }
     if ($args{termstop}) {
-        type_very_safely "exit\n";
-        send_key 'alt-f4';
+        desktop_vt;
     }
 }
 
@@ -209,31 +200,21 @@ sub run {
         solidify_wallpaper;
         # also get rid of the wallpaper on SDDM screen. This is system
         # wide so we only need do it once
-        menu_launch_type $term;
-        wait_still_screen 2;
-        assert_screen "apps_run_terminal";
-        type_very_safely "sudo -i\n";
-        type_password $syspwd;
+        $self->root_console(tty=>3);
         assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf.user";
     }
-    if ($desktop eq "kde") {
-        # we're already at a terminal! EFFICIENCY!
-        adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass, termstart=>0, termstop=>0);
-    }
-    else {
-        # gotta start the terminal
-        adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass, termstart=>1, termstop=>0);
-    }
+    $self->root_console(tty=>3);
+    adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass, termstop=>0);
     if ($desktop eq "gnome") {
         # In Gnome, we can create a passwordless user that can provide his password upon
         # the first login. So we can create the second user in this way to test this feature
         # later.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>"askuser", termstart=>0, termstop=>1);
+        adduser(name=>"Jim Eagle", login=>"jim", password=>"askuser", termstop=>1);
     }
     else {
         # In KDE, we can also create a passwordless user, but we cannot log into the system
         # later, so we will create the second user the standard way.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>$jimpass, termstart=>0, termstop=>1);
+        adduser(name=>"Jim Eagle", login=>"jim", password=>$jimpass, termstop=>1);
     }
 
     # Clean boot the system, and note what accounts are listed on the login screen.
