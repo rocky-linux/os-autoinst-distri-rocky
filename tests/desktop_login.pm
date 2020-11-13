@@ -47,9 +47,6 @@ sub adduser {
         assert_script_run "chown -R $login.$login /home/$login/.config";
         assert_script_run "restorecon -vr /home/$login/.config";
     }
-    if ($args{termstop}) {
-        desktop_vt;
-    }
 }
 
 sub lock_screen {
@@ -201,26 +198,24 @@ sub run {
         # use solid blue background for SDDM
         assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf.user";
     }
-    adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass, termstop=>0);
+    adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass);
     if ($desktop eq "gnome") {
         # In Gnome, we can create a passwordless user that can provide his password upon
         # the first login. So we can create the second user in this way to test this feature
         # later.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>"askuser", termstop=>1);
+        adduser(name=>"Jim Eagle", login=>"jim", password=>"askuser");
     }
     else {
         # In KDE, we can also create a passwordless user, but we cannot log into the system
         # later, so we will create the second user the standard way.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>$jimpass, termstop=>1);
+        adduser(name=>"Jim Eagle", login=>"jim", password=>$jimpass);
     }
 
     # Clean boot the system, and note what accounts are listed on the login screen.
-    # Log out the default user "test" and reboot the system
-    # before the actual testing starts. There is no need to check specifically
-    # if the users are listed, because if they are not, the login tests will fail
-    # later.
-    logout_user();
-    reboot_system();
+    # There is no need to check specifically if the users are listed, because if they
+    # are not, the login tests will fail later.
+    script_run "systemctl reboot", 0;
+    boot_to_login_screen;
 
     # Log in with the first user account.
     login_user(user=>"jack", password=>$jackpass);
