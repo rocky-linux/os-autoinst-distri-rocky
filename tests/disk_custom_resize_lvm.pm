@@ -79,10 +79,12 @@ sub run {
     send_key "tab";
     assert_and_click "anaconda_part_add_mountpoint";
 
-    # Then mount the Swap partition.
-    assert_and_click "anaconda_part_select_swap";
-    assert_and_click "anaconda_part_device_reformat";
-    assert_and_click "anaconda_part_update_settings";
+    # Then mount the Swap partition if it is present.
+    if (check_screen "anaconda_part_select_swap") {
+        assert_and_click "anaconda_part_select_swap";
+        assert_and_click "anaconda_part_device_reformat";
+        assert_and_click "anaconda_part_update_settings";
+    }
 
     # Close the spoke.
     assert_and_click "anaconda_spoke_done";

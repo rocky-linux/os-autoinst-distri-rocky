@@ -85,7 +85,7 @@ for part in ("swap", "root", "efi", "boot"):
 for num in range(1, 10):
     testliterals.append(f"anaconda_install_destination_select_disk_{num}")
 # custom_scheme_select
-for scheme in ("standard", "lvmthin", "btrfs"):
+for scheme in ("standard", "lvmthin", "btrfs", "lvm"):
     testliterals.append(f"anaconda_part_scheme_{scheme}")
 # custom_blivet_add_partition
 for dtype in ("lvm", "lvmthin", "raid"):
@@ -97,7 +97,7 @@ for fsys in ("ext3", "ext4", "xfs", "btrfs", "ppc_prep_boot", "swap", "efi_files
 # one value
 testliterals.append("anaconda_part_device_type_raid")
 # custom_change_fs
-for fsys in ("ext3", "xfs"):
+for fsys in ("ext3", "xfs", "ext4"):
     testliterals.append(f"anaconda_part_fs_{fsys}")
     testliterals.append(f"anaconda_part_fs_{fsys}_selected")
 # variable-y in custom_change_device but we only have one value
