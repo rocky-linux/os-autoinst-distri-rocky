@@ -121,6 +121,9 @@ sub run {
     while ($timeout > 0) {
         # move the mouse a bit
         mouse_set 100, 100;
+        # also click, if we're a VNC client, seems just moving mouse
+        # isn't enough to defeat blanking
+        mouse_click if (get_var("VNC_CLIENT"));
         mouse_hide;
         last if (check_screen "anaconda_install_done", $interval);
         $timeout -= $interval;
