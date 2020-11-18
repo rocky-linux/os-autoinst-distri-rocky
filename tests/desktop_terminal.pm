@@ -7,6 +7,7 @@ sub run {
     my $self=shift;
     check_desktop;
     menu_launch_type('terminal');
+    assert_screen "apps_run_terminal";
     wait_still_screen 5;
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");
