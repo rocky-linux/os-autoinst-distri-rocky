@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 194,
+      "height": 20,
+      "ypos": 183,
+      "width": 61,
+      "type": "match"
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "if this needle matches, styling in KDE is wrong somehow"
+    }
+  ],
+  "tags": [
+    "printing_pdfprinter_ready"
+  ]
+}

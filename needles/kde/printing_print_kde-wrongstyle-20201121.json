@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "width": 57,
+      "type": "match",
+      "xpos": 362,
+      "height": 14,
+      "ypos": 299
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "if this needle matches, styling in KDE is wrong somehow"
+    }
+  ],
+  "tags": [
+    "printing_print"
+  ]
+}
