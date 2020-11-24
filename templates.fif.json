@@ -1199,6 +1199,17 @@
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }
         },
+        "install_standard_partition_ext4": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "PARTITIONING": "custom_standard_partition_ext4",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
         "install_mirrorlist_graphical": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 20,
