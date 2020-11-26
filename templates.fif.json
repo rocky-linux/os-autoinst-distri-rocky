@@ -984,6 +984,20 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
+        "install_btrfs_preserve_home": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 10,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 10,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "PARTITIONING": "custom_btrfs_preserve_home",
+                "INSTALL": 1,
+                "ROOT_PASSWORD": "weakpassword",
+                "POSTINSTALL": "btrfs_preserve_home_check_content",
+                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img"
+            }
+        },
         "install_cyrillic_language": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,

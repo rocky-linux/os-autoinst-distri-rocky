@@ -1,6 +1,7 @@
 use base "anacondatest";
 use strict;
 use testapi;
+use utils;
 use anaconda;
 
 sub run {
