@@ -48,7 +48,7 @@ sub run {
     assert_screen "cockpit_join_domain";
     # we need to hit tab three times to reach 'Domain address' in
     # cockpit 232: https://github.com/cockpit-project/cockpit/issues/14895
-    my $tabs = $cockpitver eq "232" ? "\t\t\t" : "\t";
+    my $tabs = $cockpitver > 231 ? "\t\t\t" : "\t";
     type_string($tabs, 4);
     type_string("ipa001.domain.local", 4);
     type_string("\t\t", 4);
