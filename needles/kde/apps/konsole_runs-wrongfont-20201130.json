@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 326,
+      "ypos": 8,
+      "type": "match",
+      "height": 15,
+      "width": 56
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "KDE's using wrong font for window titles since 20201128.n.0"
+    }
+  ],
+  "tags": [
+    "konsole_runs",
+    "apps_run_terminal"
+  ]
+}
