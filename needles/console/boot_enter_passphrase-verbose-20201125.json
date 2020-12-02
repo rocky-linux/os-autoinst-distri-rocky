@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "width": 207,
+      "xpos": 18,
+      "ypos": 225,
+      "type": "match",
+      "height": 13
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "prompt appears, but boot is verbose so it's drowned in surrounding info"
+    }
+  ],
+  "tags": [
+    "boot_enter_passphrase"
+  ]
+}
