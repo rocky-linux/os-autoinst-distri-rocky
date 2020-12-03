@@ -4,12 +4,21 @@ use testapi;
 
 sub run {
     assert_screen "root_console";
-    # check that there are two partitions 
-    validate_script_output 'fdisk -l | grep /dev/vda | wc -l', sub { $_ =~ m/3/ };
-    # check that vda2 is a boot partition and that the fs is ext4
-    validate_script_output 'mount | grep /dev/vda2', sub { $_ =~ m/on \/boot type ext4/ };
-    # check that vda1 is a root partition and that the fs is ext4
-    validate_script_output 'mount | grep /dev/vda1', sub { $_ =~ m/on \/ type ext4/ };
+    my $count = 3;
+    my $devroot = 'vda1';
+    my $devboot = 'vda2';
+    if (get_var('OFW')) {
+        $count = 4; # for PowerPC there is also a PreP partition.
+        $devroot = 'vda2';
+        $devboot = 'vda3';
+    }
+    # check number of partitions
+    script_run 'fdisk -l | grep /dev/vda'; # debug
+    validate_script_output 'fdisk -l | grep /dev/vda | wc -l', sub { $_ =~ m/$count/ };
+    # check mounted partitions are ext4 fs
+    script_run 'mount | grep /dev/vda'; # debug
+    validate_script_output "mount | grep /dev/$devboot", sub { $_ =~ m/on \/boot type ext4/ };
+    validate_script_output "mount | grep /dev/$devroot", sub { $_ =~ m/on \/ type ext4/ };
 }
 
 sub test_flags {
