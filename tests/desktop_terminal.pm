@@ -19,7 +19,7 @@ sub run {
     # if we can run something successfully, we're at a console;
     # we're reinventing assert_script_run instead of using it so
     # we can type safely
-    type_very_safely "ls && echo 'ls OK' > /dev/ttyS0\n";
+    type_very_safely "ls && echo 'ls OK' > /dev/${serialdev}\n";
     die "terminal command failed" unless defined wait_serial "ls OK";
 }
 
