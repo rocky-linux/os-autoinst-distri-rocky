@@ -5,12 +5,7 @@ use anaconda;
 use utils;
 
 sub goto_mountpoint {
-    my $counter = 20;
-    while (!check_screen "anaconda_part_mountpoint_selected" and $counter > 0) {
-        send_key "tab";
-        $counter += 1;
-        sleep 1;
-    }
+    send_key_until_needlematch("anaconda_part_mountpoint_selected", "tab", 20);
 }
 
 sub run {
