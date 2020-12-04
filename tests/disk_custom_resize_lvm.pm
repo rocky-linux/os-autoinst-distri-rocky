@@ -34,8 +34,8 @@ sub run {
     type_very_safely "/boot";
     assert_and_click "anaconda_part_device_reformat";
     assert_and_click "anaconda_part_update_settings";
-    # give it a second or two to update
-    wait_still_screen 2;
+    # give it a few seconds to update
+    wait_still_screen 5;
 
     # For UEFI based images, we need to reassign the efi boot
     # mountpoint as well
@@ -46,7 +46,7 @@ sub run {
         assert_and_click "anaconda_part_device_reformat";
         assert_and_click "anaconda_part_update_settings";
         # give it a second or two to update
-        wait_still_screen 2;
+        wait_still_screen 5;
     }
 
     # Now resize and format the current root partition
