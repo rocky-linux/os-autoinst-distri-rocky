@@ -23,9 +23,20 @@ sub run {
         die "More than one services failed to start";
     }
     else {
-        # fail if it's something other than hcn-init
-        assert_script_run "systemctl is-failed hcn-init.service";
-        record_soft_failure "hcn-init failed - https://bugzilla.redhat.com/show_bug.cgi?id=1894654";
+        my $arch = get_var("ARCH");
+        if ($arch eq "ppc64le") {
+            # fail if it's something other than hcn-init
+            assert_script_run "systemctl is-failed hcn-init.service";
+            record_soft_failure "hcn-init failed - https://bugzilla.redhat.com/show_bug.cgi?id=1894654";
+        }
+        elsif ($arch eq "aarch64") {
+            # fail if it's something other than lm_sensors
+            assert_script_run "systemctl is-failed lm_sensors.service";
+            record_soft_failure "lm_sensors failed - https://bugzilla.redhat.com/show_bug.cgi?id=1899896";
+        }
+        else {
+            die "Unexpected service start failure";
+        }
     }
 }
 
