@@ -7,8 +7,8 @@ sub run {
     my $count = 3;
     my $devroot = 'vda1';
     my $devboot = 'vda2';
-    if (get_var('OFW')) {
-        $count = 4; # for PowerPC there is also a PreP partition.
+    if (get_var('OFW') || get_var('UEFI')) {
+        $count = 4; # extra boot partition (PreP or ESP)
         $devroot = 'vda2';
         $devboot = 'vda3';
     }
