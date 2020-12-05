@@ -14,7 +14,7 @@ sub run {
     assert_script_run('/root/test.py -m nodejs -s 12 -a list');
 
     # Check that module can be enabled and removed.
-    assert_script_run('/root/test.py -m nodejs -s 12 -p default -a install,remove,reset -f hard');
+    assert_script_run('/root/test.py -m nodejs -s 12 -p default -a install,remove,reset -f hard', 120);
     
     # Upload modular logs
     upload_logs '/root/modular.log', failok=>1;
