@@ -11,6 +11,7 @@ sub activate {
     # times to make sure the proper partition gets activated.
     my $partition = shift;
     my $count = 12;
+    assert_screen 'anaconda_blivet_disk_logical_view';
     while (check_screen "anaconda_blivet_part_inactive_$partition" and $count > 0) {
         assert_and_click "anaconda_blivet_part_inactive_$partition";
         sleep 5;
@@ -31,9 +32,9 @@ sub run {
     # a previous Linux installation and prepare the disk for new installation
     # which will be then followed through.
 
-    # Partitioning starts out of the LVM on VD1. We will use it to recreate
-    # the "/boot" partition in there. In UEFI, we will need to deal with the /boot/efi
-    # partition first.
+    # Partitioning starts out of the LVM on VD1 or VD2 (for ppc64le)
+    # We will use it to recreate the "/boot" partition in there.
+    # In UEFI, we will need to deal with the /boot/efi partition first.
     if (get_var("UEFI") == 1) {
         #The efi partition should be already activated. So reformat it and remount.
         custom_blivet_format_partition(type => 'efi_filesystem', label => 'efiboot', mountpoint => '/boot/efi');
@@ -41,7 +42,12 @@ sub run {
     }
 
     # Select the boot partition and reformat it and remount.
-    activate("boot");
+    my $devboot = 'boot';
+    if (get_var('OFW')) {
+        # for PowerPC vda1 is PreP partition.
+        $devboot = 'vda2';
+    }
+    activate($devboot);
     # Boot is the only ext4 partition on that scheme, so we will use that to make a needle.
     wait_still_screen 5;
     custom_blivet_format_partition(type => 'ext4', label => 'boot', mountpoint => '/boot');

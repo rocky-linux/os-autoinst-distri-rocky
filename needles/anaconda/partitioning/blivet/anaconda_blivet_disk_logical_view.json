@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 105,
+      "xpos": 244,
+      "width": 82,
+      "type": "match",
+      "height": 22
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_disk_logical_view"
+  ]
+}
