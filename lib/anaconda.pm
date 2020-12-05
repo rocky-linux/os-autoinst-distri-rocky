@@ -251,6 +251,7 @@ sub custom_change_fs {
     my ($fs, $part) = @_;
     $part ||= "root";
     assert_and_click "anaconda_part_select_$part";
+    wait_still_screen 5;
     # if fs is already set correctly, do nothing
     return if (check_screen "anaconda_part_fs_${fs}_selected", 5);
     assert_and_click "anaconda_part_fs";
