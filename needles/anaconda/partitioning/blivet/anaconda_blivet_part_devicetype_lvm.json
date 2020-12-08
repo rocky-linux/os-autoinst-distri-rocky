@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_devicetype_lvm"
+  ],
+  "area": [
+    {
+      "xpos": 415,
+      "ypos": 149,
+      "width": 84,
+      "height": 18,
+      "type": "match"
+    }
+  ]
+}

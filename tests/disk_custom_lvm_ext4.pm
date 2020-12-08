@@ -16,8 +16,8 @@ sub run {
     # Do 'automatic' partition creation
     assert_and_click "anaconda_part_automatic";
     # Change file system to ext4 on root and boot partitions.
-    custom_change_fs("ext4", "root");
     custom_change_fs("ext4", "boot");
+    custom_change_fs("ext4", "root");
     # Confirm changes
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";

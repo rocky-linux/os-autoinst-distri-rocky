@@ -956,6 +956,19 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
+        "install_blivet_lvm_ext4": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_blivet_lvm_ext4",
+                "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
         "install_blivet_standard_partition_ext4": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
@@ -1249,7 +1262,7 @@
                 "fedora-Server-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_lvm",
+                "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }
