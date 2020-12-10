@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 17,
+      "width": 108,
+      "ypos": 308,
+      "type": "match",
+      "xpos": 340
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_inactive_efi"
+  ]
+}

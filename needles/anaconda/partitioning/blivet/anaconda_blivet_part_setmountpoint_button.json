@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 560,
+      "ypos": 426,
+      "width": 105,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_btn_setmountpoint",
+    "anaconda_blivet_part_setmountpoint_button"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 342,
+      "ypos": 307,
+      "width": 112,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_boot_selected"
+  ]
+}
