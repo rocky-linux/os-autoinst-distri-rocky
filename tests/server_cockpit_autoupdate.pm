@@ -21,7 +21,13 @@ sub run {
     # Switch on automatic updates
     assert_and_click 'cockpit_updates_auto', '', 120;
     assert_and_click 'cockpit_updates_dnf_install', '', 120;
-    assert_screen 'cockpit_updates_auto_on';
+    # from 234 onwards, we get a config screen here: "no updates",
+    # "security updates only", "all updates"
+    assert_screen ['cockpit_updates_auto_on', 'cockpit_updates_auto_all'];
+    if (match_has_tag 'cockpit_updates_auto_all') {
+        click_lastmatch;
+        assert_and_click 'cockpit_save_changes';
+    }
 
     # Check the default automatic settings Everyday at 6 o'clock.
     assert_screen 'autoupdate_planned_day';

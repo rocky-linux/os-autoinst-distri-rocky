@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 309,
+      "height": 19,
+      "xpos": 822,
+      "width": 68
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "\"everyday\" without a space is bad English in this context: https://github.com/cockpit-project/cockpit/issues/15048"
+    }
+  ],
+  "tags": [
+    "autoupdate_planned_day"
+  ]
+}
