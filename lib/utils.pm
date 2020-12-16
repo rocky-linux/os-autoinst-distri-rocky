@@ -1071,7 +1071,7 @@ sub select_rescue_mode {
         }
     }
 
-    assert_screen "rescue_select", 120; # it takes time to start anaconda
+    assert_screen "rescue_select", 180; # it takes time to start anaconda
 }
 
 sub copy_devcdrom_as_isofile {
