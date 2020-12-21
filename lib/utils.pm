@@ -701,7 +701,7 @@ sub gnome_initial_setup {
     if (match_has_tag("auth_required")) {
         record_soft_failure "Unexpected authentication required: https://gitlab.gnome.org/GNOME/gnome-initial-setup/-/issues/106";
         send_key "esc";
-        assert_screen "next_button";
+        assert_screen ["next_button", "start_setup"];
     }
     # wait a bit in case of animation
     wait_still_screen 3;
@@ -717,7 +717,16 @@ sub gnome_initial_setup {
         # highlight problems, sleeping to give it time to get
         # to the next screen between clicks
         mouse_set(100, 100);
-        wait_screen_change { assert_and_click "next_button"; };
+        if ($n == 1) {
+            # only accept start_setup one time, to avoid matching
+            # on it during transition to next screen. also accept
+            # next_button as in per-user mode, first screen has that
+            # not start_setup
+            wait_screen_change { assert_and_click ["next_button", "start_setup"]; };
+        }
+        else {
+            wait_screen_change { assert_and_click "next_button"; };
+        }
         # for Japanese, we need to workaround a bug on the keyboard
         # selection screen
         if ($n == 1 && get_var("LANGUAGE") eq 'japanese') {
