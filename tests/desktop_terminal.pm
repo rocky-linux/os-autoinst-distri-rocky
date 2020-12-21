@@ -11,7 +11,7 @@ sub run {
     wait_still_screen 5;
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");
-    type_string "su\n", 20;
+    wait_screen_change { type_string "su\n", 20; };
     wait_still_screen 3;
     # can't use type_safely for now as current implementation relies
     # on screen change checks, and there is no screen change here
