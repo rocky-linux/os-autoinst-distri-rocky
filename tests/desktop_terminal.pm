@@ -12,7 +12,7 @@ sub run {
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");
     type_string "su\n", 20;
-    assert_screen "console_password_required";
+    wait_still_screen 3;
     # can't use type_safely for now as current implementation relies
     # on screen change checks, and there is no screen change here
     type_string "$rootpass\n", 1;
