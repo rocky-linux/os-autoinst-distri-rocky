@@ -46,7 +46,7 @@ sub run {
     assert_and_click 'desktop_package_tool_update';
     # depending on automatic update checks, 'apply' or 'download' may
     # already be visible at this point, we may not need to refresh
-    unless (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download'], 5) {
+    unless (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download'], 10) {
         # refresh updates
         assert_and_click('desktop_package_tool_update_refresh', timeout=>120);
     }
