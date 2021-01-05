@@ -448,12 +448,17 @@ sub setup_workaround_repo {
         "33" => []
     );
     # then we'll download each update for our release:
-    my $advisories = $workarounds{$version};
-    foreach my $advisory (@$advisories) {
+    my $advortasks = $workarounds{$version};
+    foreach my $advortask (@$advortasks) {
+        my $cmd = "bodhi updates download --updateid=$advortask";
+        if ($advortask =~ /^\d+$/) {
+            my $arch = get_var("ARCH");
+            $cmd = "koji download-task --arch=$arch --arch=noarch $advortask";
+        }
         my $count = 3;
         my $success = 0;
         while ($count) {
-            if (script_run "bodhi updates download --updateid=$advisory", 180) {
+            if (script_run $cmd, 180) {
                 $count -= 1;
             }
             else {
