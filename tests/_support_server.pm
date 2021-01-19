@@ -80,7 +80,7 @@ sub _pxe_setup {
     assert_script_run "curl -o /var/lib/tftpboot/fedora/initrd.img $location/Everything/${arch}/os/${kernpath}/initrd.img";
     # get a kickstart to embed in the initramfs, for testing:
     # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
-    assert_script_run "curl -o ks.cfg https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
+    assert_script_run "curl -o ks.cfg https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks";
     # tweak the repo config in it
     assert_script_run "sed -i -e 's,^url.*,nfs --server 172.16.2.110 --dir /repo --opts nfsvers=4,g' ks.cfg";
     # embed it
@@ -127,7 +127,7 @@ sub run {
     # create the file share
     assert_script_run "mkdir -p /export";
     # get the kickstart
-    assert_script_run "curl -o /export/root-user-crypted-net.ks https://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks";
+    assert_script_run "curl -o /export/root-user-crypted-net.ks https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks";
     # for update tests, set up the update repository and export it
     if (get_var("ADVISORY_OR_TASK")) {
         assert_script_run "echo '/opt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";

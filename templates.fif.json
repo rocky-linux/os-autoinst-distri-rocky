@@ -1172,7 +1172,7 @@
                 "fedora-universal-x86_64-*-64bit": 20
             },
             "settings": {
-                "GRUB": "inst.ks=http://jskladan.fedorapeople.org/kickstarts/root-user-crypted-net.ks",
+                "GRUB": "inst.ks=https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks",
                 "KICKSTART": "1",
                 "ROOT_PASSWORD": "111111",
                 "USER_LOGIN": "test",
