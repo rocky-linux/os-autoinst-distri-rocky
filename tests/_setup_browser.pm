@@ -19,6 +19,8 @@ sub run {
     assert_script_run "dnf ${extraparams} -y install libglvnd-egl", 160;
     # try to avoid random weird font selection happening
     assert_script_run "dnf ${extraparams} -y install dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts", 160;
+    # since firefox-85.0-2, firefox doesn't seem to run without this
+    assert_script_run "dnf ${extraparams} -y install dbus-glib", 160;
     assert_script_run "dnf ${extraparams} -y install firefox", 160;
 }
 
