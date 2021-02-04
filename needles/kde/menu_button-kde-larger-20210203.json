@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 8,
+      "height": 24,
+      "ypos": 735,
+      "width": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "system_menu_button",
+    "apps_menu_button"
+  ]
+}
