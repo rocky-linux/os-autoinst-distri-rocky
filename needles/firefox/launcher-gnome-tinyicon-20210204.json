@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 399,
+      "ypos": 718,
+      "height": 17,
+      "type": "match",
+      "width": 18
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "tiny tiny icon: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3465"
+    }
+  ],
+  "tags": [
+    "DESKTOP-gnome",
+    "browser_launcher",
+    "firefox_launcher"
+  ]
+}
