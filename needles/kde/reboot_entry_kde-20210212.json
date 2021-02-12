@@ -3,13 +3,13 @@
     {
       "width": 19,
       "type": "match",
-      "xpos": 609,
-      "height": 21,
-      "ypos": 688
+      "xpos": 343,
+      "height": 20,
+      "ypos": 690
     }
   ],
   "properties": [],
   "tags": [
-    "leave_button"
+    "reboot_entry"
   ]
 }

@@ -113,9 +113,9 @@ sub check_user_logged_in {
 }
 
 sub logout_user {
-    # Do steps to log out the user to reach the GDM screen.
+    # Do steps to log out the user to reach the login screen.
     assert_and_click "system_menu_button";
-    assert_and_click "power_entry";
+    assert_and_click "leave_button";
     assert_and_click "log_out_entry";
     assert_and_click "log_out_confirm";
     wait_still_screen 5;
@@ -134,7 +134,7 @@ sub switch_user {
         # and unlocked session, where user switching differs
         # from a locked but active session.
         assert_and_click "system_menu_button";
-        assert_and_click "power_entry";
+        assert_and_click "leave_button";
         assert_and_click "switch_user_entry";
         wait_still_screen 5;
         # Add sleep to slow down the process a bit
@@ -145,24 +145,26 @@ sub switch_user {
 sub reboot_system {
     # Reboots the system and handles everything until the next GDM screen.
     if (check_screen "system_menu_button") {
-        # Everywhere in Gnome and inside the KDE, there is a menu through which
-        # we can access the operationg system switching controls.
+        # In a logged in desktop, we access power options through system menu
         assert_and_click "system_menu_button";
-        assert_and_click "power_entry";
-        my $relnum = get_release_number;
-        if ($desktop eq "gnome" && $relnum < 33) {
-            # In GNOME before F33, some of the entries are brought together, while
-            # in KDE and GNOME from F33 onwards they are split and it does not seem
-            # correct to me to assign restarting tags to needles powering off the
-            # machine. So I split this for KDE and GNOME < F33:
-            assert_and_click "power_off_entry";
-            assert_and_click "restart_confirm";
-        }
-        else {
-            # And for KDE and GNOME >= F33:
-            assert_and_click "reboot_entry";
-            assert_and_click "restart_confirm";
-        }
+        # In KDE since F34, reboot entry is right here, otherwise we need to
+        # enter some kind of power option submenu
+        assert_screen ["power_entry", "reboot_entry"];
+        click_lastmatch;
+        if (match_has_tag("power_entry")) {
+            my $relnum = get_release_number;
+            if ($desktop eq "gnome" && $relnum < 33) {
+                # In GNOME before F33, some of the entries are brought together, while
+                # in KDE and GNOME from F33 onwards they are split and it does not seem
+                # correct to me to assign restarting tags to needles powering off the
+                # machine. So I split this for KDE and GNOME < F33:
+                assert_and_click "power_off_entry";
+            }
+            else {
+                # And for KDE and GNOME >= F33:
+                assert_and_click "reboot_entry";
+            }
+        assert_and_click "restart_confirm";
     }
     # When we are outside KDE (not logged in), the only way to reboot is to click
     # the reboot icon.
@@ -177,8 +179,10 @@ sub power_off {
     # do, because at the moment I do not know about a possibility to assert a
     # switched-off VM.
     assert_and_click "system_menu_button";
-    assert_and_click "power_entry";
-    assert_and_click "power_off_entry";
+    # in KDE since F34, there's no submenu to access, the button is right here
+    assert_screen ["power_entry", "power_off_entry"];
+    click_lastmatch;
+    assert_and_click "power_off_entry" if (match_has_tag("power_entry"));
     assert_and_click "power_off_confirm";
 }
 
