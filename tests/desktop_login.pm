@@ -165,6 +165,7 @@ sub reboot_system {
                 assert_and_click "reboot_entry";
             }
         assert_and_click "restart_confirm";
+        }
     }
     # When we are outside KDE (not logged in), the only way to reboot is to click
     # the reboot icon.
