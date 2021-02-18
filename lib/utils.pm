@@ -764,6 +764,8 @@ sub gnome_initial_setup {
         # wait for the stupid 'help' screen to show and kill it
         if (check_screen "getting_started", 45) {
             send_key "alt-f4";
+            # for GNOME 40, alt-f4 doesn't work
+            send_key "esc";
             wait_still_screen 5;
         }
         else {
