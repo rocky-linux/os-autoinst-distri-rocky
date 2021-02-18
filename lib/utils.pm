@@ -659,6 +659,19 @@ sub console_initial_setup {
     type_string "c\n"; # continue
 }
 
+sub _handle_welcome_screen {
+    # handle the 'welcome' screen on GNOME. shared in a few places
+    if (check_screen "getting_started", 45) {
+        send_key "alt-f4";
+        # for GNOME 40, alt-f4 doesn't work
+        send_key "esc";
+        wait_still_screen 5;
+    }
+    else {
+        record_soft_failure "Welcome tour missing";
+    }
+}
+
 sub gnome_initial_setup {
     # Handle gnome-initial-setup, with variations for the pre-login
     # mode (when no user was created during install) and post-login
@@ -761,18 +774,9 @@ sub gnome_initial_setup {
         send_key "ret";
     }
     else {
-        # wait for the stupid 'help' screen to show and kill it
-        if (check_screen "getting_started", 45) {
-            send_key "alt-f4";
-            # for GNOME 40, alt-f4 doesn't work
-            send_key "esc";
-            wait_still_screen 5;
-        }
-        else {
-            record_soft_failure "'getting started' missing (probably BGO#790811)";
-        }
-        # don't do it again on second load
+        _handle_welcome_screen;
     }
+    # don't do it again on second load
     set_var("_setup_done", 1);
 }
 

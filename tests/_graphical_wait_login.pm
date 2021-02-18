@@ -70,7 +70,7 @@ sub run {
         send_key "ret";
     }
 
-    # Handle initial-setup, for GNOME, unless START_AFTER_TEST
+    # For GNOME, handle initial-setup or welcome tour, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
     # do it if ADVISORY_OR_TASK is set, as for the update testing flow,
     # START_AFTER_TEST is set but a no-op and this hasn't happened
@@ -79,20 +79,24 @@ sub run {
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
         unless (get_var("_setup_done")) {
+            my $relnum = get_release_number;
+            if ($relnum < 34) {
+                # before GNOME 40 (F34), we get a per-user version of
+                # gnome-initial-setup here...
                 gnome_initial_setup();
+            }
+            else {
+                # ...from GNOME 40 on, we just get a "Welcome" tour
+                _handle_welcome_screen;
+                # protect against expecting it again
+                set_var("_setup_done");
+            }
         }
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
-        # wait for the stupid 'help' screen to show and kill it
-        if (check_screen "getting_started", 45) {
-            send_key "alt-f4";
-            # for GNOME 40, alt-f4 doesn't work
-            send_key "esc";
-            wait_still_screen 5;
-        }
-        else {
-            record_soft_failure "'getting started' missing (probably BGO#790811)";
-        }
+        # handle welcome screen if we didn't do it above (holy flow
+        # control, Batman!)
+        _handle_welcome_screen unless (get_var("_setup_done"));
         # if this was an image deployment, we also need to create
         # root user now, for subsequent tests to work
         if (get_var("IMAGE_DEPLOY")) {
