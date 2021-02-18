@@ -207,7 +207,8 @@ sub run {
     adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass);
     if ($desktop eq "gnome") {
         # suppress the Welcome Tour for new users in GNOME 40+
-        assert_script_run 'echo "welcome-dialog-last-shown-version=\'4294967295\'" > /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override';
+        assert_script_run 'printf "[org.gnome.shell]\nwelcome-dialog-last-shown-version=\'4294967295\'\n" > /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override';
+        assert_script_run 'glib-compile-schemas /usr/share/glib-2.0/schemas';
         # In Gnome, we can create a passwordless user that can provide his password upon
         # the first login. So we can create the second user in this way to test this feature
         # later.
