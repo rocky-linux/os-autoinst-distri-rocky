@@ -43,6 +43,7 @@ sub adduser {
     # inside Gnome.
     if ($desktop eq "gnome") {
         assert_script_run "mkdir /home/$login/.config";
+        # gnome-initial-setup-done is obsolete from F34 onwards, can be removed after F33 EOL
         assert_script_run "echo 'yes' >> /home/$login/.config/gnome-initial-setup-done";
         assert_script_run "chown -R $login.$login /home/$login/.config";
         assert_script_run "restorecon -vr /home/$login/.config";
@@ -205,6 +206,8 @@ sub run {
     }
     adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass);
     if ($desktop eq "gnome") {
+        # suppress the Welcome Tour for new users in GNOME 40+
+        assert_script_run 'echo "welcome-dialog-last-shown-version=\'4294967295\'" > /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override';
         # In Gnome, we can create a passwordless user that can provide his password upon
         # the first login. So we can create the second user in this way to test this feature
         # later.
