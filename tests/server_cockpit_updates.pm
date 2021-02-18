@@ -46,19 +46,19 @@ sub run {
         # and relog for further interaction. We will check if reconnection is
         # needed and if so, we will restart Firefox and login again.
         #
-        break if (check_screen("cockpit_updates_updated"));
+        last if (check_screen("cockpit_updates_updated"));
         if (check_screen("cockpit_updates_reconnect", 1)) {
             quit_firefox;
             sleep 5;
             start_cockpit(1);
             select_cockpit_update();
-            break;
+            last;
 
         }
         # Ignore rebooting the system because we want to finish the test instead.
         elsif (check_screen('cockpit_updates_restart_ignore', 1)) {
             assert_and_click 'cockpit_updates_restart_ignore';
-            break;
+            last;
         }
         else {
             sleep 10;
