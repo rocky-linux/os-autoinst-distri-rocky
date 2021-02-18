@@ -87,7 +87,7 @@ sub run {
             }
             else {
                 # ...from GNOME 40 on, we just get a "Welcome" tour
-                _handle_welcome_screen;
+                handle_welcome_screen;
                 # protect against expecting it again
                 set_var("_setup_done");
             }
@@ -96,7 +96,7 @@ sub run {
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         # handle welcome screen if we didn't do it above (holy flow
         # control, Batman!)
-        _handle_welcome_screen unless (get_var("_setup_done"));
+        handle_welcome_screen unless (get_var("_setup_done"));
         # if this was an image deployment, we also need to create
         # root user now, for subsequent tests to work
         if (get_var("IMAGE_DEPLOY")) {
