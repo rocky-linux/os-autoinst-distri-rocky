@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "xpos": 8,
+      "height": 16,
+      "ypos": 640,
+      "width": 40,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "width": 17,
+      "xpos": 137,
+      "ypos": 641,
+      "height": 14
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "solid white prompt on black background - https://github.com/coreos/fedora-coreos-tracker/issues/750"
+    }
+  ],
+  "tags": [
+    "root_logged_in",
+    "root_console",
+    "ENV-DISTRI-fedora"
+  ]
+}
