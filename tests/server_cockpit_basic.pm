@@ -13,7 +13,14 @@ sub run {
     assert_and_click "cockpit_logs";
     # the date dropdown changes and messes with the button locations, so wait
     wait_still_screen 2;
-    # assume there's an entry, click it
+    # set priority to info and above in case there are no errors
+    assert_and_click "cockpit_logs_priority_text";
+    send_key "backspace";
+    send_key "backspace";
+    send_key "backspace";
+    send_key "backspace";
+    type_string "info\n";
+    # now click an entry
     assert_and_click "cockpit_logs_entry";
     # check we get to the appropriate detail screen
     assert_screen "cockpit_logs_detail";
