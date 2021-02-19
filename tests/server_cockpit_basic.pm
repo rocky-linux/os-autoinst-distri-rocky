@@ -20,6 +20,7 @@ sub run {
     send_key "backspace";
     send_key "backspace";
     type_string "info\n";
+    wait_still_screen 5;
     # now click an entry
     assert_and_click "cockpit_logs_entry";
     # check we get to the appropriate detail screen
