@@ -9,7 +9,10 @@ sub use_current_partition {
     my ($partition, $reformat) = @_;
 
     # Select the partition
-    assert_and_click "anaconda_part_select_$partition";
+    my $match = $partition;
+    # needle names can't have / in them
+    $match =~ s,/,,;
+    assert_and_click "anaconda_part_select_$match";
     # Select the mountpoint field
     send_key_until_needlematch("anaconda_part_mountpoint_selected", "tab", 20);
     # Type in the mountpoint
@@ -46,6 +49,8 @@ sub run {
     use_current_partition("home", 0);
     # Use the boot partition from the current scheme
     use_current_partition("boot", 1);
+    # Use /boot/efi from current scheme, if we're EFI
+    use_current_partition("boot/efi", 1) if (get_var "UEFI");
 
     # Select the root partition from the current scheme
     # and delete it
