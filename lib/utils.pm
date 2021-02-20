@@ -670,6 +670,7 @@ sub handle_welcome_screen {
     else {
         record_soft_failure "Welcome tour missing";
     }
+    set_var("_welcome_done", 1);
 }
 
 sub gnome_initial_setup {

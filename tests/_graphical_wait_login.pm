@@ -78,25 +78,21 @@ sub run {
         # as this test gets loaded twice on the ADVISORY_OR_TASK flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
-        unless (get_var("_setup_done")) {
-            my $relnum = get_release_number;
-            if ($relnum < 34) {
-                # before GNOME 40 (F34), we get a per-user version of
-                # gnome-initial-setup here...
-                gnome_initial_setup();
-            }
-            else {
-                # ...from GNOME 40 on, we just get a "Welcome" tour
-                handle_welcome_screen;
-                # protect against expecting it again
-                set_var("_setup_done");
-            }
+        my $relnum = get_release_number;
+        if ($relnum < 34) {
+            # before GNOME 40 (F34), we get a per-user version of
+            # gnome-initial-setup here...
+            gnome_initial_setup() unless (get_var("_setup_done"));
+        }
+        else {
+            # ...from GNOME 40 on, we just get a "Welcome" tour
+            handle_welcome_screen unless (get_var("_welcome_done"));
         }
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         # handle welcome screen if we didn't do it above (holy flow
         # control, Batman!)
-        handle_welcome_screen unless (get_var("_setup_done"));
+        handle_welcome_screen unless (get_var("_welcome_done"));
         # if this was an image deployment, we also need to create
         # root user now, for subsequent tests to work
         if (get_var("IMAGE_DEPLOY")) {
