@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 123,
+      "ypos": 261,
+      "height": 33,
+      "type": "match",
+      "width": 30
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "apps_menu_boxes"
+  ]
+}
