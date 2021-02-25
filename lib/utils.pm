@@ -1367,6 +1367,12 @@ sub solidify_wallpaper {
     my $desktop = get_var("DESKTOP");
     if ($desktop eq "kde") {
     # Run the Desktop settings
+        # FIXME workaround a weird bug where alt-d-s does something
+        # different until you right click on the desktop:
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1933118
+        mouse_set 512, 384;
+        mouse_click 'right';
+        mouse_click 'left';
         hold_key 'alt';
         send_key 'd';
         send_key 's';
