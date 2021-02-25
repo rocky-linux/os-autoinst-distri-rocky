@@ -7,6 +7,7 @@ use packagetest;
 sub run {
     my $self = shift;
     my $desktop = get_var('DESKTOP');
+    my $relnum = get_release_number;
     # use a tty console for repo config and package prep
     $self->root_console(tty=>3);
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
@@ -84,6 +85,11 @@ sub run {
             send_key 'tab';
             send_key 'ret';
         }
+        boot_to_login_screen;
+    }
+    elsif ($desktop eq 'kde' && $relnum > 33) {
+        # KDE does offline updates now, we have to trigger the reboot
+        assert_and_click 'kde_offline_update_reboot';
         boot_to_login_screen;
     }
     else {
