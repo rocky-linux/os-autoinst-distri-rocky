@@ -46,10 +46,8 @@ sub run {
     assert_and_click 'desktop_package_tool_update';
     # depending on automatic update checks, 'apply' or 'download' may
     # already be visible at this point, we may not need to refresh
-    unless (check_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download'], 10) {
-        # refresh updates
-        assert_and_click('desktop_package_tool_update_refresh', timeout=>120);
-    }
+    assert_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download', 'desktop_package_tool_update_refresh'], 120;
+    click_lastmatch if (match_has_tag "desktop_package_tool_update_refresh");
     # wait for refresh, then apply updates, moving the mouse every two
     # minutes to avoid the idle screen blank kicking in. Depending on
     # whether this is KDE or GNOME and what Fedora release, we may see
