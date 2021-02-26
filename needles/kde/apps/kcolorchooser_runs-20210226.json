@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "width": 102,
+      "type": "match",
+      "xpos": 284,
+      "height": 15,
+      "ypos": 10
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kcolorchooser_runs"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 37,
+      "xpos": 393,
+      "ypos": 10,
+      "height": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kfind_runs"
+  ]
+}
