@@ -1,0 +1,30 @@
+{
+  "area": [
+    {
+      "xpos": 7,
+      "height": 16,
+      "ypos": 144,
+      "width": 40,
+      "type": "match"
+    },
+    {
+      "ypos": 144,
+      "height": 14,
+      "xpos": 113,
+      "type": "match",
+      "width": 17
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "buggy display due to bootsplash not clearing #1933378"
+    }
+  ],
+  "tags": [
+    "root_logged_in",
+    "root_console",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}
