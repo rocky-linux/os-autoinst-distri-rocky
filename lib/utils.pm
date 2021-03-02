@@ -443,9 +443,9 @@ sub setup_workaround_repo {
     assert_script_run "mkdir -p /opt/workarounds_repo";
     assert_script_run "pushd /opt/workarounds_repo";
     my %workarounds = (
-        "31" => [],
-        "32" => ["FEDORA-2021-28c15ce0f9"],
-        "33" => ["FEDORA-2021-ad495a044c", "FEDORA-2021-5258e9cb11"]
+        "32" => [],
+        "33" => [],
+        "34" => ["FEDORA-2021-263244c071"]
     );
     # then we'll download each update for our release:
     my $advortasks = $workarounds{$version};
