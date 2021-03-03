@@ -19,9 +19,7 @@ sub run {
     # Leave the root terminal and switch back to desktop.
     desktop_vt();
     my $desktop = get_var("DESKTOP");
-    my $relnum = get_release_number;
     # some simple variances between desktops. defaults are for GNOME
-    my $pdfloc = "/home/test/Desktop";
     my $editor = "gedit";
     my $viewer = "evince";
     my $maximize = "super-up";
@@ -29,9 +27,6 @@ sub run {
         $editor = "kwrite";
         $viewer = "okular";
         $maximize = "super-pgup";
-        if ($relnum > 33) {
-            $pdfloc = "/home/test";
-        }
     }
 
     # Open the text editor and print the file.
@@ -63,7 +58,7 @@ sub run {
     # Open the pdf file and check the print
     send_key "alt-f2";
     wait_still_screen(stilltime=>5, similarity_level=>45);
-    type_safely "$viewer $pdfloc/testfile.pdf\n";
+    type_safely "$viewer /home/test/Desktop/testfile.pdf\n";
     wait_still_screen(stilltime=>5, similarity_level=>45);
     # Resize the window, so that the size of the document fits the bigger space
     # and gets more readable.
