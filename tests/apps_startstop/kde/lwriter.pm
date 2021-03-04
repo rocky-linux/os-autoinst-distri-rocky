@@ -3,14 +3,14 @@ use strict;
 use testapi;
 use utils;
 
-# This test checks that Calligra Sheets starts.
+# This test checks that LibreOffice Writer starts.
 
 sub run {
     my $self = shift;
-    menu_launch_type 'calligra sheets';
+    # Start the application
+    menu_launch_type 'libreoffice writer';
     # Check that it is started
-    assert_screen 'csheets_runs';
-    # Close the application
+    assert_screen 'lwriter_runs';
     quit_with_shortcut();
 }
 

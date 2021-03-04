@@ -3,13 +3,14 @@ use strict;
 use testapi;
 use utils;
 
-# This test checks that Calligra Stage starts.
+# This test checks that LibreOffice Calc starts.
 
 sub run {
     my $self = shift;
-    menu_launch_type 'calligra stage';
+    # Start the application
+    menu_launch_type 'libreoffice calc';
     # Check that it is started
-    assert_screen 'cstage_runs';
+    assert_screen 'lcalc_runs';
     # Close the application
     quit_with_shortcut();
 }
