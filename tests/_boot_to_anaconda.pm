@@ -113,7 +113,9 @@ sub run {
         else {
             # on lives, we have to explicitly launch anaconda
             if (get_var('LIVE')) {
-                assert_and_click("live_start_anaconda_icon", timeout=>300);
+                assert_screen ["live_start_anaconda_icon", "apps_menu_button_active"], 300;
+                send_key "alt-f1" if match_has_tag "apps_menu_button_active";
+                assert_and_click("live_start_anaconda_icon");
                 unless (check_screen "anaconda_select_install_lang", 180) {
                     # click it again - on KDE since 2019-10 or so it seems
                     # like the first attempt sometimes just doesn't work
