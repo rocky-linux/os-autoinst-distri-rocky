@@ -1372,6 +1372,7 @@ sub solidify_wallpaper {
         # https://bugzilla.redhat.com/show_bug.cgi?id=1933118
         mouse_set 512, 384;
         mouse_click 'right';
+        mouse_set 480x 384;
         mouse_click 'left';
         hold_key 'alt';
         send_key 'd';
