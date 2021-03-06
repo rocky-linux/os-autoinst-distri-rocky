@@ -28,9 +28,6 @@ sub run {
     # Cancel the keypair creation
     assert_and_click 'kgpg_keypair_cancel';
     wait_still_screen 2;
-    # Close the Tips of the Day
-    assert_and_click 'kgpg_tips_close';
-    wait_still_screen 2;
     # Check that it is started
     assert_screen 'kgpg_runs';
     # Close the application
