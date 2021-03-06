@@ -3,15 +3,14 @@ use strict;
 use testapi;
 use utils;
 
-# This test checks that System monitor  starts.
+# This test checks that Plasma system monitor starts.
 
 sub run {
     my $self = shift;
-    
     # Start the application
-    menu_launch_type 'ksysguard';
+    menu_launch_type 'system monitor';
     # Check that it is started
-    assert_screen 'ksysguard_runs';
+    assert_screen 'systemmonitor_runs';
     # Close the application
     quit_with_shortcut();
 }
