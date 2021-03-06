@@ -36,17 +36,22 @@ sub run {
             assert_script_run 'date --set="06:00:00"';
         }
         if (get_var("BOOTFROM")) {
-            # Also reset the 'last update notification check' timestamp
-            # to >24 hours ago (as that matters too)
+            # Set a bunch of update checking-related timestamps to
+            # two days ago or two weeks ago to try and make sure we
+            # get notifications, see:
+            # https://wiki.gnome.org/Design/Apps/Software/Updates#Tentative_Design
             my $now = script_output 'date +%s';
-            my $yday = $now - 48*60*60;
+            my $yyday = $now - 2*24*60*60;
+            my $longago = $now - 14*24*60*60;
             # have to log in as the user to do this
             script_run 'exit', 0;
             console_login(user=>get_var('USER_LOGIN', 'test'), password=>get_var('USER_PASSWORD', 'weakpassword'));
-            script_run "gsettings set org.gnome.software check-timestamp ${yday}", 0;
-            wait_still_screen 3;
-            script_run "gsettings get org.gnome.software check-timestamp", 0;
-            wait_still_screen 3;
+            script_run "gsettings set org.gnome.software check-timestamp ${yyday}", 0;
+            script_run "gsettings set org.gnome.software update-notification-timestamp ${longago}", 0;
+            script_run "gsettings set org.gnome.software online-updates-timestamp ${longago}", 0;
+            script_run "gsettings set org.gnome.software upgrade-notification-timestamp ${longago}", 0;
+            script_run "gsettings set org.gnome.software install-timestamp ${longago}", 0;
+            wait_still_screen 5;
             script_run 'exit', 0;
             console_login(user=>'root', password=>get_var('ROOT_PASSWORD', 'weakpassword'));
         }
