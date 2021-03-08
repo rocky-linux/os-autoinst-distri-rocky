@@ -588,6 +588,13 @@ sub _repo_setup_updates {
     unless (get_var("TEST") eq "support_server" && $version ne get_var("CURRREL")) {
         assert_script_run 'printf "[advisory]\nname=Advisory repo\nbaseurl=file:///opt/update_repo\nenabled=1\nmetadata_expire=3600\ngpgcheck=0" > /etc/yum.repos.d/advisory.repo';
         # run an update now (except for upgrade tests)
+        my $relnum = get_release_number;
+        if ($relnum > 33) {
+            # FIXME workaround https://bugzilla.redhat.com/show_bug.cgi?id=1931034
+            # drop after https://github.com/systemd/systemd/pull/18915 is merged
+            # and stable
+            script_run "systemctl stop systemd-oomd";
+        }
         script_run "dnf -y update", 900 unless (get_var("UPGRADE"));
     }
     # mark via a variable that we've set up the update/task repo and done
