@@ -48,20 +48,20 @@ sub run {
     # upload the kickstart so we can check it
     upload_logs "openqa.ks";
     # now install the tools into the mock
-    assert_script_run "mock -r openqa --install bash coreutils glibc-all-langpacks lorax-lmc-novirt selinux-policy-targeted shadow-utils util-linux", 300;
+    assert_script_run "mock -r openqa --isolation=simple --install bash coreutils glibc-all-langpacks lorax-lmc-novirt selinux-policy-targeted shadow-utils util-linux", 300;
     # now make the image build directory inside the mock root and put the kickstart there
-    assert_script_run 'mock -r openqa --chroot "mkdir -p /chroot_tmpdir"';
-    assert_script_run "mock -r openqa --copyin openqa.ks /chroot_tmpdir";
+    assert_script_run 'mock -r openqa --isolation=simple --chroot "mkdir -p /chroot_tmpdir"';
+    assert_script_run "mock -r openqa --isolation=simple --copyin openqa.ks /chroot_tmpdir";
     # PULL SOME LEVERS! PULL SOME LEVERS!
-    assert_script_run "mock -r openqa --enable-network --old-chroot --chroot \"/sbin/livemedia-creator --ks /chroot_tmpdir/openqa.ks --logfile /chroot_tmpdir/lmc-logs/livemedia-out.log --no-virt --resultdir /chroot_tmpdir/lmc --project Fedora-${subv}-Live --make-iso --volid FWL-${advortask} --iso-only --iso-name Fedora-${subv}-Live-${arch}-${advortask}.iso --releasever ${version} --macboot\"", 3600;
-    unless (script_run "mock -r openqa --copyout /chroot_tmpdir/lmc-logs/livemedia-out.log .") {
+    assert_script_run "mock -r openqa --enable-network --isolation=simple --chroot \"/sbin/livemedia-creator --ks /chroot_tmpdir/openqa.ks --logfile /chroot_tmpdir/lmc-logs/livemedia-out.log --no-virt --resultdir /chroot_tmpdir/lmc --project Fedora-${subv}-Live --make-iso --volid FWL-${advortask} --iso-only --iso-name Fedora-${subv}-Live-${arch}-${advortask}.iso --releasever ${version} --macboot\"", 3600;
+    unless (script_run "mock -r openqa --isolation=simple --copyout /chroot_tmpdir/lmc-logs/livemedia-out.log .") {
         upload_logs "livemedia-out.log";
     }
-    unless (script_run "mock -r openqa --copyout /chroot_tmpdir/lmc-logs/anaconda/ anaconda") {
+    unless (script_run "mock -r openqa --isolation=simple --copyout /chroot_tmpdir/lmc-logs/anaconda/ anaconda") {
         assert_script_run "tar cvzf anaconda.tar.gz anaconda/";
         upload_logs "anaconda.tar.gz";
     }
-    assert_script_run "mock -r openqa --copyout /chroot_tmpdir/lmc/Fedora-${subv}-Live-${arch}-${advortask}.iso .";
+    assert_script_run "mock -r openqa --isolation=simple --copyout /chroot_tmpdir/lmc/Fedora-${subv}-Live-${arch}-${advortask}.iso .";
     upload_asset "./Fedora-${subv}-Live-${arch}-${advortask}.iso";
 }
 
