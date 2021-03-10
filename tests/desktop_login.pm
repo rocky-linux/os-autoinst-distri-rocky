@@ -119,7 +119,7 @@ sub logout_user {
     assert_and_click "leave_button";
     assert_and_click "log_out_entry";
     assert_and_click "log_out_confirm";
-    wait_still_screen 5;
+    wait_still_screen 20;
     sleep 10;
 }
 
