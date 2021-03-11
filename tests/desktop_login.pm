@@ -247,17 +247,20 @@ sub run {
 
     # Try to log in with either account, intentionally entering the wrong password.
     login_user(user=>"jack", password=>"wrongpassword", checklogin=>0);
-    if ($desktop eq "gnome") {
-        # In GDM, a message is shown about an unsuccessful login and it can be
-        # asserted, so let's do it. In SDDM, there is also a message, but it
-        # is only displayed for a short moment and the assertion fails here, 
-        # so we will skip the assertion. Not being able to login in with
-        # a wrong password is enough here.
+    my $relnum = get_release_number;
+    if ($desktop eq "gnome" && $relnum < 34) {
+        # In GDM before F34, a message is shown about an unsuccessful login
+        # and it can be asserted, so let's do it. In SDDM and GDM F34+,
+        # there is also a message, but it is only displayed for a short
+        # moment and the assertion fails here,  so we will skip the assertion.
+        # Not being able to login in with a wrong password is enough here.
         assert_screen "login_wrong_password";
         send_key 'esc';
     }
 
-    # Now, log into the system again using the correct password.
+    # Now, log into the system again using the correct password. This will
+    # only work if we were correctly denied login with the wrong password,
+    # if we were let in with the wrong password it'll fail
     login_user(user=>"jim", password=>$jimpass);
     check_user_logged_in("jim");
 
