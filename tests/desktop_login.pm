@@ -73,8 +73,8 @@ sub login_user {
     if (!check_screen "login_$user") {
         # Sometimes, especially in SDDM, we do not get the user list
         # but rather a "screensaver" screen for the DM. If this is the
-        # case, hit Enter to bring back the user list.
-        send_key "ret";
+        # case, hit Escape to bring back the user list.
+        send_key "esc";
         wait_still_screen 5;
     }
     if ($method ne "unlock") {
@@ -119,7 +119,7 @@ sub logout_user {
     assert_and_click "leave_button";
     assert_and_click "log_out_entry";
     assert_and_click "log_out_confirm";
-    wait_still_screen 20;
+    wait_still_screen 5;
     sleep 10;
 }
 
