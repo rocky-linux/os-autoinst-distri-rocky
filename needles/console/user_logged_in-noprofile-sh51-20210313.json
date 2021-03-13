@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 0,
+      "height": 16,
+      "width": 65,
+      "type": "match",
+      "ypos": 303
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "user_logged_in",
+    "user_console",
+    "ENV-DISTRI-fedora"
+  ]
+}
