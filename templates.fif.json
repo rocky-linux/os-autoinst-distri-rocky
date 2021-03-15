@@ -603,6 +603,31 @@
                 "USER_LOGIN": "false"
             }
         },
+        "base_package_install_remove": {
+            "profiles": {
+                "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
+                "fedora-KDE-live-iso-x86_64-*-64bit": 42,
+                "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42,
+                "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40,
+                "fedora-Server-raw_xz-raw.xz-aarch64-*-aarch64": 42,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
+                "fedora-Workstation-raw_xz-raw.xz-aarch64-*-aarch64": 42
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "base_package_install_remove",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false"
+            }
+        },
         "base_services_start": {
             "profiles": {
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
