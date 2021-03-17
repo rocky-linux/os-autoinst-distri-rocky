@@ -237,6 +237,7 @@ sub custom_change_type {
     mouse_set(10, 10);
     assert_and_click "anaconda_part_device_type_$type";
     assert_and_click "anaconda_part_update_settings";
+    wait_still_screen 5;
 }
 
 sub custom_change_fs {
@@ -259,6 +260,7 @@ sub custom_change_fs {
     mouse_set(10, 10);
     assert_and_click "anaconda_part_fs_$fs";
     assert_and_click "anaconda_part_update_settings";
+    wait_still_screen 5;
 }
 
 sub custom_change_device {
@@ -270,6 +272,7 @@ sub custom_change_device {
     }
     assert_and_click "anaconda_part_device_select";
     assert_and_click "anaconda_part_update_settings";
+    wait_still_screen 5;
 }
 
 sub custom_delete_part {
