@@ -137,7 +137,9 @@ sub run {
     # there are various things we might have to do at a console here
     # before we actually reboot. let's figure them all out first...
     my @actions;
+    my $relnum = get_release_number;
     push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
+    push (@actions, 'plymouth') if (get_var("ARCH") eq "aarch64" && get_var("ENCRYPT_PASSWORD") && $relnum > 33);
     push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
@@ -178,6 +180,11 @@ sub run {
         assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" ' . $mount . '/etc/default/grub';
         # regenerate the bootloader config
         assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg";
+    }
+    if (grep {$_ eq 'plymouth'} @actions) {
+        # FIXME: install plymouth to work around #1940163
+        assert_script_run "chroot $mount dnf -y install plymouth", 180;
+        assert_script_run "chroot $mount dracut -f", 180;
     }
     if (grep {$_ eq 'abrt'} @actions) {
          # Chroot in the newly installed system and switch on ABRT systemwide
