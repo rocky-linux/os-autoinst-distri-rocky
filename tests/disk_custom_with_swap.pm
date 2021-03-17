@@ -19,6 +19,7 @@ sub run {
     send_key "tab";
     type_very_safely "8 GiB";
     assert_and_click "anaconda_part_update_settings";
+    wait_still_screen 5;
     # Add swap
     assert_and_click "anaconda_part_add";
     type_very_safely "swap";
