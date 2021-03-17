@@ -865,7 +865,10 @@ sub check_desktop {
     assert_screen "apps_menu_button", $args{timeout};
     # GNOME 40 starts on the overview by default; for consistency with
     # older GNOME and KDE, let's just close it
-    send_key "alt-f1" if match_has_tag "apps_menu_button_active";
+    if (match_has_tag "apps_menu_button_active") {
+        send_key "alt-f1";
+        assert_screen "apps_menu_button_inactive";
+    }
 }
 
 sub download_modularity_tests {

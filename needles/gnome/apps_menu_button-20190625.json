@@ -13,6 +13,7 @@
         "DESKTOP-gnome",
         "ENV-DISTRI-fedora",
         "LANGUAGE-english",
-        "apps_menu_button"
+        "apps_menu_button",
+        "apps_menu_button_inactive"
     ]
 }
