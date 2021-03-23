@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 17,
+      "type": "match",
+      "ypos": 368,
+      "width": 289
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "boot_enter_passphrase",
+    "ENV-DISTRI-fedora",
+    "ENV-FLAVOR-server"
+  ]
+}
