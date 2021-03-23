@@ -139,7 +139,7 @@ sub run {
     my @actions;
     my $relnum = get_release_number;
     push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
-    push (@actions, 'plymouth') if (get_var("ARCH") eq "aarch64" && get_var("ENCRYPT_PASSWORD") && $relnum > 33);
+    push (@actions, 'plymouth') if (get_var("ARCH") eq "aarch64" && get_var("ENCRYPT_PASSWORD") && $relnum > 33 && !get_var("CANNED"));
     push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
