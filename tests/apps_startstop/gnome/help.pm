@@ -8,7 +8,7 @@ use utils;
 sub run {
     my $self = shift;
     # Start the application
-    start_with_launcher('apps_menu_help', 'apps_menu_utilities');
+    start_with_launcher('apps_menu_help');
     # Check that is started
     assert_screen 'apps_run_help';
     # Register application
