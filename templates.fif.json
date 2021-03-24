@@ -1047,6 +1047,18 @@
                 "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img"
             }
         },
+        "install_btrfs_preserve_home_uefi": {
+            "profiles": {
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-x86_64-*-uefi": 41
+            },
+            "settings": {
+                "PARTITIONING": "custom_btrfs_preserve_home",
+                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.img",
+                "POSTINSTALL": "btrfs_preserve_home_check_content",
+                "ROOT_PASSWORD": "weakpassword"
+            }
+        },
         "install_cyrillic_language": {
             "profiles": {
                 "fedora-universal-aarch64-*-aarch64": 40,
@@ -1271,7 +1283,8 @@
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
                 "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 30,
-                "fedora-Server-dvd-iso-x86_64-*-64bit": 30
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 30,
+                "fedora-Server-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
                 "PARTITIONING": "custom_standard_partition_ext4",
