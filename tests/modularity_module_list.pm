@@ -1,5 +1,6 @@
 use base "installedtest";
 use strict;
+use modularity;
 use testapi;
 use utils;
 
@@ -10,24 +11,39 @@ sub run {
 
     # The test case will check that dnf has modular functions and that
     # it is possible to invoke modular commands to work with modularity.
-    # It does not check the content of the further listed lists for any
-    # particular packages, modules or streams.
+
+    # Check that modular repositories are installed and enabled.
+    # If the repository does not exist, the output of the command is empty.
+    my $mfedora_output = script_output("dnf repolist --enabled fedora-modular");
+    die "The fedora-modular repo seems not to be installed." unless (length $mfedora_output);
+    my $mupdates_output = script_output("dnf repolist --enabled updates-modular");
+    die "The updates-modular repo seems not to be installed." unless (length $mupdates_output);
 
     # Check that modularity works and dnf can list the modules.
-    assert_script_run('dnf module list');
+    my $modules = script_output('dnf module list --disablerepo=updates-modular --disablerepo=updates-testing-modular', timeout => 270);
+    my @modules = parse_module_list($modules);
+    die "The module list seems to be empty when it should not be." if (scalar @modules == 0);
 
     # Check that modularity works and dnf can list the modules
     # with the -all option.
-    assert_script_run('dnf module list --all');
+    $modules = script_output('dnf module list --all --disablerepo=updates-modular --disablerepo=updates-testing-modular', timeout => 270);
+    @modules = parse_module_list($modules);
+    die "The module list seems to be empty when it should not be." if (scalar @modules == 0);
 
     # Check that dnf lists the enabled modules.
-    assert_script_run('dnf module list --enabled');
+    $modules = script_output('dnf module list --enabled', timeout => 270);
+    @modules = parse_module_list($modules);
+    die "There seem to be enabled modules when the list should be empty." unless (scalar @modules == 0);
 
     # Check that dnf lists the disabled modules.
-    assert_script_run('dnf module list --disabled');
+    $modules = script_output('dnf module list --disabled', timeout => 270);
+    @modules = parse_module_list($modules);
+    die "There seem to be disabled modules when the list should be empty." unless (scalar @modules == 0);
 
     # Check that dnf lists the installed modules.
-    assert_script_run('dnf module list --installed');
+    $modules = script_output('dnf module list --installed', timeout => 270);
+    @modules = parse_module_list($modules);
+    die "There seem to be installed modules when the list should be empty." unless (scalar @modules == 0);
 }
 
 
