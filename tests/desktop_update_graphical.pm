@@ -17,12 +17,18 @@ sub run {
 
     # run the updater
     if ($desktop eq 'kde') {
-        # get rid of notifications which get in the way of the things
-        # we need to click
-        click_unwanted_notifications;
-        # KDE team tells me the 'preferred' update method is the
-        # systray applet
-        assert_and_click 'desktop_expand_systray';
+        # KDE team tells me until F34 the 'preferred' update method
+        # was the systray applet...
+        if ($relnum < 34) {
+            # get rid of notifications which get in the way of the things
+            # we need to click
+            click_unwanted_notifications;
+            assert_and_click 'desktop_expand_systray';
+        }
+        else {
+            # ...from F34 onwards, it's Plasma Discover app
+            menu_launch_type('discover');
+        }
     }
     else {
         # this launches GNOME Software on GNOME, dunno for any other
@@ -35,9 +41,10 @@ sub run {
     if ($desktop eq 'gnome' && check_screen 'gnome_software_welcome', 10) {
         send_key 'ret';
     }
-    # go to the 'update' interface. For GNOME, we may be waiting
-    # some time at a 'Software catalog is being loaded' screen.
-    if ($desktop eq 'gnome') {
+    # go to the 'update' interface. For GNOME or KDE on F34+, we
+    # may be waiting some time at a 'Software catalog is being
+    # loaded' screen.
+    if ($desktop eq 'gnome' || ($desktop eq 'kde' && $relnum > 33)) {
         for my $n (1..5) {
             last if (check_screen 'desktop_package_tool_update', 120);
             mouse_set 10, 10;
