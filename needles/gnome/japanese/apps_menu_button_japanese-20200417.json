@@ -11,6 +11,7 @@
   "properties": [],
   "tags": [
     "LANGUAGE-japanese",
-    "apps_menu_button"
+    "apps_menu_button",
+    "apps_menu_button_inactive"
   ]
 }

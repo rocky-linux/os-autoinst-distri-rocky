@@ -1,18 +1,17 @@
 {
   "area": [
     {
-      "xpos": 10,
-      "height": 15,
       "type": "match",
-      "ypos": 6,
-      "width": 62
+      "ypos": 422,
+      "width": 84,
+      "height": 41,
+      "xpos": 398
     }
   ],
   "properties": [],
   "tags": [
     "DESKTOP-gnome",
     "LANGUAGE-french",
-    "apps_menu_button",
-    "apps_menu_button_inactive"
+    "graphical_login_input"
   ]
 }

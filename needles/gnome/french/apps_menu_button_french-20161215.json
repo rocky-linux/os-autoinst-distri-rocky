@@ -12,6 +12,8 @@
     "tags": [
         "DESKTOP-gnome",
         "LANGUAGE-french",
-        "apps_menu_button"
+        "apps_menu_button",
+        "apps_menu_button_inactive",
+
     ]
 }
