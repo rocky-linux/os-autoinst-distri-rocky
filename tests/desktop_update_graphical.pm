@@ -77,10 +77,8 @@ sub run {
         mouse_set 10, 10;
         mouse_hide;
     }
-    # KDE annoyingly pops the notification up right over the install
-    # button, which doesn't help...wait for it to go away. Let's also
-    # wait on GNOME, as we've had tests fail at this point for no
-    # obvious reason, a wait may help.
+    # Magic wait, clicking this right after the last click sometimes
+    # goes wrong
     wait_still_screen 5;
     assert_and_click 'desktop_package_tool_update_apply';
     # on GNOME, wait for reboots.
@@ -96,6 +94,16 @@ sub run {
     }
     elsif ($desktop eq 'kde' && $relnum > 33) {
         # KDE does offline updates now, we have to trigger the reboot
+        # also sometimes the update apply button just doesn't work, so
+        # keep clicking till it does
+        for my $n (1..10) {
+            sleep 2;
+            assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
+            # break out if we reached the reboot button
+            last if (match_has_tag 'kde_offline_update_reboot');
+            # otherwise, click apply again and loop again
+            click_lastmatch;
+        }
         assert_and_click 'kde_offline_update_reboot';
         boot_to_login_screen;
     }
