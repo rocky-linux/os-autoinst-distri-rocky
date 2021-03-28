@@ -94,8 +94,9 @@ sub run {
     }
     elsif ($desktop eq 'kde' && $relnum > 33) {
         # KDE does offline updates now, we have to trigger the reboot
-        # also sometimes the update apply button just doesn't work, so
-        # keep clicking till it does
+        # FIXME: also sometimes the update apply button just doesn't
+        # work, so keep clicking till it does:
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1943943
         for my $n (1..10) {
             sleep 2;
             assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
