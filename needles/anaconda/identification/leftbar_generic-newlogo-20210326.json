@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "ypos": 34,
-      "height": 713,
-      "width": 123,
-      "xpos": 24,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "leftbar_generic"
-  ]
+    "area": [
+        {
+            "height": 693,
+            "type": "match",
+            "width": 123,
+            "xpos": 24,
+            "ypos": 29
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "leftbar_generic"
+    ]
 }
