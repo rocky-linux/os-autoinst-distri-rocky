@@ -102,9 +102,11 @@ sub run {
             assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
             # break out if we reached the reboot button
             last if (match_has_tag 'kde_offline_update_reboot');
-            # otherwise, try refresh and apply
+            # otherwise, try refresh and apply or reboot
             assert_and_click 'desktop_package_tool_update_refresh';
-            assert_and_click 'desktop_package_tool_update_apply';
+            assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
+            last if (match_has_tag 'kde_offline_update_reboot');
+            click_lastmatch;
         }
         assert_and_click 'kde_offline_update_reboot';
         boot_to_login_screen;
