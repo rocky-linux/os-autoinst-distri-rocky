@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 122,
+      "height": 13,
+      "width": 18,
+      "ypos": 10,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_layout_us",
+    "gnome_layout_ascii"
+  ]
+}
