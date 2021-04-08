@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 8,
+      "type": "match",
+      "width": 76,
+      "xpos": 320,
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mahjong_runs"
+  ]
+}

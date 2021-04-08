@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 434,
+      "width": 45,
+      "height": 19,
+      "ypos": 577
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "log_out_confirm",
+    "power_off_confirm",
+    "restart_confirm"
+  ]
+}

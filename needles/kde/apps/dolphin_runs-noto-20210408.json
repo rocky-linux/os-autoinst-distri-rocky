@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 378,
+      "width": 51,
+      "height": 15,
+      "ypos": 8
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "dolphin_runs"
+  ]
+}

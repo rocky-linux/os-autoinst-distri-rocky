@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 16,
+      "width": 65,
+      "xpos": 805,
+      "ypos": 690
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kgpg_keypair_cancel"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "height": 18,
+      "xpos": 198,
+      "width": 69,
+      "type": "match",
+      "ypos": 212
+    },
+    {
+      "type": "match",
+      "height": 17,
+      "xpos": 198,
+      "width": 67,
+      "ypos": 211
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "printing_pdfprinter_ready"
+  ]
+}

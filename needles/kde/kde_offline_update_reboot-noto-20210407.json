@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 508,
+      "width": 46,
+      "type": "match",
+      "ypos": 346
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-kde",
+    "kde_offline_update_reboot"
+  ]
+}

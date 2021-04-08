@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 18,
+      "width": 48,
+      "xpos": 464,
+      "ypos": 327
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "juk_confirm"
+  ]
+}
