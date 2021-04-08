@@ -25,6 +25,8 @@ sub run {
     type_string "admin";
     send_key "tab";
     type_string "weakpassword\n";
+    # allow for UI to stabilize
+    wait_still_screen 10;
     # add our ssh key
     assert_and_click "zezere_ssh_key";
     assert_and_click "zezere_ssh_key_contents";
