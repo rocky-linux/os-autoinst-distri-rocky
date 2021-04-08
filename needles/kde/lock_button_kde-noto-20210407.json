@@ -1,15 +1,15 @@
 {
-  "area": [
-    {
-      "ypos": 607,
-      "height": 16,
-      "width": 31,
-      "xpos": 584,
-      "type": "match"
-    }
-  ],
-  "properties": [],
-  "tags": [
-    "lock_button"
-  ]
+    "area": [
+        {
+            "height": 13,
+            "type": "match",
+            "width": 31,
+            "xpos": 584,
+            "ypos": 607
+        }
+    ],
+    "properties": [],
+    "tags": [
+        "lock_button"
+    ]
 }
