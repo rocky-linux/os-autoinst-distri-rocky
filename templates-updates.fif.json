@@ -69,6 +69,17 @@
             },
             "version": "*"
         },
+        "fedora-updates-kde-live-iso-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+	    "flavor": "updates-kde-live-iso",
+            "settings": {
+                "DESKTOP": "kde",
+                "LIVE": "1",
+                "PACKAGE_SET": "default"
+            },
+            "version": "*"
+        },
         "fedora-updates-workstation-upgrade-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
@@ -120,6 +131,14 @@
         "fedora-updates-server-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-server-x86_64-*"
+        },
+        "fedora-updates-kde-live-iso-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-updates-kde-live-iso-x86_64-*"
+        },
+        "fedora-updates-kde-live-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-updates-kde-live-iso-x86_64-*"
         },
         "fedora-updates-workstation-live-iso-x86_64-*-64bit": {
             "machine": "64bit",
@@ -238,6 +257,8 @@
         },
         "install_default_update_live": {
             "profiles": {
+                "fedora-updates-kde-live-iso-x86_64-*-64bit": 40,
+                "fedora-updates-kde-live-iso-x86_64-*-uefi": 41,
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 40,
                 "fedora-updates-workstation-live-iso-x86_64-*-uefi": 41
             },
@@ -279,6 +300,7 @@
         },
         "live_build": {
             "profiles": {
+                "fedora-updates-kde-live-iso-x86_64-*-64bit": 40,
                 "fedora-updates-workstation-live-iso-x86_64-*-64bit": 40
             },
             "settings": {
