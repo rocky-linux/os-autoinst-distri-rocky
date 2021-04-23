@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 8,
+      "height": 14,
+      "xpos": 366,
+      "width": 37
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "krdc_runs"
+  ]
+}

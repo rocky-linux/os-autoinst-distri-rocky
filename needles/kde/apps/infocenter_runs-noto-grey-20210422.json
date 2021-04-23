@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "type": "match",
+      "ypos": 7,
+      "xpos": 404,
+      "width": 75
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "infocenter_runs"
+  ]
+}

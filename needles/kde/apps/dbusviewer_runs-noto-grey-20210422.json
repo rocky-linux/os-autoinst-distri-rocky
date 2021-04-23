@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 14,
+      "type": "match",
+      "ypos": 8,
+      "width": 88,
+      "xpos": 228
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "dbusviewer_runs"
+  ]
+}
