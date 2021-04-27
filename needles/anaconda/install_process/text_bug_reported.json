@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_text_bug_reported"
+  ],
+  "area": [
+    {
+      "xpos": 2,
+      "ypos": 304,
+      "width": 447,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ use base "anacondatest";
 use strict;
 use testapi;
 use utils;
+use anaconda;
 
 
 # this enables you to send a command and some post-command wait time
@@ -118,6 +119,14 @@ sub run {
 
     # begin installation
     console_type_wait("b\n");
+
+    # When simulated crash is planned, then proceed with the crash routines and finish, 
+    # otherwise proceed normally and do
+    if (get_var("CRASH_REPORT")) {
+        crash_anaconda_text;
+        report_bug_text;
+        return;
+    }
 
     # Wait for install to end. Give Rawhide a bit longer, in case
     # we're on a debug kernel, debug kernel installs are really slow.

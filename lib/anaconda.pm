@@ -7,8 +7,9 @@ use Exporter;
 
 use testapi;
 use utils;
+use bugzilla;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url check_help_on_pane/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo get_mirrorlist_url crash_anaconda_text report_bug_text/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -360,3 +361,111 @@ sub check_help_on_pane {
     }
 }
 
+sub crash_anaconda_text {
+    # This routine uses the Anaconda crash trigger to break the ongoing Anaconda installation to simulate
+    # an Anaconda crash and runs a series of steps that results in creating a bug in Bugzilla.
+    # It is used in the `install_text.pm` test and can be switched on by using the CRASH_REPORT
+    # variable set to 1. 
+    #
+    # First let us navigate to reach the shell window in Anaconda using the alt-f3 combo,
+    # this should take us to another terminal, where we can simulate the crash.
+    send_key "alt-f3";
+    assert_screen("anaconda_text_install_shell");
+    # We use the trigger command to do the simulated crash.
+    type_string "kill -USR1 `cat /var/run/anaconda.pid`\n";
+    # And navigate back to the main panel of Anaconda. This should require
+    send_key "alt-f1";
+    assert_screen("anaconda_text_install_main");
+    # We wait until the crash menu appears. This usually takes some time,
+    # so let's try for 300 seconds, this should be long enough.
+    my $trials = 1;
+    until (check_screen("anaconda_text_crash_menu_ready") || $trials > 30) {
+        sleep 10;
+        ++$trials;
+    }
+    # If the crash menu never appears, let's assert it to fail.
+    if ($trials > 30) {
+        assert_screen("anaconda_text_crash_menu_ready");
+    }
+
+}
+
+sub report_bug_text {
+    # This routine handles the Bugzilla reporting after a simulated crash on
+    # a textual console.
+    # We will not create a needle for every menu item, and we will fail,
+    # if there will be no positive Bugzilla confirmation shown at the end
+    # of the process and then we will fail. 
+    #
+    # Let us record the time of this test run. Later, we will use it to
+    # limit the Bugzilla search.
+    my $timestamp = time();
+    #
+    # First, collect the credentials.
+    my $login  = get_var("BUGZILLA_LOGIN");
+    my $password = get_var("_SECRET_BUGZILLA_PASSWORD");
+    my $apikey = get_var("_SECRET_BUGZILLA_APIKEY");
+    # Choose item 1 - Report the bug.
+    type_string "1\n";
+    sleep 2;
+    # Choose item 1 - Report to Bugzilla
+    type_string "1\n";
+    sleep 5;
+    # Do login.
+    type_string $login;
+    type_string "\n";
+    sleep 5;
+    # Enter the name of the Zilla.
+    type_password $password;
+    type_string "\n";
+    sleep 10;
+    # Save the report without changing it. 
+    # It would need some more tweaking to actually type into the report, but since
+    # it is reported even if unchanged, we leave it as such.
+    type_string ":wq\n";
+    # Wait until the Crash menu appears again.
+    # The same screen shows the result of the Bugzilla operation, 
+    # so if the needle matches, the bug has been created in Bugzilla.
+    # Bugzilla connection is slow so we need to wait out some time,
+    # therefore let's use a cycle that will check each 10 seconds and
+    # ends if there is no correct answer from Bugzilla in 120 seconds.
+    my $counter = 0;
+    until (check_screen("anaconda_text_bug_reported") || $counter > 12) {
+        sleep 10;
+        ++$counter;
+    }
+    # Sometimes, Bugzilla throws out a communication error although the bug has been
+    # created successfully. If this happens, we will softfail and leave the creation 
+    # check to a later step.
+    if ($counter > 12) {
+        record_soft_failure "Warning: Bugzilla has reported an error which could mean that the bug has not been created correctly, but it probably is not a real problem, if the test has not failed completely. ";
+    }
+
+    # Now, let us check with Bugzilla directly, if the bug has been created.
+    # First, we shall get a Bugzilla format timestamp to use it in the query.
+    # The timestamp will limit the list of bugs to those that have been created since 
+    # the then -> resulting with high probability in the one that this test run
+    # has just created.
+    $timestamp = convert_to_bz_timestamp($timestamp);
+    # Then we fetch the latest bug from Bugzilla.
+    my $lastbug = get_newest_bug($timestamp, $login);
+    unless ($lastbug) {
+        die "Bugzilla returned no newly created bug. It seems that the bug has not been created.";
+    }
+    else {
+        print("BUGZILLA: The last bug was found: $lastbug\n");
+    }
+    # We have found that the bug indeed is in the bugzilla (otherwise 
+    # we would have died already) so now we close it to clean up after this test run.
+    my $result = close_notabug($lastbug, $apikey);
+    unless ($result) {
+        record_soft_failure "The bug has not been closed for some reason. Check manually.";
+    }
+    else {
+        print("BUGZILLA: The last bug $lastbug changed status to CLOSED.\n");
+    }
+
+    # Quit anaconda
+    type_string "4\n";
+    
+}

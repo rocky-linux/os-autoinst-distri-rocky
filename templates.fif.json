@@ -369,6 +369,33 @@
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
+        },
+        "fedora-seasonal-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "seasonal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-seasonal-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "seasonal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "fedora-seasonal-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "seasonal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
         }
     },
     "Profiles": {
@@ -507,6 +534,22 @@
         "fedora-universal-x86_64-*-uefi": {
             "machine": "uefi",
             "product": "fedora-universal-x86_64-*"
+        },
+        "fedora-seasonal-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-seasonal-aarch64-*"
+        },
+        "fedora-seasonal-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-seasonal-ppc64le-*"
+        },
+        "fedora-seasonal-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-seasonal-x86_64-*"
+        },
+        "fedora-seasonal-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "fedora-seasonal-x86_64-*"
         }
     },
     "TestSuites": {
@@ -897,6 +940,17 @@
             },
             "settings": {
                 "ANACONDA_TEXT": "1"
+            }
+        },
+        "install_anaconda_text_save_traceback_bugzilla": {
+            "profiles": {
+                "fedora-seasonal-aarch64-*-aarch64": 20,
+                "fedora-seasonal-ppc64le-*-ppc64le": 20,
+                "fedora-seasonal-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "ANACONDA_TEXT": "1",
+                "CRASH_REPORT": "1"
             }
         },
         "install_arabic_language": {

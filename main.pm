@@ -251,7 +251,9 @@ sub _load_early_postinstall_tests {
     if (get_var("SWITCHED_LAYOUT") || get_var("INPUT_METHOD")) {
         _load_instance("tests/_graphical_input", $instance);
     }
-    unless (get_var("DESKTOP")) {
+    # We do not want to run this on Desktop installations or when
+    # the installation is interrupted on purpose.
+    unless (get_var("DESKTOP") || get_var("CRASH_REPORT")) {
         _load_instance("tests/_console_wait_login", $instance);
     }
 }
@@ -311,12 +313,13 @@ sub load_postinstall_tests() {
 
     # console avc / crash check
     # it makes no sense to run this after logging in on most post-
-    # install tests (hence ! BOOTFROM) but we *do* want to run it on
-    # upgrade tests after upgrading (hence UPGRADE)
+    # install tests (hence ! BOOTFROM) and we do not want it
+    # on crashed installations (hence ! CRASH_REPORT) but we *do* want 
+    # to run it on upgrade tests after upgrading (hence UPGRADE)
     # desktops have specific tests for this (hence !DESKTOP). For
     # desktop upgrades we should really upload a disk image at the end
     # of upgrade and run all the desktop post-install tests on that
-    if (!get_var("DESKTOP") && (!get_var("BOOTFROM") || get_var("UPGRADE"))) {
+    if (!get_var("DESKTOP") && !get_var("CRASH_REPORT") && (!get_var("BOOTFROM") || get_var("UPGRADE"))) {
         autotest::loadtest "tests/_console_avc_crash.pm";
     }
 

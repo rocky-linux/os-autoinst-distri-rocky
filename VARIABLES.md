@@ -81,6 +81,10 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `ANACONDA_STATIC` | string (IPv4 address) | not set | `ANACONDA_TEXT` | If set, will set up static networking using the chosen IP address during install |
 | `POST_STATIC` | string (space-separated IPv4 address and hostname) | not set | nothing | If set, will set up static networking using the chosen IP address and hostname during early post-install |
 | `NO_UEFI_POST` | boolean | `false`/not set | nothing | If set, `uefi_postinstall` test will not be loaded even if `UEFI` is set (can be useful for non-English tests to avoid `uefi_postinstall` running loadkeys) |
+| `CRASH_REPORT` | boolean | not set | nothing | If set, Anaconda will perorm a simulated crash during installation, which will be used to create a report in the Bugzilla. Currently, this only affects Anaconda when it runs in text mode. |
+| `BUGZILLA_LOGIN` | string | not set | used with `_SECRET_BUGZILLA_PASSWORD` | This is used to store a login string which does not get exposed in log files. |
+| `_SECRET_BUGZILLA_PASSWORD` | string | not set | used with `BUGZILLA_LOGIN` | This is used to store a password string which does not get exposed in log files. |
+| `_SECRET_BUGZILLA_APIKEY` | string | not set | used with other secrets | This is used to store an API key which does not get exposed in log files. |
 
 Run variables
 -------------

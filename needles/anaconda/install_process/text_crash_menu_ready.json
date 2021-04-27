@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_text_crash_menu_ready"
+  ],
+  "area": [
+    {
+      "xpos": 2,
+      "ypos": 640,
+      "width": 107,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

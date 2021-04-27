@@ -2,7 +2,7 @@
   tasks:
     - name: Install required packages
       package:
-        name: ['os-autoinst', 'perl-Test-Strict', 'perl-Test-Harness']
+        name: ['os-autoinst', 'perl-Test-Strict', 'perl-Test-Harness', 'perl-JSON', 'perl-REST-Client']
         state: present
       become: yes
     - name: Run perl tests
