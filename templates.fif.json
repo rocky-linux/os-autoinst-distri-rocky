@@ -705,15 +705,16 @@
         },
         "install_blivet_resize_lvm": {
             "profiles": {
-                "fedora-universal-aarch64-*-aarch64": 20,
-                "fedora-universal-ppc64le-*-ppc64le": 20,
-                "fedora-universal-x86_64-*-64bit": 20
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 40,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 40,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_resize_lvm",
-                "HDD_1": "disk_f%PREVREL%_desktop_4_%ARCH%.img",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "INSTALL": "1",
                 "ROOT_PASSWORD": "weakpassword",
-                "INSTALL": "1"
+                "START_AFTER_TEST": "install_lvm_ext4"
             }
         },
         "install_resize_lvm": {
@@ -1274,6 +1275,7 @@
                 "fedora-Server-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
