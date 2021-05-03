@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "anaconda_main_hub_create_user"
+  ],
+  "area": [
+    {
+      "xpos": 248,
+      "ypos": 556,
+      "width": 32,
+      "height": 33,
+      "type": "match"
+    }
+  ]
+}

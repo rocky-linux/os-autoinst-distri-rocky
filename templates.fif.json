@@ -523,6 +523,22 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
+        "anaconda_help": {
+            "profiles": {
+                "fedora-KDE-live-iso-x86_64-*-64bit": 40,
+                "fedora-Workstation-live-iso-x86_64-*-64bit": 40,
+                "fedora-Workstation-live-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Silverblue-dvd_ostree-iso-ppc64le-*-ppc64le": 50,
+                "fedora-Silverblue-dvd_ostree-iso-x86_64-*-64bit": 50,
+                "fedora-Server-dvd-iso-aarch64-*-aarch64": 20,
+                "fedora-Server-dvd-iso-ppc64le-*-ppc64le": 20,
+                "fedora-Server-dvd-iso-x86_64-*-64bit": 20
+            },
+            "settings": {
+                "ENTRYPOINT": "_boot_to_anaconda anaconda_help",
+                "HELPCHECK": "1"
+            }
+        },
         "base_reboot_unmount": {
             "profiles": {
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,

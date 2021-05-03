@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 41,
+      "ypos": 172,
+      "width": 294,
+      "height": 26,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_help_select_packages"
+  ]
+}

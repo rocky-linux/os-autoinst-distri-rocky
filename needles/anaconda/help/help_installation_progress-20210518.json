@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 95,
+      "xpos": 303,
+      "width": 337,
+      "height": 40
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_help_installation_progress"
+  ]
+}

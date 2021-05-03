@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 12,
+      "ypos": 99,
+      "type": "match",
+      "height": 30,
+      "width": 196
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_help_time_date"
+  ]
+}

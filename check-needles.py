@@ -102,6 +102,14 @@ for fsys in ("ext3", "xfs", "ext4"):
     testliterals.append(f"anaconda_part_fs_{fsys}_selected")
 # variable-y in custom_change_device but we only have one value
 testliterals.append("anaconda_part_device_sda")
+# for Anaconda help related needles.
+testliterals.extend(f"anaconda_help_{fsys}" for fsys in ('install_destination',
+'installation_progress', 'keyboard_layout', 'language_support', 'network_host_name',
+'root_password', 'select_packages', 'installation_source', 'time_date', 'create_user',
+'language_selection', 'language', 'summary_link'))
+
+testliterals.extend(f"anaconda_main_hub_{fsys}" for fsys in ('language_support', 'selec_packages',
+'time_date', 'create_user','keyboard_layout'))
 
 # retcode tracker
 ret = 0
