@@ -14,10 +14,16 @@ sub run {
 
     # Check that modular repositories are installed and enabled.
     # If the repository does not exist, the output of the command is empty.
-    my $mfedora_output = script_output("dnf repolist --enabled fedora-modular");
-    die "The fedora-modular repo seems not to be installed." unless (length $mfedora_output);
-    my $mupdates_output = script_output("dnf repolist --enabled updates-modular");
-    die "The updates-modular repo seems not to be installed." unless (length $mupdates_output);
+    if (lc(get_var('VERSION')) eq "rawhide") {
+        my $mrawhide_output = script_output("dnf repolist --enabled rawhide-modular");
+        die "The rawhide-modular repo seems not to be installed." unless (length $mrawhide_output);
+    }
+    else {
+        my $mfedora_output = script_output("dnf repolist --enabled fedora-modular");
+        die "The fedora-modular repo seems not to be installed." unless (length $mfedora_output);
+        my $mupdates_output = script_output("dnf repolist --enabled updates-modular");
+        die "The updates-modular repo seems not to be installed." unless (length $mupdates_output);
+    }
 
     # Check that modularity works and dnf can list the modules.
     my $modules = script_output('dnf module list --disablerepo=updates-modular --disablerepo=updates-testing-modular', timeout => 270);
