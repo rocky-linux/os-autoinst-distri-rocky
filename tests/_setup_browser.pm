@@ -5,7 +5,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    bypass_1691487;
     # set up appropriate repositories
     repo_setup();
     # use --enablerepo=fedora for Modular compose testing (we need to

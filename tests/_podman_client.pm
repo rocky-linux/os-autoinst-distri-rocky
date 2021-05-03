@@ -8,7 +8,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    bypass_1691487 unless (get_var("DESKTOP"));
     $self->root_console(tty=>3);
     # wait for server to be set up
     mutex_lock "podman_server_ready";

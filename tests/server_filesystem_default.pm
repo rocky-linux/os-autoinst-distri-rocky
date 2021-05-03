@@ -5,7 +5,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    bypass_1691487;
     # check / is xfs, as it should be on server
     assert_script_run 'findmnt -M / -o FSTYPE | grep xfs';
 }

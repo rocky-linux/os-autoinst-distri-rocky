@@ -7,7 +7,6 @@ use cockpit;
 
 sub run {
     my $self=shift;
-    bypass_1691487;
 
     my $cockdate = "0";
     # Remove a package, disable repositories and enable test repositories, install the package

@@ -7,7 +7,6 @@ use cockpit;
 
 sub run {
     my $self=shift;
-    bypass_1691487;
 
     # Start Cockpit
     start_cockpit(1);

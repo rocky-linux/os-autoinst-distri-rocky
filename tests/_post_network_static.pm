@@ -8,7 +8,6 @@ sub run {
     my $self = shift;
     my ($ip, $hostname) = split(/ /, get_var("POST_STATIC"));
     $hostname //= 'localhost.localdomain';
-    bypass_1691487;
     # set up networking
     setup_tap_static($ip, $hostname);
 }

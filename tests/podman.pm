@@ -8,7 +8,6 @@ use utils;
 
 sub run {
     my $self = shift;
-    bypass_1691487 unless (get_var("DESKTOP"));
     $self->root_console(tty=>3);
     # check podman is installed
     assert_script_run "rpm -q podman";

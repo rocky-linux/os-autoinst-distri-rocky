@@ -24,7 +24,6 @@ sub run {
     $expectver = $rawrel if ($expectver eq "Rawhide");
     # Create a spelt form of the version number.
     my $speltnum = spell_version_number($tospell);
-    bypass_1691487;
     # Create the expected content of the release file
     # and compare it with its real counterpart.
     my $expected = "Fedora release $expectver ($speltnum)";

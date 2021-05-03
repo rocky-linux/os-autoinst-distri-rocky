@@ -9,7 +9,6 @@ use cockpit;
 sub run {
     my $self = shift;
     # use FreeIPA server as DNS server
-    bypass_1691487;
     assert_script_run "printf 'search test.openqa.fedoraproject.org\nnameserver 172.16.2.100' > /etc/resolv.conf";
     # this gets us the name of the first connection in the list,
     # which should be what we want

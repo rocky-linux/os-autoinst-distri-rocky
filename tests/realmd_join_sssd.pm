@@ -21,7 +21,6 @@ sub run {
         $server_ip = '172.16.2.107';
         $server_mutex = 'replica_ready';
     }
-    bypass_1691487;
     # this gets us the name of the first connection in the list,
     # which should be what we want
     my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
