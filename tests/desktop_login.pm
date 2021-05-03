@@ -257,6 +257,7 @@ sub run {
         assert_screen "login_wrong_password";
         send_key 'esc';
     }
+    send_key 'esc' unless (check_screen "login_jim");
 
     # Now, log into the system again using the correct password. This will
     # only work if we were correctly denied login with the wrong password,
