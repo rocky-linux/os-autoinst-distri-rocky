@@ -11,7 +11,7 @@ sub run {
     my @unwanteds;
     my $subv = get_var("SUBVARIANT");
     if ($subv eq "Workstation") {
-        @unwanteds = ("gtk2");
+        @unwanteds = ("gtk2", "qt");
     }
     for my $unwanted (@unwanteds) {
         assert_script_run "! rpm -q $unwanted";
