@@ -95,6 +95,7 @@ sub login_user {
 sub check_user_logged_in {
     # Performs a check that a correct user has been locked in.
     my $user = shift;
+    my $exitkey;
     # In Gnome, the name of the user was accessible through menu
     # in the upper right corner, but apparently it has been removed.
     # Reading the login name from the terminal prompt seems to be
@@ -102,14 +103,16 @@ sub check_user_logged_in {
     if ($desktop eq "gnome") {
         menu_launch_type $term;
         wait_still_screen 2;
+        $exitkey = "alt-f4";
     }
     # With KDE, the user is shown in the main menu, so let us just
     # open this and see.
     else {
         assert_and_click "system_menu_button";
+        $exitkey = "esc";
     }
     assert_screen "user_confirm_$user";
-    send_key "alt-f4";
+    send_key $exitkey;
     wait_still_screen 5;
 }
 
