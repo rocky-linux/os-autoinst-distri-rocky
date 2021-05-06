@@ -10,6 +10,8 @@
   ],
   "properties": [],
   "tags": [
-    "boxes_allow_inhibit"
+    "boxes_allow_inhibit",
+    "connections_allow_inhibit",
+    "vinagre_allow_inhibit"
   ]
 }

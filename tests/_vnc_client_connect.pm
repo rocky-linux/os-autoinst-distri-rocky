@@ -4,17 +4,17 @@ use testapi;
 use utils;
 
 sub run {
-    menu_launch_type('boxes');
-    assert_screen ['apps_boxes_tutorial', 'boxes_new_connection'];
-    if (match_has_tag 'apps_boxes_tutorial') {
-        # Let us get rid of the Tutorial window.
-        send_key 'esc';
-    }
-    assert_and_click('boxes_new_connection');
-    assert_and_click('boxes_remote');
-    type_very_safely("vnc://172.16.2.114:5901\n");
-    assert_and_click('boxes_allow_inhibit');
-    assert_and_click('boxes_fullscreen');
+    menu_launch_type('vinagre');
+    assert_and_click('vinagre_new_connection');
+    assert_and_click('vinagre_protocol');
+    assert_and_click('vinagre_protocol_vnc');
+    send_key('tab');
+    type_very_safely("172.16.2.114:5901\n");
+    assert_and_click('vinagre_fullscreen');
+    assert_and_click('vinagre_allow_inhibit');
+    # allow for a stupid animation to happen
+    wait_still_screen 5;
+    assert_and_click('vinagre_enable_shortcuts');
 }
 
 sub test_flags {

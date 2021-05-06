@@ -11,6 +11,9 @@ sub run {
     setup_tap_static('172.16.2.115', 'vnc002.test.openqa.fedoraproject.org');
     # test test: check if we can see the server
     assert_script_run "ping -c 2 172.16.2.114";
+    # FIXME https://pagure.io/fedora-workstation/issue/231 - Boxes
+    # dropped VNC functionality, no default replacement yet
+    assert_script_run "dnf -y install vinagre";
     desktop_vt;
 }
 
