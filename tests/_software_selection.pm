@@ -21,7 +21,11 @@ sub run {
         elsif (get_var('SUBVARIANT') eq 'Workstation') {
             $env = 'workstation-product-environment';
         }
-        assert_script_run "grep 'selected env' /tmp/anaconda.log /tmp/packaging.log | tail -1 | grep $env";
+        # pre-F35 line looks like:
+        # 07:51:39,382 INF modules.payloads.payload.dnf.utils: selected environment: custom-environment
+        # F35+ line looks like:
+        # 07:40:26,614 DBG ui.lib.software: Selecting the 'custom-environment' environment.
+        assert_script_run "egrep '(selected env|Selecting the.*environment)' /tmp/anaconda.log /tmp/packaging.log | tail -1 | grep $env";
         send_key "ctrl-alt-f6";
         assert_screen "anaconda_main_hub", 30;
         return;
