@@ -10,11 +10,13 @@ sub run {
     assert_and_click('vinagre_protocol_vnc');
     send_key('tab');
     type_very_safely("172.16.2.114:5901\n");
-    assert_and_click('vinagre_fullscreen');
+    # this panel likes to move around so make sure we really hit it
+    while (check_screen 'vinagre_enable_shortcuts') {
+        assert_and_click('vinagre_enable_shortcuts');
+        sleep 2;
+    }
     assert_and_click('vinagre_allow_inhibit');
-    # allow for a stupid animation to happen
-    wait_still_screen 5;
-    assert_and_click('vinagre_enable_shortcuts');
+    assert_and_click('vinagre_fullscreen');
 }
 
 sub test_flags {
