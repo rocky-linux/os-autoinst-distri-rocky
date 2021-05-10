@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "width": 683,
+      "height": 32,
+      "xpos": 88,
+      "type": "match",
+      "ypos": 35
+    }
+  ],
+  "properties": [
+    {
+      "name": "workaround",
+      "value": "brc#1959160: plain color, image file is broken"
+    }
+  ],
+  "tags": [
+    "topbar_generic"
+  ]
+}
