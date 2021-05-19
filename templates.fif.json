@@ -86,6 +86,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
                 "ISO": "cloudinit.iso",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "HDD_1"
@@ -98,6 +99,8 @@
             "flavor": "Cloud_Base-qcow2-qcow2",
             "settings": {
                 "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
                 "ISO": "cloudinit.iso",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "HDD_1"
@@ -110,6 +113,8 @@
             "flavor": "Cloud_Base-qcow2-qcow2",
             "settings": {
                 "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
                 "ISO": "cloudinit.iso",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "HDD_1"
