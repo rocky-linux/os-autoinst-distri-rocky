@@ -1864,6 +1864,14 @@
                 "TEST_TARGET": "NONE"
             }
         },
+        "memtest": {
+            "profiles": {
+                "fedora-universal-x86_64-*-64bit": 30
+            },
+            "settings": {
+                "ENTRYPOINT": "memtest"
+            }
+        },
         "modularity_tests": {
             "profiles": {
                 "fedora-Server-dvd-iso-aarch64-*-aarch64": 30,
