@@ -50,7 +50,7 @@ sub run {
     # cockpit 232-244: https://github.com/cockpit-project/cockpit/issues/14895
     $tabs = "\t\t\t" if ($cockpitver > 231);
     # ...in 245+ it's down to two times, for some reason
-    $tabs = "\t\t" if ($cockpitver > 244);
+    $tabs = "\t\t" if ($cockpitver >= 245);
     type_string($tabs, 4);
     type_string("ipa001.test.openqa.fedoraproject.org", 4);
     type_string("\t\t", 4);
