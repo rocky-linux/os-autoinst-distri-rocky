@@ -45,9 +45,12 @@ sub run {
         assert_and_click "cockpit_join_domain_button", 5;
     }
     assert_screen "cockpit_join_domain";
+    my $tabs = "\t";
     # we need to hit tab three times to reach 'Domain address' in
-    # cockpit 232: https://github.com/cockpit-project/cockpit/issues/14895
-    my $tabs = $cockpitver > 231 ? "\t\t\t" : "\t";
+    # cockpit 232-244: https://github.com/cockpit-project/cockpit/issues/14895
+    $tabs = "\t\t\t" if ($cockpitver > 231);
+    # ...in 245+ it's down to two times, for some reason
+    $tabs = "\t\t" if ($cockpitver > 244);
     type_string($tabs, 4);
     type_string("ipa001.test.openqa.fedoraproject.org", 4);
     type_string("\t\t", 4);
