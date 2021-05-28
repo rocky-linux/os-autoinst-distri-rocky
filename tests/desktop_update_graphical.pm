@@ -52,6 +52,8 @@ sub run {
         }
     }
     assert_and_click 'desktop_package_tool_update';
+    # wait for things to settle if e.g. GNOME is refreshing
+    wait_still_screen 5, 90;
     # depending on automatic update checks, 'apply' or 'download' may
     # already be visible at this point, we may not need to refresh
     assert_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download', 'desktop_package_tool_update_refresh'], 120;
