@@ -355,6 +355,8 @@ sub check_help_on_pane {
         # can throw off the match here. so we'll try hitting shift-tab
         # a few times to shift focus
         send_key_until_needlematch("anaconda_main_hub", "shift-tab");
+        # things can take some time to settle after this one
+        wait_still_screen 10 if ($screen eq "install_destination");
     }
 }
 
