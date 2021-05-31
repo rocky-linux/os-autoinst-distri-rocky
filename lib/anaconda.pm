@@ -322,7 +322,7 @@ sub check_help_on_pane {
     # step, we are skipping selecting the panes.
     if ($screen ne "main" && $screen ne "language_selection" && $screen ne "installation_progress") {
         send_key_until_needlematch("anaconda_main_hub_$screen", "shift-tab");
-        click_lastmatch;
+        wait_screen_change { click_lastmatch; };
     }
     # For Help, click on the the Help button.
     assert_and_click "anaconda_help_button";
