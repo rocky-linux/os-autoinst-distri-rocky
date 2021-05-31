@@ -321,7 +321,8 @@ sub check_help_on_pane {
     # and Installation progress Help button. For the aforementioned
     # step, we are skipping selecting the panes.
     if ($screen ne "main" && $screen ne "language_selection" && $screen ne "installation_progress") {
-        assert_and_click "anaconda_main_hub_$screen";
+        send_key_until_needlematch("anaconda_main_hub_$screen", "shift-tab");
+        click_lastmatch;
     }
     # For Help, click on the the Help button.
     assert_and_click "anaconda_help_button";
@@ -350,7 +351,10 @@ sub check_help_on_pane {
     # In the situation, when we do not arrive at main hub, we will skip
     # testing that main hub is shown.
     if ($screen ne "language_selection" && $screen ne "installation_progress") {
-    assert_screen "anaconda_main_hub";
+        # on leaving a spoke, it is highlighted on the main hub, which
+        # can throw off the match here. so we'll try hitting shift-tab
+        # a few times to shift focus
+        send_key_until_needlematch("anaconda_main_hub", "shift-tab");
     }
 }
 

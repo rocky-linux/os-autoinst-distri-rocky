@@ -26,24 +26,24 @@ sub run {
     my @testplan;
     # For LIVE KDE:
     if ((get_var('LIVE')) && (get_var('DESKTOP') eq "kde")) {
-    	@testplan = qw/keyboard_layout time_date install_destination network_host_name root_password create_user/;
+        @testplan = qw/keyboard_layout time_date install_destination network_host_name root_password create_user/;
     }
     # For LIVE Workstation
     elsif ((get_var('LIVE')) && (get_var('DESKTOP') eq "gnome")) {
-    	@testplan = qw/keyboard_layout install_destination time_date/;
+        @testplan = qw/keyboard_layout install_destination time_date/;
     }
     # For Silverblue
     elsif (get_var('DESKTOP') eq "gnome") {
-    	@testplan = qw/keyboard_layout language_support install_destination time_date/;
+        @testplan = qw/keyboard_layout language_support install_destination time_date/;
     }
     # For ServerDVD
     else {
-    	@testplan = qw/keyboard_layout language_support time_date installation_source select_packages install_destination network_host_name root_password create_user/;
+        @testplan = qw/keyboard_layout language_support time_date installation_source select_packages install_destination network_host_name root_password create_user/;
     }
 
     # Iterate over test plan and do the tests.
     foreach (@testplan) {
-    	check_help_on_pane($_);
+        check_help_on_pane($_);
     }
 
     # Now, we will start the installation.
@@ -51,16 +51,17 @@ sub run {
     # the Begin Installation button may be greyed out. If this is the situation,
     # we will create the root password to override this.
     unless (check_screen "anaconda_main_hub_begin_installation", 120) {
-	    assert_and_click "anaconda_main_hub_root_password";
-	    type_safely "weakrootpassword";
-	    send_key "tab";
-	    type_safely "weakrootpassword";
-	    assert_and_click "anaconda_spoke_done";
+        assert_and_click "anaconda_main_hub_root_password";
+        type_safely "weakrootpassword";
+        send_key "tab";
+        type_safely "weakrootpassword";
+        assert_and_click "anaconda_spoke_done";
     }
-    # Begin installation
-    assert_and_click "anaconda_main_hub_begin_installation";
+    # Begin installation after waiting out animation
+    wait_still_screen 5;
+    wait_screen_change { assert_and_click "anaconda_main_hub_begin_installation"; };
 
-    # Check the last Help screen. As
+    # Check the last Help screen
     check_help_on_pane("installation_progress");
 
     # As there is no need to proceed with the installation,
