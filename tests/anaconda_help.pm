@@ -47,10 +47,10 @@ sub run {
     }
 
     # Now, we will start the installation.
-    # As we have not created any root password, or any user, on non-live systems
-    # the Begin Installation button may be greyed out. If this is the situation,
-    # we will create the root password to override this.
-    unless (check_screen "anaconda_main_hub_begin_installation", 120) {
+    # on GNOME installs (Workstation Live and Silverblue) we don't
+    # need to set a root password or create a user; on other flavors
+    # we must
+    unless (get_var("DESKTOP") eq "gnome" ) {
         assert_and_click "anaconda_main_hub_root_password";
         type_safely "weakrootpassword";
         send_key "tab";
