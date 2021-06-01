@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Red Hat
+# Copyright Red Hat
 #
 # This file is part of os-autoinst-distri-fedora.
 #
