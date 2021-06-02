@@ -4,10 +4,15 @@ use testapi;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
+    my $relnum = get_release_number;
+    my $desktop = get_var("DESKTOP");
     check_desktop;
     menu_launch_type('terminal');
     assert_screen "apps_run_terminal";
+    # FIXME: workaround for RHBZ#1957858 - test actually works without
+    # this, but very slowly as characters don't appear on screen
+    send_key "super-pgup" if ($relnum > 33 && $desktop eq "kde");
     wait_still_screen 5;
     # need to be root
     my $rootpass = get_var("ROOT_PASSWORD", "weakpassword");

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 8,
+      "type": "match",
+      "xpos": 234,
+      "height": 15,
+      "width": 54
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "konsole_runs",
+    "apps_run_terminal"
+  ]
+}
