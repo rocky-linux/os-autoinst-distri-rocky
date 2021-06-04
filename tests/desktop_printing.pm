@@ -16,6 +16,12 @@ sub run {
     script_run "chmod 666 testfile.txt";
     # Install the Cups-PDF package to use the Cups-PDF printer
     assert_script_run "dnf -y install cups-pdf", 180;
+    # FIXME: log version of cups-pdf and check it for output location
+    # this is only necessary as long as the test may run on cups-pdf
+    # 3.0.1-11 or lower, as soon as that's not true we can cut it
+    my $cpdfver = script_output 'rpm -q cups-pdf --queryformat "%{VERSION}-%{RELEASE}\n"';
+    assert_script_run "dnf -y install rpmdevtools", 180;
+    my $cpdfvercmp = script_run "rpmdev-vercmp $cpdfver 3.0.1-11.5";
     # Leave the root terminal and switch back to desktop.
     desktop_vt();
     my $desktop = get_var("DESKTOP");
@@ -58,7 +64,15 @@ sub run {
     # Open the pdf file and check the print
     send_key "alt-f2";
     wait_still_screen(stilltime=>5, similarity_level=>45);
-    type_safely "$viewer /home/test/Desktop/testfile.pdf\n";
+    # output location is different for cups-pdf 3.0.1-12 or later (we
+    # checked this above)
+    if ($cpdfvercmp eq "12") {
+        # older cups-pdf
+        type_safely "$viewer /home/test/Desktop/testfile.pdf\n";
+    }
+    else {
+        type_safely "$viewer /home/test/Desktop/testfile-job_1.pdf\n";
+    }
     wait_still_screen(stilltime=>5, similarity_level=>45);
     # Resize the window, so that the size of the document fits the bigger space
     # and gets more readable.
