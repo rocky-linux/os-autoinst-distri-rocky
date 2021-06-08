@@ -88,7 +88,7 @@ for num in range(1, 10):
 for scheme in ("standard", "lvmthin", "btrfs", "lvm"):
     testliterals.append(f"anaconda_part_scheme_{scheme}")
 # custom_blivet_add_partition
-for dtype in ("lvm", "lvmthin", "raid"):
+for dtype in ("lvmvg", "lvmlv", "lvmthin", "raid"):
     testliterals.append(f"anaconda_blivet_part_devicetype_{dtype}")
 for fsys in ("ext3", "ext4", "xfs", "btrfs", "ppc_prep_boot", "swap", "efi_filesystem"):
     testliterals.append(f"anaconda_blivet_part_fs_{fsys}")
