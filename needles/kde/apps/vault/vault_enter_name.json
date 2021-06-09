@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_enter_name"
+  ],
+  "area": [
+    {
+      "xpos": 68,
+      "ypos": 43,
+      "width": 180,
+      "height": 38,
+      "type": "match"
+    }
+  ]
+}

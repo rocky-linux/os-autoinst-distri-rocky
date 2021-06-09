@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 16,
+      "xpos": 482,
+      "width": 48,
+      "ypos": 524
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kde_next"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_encfs_backend_available"
+  ],
+  "area": [
+    {
+      "xpos": 32,
+      "ypos": 100,
+      "width": 103,
+      "height": 20,
+      "type": "match"
+    }
+  ]
+}

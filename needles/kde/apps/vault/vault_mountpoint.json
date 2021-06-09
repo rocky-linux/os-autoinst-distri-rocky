@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_mountpoint"
+  ],
+  "area": [
+    {
+      "xpos": 31,
+      "ypos": 64,
+      "width": 83,
+      "height": 21,
+      "type": "match"
+    }
+  ]
+}

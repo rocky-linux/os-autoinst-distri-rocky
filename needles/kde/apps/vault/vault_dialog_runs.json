@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_dialog_runs"
+  ],
+  "area": [
+    {
+      "xpos": 214,
+      "ypos": 173,
+      "width": 119,
+      "height": 17,
+      "type": "match"
+    }
+  ]
+}

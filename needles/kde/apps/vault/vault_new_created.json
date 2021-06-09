@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_new_created"
+  ],
+  "area": [
+    {
+      "xpos": 593,
+      "ypos": 345,
+      "width": 93,
+      "height": 28,
+      "type": "match"
+    }
+  ]
+}

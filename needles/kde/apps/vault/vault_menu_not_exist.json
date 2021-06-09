@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "vault_menu_not_exist"
+  ],
+  "area": [
+    {
+      "xpos": 693,
+      "ypos": 492,
+      "width": 221,
+      "height": 23,
+      "type": "match"
+    }
+  ]
+}
