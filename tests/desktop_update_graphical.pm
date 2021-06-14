@@ -16,6 +16,9 @@ sub run {
     desktop_vt;
 
     # run the updater
+    # FIXME: when F33 goes EOL, remove all the KDE < F34 stuff below
+    # and drop 'desktop_package_tool_update' tag from
+    # desktop_update_notification_systray-kde-20200929.json
     if ($desktop eq 'kde') {
         # KDE team tells me until F34 the 'preferred' update method
         # was the systray applet...
