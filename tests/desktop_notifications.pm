@@ -119,10 +119,15 @@ sub run {
     }
     if (get_var("BOOTFROM")) {
         if ($desktop eq 'kde' && $relnum > 33) {
-            # there is no permanent notification in F34+, check we saw
-            # the transient one earlier and we see no others now
-            assert_screen "desktop_no_notifications";
-            die "No update notification was shown!" unless $seen;
+            # there is not always a permanent notification in F34+,
+            # if we don't see one, check we saw the transient one
+            # earlier. FIXME: maybe drop the 'transient' path here
+            # if the permanent notification seems to be reliably
+            # back after 2021-06-13 Rawhide?
+            assert_screen ["desktop_no_notifications", "desktop_update_notification_only"];
+            if (match_has_tag "desktop_no_notifications") {
+                die "No update notification was shown!" unless $seen;
+            }
         }
         else {
             # we should see an update notification and no others
