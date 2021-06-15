@@ -4,6 +4,20 @@ use testapi;
 use utils;
 
 sub run {
+    my $relnum = get_release_number;
+    if (get_var("LANGUAGE") eq 'japanese' && $relnum > 33) {
+        # since g-i-s new user mode was dropped and the replacement
+        # doesn't do input method selection, and anaconda never has,
+        # we have to set up the input method manually:
+        # https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/3749
+        menu_launch_type "keyboard";
+        assert_and_click "desktop_add_input_source";
+        assert_and_click "desktop_input_source_japanese";
+        assert_and_click "desktop_input_source_japanese_anthy";
+        send_key "ret";
+        wait_still_screen 3;
+        send_key "alt-f4";
+    }
     # do this from the overview because the desktop uses the stupid
     # transparent top bar which messes with our needles
     send_key "alt-f1";
