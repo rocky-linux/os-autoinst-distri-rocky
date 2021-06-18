@@ -2329,12 +2329,13 @@
         },
         "upgrade_2_desktop_64bit": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 40
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%UP2REL%_desktop_4_x86_64.img",
+                "HDD_1": "disk_f%UP2REL%_desktop_4_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2344,13 +2345,14 @@
         },
         "upgrade_2_desktop_encrypted_64bit": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 40
+                "fedora-universal-x86_64-*-64bit": 40,
+                "fedora-universal-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDD_1": "disk_f%UP2REL%_desktopencrypt_x86_64.img",
+                "HDD_1": "disk_f%UP2REL%_desktopencrypt_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2459,12 +2461,13 @@
         },
         "upgrade_desktop_64bit": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 30
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_f%UP1REL%_desktop_4_x86_64.img",
+                "HDD_1": "disk_f%UP1REL%_desktop_4_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
@@ -2474,13 +2477,14 @@
         },
         "upgrade_desktop_encrypted_64bit": {
             "profiles": {
-                "fedora-universal-x86_64-*-64bit": 30
+                "fedora-universal-x86_64-*-64bit": 30,
+                "fedora-universal-aarch64-*-aarch64": 40
             },
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDD_1": "disk_f%UP1REL%_desktopencrypt_x86_64.img",
+                "HDD_1": "disk_f%UP1REL%_desktopencrypt_%ARCH%.img",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "COMPOSE",
                 "UPGRADE": "1",
