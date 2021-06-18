@@ -8,7 +8,7 @@ This repository contains tests and images for testing [Fedora](https://getfedora
 
 ## Requirements
 
-Obviously, this repository is little use without access to an openQA installation. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
+Obviously, this repository is little use without access to an openQA installation. Also, the tests themselves require the perl libraries JSON and REST::Client to be installed on the worker host; in Fedora, the package names are `perl-JSON` and `perl-REST-Client`. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
 
 ## Test development
 
