@@ -1,5 +1,26 @@
 {
     "Products": {
+        "fedora-updates-container-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "settings": {},
+            "version": "*"
+        },
+        "fedora-updates-container-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "settings": {},
+            "version": "*"
+        },
+        "fedora-updates-container-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "updates-container",
+            "settings": {},
+            "version": "*"
+        },
         "fedora-updates-everything-boot-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
@@ -100,6 +121,18 @@
         }
     },
     "Profiles": {
+        "fedora-updates-container-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "fedora-updates-container-aarch64-*"
+        },
+        "fedora-updates-container-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "fedora-updates-container-ppc64le-*"
+        },
+        "fedora-updates-container-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "fedora-updates-container-x86_64-*"
+        },
         "fedora-updates-everything-boot-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-updates-everything-boot-iso-x86_64-*"
@@ -314,6 +347,20 @@
                 "POSTINSTALL": "_live_build",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "false"
+            }
+        },
+        "podman": {
+            "profiles": {
+                "fedora-updates-container-aarch64-*-aarch64": 40,
+                "fedora-updates-container-ppc64le-*-ppc64le": 40,
+                "fedora-updates-container-x86_64-*-64bit": 40
+            }
+        },
+        "podman_client": {
+            "profiles": {
+                "fedora-updates-container-aarch64-*-aarch64": 40,
+                "fedora-updates-container-ppc64le-*-ppc64le": 40,
+                "fedora-updates-container-x86_64-*-64bit": 40
             }
         },
         "realmd_join_cockpit": {

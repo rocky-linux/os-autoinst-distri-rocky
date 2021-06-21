@@ -9,6 +9,8 @@ use utils;
 sub run {
     my $self = shift;
     $self->root_console(tty=>3);
+    # on non-canned flavors, we need to install podman
+    assert_script_run "dnf -y install podman", 180 unless (get_var("CANNED"));
     # check podman is installed
     assert_script_run "rpm -q podman";
     # check to see if you can pull an image from the registry
