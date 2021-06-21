@@ -19,7 +19,7 @@ sub run {
     # If the disks module is present, open it
     assert_and_click "infocenter_smart_status";
     # Check that a correct screen is displayed.
-    assert_screen "disks_runs";
+    assert_screen "infocenter_smart_status_shown";
     # Close the application
     quit_with_shortcut();
 }
