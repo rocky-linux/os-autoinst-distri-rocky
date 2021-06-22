@@ -60,6 +60,8 @@ sub run {
     activate("root");
     custom_blivet_resize_partition(size => '13', units => 'GiB');
     wait_still_screen 5;
+    # Check that the partition has been correctly resized to 13G.
+    assert_screen "device_root_resized_thirteen";
 
     # Now format the resized root partition. It seems that the focus returns to the first
     # partition in the view, so we need to activate this again before we attempt to do 

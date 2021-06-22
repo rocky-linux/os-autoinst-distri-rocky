@@ -62,6 +62,8 @@ sub run {
     assert_and_click "anaconda_part_update_settings";
     # give it a second or two to update
     wait_still_screen 2;
+    # Check that the partition has been resized for 13GiB
+    assert_screen "device_root_resized_thirteen";
 
     # Add new /home partition into the emptied space.
     assert_and_click "anaconda_part_add";
