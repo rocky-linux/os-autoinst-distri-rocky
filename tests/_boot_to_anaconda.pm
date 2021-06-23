@@ -116,13 +116,11 @@ sub run {
                 assert_screen ["live_start_anaconda_icon", "apps_menu_button_active"], 300;
                 send_key "alt-f1" if match_has_tag "apps_menu_button_active";
                 # for KDE we need to double-click after kde-settings-34.6-1,
-                # which is in FEDORA-2021-dcc1ce9423
-                # FIXME: when that update goes stable, simplify the dclick
-                # conditional to just desktop eq KDE && relnum > 33
-                my $advortask = get_var("ADVISORY_OR_TASK");
+                # which is stable now.
+                # FIXME: when F33 goes EOL, make the condition just "if kde"
                 my $relnum = get_release_number;
                 my $dclick = 0;
-                $dclick = 1 if (get_var("DESKTOP") eq "kde" && ($relnum > 34 || $advortask eq "FEDORA-2021-dcc1ce9423"));
+                $dclick = 1 if (get_var("DESKTOP") eq "kde" && $relnum > 33);
                 assert_and_click("live_start_anaconda_icon", dclick=>$dclick);
                 unless (check_screen "anaconda_select_install_lang", 180) {
                     # click it again - on KDE since 2019-10 or so it seems
