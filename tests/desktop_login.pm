@@ -88,7 +88,7 @@ sub login_user {
         type_very_safely "$password\n";
     }
     type_very_safely "$password\n";
-    check_desktop if ($args{checklogin});
+    check_desktop(timeout=>60) if ($args{checklogin});
     wait_still_screen 5;
 }
 
