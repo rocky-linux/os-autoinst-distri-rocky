@@ -60,23 +60,29 @@ sub run {
     # depending on automatic update checks, 'apply' or 'download' may
     # already be visible at this point, we may not need to refresh
     assert_screen ['desktop_package_tool_update_apply', 'desktop_package_tool_update_download', 'desktop_package_tool_update_refresh'], 120;
-    click_lastmatch if (match_has_tag "desktop_package_tool_update_refresh");
-    # wait for refresh, then apply updates, moving the mouse every two
-    # minutes to avoid the idle screen blank kicking in. Depending on
-    # whether this is KDE or GNOME and what Fedora release, we may see
-    # 'apply' right away, or 'download' then 'apply'.
     my $tags = ['desktop_package_tool_update_download', 'desktop_package_tool_update_apply'];
+    # Apply updates, moving the mouse every two minutes to avoid the
+    # idle screen blank kicking in. Depending on whether this is KDE
+    # or GNOME and what Fedora release, we may see 'apply' right away,
+    # or 'download' then 'apply', or we may only see 'refresh' and
+    # need to click it first
     for (my $n = 1; $n < 6; $n++) {
         if (check_screen $tags, 120) {
             # if we see 'apply', we're done here, quit out of the loop
             last if (match_has_tag 'desktop_package_tool_update_apply');
-            # if we see 'download', we're in the GNOME Software 3.30.5+
-            # two-step process - let's hit it, and continue waiting for
+            # if we see 'download', let's hit it, and continue waiting
             # for apply (only)
             wait_screen_change { click_lastmatch; };
-            $n -= 1 if ($n > 1);
+            $n -= 1 if ($n > 2);
             $tags = ['desktop_package_tool_update_apply'];
             next;
+        }
+        elsif ($n == 1) {
+            # if we're in the first iteration of this loop and we can't
+            # see apply or download, that means we can only see refresh
+            # and should click it
+            click_lastmatch;
+            sleep 2;
         }
         # move the mouse to stop the screen blanking on idle
         mouse_set 10, 10;
