@@ -802,7 +802,7 @@
                 "PARTITIONING": "custom_blivet_resize_lvm",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "INSTALL": "1",
-                "POSTINSTALL": "custom_resize_lvm_postinstall",
+                "POSTINSTALL": "disk_custom_resize_lvm_postinstall",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_lvm_ext4"
             }
