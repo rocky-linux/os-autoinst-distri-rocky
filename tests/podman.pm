@@ -20,7 +20,7 @@ sub run {
     # create a Dockerfile
     assert_script_run 'printf \'FROM registry.fedoraproject.org/fedora:latest\nRUN /usr/bin/dnf install -y httpd\nEXPOSE 80\nCMD ["-D", "FOREGROUND"]\nENTRYPOINT ["/usr/sbin/httpd"]\n\' > Dockerfile';
     # Build an image
-    assert_script_run 'podman build -t fedora-httpd $(pwd)', 120;
+    assert_script_run 'podman build -t fedora-httpd $(pwd)', 180;
     # Verify the image
     validate_script_output "podman images", sub { m/fedora-httpd/ };
     # Run the container
