@@ -59,7 +59,7 @@ sub run {
     assert_script_run "systemctl is-active httpd";
 
     # Uninstall wget and httpd again.
-    assert_script_run "rpm-ostree uninstall wget httpd";
+    assert_script_run "rpm-ostree uninstall wget httpd", timeout => 300;
 
     # Reboot to see the changed tree
     reboot_and_login "300";
