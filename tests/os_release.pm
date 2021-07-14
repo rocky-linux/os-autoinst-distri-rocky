@@ -59,6 +59,9 @@ sub run {
             $cannedtag = (split /-/, $build)[-1];
         }
         my $name = ucfirst($id);
+        # from F35 onwards, $NAME is "Fedora Linux" not just "Fedora"
+        my $relnum = get_release_number;
+        my $fullname = $relnum > 34 ? $name . " Linux" : $name;
         my $rawrel = get_var("RAWREL", '');
         my $version_id = get_var("VERSION"); # Should be the version number or Rawhide.
         # IoT has a branch that acts more or less like Rawhide, but has
@@ -115,10 +118,10 @@ sub run {
             $version = "$cannedtag ($varstr)";
         }
         my $platform_id = "platform:f$version_id";
-        my $pretty = "$name $version_id ($varstr)";
+        my $pretty = "$fullname $version_id ($varstr)";
         # Same problem is when testing the PRETTY_NAME.
         if (get_var("CANNED")) {
-            $pretty = "$name $cannedtag ($varstr)";
+            $pretty = "$fullname $cannedtag ($varstr)";
             # ...and FCOS uses a different format, sigh
             if ($build =~ /^Fedora-CoreOS/) {
                 $pretty = "Fedora CoreOS $cannedtag";
@@ -130,10 +133,11 @@ sub run {
         my $failref =\@fails;
 
         # Test for name
-        rec_log "NAME should be $name and is $content{'NAME'}", $content{'NAME'} eq $name, $failref;
+        my $strip = strip_marks($content{'NAME'});
+        rec_log "NAME should be $fullname and is $strip", $strip eq $fullname, $failref;
 
         # Test for version.
-        my $strip = strip_marks($content{'VERSION'});
+        $strip = strip_marks($content{'VERSION'});
         rec_log "VERSION should be $version and is $strip",  $strip eq $version, $failref;
 
         # Test for version_id
