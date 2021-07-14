@@ -323,13 +323,33 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/_console_avc_crash.pm";
     }
 
-    # generic post-install test load
-    if (get_var("POSTINSTALL")) {
-        my @pis = split(/ /, get_var("POSTINSTALL"));
-        foreach my $pi (@pis) {
-            autotest::loadtest "tests/${pi}.pm";
-        }
-    }
+    # generic post-install test will load if POSTINSTALL or POSTINSTALL_PATH
+    # are set. If POSTINSTALL is set, then only tests provided in that list will
+    # be run, with POSTINSTALL_PATH all tests on that path will be run without any
+    # possibility to limit them. 
+    # These variables are mutually exclusive.
+	# If POSTINSTALL is set, it means that we want to run selected tests,
+	# specified in the POSTINSTALL variable. 
+	if (get_var("POSTINSTALL")) {
+	    my @pis = split(/ /, get_var("POSTINSTALL"));
+	    # For each test in POSTINSTALL, load the test
+	    foreach my $pi (@pis) {
+		autotest::loadtest "tests/${pi}.pm";
+	    }
+	}
+	# If POSTINSTALL_PATH is set, we will load all available test files from that location
+	# as postinstall tests.
+	elsif (get_var("POSTINSTALL_PATH")) {
+	    my $casedir = get_var("CASEDIR");
+	    my $path = get_var("POSTINSTALL_PATH");
+	    # Read the list of files on that path,
+	    my @pis = glob "${casedir}/${path}/*.pm";
+	    # and load each of them.
+	    foreach my $pi (@pis) {
+	        $pi = basename($pi);
+	        autotest::loadtest "$path/$pi";
+	    }
+	}
 
     # load the ADVISORY / KOJITASK post-install test - this records which
     # update or task packages were actually installed during the test. Don't

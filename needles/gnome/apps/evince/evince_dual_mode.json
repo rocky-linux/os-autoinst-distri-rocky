@@ -1,0 +1,22 @@
+{
+  "properties": [],
+  "tags": [
+    "evince_dual_mode"
+  ],
+  "area": [
+    {
+      "xpos": 322,
+      "ypos": 383,
+      "width": 88,
+      "height": 16,
+      "type": "match"
+    },
+    {
+      "xpos": 703,
+      "ypos": 428,
+      "width": 99,
+      "height": 16,
+      "type": "match"
+    }
+  ]
+}

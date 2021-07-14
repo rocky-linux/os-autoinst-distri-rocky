@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 781,
+      "ypos": 450,
+      "width": 88,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_toggle_night_mode"
+  ]
+}

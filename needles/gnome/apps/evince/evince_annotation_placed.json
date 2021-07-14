@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 600,
+      "type": "match",
+      "height": 32,
+      "width": 30,
+      "xpos": 373
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "evince_annotation_placed"
+  ]
+}
