@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
     # As there are no vaults created, we need to list
     # invisible icons.
-    assert_and_click "show_hidden_icons";
+    assert_and_click "desktop_expand_systray";
 
     # Now we should be able to see the Vaults icon,
     # so we will click on it.
