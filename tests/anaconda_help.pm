@@ -55,7 +55,7 @@ sub run {
         type_safely "weakrootpassword";
         send_key "tab";
         type_safely "weakrootpassword";
-        assert_and_click "anaconda_spoke_done";
+        wait_screen_change { assert_and_click "anaconda_spoke_done"; };
     }
     # Begin installation after waiting out animation
     wait_still_screen 5;
