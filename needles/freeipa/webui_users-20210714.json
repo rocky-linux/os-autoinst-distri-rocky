@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 16,
+      "type": "match",
+      "ypos": 196,
+      "width": 43,
+      "xpos": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "freeipa_webui_users"
+  ]
+}

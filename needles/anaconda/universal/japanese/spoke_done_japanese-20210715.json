@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "width": 27,
+      "ypos": 63,
+      "xpos": 34,
+      "height": 13
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "anaconda_spoke_done"
+  ]
+}

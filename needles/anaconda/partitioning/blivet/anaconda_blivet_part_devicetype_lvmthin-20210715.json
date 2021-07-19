@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 19,
+      "width": 56,
+      "type": "match",
+      "ypos": 176,
+      "xpos": 435
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_blivet_part_devicetype_lvmthin"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 16,
+      "width": 99,
+      "type": "match",
+      "ypos": 10,
+      "xpos": 21
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-japanese",
+    "apps_menu_button",
+    "apps_menu_button_inactive"
+  ]
+}
