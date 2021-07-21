@@ -180,15 +180,14 @@ sub reboot_system {
 }
 
 sub power_off {
-    # Powers-off the machine. I am not sure if this is not a useless thing to
-    # do, because at the moment I do not know about a possibility to assert a
-    # switched-off VM.
+    # Powers-off the machine.
     assert_and_click "system_menu_button";
     # in KDE since F34, there's no submenu to access, the button is right here
     assert_screen ["power_entry", "power_off_entry"];
     click_lastmatch;
     assert_and_click "power_off_entry" if (match_has_tag("power_entry"));
     assert_and_click "power_off_confirm";
+    assert_shutdown;
 }
 
 sub run {
@@ -311,7 +310,6 @@ sub run {
     }
     # Power off the machine
     power_off();
-    check_shutdown;
 }
 
 sub test_flags {
