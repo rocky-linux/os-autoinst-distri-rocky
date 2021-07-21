@@ -121,6 +121,20 @@
             },
             "version": "*"
         },
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide": {
+            "arch": "x86_64",
+            "distri": "fedora",
+            "flavor": "Cloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "Rawhide"
+        },
         "fedora-CoreOS-colive-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "fedora",
@@ -411,6 +425,14 @@
             "machine": "64bit",
             "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-*"
         },
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-64bit": {
+            "machine": "64bit",
+            "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide"
+        },
+        "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": {
+            "machine": "uefi",
+            "product": "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide"
+        },
         "fedora-CoreOS-colive-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "fedora-CoreOS-colive-iso-x86_64-*"
@@ -587,6 +609,8 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-64bit": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
@@ -617,6 +641,7 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 20,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 20,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 20,
@@ -647,6 +672,7 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 20,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 20,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 20,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 22,
                 "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 22,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 22,
@@ -672,6 +698,7 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 40,
                 "fedora-KDE-live-iso-x86_64-*-64bit": 42,
                 "fedora-Minimal-raw_xz-raw.xz-arm-*-ARM": 42,
                 "fedora-Minimal-raw_xz-raw.xz-aarch64-*-aarch64": 42,
@@ -697,6 +724,8 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-64bit": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
@@ -727,6 +756,7 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
@@ -757,6 +787,7 @@
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 40,
                 "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 40,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 40,
                 "fedora-CoreOS-colive-iso-x86_64-*-64bit": 50,
                 "fedora-IoT-dvd_ostree-iso-aarch64-*-aarch64": 40,
                 "fedora-IoT-dvd_ostree-iso-x86_64-*-64bit": 40,
@@ -786,7 +817,8 @@
             "profiles": {
                 "fedora-Cloud_Base-qcow2-qcow2-aarch64-*-aarch64": 30,
                 "fedora-Cloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 30,
-                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 30
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "fedora-Cloud_Base-qcow2-qcow2-x86_64-Rawhide-uefi": 30
             },
             "settings": {
                 "POSTINSTALL": "autocloud"

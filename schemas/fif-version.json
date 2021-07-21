@@ -3,5 +3,5 @@
   "$id": "fif-version.json",
   "title": "FIF version schema",
   "type": "string",
-  "pattern": "^([*]|[[:digit:]]{1,3})$"
+  "pattern": "^([*]|[[:digit:]]{1,3}|Rawhide)$"
 }
