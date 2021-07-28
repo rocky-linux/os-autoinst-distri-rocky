@@ -314,7 +314,7 @@ sub load_postinstall_tests() {
     # console avc / crash check
     # it makes no sense to run this after logging in on most post-
     # install tests (hence ! BOOTFROM) and we do not want it
-    # on crashed installations (hence ! CRASH_REPORT) but we *do* want 
+    # on crashed installations (hence ! CRASH_REPORT) but we *do* want
     # to run it on upgrade tests after upgrading (hence UPGRADE)
     # desktops have specific tests for this (hence !DESKTOP). For
     # desktop upgrades we should really upload a disk image at the end
@@ -323,33 +323,27 @@ sub load_postinstall_tests() {
         autotest::loadtest "tests/_console_avc_crash.pm";
     }
 
-    # generic post-install test will load if POSTINSTALL or POSTINSTALL_PATH
-    # are set. If POSTINSTALL is set, then only tests provided in that list will
-    # be run, with POSTINSTALL_PATH all tests on that path will be run without any
-    # possibility to limit them. 
-    # These variables are mutually exclusive.
-	# If POSTINSTALL is set, it means that we want to run selected tests,
-	# specified in the POSTINSTALL variable. 
-	if (get_var("POSTINSTALL")) {
-	    my @pis = split(/ /, get_var("POSTINSTALL"));
-	    # For each test in POSTINSTALL, load the test
-	    foreach my $pi (@pis) {
-		autotest::loadtest "tests/${pi}.pm";
-	    }
-	}
-	# If POSTINSTALL_PATH is set, we will load all available test files from that location
-	# as postinstall tests.
-	elsif (get_var("POSTINSTALL_PATH")) {
-	    my $casedir = get_var("CASEDIR");
-	    my $path = get_var("POSTINSTALL_PATH");
-	    # Read the list of files on that path,
-	    my @pis = glob "${casedir}/${path}/*.pm";
-	    # and load each of them.
-	    foreach my $pi (@pis) {
-	        $pi = basename($pi);
-	        autotest::loadtest "$path/$pi";
-	    }
-	}
+    # generic post-install test load
+    if (get_var("POSTINSTALL")) {
+        my @pis = split(/ /, get_var("POSTINSTALL"));
+        # For each test in POSTINSTALL, load the test
+        foreach my $pi (@pis) {
+            autotest::loadtest "tests/${pi}.pm";
+        }
+    }
+    # If POSTINSTALL_PATH is set, we will load all available test files from that location
+    # as postinstall tests.
+    elsif (get_var("POSTINSTALL_PATH")) {
+        my $casedir = get_var("CASEDIR");
+        my $path = get_var("POSTINSTALL_PATH");
+        # Read the list of files on that path,
+        my @pis = glob "${casedir}/${path}/*.pm";
+        # and load each of them.
+        foreach my $pi (@pis) {
+            $pi = basename($pi);
+            autotest::loadtest "$path/$pi";
+        }
+    }
 
     # load the ADVISORY / KOJITASK post-install test - this records which
     # update or task packages were actually installed during the test. Don't
@@ -368,7 +362,7 @@ sub load_postinstall_tests() {
     if (get_var("STORE_HDD_1") || get_var("STORE_HDD_2") || get_var("PUBLISH_HDD_1")) {
         autotest::loadtest "tests/_console_shutdown.pm";
     }
-    
+
 
 }
 
@@ -410,7 +404,7 @@ if (!get_var("ENTRYPOINT")) {
     load_postinstall_tests;
 }
 
-# load application start-stop tests 
+# load application start-stop tests
 if (get_var("STARTSTOP")) {
     my $desktop = get_var('DESKTOP');
     my $casedir = get_var('CASEDIR');
@@ -418,7 +412,7 @@ if (get_var("STARTSTOP")) {
     if ($desktop eq 'gnome') {
         # Run this test to preset the environment
         autotest::loadtest "tests/apps_gnome_preset.pm";
-    }   
+    }
 
     # Find all tests from a directory defined by the DESKTOP variable
     my @apptests = glob "${casedir}/tests/apps_startstop/${desktop}/*.pm";
