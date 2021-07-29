@@ -9,8 +9,10 @@ use utils;
 
 sub check_and_install_git {
     # Let's see if Git is installed and install it, if it isn't.
-    if (script_run("rpm -q git")) {
-        assert_script_run("dnf install -y git");
+    unless (get_var("CANNED")) {
+        if (script_run("rpm -q git")) {
+            assert_script_run("dnf -y install git", 180);
+        }
     }
 }
 
