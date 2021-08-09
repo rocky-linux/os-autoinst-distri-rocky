@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "width": 99,
+      "xpos": 46,
+      "type": "match",
+      "ypos": 166,
+      "height": 16
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "LANGUAGE-english",
+    "anaconda_minimal_highlighted"
+  ]
+}

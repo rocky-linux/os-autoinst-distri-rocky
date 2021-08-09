@@ -1,0 +1,32 @@
+{
+  "area": [
+    {
+      "height": 17,
+      "xpos": 286,
+      "type": "match",
+      "ypos": 141,
+      "width": 69
+    },
+    {
+      "width": 62,
+      "height": 17,
+      "ypos": 241,
+      "type": "match",
+      "xpos": 295
+    },
+    {
+      "width": 57,
+      "ypos": 31,
+      "type": "match",
+      "xpos": 10,
+      "height": 24
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "LANGUAGE-english",
+    "anaconda_install_user_creation_screen"
+  ]
+}
