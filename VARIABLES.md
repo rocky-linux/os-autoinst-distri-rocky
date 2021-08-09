@@ -61,8 +61,8 @@ it also means that `B` conflicts `A` even if not shown in the table).
 | `UPGRADE` | string (`minimal`, `desktop`, `encrypted`, ...) | not set | all except of `LIVE` and `USER_PASSWORD` | when set, do an upgrade test of specified type |
 | `KICKSTART` | boolean | `false`/not set | all | when specified, do an kickstart installation (you should use `GRUB` variable to specify where kickstart file resides) |
 | `MIRRORLIST_GRAPHICAL` | boolean | `false`/not set | `REPOSITORY_GRAPHICAL` | sets installation source to mirrorlist |
-| `REPOSITORY_GRAPHICAL` | url to repository (without arch and `/os`, for example `http://dl.fedoraproject.org/pub/fedora/linux/development`) | not set | `MIRRORLIST_GRAPHICAL` | sets installation source to repository url in Anaconda |
-| `REPOSITORY_VARIATION` | url to repository (without arch and `/os`, for example `http://dl.fedoraproject.org/pub/fedora/linux/development`) | not set | nothing | sets installation source to repository url in GRUB |
+| `REPOSITORY_GRAPHICAL` | url to repository (without arch and `/os`, for example `http://dl.rockylinux.org/pub/rocky/linux/development`) | not set | `MIRRORLIST_GRAPHICAL` | sets installation source to repository url in Anaconda |
+| `REPOSITORY_VARIATION` | url to repository (without arch and `/os`, for example `http://dl.rockylinux.org/pub/rocky/linux/development`) | not set | nothing | sets installation source to repository url in GRUB |
 | `PARTITIONING` | string (`custom_software_raid`, `guided_delete_all`, ...) | `guided_empty` | nothing | load specified test for partitioning part (when `PARTITIONING=guided_delete_all`, `tests/disk_guided_delete_all.pm` is loaded) and optionally post-install partitioning check (if `tests/disk_guided_delete_all_postinstall.pm` exists, it will be loaded after login to the installed system). Also, if value starts with `custom_`, the `select_disks()` method will check the custom partitioning box |
 | `ENCRYPT_PASSWORD` | string | not set | nothing | if set, encrypt disk with given password |
 | `DESKTOP` | boolean | `false`/not set | nothing | set to indicate that Fedora is running with GUI (so for example OpenQA should expect graphical login screen) |
@@ -97,14 +97,14 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `ISO_URL` | contains URL for ISO to boot, openQA will download it |
 | `ADVISORY` | A Bodhi update ID. If set, the 'update testing' flow will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
 | `KOJITASK` | A Koji task ID. If set, the modified 'update testing' flow for testing scratch builds will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
-| `DISTRI` | contains distribution name (should be same as in WebUI, probably `fedora`) |
+| `DISTRI` | contains distribution name (should be same as in WebUI, probably `rocky`) |
 | `VERSION` | contains version of distribution |
 | `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
 | `ARCH` | is set to architecture that will be used (`x86_64`, `i686`) |
-| `BUILD` | contains Pungi compose_id (something like `Fedora-24-20160121.n.3`) |
+| `BUILD` | contains Pungi compose_id (something like `Rocky-8.4-20210801.n.0`) |
 | `LABEL` | contains Pungi compose label, if it has one (otherwise should be unset) - e.g `RC-1.5` |
-| `CURRREL` | the current stable Fedora release at the time of the test run |
-| `PREVREL` | the previous stable Fedora release at the time of the test run |
+| `CURRREL` | the current stable Rocky release at the time of the test run |
+| `PREVREL` | the previous stable Rocky release at the time of the test run |
 | `UP1REL` | the source release for "1-release" upgrade tests (usually but not always same as `CURRREL`) |
 | `UP2REL` | the source release for "2-release" upgrade tests (currently always same as `PREVREL`) |
-| `LOCATION` | contains Pungi base compose location (something like `https://kojipkgs.fedoraproject.org/compose/branched/Fedora-25-20160901.n.0/compose/`) |
+| `LOCATION` | contains Pungi base compose location (something like `https://kojipkgs.rockylinux.org/compose/branched/Rocky-8.4-20210801.n.0/compose/`) |

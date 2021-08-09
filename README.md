@@ -1,6 +1,6 @@
-# openQA tests for the Fedora distribution
+# openQA tests for the Rocky Linux distribution
 
-This repository contains tests and images for testing [Fedora](https://getfedora.org/) with [openQA](http://os-autoinst.github.io/openQA/). The [fedora_openqa library and CLI](https://pagure.io/fedora-qa/fedora_openqa) are used for scheduling tests, and [createhdds](https://pagure.io/fedora-qa/createhdds) is used for creating base disk images for the test. For openQA installation instructions, see [the Fedora openQA wiki page](https://fedoraproject.org/wiki/OpenQA).
+This repository contains tests and images for testing [Rocky](https://rockylinux.org/download) with [openQA](http://os-autoinst.github.io/openQA/). The [fedora_openqa library and CLI](https://pagure.io/fedora-qa/fedora_openqa) are used for scheduling tests, and [createhdds](https://pagure.io/fedora-qa/createhdds) is used for creating base disk images for the test. For openQA installation instructions, see [the Fedora openQA wiki page](https://fedoraproject.org/wiki/OpenQA).
 
 ## Issues
 
@@ -8,7 +8,7 @@ This repository contains tests and images for testing [Fedora](https://getfedora
 
 ## Requirements
 
-Obviously, this repository is little use without access to an openQA installation. Also, the tests themselves require the perl libraries JSON and REST::Client to be installed on the worker host; in Fedora, the package names are `perl-JSON` and `perl-REST-Client`. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
+Obviously, this repository is little use without access to an openQA installation. Also, the tests themselves require the perl libraries JSON and REST::Client to be installed on the worker host; in Fedora, the package names are `perl-JSON` and `perl-REST-Client`. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader-rocky.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
 
 ## Test development
 
@@ -23,7 +23,7 @@ See [this example repo](https://github.com/os-autoinst/os-autoinst-distri-exampl
 
 ### FIF template format
 
-The test templates in this repository (files ending in `fif.json`) are not in the same format as expected by and are not directly compatible with the upstream template loader. They are in a format referred to as 'FIF' ('Fedora Intermediate Format') which is parsed into the upstream format by the `fifloader.py` utility found in this repository. This format is intended to be more convenient for human reading and editing. It is more fully explained in the docstring at the top of `fifloader.py`. Please refer to this when adding new tests to the templates. A command like `./fifloader.py --load templates.fif.json templates-updates.fif.json` can be used to load templates in the FIF format (this converts them to the upstream format, and calls the upstream template loader on the converted data). See `./fifloader.py -h` for further details on `fifloader.py`.
+The test templates in this repository (files ending in `fif.json`) are not in the same format as expected by and are not directly compatible with the upstream template loader. They are in a format referred to as 'FIF' ('Fedora Intermediate Format') which is parsed into the upstream format by the `fifloader-rocky.py` utility found in this repository. This format is intended to be more convenient for human reading and editing. It is more fully explained in the docstring at the top of `fifloader.py`. Please refer to this when adding new tests to the templates. A command like `./fifloader-rocky.py --load templates.fif.json templates-updates.fif.json` can be used to load templates in the FIF format (this converts them to the upstream format, and calls the upstream template loader on the converted data). See `./fifloader-rocky.py -h` for further details on `fifloader-rocky.py`.
 
 ### main.pm modular architecture
 
@@ -52,7 +52,7 @@ To customize this step, you can set following variables:
 - Set `PACKAGE_SET` to install required package set on "Software selection spoke" - you have to provide correct needles with the name of `anaconda_${PACKAGE_SET}_highlighted` and `anaconda_${PACKAGE_SET}_selected`.
 - Set `ENCRYPT_PASSWORD` to encrypt disk, value of this variable is used as an actual password.
 
-#### Installing Fedora and waiting for Fedora to reboot
+#### Installing Rocky Linux and waiting for Rocky Linux to reboot
 
 After all customizations are finished, `_do_install_and_reboot.pm` test is automatically loaded. It starts installation, creates user and sets root password when required, waits for installation to finish and reboots into installed system. Only variables that control flow in this part are these:
 
@@ -103,4 +103,4 @@ Note that tags of the form `ENV-INSTLANG-(anything)` are useless artefacts and s
 
 The contents of this repository are available under the GPL, version 3 or any later version. A copy is included as COPYING. Note that we do not include the full GPL header in every single test file as they are quite short and this would waste a lot of space.
 
-The tools and tests in this repository are maintained by the [Fedora QA team](https://fedoraproject.org/wiki/QA). We are grateful to the [openSUSE](https://opensuse.org) team for developing openQA, and for the [openSUSE tests](https://github.com/os-autoinst/os-autoinst-distri-opensuse) on which this repository was initially based (and from which occasional pieces are still borrowed).
+The tools and tests in this repository are maintained by the [Rocky Linux QA team](https://wiki.rockylinux.org/team/testing). We are grateful to the [openSUSE](https://opensuse.org) team for developing openQA, to the [Fedora QA team](https://fedoraproject.org/wiki/QA) for their respin and for the [openSUSE tests](https://github.com/os-autoinst/os-autoinst-distri-opensuse) and [Fedora tests](https://pagure.io/fedora-qa/os-autoinst-distri-fedora) on which this repository was initially based (and from which occasional pieces are still borrowed).
