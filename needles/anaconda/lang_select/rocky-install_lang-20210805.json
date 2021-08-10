@@ -10,7 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "ENV-DISTRI-fedora",
+    "ENV-DISTRI-rocky",
     "anaconda_select_install_lang"
   ]
 }

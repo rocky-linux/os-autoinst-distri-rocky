@@ -10,7 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "ENV-DISTRI-fedora",
+    "ENV-DISTRI-rocky",
     "LANGUAGE-english",
     "anaconda_rawhide_accept_fate"
   ]
