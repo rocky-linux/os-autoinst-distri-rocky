@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 777,
+      "ypos": 12,
+      "width": 231,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "version_8_ident"
+  ]
+}
