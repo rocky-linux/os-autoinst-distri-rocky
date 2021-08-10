@@ -31,30 +31,30 @@
         }
     },
     "Products": {
-        "rocky-Server-boot-iso-x86_64-*": {
+        "rocky-boot-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
-            "flavor": "Server-boot-iso",
+            "flavor": "boot-iso",
             "settings": {
                 "+QEMURAM": 3072,
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
         },
-        "rocky-Server-minimal-iso-x86_64-*": {
+        "rocky-minimal-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
-            "flavor": "Server-minimal-iso",
+            "flavor": "minimal-iso",
             "settings": {
                 "+QEMURAM": 3072,
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
         },
-        "rocky-Server-dvd-iso-x86_64-*": {
+        "rocky-dvd-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
-            "flavor": "Server-dvd-iso",
+            "flavor": "dvd-iso",
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "TEST_TARGET": "ISO"
@@ -72,25 +72,25 @@
         }
     },
     "Profiles": {
-        "rocky-Server-boot-iso-x86_64-*-64bit": {
+        "rocky-boot-iso-x86_64-*-64bit": {
             "machine": "64bit",
-            "product": "rocky-Server-boot-iso-x86_64-*"
+            "product": "rocky-boot-iso-x86_64-*"
         },
-        "rocky-Server-boot-iso-x86_64-*-uefi": {
+        "rocky-boot-iso-x86_64-*-uefi": {
             "machine": "uefi",
-            "product": "rocky-Server-boot-iso-x86_64-*"
+            "product": "rocky-boot-iso-x86_64-*"
         },
-        "rocky-Server-minimal-iso-x86_64-*-64bit": {
+        "rocky-minimal-iso-x86_64-*-64bit": {
             "machine": "64bit",
-            "product": "rocky-Server-minimal-iso-x86_64-*"
+            "product": "rocky-minimal-iso-x86_64-*"
         },
-        "rocky-Server-dvd-iso-x86_64-*-64bit": {
+        "rocky-dvd-iso-x86_64-*-64bit": {
             "machine": "64bit",
-            "product": "rocky-Server-dvd-iso-x86_64-*"
+            "product": "rocky-dvd-iso-x86_64-*"
         },
-        "rocky-Server-dvd-iso-x86_64-*-uefi": {
+        "rocky-dvd-iso-x86_64-*-uefi": {
             "machine": "uefi",
-            "product": "rocky-Server-dvd-iso-x86_64-*"
+            "product": "rocky-dvd-iso-x86_64-*"
         },
         "rocky-universal-x86_64-*-64bit": {
             "machine": "64bit",
@@ -104,7 +104,7 @@
     "TestSuites": {
         "anaconda_help": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "ENTRYPOINT": "_boot_to_anaconda anaconda_help",
@@ -113,7 +113,7 @@
         },
         "base_reboot_unmount": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -126,7 +126,7 @@
         },
         "base_system_logging": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -139,7 +139,7 @@
         },
         "base_update_cli": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -152,7 +152,7 @@
         },
         "base_package_install_remove": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -165,7 +165,7 @@
         },
         "base_services_start": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -178,7 +178,7 @@
         },
         "base_selinux": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -191,7 +191,7 @@
         },
         "base_service_manipulation": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -204,7 +204,7 @@
         },
         "install_blivet_resize_lvm": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_resize_lvm",
@@ -217,7 +217,7 @@
         },
         "install_resize_lvm": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_resize_lvm",
@@ -295,7 +295,7 @@
         },
         "install_blivet_btrfs_preserve_home": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
@@ -306,7 +306,7 @@
         },
         "install_blivet_btrfs_preserve_home_uefi": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_btrfs_preserve_home",
@@ -317,8 +317,8 @@
         },
         "install_blivet_lvm_ext4": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40,
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 41
+                "rocky-dvd-iso-x86_64-*-64bit": 40,
+                "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_lvm_ext4",
@@ -328,8 +328,8 @@
         },
         "install_blivet_standard_partition_ext4": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40,
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 41
+                "rocky-dvd-iso-x86_64-*-64bit": 40,
+                "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_standard_partition_ext4",
@@ -382,7 +382,7 @@
         },
         "install_btrfs_preserve_home": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 10
+                "rocky-dvd-iso-x86_64-*-64bit": 10
             },
             "settings": {
                 "PARTITIONING": "custom_btrfs_preserve_home",
@@ -394,7 +394,7 @@
         },
         "install_btrfs_preserve_home_uefi": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 41
+                "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
                 "PARTITIONING": "custom_btrfs_preserve_home",
@@ -423,9 +423,9 @@
         },
         "install_default": {
             "profiles": {
-                "rocky-Server-boot-iso-x86_64-*-64bit": 10,
-                "rocky-Server-boot-iso-x86_64-*-uefi": 11,
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 11
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -434,7 +434,7 @@
         },
         "install_minimal": {
             "profiles": {
-                "rocky-Server-minimal-iso-x86_64-*-64bit": 10
+                "rocky-minimal-iso-x86_64-*-64bit": 10
             },
             "settings": {
                 "PACKAGE_SET": "minimal",
@@ -443,7 +443,7 @@
         },
         "install_default_upload": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 10
+                "rocky-dvd-iso-x86_64-*-64bit": 10
             },
             "settings": {
                 "PACKAGE_SET": "default",
@@ -503,8 +503,8 @@
         },
         "install_lvm_ext4": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40,
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 41
+                "rocky-dvd-iso-x86_64-*-64bit": 40,
+                "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
                 "HDDSIZEGB": "15",
@@ -515,8 +515,8 @@
         },
         "install_standard_partition_ext4": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 30,
-                "rocky-Server-dvd-iso-x86_64-*-uefi": 31
+                "rocky-dvd-iso-x86_64-*-64bit": 30,
+                "rocky-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
                 "PARTITIONING": "custom_standard_partition_ext4",
@@ -736,7 +736,7 @@
         },
         "modularity_tests": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 30
+                "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -749,7 +749,7 @@
         },
         "release_identification": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 40
+                "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -761,7 +761,7 @@
         },
         "server_cockpit_basic": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 30
+                "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
@@ -774,7 +774,7 @@
         },
         "server_cockpit_default": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -788,7 +788,7 @@
         },
         "server_cockpit_updates": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 30
+                "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
@@ -801,7 +801,7 @@
         },
         "server_filesystem_default": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -814,7 +814,7 @@
         },
         "server_firewall_default": {
             "profiles": {
-                "rocky-Server-dvd-iso-x86_64-*-64bit": 20
+                "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
                 "BOOTFROM": "c",
