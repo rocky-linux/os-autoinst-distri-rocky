@@ -8,7 +8,7 @@ This repository contains tests and images for testing [Rocky](https://rockylinux
 
 ## Requirements
 
-Obviously, this repository is little use without access to an openQA installation. Also, the tests themselves require the perl libraries JSON and REST::Client to be installed on the worker host; in Fedora, the package names are `perl-JSON` and `perl-REST-Client`. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader-rocky.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
+Obviously, this repository is little use without access to an openQA installation. Also, the tests themselves require the perl libraries JSON and REST::Client to be installed on the worker host; in Fedora, the package names are `perl-JSON` and `perl-REST-Client`. To load templates from this repository, you will need the upstream client tools (packaged as `openqa-client` in Fedora) and the dependencies of `fifloader.py` (see below for more on this tool) installed. Those dependencies are Python 3 and the `jsonschema` library. For running the unit tests, you will additionally need `pytest` and `tox`.
 
 ## Test development
 
@@ -23,7 +23,7 @@ See [this example repo](https://github.com/os-autoinst/os-autoinst-distri-exampl
 
 ### FIF template format
 
-The test templates in this repository (files ending in `fif.json`) are not in the same format as expected by and are not directly compatible with the upstream template loader. They are in a format referred to as 'FIF' ('Fedora Intermediate Format') which is parsed into the upstream format by the `fifloader-rocky.py` utility found in this repository. This format is intended to be more convenient for human reading and editing. It is more fully explained in the docstring at the top of `fifloader.py`. Please refer to this when adding new tests to the templates. A command like `./fifloader-rocky.py --load templates.fif.json templates-updates.fif.json` can be used to load templates in the FIF format (this converts them to the upstream format, and calls the upstream template loader on the converted data). See `./fifloader-rocky.py -h` for further details on `fifloader-rocky.py`.
+The test templates in this repository (files ending in `fif.json`) are not in the same format as expected by and are not directly compatible with the upstream template loader. They are in a format referred to as 'FIF' ('Fedora Intermediate Format') which is parsed into the upstream format by the `fifloader.py` utility found in this repository. This format is intended to be more convenient for human reading and editing. It is more fully explained in the docstring at the top of `fifloader.py`. Please refer to this when adding new tests to the templates. A command like `./fifloader.py --load templates.fif.json templates-updates.fif.json` can be used to load templates in the FIF format (this converts them to the upstream format, and calls the upstream template loader on the converted data). See `./fifloader.py -h` for further details on `fifloader.py`.
 
 ### main.pm modular architecture
 
