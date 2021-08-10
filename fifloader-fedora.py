@@ -18,7 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Author: Adam Williamson <awilliam@redhat.com>
-# Modified: Trevor Cooper <tcooper@rockylinux.org>
 
 """This is an openQA template loader/converter for FIF, the Fedora Intermediate Format. It reads
 from one or more files expected to contain FIF JSON-formatted template data; read on for details
@@ -200,7 +199,7 @@ def generate_job_templates(products, profiles, testsuites):
         for (profile, prio) in suite['profiles'].items():
             jobtemplate = {'test_suite_name': name, 'prio': prio}
             # x86_64 compose
-            jobtemplate['group_name'] = 'Rocky'
+            jobtemplate['group_name'] = 'fedora'
             jobtemplate['machine_name'] = profiles[profile]['machine']
             product = products[profiles[profile]['product']]
             jobtemplate['arch'] = product['arch']
@@ -209,17 +208,17 @@ def generate_job_templates(products, profiles, testsuites):
             jobtemplate['version'] = product['version']
             if jobtemplate['machine_name'] == 'ppc64le':
                 if 'updates' in product['flavor']:
-                    jobtemplate['group_name'] = "Rocky PowerPC Updates"
+                    jobtemplate['group_name'] = "Fedora PowerPC Updates"
                 else:
-                    jobtemplate['group_name'] = "Rocky PowerPC"
+                    jobtemplate['group_name'] = "Fedora PowerPC"
             elif jobtemplate['machine_name'] in ('aarch64', 'ARM'):
                 if 'updates' in product['flavor']:
-                    jobtemplate['group_name'] = "Rocky AArch64 Updates"
+                    jobtemplate['group_name'] = "Fedora AArch64 Updates"
                 else:
-                    jobtemplate['group_name'] = "Rocky AArch64"
+                    jobtemplate['group_name'] = "Fedora AArch64"
             elif 'updates' in product['flavor']:
                 # x86_64 updates
-                jobtemplate['group_name'] = "Rocky Updates"
+                jobtemplate['group_name'] = "Fedora Updates"
             jobtemplates.append(jobtemplate)
     return jobtemplates
 
