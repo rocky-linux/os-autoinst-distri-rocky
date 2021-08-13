@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 478,
+      "xpos": 167,
+      "type": "match",
+      "width": 71,
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_manual_partitioning"
+  ]
+}

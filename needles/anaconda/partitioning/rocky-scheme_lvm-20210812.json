@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "ypos": 241,
+      "width": 33,
+      "xpos": 67,
+      "type": "match",
+      "height": 18
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "LANGUAGE-english",
+    "anaconda_part_scheme_lvm"
+  ]
+}
