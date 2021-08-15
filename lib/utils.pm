@@ -386,13 +386,12 @@ sub boot_decrypt {
 
 sub check_release {
     # Checks whether the installed release matches a given value. E.g.
-    # `check_release(23)` checks whether the installed system is
-    # Fedora 23. The value can be 'Rawhide' or a Fedora release
-    # number; often you will want to use `get_var('VERSION')`. Expects
+    # `check_release(8.4)` checks whether the installed system is
+    # Rocky Linux 8.4. Often you will want to use `get_var('VERSION')`. Expects
     # a console prompt to be active when it is called.
     my $release = shift;
     my $check_command = "grep SUPPORT_PRODUCT_VERSION /etc/os-release";
-    validate_script_output $check_command, sub { $_ =~ m/REDHAT_SUPPORT_PRODUCT_VERSION=$release/ };
+    validate_script_output $check_command, sub { $_ =~ m/ROCKY_SUPPORT_PRODUCT_VERSION=$release/ };
 }
 
 sub disable_firefox_studies {
