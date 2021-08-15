@@ -175,6 +175,13 @@ sub load_install_tests() {
         autotest::loadtest "tests/_anaconda_network_enable.pm";
     }
 
+    ## Kdump
+    if (get_var('ANACONDA_KDUMP') eq 'enabled') {
+        autotest::loadtest "tests/_anaconda_kdump_enable.pm";
+    }
+    else {
+        autotest::loadtest "tests/_anaconda_kdump_disable.pm";
+    }
 
     ## Installation source
     if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")) {
