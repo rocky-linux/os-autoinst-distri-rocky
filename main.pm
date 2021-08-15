@@ -171,6 +171,10 @@ sub load_install_tests() {
     if (get_var('ANACONDA_STATIC')) {
         autotest::loadtest "tests/_anaconda_network_static.pm";
     }
+    else {
+        autotest::loadtest "tests/_anaconda_network_enable.pm";
+    }
+
 
     ## Installation source
     if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")) {

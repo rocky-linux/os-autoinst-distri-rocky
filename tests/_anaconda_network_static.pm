@@ -22,6 +22,7 @@ sub run {
     # set DNS from host
     type_safely join(',', get_host_dns());
     type_safely "\t\t\t\t\t\n";
+    assert_and_click "anaconda_network_connect";
     # can take a bit of time as it seems to wait for all the pending
     # DHCP requests to time out before applying the static config
     assert_screen "anaconda_network_connected", 90;
