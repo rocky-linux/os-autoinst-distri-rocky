@@ -12,7 +12,7 @@ sub run {
     # Install a Ruby module.
     my $name = "nodejs";
     my $stream = "14";
-    my $profile = "default";
+    my $profile = "common";
     assert_script_run("dnf module install -y $name:$stream/$profile");
 
     # Check that it is listed in the installed list.
