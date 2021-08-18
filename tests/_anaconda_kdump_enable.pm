@@ -6,6 +6,9 @@ use tapnet;
 
 sub run {
     my $self = shift;
+    # Anaconda hub
+    assert_screen "anaconda_main_hub", 300; #
+
     assert_and_click "anaconda_main_hub_kdump";
     assert_and_click "anaconda_kdump_enable";
     assert_screen "anaconda_kdump_enabled", 90;
