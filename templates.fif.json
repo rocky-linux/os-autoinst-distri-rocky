@@ -47,6 +47,7 @@
             "flavor": "minimal-iso",
             "settings": {
                 "+QEMURAM": 3072,
+                "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -373,6 +374,16 @@
             "settings": {
                 "PACKAGE_SET": "minimal",
                 "POSTINSTALL": "_collect_data"
+            }
+        },
+        "install_minimal_upload": {
+            "profiles": {
+                "rocky-minimal-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "PACKAGE_SET": "minimal",
+                "POSTINSTALL": "_collect_data",
+                "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
             }
         },
         "install_default_upload": {
