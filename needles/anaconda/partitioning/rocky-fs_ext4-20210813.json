@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "ypos": 270,
+      "width": 34,
+      "xpos": 505,
+      "type": "match",
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_part_fs_ext4"
+  ]
+}

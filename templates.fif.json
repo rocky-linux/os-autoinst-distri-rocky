@@ -271,17 +271,6 @@
                 "USER_LOGIN": "qwerty"
             }
         },
-        "install_blivet_btrfs": {
-            "profiles": {
-                "rocky-universal-x86_64-*-64bit": 40,
-                "rocky-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_btrfs",
-                "POSTINSTALL": "disk_custom_btrfs_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
         "install_blivet_lvmthin": {
             "profiles": {
                 "rocky-universal-x86_64-*-64bit": 40,
@@ -290,28 +279,6 @@
             "settings": {
                 "PARTITIONING": "custom_blivet_lvmthin",
                 "POSTINSTALL": "disk_custom_lvmthin_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_blivet_btrfs_preserve_home": {
-            "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img",
-                "POSTINSTALL": "btrfs_preserve_home_check_content",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_blivet_btrfs_preserve_home_uefi": {
-            "profiles": {
-                "rocky-dvd-iso-x86_64-*-uefi": 40
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.img",
-                "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
@@ -367,39 +334,6 @@
             "settings": {
                 "PARTITIONING": "custom_blivet_xfs",
                 "POSTINSTALL": "disk_custom_xfs_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_btrfs": {
-            "profiles": {
-                "rocky-universal-x86_64-*-64bit": 40,
-                "rocky-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_btrfs",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_btrfs_preserve_home": {
-            "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 10
-            },
-            "settings": {
-                "PARTITIONING": "custom_btrfs_preserve_home",
-                "INSTALL": 1,
-                "ROOT_PASSWORD": "weakpassword",
-                "POSTINSTALL": "btrfs_preserve_home_check_content",
-                "HDD_1": "disk_f%CURRREL%_desktop_4_%ARCH%.img"
-            }
-        },
-        "install_btrfs_preserve_home_uefi": {
-            "profiles": {
-                "rocky-dvd-iso-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_btrfs_preserve_home",
-                "HDD_1": "disk_f%CURRREL%_minimal-uefi_3_%ARCH%.img",
-                "POSTINSTALL": "btrfs_preserve_home_check_content",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },

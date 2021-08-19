@@ -12,34 +12,26 @@ sub run {
     # The test case will check that dnf has modular functions and that
     # it is possible to invoke modular commands to work with modularity.
 
-    # Check that modular repositories are installed and enabled.
-    # If the repository does not exist, the output of the command is empty.
-    if (lc(get_var('VERSION')) eq "rawhide") {
-        my $mrawhide_output = script_output("dnf repolist --enabled rawhide-modular");
-        die "The rawhide-modular repo seems not to be installed." unless (length $mrawhide_output);
-    }
-    else {
-        my $mfedora_output = script_output("dnf repolist --enabled fedora-modular");
-        die "The fedora-modular repo seems not to be installed." unless (length $mfedora_output);
-        my $mupdates_output = script_output("dnf repolist --enabled updates-modular");
-        die "The updates-modular repo seems not to be installed." unless (length $mupdates_output);
-    }
-
-    # Check that modularity works and dnf can list the modules.
-    my $modules = script_output('dnf module list --disablerepo=updates-modular --disablerepo=updates-testing-modular', timeout => 270);
-    my @modules = parse_module_list($modules);
-    die "The module list seems to be empty when it should not be." if (scalar @modules == 0);
-
-    # Check that modularity works and dnf can list the modules
-    # with the -all option.
-    $modules = script_output('dnf module list --all --disablerepo=updates-modular --disablerepo=updates-testing-modular', timeout => 270);
-    @modules = parse_module_list($modules);
-    die "The module list seems to be empty when it should not be." if (scalar @modules == 0);
-
     # Check that dnf lists the enabled modules.
-    $modules = script_output('dnf module list --enabled', timeout => 270);
-    @modules = parse_module_list($modules);
-    die "There seem to be enabled modules when the list should be empty." unless (scalar @modules == 0);
+    # NOTE: In Rocky the baseos and appstream default repos include and add modules in the
+    #       default installation where in Fedora all modules are in separate modular repos.
+    #       Until we figure out how to keep track of the count of expected enabled modular
+    #       packages this will need to assume what appears to be the default in minimal.
+    my $modules = script_output('dnf module list --enabled', timeout => 270);
+    my @modules = parse_module_list($modules);
+    die "Enabled modules is less than the default (3)." unless (scalar @modules < 3);
+    die "Enabled modules is greater than the default (3)." unless (scalar @modules > 3);
+
+    # More advanced... loop over default modules and check them directly. The is_listed
+    # bit comes from modularity_enable_disable_module.pm
+
+    #perl                5.26   [d][e]
+    #perl-IO-Socket-SSL  2.066  [d][e]
+    #perl-libwww-perl    6.34   [d][e]
+    #my @enabled_modules = parse_module_list($enabled);
+    #unless (is_listed($name, $stream, \@enabled_modules)) {
+    #    die "The enabled module is not listed in the list of enabled modules but it should be.";
+    #}
 
     # Check that dnf lists the disabled modules.
     $modules = script_output('dnf module list --disabled', timeout => 270);
