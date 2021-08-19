@@ -31,6 +31,13 @@
                 "DESKTOP": "gnome"
             },
             "version": "*"
+        },
+        "rocky-updates-minimal-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "rocky",
+            "flavor": "updates-minimal",
+            "settings": {},
+            "version": "*"
         }
     },
     "Profiles": {
@@ -49,6 +56,10 @@
         "rocky-updates-workstation-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-updates-workstation-x86_64-*"
+        },
+        "rocky-updates-minimal-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "rocky-updates-minimal-x86_64-*"
         }
     },
     "TestSuites": {
@@ -65,36 +76,42 @@
         },
         "base_selinux": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
         },
         "base_service_manipulation": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
         },
         "base_services_start": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
         },
         "base_update_cli": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
         },
         "base_reboot_unmount": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
         },
         "base_system_logging": {
             "profiles": {
+                "rocky-updates-minimal-x86_64-*-64bit": 40,
                 "rocky-updates-server-x86_64-*-64bit": 40,
                 "rocky-updates-workstation-x86_64-*-64bit": 40
             }
