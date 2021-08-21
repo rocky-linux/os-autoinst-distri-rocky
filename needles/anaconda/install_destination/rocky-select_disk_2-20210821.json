@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 18,
+      "xpos": 201,
+      "height": 23,
+      "ypos": 284,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "anaconda_install_destination_select_disk_2"
+  ]
+}
