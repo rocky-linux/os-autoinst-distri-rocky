@@ -306,7 +306,7 @@ sub get_full_repo {
 }
 
 sub get_mirrorlist_url {
-    return "mirrors.fedoraproject.org/mirrorlist?repo=fedora-" . lc(get_var("VERSION")) . "&arch=" . get_var('ARCH');
+    return "mirrors.rockylinux.org/mirrorlist?repo=rocky-BaseOS-" . lc(get_var("VERSION")) . "&arch=" . get_var('ARCH');
 }
 
 sub check_help_on_pane {
