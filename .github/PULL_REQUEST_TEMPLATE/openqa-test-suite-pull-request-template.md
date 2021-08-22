@@ -14,6 +14,7 @@ assignees: ''
 
 <!-- eg: Fixes #999 -->
 
+<!-- If no Issue exists it is highly recommended that you create an issue first, assigning it to yourself and then return here to provide the pull request. -->
 
 # How Has This Been Tested?
 
