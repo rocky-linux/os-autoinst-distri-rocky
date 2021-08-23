@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 13,
+      "height": 18,
+      "width": 112,
+      "type": "match",
+      "ypos": 135
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-french",
+    "anaconda_kdump_disabled"
+  ]
+}
