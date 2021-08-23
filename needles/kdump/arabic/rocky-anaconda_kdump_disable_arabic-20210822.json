@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 904,
+      "width": 111,
+      "ypos": 130,
+      "height": 26,
+      "click_point": {
+        "xpos": 98.5,
+        "ypos": 13
+      },
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_kdump_disable"
+  ]
+}
