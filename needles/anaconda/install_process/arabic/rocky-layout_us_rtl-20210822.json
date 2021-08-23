@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 372,
+      "height": 17,
+      "xpos": 643,
+      "width": 37
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_layout_ascii",
+    "anaconda_layout_us"
+  ]
+}
