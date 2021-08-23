@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 776,
+      "width": 90,
+      "ypos": 361,
+      "height": 16,
+      "click_point": {
+        "xpos": 17,
+        "ypos": 1.5
+      },
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "anaconda_main_hub_network_host_name_not_connected"
+  ]
+}
