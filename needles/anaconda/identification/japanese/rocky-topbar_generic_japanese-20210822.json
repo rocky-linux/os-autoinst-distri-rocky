@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 675,
+      "xpos": 102,
+      "height": 32,
+      "ypos": 49,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-japanese",
+    "topbar_generic"
+  ]
+}
