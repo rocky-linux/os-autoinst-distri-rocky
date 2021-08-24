@@ -19,7 +19,9 @@ assignees: ''
 # How Has This Been Tested?
 
 <!-- Indicate what you have done to test this PR, with screenshots if appropriate -->
-
+<!-- At a minimum, please include the following: -->
+<!-- * The command you used to trigger a passing test -->
+<!-- * Criteria for a successful test (eg: suite install_minimal@uefi passes) -->
 
 # Checklist:
 
