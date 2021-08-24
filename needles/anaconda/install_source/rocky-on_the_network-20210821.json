@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "width": 100,
+      "xpos": 58,
+      "height": 15,
+      "ypos": 179,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "LANGUAGE-english",
+    "anaconda_install_source_on_the_network"
+  ]
+}
