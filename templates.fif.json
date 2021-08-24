@@ -13,6 +13,25 @@
                 "WORKER_CLASS": "qemu_x86_64"
             }
         },
+        "aarch64": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "aarch64",
+                "PART_TABLE_TYPE": "gpt",
+                "QEMU": "aarch64",
+                "QEMUCPU": "host",
+                "QEMUCPUS": "2",
+                "QEMUMACHINE": "virt,gic-version=max",
+                "QEMURAM": 3072,
+                "QEMU_VIRTIO_RNG": "1",
+                "SERIALDEV": "ttyAMA0",
+                "TIMEOUT_SCALE": "1.5",
+                "UEFI": "1",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/aarch64/vars-template-pflash.raw",
+                "WORKER_CLASS": "qemu_aarch64"
+            }
+        },
         "uefi": {
             "backend": "qemu",
             "settings": {
@@ -31,12 +50,33 @@
         }
     },
     "Products": {
+        "rocky-boot-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "boot-iso",
+            "settings": {
+                "+QEMURAM": 3072,
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "rocky-boot-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
                 "+QEMURAM": 3072,
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-minimal-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "minimal-iso",
+            "settings": {
+                "+QEMURAM": 3072,
+                "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -52,6 +92,16 @@
             },
             "version": "*"
         },
+        "rocky-dvd-iso-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "dvd-iso",
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "rocky-dvd-iso-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -62,6 +112,15 @@
             },
             "version": "*"
         },
+        "rocky-package-set-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "package-set",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },        
         "rocky-package-set-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -71,6 +130,15 @@
             },
             "version": "*"
         },
+        "rocky-universal-aarch64-*": {
+            "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "universal",
+            "settings": {
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },        
         "rocky-universal-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -82,6 +150,10 @@
         }
     },
     "Profiles": {
+        "rocky-boot-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "rocky-boot-iso-aarch64-*"
+        },
         "rocky-boot-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-boot-iso-x86_64-*"
@@ -90,9 +162,17 @@
             "machine": "uefi",
             "product": "rocky-boot-iso-x86_64-*"
         },
+        "rocky-minimal-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "rocky-minimal-iso-aarch64-*"
+        },
         "rocky-minimal-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-minimal-iso-x86_64-*"
+        },
+        "rocky-dvd-iso-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "rocky-dvd-iso-aarch64-*"
         },
         "rocky-dvd-iso-x86_64-*-64bit": {
             "machine": "64bit",
@@ -102,6 +182,10 @@
             "machine": "uefi",
             "product": "rocky-dvd-iso-x86_64-*"
         },
+        "rocky-package-set-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "rocky-package-set-aarch64-*"
+        },        
         "rocky-package-set-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-package-set-x86_64-*"
@@ -110,6 +194,10 @@
             "machine": "64bit",
             "product": "rocky-package-set-x86_64-*"
         },
+        "rocky-universal-aarch64-*-aarch64": {
+            "machine": "aarch64",
+            "product": "rocky-universal-aarch64-*"
+        },        
         "rocky-universal-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-universal-x86_64-*"
@@ -122,6 +210,7 @@
     "TestSuites": {
         "anaconda_help": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -131,6 +220,7 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -144,6 +234,7 @@
         },
         "base_system_logging": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -157,6 +248,7 @@
         },
         "base_update_cli": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -170,6 +262,7 @@
         },
         "base_package_install_remove": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -183,6 +276,7 @@
         },
         "base_services_start": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -196,6 +290,7 @@
         },
         "base_selinux": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -209,6 +304,7 @@
         },
         "base_service_manipulation": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -222,6 +318,7 @@
         },
         "install_blivet_resize_lvm": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -235,6 +332,7 @@
         },
         "install_resize_lvm": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -247,6 +345,7 @@
         },
         "install_anaconda_text": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
@@ -255,6 +354,7 @@
         },
         "install_arabic_language": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -273,6 +373,7 @@
         },
         "install_asian_language": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -291,6 +392,7 @@
         },
         "install_blivet_lvmthin": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
@@ -302,6 +404,7 @@
         },
         "install_blivet_lvm_ext4": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
@@ -313,6 +416,7 @@
         },
         "install_blivet_standard_partition_ext4": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
@@ -323,6 +427,7 @@
         },
         "install_blivet_with_swap": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 50,
                 "rocky-universal-x86_64-*-64bit": 50,
                 "rocky-universal-x86_64-*-uefi": 51
             },
@@ -334,6 +439,7 @@
         },
         "install_blivet_software_raid": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
@@ -346,6 +452,7 @@
         },
         "install_blivet_xfs": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
@@ -357,6 +464,7 @@
         },
         "install_cyrillic_language": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -375,8 +483,10 @@
         },
         "install_default": {
             "profiles": {
+                "rocky-boot-iso-aarch64-*-aarch64": 10,
                 "rocky-boot-iso-x86_64-*-64bit": 10,
                 "rocky-boot-iso-x86_64-*-uefi": 11,
+                "rocky-dvd-iso-aarch64-*-aarch64": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11
             },
             "settings": {
@@ -386,6 +496,7 @@
         },
         "install_minimal": {
             "profiles": {
+                "rocky-minimal-iso-aarch64-*-aarch64": 10,
                 "rocky-minimal-iso-x86_64-*-64bit": 10
             },
             "settings": {
@@ -395,6 +506,7 @@
         },
         "install_minimal_upload": {
             "profiles": {
+                "rocky-minimal-iso-aarch64-*-aarch64": 10,
                 "rocky-minimal-iso-x86_64-*-64bit": 10
             },
             "settings": {
@@ -405,6 +517,7 @@
         },
         "install_default_upload": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 10,
                 "rocky-dvd-iso-x86_64-*-64bit": 10
             },
             "settings": {
@@ -415,6 +528,7 @@
         },
         "install_delete_partial": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -426,6 +540,7 @@
         },
         "install_delete_pata": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
             },
@@ -437,6 +552,7 @@
         },
         "install_european_language": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -455,6 +571,7 @@
         },
         "install_lvmthin": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
@@ -465,6 +582,7 @@
         },
         "install_lvm_ext4": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
@@ -477,6 +595,7 @@
         },
         "install_standard_partition_ext4": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30,
                 "rocky-dvd-iso-x86_64-*-uefi": 31
             },
@@ -487,6 +606,7 @@
         },
         "install_mirrorlist_graphical": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
@@ -495,6 +615,7 @@
         },
         "install_multi": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
             },
@@ -507,6 +628,7 @@
         },
         "install_multi_empty": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -518,6 +640,7 @@
         },
         "install_with_swap": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 50,
                 "rocky-universal-x86_64-*-64bit": 50,
                 "rocky-universal-x86_64-*-uefi": 51
             },
@@ -528,6 +651,7 @@
         },
         "install_package_set_minimal": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30
             },
             "settings": {
@@ -537,6 +661,7 @@
         },
         "install_package_set_minimal": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -546,6 +671,7 @@
         },
         "install_package_set_server": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -555,6 +681,7 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -568,6 +695,7 @@
         },
         "install_package_set_workstation": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -581,6 +709,7 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -590,6 +719,7 @@
         },
         "install_pxeboot": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -608,6 +738,7 @@
         },
         "install_repository_http_graphical": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
@@ -616,6 +747,7 @@
         },
         "install_repository_http_variation": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
@@ -624,6 +756,7 @@
         },
         "install_rescue_encrypted": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 31,
                 "rocky-universal-x86_64-*-64bit": 31,
                 "rocky-universal-x86_64-*-uefi": 32
             },
@@ -636,6 +769,7 @@
         },
         "install_sata": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
             },
@@ -646,6 +780,7 @@
         },
         "install_scsi_updates_img": {
             "profiles": {
+              "rocky-universal-aarch64-*-aarch64": 20,
               "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
@@ -658,6 +793,7 @@
         },
         "install_serial_console": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30
             },
             "settings": {
@@ -669,6 +805,7 @@
         },
         "install_shrink_ext4": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -679,6 +816,7 @@
         },
         "install_shrink_ntfs": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
@@ -689,6 +827,7 @@
         },
         "install_simple_encrypted": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -699,6 +838,7 @@
         },
         "install_simple_free_space": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -710,6 +850,7 @@
         },
         "install_software_raid": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
             },
@@ -721,6 +862,7 @@
         },
         "install_xfs": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
@@ -731,6 +873,7 @@
         },
         "memtest": {
             "profiles": {
+                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30
             },
             "settings": {
@@ -739,6 +882,7 @@
         },
         "modularity_tests": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
@@ -752,6 +896,7 @@
         },
         "release_identification": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
@@ -764,6 +909,7 @@
         },
         "server_cockpit_basic": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
@@ -777,6 +923,7 @@
         },
         "server_cockpit_default": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -791,6 +938,7 @@
         },
         "server_cockpit_updates": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30
             },
             "settings": {
@@ -804,6 +952,7 @@
         },
         "server_filesystem_default": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
@@ -817,6 +966,7 @@
         },
         "server_firewall_default": {
             "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
             "settings": {
