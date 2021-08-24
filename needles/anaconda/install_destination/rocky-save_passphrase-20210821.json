@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 26,
+      "xpos": 672,
+      "width": 130,
+      "type": "match",
+      "ypos": 506
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_install_destination_save_passphrase"
+  ]
+}
