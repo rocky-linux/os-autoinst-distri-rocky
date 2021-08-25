@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 58,
+      "xpos": 952,
+      "height": 22,
+      "ypos": 39,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-french",
+    "skip_button"
+  ]
+}
