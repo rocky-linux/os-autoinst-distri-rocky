@@ -49,9 +49,6 @@ sub run {
         send_key "tab";
         send_key "tab";
         send_key "down";
-        # since anaconda-33.17-1.fc33 we only have to press down *one*
-        # time to select 'mirrorlist'
-        send_key "down" if ($relnum < 33);
     }
     elsif (get_var("REPOSITORY_GRAPHICAL")) {
         $repourl = get_full_repo(get_var("REPOSITORY_GRAPHICAL"));
