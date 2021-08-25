@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "ypos": 116,
+      "type": "match",
+      "width": 288,
+      "xpos": 38,
+      "height": 43
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "LANGUAGE-english",
+    "getting_started"
+  ]
+}

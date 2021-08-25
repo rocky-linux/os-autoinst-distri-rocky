@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 35,
+      "height": 16,
+      "xpos": 853,
+      "ypos": 7,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gnome_layout_ascii",
+    "gnome_layout_us"
+  ]
+}
