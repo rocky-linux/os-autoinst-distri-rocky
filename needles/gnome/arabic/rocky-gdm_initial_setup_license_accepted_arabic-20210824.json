@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "xpos": 327,
+      "ypos": 395,
+      "width": 211,
+      "height": 69,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "gdm_initial_setup_license_accepted"
+  ]
+}

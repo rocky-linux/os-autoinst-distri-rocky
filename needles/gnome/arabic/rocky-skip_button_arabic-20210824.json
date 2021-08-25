@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 49,
+      "height": 24,
+      "xpos": 14,
+      "ypos": 39,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "skip_button"
+  ]
+}
