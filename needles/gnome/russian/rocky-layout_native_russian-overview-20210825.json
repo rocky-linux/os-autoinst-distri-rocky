@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 33,
+      "xpos": 853,
+      "height": 13,
+      "ypos": 7,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "gnome_layout_native"
+  ]
+}

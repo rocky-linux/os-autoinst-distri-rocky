@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 5,
+      "xpos": 10,
+      "height": 24,
+      "width": 67
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "apps_menu_button",
+    "apps_menu_button_active"
+  ]
+}
