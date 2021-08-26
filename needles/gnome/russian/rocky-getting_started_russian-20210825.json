@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 17,
+      "xpos": 460,
+      "width": 111,
+      "type": "match",
+      "ypos": 34
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "getting_started"
+  ]
+}

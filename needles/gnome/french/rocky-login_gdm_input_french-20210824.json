@@ -1,16 +1,18 @@
 {
   "area": [
     {
-      "width": 414,
+      "width": 112,
       "height": 27,
-      "ypos": 270,
-      "xpos": 374,
+      "xpos": 338,
+      "ypos": 339,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
+    "DESKTOP-gnome",
     "ENV-DISTRI-rocky",
-    "anaconda_warning_bar"
+    "LANGUAGE-french",
+    "graphical_login_input"
   ]
 }

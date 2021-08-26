@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "xpos": 484,
+      "ypos": 396,
+      "width": 214,
+      "height": 74,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-japanese",
+    "gdm_initial_setup_license_accepted"
+  ]
+}

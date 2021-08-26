@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 256,
+      "xpos": 357,
+      "height": 17,
+      "width": 285
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-japanese",
+    "initial_setup_kana_kanji_selected"
+  ]
+}

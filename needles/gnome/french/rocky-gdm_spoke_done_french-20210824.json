@@ -1,0 +1,18 @@
+{
+  "area": [
+    {
+      "xpos": 11,
+      "ypos": 33,
+      "width": 44,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-french",
+    "gdm_spoke_done"
+  ]
+}

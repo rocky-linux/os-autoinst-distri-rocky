@@ -1,0 +1,24 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 638,
+      "xpos": 647,
+      "height": 20,
+      "width": 376
+    },
+    {
+      "type": "match",
+      "ypos": 697,
+      "height": 18,
+      "xpos": 867,
+      "width": 139
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "anaconda_install_done"
+  ]
+}

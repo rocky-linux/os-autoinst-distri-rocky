@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 22,
+      "xpos": 673,
+      "width": 93,
+      "type": "match",
+      "ypos": 97
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_install_user_creation_screen"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "xpos": 83,
+      "ypos": 629,
+      "width": 208,
+      "height": 21,
+      "type": "match",
+      "click_point": {
+        "xpos": 11,
+        "ypos": 9.5
+      }
+    },
+    {
+      "xpos": 80,
+      "ypos": 100,
+      "width": 121,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-french",
+    "gdm_initial_setup_licence_accept"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 198,
+      "ypos": 361,
+      "width": 71,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_main_hub_network_host_name_not_connected"
+  ]
+}
