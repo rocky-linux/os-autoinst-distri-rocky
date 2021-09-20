@@ -26,20 +26,51 @@ sub run {
     # After updates, ignore restart because we do not need
     # restarting the machine to continue. Also, we would have
     # to deal with much more complicated workflow.
-    #
-    if (check_screen('cockpit_updates_security_install',1)) {
-       assert_and_click 'cockpit_updates_security_install';
-       sleep 60; # wait until things are installed
-       assert_and_click 'cockpit_updates_restart_ignore';
-       wait_still_screen 2;
-    }
 
+    # In Rocky it may take quite a while to query for updates
+    # and present the Install Security Updates button.
+    # Provide a bit of extra time to match that screen
+    if (check_screen('cockpit_updates_security_install', 180)) {
+
+      # There may be a large number of security updates to install
+      # so give the system more time to complete those updates.
+      assert_and_click 'cockpit_updates_security_install';
+      my $run = 0;
+      while ($run < 60) {
+
+        # Ignore rebooting the system because we want to finish the test instead.
+        if (check_screen('cockpit_updates_restart_ignore', 1)) {
+            assert_and_click 'cockpit_updates_restart_ignore';
+            last;
+        }
+        else {
+            sleep 60;
+            $run = $run + 1;
+        }
+
+        # move the mouse a bit
+        mouse_set 100, 100;
+        # also click, if we're a VNC client, seems just moving mouse
+        # isn't enough to defeat blanking
+        mouse_click if (get_var("VNC_CLIENT"));
+        mouse_hide;
+      }
+      wait_still_screen 2;
+
+      # Rocky cockpit UI may require a scroll-down event after
+      # updating.
+      if (check_screen('cockpit_updates_security_complete', 180)) {
+       assert_screen ["cockpit_updates_security_complete"], 120;
+        click_lastmatch;
+      }
+
+    }
 
     # Install the rest of the updates, or any updates
     # that have not been previously installed.
     assert_and_click 'cockpit_updates_all_install';
     my $run = 0;
-    while ($run < 40) {
+    while ($run < 60) {
         # When Cockpit packages are also included in the updates
         # the user is forced to reconnect, i.e. to restart the Web Application
         # and relog for further interaction. We will check if reconnection is
@@ -63,6 +94,13 @@ sub run {
             sleep 10;
             $run = $run + 1;
         }
+
+        # move the mouse a bit
+        mouse_set 100, 100;
+        # also click, if we're a VNC client, seems just moving mouse
+        # isn't enough to defeat blanking
+        mouse_click if (get_var("VNC_CLIENT"));
+        mouse_hide;
     }
     # Check that the system is updated
     assert_screen 'cockpit_updates_updated';
