@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 484,
+      "ypos": 394,
+      "width": 213,
+      "height": 73,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gdm_initial_setup_license_accepted"
+  ]
+}

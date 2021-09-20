@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 30,
+      "type": "match",
+      "ypos": 6,
+      "width": 67
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "apps_menu_button",
+    "apps_menu_button_inactive"
+  ]
+}
