@@ -509,18 +509,6 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_package_set_kde": {
-            "profiles": {
-                "rocky-universal-x86_64-*-64bit": 50
-            },
-            "settings": {
-                "DESKTOP": "kde",
-                "HDDSIZEGB": "15",
-                "PACKAGE_SET": "kde",
-                "POSTINSTALL": "_collect_data",
-                "REPOSITORY_VARIATION": "%LOCATION%"
-            }
-        },
         "install_package_set_minimal": {
             "profiles": {
                 "rocky-universal-x86_64-*-64bit": 30
