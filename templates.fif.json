@@ -537,6 +537,7 @@
         },
         "install_package_set_minimal": {
             "profiles": {
+                "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "PACKAGE_SET": "minimal",
@@ -545,6 +546,7 @@
         },
         "install_package_set_server": {
             "profiles": {
+                "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "PACKAGE_SET": "server",
@@ -579,6 +581,7 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
+                "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "PACKAGE_SET": "virtualization-host",
