@@ -23,7 +23,7 @@ sub parse_module_list {
 
     foreach my $line (@output_lines) {
         my ($module, $stream, $profile) = split(/\s+/, $line);
-        unless ($module =~ /Fedora|Last|Hint|Name|^$/) {
+        unless ($module =~ /Rocky|Last|Hint|Name|^$/) {
             $profile =~ s/,$//;
             my %module = ("module" => $module, "stream" => $stream, "profile" => $profile);
             push(@parsed_list, \%module);

@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
+    "ENV-DISTRI-rocky",
     "autoupdate_planned_day"
   ]
 }

@@ -1,16 +1,16 @@
 {
   "area": [
     {
-      "width": 156,
-      "xpos": 0,
-      "ypos": 0,
-      "height": 766,
+      "xpos": 28,
+      "ypos": 241,
+      "width": 247,
+      "height": 32,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "leftbar_server"
+    "anaconda_workstation_selected"
   ]
 }

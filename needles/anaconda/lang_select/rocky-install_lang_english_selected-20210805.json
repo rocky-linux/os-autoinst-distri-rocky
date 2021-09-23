@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
+    "ENV-DISTRI-rocky",
     "anaconda_select_install_lang_selected",
     "anaconda_select_install_lang_filtered",
     "LANGUAGE-english"

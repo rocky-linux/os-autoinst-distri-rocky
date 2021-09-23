@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 125,
+      "height": 13,
+      "type": "match",
+      "xpos": 48,
+      "ypos": 335
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_virtualization-host_highlighted"
+  ]
+}

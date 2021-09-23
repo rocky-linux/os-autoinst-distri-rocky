@@ -10,7 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "ENV-DISTRI-fedora",
+    "ENV-DISTRI-rocky",
     "anaconda_part_fs",
     "anaconda_part_fs_xfs_selected"
   ]
