@@ -120,7 +120,7 @@
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
-        },        
+        },
         "rocky-package-set-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -138,7 +138,7 @@
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
-        },        
+        },
         "rocky-universal-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -185,7 +185,7 @@
         "rocky-package-set-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-package-set-aarch64-*"
-        },        
+        },
         "rocky-package-set-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-package-set-x86_64-*"
@@ -197,7 +197,7 @@
         "rocky-universal-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-universal-aarch64-*"
-        },        
+        },
         "rocky-universal-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-universal-x86_64-*"
@@ -422,18 +422,6 @@
             },
             "settings": {
                 "PARTITIONING": "custom_blivet_standard_partition_ext4",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_blivet_with_swap": {
-            "profiles": {
-                "rocky-universal-aarch64-*-aarch64": 50,
-                "rocky-universal-x86_64-*-64bit": 50,
-                "rocky-universal-x86_64-*-uefi": 51
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_with_swap",
-                "POSTINSTALL": "disk_custom_with_swap_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
