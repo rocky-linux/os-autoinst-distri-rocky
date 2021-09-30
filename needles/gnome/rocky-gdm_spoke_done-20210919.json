@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 12,
+      "ypos": 32,
+      "width": 52,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gdm_spoke_done"
+  ]
+}
