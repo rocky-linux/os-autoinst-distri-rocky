@@ -21,6 +21,8 @@ See official documentation on:
 
 See [this example repo](https://github.com/os-autoinst/os-autoinst-distri-example) on how tests should be structured.
 
+See the [results readme](RESULTS.md) for the expected test commands and results for Rocky
+
 ### FIF template format
 
 The test templates in this repository (files ending in `fif.json`) are not in the same format as expected by and are not directly compatible with the upstream template loader. They are in a format referred to as 'FIF' ('Fedora Intermediate Format') which is parsed into the upstream format by the `fifloader.py` utility found in this repository. This format is intended to be more convenient for human reading and editing. It is more fully explained in the docstring at the top of `fifloader.py`. Please refer to this when adding new tests to the templates. A command like `./fifloader.py --load templates.fif.json templates-updates.fif.json` can be used to load templates in the FIF format (this converts them to the upstream format, and calls the upstream template loader on the converted data). See `./fifloader.py -h` for further details on `fifloader.py`.
