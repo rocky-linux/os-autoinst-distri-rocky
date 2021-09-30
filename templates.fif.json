@@ -316,20 +316,6 @@
                 "USER_LOGIN": "false"
             }
         },
-        "install_blivet_resize_lvm": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_resize_lvm",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "INSTALL": "1",
-                "POSTINSTALL": "disk_custom_resize_lvm_postinstall",
-                "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_lvm_ext4"
-            }
-        },
         "install_resize_lvm": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
@@ -388,18 +374,6 @@
                 "REPOSITORY_VARIATION": "%LOCATION%",
                 "ROOT_PASSWORD": "weakpassword",
                 "USER_LOGIN": "qwerty"
-            }
-        },
-        "install_blivet_lvmthin": {
-            "profiles": {
-                "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-64bit": 40,
-                "rocky-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_lvmthin",
-                "POSTINSTALL": "disk_custom_lvmthin_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "install_blivet_lvm_ext4": {
