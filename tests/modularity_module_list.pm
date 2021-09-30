@@ -19,19 +19,34 @@ sub run {
     #       packages this will need to assume what appears to be the default in minimal.
     my $modules = script_output('dnf module list --enabled', timeout => 270);
     my @modules = parse_module_list($modules);
-    die "Enabled modules is less than the default (3)." unless (scalar @modules < 3);
-    die "Enabled modules is greater than the default (3)." unless (scalar @modules > 3);
+    my $module_count = scalar @modules;
 
-    # More advanced... loop over default modules and check them directly. The is_listed
-    # bit comes from modularity_enable_disable_module.pm
+    my $flavor = get_var('FLAVOR', 'minimal-iso');
+    my $packageset = get_var('PACKAGE_SET', 'minimal');
 
-    #perl                5.26   [d][e]
-    #perl-IO-Socket-SSL  2.066  [d][e]
-    #perl-libwww-perl    6.34   [d][e]
-    #my @enabled_modules = parse_module_list($enabled);
-    #unless (is_listed($name, $stream, \@enabled_modules)) {
-    #    die "The enabled module is not listed in the list of enabled modules but it should be.";
-    #}
+    if ($flavor eq 'boot-iso') {
+        die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+    } elsif ($flavor eq 'minimal-iso') {
+        if ($packageset eq 'minimal') {
+            die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+        } elsif ($packageset eq 'server') {
+            die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+        }
+    } elsif ($flavor eq 'dvd-iso' || $flavor eq 'universal') {
+        if ($packageset eq 'minimal') {
+            die "Enabled modules ($module_count) is not equal to the default (1)." unless (scalar @modules == 1);
+        } elsif ($packageset eq 'server') {
+            die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
+        } elsif ($packageset eq 'graphical-server') {
+            die "Enabled modules ($module_count) is not equal to the default (9)." unless (scalar @modules == 9);
+        } elsif ($packageset eq 'workstation') {
+            die "Enabled modules ($module_count) is not equal to the default (6)." unless (scalar @modules == 6);
+        } elsif ($packageset eq 'virtualization-host') {
+            die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
+        }
+    } else {
+        die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
+    }
 
     # Check that dnf lists the disabled modules.
     $modules = script_output('dnf module list --disabled', timeout => 270);

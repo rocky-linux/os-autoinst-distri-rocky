@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
+    "ENV-DISTRI-rocky",
     "anaconda_part_fs_ext4"
   ]
 }
