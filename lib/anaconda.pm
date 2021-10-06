@@ -9,7 +9,7 @@ use testapi;
 use utils;
 use bugzilla;
 
-our @EXPORT = qw/select_disks custom_scheme_select custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo check_help_on_pane get_mirrorlist_url crash_anaconda_text report_bug_text/;
+our @EXPORT = qw/select_disks custom_scheme_select custom_add_partition custom_blivet_add_partition custom_blivet_format_partition custom_blivet_resize_partition custom_change_type custom_change_fs custom_change_device custom_delete_part get_full_repo check_help_on_pane get_mirrorlist_url crash_anaconda_text report_bug_text/;
 
 sub select_disks {
     # Handles disk selection. Has one optional argument - number of
@@ -175,8 +175,67 @@ sub custom_blivet_add_partition {
     }
 }
 
+sub custom_add_partition {
+    # Used to add partition on Rocky custom-gui partitioning screen
+    # in Anaconda. Should be called when custom-gui is displayed and free space is selected.
+    # You can pass device type for partition (needle tagged anaconda_custom_devicetype_$devicetype should exist), size of that partition in MiBs, desired filesystem of that partition
+    # (anaconda_custom_part_fs_$filesystem should exist) and mountpoint of that partition (e. g. string "/boot").
+    my %args = (
+        devicetype => "",
+        raid1 => 0,
+        size => 0,
+        filesystem => "",
+        mountpoint => "",
+        @_
+    );
+    $args{devicetype} = "raid" if $args{raid1};
+
+    assert_and_click "anaconda_custom_part_add";
+
+    if ($args{mountpoint}) {
+        assert_and_click "anaconda_custom_mountpoint";
+        type_safely $args{mountpoint};
+        # esc to dismiss the dropdown that appears when we add a mountpoint
+        send_key "esc";
+    }
+    if ($args{size}) {
+        assert_and_click "anaconda_custom_size";
+        # size input can contain whole set of different values, so we can't match it with needle
+        type_safely $args{size};
+    }
+    assert_and_click "anaconda_custom_btn_add_mountpoint";
+
+#    if ($args{raid1}) {
+#        # for RAID1, two disks should be selected
+#        send_key "tab";
+#        send_key "down";
+#        send_key "spc";
+#        assert_screen "anaconda_custom_vdb_selected";
+#
+#        assert_and_click "anaconda_custom_raidlevel_select";
+#        mouse_set(10, 10);
+#        assert_and_click "anaconda_custom_raidlevel_raid1";
+#    }
+
+    # if no devicetype was specified or devicetype is already selected, do nothing
+    if ($args{devicetype}) && !check_screen("anaconda_custom_part_fs_$args{devicetype}_selected", 5)) {
+        assert_and_click "anaconda_custom_part_devicetype";
+        mouse_set(10, 10);
+        assert_and_click "anaconda_custom_part_devicetype_$args{devicetype}";
+    }
+    # if no filesystem was specified or filesystem is already selected, do nothing
+    if ($args{filesystem} && !check_screen("anaconda_custom_part_fs_$args{filesystem}_selected", 5)) {
+        assert_and_click "anaconda_custom_part_fs";
+        assert_and_click "anaconda_custom_part_fs_$args{filesystem}";
+    }
+    # select "free space" in custom-gui if it exists, so we could run this function again to add another partition
+    if (check_screen("anaconda_custom_free_space", 15)) {
+        assert_and_click "anaconda_custom_free_space";
+    }
+}
+
 sub custom_blivet_format_partition {
-    # This subroutine formats a selected partition. To use it, you must select the 
+    # This subroutine formats a selected partition. To use it, you must select the
     # partition by other means before you format it using this routine.
     # You have to create a needle for any non-existing filesystem that is
     # passed via the $type, such as anaconda_blivet_part_fs_ext4.
@@ -202,14 +261,14 @@ sub custom_blivet_format_partition {
 sub custom_blivet_resize_partition {
     # This subroutine resizes the selected (active) partition to a given value. Note, that
     # if the selected value is bigger than the available space, it will only be
-    # resized to fill up the available space no matter the number. 
+    # resized to fill up the available space no matter the number.
     # This routine cannot will not be able to select a particular partition!!!
     my %args = @_;
     # Start editing the partition and select the Resize option
     assert_and_click "anaconda_blivet_part_edit";
     assert_and_click "anaconda_blivet_part_resize";
     # Select the appropriate units. Note, that there must a be needle existing
-    # for each possible unit that you might want to use, such as 
+    # for each possible unit that you might want to use, such as
     # "anaconda_blivet_size_unit_gib".
     assert_and_click "anaconda_blivet_part_drop_select";
     assert_and_click "anaconda_blivet_size_unit_$args{units}";
@@ -365,7 +424,7 @@ sub crash_anaconda_text {
     # This routine uses the Anaconda crash trigger to break the ongoing Anaconda installation to simulate
     # an Anaconda crash and runs a series of steps that results in creating a bug in Bugzilla.
     # It is used in the `install_text.pm` test and can be switched on by using the CRASH_REPORT
-    # variable set to 1. 
+    # variable set to 1.
     #
     # First let us navigate to reach the shell window in Anaconda using the alt-f3 combo,
     # this should take us to another terminal, where we can simulate the crash.
@@ -395,7 +454,7 @@ sub report_bug_text {
     # a textual console.
     # We will not create a needle for every menu item, and we will fail,
     # if there will be no positive Bugzilla confirmation shown at the end
-    # of the process and then we will fail. 
+    # of the process and then we will fail.
     #
     # Let us record the time of this test run. Later, we will use it to
     # limit the Bugzilla search.
@@ -419,12 +478,12 @@ sub report_bug_text {
     type_password $password;
     type_string "\n";
     sleep 10;
-    # Save the report without changing it. 
+    # Save the report without changing it.
     # It would need some more tweaking to actually type into the report, but since
     # it is reported even if unchanged, we leave it as such.
     type_string ":wq\n";
     # Wait until the Crash menu appears again.
-    # The same screen shows the result of the Bugzilla operation, 
+    # The same screen shows the result of the Bugzilla operation,
     # so if the needle matches, the bug has been created in Bugzilla.
     # Bugzilla connection is slow so we need to wait out some time,
     # therefore let's use a cycle that will check each 10 seconds and
@@ -435,7 +494,7 @@ sub report_bug_text {
         ++$counter;
     }
     # Sometimes, Bugzilla throws out a communication error although the bug has been
-    # created successfully. If this happens, we will softfail and leave the creation 
+    # created successfully. If this happens, we will softfail and leave the creation
     # check to a later step.
     if ($counter > 12) {
         record_soft_failure "Warning: Bugzilla has reported an error which could mean that the bug has not been created correctly, but it probably is not a real problem, if the test has not failed completely. ";
@@ -443,7 +502,7 @@ sub report_bug_text {
 
     # Now, let us check with Bugzilla directly, if the bug has been created.
     # First, we shall get a Bugzilla format timestamp to use it in the query.
-    # The timestamp will limit the list of bugs to those that have been created since 
+    # The timestamp will limit the list of bugs to those that have been created since
     # the then -> resulting with high probability in the one that this test run
     # has just created.
     $timestamp = convert_to_bz_timestamp($timestamp);
@@ -455,7 +514,7 @@ sub report_bug_text {
     else {
         print("BUGZILLA: The last bug was found: $lastbug\n");
     }
-    # We have found that the bug indeed is in the bugzilla (otherwise 
+    # We have found that the bug indeed is in the bugzilla (otherwise
     # we would have died already) so now we close it to clean up after this test run.
     my $result = close_notabug($lastbug, $apikey);
     unless ($result) {
@@ -467,5 +526,5 @@ sub report_bug_text {
 
     # Quit anaconda
     type_string "4\n";
-    
+
 }

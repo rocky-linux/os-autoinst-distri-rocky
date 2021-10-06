@@ -376,14 +376,14 @@
                 "USER_LOGIN": "qwerty"
             }
         },
-        "install_blivet_lvm_ext4": {
+        "install_custom_gui_lvm_ext4": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_blivet_lvm_ext4",
+                "PARTITIONING": "custom_gui_lvm_ext4",
                 "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
