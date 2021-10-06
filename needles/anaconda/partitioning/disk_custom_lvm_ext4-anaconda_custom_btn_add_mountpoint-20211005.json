@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 548,
+      "ypos": 463,
+      "width": 109,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_btn_add_mountpoint"
+  ]
+}
