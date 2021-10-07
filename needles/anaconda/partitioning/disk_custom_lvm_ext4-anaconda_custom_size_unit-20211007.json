@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "ypos": 404,
+      "height": 24,
+      "xpos": 352,
+      "width": 134,
+      "type": "match",
+      "click_point": {
+        "xpos": 134,
+        "ypos": 10
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_size"
+  ]
+}

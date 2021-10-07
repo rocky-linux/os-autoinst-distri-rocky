@@ -220,7 +220,8 @@ sub custom_add_partition {
     # if no devicetype was specified or devicetype is already selected, do nothing
     if (($args{devicetype} && !check_screen("anaconda_custom_part_fs_$args{devicetype}_selected", 5))) {
         assert_and_click "anaconda_custom_part_devicetype";
-        mouse_set(10, 10);
+        # move mouse to dehighlight the list
+        mouse_set(10, 100);
         assert_and_click "anaconda_custom_part_devicetype_$args{devicetype}";
     }
     # if no filesystem was specified or filesystem is already selected, do nothing
