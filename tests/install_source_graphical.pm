@@ -60,6 +60,18 @@ sub run {
 
     assert_and_click "anaconda_spoke_done";
 
+    wait_still_screen 2;
+
+    # if the internet connection was too slow the mirrorlist shows as error
+    # so needs to be applied a second time
+    if (check_screen('anaconda_main_hub_installation_source_error', 10)) {
+        # Go into the Install Source spoke
+        assert_and_click "anaconda_main_hub_installation_source_error";
+
+        # and back again
+        assert_and_click "anaconda_spoke_done";
+    }
+
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300;
 }
