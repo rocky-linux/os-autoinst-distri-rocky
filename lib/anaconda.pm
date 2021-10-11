@@ -194,12 +194,15 @@ sub custom_add_partition {
     # the number of tabs needed seems to depend on whether a partition has already been added
     send_key_until_needlematch("anaconda_custom_part_add", "tab");
     send_key "spc";
+
+    # supply the mountpoint
     assert_screen "anaconda_custom_mountpoint";
     type_safely $args{mountpoint};
     send_key "tab";
     send_key "tab";
     send_key "tab";
     assert_screen "anaconda_custom_size";
+    # supply the desired size
     # if size is not provided, leave empty to use the remaining disk space
     if ($args{size}) {
         type_safely $args{size};
@@ -223,15 +226,19 @@ sub custom_add_partition {
 
     # if no devicetype was specified or devicetype is already selected, do nothing
     if (($args{devicetype} && !check_screen("anaconda_custom_part_fs_$args{devicetype}_selected", 5))) {
+        # send 'tab' until the Device Type dropdown is selected
         send_key_until_needlematch("anaconda_custom_part_devicetype_selected", "tab");
         send_key "spc";
+        # send 'down' until the correct devicetype is selected
         send_key_until_needlematch("anaconda_custom_part_devicetype_$args{devicetype}", "down");
         send_key "spc";
     }
     # if no filesystem was specified or filesystem is already selected, do nothing
     if ($args{filesystem} && !check_screen("anaconda_custom_part_fs_$args{filesystem}_selected", 5)) {
+        # send 'tab' until the File System dropdown is selected
         send_key_until_needlematch("anaconda_custom_part_fs_selected", "tab");
         send_key "spc";
+        # send 'down' until the correct filesystem is selected
         send_key_until_needlematch("anaconda_custom_part_fs_$args{filesystem}_selected", "down");
         send_key "spc";
     }
