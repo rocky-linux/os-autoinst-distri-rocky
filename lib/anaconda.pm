@@ -190,20 +190,24 @@ sub custom_add_partition {
     );
     $args{devicetype} = "raid" if $args{raid1};
 
-    assert_and_click "anaconda_custom_part_add";
-
-    if ($args{mountpoint}) {
-        assert_and_click "anaconda_custom_mountpoint";
-        type_safely $args{mountpoint};
-        # esc to dismiss the dropdown that appears when we add a mountpoint
-        send_key "esc";
-    }
+    # send tab until 'add' button is selected, then press
+    # the number of tabs needed seems to depend on whether a partition has already been added
+    send_key_until_needlematch("anaconda_custom_part_add", "tab");
+    send_key "spc";
+    assert_screen "anaconda_custom_mountpoint";
+    type_safely $args{mountpoint};
+    send_key "tab";
+    send_key "tab";
+    send_key "tab";
+    assert_screen "anaconda_custom_size";
+    # if size is not provided, leave empty to use the remaining disk space
     if ($args{size}) {
-        assert_and_click "anaconda_custom_size";
-        # size input can contain whole set of different values, so we can't match it with needle
         type_safely $args{size};
     }
-    assert_and_click "anaconda_custom_btn_add_mountpoint";
+    send_key "tab";
+    send_key "tab";
+    assert_screen "anaconda_custom_btn_add_mountpoint";
+    send_key "spc";
 
 #    if ($args{raid1}) {
 #        # for RAID1, two disks should be selected
@@ -219,15 +223,17 @@ sub custom_add_partition {
 
     # if no devicetype was specified or devicetype is already selected, do nothing
     if (($args{devicetype} && !check_screen("anaconda_custom_part_fs_$args{devicetype}_selected", 5))) {
-        assert_and_click "anaconda_custom_part_devicetype";
-        # move mouse to dehighlight the list
-        mouse_set(10, 100);
-        assert_and_click "anaconda_custom_part_devicetype_$args{devicetype}";
+        send_key_until_needlematch("anaconda_custom_part_devicetype_selected", "tab");
+        send_key "spc";
+        send_key_until_needlematch("anaconda_custom_part_devicetype_$args{devicetype}", "down");
+        send_key "spc";
     }
     # if no filesystem was specified or filesystem is already selected, do nothing
     if ($args{filesystem} && !check_screen("anaconda_custom_part_fs_$args{filesystem}_selected", 5)) {
-        assert_and_click "anaconda_custom_part_fs";
-        assert_and_click "anaconda_custom_part_fs_$args{filesystem}";
+        send_key_until_needlematch("anaconda_custom_part_fs_selected", "tab");
+        send_key "spc";
+        send_key_until_needlematch("anaconda_custom_part_fs_$args{filesystem}_selected", "down");
+        send_key "spc";
     }
     # select "free space" in custom-gui if it exists, so we could run this function again to add another partition
     if (check_screen("anaconda_custom_free_space", 15)) {

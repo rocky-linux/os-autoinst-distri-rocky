@@ -1,10 +1,10 @@
 {
   "area": [
     {
-      "xpos": 494,
-      "ypos": 347,
-      "width": 140,
-      "height": 34,
+      "xpos": 503,
+      "ypos": 269,
+      "width": 76,
+      "height": 27,
       "type": "match"
     }
   ],
@@ -12,6 +12,6 @@
   "tags": [
     "ENV-DISTRI-rocky",
     "LANGUAGE-english",
-    "anaconda_custom_part_fs_efi_filesystem"
+    "anaconda_custom_part_devicetype_selected"
   ]
 }
