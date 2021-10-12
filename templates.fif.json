@@ -388,7 +388,7 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_gui_standard_partition_ext4": {
+        "install_custom_gui_standard_partition_ext4": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
@@ -412,14 +412,14 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_xfs": {
+        "install_custom_gui_xfs": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_blivet_xfs",
+                "PARTITIONING": "custom_gui_xfs",
                 "POSTINSTALL": "disk_custom_xfs_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
