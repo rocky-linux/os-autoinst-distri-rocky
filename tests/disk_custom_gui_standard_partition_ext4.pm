@@ -20,7 +20,7 @@ sub run {
 
     #custom_add_partition(filesystem => 'ext4', mountpoint => '/');
     custom_add_partition(filesystem => 'ext4', size => 512, mountpoint => '/boot', devicetype => 'standard_partition');
-    custom_add_partition(filesystem => 'ext4', size => 512, mountpoint => 'swap');
+    custom_add_partition(filesystem => 'swap', size => 512, mountpoint => 'swap');
     custom_add_partition(filesystem => 'ext4', mountpoint => '/', devicetype => 'standard_partition');
 
     assert_and_click "anaconda_spoke_done";
