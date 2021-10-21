@@ -212,18 +212,6 @@ sub custom_add_partition {
     assert_screen "anaconda_custom_btn_add_mountpoint";
     send_key "spc";
 
-#    if ($args{raid1}) {
-#        # for RAID1, two disks should be selected
-#        send_key "tab";
-#        send_key "down";
-#        send_key "spc";
-#        assert_screen "anaconda_custom_vdb_selected";
-#
-#        assert_and_click "anaconda_custom_raidlevel_select";
-#        mouse_set(10, 10);
-#        assert_and_click "anaconda_custom_raidlevel_raid1";
-#    }
-
     # if no devicetype was specified or devicetype is already selected, do nothing
     if (($args{devicetype} && !check_screen("anaconda_custom_part_fs_$args{devicetype}_selected", 5))) {
         # send 'tab' until the Device Type dropdown is selected
@@ -242,6 +230,17 @@ sub custom_add_partition {
         send_key_until_needlematch("anaconda_custom_part_fs_$args{filesystem}_selected", "down");
         send_key "spc";
     }
+    if ($args{raid1}) {
+        # send 'tab' until Raid Level dropdown is selected
+        send_key_until_needlematch("anaconda_custom_part_raidlevel_selected", "tab");
+        send_key "spc";
+        #choose RAID level from dropdown
+        # needle name specified like this is interpreted as "anaconda_custom_part_raid__selected"
+        #send_key_until_needlematch("anaconda_custom_part_raid_$args{raidl}_selected", "down");
+        send_key_until_needlematch("anaconda_custom_part_raid_1_selected", "down");
+        send_key "spc";
+    }
+
     # select "free space" in custom-gui if it exists, so we could run this function again to add another partition
     if (check_screen("anaconda_custom_free_space", 15)) {
         assert_and_click "anaconda_custom_free_space";

@@ -399,7 +399,7 @@
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_software_raid": {
+        "install_custom_gui_software_raid": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
@@ -407,7 +407,7 @@
             },
             "settings": {
                 "NUMDISKS": "2",
-                "PARTITIONING": "custom_blivet_software_raid",
+                "PARTITIONING": "custom_gui_software_raid",
                 "POSTINSTALL": "disk_custom_software_raid_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
