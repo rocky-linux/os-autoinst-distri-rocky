@@ -20,7 +20,7 @@ sub run {
 
     custom_add_partition(size => 512, mountpoint => '/boot');
     custom_add_partition(filesystem => 'swap', size => 512, mountpoint => 'swap');
-    custom_add_partition(raidl => 1, mountpoint => '/', devicetype => 'raid');
+    custom_add_partition(raidlevel => 1, mountpoint => '/');
 
     assert_and_click "anaconda_spoke_done";
     assert_and_click "anaconda_part_accept_changes";

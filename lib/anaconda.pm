@@ -182,13 +182,13 @@ sub custom_add_partition {
     # (anaconda_custom_part_fs_$filesystem should exist) and mountpoint of that partition (e. g. string "/boot").
     my %args = (
         devicetype => "",
-        raid1 => 0,
+        raidlevel => 0,
         size => 0,
         filesystem => "",
         mountpoint => "",
         @_
     );
-    $args{devicetype} = "raid" if $args{raid1};
+    $args{devicetype} = "raid" if $args{raidlevel};
 
     # send tab until 'add' button is selected, then press
     # the number of tabs needed seems to depend on whether a partition has already been added
@@ -230,13 +230,11 @@ sub custom_add_partition {
         send_key_until_needlematch("anaconda_custom_part_fs_$args{filesystem}_selected", "down");
         send_key "spc";
     }
-    if ($args{raid1}) {
+    if ($args{raidlevel}) {
         # send 'tab' until Raid Level dropdown is selected
         send_key_until_needlematch("anaconda_custom_part_raidlevel_selected", "tab");
         send_key "spc";
         #choose RAID level from dropdown
-        # needle name specified like this is interpreted as "anaconda_custom_part_raid__selected"
-        #send_key_until_needlematch("anaconda_custom_part_raid_$args{raidl}_selected", "down");
         send_key_until_needlematch("anaconda_custom_part_raid_1_selected", "down");
         send_key "spc";
     }
