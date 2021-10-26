@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 511,
+      "ypos": 330,
+      "width": 33,
+      "height": 10,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_part_devicetype_raid"
+  ]
+}

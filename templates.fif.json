@@ -120,7 +120,7 @@
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
-        },        
+        },
         "rocky-package-set-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -138,7 +138,7 @@
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
-        },        
+        },
         "rocky-universal-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
@@ -185,7 +185,7 @@
         "rocky-package-set-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-package-set-aarch64-*"
-        },        
+        },
         "rocky-package-set-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-package-set-x86_64-*"
@@ -197,7 +197,7 @@
         "rocky-universal-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-universal-aarch64-*"
-        },        
+        },
         "rocky-universal-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-universal-x86_64-*"
@@ -316,20 +316,6 @@
                 "USER_LOGIN": "false"
             }
         },
-        "install_blivet_resize_lvm": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-64bit": 40
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_resize_lvm",
-                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "INSTALL": "1",
-                "POSTINSTALL": "disk_custom_resize_lvm_postinstall",
-                "ROOT_PASSWORD": "weakpassword",
-                "START_AFTER_TEST": "install_lvm_ext4"
-            }
-        },
         "install_resize_lvm": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
@@ -390,54 +376,30 @@
                 "USER_LOGIN": "qwerty"
             }
         },
-        "install_blivet_lvmthin": {
-            "profiles": {
-                "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-64bit": 40,
-                "rocky-universal-x86_64-*-uefi": 41
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_lvmthin",
-                "POSTINSTALL": "disk_custom_lvmthin_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_blivet_lvm_ext4": {
+        "install_custom_gui_lvm_ext4": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_blivet_lvm_ext4",
+                "PARTITIONING": "custom_gui_lvm_ext4",
                 "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_standard_partition_ext4": {
+        "install_custom_gui_standard_partition_ext4": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_blivet_standard_partition_ext4",
+                "PARTITIONING": "custom_gui_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_with_swap": {
-            "profiles": {
-                "rocky-universal-aarch64-*-aarch64": 50,
-                "rocky-universal-x86_64-*-64bit": 50,
-                "rocky-universal-x86_64-*-uefi": 51
-            },
-            "settings": {
-                "PARTITIONING": "custom_blivet_with_swap",
-                "POSTINSTALL": "disk_custom_with_swap_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
-            }
-        },
-        "install_blivet_software_raid": {
+        "install_custom_gui_software_raid": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
@@ -445,19 +407,19 @@
             },
             "settings": {
                 "NUMDISKS": "2",
-                "PARTITIONING": "custom_blivet_software_raid",
+                "PARTITIONING": "custom_gui_software_raid",
                 "POSTINSTALL": "disk_custom_software_raid_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
         },
-        "install_blivet_xfs": {
+        "install_custom_gui_xfs": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
             },
             "settings": {
-                "PARTITIONING": "custom_blivet_xfs",
+                "PARTITIONING": "custom_gui_xfs",
                 "POSTINSTALL": "disk_custom_xfs_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
