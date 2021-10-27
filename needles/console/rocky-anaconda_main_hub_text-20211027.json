@@ -1,0 +1,30 @@
+{
+  "area": [
+    {
+      "height": 14,
+      "type": "match",
+      "width": 96,
+      "xpos": 55,
+      "ypos": 257
+    },
+    {
+      "height": 13,
+      "type": "match",
+      "width": 128,
+      "xpos": 55,
+      "ypos": 370
+    },
+    {
+      "height": 14,
+      "type": "match",
+      "width": 119,
+      "xpos": 0,
+      "ypos": 193
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_main_hub_text",
+    "ENV-DISTRI-rocky"
+  ]
+}
