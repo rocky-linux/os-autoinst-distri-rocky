@@ -60,6 +60,26 @@ sub run {
         $error = "anaconda_text_error";
     }
 
+    if (get_var("DISTRI") eq "rocky") {
+        # Activate Network
+        run_with_error_check(sub {console_type_wait($spoke_number{"network"} . "\n")}, $error);
+        console_type_wait("2\n"); # Configure device
+        console_type_wait("7\n"); # Connect automatically after reboot
+        console_type_wait("8\n"); # Apply configuration in installer
+        console_type_wait("c\n"); # Continue
+        sleep 10;
+        console_type_wait("r\n"); # Refresh
+        console_type_wait("c\n"); # Continue
+
+        # Software Selection
+        run_with_error_check(sub {console_type_wait($spoke_number{"swselection"} . "\n")}, $error);
+        console_type_wait("2\n"); # Server
+        console_type_wait("c\n"); # Continue
+        console_type_wait("c\n"); # Continue
+        sleep 10;
+        console_type_wait("r\n"); # Refresh
+    }
+
     # Set timezone
     run_with_error_check(sub {console_type_wait($spoke_number{"timezone"} . "\n")}, $error);
     console_type_wait("1\n"); # Set timezone
