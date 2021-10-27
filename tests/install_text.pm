@@ -152,7 +152,7 @@ sub run {
     # Wait for install to end. Give Rawhide a bit longer, in case
     # we're on a debug kernel, debug kernel installs are really slow.
     my $timeout = 1800;
-    if (lc(get_var('VERSION')) eq "rawhide") {
+    if (lc(get_var('VERSION')) eq "rawhide" || lc(get_var('DISTRI')) eq "rocky") {
         $timeout = 2400;
     }
 
