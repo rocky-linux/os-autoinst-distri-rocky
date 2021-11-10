@@ -562,6 +562,7 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
+                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
