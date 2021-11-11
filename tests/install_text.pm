@@ -44,9 +44,10 @@ sub run {
         "source" => 3,
         "swselection" => 4,
         "destination" => 5,
-        "network" => 6,
-        "rootpwd" => 7,
-        "user" => 8
+        "kdump" => 6,
+        "network" => 7,
+        "rootpwd" => 8,
+        "user" => 9
     );
 
     # The error message that we are going to check for in the text installation
@@ -57,6 +58,26 @@ sub run {
     }
     else {
         $error = "anaconda_text_error";
+    }
+
+    if (get_var("DISTRI") eq "rocky") {
+        # Activate Network
+        run_with_error_check(sub {console_type_wait($spoke_number{"network"} . "\n")}, $error);
+        console_type_wait("2\n"); # Configure device
+        console_type_wait("7\n"); # Connect automatically after reboot
+        console_type_wait("8\n"); # Apply configuration in installer
+        console_type_wait("c\n"); # Continue
+        sleep 10;
+        console_type_wait("r\n"); # Refresh
+        console_type_wait("c\n"); # Continue
+
+        # Software Selection
+        run_with_error_check(sub {console_type_wait($spoke_number{"swselection"} . "\n")}, $error);
+        console_type_wait("2\n"); # Server
+        console_type_wait("c\n"); # Continue
+        console_type_wait("c\n"); # Continue
+        sleep 10;
+        console_type_wait("r\n"); # Refresh
     }
 
     # Set timezone
@@ -85,7 +106,7 @@ sub run {
     console_type_wait("3\n"); # set username
     console_type_wait("$username\n");
     # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
-    if (get_release_number() < 31) {
+    if (get_release_number() < 31 && lc(get_var('DISTRI')) ne "rocky") {
         # typing "4\n" on abrt screen causes system to reboot, so be careful
         run_with_error_check(sub {console_type_wait("4\n")}, $error); # use password
     }
@@ -131,7 +152,7 @@ sub run {
     # Wait for install to end. Give Rawhide a bit longer, in case
     # we're on a debug kernel, debug kernel installs are really slow.
     my $timeout = 1800;
-    if (lc(get_var('VERSION')) eq "rawhide") {
+    if (lc(get_var('VERSION')) eq "rawhide" || lc(get_var('DISTRI')) eq "rocky") {
         $timeout = 2400;
     }
 

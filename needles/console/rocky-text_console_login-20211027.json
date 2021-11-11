@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "type": "match",
+      "width": 61,
+      "xpos": 72,
+      "ypos": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "login_screen",
+    "text_console_login",
+    "ENV-DISTRI-rocky"
+  ]
+}
