@@ -16,47 +16,74 @@ Product test commands
 ---
 
 rocky-boot-iso-x86_64-*
-```
-sudo openqa-cli api -X POST isos \
+```sh
+openqa-cli api -X POST isos \
   ISO=Rocky-8.4-x86_64-boot.iso \
-  DISTRI=rocky \
-  VERSION=8.4 \
-  FLAVOR=boot-iso \
   ARCH=x86_64 \
+  DISTRI=rocky \
+  FLAVOR=boot-iso \
+  VERSION=8.4 \
   BUILD="-boot-iso-$(date +%Y%m%d.%H%M%S).0"
 ```
 
 rocky-minimal-iso-x86_64-*
-```
-sudo openqa-cli api -X POST isos \
+```sh
+openqa-cli api -X POST isos \
   ISO=Rocky-8.4-x86_64-minimal.iso \
-  DISTRI=rocky \
-  VERSION=8.4 \
-  FLAVOR=minimal-iso \
   ARCH=x86_64 \
+  DISTRI=rocky \
+  FLAVOR=minimal-iso \
+  VERSION=8.4 \
   BUILD="-minimal-iso-$(date +%Y%m%d.%H%M%S).0"
 ```
 
 rocky-dvd-iso-x86_64-*
-```
-sudo openqa-cli api -X POST isos \
+```sh
+openqa-cli api -X POST isos \
   ISO=Rocky-8.4-x86_64-dvd1.iso \
-  DISTRI=rocky \
-  VERSION=8.4 \
+  ARCH=x86_64 DISTRI=rocky \
   FLAVOR=dvd-iso \
+  PACKAGE_SET=minimal \
+  VERSION=8.4 \
+  BUILD="-minimal-$(date +%Y%m%d.%H%M%S).0"
+
+openqa-cli api -X POST isos \
+  ISO=Rocky-8.4-x86_64-dvd1.iso \
   ARCH=x86_64 \
-  BUILD="-dvd-iso-$(date +%Y%m%d.%H%M%S).0"
+  DISTRI=rocky \
+  FLAVOR=dvd-iso \
+  PACKAGE_SET=server \
+  VERSION=8.4 \
+  BUILD="-server-$(date +%Y%m%d.%H%M%S).0"
+
+openqa-cli api -X POST isos \
+  ISO=Rocky-8.4-x86_64-dvd1.iso \
+  ARCH=x86_64 \
+  DISTRI=rocky \
+  FLAVOR=dvd-iso \
+  PACKAGE_SET=graphical-server \
+  DESKTOP=gnome \
+  VERSION=8.4 \
+  BUILD="-graphical-server-$(date +%Y%m%d.%H%M%S).0"
+
+openqa-cli api -X POST isos \
+  ISO=Rocky-8.4-x86_64-dvd1.iso \
+  ARCH=x86_64 \
+  DISTRI=rocky \
+  FLAVOR=dvd-iso \
+  PACKAGE_SET=workstation \
+  DESKTOP=gnome \
+  VERSION=8.4 \
+  BUILD="-workstation-$(date +%Y%m%d.%H%M%S).0"
 ```
 
 rocky-universal-x86_64-*
-```
-sudo openqa-cli api -X POST isos \
+```sh
+openqa-cli api -X POST isos \
   ISO=Rocky-8.4-x86_64-dvd1.iso \
-  DISTRI=rocky \
-  VERSION=8.4 \
-  FLAVOR=universal \
   ARCH=x86_64 \
+  DISTRI=rocky \
+  FLAVOR=universal \
+  VERSION=8.4 \
   BUILD="-universal-$(date +%Y%m%d.%H%M%S).0"
 ```
-
-

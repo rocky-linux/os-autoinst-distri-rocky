@@ -1,8 +1,13 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
+    my $self = shift;
+    unless (check_screen "root_console", 0) {
+        $self->root_console(tty=>4);
+    }
     assert_screen "root_console";
     my $count = 4;
     my $devroot = 'vda1';
