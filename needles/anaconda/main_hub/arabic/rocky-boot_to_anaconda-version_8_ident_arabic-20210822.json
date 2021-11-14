@@ -1,16 +1,17 @@
 {
   "area": [
     {
-      "xpos": 777,
+      "type": "match",
       "ypos": 12,
-      "width": 231,
       "height": 20,
-      "type": "match"
+      "xpos": 12,
+      "width": 231
     }
   ],
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "version_8.4_ident"
+    "LANGUAGE-arabic",
+    "version_8_ident"
   ]
 }

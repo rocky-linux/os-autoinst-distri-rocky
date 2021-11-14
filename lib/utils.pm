@@ -1267,13 +1267,11 @@ sub check_prerelease {
 
 sub check_version {
     # This function checks if the correct version is display during installation
-    # in Anaconda, i.e. nonlive media showing Rawhide when Rawhide and version numbers
-    # when not Rawhide, while live media always showing version numbers.
+    # in Anaconda, it only looks at the major version, as these needles should
+    # not change between the major versions.
 
     my $version = lc(get_var('VERSION'));
-    if ($version eq 'rawhide' && get_var('LIVE')) {
-        $version = get_var('RAWREL');
-    }
+    $version =~ s/\..+$//;
     assert_screen "version_${version}_ident";
 }
 
