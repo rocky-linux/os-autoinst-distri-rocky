@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 257,
+      "height": 12,
+      "width": 60,
+      "xpos": 387,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "cockpit_logs_priority_text"
+  ]
+}
