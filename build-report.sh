@@ -3,7 +3,10 @@ set -e
 
 BUILD_NAME=$1
 
-printf '# %s\nTest | Result\n=============\n' "$BUILD_NAME"
+printf '# %s\n' "$BUILD_NAME"
+printf "| Test | Result | Failure Reason | Effort to Fix | Notes |\n"
+printf "| ---- | ------ | -------------- | ------------- | ----- |\n"
+
 openqa-cli api -X GET jobs build="$BUILD_NAME" | \
     jq -r '.jobs[] | {name,result} | join(" | ") | split("-") | last' | \
     sort
