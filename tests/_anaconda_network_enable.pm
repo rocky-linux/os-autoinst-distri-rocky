@@ -9,6 +9,11 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
+    if (check_screen ["anaconda_network_connected"], 60) {
+        # network is connected already, we're done
+        return;
+    }
+
     assert_and_click "anaconda_main_hub_network_host_name_not_connected";
     assert_and_click "anaconda_network_connect";
 
