@@ -141,7 +141,7 @@ sub run {
     # begin installation
     console_type_wait("b\n");
 
-    # When simulated crash is planned, then proceed with the crash routines and finish, 
+    # When simulated crash is planned, then proceed with the crash routines and finish,
     # otherwise proceed normally and do
     if (get_var("CRASH_REPORT")) {
         crash_anaconda_text;
@@ -153,7 +153,7 @@ sub run {
     # we're on a debug kernel, debug kernel installs are really slow.
     my $timeout = 1800;
     if (lc(get_var('VERSION')) eq "rawhide" || lc(get_var('DISTRI')) eq "rocky") {
-        $timeout = 2400;
+        $timeout = 4800;
     }
 
     if (testapi::is_serial_terminal) {
