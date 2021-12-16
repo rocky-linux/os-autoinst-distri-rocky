@@ -112,8 +112,8 @@ sub run {
     # we're on a debug kernel, debug kernel installs are really slow.
     my $timeout = 1800;
     my $version = lc(get_var('VERSION'));
-    if ($version eq "rawhide") {
-        $timeout = 2400;
+    if ($version eq "rawhide" || lc(get_var('DISTRI')) eq "rocky") {
+        $timeout = 4800;
     }
     # workstation especially has an unfortunate habit of kicking in
     # the screensaver during install...
