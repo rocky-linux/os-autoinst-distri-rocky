@@ -958,7 +958,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.img",
+                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.qcow2",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
                 "PARALLEL_WITH": "install_vnc_server",
@@ -987,7 +987,7 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
-                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.img",
+                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.qcow2",
                 "INSTALL": "1",
                 "NICTYPE": "tap",
                 "PREINSTALL": "_vncconnect_client_setup_pre _graphical_wait_login _vncconnect_client_setup",
@@ -1250,7 +1250,7 @@
             },
             "settings": {
                 "GRUB": "inst.ks=hd:vdb1:/freeipaclient.ks",
-                "HDD_2": "disk_ks_6.img",
+                "HDD_2": "disk_ks.img",
                 "INSTALL_UNLOCK": "freeipa_ready",
                 "KICKSTART": "1",
                 "NICTYPE": "tap",
@@ -1343,7 +1343,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
-                "HDD_1": "disk_rocky%CURRREL%_support_%ARCH%.img",
+                "HDD_1": "disk_rocky%CURRREL%_support_%ARCH%.qcow2",
                 "NICTYPE": "tap",
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
