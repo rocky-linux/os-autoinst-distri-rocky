@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 148,
+      "width": 27,
+      "height": 26,
+      "ypos": 261,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_install_destination_reclaim_space_first_partition"
+  ]
+}
