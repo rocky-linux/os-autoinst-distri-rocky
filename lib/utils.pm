@@ -434,7 +434,7 @@ sub repos_mirrorlist {
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
     my $files = shift;
-    $files ||= "/etc/yum.repos.d/fedora*.repo";
+    $files ||= "/etc/yum.repos.d/Rocky*.repo";
     assert_script_run "sed -i -e 's,metalink,mirrorlist,g' ${files}";
 }
 
