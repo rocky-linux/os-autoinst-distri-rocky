@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 35,
+      "type": "match",
+      "width": 209,
+      "xpos": 16,
+      "ypos": 487
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_install_destination_reclaim_space_shrink_slider"
+  ]
+}
