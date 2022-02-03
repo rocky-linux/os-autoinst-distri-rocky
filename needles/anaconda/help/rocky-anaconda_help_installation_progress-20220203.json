@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 40,
+      "ypos": 216,
+      "width": 436,
+      "height": 40,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_help_installation_progress"
+  ]
+}
