@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 245,
+      "ypos": 202,
+      "width": 37,
+      "height": 29,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_main_hub_keyboard_layout"
+  ]
+}

@@ -24,8 +24,14 @@ sub run {
 
     # Create test plans
     my @testplan;
+    # For Rocky ISO
+    if ((get_var('DISTRI') eq "Rocky")) {
+        @testplan = qw/keyboard_layout language_support time_date installation_source select_packages install_destination network_host_name root_password create_user/;
+    }
+    # While technically we don't need any of these Fedora test plans it's worth
+    # leaving them here for now as examples.
     # For LIVE KDE:
-    if ((get_var('LIVE')) && (get_var('DESKTOP') eq "kde")) {
+    elsif ((get_var('LIVE')) && (get_var('DESKTOP') eq "kde")) {
         @testplan = qw/keyboard_layout time_date install_destination network_host_name root_password create_user/;
     }
     # For LIVE Workstation
@@ -51,6 +57,11 @@ sub run {
     # need to set a root password or create a user; on other flavors
     # we must
     unless (get_var("DESKTOP") eq "gnome" ) {
+        # In Rocky ISO you will finish testplan on Create User and need to shift-tab to select
+	# Root password
+        if ((get_var("DISTRI") eq "rocky" )) {
+	    send_key_until_needlematch("anaconda_main_hub_root_password", "shift-tab");
+        }
         assert_and_click "anaconda_main_hub_root_password";
         type_safely "weakrootpassword";
         send_key "tab";
@@ -62,7 +73,9 @@ sub run {
     wait_screen_change { assert_and_click "anaconda_main_hub_begin_installation"; };
 
     # Check the last Help screen
-    check_help_on_pane("installation_progress");
+    unless (get_var("DISTRI") eq "rocky") {
+        check_help_on_pane("installation_progress");
+    }
 
     # As there is no need to proceed with the installation,
     # the test ends here and the VM will be destroyed
