@@ -12,7 +12,7 @@ sub run {
     my $packageset = get_var('PACKAGE_SET', 'minimal');
     if ($packageset eq 'default' || get_var('MODULAR')) {
         # we can't or don't want to check the selected package set in these cases
-        return if (get_var('CANNED') || get_var('LIVE') || get_var('MEMCHECK'));
+        return if (get_var('CANNED') || get_var('LIVE') || get_var('MEMCHECK') || (get_var('DISTRI') eq 'Rocky'));
         $self->root_console;
         my $env = 'custom-environment';
         if (get_var('SUBVARIANT') eq 'Server') {

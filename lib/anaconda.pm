@@ -411,6 +411,19 @@ sub check_help_on_pane {
     }
     # Otherwise, only check the relevant screen.
     else {
+        # Rocky help has a level of indirection here. Need to click a link first...
+        if ((get_var('DISTRI') eq "rocky"))
+        {
+            if ($screen eq "keyboard_layout" || $screen eq "language_support" || $screen eq "time_date")
+            {
+                assert_and_click "anaconda_help_localization_link";
+                # Specifically for language_support and time_date press page-down
+                if ($screen eq "language_support" || $screen eq "time_date")
+                {
+                    send_key "spc";
+                }
+            }
+        }
         assert_screen "anaconda_help_$screen";
     }
     # Close Help window
