@@ -454,6 +454,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 11
             },
             "settings": {
+                "DESKTOP": "gnome",
+                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data"
             }
