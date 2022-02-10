@@ -7,22 +7,20 @@ sub run {
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
-    # Select package set. Minimal is the default, if 'default' is specified, skip selection,
-    # but verify correct default in some cases
-    my $packageset = get_var('PACKAGE_SET', 'minimal');
-    if ($packageset eq 'default' || get_var('MODULAR')) {
-        # we can't or don't want to check the selected package set in these cases
-        return if (get_var('CANNED') || get_var('LIVE') || get_var('MEMCHECK') || (get_var('DISTRI') eq 'Rocky'));
+    # Select package set. Default is 'graphical-server', unless FLAVOR=minimal, where default is 'server'.
+    # If 'default' is specified, skip selection, but verify correct default
+    my $packageset = get_var('PACKAGE_SET', 'graphical-server');
+    if ($packageset eq 'default') {
+        # if PACKAGE_SET=default, actually check for these:
+        # dvd-iso = graphical-server
+        # minimal-iso = server
+        # boot-iso = graphical-server
         $self->root_console;
-        my $env = 'graphical-server-environment';
-        if (get_var('SUBVARIANT') eq 'Server') {
-            $env = 'server-product-environment';
+        my $env = "graphical-server-environment";
+        if ( get_var('FLAVOR') eq 'minimal-iso') {
+            $env = "server-environment";
         }
-        elsif (get_var('SUBVARIANT') eq 'Workstation') {
-            $env = 'workstation-product-environment';
-        }
-        # RL8 line looks like:
-        # 02:25:18,525 INF packaging: selected environment: graphical-server-environment
+
         assert_script_run "egrep 'selected environment:' /tmp/anaconda.log /tmp/packaging.log | tail -1 | grep $env";
         send_key "ctrl-alt-f6";
         assert_screen "anaconda_main_hub", 30;
