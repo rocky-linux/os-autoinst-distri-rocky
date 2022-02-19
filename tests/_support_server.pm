@@ -8,6 +8,9 @@ use tapnet;
 use utils;
 
 sub _pxe_setup {
+    # This happens before local DNS server is running and dnf will fail. Temporarily add 8.8.8.8 to resolve.conf
+    assert_script_run "echo 'nameserver 8.8.8.8' >> /etc/resolv.conf";
+
     # set up PXE server (via dnsmasq). Not used for update tests.
     # don't get hung up on slow mirrors when DNFing...
     repos_mirrorlist;
