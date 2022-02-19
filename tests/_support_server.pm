@@ -130,8 +130,11 @@ sub run {
     #assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
     assert_script_run "targetcli /backstores/block create dev=/dev/vdb name=vdb";
     assert_script_run "targetcli /iscsi create wwn=iqn.2016-06.local.domain:support.target1";
-    assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1 set auth userid=test password=weakpassword";
+    assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1/acls create iqn.2016-06.local.domain:support.target1";
+    assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1 set attribute authentication=1";
+    assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1/acls/iqn.2016-06.local.domain:support.target1 set auth userid=test password=weakpassword";
     assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1/luns create /backstores/block/vdb";
+    assert_script_run "targetcli / saveconfig";
     # open firewall port
     assert_script_run "firewall-cmd --add-port=3260/tcp";
     assert_script_run "systemctl restart target.service";
