@@ -90,7 +90,7 @@ sub run {
         # match for the installer bootloader if it hangs around for a
         # while after do_bootloader finishes (in PXE case it does)
         sleep 20;
-        assert_screen "bootloader", 1800;
+        assert_screen "bootloader", 3600;
     }
     else {
         if (get_var("ANACONDA_TEXT")) {
