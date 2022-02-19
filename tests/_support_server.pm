@@ -31,7 +31,7 @@ sub _pxe_setup {
         assert_script_run "mkdir -p /var/lib/tftpboot/pxelinux.cfg";
         # install bootloader packages
         assert_script_run "dnf -y install syslinux", 120;
-        assert_script_run "dnf -y --releasever=$ourversion --installroot=/var/tmp/rocky install shim-x64 grub2-efi-x64", 300;
+        assert_script_run "dnf -y --releasever=$ourversion --refresh --installroot=/var/tmp/rocky install shim-x64 grub2-efi-x64", 1800;
         # copy bootloader files to tftp root
         assert_script_run "cp /usr/share/syslinux/{pxelinux.0,vesamenu.c32,ldlinux.c32,libcom32.c32,libutil.c32} /var/lib/tftpboot";
         assert_script_run "cp /var/tmp/rocky/boot/efi/EFI/rocky/{shim.efi,grubx64.efi} /var/lib/tftpboot";
@@ -49,7 +49,7 @@ sub _pxe_setup {
     elsif ($arch eq 'ppc64le') {
         # ppc64le: use grub2 for OFW
         # install bootloader tools package
-        assert_script_run "dnf -y install grub2-tools-extra", 180;
+        assert_script_run "dnf -y install grub2-tools-extra", 360;
         # install a network bootloader to tftp root
         assert_script_run "grub2-mknetdir --net-directory=/var/lib/tftpboot";
         # bootloader config
@@ -146,7 +146,7 @@ sub run {
         assert_script_run "mount /dev/cdrom /mnt/iso";
         # copy the contents of the ISO to the repo share
         assert_script_run "dnf -y install rsync", 180;
-        assert_script_run "rsync -av /mnt/iso/ /repo", 180;
+        assert_script_run "rsync -av /mnt/iso/ /repo", 360;
         # put the updates image in the NFS repo (for testing this update
         # image delivery method)
         assert_script_run "curl -o /repo/images/updates.img https://fedorapeople.org/groups/qa/updates/updates-openqa.img";
