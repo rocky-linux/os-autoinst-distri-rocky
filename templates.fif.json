@@ -1348,7 +1348,7 @@
                 "NUMDISKS": "2",
                 "PARALLEL_CANCEL_WHOLE_CLUSTER": "0",
                 "POSTINSTALL": "_support_server",
-                "POST_STATIC": "172.16.2.110 support.test.openqa.fedoraproject.org",
+                "POST_STATIC": "172.16.2.110 support.test.openqa.rockylinux.org",
                 "ROOT_PASSWORD": "weakpassword",
                 "TEST_TARGET": "NONE",
                 "USER_LOGIN": "false",
