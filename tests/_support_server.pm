@@ -114,7 +114,7 @@ sub run {
     }
     ## DNS / DHCP (dnsmasq)
     # create config
-    assert_script_run "printf 'domain=test.openqa.fedoraproject.org\ndhcp-range=172.16.2.150,172.16.2.199\ndhcp-option=option:router,172.16.2.2\n' > /etc/dnsmasq.conf";
+    assert_script_run "printf 'domain=test.openqa.rockylinux.org\ndhcp-range=172.16.2.150,172.16.2.199\ndhcp-option=option:router,172.16.2.2\n' > /etc/dnsmasq.conf";
     # do PXE setup if this is not an update test
     _pxe_setup() unless (get_var("ADVISORY_OR_TASK"));
     # open firewall ports
