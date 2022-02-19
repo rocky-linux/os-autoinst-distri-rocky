@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 76,
+      "xpos": 251,
+      "height": 16,
+      "type": "match",
+      "ypos": 363
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "anaconda_part_device_sda",
+    "anaconda_part_device_sda_selected"
+  ]
+}
