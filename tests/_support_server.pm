@@ -145,7 +145,7 @@ sub run {
     # create the file share
     assert_script_run "mkdir -p /export";
     # get the kickstart
-    assert_script_run "curl -o /export/root-user-crypted-net.ks https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks";
+    assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
     # for update tests, set up the update repository and export it
     if (get_var("ADVISORY_OR_TASK")) {
         assert_script_run "echo '/opt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";
