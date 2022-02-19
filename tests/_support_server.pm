@@ -34,15 +34,23 @@ sub _pxe_setup {
         assert_script_run "mkdir -p /var/lib/tftpboot/pxelinux.cfg";
         # install bootloader packages
         assert_script_run "dnf -y install syslinux", 120;
+        assert_script_run "rpm --root=/var/tmp/rocky --rebuilddb", 60;
+        assert_script_run "cd /var/tmp; dnf download rocky-release rocky-repos rocky-gpg-keys", 60;
+        assert_script_run "rpm --root=/var/tmp/rocky --nodeps -i /var/tmp/*.rpm", 60;
+        #assert_script_run "sed -i /var/tmp/rocky/etc/yum.repos.d/Rocky-*.repo -e 's/repo=/repo=rocky-/g'", 60;
         assert_script_run "dnf -y --releasever=$ourversion --refresh --installroot=/var/tmp/rocky install shim-x64 grub2-efi-x64", 1800;
+
         # copy bootloader files to tftp root
         assert_script_run "cp /usr/share/syslinux/{pxelinux.0,vesamenu.c32,ldlinux.c32,libcom32.c32,libutil.c32} /var/lib/tftpboot";
-        assert_script_run "cp /var/tmp/rocky/boot/efi/EFI/rocky/{shim.efi,grubx64.efi} /var/lib/tftpboot";
+        assert_script_run "cp /var/tmp/rocky/boot/efi/EFI/rocky/{shimx64.efi,shimx64-rocky.efi,grubx64.efi} /var/lib/tftpboot";
         # bootloader configs
         # BIOS
-        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux\n  menu default\n  kernel rocky/vmlinuz\n  append initrd=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
+        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux 64-bit\n  menu default\n  kernel rocky/vmlinuz\n  append initr
+d=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
         # UEFI
-        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
+        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\
+n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux 64-bit\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=
+file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/grub.cfg";
@@ -83,9 +91,9 @@ sub _pxe_setup {
     assert_script_run "curl -o /var/lib/tftpboot/rocky/initrd.img $location/BaseOS/${arch}/os/${kernpath}/initrd.img";
     # get a kickstart to embed in the initramfs, for testing:
     # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
-    assert_script_run "curl -o ks.cfg https://fedorapeople.org/groups/qa/kickstarts/root-user-crypted-net.ks";
+    assert_script_run "curl -o ks.cfg https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
     # tweak the repo config in it
-    assert_script_run "sed -i -e 's,^url.*,nfs --server 172.16.2.110 --dir /repo --opts nfsvers=4,g' ks.cfg";
+    assert_script_run "sed -i -e 's,^url.*,nfs --server=nfs://172.16.2.110 --dir=/repo --opts=nfsver=4,g' ks.cfg";
     # embed it
     assert_script_run "echo ks.cfg | cpio -c -o >> /var/lib/tftpboot/rocky/initrd.img";
     # chown root
