@@ -618,17 +618,13 @@
         },
         "install_package_set_minimal": {
             "profiles": {
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
+                "rocky-dvd-iso-x86_64-*-64bit": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11,
+                "rocky-minimal-iso-x86_64-*-64bit": 10,
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-64bit": 30
-            },
-            "settings": {
-                "PACKAGE_SET": "minimal",
-                "POSTINSTALL": "_console_login"
-            }
-        },
-        "install_package_set_minimal": {
-            "profiles": {
-                "rocky-universal-aarch64-*-aarch64": 30,
+                "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -638,6 +634,9 @@
         },
         "install_package_set_server": {
             "profiles": {
+                "rocky-dvd-iso-x86_64-*-64bit": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11,
+                "rocky-minimal-iso-x86_64-*-64bit": 10,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
@@ -648,12 +647,15 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
+                "rocky-dvd-iso-x86_64-*-64bit": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "graphical-server",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
@@ -662,12 +664,15 @@
         },
         "install_package_set_workstation": {
             "profiles": {
+                "rocky-dvd-iso-x86_64-*-64bit": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
+                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
@@ -676,6 +681,8 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
+                "rocky-dvd-iso-x86_64-*-64bit": 11,
+                "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },

@@ -38,6 +38,7 @@ sub run {
       send_key "spc";
     }
 
+    # check that desired environment is selected
     assert_screen "anaconda_".$packageset."_selected";
     assert_and_click "anaconda_spoke_done";
 
