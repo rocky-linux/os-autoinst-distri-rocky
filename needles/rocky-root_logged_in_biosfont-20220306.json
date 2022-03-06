@@ -1,0 +1,27 @@
+{
+  "area": [
+    {
+      "height": 14,
+      "type": "match",
+      "width": 41,
+      "xpos": 7,
+      "ypos": 128,
+      "match": 93
+    },
+    {
+      "ypos": 128,
+      "xpos": 104,
+      "type": "match",
+      "width": 16,
+      "height": 14,
+      "match": 93
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server",
+    "root_console",
+    "root_logged_in"
+  ]
+}
