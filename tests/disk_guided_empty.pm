@@ -18,16 +18,16 @@ sub run {
     if (get_var('TEST_UPDATES')){
         assert_screen "anaconda_install_destination_updates", 30;
     }
-   # Here the self identification test code is placed.
-   my $branched = get_var('VERSION');
-   if ($identification eq 'true' or $branched ne "Rawhide") {
+    # Here the self identification test code is placed.
+    my $branched = get_var('VERSION');
+    if ($identification eq 'true' or $branched ne "Rawhide") {
         check_top_bar(); # See utils.pm
         # we don't check version or pre-release because here those
         # texts appear on the banner which makes the needling
         # complex and fragile (banner is different between variants,
         # and has a gradient so for RTL languages the background color
         # differs; pre-release text is also translated)
-   }
+    }
 
     assert_and_click "anaconda_spoke_done";
 
