@@ -358,7 +358,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "arabic",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -377,7 +376,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "INPUT_METHOD": "1",
                 "LANGUAGE": "japanese",
                 "PACKAGE_SET": "workstation",
@@ -444,7 +442,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "russian",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -465,7 +462,6 @@
             },
             "settings": {
                 "DESKTOP": "gnome",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data"
             }
@@ -534,7 +530,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "french",
                 "NO_UEFI_POST": "1",
                 "PACKAGE_SET": "workstation",
@@ -563,7 +558,6 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
@@ -576,7 +570,6 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
-                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -665,7 +658,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "graphical-server",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
@@ -682,7 +674,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
