@@ -31,6 +31,20 @@ sub run {
 
     assert_and_click "anaconda_spoke_done";
 
+    # if we get the "Reclaim Space" dialog, hit enter to reclaim space
+    if (check_screen("anaconda_install_destination_reclaim_space_btn", 5)) {
+        # hit enter to reclaim space
+        send_key "ret";
+
+        # select 'delete all' button and hit enter to delete existing data
+        send_key_until_needlematch("anaconda_install_destination_delete_all_btn_selected", "tab", 5);
+        send_key "ret";
+
+        # send tab 5 times to select "Reclaim Space" button
+        send_key_until_needlematch("anaconda_install_destination_reclaim_space_btn_selected", "tab", 5);
+        send_key "ret";
+    }
+
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300; #
 
