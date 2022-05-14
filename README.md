@@ -101,6 +101,13 @@ It is very important, therefore, that needles have the correct tags. Any needle 
 
 Note that tags of the form `ENV-INSTLANG-(anything)` are useless artefacts and should be removed.
 
+## Contribution Approval Guidelines
+
+Use the following guidelines to understand the level of approval needed to merge your contributions:
+1. Pull requests and merge requests to a non-default branch will require 1 visual inspection approval to merge, provided all comments are addressed and requests for followup are outstanding.
+1. Pull and merge requests to the default branch (`rocky`) require 2 visual inspection approvals **and** 1 openQA automation approval to merge.
+1. When public openQA infrastructure is available, all pull requests should initiate an openQA build, which must pass prior to merge.
+
 ## Licensing and credits
 
 The contents of this repository are available under the GPL, version 3 or any later version. A copy is included as COPYING. Note that we do not include the full GPL header in every single test file as they are quite short and this would waste a lot of space.
