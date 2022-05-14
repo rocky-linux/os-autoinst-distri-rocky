@@ -175,14 +175,6 @@ sub load_install_tests() {
         autotest::loadtest "tests/_anaconda_network_enable.pm";
     }
 
-    ## Kdump
-    if (get_var('ANACONDA_KDUMP') eq 'enabled') {
-        autotest::loadtest "tests/_anaconda_kdump_enable.pm";
-    }
-    else {
-        autotest::loadtest "tests/_anaconda_kdump_disable.pm";
-    }
-
     ## Installation source
     if (get_var('MIRRORLIST_GRAPHICAL') || get_var("REPOSITORY_GRAPHICAL")) {
         autotest::loadtest "tests/install_source_graphical.pm";
@@ -213,6 +205,14 @@ sub load_install_tests() {
 
     if (get_var("ENCRYPT_PASSWORD")){
         autotest::loadtest "tests/disk_guided_encrypted.pm";
+    }
+
+    ## Kdump
+    if (get_var('ANACONDA_KDUMP') eq 'enabled') {
+        autotest::loadtest "tests/_anaconda_kdump_enable.pm";
+    }
+    else {
+        autotest::loadtest "tests/_anaconda_kdump_disable.pm";
     }
 
     # Start installation, set user & root passwords, reboot
