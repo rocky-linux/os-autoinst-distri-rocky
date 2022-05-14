@@ -104,7 +104,7 @@ Note that tags of the form `ENV-INSTLANG-(anything)` are useless artefacts and s
 ## Contribution Approval Guidelines
 
 Use the following guidelines to understand the level of approval needed to merge your contributions:
-1. Pull requests and merge requests to a non-default branch will require 1 visual inspection approval to merge, provided all comments are addressed and requests for followup are outstanding.
+1. Pull requests and merge requests to a non-default branch will require 1 visual inspection approval to merge, provided all comments are addressed and no requests for followup are outstanding.
 1. Pull and merge requests to the default branch (`rocky`) require 2 visual inspection approvals **and** 1 openQA automation approval to merge.
 1. When public openQA infrastructure is available, all pull requests should initiate an openQA build, which must pass prior to merge.
 
