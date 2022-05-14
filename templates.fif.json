@@ -394,6 +394,7 @@
             },
             "settings": {
                 "PARTITIONING": "custom_gui_lvm_ext4",
+                "HDDSIZEGB": "15",
                 "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
                 "ROOT_PASSWORD": "weakpassword"
             }
