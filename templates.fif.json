@@ -57,6 +57,7 @@
             "settings": {
                 "GRUB": "ip=dhcp",
                 "+QEMURAM": 3072,
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -68,6 +69,7 @@
             "settings": {
                 "GRUB": "ip=dhcp",
                 "+QEMURAM": 3072,
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -79,6 +81,7 @@
             "settings": {
                 "+QEMURAM": 3072,
                 "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -90,6 +93,7 @@
             "settings": {
                 "+QEMURAM": 3072,
                 "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -100,6 +104,7 @@
             "flavor": "dvd-iso",
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -110,6 +115,7 @@
             "flavor": "dvd-iso",
             "settings": {
                 "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -119,6 +125,7 @@
             "distri": "rocky",
             "flavor": "package-set",
             "settings": {
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -128,6 +135,7 @@
             "distri": "rocky",
             "flavor": "package-set",
             "settings": {
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -137,6 +145,7 @@
             "distri": "rocky",
             "flavor": "universal",
             "settings": {
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -146,6 +155,7 @@
             "distri": "rocky",
             "flavor": "universal",
             "settings": {
+                "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
             "version": "*"
@@ -348,7 +358,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "arabic",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -367,7 +376,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "INPUT_METHOD": "1",
                 "LANGUAGE": "japanese",
                 "PACKAGE_SET": "workstation",
@@ -434,7 +442,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "russian",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
@@ -455,7 +462,6 @@
             },
             "settings": {
                 "DESKTOP": "gnome",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data"
             }
@@ -513,6 +519,7 @@
             "settings": {
                 "HDDMODEL": "ide-hd",
                 "HDD_1": "disk_full_mbr.img",
+                "HDDSIZEGB": "20",
                 "PARTITIONING": "guided_delete_all"
             }
         },
@@ -524,7 +531,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "LANGUAGE": "french",
                 "NO_UEFI_POST": "1",
                 "PACKAGE_SET": "workstation",
@@ -553,7 +559,6 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
-                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
@@ -566,7 +571,6 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
-                "HDDSIZEGB": "15",
                 "PARTITIONING": "custom_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -655,7 +659,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "graphical-server",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
@@ -672,7 +675,6 @@
             "settings": {
                 "DESKTOP": "gnome",
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "HDDSIZEGB": "15",
                 "PACKAGE_SET": "workstation",
                 "POSTINSTALL": "_console_login",
                 "ROOT_PASSWORD": "weakpassword",
@@ -818,6 +820,7 @@
             },
             "settings": {
                 "HDD_1": "disk_freespace_%PART_TABLE_TYPE%.img",
+                "HDDSIZEGB": "20",
                 "PARTITIONING": "guided_free_space",
                 "ROOT_PASSWORD": "weakpassword"
             }
