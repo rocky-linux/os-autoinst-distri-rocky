@@ -519,6 +519,7 @@
             "settings": {
                 "HDDMODEL": "ide-hd",
                 "HDD_1": "disk_full_mbr.img",
+                "HDDSIZEGB": "20",
                 "PARTITIONING": "guided_delete_all"
             }
         },
@@ -819,6 +820,7 @@
             },
             "settings": {
                 "HDD_1": "disk_freespace_%PART_TABLE_TYPE%.img",
+                "HDDSIZEGB": "20",
                 "PARTITIONING": "guided_free_space",
                 "ROOT_PASSWORD": "weakpassword"
             }
