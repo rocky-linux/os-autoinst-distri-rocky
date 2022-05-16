@@ -761,7 +761,7 @@
             },
             "settings": {
                 "CDMODEL": "scsi-cd",
-                "GRUB": "inst.updates=https://rockypeople.org/groups/qa/updates/updates-openqa.img",
+                "GRUB": "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-openqa.img",
                 "HDDMODEL": "scsi-hd",
                 "SCSICONTROLLER": "virtio-scsi-pci",
                 "TEST_UPDATES": "1"
