@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 ROCKY_FLAVOR="${ROCKY_FLAVOR:-boot-iso}"
@@ -19,6 +20,7 @@ else
     exit 1
 fi
 
+export PS4='# '
 set -o xtrace
 openqa-cli api \
     -X POST isos \
