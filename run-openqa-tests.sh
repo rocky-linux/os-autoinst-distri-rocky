@@ -1,10 +1,12 @@
 #!/bin/bash
+
 set -e
 
-ROCKY_FLAVOR=$1
-ROCKY_VERSION=8.5
-ROCKY_ARCH=x86_64
-ROCKY_PACKAGE_SET=minimal
+ROCKY_FLAVOR="${ROCKY_FLAVOR:-boot-iso}"
+ROCKY_VERSION="${ROCKY_VERSION:-8.6}"
+ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
+ROCKY_PACKAGE_SET="${ROCKY_PACKAGE_SET:=minimal}"
+ROCKY_EXTRA_ARGS="${ROCKY_EXTRA_ARGS:-}"
 BUILD_PREFIX="${ROCKY_VERSION}_${ROCKY_FLAVOR}"
 BUILD_NAME="${BUILD_PREFIX}_$(date +%Y%m%d.%H%M%S).0"
 
@@ -19,6 +21,7 @@ else
     exit 1
 fi
 
+export PS4='# '
 set -o xtrace
 openqa-cli api \
     -X POST isos \
@@ -29,4 +32,5 @@ openqa-cli api \
     VERSION="$ROCKY_VERSION" \
     BUILD="$BUILD_NAME" \
     PACKAGE_SET="$ROCKY_PACKAGE_SET" \
-    IDENTIFICATION=false
+    IDENTIFICATION=false \
+    "${ROCKY_EXTRA_ARGS}"
