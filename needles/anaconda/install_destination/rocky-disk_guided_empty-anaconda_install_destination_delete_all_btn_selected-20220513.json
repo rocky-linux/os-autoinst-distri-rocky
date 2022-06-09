@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 912,
+      "ypos": 510,
+      "width": 90,
+      "height": 38,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_install_destination_delete_all_btn_selected"
+  ]
+}

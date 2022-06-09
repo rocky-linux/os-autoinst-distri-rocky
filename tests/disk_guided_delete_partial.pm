@@ -18,6 +18,7 @@ sub run {
 
     assert_and_click "anaconda_install_destination_reclaim_space_delete_btn";
 
+    # If this fails with a disabled button, we didn't reclaim enough space to perform installation
     assert_and_click "anaconda_install_destination_reclaim_space_btn";
 
     # Anaconda hub
