@@ -10,6 +10,7 @@
   ],
   "properties": [],
   "tags": [
-    "anaconda_install_destination_add_network_disk"
+    "anaconda_install_destination_add_network_disk",
+    "ENV-DISTRI-rocky"
   ]
 }
