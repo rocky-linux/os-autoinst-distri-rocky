@@ -11,6 +11,7 @@
   "properties": [],
   "tags": [
     "anaconda_part_device_sda",
-    "anaconda_part_device_sda_selected"
+    "anaconda_part_device_sda_selected",
+    "ENV-DISTRI-rocky"
   ]
 }
