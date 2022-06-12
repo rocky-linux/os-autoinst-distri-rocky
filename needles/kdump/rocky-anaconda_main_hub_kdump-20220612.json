@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 719,
+      "ypos": 265,
+      "width": 16,
+      "height": 43,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_main_hub_kdump"
+  ]
+}
