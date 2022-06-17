@@ -40,18 +40,22 @@ sub run {
     # desktop
     unless (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         unless (get_var("HDD_1") && !(get_var("PARTITIONING") eq "custom_resize_lvm")) {
-            # for Rocky Linux here happens to be a license acceptance screen
-            # the initial appearance can sometimes take really long
-            assert_screen "gdm_initial_setup_license", 120;
-            assert_and_click "gdm_initial_setup_license";
-            # Make sure the card has fully lifted until clicking on the buttons
-            wait_still_screen 5, 30;
-            assert_and_click "gdm_initial_setup_licence_accept";
-            assert_and_click "gdm_spoke_done";
-            # As well as coming back
-            wait_still_screen 5, 30;
-            assert_screen "gdm_initial_setup_license_accepted";
-            assert_and_click "gdm_initial_setup_spoke_forward";
+            # in 9.0+, license screens are not shown by default
+            # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
+            unless ($version eq '9.0') {
+                # for Rocky Linux here happens to be a license acceptance screen
+                # the initial appearance can sometimes take really long
+                assert_screen "gdm_initial_setup_license", 120;
+                assert_and_click "gdm_initial_setup_license";
+                # Make sure the card has fully lifted until clicking on the buttons
+                wait_still_screen 5, 30;
+                assert_and_click "gdm_initial_setup_licence_accept";
+                assert_and_click "gdm_spoke_done";
+                # As well as coming back
+                wait_still_screen 5, 30;
+                assert_screen "gdm_initial_setup_license_accepted";
+                assert_and_click "gdm_initial_setup_spoke_forward";
+            }
         }
 
         boot_to_login_screen(timeout => $wait_time);
@@ -61,6 +65,10 @@ sub run {
         # GDM 3.24.1 dumps a cursor in the middle of the screen here...
         mouse_hide;
         if (get_var("DESKTOP") eq 'gnome') {
+            if ($version eq '9.0') {
+                send_key_until_needlematch("graphical_login_test_user_highlighted", "tab", 5);
+                assert_screen "graphical_login_test_user_highlighted";
+            }
             # we have to hit enter to get the password dialog, and it
             # doesn't always work for some reason so just try it three
             # times
@@ -103,6 +111,9 @@ sub run {
             # ...from GNOME 40 on, we just get a "Welcome" tour
             handle_welcome_screen unless (get_var("_welcome_done"));
         }
+    }
+    if ($version eq '9.0') {
+        handle_welcome_screen unless (get_var("_welcome_done"));
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         # handle welcome screen if we didn't do it above (holy flow
