@@ -639,6 +639,8 @@
         },
         "install_package_set_server": {
             "profiles": {
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
                 "rocky-dvd-iso-x86_64-*-64bit": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-minimal-iso-x86_64-*-64bit": 10,
@@ -652,6 +654,8 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
                 "rocky-dvd-iso-x86_64-*-64bit": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
@@ -668,6 +672,8 @@
         },
         "install_package_set_workstation": {
             "profiles": {
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
                 "rocky-dvd-iso-x86_64-*-64bit": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
@@ -684,6 +690,8 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
                 "rocky-dvd-iso-x86_64-*-64bit": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11,
                 "rocky-universal-aarch64-*-aarch64": 30,
