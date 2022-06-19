@@ -40,7 +40,7 @@ sub run {
     # desktop
     unless (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         unless (get_var("HDD_1") && !(get_var("PARTITIONING") eq "custom_resize_lvm")) {
-            # in 9.0+, license screens are not shown by default
+            # in 9.0, license screens are not shown by default
             # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
             unless ($version eq '9.0') {
                 # for Rocky Linux here happens to be a license acceptance screen
