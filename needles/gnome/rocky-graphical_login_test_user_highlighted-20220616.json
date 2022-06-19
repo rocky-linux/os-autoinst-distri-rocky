@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 418,
+      "ypos": 361,
+      "width": 32,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "graphical_login_test_user_highlighted"
+  ]
+}
