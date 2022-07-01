@@ -5,9 +5,10 @@ use strict;
 use base 'Exporter';
 use Exporter;
 
+use feature "switch";
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -60,6 +61,22 @@ sub get_release_number {
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
     return $version
+}
+
+sub get_code_name {
+    my $code_name = 'Green Obsidian';
+    my $version = get_var('VERSION');
+    my $ver_major = substr($version, 0, index($version, q/./));
+
+    given($ver_major){
+        when ('9') {  $code_name = 'Blue Onyx'; }
+        when ('10') {  $code_name = 'Smoky Quartz'; }
+        when ('11') {  $code_name = 'Lavender Calcite'; }
+        default{
+            $code_name = 'Green Obsidian';
+        }
+    }
+    return $code_name;
 }
 
 # Figure out what tty the desktop is on, switch to it. Assumes we're
@@ -1360,8 +1377,8 @@ sub register_application {
 }
 
 # The KDE desktop tests are very difficult to maintain, because the transparency
-# of the menu requires a lot of different needles to cover the elements. 
-# Therefore it is useful to change the background to a solid colour. 
+# of the menu requires a lot of different needles to cover the elements.
+# Therefore it is useful to change the background to a solid colour.
 # Since many needles have been already created with a black background
 # we will keep it that way. The following code has been taken from the
 # KDE startstop tests but it is good to have it here, because it will be
