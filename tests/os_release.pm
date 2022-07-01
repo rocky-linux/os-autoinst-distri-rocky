@@ -43,6 +43,9 @@ sub run {
         my $ver_major = substr($version_id, 0, index($version_id, q/./));
         my $ver_minor = substr($version_id, index($version_id, q/./), length($version_id));
         my $target = lc($ver_major);
+        if ( $ver_major = '9' ) {
+            $target = lc($version_id);
+        }
 
         my $reltag = script_output 'rpm -q rocky-release --qf "%{RELEASE}\n"';
         my $relver = substr($reltag, 0, rindex($reltag, q/./));
@@ -79,6 +82,10 @@ sub run {
 
         # Test for Rocky Support Product
         $strip = strip_marks($content{'ROCKY_SUPPORT_PRODUCT'});
+        if ( $ver_major = '9' ) {
+            $fullname = qq/$fullname $ver_major/;
+            $fullname =~ s/ /-/g;
+        }
         rec_log "ROCKY_SUPPORT_PRODUCT should be $fullname and is $strip", $strip eq $fullname, $failref;
 
         # Test for Rocky Support Product Version
