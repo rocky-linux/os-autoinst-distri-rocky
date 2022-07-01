@@ -40,12 +40,13 @@ sub run {
         my $fullname = $name . " Linux";
 
         my $version_id = get_var("VERSION"); # Should be the version number.
-        my ($ver_major, $ver_minor) = split /\./, $version_id;
-        my $varstr = spell_version_number($version_id);
+        my $ver_major = substr($version_id, 0, index($version_id, q/./));
+        my $ver_minor = substr($version_id, index($version_id, q/./), length($version_id));
         my $target = lc($ver_major);
 
         my $reltag = script_output 'rpm -q rocky-release --qf "%{RELEASE}\n"';
-        my ($relver, $eltag) = split /\./, $reltag;
+        my $relver = substr($reltag, 0, rindex($reltag, q/./));
+        my $eltag = substr($reltag, rindex($reltag, q/./)+1, length($reltag));
 
         my $code_name = get_code_name();
         my $version = "$version_id ($code_name)";
