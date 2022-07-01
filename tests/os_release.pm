@@ -47,7 +47,7 @@ sub run {
         my $reltag = script_output 'rpm -q rocky-release --qf "%{RELEASE}\n"';
         my ($relver, $eltag) = split /\./, $reltag;
 
-        my $code_name = get_var("CODENAME", 'Green Obsidian');
+        my $code_name = get_code_name();
         my $version = "$version_id ($code_name)";
         my $platform_id = "platform:$eltag";
         my $pretty = "$fullname $version_id ($code_name)";
