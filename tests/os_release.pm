@@ -79,7 +79,7 @@ sub run {
 
         # Test for Rocky Support Product
         $strip = strip_marks($content{'ROCKY_SUPPORT_PRODUCT'});
-        rec_log "ROCKY_SUPPORT_PRODUCT should be $name and is $strip", $strip eq $fullname, $failref;
+        rec_log "ROCKY_SUPPORT_PRODUCT should be $fullname and is $strip", $strip eq $fullname, $failref;
 
         # Test for Rocky Support Product Version
         $strip = strip_marks($content{ROCKY_SUPPORT_PRODUCT_VERSION});
