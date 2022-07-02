@@ -12,7 +12,6 @@
   "tags": [
     "DESKTOP-gnome",
     "ENV-DISTRI-rocky",
-    "LANGUAGE-english",
     "graphical_login",
     "login_screen"
   ]
