@@ -368,9 +368,7 @@ sub get_full_repo {
     if ($repourl !~ m/^(nfs|hd:)/) {
         # Everything variant doesn't exist for modular composes atm,
         # only Server
-        my $variant = 'Everything';
-        $variant = 'Server' if (get_var("MODULAR"));
-        $repourl .= "/${variant}/".get_var("ARCH")."/os";
+        $repourl .= "/".get_var("ARCH")."/os";
     }
     return $repourl;
 }
