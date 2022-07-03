@@ -2,11 +2,14 @@ use base "installedtest";
 use strict;
 use testapi;
 use packagetest;
+use utils;
 
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
     $self->root_console(tty=>3);
+    # support switching to stg repos
+    dnf_contentdir();
     # enable test repos and install test packages
     prepare_test_packages;
     # check rpm agrees they installed good

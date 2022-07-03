@@ -8,7 +8,7 @@ use Exporter;
 use feature "switch";
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup dnf_contentdir setup_workaround_repo cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -626,6 +626,21 @@ sub repo_setup {
     # it even though it is disabled, and fail. At present none of the
     # tests needs it, so let's just unconditionally nuke it.
     assert_script_run "rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo";
+}
+
+sub _dnf_contentdir_reset {
+    # Restore default repository contentdir
+    script_run 'printf "pub/rocky\n" > /etc/dnf/vars/contentdir';
+}
+
+sub _dnf_contentdir_set {
+    # Point at staging repositories by modifying contentdir
+    script_run 'printf "stg/rocky\n" > /etc/dnf/vars/contentdir';
+}
+
+sub dnf_contentdir {
+    # Modify the Rocky Linux repository baseurl's if needed
+    get_var("DNF_CONTENTDIR") ? _dnf_contentdir_set : _dnf_contentdir_reset
 }
 
 sub console_initial_setup {

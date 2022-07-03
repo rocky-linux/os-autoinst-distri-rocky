@@ -1,10 +1,13 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
     my $self = shift;
     $self->root_console(tty=>4);
+    # support switching to stg repos
+    dnf_contentdir();
     assert_script_run 'top -i -n20 -b > /var/tmp/top.log', 120;
     upload_logs '/var/tmp/top.log';
     unless (get_var("CANNED")) {
