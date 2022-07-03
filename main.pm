@@ -249,7 +249,8 @@ sub _load_early_postinstall_tests {
 
     # For now, there's no possibility to get a graphical desktop on
     # Modular composes, so short-circuit here for those
-    if (get_var("MODULAR")) {
+    # Rocky has no such thing as MODULAR composes.
+    if (!get_var("DESKTOP") || get_var("DESKTOP") eq "false") {
         _load_instance("tests/_console_wait_login", $instance);
         return;
     }
