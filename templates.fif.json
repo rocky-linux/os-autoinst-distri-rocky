@@ -494,6 +494,7 @@
                 "rocky-dvd-iso-x86_64-*-64bit": 10
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
@@ -633,8 +634,8 @@
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
-                "PACKAGE_SET": "minimal",
-                "POSTINSTALL": "_console_login"
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal"
             }
         },
         "install_package_set_server": {
@@ -648,8 +649,8 @@
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
-                "PACKAGE_SET": "server",
-                "POSTINSTALL": "_console_login"
+                "DESKTOP": "false",
+                "PACKAGE_SET": "server"
             }
         },
         "install_package_set_graphical-server": {

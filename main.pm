@@ -249,13 +249,19 @@ sub _load_early_postinstall_tests {
 
     # For now, there's no possibility to get a graphical desktop on
     # Modular composes, so short-circuit here for those
-    # Rocky has no such thing as MODULAR composes.
-    if (!get_var("DESKTOP") || get_var("DESKTOP") eq "false") {
+    # Rocky has no such thing as MODULAR composes and we make use of PACKAGESET
+    # to select different Environments from the boot and/or DVD ISOs.
+    # DO NOT specify DESKTOP for minimal, server-product or virtualization-host
+    my $package_set = get_var("PACKAGE_SET");
+    if (!get_var("DESKTOP") || get_var("DESKTOP") eq "false" ||
+        $package_set eq "minimal" || $package_set eq "server" ||
+        $package_set eq "virtualization-host") {
         _load_instance("tests/_console_wait_login", $instance);
         return;
     }
 
-    # Appropriate login method for install type
+    # Explicitly setting DESKTOP="kde" or DESKTOP="gnome" should ALWAYS trigger
+    # graphical login...
     if (get_var("DESKTOP")) {
         _load_instance("tests/_graphical_wait_login", $instance);
     }
