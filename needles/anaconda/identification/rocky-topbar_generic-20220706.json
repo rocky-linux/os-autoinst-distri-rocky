@@ -1,17 +1,16 @@
 {
   "area": [
     {
-      "type": "match",
-      "xpos": 493,
       "width": 531,
       "height": 32,
-      "ypos": 0
+      "xpos": 237,
+      "ypos": 31,
+      "type": "match"
     }
   ],
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "LANGUAGE-english",
     "topbar_generic"
   ]
 }
