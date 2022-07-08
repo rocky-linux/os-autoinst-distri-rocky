@@ -10,6 +10,9 @@ sub run {
     if (get_version_major() < 9) {
         script_run "sed -i 's/^mirrorlist/#mirrorlist/g' /etc/yum.repos.d/Rocky-*";
         script_run "sed -i 's,^#\(baseurl=http[s]*://\),\1,g' /etc/yum.repos.d/Rocky-*";
+    } else {
+      script_run "sed -i 's/^mirrorlist/#mirrorlist/g' /etc/yum.repos.d/rocky*";
+      script_run "sed -i 's,^#\(baseurl=http[s]*://\),\1,g' /etc/yum.repos.d/rocky*";
     }
     script_run 'printf "stg/rocky\n" > /etc/dnf/vars/contentdir';
     script_run 'dnf clean all';
