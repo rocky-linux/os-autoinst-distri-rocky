@@ -292,9 +292,9 @@ sub load_postinstall_tests() {
     _load_early_postinstall_tests();
 
     ## enable staging repos if requested
-    if (get_var("DNF_CONTENTDIR")) {
-        autotest::loadtest "tests/_staging_repos_enable.pm";
-    }
+    #if (get_var("DNF_CONTENTDIR")) {
+    #    autotest::loadtest "tests/_staging_repos_enable.pm";
+    #}
 
     # do standard post-install static network config if the var is set
     # and this is not an upgrade test (this is done elsewhere in the
