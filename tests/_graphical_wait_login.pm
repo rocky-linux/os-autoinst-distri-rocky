@@ -103,10 +103,9 @@ sub run {
         # as this test gets loaded twice on the ADVISORY_OR_TASK flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
-        my $relnum = get_release_number;
         my $version_major = get_version_major();
-        if (($relnum < 34) || ($version_major < 9)) {
-            # before GNOME 40 (F34), we get a per-user version of
+        if ($version_major < 9) {
+            # before GNOME 40 we get a per-user version of
             # gnome-initial-setup here...
             gnome_initial_setup() unless (get_var("_setup_done"));
         }
