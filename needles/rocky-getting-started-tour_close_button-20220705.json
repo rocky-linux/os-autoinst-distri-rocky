@@ -1,0 +1,30 @@
+{
+  "area": [
+    {
+      "height": 26,
+      "ypos": 41,
+      "width": 51,
+      "click_point": {
+        "xpos": 25.5,
+        "ypos": 13
+      },
+      "type": "match",
+      "xpos": 946
+    },
+    {
+      "xpos": 135,
+      "ypos": 6,
+      "width": 64,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "close_button",
+    "getting_started"
+  ]
+}

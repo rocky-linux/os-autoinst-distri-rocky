@@ -31,7 +31,7 @@ sub run {
         $params .= "inst.repo=" . get_full_repo($repourl) . " ";
     }
     # Construct inst.addrepo arg for ADD_REPOSITORY_VARIATION
-    my $repourl = get_var("ADD_REPOSITORY_VARIATION");
+    $repourl = get_var("ADD_REPOSITORY_VARIATION");
     if ($repourl) {
         $params .= "inst.addrepo=addrepo," . get_full_repo($repourl) . " ";
     }

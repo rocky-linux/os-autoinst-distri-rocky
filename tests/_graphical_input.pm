@@ -5,7 +5,8 @@ use utils;
 
 sub run {
     my $relnum = get_release_number;
-    if (get_var("LANGUAGE") eq 'japanese' && $relnum > 33) {
+    my $version_major = get_version_major;
+    if (get_var("LANGUAGE") eq 'japanese' && (($relnum > 33) || ($version_major > 8))) {
         # since g-i-s new user mode was dropped and the replacement
         # doesn't do input method selection, and anaconda never has,
         # we have to set up the input method manually:

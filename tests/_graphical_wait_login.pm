@@ -65,7 +65,7 @@ sub run {
         # GDM 3.24.1 dumps a cursor in the middle of the screen here...
         mouse_hide;
         if (get_var("DESKTOP") eq 'gnome') {
-            if ($version eq '9.0') {
+            if (get_version_major() > 8) {
                 send_key_until_needlematch("graphical_login_test_user_highlighted", "tab", 5);
                 assert_screen "graphical_login_test_user_highlighted";
             }
@@ -93,6 +93,8 @@ sub run {
         send_key "ret";
     }
 
+    # Welcome tour is here...
+
     # For GNOME, handle initial-setup or welcome tour, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
     # do it if ADVISORY_OR_TASK is set, as for the update testing flow,
@@ -101,9 +103,9 @@ sub run {
         # as this test gets loaded twice on the ADVISORY_OR_TASK flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
-        my $relnum = get_release_number;
-        if ($relnum < 34) {
-            # before GNOME 40 (F34), we get a per-user version of
+        my $version_major = get_version_major();
+        if ($version_major < 9) {
+            # before GNOME 40 we get a per-user version of
             # gnome-initial-setup here...
             gnome_initial_setup() unless (get_var("_setup_done"));
         }
@@ -112,7 +114,7 @@ sub run {
             handle_welcome_screen unless (get_var("_welcome_done"));
         }
     }
-    if ($version eq '9.0') {
+    if (get_version_major() > 8) {
         handle_welcome_screen unless (get_var("_welcome_done"));
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {

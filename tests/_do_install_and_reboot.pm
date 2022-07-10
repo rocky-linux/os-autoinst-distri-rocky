@@ -140,6 +140,7 @@ sub run {
     push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
     push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
     push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
+    push (@actions, 'stagingrepos') if (get_var("DNF_CONTENTDIR"));
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
@@ -186,6 +187,20 @@ sub run {
     if (grep {$_ eq 'rootpw'} @actions) {
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
+    }
+    if (grep {$_ eq 'stagingrepos'} @actions) {
+        if (get_version_major() < 9) {
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-BaseOS.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-AppStream.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-Extras.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-Devel.repo';
+        } else {
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/etc/yum.repos.d/rocky.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/etc/yum.repos.d/rocky-addons.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/etc/yum.repos.d/rocky-devel.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/etc/yum.repos.d/rocky-extras.repo';
+        }
+        assert_script_run 'printf "stg/rocky\n" > ' . $mount . '/etc/dnf/vars/contentdir';
     }
     type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
 }
