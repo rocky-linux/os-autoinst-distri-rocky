@@ -725,7 +725,7 @@
             },
             "settings": {
                 "ATACONTROLLER": "ich9-ahci",
-                "HDDMODEL": "ide-drive,bus=ahci0.0"
+                "HDDMODEL": "ide-hd,bus=ahci0.0"
             }
         },
         "install_scsi_updates_img": {
