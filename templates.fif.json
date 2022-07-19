@@ -334,6 +334,8 @@
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_resize_lvm",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "INSTALL": "1",
@@ -393,6 +395,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_gui_lvm_ext4",
                 "HDDSIZEGB": "15",
                 "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
@@ -406,6 +410,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_gui_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -561,6 +567,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
