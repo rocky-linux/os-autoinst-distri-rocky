@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "ypos": 341,
+      "type": "match",
+      "height": 56,
+      "xpos": 498,
+      "width": 77,
+      "click_point": {
+        "xpos": 26.5,
+        "ypos": 36
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_part_fs",
+    "anaconda_part_fs_xfs_selected"
+  ]
+}

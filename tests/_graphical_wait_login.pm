@@ -40,18 +40,22 @@ sub run {
     # desktop
     unless (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         unless (get_var("HDD_1") && !(get_var("PARTITIONING") eq "custom_resize_lvm")) {
-            # for Rocky Linux here happens to be a license acceptance screen
-            # the initial appearance can sometimes take really long
-            assert_screen "gdm_initial_setup_license", 120;
-            assert_and_click "gdm_initial_setup_license";
-            # Make sure the card has fully lifted until clicking on the buttons
-            wait_still_screen 5, 30;
-            assert_and_click "gdm_initial_setup_licence_accept";
-            assert_and_click "gdm_spoke_done";
-            # As well as coming back
-            wait_still_screen 5, 30;
-            assert_screen "gdm_initial_setup_license_accepted";
-            assert_and_click "gdm_initial_setup_spoke_forward";
+            # in 9.0, license screens are not shown by default
+            # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
+            unless ($version eq '9.0') {
+                # for Rocky Linux here happens to be a license acceptance screen
+                # the initial appearance can sometimes take really long
+                assert_screen "gdm_initial_setup_license", 120;
+                assert_and_click "gdm_initial_setup_license";
+                # Make sure the card has fully lifted until clicking on the buttons
+                wait_still_screen 5, 30;
+                assert_and_click "gdm_initial_setup_licence_accept";
+                assert_and_click "gdm_spoke_done";
+                # As well as coming back
+                wait_still_screen 5, 30;
+                assert_screen "gdm_initial_setup_license_accepted";
+                assert_and_click "gdm_initial_setup_spoke_forward";
+            }
         }
 
         boot_to_login_screen(timeout => $wait_time);
@@ -61,6 +65,10 @@ sub run {
         # GDM 3.24.1 dumps a cursor in the middle of the screen here...
         mouse_hide;
         if (get_var("DESKTOP") eq 'gnome') {
+            if (get_version_major() > 8) {
+                send_key_until_needlematch("graphical_login_test_user_highlighted", "tab", 5);
+                assert_screen "graphical_login_test_user_highlighted";
+            }
             # we have to hit enter to get the password dialog, and it
             # doesn't always work for some reason so just try it three
             # times
@@ -85,6 +93,8 @@ sub run {
         send_key "ret";
     }
 
+    # Welcome tour is here...
+
     # For GNOME, handle initial-setup or welcome tour, unless START_AFTER_TEST
     # is set in which case it will have been done already. Always
     # do it if ADVISORY_OR_TASK is set, as for the update testing flow,
@@ -93,9 +103,9 @@ sub run {
         # as this test gets loaded twice on the ADVISORY_OR_TASK flow, and
         # we might be on the INSTALL_NO_USER flow, check whether
         # this happened already
-        my $relnum = get_release_number;
-        if ($relnum < 34) {
-            # before GNOME 40 (F34), we get a per-user version of
+        my $version_major = get_version_major();
+        if ($version_major < 9) {
+            # before GNOME 40 we get a per-user version of
             # gnome-initial-setup here...
             gnome_initial_setup() unless (get_var("_setup_done"));
         }
@@ -103,6 +113,9 @@ sub run {
             # ...from GNOME 40 on, we just get a "Welcome" tour
             handle_welcome_screen unless (get_var("_welcome_done"));
         }
+    }
+    if (get_version_major() > 8) {
+        handle_welcome_screen unless (get_var("_welcome_done"));
     }
     if (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         # handle welcome screen if we didn't do it above (holy flow

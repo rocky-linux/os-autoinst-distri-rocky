@@ -14,6 +14,7 @@ sub run {
     my $self = shift;
     my $desktop = get_var("DESKTOP");
     my $relnum = get_release_number;
+    my $version_major = get_version_major;
     # for the live image case, handle bootloader here
     if (get_var("BOOTFROM")) {
         do_bootloader(postinstall=>1, params=>'3');
@@ -118,7 +119,7 @@ sub run {
         }
     }
     if (get_var("BOOTFROM")) {
-        if ($desktop eq 'kde' && $relnum > 33) {
+        if ($desktop eq 'kde' && (($relnum > 33) || ($version_major > 8))) {
             # there is not always a permanent notification in F34+,
             # if we don't see one, check we saw the transient one
             # earlier. FIXME: maybe drop the 'transient' path here

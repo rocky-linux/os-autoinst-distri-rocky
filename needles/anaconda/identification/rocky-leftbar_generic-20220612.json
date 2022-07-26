@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 144,
+      "xpos": 3,
+      "ypos": 0,
+      "type": "match",
+      "height": 764
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "leftbar_generic"
+  ]
+}

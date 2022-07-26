@@ -39,18 +39,22 @@ sub run {
         # $NAME is "Rocky Linux" not just "Rocky"
         my $fullname = $name . " Linux";
 
-	my $version_id = get_var("VERSION"); # Should be the version number.
-	my ($ver_major, $ver_minor) = split /\./, $version_id;
-	my $varstr = spell_version_number($version_id);
-	my $target = lc($ver_major);
+        my $version_id = get_var("VERSION"); # Should be the version number.
+        my $ver_major = substr($version_id, 0, index($version_id, q/./));
+        my $ver_minor = substr($version_id, index($version_id, q/./), length($version_id));
+        my $target = lc($ver_major);
+        if ( $ver_major = '9' ) {
+            $target = lc($version_id);
+        }
 
-	my $reltag = script_output 'rpm -q rocky-release --qf "%{RELEASE}\n"';
-	my ($relver, $eltag) = split /\./, $reltag;
+        my $reltag = script_output 'rpm -q rocky-release --qf "%{RELEASE}\n"';
+        my $relver = substr($reltag, 0, rindex($reltag, q/./));
+        my $eltag = substr($reltag, rindex($reltag, q/./)+1, length($reltag));
 
-	my $code_name = get_var("CODENAME", 'Green Obsidian');
+        my $code_name = get_code_name();
         my $version = "$version_id ($code_name)";
         my $platform_id = "platform:$eltag";
-	my $pretty = "$fullname $version_id ($code_name)";
+        my $pretty = "$fullname $version_id ($code_name)";
 
         #Now. we can start testing the real values from the installed system.
         my @fails = ();
@@ -65,7 +69,7 @@ sub run {
         rec_log "VERSION should be $version and is $strip",  $strip eq $version, $failref;
 
         # Test for version_id
-	$strip = strip_marks($content{'VERSION_ID'});
+        $strip = strip_marks($content{'VERSION_ID'});
         rec_log "VERSION_ID should be $version_id and is $strip", $strip eq $version_id, $failref;
 
         # Test for platform_id
@@ -78,20 +82,20 @@ sub run {
 
         # Test for Rocky Support Product
         $strip = strip_marks($content{'ROCKY_SUPPORT_PRODUCT'});
-        rec_log "ROCKY_SUPPORT_PRODUCT should be $name and is $strip", $strip eq $fullname, $failref;
+        if ( $ver_major = '9' ) {
+            $fullname = qq/$fullname $ver_major/;
+            $fullname =~ s/ /-/g;
+        }
+        rec_log "ROCKY_SUPPORT_PRODUCT should be $fullname and is $strip", $strip eq $fullname, $failref;
 
         # Test for Rocky Support Product Version
-	$strip = strip_marks($content{ROCKY_SUPPORT_PRODUCT_VERSION});
+        $strip = strip_marks($content{ROCKY_SUPPORT_PRODUCT_VERSION});
         rec_log "ROCKY_SUPPORT_PRODUCT_VERSION should be $target and is $strip", $strip eq $target, $failref;
 
 	# VERSION_ID should be 8.4 and is "8.4"
 	# PLATFORM_ID should be platform: and is platform:el8
 	# ROCKY_SUPPORT_PRODUCT should be Rocky and is Rocky Linux
 	# ROCKY_SUPPORT_PRODUCT_VERSION should be  and is 8 at /var/lib/openqa/share/tests/rocky/tests/os_release.pm line 95.
-
-
-
-
 
 	# Check for fails, count them, collect their messages and die if something was found.
         my $failcount = scalar @fails;

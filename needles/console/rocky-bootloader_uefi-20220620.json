@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "ypos": 694,
+      "height": 19,
+      "type": "match",
+      "width": 113,
+      "xpos": 37
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-FLAVOR-server_boot",
+    "ENV-FLAVOR-workstation_live",
+    "ENV-UEFI-1",
+    "bootloader",
+    "bootloader_uefi"
+  ]
+}

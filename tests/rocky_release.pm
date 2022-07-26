@@ -20,7 +20,7 @@ sub run {
     # Version as defined in the VERSION variable.
     my $expectver = get_var('VERSION');
     # Code Name as defined in the CODENAME variable or default.
-    my $code_name = get_var('CODENAME', "Green Obsidian");
+    my $code_name = get_code_name();
     # Create the expected content of the release file
     # and compare it with its real counterpart.
     my $expected = "Rocky Linux release $expectver ($code_name)";

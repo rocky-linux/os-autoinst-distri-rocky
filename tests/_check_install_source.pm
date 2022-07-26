@@ -73,7 +73,11 @@ sub run {
         # trying to use the image itself as a repo and failing because it's
         # not a DVD), and this was causing false failures when running
         # universal tests on netinsts
-        assert_script_run '! grep "base repo.*not valid" /tmp/packaging.log | grep -v "cdrom/file"';
+        if (get_var('FLAVOR') eq 'boot-iso') {
+            assert_script_run '! grep "base repo.*not valid" /tmp/packaging.log | grep -v "cdrom/file"';
+        } else {
+            script_run '! grep "base repo.*not valid" /tmp/packaging.log | grep -v "cdrom/file"';
+        }
     }
     # just for convenience - sometimes it's useful to see this log
     # for a success case

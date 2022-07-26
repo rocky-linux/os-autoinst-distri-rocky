@@ -1,0 +1,34 @@
+{
+  "area": [
+    {
+      "width": 53,
+      "height": 22,
+      "click_point": {
+        "xpos": 24.5,
+        "ypos": 11.5
+      },
+      "type": "match",
+      "xpos": 909,
+      "ypos": 447
+    },
+    {
+      "xpos": 262,
+      "ypos": 448,
+      "width": 145,
+      "height": 20,
+      "type": "match"
+    },
+    {
+      "xpos": 408,
+      "ypos": 448,
+      "width": 75,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "cockpit_updates_auto"
+  ]
+}

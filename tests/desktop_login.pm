@@ -157,7 +157,8 @@ sub reboot_system {
         click_lastmatch;
         if (match_has_tag("power_entry")) {
             my $relnum = get_release_number;
-            if ($desktop eq "gnome" && $relnum < 33) {
+            my $version_major = get_version_major;
+            if ($desktop eq "gnome" && (($relnum < 33) || ($version_major < 9))) {
                 # In GNOME before F33, some of the entries are brought together, while
                 # in KDE and GNOME from F33 onwards they are split and it does not seem
                 # correct to me to assign restarting tags to needles powering off the
