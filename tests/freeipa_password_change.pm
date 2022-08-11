@@ -27,7 +27,8 @@ sub run {
     # The next box we need to type into was moved in FreeIPA 4.8.9,
     # which is in F32+ but not F31
     my $relnum = get_release_number;
-    $relnum < 32 ? type_safely "\t\t" : type_safely "\t";
+    my $version_major = get_version_major;
+    (($relnum < 32) || ($version_major < 9)) ? type_safely "\t\t" : type_safely "\t";
     type_safely "loremipsum";
     wait_screen_change { send_key "tab"; };
     type_safely "loremipsum";

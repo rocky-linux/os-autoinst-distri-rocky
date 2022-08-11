@@ -8,6 +8,7 @@ sub run {
     my $self = shift;
     my $desktop = get_var('DESKTOP');
     my $relnum = get_release_number;
+    my $version_major = get_version_major;
     # use a tty console for repo config and package prep
     $self->root_console(tty=>3);
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
@@ -22,7 +23,7 @@ sub run {
     if ($desktop eq 'kde') {
         # KDE team tells me until F34 the 'preferred' update method
         # was the systray applet...
-        if ($relnum < 34) {
+        if (($relnum < 34) || ($version_major < 9)) {
             # get rid of notifications which get in the way of the things
             # we need to click
             click_unwanted_notifications;

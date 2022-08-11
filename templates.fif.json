@@ -334,6 +334,8 @@
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_resize_lvm",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "INSTALL": "1",
@@ -393,6 +395,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_gui_lvm_ext4",
                 "HDDSIZEGB": "15",
                 "POSTINSTALL": "disk_custom_lvm_ext4_postinstall",
@@ -406,6 +410,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_gui_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -420,7 +426,9 @@
                 "NUMDISKS": "2",
                 "PARTITIONING": "custom_gui_software_raid",
                 "POSTINSTALL": "disk_custom_software_raid_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_custom_gui_xfs": {
@@ -432,7 +440,9 @@
             "settings": {
                 "PARTITIONING": "custom_gui_xfs",
                 "POSTINSTALL": "disk_custom_xfs_postinstall",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_cyrillic_language": {
@@ -494,6 +504,7 @@
                 "rocky-dvd-iso-x86_64-*-64bit": 10
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "PACKAGE_SET": "default",
                 "POSTINSTALL": "_collect_data",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
@@ -508,7 +519,9 @@
             "settings": {
                 "HDD_1": "disk_full_%PART_TABLE_TYPE%.img",
                 "PARTITIONING": "guided_delete_partial",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_delete_pata": {
@@ -521,7 +534,9 @@
                 "HDDMODEL": "ide-hd",
                 "HDD_1": "disk_full_mbr.img",
                 "HDDSIZEGB": "20",
-                "PARTITIONING": "guided_delete_all"
+                "PARTITIONING": "guided_delete_all",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_european_language": {
@@ -550,7 +565,9 @@
             },
             "settings": {
                 "PARTITIONING": "custom_lvmthin",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_lvm_ext4": {
@@ -560,6 +577,8 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 41
             },
             "settings": {
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal",
                 "PARTITIONING": "custom_lvm_ext4",
                 "ROOT_PASSWORD": "weakpassword",
                 "STORE_HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2"
@@ -595,7 +614,9 @@
                 "HDD_2": "disk_full_mbr.img",
                 "NUMDISKS": "2",
                 "PARTITIONING": "guided_multi",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_multi_empty": {
@@ -607,7 +628,9 @@
             "settings": {
                 "NUMDISKS": "2",
                 "PARTITIONING": "guided_multi_empty_all",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_with_swap": {
@@ -618,80 +641,54 @@
             },
             "settings": {
                 "PARTITIONING": "custom_with_swap",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_package_set_minimal": {
             "profiles": {
-                "rocky-boot-iso-x86_64-*-64bit": 10,
-                "rocky-boot-iso-x86_64-*-uefi": 11,
-                "rocky-dvd-iso-x86_64-*-64bit": 11,
-                "rocky-dvd-iso-x86_64-*-uefi": 11,
-                "rocky-minimal-iso-x86_64-*-64bit": 10,
-                "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
-                "PACKAGE_SET": "minimal",
-                "POSTINSTALL": "_console_login"
+                "DESKTOP": "false",
+                "PACKAGE_SET": "minimal"
             }
         },
         "install_package_set_server": {
             "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 11,
-                "rocky-dvd-iso-x86_64-*-uefi": 11,
-                "rocky-minimal-iso-x86_64-*-64bit": 10,
-                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
-                "PACKAGE_SET": "server",
-                "POSTINSTALL": "_console_login"
+                "DESKTOP": "false",
+                "PACKAGE_SET": "server"
             }
         },
         "install_package_set_graphical-server": {
             "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 11,
-                "rocky-dvd-iso-x86_64-*-uefi": 11,
-                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
-                "ENCRYPT_PASSWORD": "weakpassword",
-                "PACKAGE_SET": "graphical-server",
-                "POSTINSTALL": "_console_login",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "qwerty"
+                "PACKAGE_SET": "graphical-server"
             }
         },
         "install_package_set_workstation": {
             "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 11,
-                "rocky-dvd-iso-x86_64-*-uefi": 11,
-                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
-                "ENCRYPT_PASSWORD": "weakpassword",
-                "PACKAGE_SET": "workstation",
-                "POSTINSTALL": "_console_login",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "qwerty"
+                "PACKAGE_SET": "workstation"
             }
         },
         "install_package_set_virtualization-host": {
             "profiles": {
-                "rocky-dvd-iso-x86_64-*-64bit": 11,
-                "rocky-dvd-iso-x86_64-*-uefi": 11,
-                "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
-                "PACKAGE_SET": "virtualization-host",
-                "POSTINSTALL": "_console_login"
+                "DESKTOP": "false",
+                "PACKAGE_SET": "virtualization-host"
             }
         },
         "install_pxeboot": {
@@ -719,7 +716,9 @@
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
-                "REPOSITORY_GRAPHICAL": "%LOCATION%"
+                "REPOSITORY_GRAPHICAL": "%LOCATION%",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_repository_http_variation": {
@@ -728,7 +727,9 @@
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
-                "REPOSITORY_VARIATION": "%LOCATION%"
+                "REPOSITORY_VARIATION": "%LOCATION%",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_rescue_encrypted": {
@@ -752,7 +753,9 @@
             },
             "settings": {
                 "ATACONTROLLER": "ich9-ahci",
-                "HDDMODEL": "ide-drive,bus=ahci0.0"
+                "HDDMODEL": "ide-hd,bus=ahci0.0",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_scsi_updates_img": {
@@ -765,7 +768,9 @@
                 "GRUB": "inst.updates=https://fedorapeople.org/groups/qa/updates/updates-openqa.img",
                 "HDDMODEL": "scsi-hd",
                 "SCSICONTROLLER": "virtio-scsi-pci",
-                "TEST_UPDATES": "1"
+                "TEST_UPDATES": "1",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_serial_console": {
@@ -788,7 +793,9 @@
             "settings": {
                 "HDD_1": "disk_shrink_ext4.img",
                 "PARTITIONING": "guided_shrink",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_shrink_ntfs": {
@@ -799,7 +806,9 @@
             "settings": {
                 "HDD_1": "disk_shrink_ntfs.img",
                 "PARTITIONING": "guided_shrink",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_simple_encrypted": {
@@ -810,7 +819,9 @@
             },
             "settings": {
                 "ENCRYPT_PASSWORD": "weakpassword",
-                "STORE_HDD_1": "disk_%MACHINE%_encrypted.qcow2"
+                "STORE_HDD_1": "disk_%MACHINE%_encrypted.qcow2",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_simple_free_space": {
@@ -823,7 +834,9 @@
                 "HDD_1": "disk_freespace_%PART_TABLE_TYPE%.img",
                 "HDDSIZEGB": "20",
                 "PARTITIONING": "guided_free_space",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_software_raid": {
@@ -835,7 +848,9 @@
             "settings": {
                 "NUMDISKS": "2",
                 "PARTITIONING": "custom_software_raid",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "install_xfs": {
@@ -846,7 +861,9 @@
             },
             "settings": {
                 "PARTITIONING": "custom_xfs",
-                "ROOT_PASSWORD": "weakpassword"
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
             }
         },
         "memtest": {
