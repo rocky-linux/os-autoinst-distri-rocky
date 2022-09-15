@@ -1250,7 +1250,7 @@
             },
             "settings": {
                 "GRUB": "inst.ks=hd:vdb1:/freeipaclient.ks",
-                "HDD_2": "disk_ks.img",
+                "HDD_2": "disk_ks-%CURRREL%.img",
                 "INSTALL_UNLOCK": "freeipa_ready",
                 "KICKSTART": "1",
                 "NICTYPE": "tap",
