@@ -1,16 +1,16 @@
 {
   "area": [
     {
-      "ypos": 694,
-      "width": 43,
-      "height": 55,
-      "xpos": 196,
+      "xpos": 21,
+      "ypos": 207,
+      "width": 174,
+      "height": 27,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "cockpit_leftbar_scroll"
+    "cockpit_search"
   ]
 }
