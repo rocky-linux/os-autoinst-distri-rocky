@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 110,
+      "height": 23,
+      "type": "match",
+      "xpos": 607,
+      "ypos": 196
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "firefox_close_tabs"
+  ]
+}
