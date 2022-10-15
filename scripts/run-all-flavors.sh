@@ -4,6 +4,9 @@ set -e
 MAJOR_VERSION=9
 MINOR_VERSION=0
 
+## Usage: Posts ISOs to openQA for each of the universal, dvd-iso, package-set, minimal-iso, and boot-iso FLAVORs.
+# scripts/run-all-flavors.sh
+
 ROCKY_VERSION="$MAJOR_VERSION.$MINOR_VERSION"
 ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
 ROCKY_EXTRA_ARGS="${ROCKY_EXTRA_ARGS:-}"

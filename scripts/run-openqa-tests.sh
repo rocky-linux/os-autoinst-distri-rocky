@@ -4,6 +4,17 @@ set -e
 MAJOR_VERSION=9
 MINOR_VERSION=0
 
+## Usage: Post an ISO for the specified FLAVOR. Defaults to boot-iso.
+#
+## Run the boot-iso FLAVOR
+# scripts/run-openqa-tests.sh
+#
+## Run the package-set FLAVOR
+# ROCKY_FLAVOR=package-set scripts/run-openqa-tests.sh
+#
+## Run the localization test suites
+# ROCKY_FLAVOR ROCKY_EXTRA_ARGS=TEST=install_arabic_language,install_asian_language,install_european_language,install_cyrillic_language scripts/run-openqa-tests.sh
+
 ROCKY_FLAVOR="${ROCKY_FLAVOR:-boot-iso}"
 ROCKY_VERSION="$MAJOR_VERSION.$MINOR_VERSION"
 ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
