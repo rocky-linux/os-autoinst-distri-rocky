@@ -237,6 +237,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_reboot_unmount",
                 "ROOT_PASSWORD": "weakpassword",
@@ -251,6 +252,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_system_logging",
                 "ROOT_PASSWORD": "weakpassword",
@@ -265,6 +267,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_update_cli",
                 "ROOT_PASSWORD": "weakpassword",
@@ -279,6 +282,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_package_install_remove",
                 "ROOT_PASSWORD": "weakpassword",
@@ -293,6 +297,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_services_start",
                 "ROOT_PASSWORD": "weakpassword",
@@ -307,6 +312,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_selinux",
                 "ROOT_PASSWORD": "weakpassword",
@@ -321,6 +327,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "base_service_manipulation",
                 "ROOT_PASSWORD": "weakpassword",
@@ -591,6 +598,7 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 31
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "PARTITIONING": "custom_standard_partition_ext4",
                 "ROOT_PASSWORD": "weakpassword"
             }
@@ -882,6 +890,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "modularity_module_list modularity_enable_disable_module modularity_install_module",
                 "ROOT_PASSWORD": "weakpassword",
@@ -923,6 +932,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "_setup_browser server_cockpit_default",
                 "ROOT_PASSWORD": "weakpassword",
@@ -952,6 +962,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL": "server_filesystem_default",
                 "ROOT_PASSWORD": "weakpassword",
