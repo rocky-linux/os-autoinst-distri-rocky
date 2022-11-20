@@ -42,7 +42,7 @@ sub run {
         unless (get_var("HDD_1") && !(get_var("PARTITIONING") eq "custom_resize_lvm")) {
             # in 9.0, license screens are not shown by default
             # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
-            unless ($version eq '9.0') {
+            unless (get_version_major() > 8) {
                 # for Rocky Linux here happens to be a license acceptance screen
                 # the initial appearance can sometimes take really long
                 assert_screen "gdm_initial_setup_license", 120;
