@@ -8,7 +8,9 @@
                 "QEMUCPU": "Nehalem",
                 "QEMUCPUS": "2",
                 "QEMURAM": "2048",
-                "QEMUVGA": "virtio",
+                "QEMU_VIDEO_DEVICE": "virtio-vga",
+                "XRES": "1024",
+                "YRES": "768",
                 "QEMU_VIRTIO_RNG": "1",
                 "WORKER_CLASS": "qemu_x86_64"
             }
@@ -40,7 +42,9 @@
                 "QEMUCPU": "Nehalem",
                 "QEMUCPUS": "2",
                 "QEMURAM": "2048",
-                "QEMUVGA": "virtio",
+                "QEMU_VIDEO_DEVICE": "virtio-vga",
+                "XRES": "1024",
+                "YRES": "768",
                 "QEMU_VIRTIO_RNG": "1",
                 "UEFI": "1",
                 "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
