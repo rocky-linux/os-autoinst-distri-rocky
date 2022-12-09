@@ -39,9 +39,16 @@ sub start_cockpit {
 
 sub select_cockpit_update {
     # This method navigates to to the updates screen
-    assert_screen ["cockpit_software_updates", "cockpit_leftbar_scroll"], 120;
+    # From Firefox 100 on, we get 'adaptive scrollbars', which means
+    # the scrollbar is just invisible unless you moved the mouse
+    # recently. So we click in the search box and hit 'down' to scroll
+    # the sidebar as often as needed to show the button
+    assert_screen ["cockpit_software_updates", "cockpit_search"], 120;
     click_lastmatch;
-    assert_and_click "cockpit_software_updates" if (match_has_tag "cockpit_leftbar_scroll");
+    if (match_has_tag "cockpit_search") {
+        send_key_until_needlematch("cockpit_software_updates", "down", 10);
+        assert_and_click "cockpit_software_updates";
+    }
     # wait for the updates to download
     assert_screen 'cockpit_updates_check', 300;
 }

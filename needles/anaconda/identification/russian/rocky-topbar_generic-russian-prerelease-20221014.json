@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 24,
+      "xpos": 171,
+      "width": 683,
+      "height": 32,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-russian",
+    "topbar_generic"
+  ]
+}
