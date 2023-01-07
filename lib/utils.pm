@@ -685,7 +685,7 @@ sub console_initial_setup {
     type_string "c\n";
     wait_still_screen 7;
 
-    assert_screen "console_initial_setup_done", 30;
+    assert_screen "console_initial_SETUP_DONE", 30;
     type_string "c\n"; # continue
 }
 
@@ -700,7 +700,7 @@ sub handle_welcome_screen {
     else {
         record_soft_failure "Welcome tour missing";
     }
-    set_var("_welcome_done", 1);
+    set_var("_WELCOME_DONE", 1);
 }
 
 sub gnome_initial_setup {
@@ -808,7 +808,7 @@ sub gnome_initial_setup {
         handle_welcome_screen;
     }
     # don't do it again on second load
-    set_var("_setup_done", 1);
+    set_var("_SETUP_DONE", 1);
 }
 
 sub _type_user_password {
