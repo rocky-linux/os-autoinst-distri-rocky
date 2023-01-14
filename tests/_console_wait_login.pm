@@ -23,6 +23,9 @@ sub run {
     # Wait for the text login
     boot_to_login_screen(timeout => $wait_time);
 
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty=>3);
+
     # do user login unless USER_LOGIN is set to string 'false'
     unless (get_var("USER_LOGIN") eq "false") {
         # this avoids us waiting 90 seconds for a # to show up
