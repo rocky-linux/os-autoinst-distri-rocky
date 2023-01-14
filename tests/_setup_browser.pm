@@ -5,6 +5,9 @@ use utils;
 
 sub run {
     my $self = shift;
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty=>3);
+    
     # set up appropriate repositories
     repo_setup();
     # use --enablerepo=fedora for Modular compose testing (we need to
