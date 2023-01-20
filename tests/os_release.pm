@@ -43,7 +43,7 @@ sub run {
         my $ver_major = substr($version_id, 0, index($version_id, q/./));
         my $ver_minor = substr($version_id, index($version_id, q/./), length($version_id));
         my $target = lc($ver_major);
-        if ( $ver_major = '9' ) {
+        if ( $ver_major == '9' || '8' ) {
             $target = lc($version_id);
         }
 
@@ -82,7 +82,7 @@ sub run {
 
         # Test for Rocky Support Product
         $strip = strip_marks($content{'ROCKY_SUPPORT_PRODUCT'});
-        if ( $ver_major = '9' ) {
+        if ( $ver_major == '9' || '8' ) {
             $fullname = qq/$fullname $ver_major/;
             $fullname =~ s/ /-/g;
         }
