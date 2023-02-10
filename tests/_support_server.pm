@@ -34,6 +34,10 @@ sub _pxe_setup {
         assert_script_run "mkdir -p /var/lib/tftpboot/pxelinux.cfg";
         # install bootloader packages
         assert_script_run "dnf -y install syslinux", 120;
+        # selinux compatible fcontext config required
+        assert_script_run "dnf -y install policycoreutils-python-utils", 120;
+        assert_script_run "semanage fcontext -a -e /var/lib/rpm /var/tmp/rocky", 60;
+        assert_script_run "restorecon -vvRF /var/tmp/rocky", 60;
         assert_script_run "rpm --root=/var/tmp/rocky --rebuilddb", 60;
         assert_script_run "cd /var/tmp; dnf download rocky-release rocky-repos rocky-gpg-keys", 60;
         assert_script_run "rpm --root=/var/tmp/rocky --nodeps -i /var/tmp/*.rpm", 60;
