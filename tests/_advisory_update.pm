@@ -7,7 +7,7 @@ sub run {
     my $self = shift;
     # do the 'repo setup' steps, which set up a repo containing the
     # update packages and run 'dnf update'
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     repo_setup;
     if (get_var("ADVISORY_BOOT_TEST")) {
         # to test boot stuff - in case the update touched grub2, or dracut,
@@ -25,7 +25,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

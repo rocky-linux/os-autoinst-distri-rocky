@@ -14,7 +14,7 @@ sub run {
     if (get_var("UEFI")) {
         # if we're running on UEFI, let us reformat the UEFI first
         # Select the UEFI partition if it is not selected by default
-        if (not (check_screen "anaconda_blivet_part_efi_selected", 30)) {
+        if (not(check_screen "anaconda_blivet_part_efi_selected", 30)) {
             assert_and_click "anaconda_blivet_part_inactive_efi";
             wait_still_screen 5;
         }
@@ -23,10 +23,10 @@ sub run {
         assert_and_click "anaconda_blivet_part_edit";
         # Select the Format option
         assert_and_click "anaconda_blivet_part_format";
-    if (not (check_screen "anaconda_blivet_part_fs_efi_filesystem_selected", 30)) {
-        assert_and_click "anaconda_blivet_part_fs_select";
-        assert_and_click "anaconda_blivet_part_fs_efi_filesystem";
-    }
+        if (not(check_screen "anaconda_blivet_part_fs_efi_filesystem_selected", 30)) {
+            assert_and_click "anaconda_blivet_part_fs_select";
+            assert_and_click "anaconda_blivet_part_fs_efi_filesystem";
+        }
         # Select the mountpoint field
 
         send_key_until_needlematch("anaconda_blivet_mountpoint_selected", "tab", 3, 5);
@@ -50,9 +50,9 @@ sub run {
     # Select the Format option
     assert_and_click "anaconda_blivet_part_format";
     # Open the filesystem types and select ext4, if not selected
-    if (not (check_screen "anaconda_blivet_part_fs_ext4_selected",30)) {
-            assert_and_click "anaconda_blivet_part_fs_select";
-            assert_and_click "anaconda_blivet_part_fs_ext4";
+    if (not(check_screen "anaconda_blivet_part_fs_ext4_selected", 30)) {
+        assert_and_click "anaconda_blivet_part_fs_select";
+        assert_and_click "anaconda_blivet_part_fs_ext4";
     }
     # Select the mountpoint field
     send_key_until_needlematch("anaconda_blivet_mountpoint_selected", "tab", 3, 5);
@@ -65,7 +65,7 @@ sub run {
     assert_and_click "anaconda_blivet_volumes_icon";
 
     # Select the home partition
-    if (not (check_screen "anaconda_blivet_part_home_selected")) {
+    if (not(check_screen "anaconda_blivet_part_home_selected")) {
         assert_and_click "anaconda_blivet_part_inactive_home";
     }
     # Go to the partition settings
@@ -87,7 +87,7 @@ sub run {
         assert_and_click "anaconda_blivet_part_root_exists";
         assert_and_click "anaconda_blivet_part_delete";
         assert_and_click "anaconda_blivet_btn_ok";
-    sleep 5;
+        sleep 5;
     }
 
     # Add new root partition
@@ -108,12 +108,12 @@ sub run {
     assert_and_click "anaconda_part_accept_changes";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

@@ -5,7 +5,7 @@ use testapi;
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # "Job foo.service/start deleted to break ordering cycle"-type
     # message in the log indicates a service got taken out of the boot
     # process to resolve some kind of dependency loop, see e.g.
@@ -42,7 +42,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

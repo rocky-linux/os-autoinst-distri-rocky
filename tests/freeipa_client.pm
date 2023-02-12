@@ -4,7 +4,7 @@ use testapi;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # switch to tty1 (we're usually there already, but just in case
     # we're carrying on from a failed freeipa_webui that didn't fail
     # at tty1)
@@ -25,7 +25,7 @@ sub run {
     # switch to tty2 for login tests
     send_key "ctrl-alt-f2";
     # try and login as test1, should work
-    console_login(user=>'test1@TEST.OPENQA.FEDORAPROJECT.ORG', password=>'batterystaple');
+    console_login(user => 'test1@TEST.OPENQA.FEDORAPROJECT.ORG', password => 'batterystaple');
     type_string "exit\n";
     # try and login as test2, should fail. we cannot use console_login
     # as it takes 10 seconds to complete when login fails, and
@@ -40,7 +40,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

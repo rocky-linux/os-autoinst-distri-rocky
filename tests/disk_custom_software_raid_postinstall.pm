@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     unless (check_screen "root_console", 0) {
-        $self->root_console(tty=>4);
+        $self->root_console(tty => 4);
     }
     assert_screen "root_console";
     # check that RAID is used
@@ -14,7 +14,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

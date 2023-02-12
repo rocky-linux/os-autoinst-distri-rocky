@@ -5,10 +5,10 @@ use testapi;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     my $hook_run = 0;
     # switch to tty and login as root
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Enable the module.
     my $name = "swig";
@@ -28,7 +28,7 @@ sub run {
     if (is_listed($name, $stream, \@disabled_modules)) {
         die "The enabled module is listed in the list of disabled modules but it should not be.";
     }
-    
+
     # Disable some other module.
     my $name_alt = "postgresql";
     my $stream_alt = "13";
@@ -50,7 +50,7 @@ sub run {
 
     # Reset the first module to its original state and do the list checks.
     assert_script_run("dnf module reset -y $name");
-    
+
     # Check that the module has disappeared from both the lists.
     $disabled = script_output('dnf module list --disabled');
     @disabled_modules = parse_module_list($disabled);

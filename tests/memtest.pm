@@ -9,7 +9,7 @@ use utils;
 #
 
 sub run {
-    
+
     # Let's navigate through the Grub menu and choose the memtest item.
     # We use plenty of sleeps to slower down the process a little bit
     # and to make it visible at the video and for some troubleshooting.
@@ -27,7 +27,7 @@ sub run {
     send_key "down";
     sleep 1;
     send_key "ret";
-    # Now Memtest should be running. 
+    # Now Memtest should be running.
     send_key "f1";
     # Assert that the test has reached 10%
     assert_screen "memtest_ten_percent", 120;

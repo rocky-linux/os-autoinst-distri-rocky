@@ -6,7 +6,7 @@ use packagetest;
 use cockpit;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
 
     # Start Cockpit
     start_cockpit(1);
@@ -40,11 +40,11 @@ sub run {
     assert_script_run "systemctl is-active dnf-automatic-install.timer";
 
     # Check that it is scheduled correctly
-    validate_script_output "systemctl show dnf-automatic-install.timer | grep TimersCalendar", sub {$_ =~ "06:00:00" };
+    validate_script_output "systemctl show dnf-automatic-install.timer | grep TimersCalendar", sub { $_ =~ "06:00:00" };
 }
 
 sub test_flags {
-    return { always_rolllback => 1 };
+    return {always_rolllback => 1};
 }
 
 1;

@@ -7,11 +7,11 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     start_with_launcher('apps_menu_software');
-    
-    
+
+
     # check if a welcome screen appears, if so, click on it
     if (check_screen('apps_run_software_welcome', 1)) {
         assert_and_click 'apps_run_software_welcome';
@@ -22,7 +22,7 @@ sub run {
     register_application("gnome-software");
     # Close the application
     quit_with_shortcut();
-    
+
 }
 
 sub test_flags {

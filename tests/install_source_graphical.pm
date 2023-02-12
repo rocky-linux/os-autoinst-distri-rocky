@@ -8,7 +8,7 @@ use Time::HiRes qw( usleep );
 sub run {
     my $self = shift;
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
     # Go into the Install Source spoke
     assert_and_click "anaconda_main_hub_installation_source";
@@ -26,7 +26,7 @@ sub run {
     if (get_var("REPOSITORY_GRAPHICAL") =~ m/^http:/) {
         $num = 4;
     }
-    for (my $i=0; $i<$num; $i++) {
+    for (my $i = 0; $i < $num; $i++) {
         send_key "up";
         usleep 100;
     }
@@ -77,7 +77,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

@@ -7,7 +7,7 @@ use tapnet;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # use FreeIPA server or replica as DNS server
     my $server = 'ipa001.test.openqa.fedoraproject.org';
     my $server_ip = '172.16.2.100';
@@ -86,7 +86,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

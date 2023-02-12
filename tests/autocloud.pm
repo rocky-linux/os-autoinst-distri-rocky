@@ -23,7 +23,7 @@ sub run {
     assert_script_run "chmod ugo+w /dev/" . $serialdev;
     # let's go to another tty and login as regular user
     send_key "alt-f2";
-    console_login(user=>"test", password=>"weakpassword");
+    console_login(user => "test", password => "weakpassword");
     assert_script_run "curl -O https://fedorapeople.org/groups/qa/tunirtests.tar.gz";
     assert_script_run "tar xvf tunirtests.tar.gz";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomic01Status -v";
@@ -45,24 +45,24 @@ sub run {
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceDisable -v";
     type_string "sudo reboot\n";
     boot_to_login_screen(timeout => 180);
-    console_login(user=>"root", password=>"weakpassword");
+    console_login(user => "root", password => "weakpassword");
     # we need to use script_run as regular user again
     assert_script_run "sudo chmod ugo+w /dev/" . $serialdev;
     # let's go to another tty and login as regular user again
     send_key "alt-f2";
-    console_login(user=>"test", password=>"weakpassword");
+    console_login(user => "test", password => "weakpassword");
     _soft_fail_run "tunirtests.testreboot.TestReboot";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceManipulation -v";
     # this test only works properly as a regular user
     _soft_fail_run "tunirtests.cloudtests.TestJournalWrittenAfterReboot", 0;
     type_string "sudo reboot\n";
     boot_to_login_screen(timeout => 180);
-    console_login(user=>"root", password=>"weakpassword");
+    console_login(user => "root", password => "weakpassword");
     # we need to use script_run as regular user again
     assert_script_run "sudo chmod ugo+w /dev/" . $serialdev;
     # let's go to another tty and login as regular user again
     send_key "alt-f2";
-    console_login(user=>"test", password=>"weakpassword");
+    console_login(user => "test", password => "weakpassword");
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceAfter -v";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerInstalled -v";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerStorageSetup -v";
@@ -76,7 +76,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

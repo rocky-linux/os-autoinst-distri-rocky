@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # This test case tests that packages can be correctly installed and removed.
     # We will test by installing two packages - ftp and mc.
@@ -49,7 +49,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

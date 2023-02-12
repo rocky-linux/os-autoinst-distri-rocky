@@ -8,7 +8,7 @@ sub reboot_and_login {
     my $reboot_time = shift;
     script_run "systemctl reboot";
     boot_to_login_screen(timeout => $reboot_time);
-    console_login(user=>"root", password=>get_var("ROOT_PASSWORD"));
+    console_login(user => "root", password => get_var("ROOT_PASSWORD"));
     sleep 2;
 }
 
@@ -16,14 +16,14 @@ sub run {
     my $self = shift;
     my $reboot_time = 300;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Install wget as rpm-ostree overlay. Let's have timeout defined
     # quite generously, because it loads the package DBs.
     assert_script_run "rpm-ostree install wget", timeout => 300;
     # Reboot the machine to boot into the overlayed tree.
     reboot_and_login "300";
-    
+
     # Check that wget rpm is installed
     assert_script_run "rpm -q wget";
     # And that it works
@@ -31,7 +31,7 @@ sub run {
 
     # Then install the httpd package.
     assert_script_run "rpm-ostree install httpd", timeout => 300;
-    
+
     # Reboot the machine to boot into the overlayed tree.
     reboot_and_login "300";
 
@@ -46,7 +46,7 @@ sub run {
 
     # Check for the functional test page
     assert_script_run "curl -o page.html http://localhost";
-    assert_script_run "grep 'Fedora Project' page.html"; 
+    assert_script_run "grep 'Fedora Project' page.html";
 
     # Enable the httpd service
     assert_script_run "systemctl enable httpd";
@@ -73,7 +73,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

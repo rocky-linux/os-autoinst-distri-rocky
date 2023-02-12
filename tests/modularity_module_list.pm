@@ -5,9 +5,9 @@ use testapi;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # switch to tty and login as root
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # The test case will check that dnf has modular functions and that
     # it is possible to invoke modular commands to work with modularity.

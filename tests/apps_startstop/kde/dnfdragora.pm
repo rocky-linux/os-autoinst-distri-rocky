@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     menu_launch_type 'dnfdragora';
     # Check that it is started

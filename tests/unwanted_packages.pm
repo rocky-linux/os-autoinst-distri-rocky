@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     my @unwanteds;
     my $subv = get_var("SUBVARIANT");
     if ($subv eq "Workstation") {
@@ -19,7 +19,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

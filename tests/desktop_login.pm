@@ -88,7 +88,7 @@ sub login_user {
         type_very_safely "$password\n";
     }
     type_very_safely "$password\n";
-    check_desktop(timeout=>60) if ($args{checklogin});
+    check_desktop(timeout => 60) if ($args{checklogin});
     wait_still_screen 5;
 }
 
@@ -169,7 +169,7 @@ sub reboot_system {
                 # And for KDE and GNOME >= F33:
                 assert_and_click "reboot_entry";
             }
-        assert_and_click "restart_confirm";
+            assert_and_click "restart_confirm";
         }
     }
     # When we are outside KDE (not logged in), the only way to reboot is to click
@@ -199,7 +199,7 @@ sub run {
     our $desktop = get_var("DESKTOP");
     # replace the wallpaper with a black image, this should work for
     # all desktops. Takes effect after a logout / login cycle
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     assert_script_run "dnf -y install GraphicsMagick", 300;
     assert_script_run "gm convert -size 1024x768 xc:black /usr/share/backgrounds/black.png";
     assert_script_run 'for i in /usr/share/backgrounds/f*/default/*.png; do ln -sf /usr/share/backgrounds/black.png $i; done';
@@ -207,7 +207,7 @@ sub run {
         # use solid blue background for SDDM
         assert_script_run "sed -i -e 's,image,solid,g' /usr/share/sddm/themes/01-breeze-fedora/theme.conf.user";
     }
-    adduser(name=>"Jack Sparrow", login=>"jack", password=>$jackpass);
+    adduser(name => "Jack Sparrow", login => "jack", password => $jackpass);
     if ($desktop eq "gnome") {
         # suppress the Welcome Tour for new users in GNOME 40+
         assert_script_run 'printf "[org.gnome.shell]\nwelcome-dialog-last-shown-version=\'4294967295\'\n" > /usr/share/glib-2.0/schemas/org.gnome.shell.gschema.override';
@@ -215,12 +215,12 @@ sub run {
         # In Gnome, we can create a passwordless user that can provide his password upon
         # the first login. So we can create the second user in this way to test this feature
         # later.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>"askuser");
+        adduser(name => "Jim Eagle", login => "jim", password => "askuser");
     }
     else {
         # In KDE, we can also create a passwordless user, but we cannot log into the system
         # later, so we will create the second user the standard way.
-        adduser(name=>"Jim Eagle", login=>"jim", password=>$jimpass);
+        adduser(name => "Jim Eagle", login => "jim", password => $jimpass);
     }
 
     # Clean boot the system, and note what accounts are listed on the login screen.
@@ -230,7 +230,7 @@ sub run {
     boot_to_login_screen;
 
     # Log in with the first user account.
-    login_user(user=>"jack", password=>$jackpass);
+    login_user(user => "jack", password => $jackpass);
     check_user_logged_in("jack");
     # Log out the user.
     logout_user();
@@ -238,18 +238,18 @@ sub run {
     # Log in with the second user account. The second account, Jim Eagle,
     if ($desktop eq "gnome") {
         # If we are in Gnome, we will this time assign a password on first log-in.
-        login_user(user=>"jim", password=>$jimpass, method=>"create");
+        login_user(user => "jim", password => $jimpass, method => "create");
     }
     else {
         # If not, we are in KDE and we will log in normally.
-        login_user(user=>"jim", password=>$jimpass);
+        login_user(user => "jim", password => $jimpass);
     }
     check_user_logged_in("jim");
     # And this time reboot the system using the menu.
     reboot_system();
 
     # Try to log in with either account, intentionally entering the wrong password.
-    login_user(user=>"jack", password=>"wrongpassword", checklogin=>0);
+    login_user(user => "jack", password => "wrongpassword", checklogin => 0);
     my $relnum = get_release_number;
     if ($desktop eq "gnome" && $relnum < 34) {
         # In GDM before F34, a message is shown about an unsuccessful login
@@ -265,13 +265,13 @@ sub run {
     # Now, log into the system again using the correct password. This will
     # only work if we were correctly denied login with the wrong password,
     # if we were let in with the wrong password it'll fail
-    login_user(user=>"jim", password=>$jimpass);
+    login_user(user => "jim", password => $jimpass);
     check_user_logged_in("jim");
 
     # Lock the screen and unlock again.
     lock_screen();
     # Use the password to unlock the screen.
-    login_user(user=>"jim", password=>$jimpass, method=>"unlock");
+    login_user(user => "jim", password => $jimpass, method => "unlock");
 
     # Switch user tests
     if ($desktop eq "gnome") {
@@ -286,7 +286,7 @@ sub run {
         # Initiate switch user
         switch_user();
         # Now, we get a new login screen, so let's do the login into the new session.
-        login_user(user=>"jack", password=>$jackpass);
+        login_user(user => "jack", password => $jackpass);
         # Check that it is a new session, the terminal window should not be visible.
         if (check_screen "user_confirm_jim") {
             die "The session was not switched!";
@@ -298,7 +298,7 @@ sub run {
         logout_user();
         # Now, let us log into the original session, this time, the terminal window
         # should still be visible.
-        login_user(user=>"jim", password=>$jimpass);
+        login_user(user => "jim", password => $jimpass);
         assert_screen "user_confirm_jim";
 
         # We will also test another alternative - switching the user from
@@ -306,7 +306,7 @@ sub run {
         lock_screen();
         send_key "ret";
         switch_user();
-        login_user(user=>"jack", password=>$jackpass);
+        login_user(user => "jack", password => $jackpass);
         check_user_logged_in("jack");
     }
     # Power off the machine
@@ -314,7 +314,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;
