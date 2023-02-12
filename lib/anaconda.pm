@@ -28,8 +28,8 @@ sub select_disks {
     );
     my %iscsi = %{$args{iscsi}};
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
-    # Damn animation delay can cause bad clicks here too - wait for it
+    assert_screen "anaconda_main_hub", 300;    #
+                                               # Damn animation delay can cause bad clicks here too - wait for it
     sleep 1;
     assert_and_click "anaconda_main_hub_install_destination";
 
@@ -150,7 +150,7 @@ sub custom_blivet_add_partition {
         assert_and_click "anaconda_blivet_size_unit";
         assert_and_click "anaconda_blivet_size_unit_mib";
 
-        send_key "shift-tab";  # input is one tab back from unit selection listbox
+        send_key "shift-tab";    # input is one tab back from unit selection listbox
 
         # size input can contain whole set of different values, so we can't match it with needle
         type_safely $args{size} . "\n";
@@ -178,7 +178,7 @@ sub custom_blivet_add_partition {
 sub custom_add_partition {
     # Used to add partition on Rocky custom-gui partitioning screen
     # in Anaconda. Should be called when custom-gui is displayed and free space is selected.
-    # You can pass device type for partition (needle tagged anaconda_custom_devicetype_$devicetype should exist), size of that partition in MiBs, desired filesystem of that partition
+# You can pass device type for partition (needle tagged anaconda_custom_devicetype_$devicetype should exist), size of that partition in MiBs, desired filesystem of that partition
     # (anaconda_custom_part_fs_$filesystem should exist) and mountpoint of that partition (e. g. string "/boot").
     my %args = (
         devicetype => "",
@@ -368,7 +368,7 @@ sub get_full_repo {
     if ($repourl !~ m/^(nfs|hd:)/) {
         # Everything variant doesn't exist for modular composes atm,
         # only Server
-        $repourl .= "/".get_var("ARCH")."/os";
+        $repourl .= "/" . get_var("ARCH") . "/os";
     }
     return $repourl;
 }
@@ -483,7 +483,7 @@ sub report_bug_text {
     my $timestamp = time();
     #
     # First, collect the credentials.
-    my $login  = get_var("BUGZILLA_LOGIN");
+    my $login = get_var("BUGZILLA_LOGIN");
     my $password = get_var("_SECRET_BUGZILLA_PASSWORD");
     my $apikey = get_var("_SECRET_BUGZILLA_APIKEY");
     # Choose item 1 - Report the bug.

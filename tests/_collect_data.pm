@@ -4,7 +4,7 @@ use testapi;
 
 sub run {
     my $self = shift;
-    $self->root_console(tty=>4);
+    $self->root_console(tty => 4);
     assert_script_run 'top -i -n20 -b > /var/tmp/top.log', 120;
     upload_logs '/var/tmp/top.log';
     unless (get_var("CANNED")) {
@@ -43,7 +43,7 @@ sub run {
 }
 
 sub test_flags {
-    return { 'ignore_failure' => 1 };
+    return {'ignore_failure' => 1};
 }
 
 1;

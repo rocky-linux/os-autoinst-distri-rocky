@@ -62,69 +62,69 @@ sub run {
 
     if (get_var("DISTRI") eq "rocky") {
         # Activate Network
-        run_with_error_check(sub {console_type_wait($spoke_number{"network"} . "\n")}, $error);
-        console_type_wait("2\n"); # Configure device
-        console_type_wait("7\n"); # Connect automatically after reboot
-        console_type_wait("8\n"); # Apply configuration in installer
-        console_type_wait("c\n"); # Continue
+        run_with_error_check(sub { console_type_wait($spoke_number{"network"} . "\n") }, $error);
+        console_type_wait("2\n");    # Configure device
+        console_type_wait("7\n");    # Connect automatically after reboot
+        console_type_wait("8\n");    # Apply configuration in installer
+        console_type_wait("c\n");    # Continue
         sleep 10;
-        console_type_wait("r\n"); # Refresh
-        console_type_wait("c\n"); # Continue
+        console_type_wait("r\n");    # Refresh
+        console_type_wait("c\n");    # Continue
 
         # Software Selection
-        run_with_error_check(sub {console_type_wait($spoke_number{"swselection"} . "\n")}, $error);
-        console_type_wait("2\n"); # Server
-        console_type_wait("c\n"); # Continue
-        console_type_wait("c\n"); # Continue
+        run_with_error_check(sub { console_type_wait($spoke_number{"swselection"} . "\n") }, $error);
+        console_type_wait("2\n");    # Server
+        console_type_wait("c\n");    # Continue
+        console_type_wait("c\n");    # Continue
         sleep 10;
-        console_type_wait("r\n"); # Refresh
+        console_type_wait("r\n");    # Refresh
     }
 
     # Set timezone
-    run_with_error_check(sub {console_type_wait($spoke_number{"timezone"} . "\n")}, $error);
-    console_type_wait("1\n"); # Set timezone
-    console_type_wait("1\n"); # Europe
-    console_type_wait("37\n", 7); # Prague
+    run_with_error_check(sub { console_type_wait($spoke_number{"timezone"} . "\n") }, $error);
+    console_type_wait("1\n");    # Set timezone
+    console_type_wait("1\n");    # Europe
+    console_type_wait("37\n", 7);    # Prague
 
     # Select disk
-    run_with_error_check(sub {console_type_wait($spoke_number{"destination"} . "\n")}, $error);
-    console_type_wait("c\n"); # first disk selected, continue
-    console_type_wait("c\n"); # use all space selected, continue
-    console_type_wait("c\n", 7); # LVM selected, continue
+    run_with_error_check(sub { console_type_wait($spoke_number{"destination"} . "\n") }, $error);
+    console_type_wait("c\n");    # first disk selected, continue
+    console_type_wait("c\n");    # use all space selected, continue
+    console_type_wait("c\n", 7);    # LVM selected, continue
 
     # Set root password
     my $rootpwd = get_var("ROOT_PASSWORD", "weakpassword");
-    run_with_error_check(sub {console_type_wait($spoke_number{"rootpwd"} . "\n")}, $error);
+    run_with_error_check(sub { console_type_wait($spoke_number{"rootpwd"} . "\n") }, $error);
     console_type_wait("$rootpwd\n");
     console_type_wait("$rootpwd\n");
 
     # Create user
     my $userpwd = get_var("USER_PASSWORD", "weakpassword");
     my $username = get_var("USER_LOGIN", "test");
-    run_with_error_check(sub {console_type_wait($spoke_number{"user"} . "\n")}, $error);
-    console_type_wait("1\n"); # create new
-    console_type_wait("3\n"); # set username
+    run_with_error_check(sub { console_type_wait($spoke_number{"user"} . "\n") }, $error);
+    console_type_wait("1\n");    # create new
+    console_type_wait("3\n");    # set username
     console_type_wait("$username\n");
     # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
     if ((get_release_number() < 31) || (get_version_major() < 9)) {
         # typing "4\n" on abrt screen causes system to reboot, so be careful
-        run_with_error_check(sub {console_type_wait("4\n")}, $error); # use password
+        run_with_error_check(sub { console_type_wait("4\n") }, $error);    # use password
     }
-    console_type_wait("5\n"); # set password
+    console_type_wait("5\n");    # set password
     console_type_wait("$userpwd\n");
     console_type_wait("$userpwd\n");
-    console_type_wait("6\n"); # make him an administrator
+    console_type_wait("6\n");    # make him an administrator
     console_type_wait("c\n", 7);
 
     my $counter = 0;
     if (testapi::is_serial_terminal) {
-        while (wait_serial("[!]", timeout=>5, quiet=>1)) {
+        while (wait_serial("[!]", timeout => 5, quiet => 1)) {
             if ($counter > 10) {
                 die "There are unfinished spokes in Anaconda";
             }
             sleep 10;
             $counter++;
-            console_type_wait("r\n"); # refresh
+            console_type_wait("r\n");    # refresh
         }
     }
     else {
@@ -134,7 +134,7 @@ sub run {
             }
             sleep 10;
             $counter++;
-            console_type_wait("r\n"); # refresh
+            console_type_wait("r\n");    # refresh
         }
     }
 
@@ -157,7 +157,7 @@ sub run {
     }
 
     if (testapi::is_serial_terminal) {
-        wait_serial("Installation complete", timeout=>$timeout);
+        wait_serial("Installation complete", timeout => $timeout);
         if (get_var("SERIAL_CONSOLE") && get_var("OFW")) {
             # for some reason the check for a prompt times out here, even
             # though '# ' is clearly in the terminal log; hack it out
@@ -181,7 +181,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

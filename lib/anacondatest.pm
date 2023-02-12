@@ -21,7 +21,7 @@ sub post_fail_hook {
     if (check_screen "anaconda_error_report", 10) {
         assert_and_click "anaconda_error_report";
         $has_traceback = 1;
-    } elsif (check_screen "anaconda_text_error", 10) {  # also for text install
+    } elsif (check_screen "anaconda_text_error", 10) {    # also for text install
         type_string "1\n";
         $has_traceback = 1;
     }
@@ -73,21 +73,21 @@ sub post_fail_hook {
     }
 
     if ($dracut) {
-        upload_logs "/run/initramfs/rdsosreport.txt", failok=>1;
+        upload_logs "/run/initramfs/rdsosreport.txt", failok => 1;
         # that's all that's really useful, so...
         return;
     }
 
-    upload_logs "/tmp/X.log", failok=>1;
-    upload_logs "/tmp/anaconda.log", failok=>1;
-    upload_logs "/tmp/packaging.log", failok=>1;
-    upload_logs "/tmp/storage.log", failok=>1;
-    upload_logs "/tmp/syslog", failok=>1;
-    upload_logs "/tmp/program.log", failok=>1;
-    upload_logs "/tmp/dnf.log", failok=>1;
-    upload_logs "/tmp/dnf.librepo.log", failok=>1;
-    upload_logs "/tmp/dnf.rpm.log", failok=>1;
-    upload_logs "/tmp/dbus.log", failok=>1;
+    upload_logs "/tmp/X.log", failok => 1;
+    upload_logs "/tmp/anaconda.log", failok => 1;
+    upload_logs "/tmp/packaging.log", failok => 1;
+    upload_logs "/tmp/storage.log", failok => 1;
+    upload_logs "/tmp/syslog", failok => 1;
+    upload_logs "/tmp/program.log", failok => 1;
+    upload_logs "/tmp/dnf.log", failok => 1;
+    upload_logs "/tmp/dnf.librepo.log", failok => 1;
+    upload_logs "/tmp/dnf.rpm.log", failok => 1;
+    upload_logs "/tmp/dbus.log", failok => 1;
 
     if ($has_traceback) {
         # Upload Anaconda traceback logs
@@ -131,7 +131,7 @@ sub root_console {
         # tty3 has a shell on all f31+ installer and live images
         send_key "ctrl-alt-f3";
     }
-    console_login(user=>"root", timeout=>$args{timeout});
+    console_login(user => "root", timeout => $args{timeout});
 }
 
 1;

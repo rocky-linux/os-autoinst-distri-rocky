@@ -7,16 +7,16 @@ sub run {
     my $self = shift;
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and select only one disk.
-    select_disks(disks=>1);
+    select_disks(disks => 1);
     assert_and_click "anaconda_spoke_done";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

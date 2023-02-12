@@ -33,7 +33,7 @@ testapi::set_distribution(fedoradistribution->new());
 # Stolen from openSUSE.
 sub unregister_needle_tags($) {
     my $tag = shift;
-    my @a   = @{ needle::tags($tag) };
+    my @a = @{needle::tags($tag)};
     for my $n (@a) { $n->unregister(); }
 }
 
@@ -49,14 +49,14 @@ sub unregister_needle_tags($) {
 # 'LANGUAGE-' at all.
 sub unregister_prefix_tags {
     my ($prefix, $valueref) = @_;
-    NEEDLE: for my $needle ( needle::all() ) {
+  NEEDLE: for my $needle (needle::all()) {
         my $unregister = 0;
-        for my $tag ( @{$needle->{'tags'}} ) {
+        for my $tag (@{$needle->{'tags'}}) {
             if ($tag =~ /^\Q$prefix/) {
                 # We have at least one tag matching the prefix, so we
                 # *MAY* want to un-register the needle
                 $unregister = 1;
-                for my $value ( @{$valueref} ) {
+                for my $value (@{$valueref}) {
                     # At any point if we hit a prefix-value match, we
                     # know we need to keep this needle and can skip
                     # to the next
@@ -85,13 +85,13 @@ sub cleanup_needles() {
 
     # Unregister desktop needles of other desktops when DESKTOP is specified
     if (get_var('DESKTOP')) {
-        unregister_prefix_tags('DESKTOP', [ get_var('DESKTOP') ])
+        unregister_prefix_tags('DESKTOP', [get_var('DESKTOP')]);
     }
 
     # Unregister non-language-appropriate needles. See unregister_except_
     # tags for details; basically all needles with at least one LANGUAGE-
     # tag will be unregistered unless they match the current langauge.
-    my $langref = [ get_var('LANGUAGE') || 'english' ];
+    my $langref = [get_var('LANGUAGE') || 'english'];
     unregister_prefix_tags('LANGUAGE', $langref);
 }
 $needle::cleanuphandler = \&cleanup_needles;
@@ -195,15 +195,15 @@ sub load_install_tests() {
     my $partitioning = get_var('PARTITIONING');
     # if PARTITIONING is unset, or one of [...], use disk_guided_empty,
     # which is the simplest / 'default' case.
-    if (! $partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
+    if (!$partitioning || $partitioning ~~ ['guided_empty', 'guided_free_space']) {
         $storage = "tests/disk_guided_empty.pm";
     }
     else {
-        $storage = "tests/disk_".$partitioning.".pm";
+        $storage = "tests/disk_" . $partitioning . ".pm";
     }
     autotest::loadtest $storage;
 
-    if (get_var("ENCRYPT_PASSWORD")){
+    if (get_var("ENCRYPT_PASSWORD")) {
         autotest::loadtest "tests/disk_guided_encrypted.pm";
     }
 
@@ -330,7 +330,7 @@ sub load_postinstall_tests() {
     }
     autotest::loadtest $storagepost if ($storagepost);
 
-    if (get_var("UEFI") &! get_var("NO_UEFI_POST") &! get_var("START_AFTER_TEST")) {
+    if (get_var("UEFI") & !get_var("NO_UEFI_POST") & !get_var("START_AFTER_TEST")) {
         autotest::loadtest "tests/uefi_postinstall.pm";
     }
 

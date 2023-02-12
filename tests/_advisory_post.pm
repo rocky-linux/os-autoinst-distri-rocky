@@ -5,7 +5,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # figure out which packages from the update actually got installed
     # (if any) as part of this test
     advisory_get_installed_packages;
@@ -15,7 +15,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

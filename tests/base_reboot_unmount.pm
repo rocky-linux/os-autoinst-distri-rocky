@@ -19,21 +19,21 @@ sub test_routine {
 sub run {
     my $self = shift;
     # switch to TTY3 for both graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # Run test for the first time
     test_routine();
     # Reboot the system.
     type_safely "reboot\n";
     # This time, we will need to login manually.
     boot_to_login_screen;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Run the tests for the second time.
     test_routine();
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

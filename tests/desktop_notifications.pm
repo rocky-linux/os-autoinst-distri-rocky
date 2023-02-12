@@ -17,14 +17,14 @@ sub run {
     my $version_major = get_version_major;
     # for the live image case, handle bootloader here
     if (get_var("BOOTFROM")) {
-        do_bootloader(postinstall=>1, params=>'3');
+        do_bootloader(postinstall => 1, params => '3');
     }
     else {
-        do_bootloader(postinstall=>0, params=>'3');
+        do_bootloader(postinstall => 0, params => '3');
     }
     boot_to_login_screen;
     # use tty1 to avoid RHBZ #1821499 on F32 Workstation live
-    $self->root_console(tty=>1);
+    $self->root_console(tty => 1);
     # ensure we actually have some package updates available
     prepare_test_packages;
     if ($desktop eq 'gnome') {
@@ -43,11 +43,11 @@ sub run {
             # get notifications, see:
             # https://wiki.gnome.org/Design/Apps/Software/Updates#Tentative_Design
             my $now = script_output 'date +%s';
-            my $yyday = $now - 2*24*60*60;
-            my $longago = $now - 14*24*60*60;
+            my $yyday = $now - 2 * 24 * 60 * 60;
+            my $longago = $now - 14 * 24 * 60 * 60;
             # have to log in as the user to do this
             script_run 'exit', 0;
-            console_login(user=>get_var('USER_LOGIN', 'test'), password=>get_var('USER_PASSWORD', 'weakpassword'));
+            console_login(user => get_var('USER_LOGIN', 'test'), password => get_var('USER_PASSWORD', 'weakpassword'));
             script_run "gsettings set org.gnome.software check-timestamp ${yyday}", 0;
             script_run "gsettings set org.gnome.software update-notification-timestamp ${longago}", 0;
             script_run "gsettings set org.gnome.software online-updates-timestamp ${longago}", 0;
@@ -55,7 +55,7 @@ sub run {
             script_run "gsettings set org.gnome.software install-timestamp ${longago}", 0;
             wait_still_screen 5;
             script_run 'exit', 0;
-            console_login(user=>'root', password=>get_var('ROOT_PASSWORD', 'weakpassword'));
+            console_login(user => 'root', password => get_var('ROOT_PASSWORD', 'weakpassword'));
         }
     }
     # can't use assert_script_run here as long as we're on tty1
@@ -76,14 +76,14 @@ sub run {
         type_very_safely get_var("USER_PASSWORD", "weakpassword");
         send_key 'ret';
     }
-    check_desktop(timeout=>90);
+    check_desktop(timeout => 90);
     # now, WE WAIT. Because KDE on F34+ shows a notification only
     # briefly we will keep an eye out and record if we saw it (logic
     # around this comes later). But we wait the whole ten minutes even
     # if we see it  so we catch any unwanted notifications that appear
     # shortly after boot
     my $seen = 0;
-    for my $n (1..16) {
+    for my $n (1 .. 16) {
         $seen = 1 if (check_screen "desktop_update_notification", 30);
         mouse_set 20, 20;
         send_key "spc";
@@ -148,7 +148,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

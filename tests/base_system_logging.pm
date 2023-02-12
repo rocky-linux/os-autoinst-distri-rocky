@@ -3,9 +3,9 @@ use strict;
 use testapi;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # Check that journalctl DOESN'T output "No entries". This is also the case when journal files are missing.
     # NOTE: We are quietly assuming that something was logged in journal in last 30 minutes. Should be boot log,
     # switch to TTY3 etc.
@@ -16,7 +16,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

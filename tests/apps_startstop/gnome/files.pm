@@ -3,7 +3,7 @@ use strict;
 use testapi;
 use utils;
 
-# This tests if Files starts 
+# This tests if Files starts
 
 sub run {
     my $self = shift;
@@ -15,7 +15,7 @@ sub run {
     register_application("nautilus");
     # Close the application
     quit_with_shortcut();
-    
+
 }
 
 sub test_flags {

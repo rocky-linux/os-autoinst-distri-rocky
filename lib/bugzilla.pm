@@ -32,7 +32,7 @@ sub convert_to_bz_timestamp {
 
 sub get_newest_bug {
     # This subroutine makes an API call to Bugzilla and
-    # fetches the newest bug that have been created. 
+    # fetches the newest bug that have been created.
     # This will be the bug created by Anaconda in this
     # test run.
     my ($timestamp, $login) = @_;

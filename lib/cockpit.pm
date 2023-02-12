@@ -24,7 +24,7 @@ sub start_cockpit {
     assert_screen "cockpit_login", 60;
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     if ($login) {
         type_safely "root";
         wait_screen_change { send_key "tab"; };
@@ -57,6 +57,6 @@ sub check_updates {
     my $logfile = shift;
     sleep 2;
     my $checkresult = script_run "dnf check-update > $logfile";
-    upload_logs "$logfile", failok=>1;
-    return($checkresult);
+    upload_logs "$logfile", failok => 1;
+    return ($checkresult);
 }

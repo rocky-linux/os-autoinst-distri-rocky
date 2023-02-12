@@ -7,10 +7,10 @@ sub run {
     select_rescue_mode;
     # continue
     type_string "1\n";
-    assert_screen "rescue_enter_pass", 60; # it might take time to scan all disks
+    assert_screen "rescue_enter_pass", 60;    # it might take time to scan all disks
     type_string get_var("ENCRYPT_PASSWORD", "weakpassword");
     send_key "ret";
-    assert_screen "rescue_mounted", 60; # it also might take time to mount disk
+    assert_screen "rescue_mounted", 60;    # it also might take time to mount disk
     send_key "ret";
 
     # check whether disk was mounted
@@ -24,7 +24,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

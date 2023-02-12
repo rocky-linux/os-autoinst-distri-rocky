@@ -8,7 +8,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # wait for server to be set up
     mutex_lock "podman_server_ready";
     mutex_unlock "podman_server_ready";
@@ -23,7 +23,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

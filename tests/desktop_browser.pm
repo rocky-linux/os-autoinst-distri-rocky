@@ -30,54 +30,54 @@ sub run {
     check_desktop;
     send_key 'alt-f1';
     # wait out animations
-    wait_still_screen(stilltime=>4, similarity_level=>45);
+    wait_still_screen(stilltime => 4, similarity_level => 45);
     assert_and_click 'browser_launcher';
     assert_screen 'browser', 45;
     # firefox is quite grindy on startup, let it settle
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     # open a new tab so we don't race with the default page load
     # (also focuses the location bar for us)
     _open_new_tab;
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     sleep 3;
     # check FAS, typing slowly to avoid errors
     type_very_safely "https://admin.fedoraproject.org/accounts/\n";
     assert_screen "browser_fas_home";
     _open_new_tab;
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     sleep 2;
     type_very_safely "https://kernel.org\n";
     assert_and_click "browser_kernelorg_patch";
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     assert_and_click "browser_download_save";
     sleep 2;
     send_key 'ret';
-    wait_still_screen(stilltime=>3, similarity_level=>45);
+    wait_still_screen(stilltime => 3, similarity_level => 45);
     # browsers do...something...when the download completes, and we
     # expect there's a single click to make it go away and return
     # browser to a state where we can open a new tab
     assert_and_click "browser_download_complete";
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     # we'll check it actually downloaded later
     # add-on test: at present all desktops we test (KDE, GNOME) are
     # using Firefox by default so we do this unconditionally, but we
     # may need to conditionalize it if we ever test desktops whose
     # default browser doesn't support add-ons or uses different ones
     _open_new_tab;
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     sleep 2;
     type_very_safely "https://addons.mozilla.org/en-US/firefox/addon/ublock-origin/\n";
     assert_and_click "firefox_addon_add";
     assert_and_click "firefox_addon_install";
     assert_and_click "firefox_addon_success";
     # go to a console and check download worked
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     my $user = get_var("USER_LOGIN", "test");
     assert_script_run "test -e /home/$user/Downloads/patch-*.xz";
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

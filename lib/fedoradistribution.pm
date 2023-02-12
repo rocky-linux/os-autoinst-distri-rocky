@@ -41,7 +41,7 @@ sub x11_start_program {
     send_key "alt-f2";
     assert_screen "desktop_runner";
     type_string $program, 20;
-    sleep 5; # because of KDE dialog - SUSE guys are doing the same!
+    sleep 5;    # because of KDE dialog - SUSE guys are doing the same!
     send_key "ret", 1;
 }
 

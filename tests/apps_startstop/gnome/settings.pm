@@ -11,11 +11,11 @@ sub run {
     send_key 'alt-f1';
     type_very_safely 'settings';
     send_key 'ret';
-    
+
     # select Background menu item
     assert_and_click 'apps_settings_menu_background';
     wait_still_screen 5;
-    
+
     # close the application
     send_key 'alt-f4';
     wait_still_screen 5;
@@ -24,7 +24,7 @@ sub run {
     assert_screen 'workspace';
     # Register application
     register_application("gnome-control-center");
-    
+
 }
 
 sub test_flags {

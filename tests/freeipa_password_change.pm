@@ -6,7 +6,7 @@ use freeipa;
 
 sub run {
     my $self = shift;
-    console_login(user=>'root');
+    console_login(user => 'root');
     # check whether test3 exists, i.e. whether freeipa_webui at
     # least managed to create it. if not, we may as well just
     # die now, this test cannot work.
@@ -60,7 +60,7 @@ sub run {
 }
 
 sub test_flags {
-    return { 'ignore_failure' => 1 };
+    return {'ignore_failure' => 1};
 }
 
 1;
