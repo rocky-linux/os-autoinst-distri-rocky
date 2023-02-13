@@ -1,4 +1,4 @@
-# Setup for running perltidy via pre-commit
+# Using perltidy, tidyall and tidy with the repository
 
 ## Purpose
 
