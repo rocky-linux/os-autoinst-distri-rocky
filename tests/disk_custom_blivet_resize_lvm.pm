@@ -21,7 +21,7 @@ sub activate {
 
 sub run {
     my $self = shift;
-    # Navigate to "Installation destionation" and select blivet-gui 
+    # Navigate to "Installation destionation" and select blivet-gui
     # to manipulate the partitions. This will be automatically
     # done using the following method, because PARTITIONING starts
     # with "custom_blivet".
@@ -64,7 +64,7 @@ sub run {
     assert_screen "device_root_resized_thirteen";
 
     # Now format the resized root partition. It seems that the focus returns to the first
-    # partition in the view, so we need to activate this again before we attempt to do 
+    # partition in the view, so we need to activate this again before we attempt to do
     # anything to the partition.
     activate("root");
     custom_blivet_format_partition(type => 'ext4', label => 'root', mountpoint => '/');
@@ -86,7 +86,7 @@ sub run {
 }
 
 sub test_flags {
-        return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

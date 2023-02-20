@@ -7,14 +7,14 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     menu_launch_type 'kmouth';
     sleep 2;
     # Deal with the welcome screens
     assert_screen ["kde_next", "kde_finish"];
     while (match_has_tag "kde_next") {
-        assert_and_click "kde_next"; 
+        assert_and_click "kde_next";
         sleep 2;
         assert_screen ["kde_next", "kde_finish"];
     }

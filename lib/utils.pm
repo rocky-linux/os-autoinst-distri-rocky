@@ -22,9 +22,9 @@ sub run_with_error_check {
         # by using 'unless' and 'expect_not_found=>1' here we avoid
         # the web UI showing each failure to see the error message as
         # a 'failed match'
-        die "Error screen appeared" unless (wait_serial($error_screen, timeout=>5, expect_not_found=>1));
+        die "Error screen appeared" unless (wait_serial($error_screen, timeout => 5, expect_not_found => 1));
         $func->();
-        die "Error screen appeared" unless (wait_serial($error_screen, timeout=>5, expect_not_found=>1));
+        die "Error screen appeared" unless (wait_serial($error_screen, timeout => 5, expect_not_found => 1));
     }
     else {
         die "Error screen appeared" if (check_screen $error_screen, 5);
@@ -40,7 +40,7 @@ sub type_safely {
     type_string($string, wait_screen_change => 3, max_interval => 20);
     # similarity level 45 as there will commonly be a flashing
     # cursor and the default level (47) is slightly too tight
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
 }
 
 # high-level 'type this string extremely safely and rather slow'
@@ -50,7 +50,7 @@ sub type_very_safely {
     type_string($string, wait_screen_change => 1, max_interval => 1);
     # similarity level 45 as there will commonly be a flashing
     # cursor and the default level (47) is slightly too tight
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
 }
 
 sub get_release_number {
@@ -60,13 +60,13 @@ sub get_release_number {
     my $version = get_var("VERSION");
     my $rawrel = get_var("RAWREL", "Rawhide");
     return $rawrel if ($version eq "Rawhide");
-    return $version
+    return $version;
 }
 
 sub get_version_major {
-  my $version = get_var('VERSION');
-  my $version_major = substr($version, 0, index($version, q/./));
-  return $version_major
+    my $version = get_var('VERSION');
+    my $version_major = substr($version, 0, index($version, q/./));
+    return $version_major;
 }
 
 sub get_code_name {
@@ -74,11 +74,11 @@ sub get_code_name {
     my $version = get_var('VERSION');
     my $version_major = get_version_major;
 
-    given($version_major){
-        when ('9') {  $code_name = 'Blue Onyx'; }
-        when ('10') {  $code_name = 'Smoky Quartz'; }
-        when ('11') {  $code_name = 'Lavender Calcite'; }
-        default{
+    given ($version_major) {
+        when ('9') { $code_name = 'Blue Onyx'; }
+        when ('10') { $code_name = 'Smoky Quartz'; }
+        when ('11') { $code_name = 'Lavender Calcite'; }
+        default {
             $code_name = 'Green Obsidian';
         }
     }
@@ -98,9 +98,9 @@ sub desktop_vt {
     # stop as soon as any command fails, so we use ||: to make the
     # first grep return 0 even if it matches nothing
     eval { $xout = script_output ' loginctl | grep test ||:; ps -e | egrep "(gnome-session|Xwayland|Xorg)" | grep -o tty[0-9]' };
-    my $tty = 1; # default
+    my $tty = 1;    # default
     while ($xout =~ /tty(\d)/g) {
-        $tty = $1; # most recent match is probably best
+        $tty = $1;    # most recent match is probably best
     }
     send_key "ctrl-alt-f${tty}";
     # work around https://gitlab.gnome.org/GNOME/gnome-software/issues/582
@@ -129,7 +129,7 @@ sub boot_to_login_screen {
     $args{timeout} //= 300;
     if (testapi::is_serial_terminal) {
         # For serial console, just wait for the login prompt
-        unless (wait_serial "login:", timeout=>$args{timeout}) {
+        unless (wait_serial "login:", timeout => $args{timeout}) {
             die "No login prompt shown on serial console.";
         }
     }
@@ -140,14 +140,14 @@ sub boot_to_login_screen {
         # The following is true for non-serial console.
         my $count = 5;
         while (check_screen("login_screen", 3) && $count > 0) {
-           sleep 5;
-           $count -= 1;
+            sleep 5;
+            $count -= 1;
         }
-       assert_screen "login_screen", $args{timeout};
-       if (match_has_tag "graphical_login") {
-           wait_still_screen 10, 30;
-           assert_screen "login_screen";
-       }
+        assert_screen "login_screen", $args{timeout};
+        if (match_has_tag "graphical_login") {
+            wait_still_screen 10, 30;
+            assert_screen "login_screen";
+        }
     }
 }
 
@@ -174,7 +174,7 @@ sub desktop_switch_layout {
     # if already selected, we're good
     return if (check_screen "${environment}_layout_${layout}", 3);
     # otherwise we need to switch
-    my $switcher = "alt-shift";  # anaconda
+    my $switcher = "alt-shift";    # anaconda
     $switcher = "super-spc" if $environment eq 'gnome';
     # KDE? not used yet
     send_key $switcher;
@@ -188,7 +188,7 @@ sub desktop_switch_layout {
 sub _console_login_finish {
     # The check differs according to the console used.
     if (testapi::is_serial_terminal) {
-        unless (wait_serial("-bash-.*[#\$]", timeout=>5, expect_not_found=>1)) {
+        unless (wait_serial("-bash-.*[#\$]", timeout => 5, expect_not_found => 1)) {
             record_soft_failure "It looks like profile sourcing failed";
         }
     }
@@ -219,7 +219,7 @@ sub console_login {
     # enable a new proper login based on the user variable.
     if (get_var("SERIAL_CONSOLE")) {
         # Check for the usual prompt.
-        if (wait_serial("~\][#\$]", timeout=>5, quiet=>1)) {
+        if (wait_serial("~\][#\$]", timeout => 5, quiet => 1)) {
             type_string "logout\n";
             # Wait a bit to let the logout properly finish.
             sleep 10;
@@ -233,7 +233,7 @@ sub console_login {
         # Let's perform a simple login test. This is the same as
         # whoami, but has the advantage of existing in installer env
         assert_script_run "id -un";
-        unless (wait_serial $args{user}, timeout=>5) {
+        unless (wait_serial $args{user}, timeout => 5) {
             die "Logging onto the serial console has failed.";
         }
     }
@@ -392,8 +392,8 @@ sub do_bootloader {
         # in SLOF usb-xhci driver failed sometimes in powerpc
         type_safely " $args{params}";
     }
-    save_screenshot; # for debug purpose
-    # ctrl-X boots from grub editor mode
+    save_screenshot;    # for debug purpose
+                        # ctrl-X boots from grub editor mode
     send_key "ctrl-x";
     # return boots all other cases
     send_key "ret";
@@ -515,7 +515,7 @@ sub _repo_setup_compose {
     assert_script_run 'dnf config-manager --set-disabled updates-testing updates';
     # script_run returns the exit code, so 'unless' here means 'if the file exists'
     unless (script_run 'test -f /etc/yum.repos.d/fedora-updates-modular.repo') {
-            assert_script_run 'dnf config-manager --set-disabled updates-testing-modular updates-modular';
+        assert_script_run 'dnf config-manager --set-disabled updates-testing-modular updates-modular';
     }
     # we use script_run here as the rawhide and modular repo files
     # won't always exist and we don't want to bother testing or
@@ -525,9 +525,9 @@ sub _repo_setup_compose {
     script_run "sed -i -e 's,^metalink,#metalink,g' -e 's,^mirrorlist,#mirrorlist,g' -e 's,^#baseurl.*basearch,baseurl=${location}/Modular/\$basearch,g' -e 's,^#baseurl.*source,baseurl=${location}/Modular/source,g' /etc/yum.repos.d/{fedora-modular,fedora-rawhide-modular}.repo", 0;
 
     # this can be used for debugging if something is going wrong
-#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
-#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
-#    }
+    #    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
+    #        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
+    #    }
 }
 
 sub _repo_setup_updates {
@@ -538,9 +538,9 @@ sub _repo_setup_updates {
     my $currrel = get_var("CURRREL", "0");
     repos_mirrorlist();
     # this can be used for debugging repo config if something is wrong
-#    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
-#        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
-#    }
+    #    unless (script_run 'pushd /etc/yum.repos.d && tar czvf yumreposd.tar.gz * && popd') {
+    #        upload_logs "/etc/yum.repos.d/yumreposd.tar.gz";
+    #    }
     if ($version > $currrel) {
         # Disable updates-testing so other bad updates don't break us
         # this will do nothing on upgrade tests as we're on a stable
@@ -651,11 +651,11 @@ sub console_initial_setup {
     # Set timezone
     type_string "2\n";
     wait_still_screen 5;
-    type_string "1\n"; # Set timezone
+    type_string "1\n";    # Set timezone
     wait_still_screen 5;
-    type_string "1\n"; # Europe
+    type_string "1\n";    # Europe
     wait_still_screen 5;
-    type_string "37\n"; # Prague
+    type_string "37\n";    # Prague
     wait_still_screen 7;
 
     # Set root password
@@ -671,14 +671,14 @@ sub console_initial_setup {
     # Create user
     type_string "5\n";
     wait_still_screen 5;
-    type_string "1\n"; # create new
+    type_string "1\n";    # create new
     wait_still_screen 5;
-    type_string "3\n"; # set username
+    type_string "3\n";    # set username
     wait_still_screen 5;
     type_string get_var("USER_LOGIN", "test");
     send_key "ret";
     wait_still_screen 5;
-    type_string "5\n"; # set password
+    type_string "5\n";    # set password
     wait_still_screen 5;
     type_string get_var("USER_PASSWORD", "weakpassword");
     send_key "ret";
@@ -686,13 +686,13 @@ sub console_initial_setup {
     type_string get_var("USER_PASSWORD", "weakpassword");
     send_key "ret";
     wait_still_screen 5;
-    type_string "6\n"; # make him an administrator
+    type_string "6\n";    # make him an administrator
     wait_still_screen 5;
     type_string "c\n";
     wait_still_screen 7;
 
     assert_screen "console_initial_SETUP_DONE", 30;
-    type_string "c\n"; # continue
+    type_string "c\n";    # continue
 }
 
 sub handle_welcome_screen {
@@ -735,18 +735,18 @@ sub gnome_initial_setup {
         # https://fedoraproject.org//wiki/Changes/ReduceInitialSetupRedundancy
         # https://bugzilla.redhat.com/show_bug.cgi?id=1474787 ,
         # except 'language' is never *really* skipped (see above)
-        @nexts = grep {$_ ne 'keyboard'} @nexts;
-        @nexts = grep {$_ ne 'timezone'} @nexts;
+        @nexts = grep { $_ ne 'keyboard' } @nexts;
+        @nexts = grep { $_ ne 'timezone' } @nexts;
     }
     else {
         # 'timezone' and 'software' are suppressed for the 'existing user'
         # form of g-i-s
-        @nexts = grep {$_ ne 'software'} @nexts;
-        @nexts = grep {$_ ne 'timezone'} @nexts;
+        @nexts = grep { $_ ne 'software' } @nexts;
+        @nexts = grep { $_ ne 'timezone' } @nexts;
     }
     # 'additional software sources' screen does not display on F28+:
     # https://bugzilla.gnome.org/show_bug.cgi?id=794825
-    @nexts = grep {$_ ne 'software'} @nexts;
+    @nexts = grep { $_ ne 'software' } @nexts;
 
     # note: in g-i-s 3.37.91 and later, the first screen in systemwide
     # mode has a "Start Setup" button, not a "Next" button
@@ -761,13 +761,13 @@ sub gnome_initial_setup {
     # wait a bit in case of animation
     wait_still_screen 3;
     # one more check for frickin auth_required
-   if (check_screen "auth_required") {
+    if (check_screen "auth_required") {
         record_soft_failure "Unexpected authentication required: https://gitlab.gnome.org/GNOME/gnome-initial-setup/-/issues/106";
         send_key "esc";
     }
     # GDM 3.24.1 dumps a cursor in the middle of the screen here...
     mouse_hide if ($args{prelogin});
-    for my $n (1..scalar(@nexts)) {
+    for my $n (1 .. scalar(@nexts)) {
         # click 'Next' $nexts times, moving the mouse to avoid
         # highlight problems, sleeping to give it time to get
         # to the next screen between clicks
@@ -794,7 +794,7 @@ sub gnome_initial_setup {
     unless (get_var("VNC_CLIENT")) {
         # click 'Skip' one time (this is the 'goa' screen). We don't
         # get it on VNC_CLIENT case as network isn't working (yet)
-        mouse_set(100,100);
+        mouse_set(100, 100);
         wait_screen_change { assert_and_click "skip_button"; };
     }
     send_key "ret";
@@ -843,7 +843,7 @@ sub anaconda_create_user {
         @_
     );
     my $user_login = get_var("USER_LOGIN") || "test";
-    assert_and_click("anaconda_install_user_creation", timeout=>$args{timeout});
+    assert_and_click("anaconda_install_user_creation", timeout => $args{timeout});
     assert_screen "anaconda_install_user_creation_screen";
     # wait out animation
     wait_still_screen 2;
@@ -901,21 +901,21 @@ sub check_desktop {
 }
 
 sub download_modularity_tests {
-# Download the modularity test script, place in the system and then
-# modify the access rights to make it executable.
+    # Download the modularity test script, place in the system and then
+    # modify the access rights to make it executable.
     my ($whitelist) = @_;
     # we need python3-yaml for the script to run
     assert_script_run 'dnf -y install python3-yaml', 180;
     assert_script_run 'curl -o /root/test.py https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/modular_functions.py';
     if ($whitelist eq 'whitelist') {
-	assert_script_run 'curl -o /root/whitelist https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/whitelist';
+        assert_script_run 'curl -o /root/whitelist https://pagure.io/fedora-qa/modularity_testing_scripts/raw/master/f/whitelist';
     }
     assert_script_run 'chmod 755 /root/test.py';
 }
 
 sub quit_firefox {
-# Quit Firefox, handling the 'close multiple tabs' warning screen if
-# it shows up
+    # Quit Firefox, handling the 'close multiple tabs' warning screen if
+    # it shows up
     send_key "ctrl-q";
     # expect to get to either the tabs warning or a console
     if (check_screen ["user_console", "root_console", "firefox_close_tabs"], 30) {
@@ -927,14 +927,14 @@ sub quit_firefox {
 }
 
 sub start_with_launcher {
-# Get the name of the needle with a launcher, find the launcher in the menu
-# and click on it to start the application. This function works for the
-# Gnome desktop.
+    # Get the name of the needle with a launcher, find the launcher in the menu
+    # and click on it to start the application. This function works for the
+    # Gnome desktop.
 
     # $launcher holds the launcher needle, but some of the apps are hidden in a submenu
     # so this must be handled first to find the launcher needle.
 
-    my ($launcher,$submenu,$group) = @_;
+    my ($launcher, $submenu, $group) = @_;
     $submenu //= '';
     $group //= '';
     my $desktop = get_var('DESKTOP');
@@ -979,7 +979,7 @@ sub start_with_launcher {
         assert_and_click $launcher;
         wait_still_screen 5;
     }
-    elsif ($desktop eq 'kde'){
+    elsif ($desktop eq 'kde') {
         # Click on the KDE launcher icon
         assert_and_click 'kde_menu_launcher';
         wait_still_screen 2;
@@ -1006,7 +1006,7 @@ sub start_with_launcher {
 
 
 sub quit_with_shortcut {
-# Quit the application using the Alt-F4 keyboard shortcut
+    # Quit the application using the Alt-F4 keyboard shortcut
     send_key 'alt-f4';
     wait_still_screen 5;
     assert_screen 'workspace';
@@ -1035,12 +1035,12 @@ sub advisory_get_installed_packages {
         # occasionally, for some reason, it's unhappy about sorting;
         # we shouldn't fail the test in this case, just upload the
         # files so we can see why...
-        upload_logs "/tmp/allpkgs.txt", failok=>1;
-        upload_logs "/var/log/updatepkgs.txt", failok=>1;
+        upload_logs "/tmp/allpkgs.txt", failok => 1;
+        upload_logs "/var/log/updatepkgs.txt", failok => 1;
     }
     # we'll try and upload the output even if comm 'failed', as it
     # does in fact still write it in some cases
-    upload_logs "/var/log/testedpkgs.txt", failok=>1;
+    upload_logs "/var/log/testedpkgs.txt", failok => 1;
 }
 
 sub advisory_check_nonmatching_packages {
@@ -1068,8 +1068,8 @@ sub advisory_check_nonmatching_packages {
     script_run 'for pkg in $(cat /var/log/updatepkgnames.txt); do rpm -q $pkg && rpm -q $pkg --last | head -1 | cut -d" " -f1 | xargs rpm -q --qf "%{SOURCERPM} %{EPOCH} %{NAME}-%{VERSION}-%{RELEASE}\n" >> /tmp/installedupdatepkgs.txt; done';
     script_run 'sort -u -o /tmp/installedupdatepkgs.txt /tmp/installedupdatepkgs.txt';
     # for debugging, may as well always upload these, can't hurt anything
-    upload_logs "/tmp/installedupdatepkgs.txt", failok=>1;
-    upload_logs "/var/log/updatepkgs.txt", failok=>1;
+    upload_logs "/tmp/installedupdatepkgs.txt", failok => 1;
+    upload_logs "/var/log/updatepkgs.txt", failok => 1;
     # if any line appears in installedupdatepkgs.txt but not updatepkgs.txt,
     # we have a problem.
     if (script_run 'comm -23 /tmp/installedupdatepkgs.txt /var/log/updatepkgs.txt > /var/log/installednotupdatedpkgs.txt') {
@@ -1081,7 +1081,7 @@ sub advisory_check_nonmatching_packages {
     # this exits 1 if the file is zero-length, 0 if it's longer
     # if it's 0, that's *BAD*: we want to upload the file and fail
     unless (script_run 'test -s /var/log/installednotupdatedpkgs.txt') {
-        upload_logs "/var/log/installednotupdatedpkgs.txt", failok=>1;
+        upload_logs "/var/log/installednotupdatedpkgs.txt", failok => 1;
         my $message = "Package(s) from update not installed when it should have been! See installednotupdatedpkgs.txt";
         if ($args{fatal}) {
             set_var("_ACNMP_DONE", "1");
@@ -1134,7 +1134,7 @@ sub select_rescue_mode {
         }
     }
 
-    assert_screen "rescue_select", 180; # it takes time to start anaconda
+    assert_screen "rescue_select", 180;    # it takes time to start anaconda
 }
 
 sub copy_devcdrom_as_isofile {
@@ -1289,10 +1289,10 @@ sub check_prerelease {
         assert_screen "prerelease_note";
     }
     elsif ($prerelease == 0) {
-       # If the prerelease note is shown, where it should not be, die!
-       if (check_screen "prerelease_note") {
+        # If the prerelease note is shown, where it should not be, die!
+        if (check_screen "prerelease_note") {
             die "The PRERELEASE tag is shown, but it should NOT be.";
-       }
+        }
     }
 }
 
@@ -1372,12 +1372,12 @@ sub click_unwanted_notifications {
     my @closed;
     while ($count > 0 && check_screen "desktop_update_notification_popup", 5) {
         $count -= 1;
-        push (@closed, 'update');
+        push(@closed, 'update');
         click_lastmatch;
     }
     if (check_screen "akonadi_migration_agent_running", 5) {
         click_lastmatch;
-        push (@closed, 'akonadi');
+        push(@closed, 'akonadi');
     }
     return @closed;
 }
@@ -1400,7 +1400,7 @@ sub register_application {
 sub solidify_wallpaper {
     my $desktop = get_var("DESKTOP");
     if ($desktop eq "kde") {
-    # Run the Desktop settings
+        # Run the Desktop settings
         # FIXME workaround a weird bug where alt-d-s does something
         # different until you right click on the desktop:
         # https://bugzilla.redhat.com/show_bug.cgi?id=1933118

@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     start_with_launcher('apps_menu_rhythmbox');
     # Check that is started

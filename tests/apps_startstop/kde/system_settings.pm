@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     menu_launch_type 'system settings';
     # Check that it is started

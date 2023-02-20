@@ -11,7 +11,7 @@ sub run {
     # Anaconda hub
     # Go to INSTALLATION DESTINATION and ensure one regular disk
     # and the iscsi target are selected.
-    select_disks(iscsi=>\%iscsi);
+    select_disks(iscsi => \%iscsi);
     assert_and_click "anaconda_spoke_done";
     # now we're at custom part. let's use standard partitioning for
     # simplicity
@@ -25,7 +25,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

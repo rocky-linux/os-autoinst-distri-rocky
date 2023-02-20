@@ -6,7 +6,7 @@ use utils;
 sub run {
 
     my $self = shift;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # list available branches
     assert_script_run "ostree remote refs fedora-iot";
@@ -19,14 +19,14 @@ sub run {
 
     # if testing the current release, rebase to devel
     unless (script_run "rpm-ostree status -b | grep stable") {
-        $rebase = "devel"
+        $rebase = "devel";
     }
     # rebase to the appropriate release, arch
     validate_script_output "rpm-ostree rebase fedora/${rebase}/${arch}/iot", sub { m/systemctl reboot/ }, 300;
     script_run "systemctl reboot", 0;
 
     boot_to_login_screen;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # check booted branch to make sure successful rebase
     if ($rebase eq "devel") {
@@ -41,7 +41,7 @@ sub run {
     script_run "systemctl reboot", 0;
 
     boot_to_login_screen;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # check to make sure rollback successful, also account for branched (devel)
     if ($rebase eq "devel") {
@@ -53,7 +53,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

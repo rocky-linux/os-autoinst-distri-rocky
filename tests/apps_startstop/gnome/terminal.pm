@@ -12,7 +12,7 @@ sub run {
     send_key 'alt-f1';
     wait_still_screen 2;
     type_very_safely 'terminal';
-    send_key 'ret';  
+    send_key 'ret';
     wait_still_screen 5;
     assert_screen "apps_run_terminal";
 
@@ -23,11 +23,11 @@ sub run {
     quit_with_shortcut();
 }
 
-# If this test fails, the others will probably start failing too, 
+# If this test fails, the others will probably start failing too,
 # so there is no need to continue.
 # Also, when subsequent tests fail, the suite will revert to this state for further testing.
 sub test_flags {
-    return { fatal => 1, milestone => 1 };
+    return {fatal => 1, milestone => 1};
 }
 
 1;

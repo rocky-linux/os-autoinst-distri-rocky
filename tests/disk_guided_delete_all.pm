@@ -18,12 +18,12 @@ sub run {
     assert_and_click "anaconda_install_destination_reclaim_space_btn";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

@@ -137,14 +137,14 @@ sub run {
     # there are various things we might have to do at a console here
     # before we actually reboot. let's figure them all out first...
     my @actions;
-    push (@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
-    push (@actions, 'abrt') if (get_var("ABRT", '') eq "system");
-    push (@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
-    push (@actions, 'stagingrepos') if (get_var("DNF_CONTENTDIR"));
+    push(@actions, 'consoletty0') if (get_var("ARCH") eq "aarch64");
+    push(@actions, 'abrt') if (get_var("ABRT", '') eq "system");
+    push(@actions, 'rootpw') if (get_var("INSTALLER_NO_ROOT"));
+    push(@actions, 'stagingrepos') if (get_var("DNF_CONTENTDIR"));
     # memcheck test doesn't need to reboot at all. Rebooting from GUI
     # for lives is unreliable. And if we're already doing something
     # else at a console, we may as well reboot from there too
-    push (@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
+    push(@actions, 'reboot') if (!get_var("MEMCHECK") && (get_var("LIVE") || @actions));
     # our approach for taking all these actions doesn't work on VNC
     # installs, fortunately we don't need any of them in that case
     # yet, so for now let's just flush the list here if we're VNC
@@ -159,14 +159,14 @@ sub run {
     }
     # OK, if we're here, we got actions, so head to a console. Switch
     # to console after liveinst sometimes takes a while, so 30 secs
-    $self->root_console(timeout=>30);
+    $self->root_console(timeout => 30);
     # this is something a couple of actions may need to know
     my $mount = "/mnt/sysimage";
     if (get_var("CANNED")) {
         # finding the actual host system root is fun for ostree...
         $mount = "/mnt/sysimage/ostree/deploy/fedora*/deploy/*.?";
     }
-    if (grep {$_ eq 'consoletty0'} @actions) {
+    if (grep { $_ eq 'consoletty0' } @actions) {
         # somehow, by this point, localized keyboard layout has been
         # loaded for this tty, so for French and Arabic at least we
         # need to load the 'us' layout again for the next command to
@@ -180,15 +180,15 @@ sub run {
         # regenerate the bootloader config
         assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/rocky/grub.cfg";
     }
-    if (grep {$_ eq 'abrt'} @actions) {
-         # Chroot in the newly installed system and switch on ABRT systemwide
-         assert_script_run "chroot $mount abrt-auto-reporting 1";
+    if (grep { $_ eq 'abrt' } @actions) {
+        # Chroot in the newly installed system and switch on ABRT systemwide
+        assert_script_run "chroot $mount abrt-auto-reporting 1";
     }
-    if (grep {$_ eq 'rootpw'} @actions) {
+    if (grep { $_ eq 'rootpw' } @actions) {
         my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
         assert_script_run "echo 'root:$root_password' | chpasswd -R $mount";
     }
-    if (grep {$_ eq 'stagingrepos'} @actions) {
+    if (grep { $_ eq 'stagingrepos' } @actions) {
         if (get_version_major() < 9) {
             assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-BaseOS.repo';
             assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . $mount . '/etc/yum.repos.d/Rocky-AppStream.repo';
@@ -202,11 +202,11 @@ sub run {
         }
         assert_script_run 'printf "stg/rocky\n" > ' . $mount . '/etc/dnf/vars/contentdir';
     }
-    type_string "reboot\n" if (grep {$_ eq 'reboot'} @actions);
+    type_string "reboot\n" if (grep { $_ eq 'reboot' } @actions);
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

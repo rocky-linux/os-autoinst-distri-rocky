@@ -4,9 +4,9 @@ use testapi;
 use utils;
 
 sub run {
-    my $self=shift;
-    if (not( check_screen "root_console", 0)) {
-        $self->root_console(tty=>4);
+    my $self = shift;
+    if (not(check_screen "root_console", 0)) {
+        $self->root_console(tty => 4);
     }
     assert_screen "root_console";
     # for aarch64 non-english tests
@@ -16,7 +16,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

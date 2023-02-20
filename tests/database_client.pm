@@ -6,7 +6,7 @@ use tapnet;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # use compose repo, disable u-t, etc.
     repo_setup();
     # install postgresql
@@ -19,7 +19,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

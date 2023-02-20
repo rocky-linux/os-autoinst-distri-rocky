@@ -44,7 +44,7 @@ sub start_webui {
     disable_firefox_studies;
     type_string "startx /usr/bin/firefox -width 1024 -height 768 https://ipa001.test.openqa.fedoraproject.org\n";
     assert_screen ["freeipa_webui_login", $user_screen], 60;
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     # softfail on kerberos ticket bugs meaning we get auto-logged in
     # as the requested user when we don't expect to be
     if (match_has_tag $user_screen) {

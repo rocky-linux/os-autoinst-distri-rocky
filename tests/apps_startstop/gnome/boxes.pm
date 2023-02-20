@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     start_with_launcher('apps_menu_boxes');
     # We get tutorial on F32+, directly to main UI on F<32; we can
@@ -23,7 +23,7 @@ sub run {
     register_application("gnome-boxes");
     # Close the application
     quit_with_shortcut();
-    
+
 }
 
 sub test_flags {
