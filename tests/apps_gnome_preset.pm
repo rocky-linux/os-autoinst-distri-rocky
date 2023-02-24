@@ -12,11 +12,11 @@ sub run {
     solidify_wallpaper;
 }
 
-# If this test fails, the others will probably start failing too, 
+# If this test fails, the others will probably start failing too,
 # so there is no need to continue.
 # Also, when subsequent tests fail, the suite will revert to this state for further testing.
 sub test_flags {
-    return { fatal => 1, milestone => 1 };
+    return {fatal => 1, milestone => 1};
 }
 
 1;

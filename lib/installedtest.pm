@@ -16,7 +16,7 @@ sub root_console {
     # Switch to a default or specified TTY and log in as root.
     my $self = shift;
     my %args = (
-        tty => 1, # what TTY to login to
+        tty => 1,    # what TTY to login to
         @_);
     if (get_var("SERIAL_CONSOLE")) {
         # select the first virtio terminal, for now we assume we can
@@ -27,7 +27,7 @@ sub root_console {
         # For normal terminal emulation, use key combo to reach a tty
         send_key "ctrl-alt-f$args{tty}";
     }
-    console_login; # Do the login.
+    console_login;    # Do the login.
 }
 
 sub post_fail_hook {
@@ -43,7 +43,7 @@ sub post_fail_hook {
         assert_script_run "dhclient";
     }
     else {
-        $self->root_console(tty=>6);
+        $self->root_console(tty => 6);
         # fix up keyboard layout, if we failed before the test did this
         # itself; if it's already been done, should be safe, will just
         # fail and carry on
@@ -88,7 +88,7 @@ sub post_fail_hook {
     }
 
     if ($dracut) {
-        upload_logs "/run/initramfs/rdsosreport.txt", failok=>1;
+        upload_logs "/run/initramfs/rdsosreport.txt", failok => 1;
         # that's all that's really useful, so...
         return;
     }
@@ -125,14 +125,14 @@ sub post_fail_hook {
     }
 
     # Sometimes useful for diagnosing FreeIPA issues
-    upload_logs "/etc/nsswitch.conf", failok=>1;
+    upload_logs "/etc/nsswitch.conf", failok => 1;
 
     if (get_var("FLAVOR") eq "updates-everything-boot-iso") {
         # for installer creation test
         script_run "df -h";
-        upload_logs "/root/imgbuild/pylorax.log", failok=>1;
-        upload_logs "/root/imgbuild/lorax.log", failok=>1;
-        upload_logs "/root/imgbuild/program.log", failok=>1;
+        upload_logs "/root/imgbuild/pylorax.log", failok => 1;
+        upload_logs "/root/imgbuild/lorax.log", failok => 1;
+        upload_logs "/root/imgbuild/program.log", failok => 1;
     }
 
     if (get_var("TEST") eq "live_build") {
@@ -149,10 +149,10 @@ sub post_fail_hook {
     }
 }
 
-    # For update tests, let's do the update package info log stuff,
-    # it may be useful for diagnosing the cause of the failure
-    advisory_get_installed_packages;
-    advisory_check_nonmatching_packages(fatal=>0);
+# For update tests, let's do the update package info log stuff,
+# it may be useful for diagnosing the cause of the failure
+advisory_get_installed_packages;
+advisory_check_nonmatching_packages(fatal => 0);
 
 1;
 

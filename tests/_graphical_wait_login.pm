@@ -17,17 +17,17 @@ sub run {
 
     # handle bootloader, if requested
     if (get_var("GRUB_POSTINSTALL")) {
-        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>$wait_time);
+        do_bootloader(postinstall => 1, params => get_var("GRUB_POSTINSTALL"), timeout => $wait_time);
         $wait_time = 300;
     }
 
     # Handle pre-login initial setup if we're doing INSTALL_NO_USER
     if (get_var("INSTALL_NO_USER") && !get_var("_SETUP_DONE")) {
         if (get_var("DESKTOP") eq 'gnome') {
-            gnome_initial_setup(prelogin=>1, timeout=>$wait_time);
+            gnome_initial_setup(prelogin => 1, timeout => $wait_time);
         }
         else {
-            anaconda_create_user(timeout=>$wait_time);
+            anaconda_create_user(timeout => $wait_time);
             # wait out animation
             wait_still_screen 3;
             assert_and_click "initialsetup_finish_configuration";
@@ -41,7 +41,7 @@ sub run {
     unless (get_var("DESKTOP") eq 'gnome' && get_var("INSTALL_NO_USER")) {
         unless (get_var("HDD_1") && !(get_var("PARTITIONING") eq "custom_resize_lvm")) {
             # in 9.0, license screens are not shown by default
-            # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
+         # https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html-single/9.0_release_notes/index#enhancement_installer-and-image-creation
             unless (get_version_major() > 8) {
                 # for Rocky Linux here happens to be a license acceptance screen
                 # the initial appearance can sometimes take really long
@@ -125,7 +125,7 @@ sub run {
         # root user now, for subsequent tests to work
         if (get_var("IMAGE_DEPLOY")) {
             send_key "ctrl-alt-f3";
-            console_login(user=>get_var("USER_LOGIN", "test"), password=>get_var("USER_PASSWORD", "weakpassword"));
+            console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
             type_string "sudo su\n";
             type_string "$password\n";
             my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
@@ -137,11 +137,11 @@ sub run {
     # Move the mouse somewhere it won't highlight the match areas
     mouse_set(300, 800);
     # KDE can take ages to start up
-    check_desktop(timeout=>120);
+    check_desktop(timeout => 120);
 }
 
 sub test_flags {
-    return { fatal => 1, milestone => 1 };
+    return {fatal => 1, milestone => 1};
 }
 
 1;

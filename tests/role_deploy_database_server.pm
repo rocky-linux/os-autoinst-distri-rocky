@@ -7,7 +7,7 @@ use tapnet;
 use utils;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # use compose repo, disable u-t, etc.
     repo_setup();
     # deploy postgres directly ourselves. first, install packages...
@@ -54,10 +54,10 @@ sub run {
     # check we can add a row to the table
     assert_script_run 'su postgres -c "psql openqa -c \'INSERT INTO test VALUES (5);\'"';
     # check we can query the table
-    validate_script_output 'su postgres -c "psql openqa -c \'SELECT * FROM test;\'"', sub {$_ =~ m/^ *testcol.*5.*1 row/s };
+    validate_script_output 'su postgres -c "psql openqa -c \'SELECT * FROM test;\'"', sub { $_ =~ m/^ *testcol.*5.*1 row/s };
     # check we can modify the row
     assert_script_run 'su postgres -c "psql openqa -c \'UPDATE test SET testcol = 50 WHERE testcol = 5;\'"';
-    validate_script_output 'su postgres -c "psql openqa -c \'SELECT * FROM test;\'"', sub {$_ =~ m/^ *testcol.*50.*1 row/s };
+    validate_script_output 'su postgres -c "psql openqa -c \'SELECT * FROM test;\'"', sub { $_ =~ m/^ *testcol.*50.*1 row/s };
     # we're all ready for other jobs to run!
     mutex_create('db_ready');
     wait_for_children;
@@ -73,7 +73,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

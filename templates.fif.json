@@ -54,7 +54,35 @@
         }
     },
     "Products": {
-        "rocky-boot-iso-aarch64-*": {
+        "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "rocky",
+            "flavor": "GenericCloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*": {
+            "arch": "x86_64",
+            "distri": "rocky",
+            "flavor": "GenericCloud_LVM-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+	"rocky-boot-iso-aarch64-*": {
             "arch": "aarch64",
             "distri": "rocky",
             "flavor": "boot-iso",
@@ -166,7 +194,23 @@
         }
     },
     "Profiles": {
-        "rocky-boot-iso-aarch64-*-aarch64": {
+        "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": {
+            "machine": "64bit",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*"
+        },
+	"rocky-boot-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-boot-iso-aarch64-*"
         },
@@ -236,6 +280,10 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -251,6 +299,10 @@
         },
         "base_system_logging": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -266,6 +318,10 @@
         },
         "base_update_cli": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -281,6 +337,10 @@
         },
         "base_package_install_remove": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -296,6 +356,10 @@
         },
         "base_services_start": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -311,6 +375,10 @@
         },
         "base_selinux": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -326,6 +394,10 @@
         },
         "base_service_manipulation": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -339,7 +411,18 @@
                 "USER_LOGIN": "false"
             }
         },
-        "install_resize_lvm": {
+        "cloud_autocloud": {
+            "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "POSTINSTALL": "autocloud"
+            }
+        },
+	"install_resize_lvm": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40

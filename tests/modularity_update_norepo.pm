@@ -5,9 +5,9 @@ use utils;
 use modularity;
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # switch to tty and login as root
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Update the system
     assert_script_run('dnf update -y');

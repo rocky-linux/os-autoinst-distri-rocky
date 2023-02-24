@@ -45,7 +45,7 @@ sub run {
     # handle bootloader, if requested; set longer timeout as sometimes
     # reboot here seems to take a long time
     if (get_var("GRUB_POSTINSTALL")) {
-        do_bootloader(postinstall=>1, params=>get_var("GRUB_POSTINSTALL"), timeout=>120);
+        do_bootloader(postinstall => 1, params => get_var("GRUB_POSTINSTALL"), timeout => 120);
     }
 
     # decrypt, if encrypted
@@ -60,7 +60,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

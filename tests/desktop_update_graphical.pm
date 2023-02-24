@@ -10,7 +10,7 @@ sub run {
     my $relnum = get_release_number;
     my $version_major = get_version_major;
     # use a tty console for repo config and package prep
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     assert_script_run 'dnf config-manager --set-disabled updates-testing';
     prepare_test_packages;
     # get back to the desktop
@@ -49,7 +49,7 @@ sub run {
     # may be waiting some time at a 'Software catalog is being
     # loaded' screen.
     if ($desktop eq 'gnome' || ($desktop eq 'kde' && $relnum > 33)) {
-        for my $n (1..5) {
+        for my $n (1 .. 5) {
             last if (check_screen 'desktop_package_tool_update', 120);
             mouse_set 10, 10;
             mouse_hide;
@@ -109,7 +109,7 @@ sub run {
         # FIXME: also sometimes the update apply button just doesn't
         # work, so keep clicking till it does:
         # https://bugzilla.redhat.com/show_bug.cgi?id=1943943
-        for my $n (1..10) {
+        for my $n (1 .. 10) {
             sleep 2;
             assert_screen ['kde_offline_update_reboot', 'desktop_package_tool_update_apply'];
             # break out if we reached the reboot button
@@ -127,12 +127,12 @@ sub run {
         assert_screen 'desktop_package_tool_update_done', 180;
     }
     # back to console to verify updates
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     verify_updated_packages;
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

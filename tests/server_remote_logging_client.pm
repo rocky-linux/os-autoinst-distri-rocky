@@ -4,9 +4,9 @@ use testapi;
 use lockapi;
 
 sub run {
-    my $self=shift;
-    if (not (check_screen "root_console", 0)) {
-        $self->root_console(tty=>3);
+    my $self = shift;
+    if (not(check_screen "root_console", 0)) {
+        $self->root_console(tty => 3);
     }
     # ensure rsyslog is installed and enabled
     script_run "dnf -y install rsyslog", 180;
@@ -31,7 +31,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

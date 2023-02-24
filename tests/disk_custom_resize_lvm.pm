@@ -10,7 +10,7 @@ sub goto_mountpoint {
 
 sub run {
     my $self = shift;
-    # Navigate to "Installation destionation" and select blivet-gui 
+    # Navigate to "Installation destionation" and select blivet-gui
     # to manipulate the partitions. This will be automatically
     # done using the following method, because PARTITIONING starts
     # with "custom_blivet".
@@ -21,7 +21,7 @@ sub run {
     # a previous Linux installation and prepare the disk for new installation
     # which will be then followed through.
 
-    # Custom partitioning shows that an existing installations is there on the disk, 
+    # Custom partitioning shows that an existing installations is there on the disk,
     # we need to select it to proceed.
     assert_and_click "anaconda_part_use_current";
 
@@ -86,7 +86,7 @@ sub run {
 }
 
 sub test_flags {
-        return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

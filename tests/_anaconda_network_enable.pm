@@ -7,7 +7,7 @@ use tapnet;
 sub run {
     my $self = shift;
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
     if (check_screen ["anaconda_network_connected"], 60) {
         # network is connected already, we're done
@@ -22,7 +22,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

@@ -8,11 +8,11 @@ sub run {
     # Prepare the environment:
     #
     # Become root
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Create a text file with content to print
-    script_run  "cd /home/test/";
-    assert_script_run  "echo 'A quick brown fox jumps over a lazy dog.' > testfile.txt";
+    script_run "cd /home/test/";
+    assert_script_run "echo 'A quick brown fox jumps over a lazy dog.' > testfile.txt";
     script_run "chmod 666 testfile.txt";
     # Install the Cups-PDF package to use the Cups-PDF printer
     assert_script_run "dnf -y install cups-pdf", 180;
@@ -37,12 +37,12 @@ sub run {
 
     # Open the text editor and print the file.
     wait_screen_change { send_key "alt-f2"; };
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     type_very_safely "$editor /home/test/testfile.txt\n";
-    wait_still_screen(stilltime=>5, similarity_level=>44);
+    wait_still_screen(stilltime => 5, similarity_level => 44);
     # Print the file using the Cups-PDF printer
     send_key "ctrl-p";
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     if ($desktop eq 'gnome') {
         assert_and_click "printing_select_pdfprinter";
     }
@@ -52,7 +52,7 @@ sub run {
         # We only check that it is correct.
         assert_screen "printing_pdfprinter_ready";
     }
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     assert_and_click "printing_print";
     # Exit the application
     send_key "alt-f4";
@@ -63,7 +63,7 @@ sub run {
 
     # Open the pdf file and check the print
     send_key "alt-f2";
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     # output location is different for cups-pdf 3.0.1-12 or later (we
     # checked this above)
     if ($cpdfvercmp eq "12") {
@@ -73,11 +73,11 @@ sub run {
     else {
         type_safely "$viewer /home/test/Desktop/testfile-job_1.pdf\n";
     }
-    wait_still_screen(stilltime=>5, similarity_level=>45);
+    wait_still_screen(stilltime => 5, similarity_level => 45);
     # Resize the window, so that the size of the document fits the bigger space
     # and gets more readable.
     send_key $maximize;
-    wait_still_screen(stilltime=>2, similarity_level=>45);
+    wait_still_screen(stilltime => 2, similarity_level => 45);
     # make sure we're at the start of the document
     send_key "ctrl-home" if ($desktop eq "kde");
     # Check the printed pdf.
@@ -86,7 +86,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

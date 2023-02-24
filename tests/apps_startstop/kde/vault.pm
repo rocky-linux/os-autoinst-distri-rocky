@@ -30,7 +30,7 @@ sub run {
 
     # Enter the name of the newly created testvault
     assert_and_click "vault_enter_name";
-    
+
     # Then name the vault "testvault"
     type_very_safely "testvault";
 

@@ -25,13 +25,13 @@ sub download_testdata {
     # Change ownership and attributes
     assert_script_run("chown -R test:test openqa_testdata");
     # Move the test file into a correct location.
-    assert_script_run("cp openqa_testdata/evince/evince.pdf Documents")
+    assert_script_run("cp openqa_testdata/evince/evince.pdf Documents");
 }
 
 sub run {
     my $self = shift;
     # Switch to console
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # Perform git test
     check_and_install_git();
     # Download the test data
@@ -55,7 +55,7 @@ sub run {
 
     # Select the evince.pdf file.
     assert_and_click("evince_file_select_pdf", button => "left", timeout => 30);
-    
+
     # Click the Open button to open the file
     assert_and_click("gnome_button_open", button => "left", timeout => 30);
 

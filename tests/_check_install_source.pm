@@ -81,16 +81,16 @@ sub run {
     }
     # just for convenience - sometimes it's useful to see this log
     # for a success case
-    upload_logs "/tmp/packaging.log", failok=>1;
+    upload_logs "/tmp/packaging.log", failok => 1;
     send_key "ctrl-alt-f6";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 30; #
+    assert_screen "anaconda_main_hub", 30;    #
 
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

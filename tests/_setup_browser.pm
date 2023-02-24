@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # set up appropriate repositories
     repo_setup();
@@ -27,7 +27,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1, milestone => 1 };
+    return {fatal => 1, milestone => 1};
 }
 
 1;

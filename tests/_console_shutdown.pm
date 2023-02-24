@@ -10,7 +10,7 @@ sub run {
     # use the desktops' graphical shutdown methods, we just go to a
     # console and run 'poweroff'. We can write separate tests for
     # properly testing shutdown/reboot/log out from desktops.
-    $self->root_console(tty=>4);
+    $self->root_console(tty => 4);
     # disable the hidden grub menu on Workstation, so post-install
     # tests that need to edit boot params will see it. Don't use
     # assert_script_run as this will fail when it's not set
@@ -23,7 +23,7 @@ sub run {
 # even if shutdown fails. we should have a separate test for shutdown/
 # logout/reboot stuff, might need some refactoring.
 sub test_flags {
-    return { 'norollback' => 1, 'ignore_failure' => 1 };
+    return {'norollback' => 1, 'ignore_failure' => 1};
 }
 
 1;

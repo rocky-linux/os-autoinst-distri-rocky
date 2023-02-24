@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # switch to TTY3 for both, graphical and console tests
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
 
     # Use ssh to log into this machine to see its status.
     type_string "ssh test\@localhost\n";
@@ -29,7 +29,7 @@ sub run {
 
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

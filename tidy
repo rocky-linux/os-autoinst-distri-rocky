@@ -1,0 +1,61 @@
+#!/bin/bash
+
+#
+# perltidy rules can be found in ../.perltidyrc
+#
+usage() {
+    cat << EOF
+Usage:
+ tidy [-c|--check] [-f|--force] [-o|--only-changed] [-l|--list] [path/to/file]
+
+Options:
+ -h, -?, --help       display this help
+ -c, --check          Only check for style check differences
+ -f, --force          Force check even if tidy version mismatches
+ -o --only-changed    Only tidy files with uncommitted changes in git. This can
+                      speed up execution a lot.
+-l --list             List files tidy would touch
+ path/to/file         When passing a file as argument, tidy will run perltidy
+                      wether it is added to the git tree or not
+
+perltidy rules can be found in .perltidyrc
+EOF
+    exit
+}
+
+set -eo pipefail
+dir="$(dirname "$0")"
+
+args=""
+selection='--all'
+[[ -e "$dir/perlfiles" ]] && selection=$("$dir"/perlfiles)
+opts=$(getopt -o hcfol --long help,check,force,only-changed,list -n "$0" -- "$@") || usage
+eval set -- "$opts"
+while true; do
+  case "$1" in
+    -h | --help ) usage; shift ;;
+    -c | --check ) args+=' --check-only'; shift ;;
+    -f | --force ) force=true; shift ;;
+    -o | --only-changed ) selection='--git'; shift ;;
+    -l | --list ) args+='--list'; shift ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+filename=${*:-"$selection"}
+
+if ! command -v perltidy > /dev/null 2>&1; then
+    echo "No perltidy found, install it first!"
+    exit 1
+fi
+
+# go to caller directory
+cd "$dir"
+
+# just to make sure we are at the right location
+test -e tidy || exit 1
+
+# shellcheck disable=SC2086
+tidyall $args $filename

@@ -5,7 +5,7 @@ use testapi;
 
 sub run {
     my $self = shift;
-    $self->root_console(tty=>3);
+    $self->root_console(tty => 3);
     # if this is a non-English, non-switched layout, load US layout
     # at this point
     # FIXME: this is all kind of a mess, as on such configs we need

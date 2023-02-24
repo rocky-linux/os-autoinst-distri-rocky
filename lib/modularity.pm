@@ -11,7 +11,7 @@ use utils;
 our @EXPORT = qw(parse_module_list is_listed);
 
 # This subroutine takes the output from the dnf module list command
-# and deletes all unnecessary stuff and returns an array of hash 
+# and deletes all unnecessary stuff and returns an array of hash
 # references where each hash consists of (module, stream, profile).
 # The subroutine only recognizes one profile but it is enough
 # for the sake of the modularity testing.
@@ -37,7 +37,7 @@ sub parse_module_list {
 sub is_listed {
     my ($module, $stream, $listref) = @_;
     my $found = 0;
-    foreach (@{ $listref }) {
+    foreach (@{$listref}) {
         if ($_->{module} eq $module and $_->{stream} eq $stream) {
             $found = 1;
         }

@@ -56,11 +56,11 @@ sub run {
     # on GNOME installs (Workstation Live and Silverblue) we don't
     # need to set a root password or create a user; on other flavors
     # we must
-    unless (get_var("DESKTOP") eq "gnome" ) {
+    unless (get_var("DESKTOP") eq "gnome") {
         # In Rocky ISO you will finish testplan on Create User and need to shift-tab to select
-	# Root password
-        if ((get_var("DISTRI") eq "rocky" )) {
-	    send_key_until_needlematch("anaconda_main_hub_root_password", "shift-tab");
+        # Root password
+        if ((get_var("DISTRI") eq "rocky")) {
+            send_key_until_needlematch("anaconda_main_hub_root_password", "shift-tab");
         }
         assert_and_click "anaconda_main_hub_root_password";
         type_safely "weakrootpassword";

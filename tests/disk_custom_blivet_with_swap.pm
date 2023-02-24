@@ -26,12 +26,12 @@ sub run {
     assert_and_click "anaconda_part_accept_changes";
 
     # Anaconda hub
-    assert_screen "anaconda_main_hub", 300; #
+    assert_screen "anaconda_main_hub", 300;    #
 
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

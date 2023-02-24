@@ -89,7 +89,7 @@ file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
     # download kernel and initramfs
     my $location = get_var("LOCATION");
     my $kernpath = "images/pxeboot";
-        # for some crazy reason these are in a different place for ppc64
+    # for some crazy reason these are in a different place for ppc64
     $kernpath = "ppc/ppc64" if ($arch eq 'ppc64le');
     assert_script_run "curl -o /var/lib/tftpboot/rocky/vmlinuz $location/BaseOS/${arch}/os/${kernpath}/vmlinuz";
     assert_script_run "curl -o /var/lib/tftpboot/rocky/initrd.img $location/BaseOS/${arch}/os/${kernpath}/initrd.img";
@@ -108,7 +108,7 @@ file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
 }
 
 sub run {
-    my $self=shift;
+    my $self = shift;
     # disable systemd-resolved, it conflicts with dnsmasq
     unless (script_run "systemctl is-active systemd-resolved.service") {
         script_run "systemctl stop systemd-resolved.service";
@@ -131,7 +131,7 @@ sub run {
     ## ISCSI
 
     # start up iscsi target
-    #assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
+#assert_script_run "printf '<target iqn.2016-06.local.domain:support.target1>\n    backing-store /dev/vdb\n    incominguser test weakpassword\n</target>' > /etc/tgt/conf.d/openqa.conf";
     assert_script_run "targetcli /backstores/block create dev=/dev/vdb name=vdb";
     assert_script_run "targetcli /iscsi create wwn=iqn.2016-06.local.domain:support.target1";
     assert_script_run "targetcli /iscsi/iqn.2016-06.local.domain:support.target1/tpg1/acls create iqn.2016-06.local.domain:support.target1";
@@ -190,7 +190,7 @@ sub run {
 }
 
 sub test_flags {
-    return { fatal => 1 };
+    return {fatal => 1};
 }
 
 1;

@@ -7,10 +7,10 @@ use utils;
 
 sub run {
     my $self = shift;
-    
+
     # Start the application
     start_with_launcher('apps_menu_calendar');
-    
+
     # give access to location if the vm asks for it
     if (check_screen('apps_run_access', 1)) {
         assert_and_click 'apps_run_access';
@@ -21,7 +21,7 @@ sub run {
     register_application("gnome-calendar");
     # close the application
     quit_with_shortcut();
-    
+
 }
 
 sub test_flags {

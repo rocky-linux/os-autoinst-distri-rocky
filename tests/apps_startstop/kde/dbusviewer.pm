@@ -7,7 +7,7 @@ use utils;
 
 sub run {
     my $self = shift;
-   
+
     menu_launch_type 'dbusviewer';
     # Check that it is started
     assert_screen 'dbusviewer_runs';
