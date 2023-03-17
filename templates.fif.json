@@ -727,7 +727,8 @@
                 "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
-                "MIRRORLIST_GRAPHICAL": "1"
+                "MIRRORLIST_GRAPHICAL": "1",
+                "PACKAGE_SET": "server"
             }
         },
         "install_multi": {
