@@ -1,6 +1,0 @@
-{
-    "project_id" : "os-autoinst-distri-fedora",
-    "conduit_uri" : "https://phab.qa.fedoraproject.org",
-    "arc.land.onto.default" : "master",
-    "arc.feature.start.default" : "master"
-}
