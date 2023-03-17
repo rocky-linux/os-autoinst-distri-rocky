@@ -11,8 +11,8 @@ sub run {
     $self->root_console(tty => 3);
 
     # Enable the module.
-    my $name = "swig";
-    my $stream = "4.0";
+    my $name = "ruby";
+    my $stream = "3.1";
     assert_script_run("dnf module enable -y $name:$stream");
 
     # Check that it is listed in the enabled list.
@@ -30,8 +30,8 @@ sub run {
     }
 
     # Disable some other module.
-    my $name_alt = "postgresql";
-    my $stream_alt = "13";
+    my $name_alt = "ruby";
+    my $stream_alt = "3.1";
     assert_script_run("dnf module disable -y $name_alt:$stream_alt");
 
     # Check that it is listed in the disabled list.

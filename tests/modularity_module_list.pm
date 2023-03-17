@@ -16,36 +16,43 @@ sub run {
     # NOTE: In Rocky the baseos and appstream default repos include and add modules in the
     #       default installation where in Fedora all modules are in separate modular repos.
     #       Until we figure out how to keep track of the count of expected enabled modular
-    #       packages this will need to assume what appears to be the default in minimal.
+    #       packages this will need to assume what appears to be the default in dvd-iso.
     my $modules = script_output('dnf module list --enabled', timeout => 270);
     my @modules = parse_module_list($modules);
     my $module_count = scalar @modules;
 
     my $flavor = get_var('FLAVOR', 'minimal-iso');
-    my $packageset = get_var('PACKAGE_SET', 'minimal');
+    my $packageset = get_var('PACKAGE_SET', 'graphical-server');
+    my $version = get_var('VERSION', 'none');
 
-    if ($flavor eq 'boot-iso') {
-        die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
-    } elsif ($flavor eq 'minimal-iso') {
-        if ($packageset eq 'minimal') {
-            die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
-        } elsif ($packageset eq 'server') {
-            die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+    if ($version eq 'none') {
+        die "VERSION=9.1 or VERSION=8.8 or VERSION=8.7 need to be specified on the command line.";
+    } elsif ($version eq '9.1') {
+        die "Enabled modules ($module_count) is not equal to the default (0)." unless (scalar @modules == 0);
+    } elsif ($version eq '8.8' || $version eq '8.7') {
+        if ($flavor eq 'boot-iso') {
+           die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+        } elsif ($flavor eq 'minimal-iso') {
+            if ($packageset eq 'minimal') {
+                die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+            } elsif ($packageset eq 'server') {
+                die "There seem to be enabled modules when the list should be empty." unless ($module_count == 0);
+            }
+        } elsif ($flavor eq 'dvd-iso' || $flavor eq 'universal') {
+            if ($packageset eq 'minimal') {
+                die "Enabled modules ($module_count) is not equal to the default (1)." unless (scalar @modules == 1);
+            } elsif ($packageset eq 'server') {
+                die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
+            } elsif ($packageset eq 'graphical-server') {
+                die "Enabled modules ($module_count) is not equal to the default (9)." unless (scalar @modules == 9);
+            } elsif ($packageset eq 'workstation') {
+                die "Enabled modules ($module_count) is not equal to the default (13)." unless (scalar @modules == 13);
+            } elsif ($packageset eq 'virtualization-host') {
+                die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
+            }
+        } else {
+            die "Enabled modules ($module_count) is not equal to the default (0)." unless (scalar @modules == 0);
         }
-    } elsif ($flavor eq 'dvd-iso' || $flavor eq 'universal') {
-        if ($packageset eq 'minimal') {
-            die "Enabled modules ($module_count) is not equal to the default (1)." unless (scalar @modules == 1);
-        } elsif ($packageset eq 'server') {
-            die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
-        } elsif ($packageset eq 'graphical-server') {
-            die "Enabled modules ($module_count) is not equal to the default (9)." unless (scalar @modules == 9);
-        } elsif ($packageset eq 'workstation') {
-            die "Enabled modules ($module_count) is not equal to the default (6)." unless (scalar @modules == 6);
-        } elsif ($packageset eq 'virtualization-host') {
-            die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
-        }
-    } else {
-        die "Enabled modules ($module_count) is not equal to the default (2)." unless (scalar @modules == 2);
     }
 
     # Check that dnf lists the disabled modules.
@@ -58,7 +65,6 @@ sub run {
     @modules = parse_module_list($modules);
     die "There seem to be installed modules when the list should be empty." unless (scalar @modules == 0);
 }
-
 
 1;
 

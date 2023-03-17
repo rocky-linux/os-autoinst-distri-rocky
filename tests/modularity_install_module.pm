@@ -10,8 +10,8 @@ sub run {
     $self->root_console(tty => 3);
 
     # Install a Ruby module.
-    my $name = "nodejs";
-    my $stream = "14";
+    my $name = "ruby";
+    my $stream = "3.1";
     my $profile = "common";
     assert_script_run("dnf module install -y $name:$stream/$profile");
 
