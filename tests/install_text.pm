@@ -105,11 +105,6 @@ sub run {
     console_type_wait("1\n");    # create new
     console_type_wait("3\n");    # set username
     console_type_wait("$username\n");
-    # from Rawhide-20190503.n.0 (F31) onwards, 'use password' is default
-    if ((get_release_number() < 31) || (get_version_major() < 9)) {
-        # typing "4\n" on abrt screen causes system to reboot, so be careful
-        run_with_error_check(sub { console_type_wait("4\n") }, $error);    # use password
-    }
     console_type_wait("5\n");    # set password
     console_type_wait("$userpwd\n");
     console_type_wait("$userpwd\n");
