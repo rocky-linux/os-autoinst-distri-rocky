@@ -104,7 +104,7 @@ sub run {
                 unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
             }
             else {
-                if (get_var("DISTRI") eq "rocky" && (get_major_version() < 9)) {
+                if (get_var("DISTRI") eq "rocky" && (get_version_major() < 9)) {
                     # Rocky Linux 8 doesn't have network enabled at boot so we
                     # are not prompted for VNC. If that changes in future update
                     # this conditional can be removed and the else condition
