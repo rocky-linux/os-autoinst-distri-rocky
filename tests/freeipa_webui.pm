@@ -48,19 +48,19 @@ sub run {
     assert_screen "root_console";
     wait_still_screen 5;
     # set permanent passwords for both accounts
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test3@TEST.OPENQA.FEDORAPROJECT.ORG';
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test4@TEST.OPENQA.FEDORAPROJECT.ORG';
+    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test3@TEST.OPENQA.ROCKYLINUX.ORG';
+    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test4@TEST.OPENQA.ROCKYLINUX.ORG';
     # switch to tty4 (boy, the tty jugglin')
     send_key "ctrl-alt-f4";
     # try and login as test3, should work
-    console_login(user => 'test3@TEST.OPENQA.FEDORAPROJECT.ORG', password => 'batterystaple');
+    console_login(user => 'test3@TEST.OPENQA.ROCKYLINUX.ORG', password => 'batterystaple');
     type_string "exit\n";
     # try and login as test4, should fail. we cannot use console_login
     # as it takes 10 seconds to complete when login fails, and
     # "permission denied" message doesn't last that long
     sleep 2;
     assert_screen "text_console_login";
-    type_string "test4\@TEST.OPENQA.FEDORAPROJECT.ORG\n";
+    type_string "test4\@TEST.OPENQA.ROCKYLINUX.ORG\n";
     assert_screen "console_password_required";
     type_string "batterystaple\n";
     assert_screen "login_permission_denied";

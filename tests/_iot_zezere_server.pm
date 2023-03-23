@@ -21,7 +21,7 @@ sub run {
     assert_script_run "zezere-manage loaddata fedora_iot_runreqs";
     assert_script_run "zezere-manage loaddata fedora_installed";
     # create admin user
-    assert_script_run 'zezere-manage createsuperuser --username admin --email zezere@test.openqa.fedoraproject.org --no-input';
+    assert_script_run 'zezere-manage createsuperuser --username admin --email zezere@test.openqa.rockylinux.org --no-input';
     # set admin password (can't find a non-interactive way sadly)
     type_string "zezere-manage changepassword admin\n";
     sleep 2;
