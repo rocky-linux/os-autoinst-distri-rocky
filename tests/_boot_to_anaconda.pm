@@ -104,14 +104,16 @@ sub run {
                 unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
             }
             else {
-                if (get_var("DISTRI") eq "rocky") {
-                    # Rocky doesn't have network enabled at boot so we are not prompted
-                    # for VNC...
+                if (get_var("DISTRI") eq "rocky" && (get_version_major() < 9)) {
+                    # Rocky Linux 8 doesn't have network enabled at boot so we
+                    # are not prompted for VNC. If that changes in future update
+                    # this conditional can be removed and the else condition
+                    # can be restored as the default / only option.
                     # wait for text version of Anaconda main hub
                     assert_screen "anaconda_main_hub_text", 300;
                 }
                 else {
-                    # Fedora has a use text mode menu here
+                    # Fedora and Rocky Linux 9+ have a 'Use text mode' menu here
                     assert_screen "anaconda_use_text_mode", 300;
                     type_string "2\n";
                     # wait for text version of Anaconda main hub
