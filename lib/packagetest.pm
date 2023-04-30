@@ -15,7 +15,7 @@ sub prepare_test_packages {
     # here in case it's not)
     script_run 'dnf -y remove python3-kickstart', 180;
     # grab the test repo definitions
-    assert_script_run 'curl -o /etc/yum.repos.d/openqa-testrepo-1.repo https://fedorapeople.org/groups/qa/openqa-repos/openqa-testrepo-1.repo';
+    assert_script_run 'curl -o /etc/yum.repos.d/openqa-testrepo-1.repo https://git.resf.org/testing/openqa-testrepos/raw/branch/main/openqa-testrepo-1.repo';
     # install the test packages from repo1
     assert_script_run 'dnf -y --disablerepo=* --enablerepo=openqa-testrepo-1 install python3-kickstart';
     if (get_var("DESKTOP") eq 'kde' && get_var("TEST") eq 'desktop_update_graphical') {
