@@ -99,8 +99,11 @@ sub run {
                 # we direct the installer to virtio-console1, and use
                 # virtio-console as a root console
                 select_console('virtio-console1');
-                unless (wait_serial "Use text mode", timeout => 120) { die "Anaconda has not started."; }
-                type_string "2\n";
+                if (get_var("DISTRI") eq "rocky" && (get_version_major() > 8)) {
+                    unless (wait_serial "Use text mode", timeout => 120) { die "Anaconda has not started."; }
+                    type_string "2\n";
+                }
+                # see comment below
                 unless (wait_serial "Installation") { die "Text version of Anaconda has not started."; }
             }
             else {

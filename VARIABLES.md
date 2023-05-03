@@ -99,7 +99,7 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `KOJITASK` | A Koji task ID. If set, the modified 'update testing' flow for testing scratch builds will be used: post-install tests will be run with the packages from the update, starting from the stable release base disk images |
 | `DISTRI` | contains distribution name (should be same as in WebUI, probably `rocky`) |
 | `VERSION` | contains version of distribution |
-| `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `Server-dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
+| `FLAVOR` | indicates what type of distribution is used. Three Pungi properties, joined with `-`: `variant`, `type`, and `format`. e.g.: `dvd-iso`. Special value `universal` is used to schedule the group of tests that should be run once each per arch per compose, against the 'best' available ISO |
 | `ARCH` | is set to architecture that will be used (`x86_64`, `i686`) |
 | `BUILD` | contains Pungi compose_id (something like `Rocky-8.4-20210801.n.0`) |
 | `LABEL` | contains Pungi compose label, if it has one (otherwise should be unset) - e.g `RC-1.5` |
@@ -108,3 +108,5 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `UP1REL` | the source release for "1-release" upgrade tests (usually but not always same as `CURRREL`) |
 | `UP2REL` | the source release for "2-release" upgrade tests (currently always same as `PREVREL`) |
 | `LOCATION` | contains Pungi base compose location (something like `https://kojipkgs.rockylinux.org/compose/branched/Rocky-8.4-20210801.n.0/compose/`) |
+| `DNF_CONTENTDIR` | the value to change `/etc/dnf/vars/contentdir` to (eg. `stg/rocky`) allowing repository reconfiguration to point at staging (usually but not always used with `DNF_RELEASEVER`) |
+| `DNF_RELEASEVER` | the value to change `/etc/dnf/vars/releasever` to (eg. `8.8-Beta`) allowing repository reconfiguration to point at a specific release (usually but not always used with `DNF_CONTENTDIR`) |
