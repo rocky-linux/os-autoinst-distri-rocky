@@ -8,8 +8,8 @@ set -e
 
 ROCKY_VERSION="9.2"
 
-MAJOR_VERSION=$(awk -F '.' '{print $1}' <<< $ROCKY_VERSION)
-MINOR_VERSION=$(awk -F '.' '{print $2}' <<< $ROCKY_VERSION)
+MAJOR_VERSION=${ROCKY_VERSION:0:1}
+MINOR_VERSION=${ROCKY_VERSION:2:1}
 ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
 ROCKY_EXTRA_ARGS="${ROCKY_EXTRA_ARGS:-}"
 BUILD_NAME="-$(date +%Y%m%d).0-$(git branch --show-current)-$ROCKY_VERSION"
