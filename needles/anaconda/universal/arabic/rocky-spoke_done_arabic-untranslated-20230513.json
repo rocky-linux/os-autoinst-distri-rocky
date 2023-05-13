@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "height": 21,
+      "type": "match",
+      "width": 42,
+      "xpos": 965,
+      "ypos": 34,
+      "click_point": {
+        "xpos": 21,
+        "ypos": 10.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_spoke_done"
+  ]
+}
