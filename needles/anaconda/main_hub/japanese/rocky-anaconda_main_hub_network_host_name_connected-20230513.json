@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 785,
+      "ypos": 362,
+      "width": 50,
+      "height": 10,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-japanese",
+    "anaconda_network_connected"
+  ]
+}
