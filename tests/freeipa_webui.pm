@@ -9,7 +9,9 @@ sub run {
     # we're restarting firefox (instead of using the same one from
     # realmd_join_cockpit) so Firefox's trusted CA store refreshes and
     # it trusts the web server cert
-    start_webui("admin", "monkeys123");
+    my $ipa_realm = 'TEST.OPENQA.ROCKYLINUX.ORG';
+    my $ipa_admin_password = 'b1U3OnyX!';
+    start_webui("admin", $ipa_admin_password);
     add_user("test3", "Three");
     add_user("test4", "Four");
     assert_screen "freeipa_webui_users_added";
@@ -48,8 +50,8 @@ sub run {
     assert_screen "root_console";
     wait_still_screen 5;
     # set permanent passwords for both accounts
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test3@TEST.OPENQA.ROCKYLINUX.ORG';
-    assert_script_run 'printf "correcthorse\nbatterystaple\nbatterystaple" | kinit test4@TEST.OPENQA.ROCKYLINUX.ORG';
+    assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test3\@$ipa_realm";
+    assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test4\@$ipa_realm";
     # switch to tty4 (boy, the tty jugglin')
     send_key "ctrl-alt-f4";
     # try and login as test3, should work
