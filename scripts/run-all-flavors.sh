@@ -1,16 +1,18 @@
 #!/bin/bash
 set -e
 
-MAJOR_VERSION=9
-MINOR_VERSION=0
-
 ## Usage: Posts ISOs to openQA for each of the universal, dvd-iso, package-set, minimal-iso, and boot-iso FLAVORs.
 # scripts/run-all-flavors.sh
+# Test a beta build with alternative repo URL
+#   ROCKY_EXTRA_ARGS="GRUB=ip=dhcp GRUBADD=inst.repo=https://dl.rockylinux.org/stg/rocky/8.8-BETA/BaseOS/x86_64/os DNF_CONTENTDIR=stg CURRREL=8 IDENTIFICATION=false" scripts/run-all-flavors.sh
 
-ROCKY_VERSION="$MAJOR_VERSION.$MINOR_VERSION"
+ROCKY_VERSION="9.2"
+
+MAJOR_VERSION=${ROCKY_VERSION:0:1}
+MINOR_VERSION=${ROCKY_VERSION:2:1}
 ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
 ROCKY_EXTRA_ARGS="${ROCKY_EXTRA_ARGS:-}"
-BUILD_PREFIX="-$(date +%Y%m%d.%H%M%S).0-$(git branch --show-current)"
+BUILD_NAME="-$(date +%Y%m%d).0-$(git branch --show-current)-$ROCKY_VERSION"
 ISO_PREFIX="Rocky-$ROCKY_VERSION-$ROCKY_ARCH"
 DVD_ISOTYPE=dvd1
 
@@ -31,8 +33,8 @@ openqa-cli api \
     DISTRI=rocky \
     FLAVOR=universal \
     VERSION="$ROCKY_VERSION" \
-    BUILD="$BUILD_PREFIX-universal-$ROCKY_VERSION" \
-    "${ROCKY_EXTRA_ARGS}"
+    BUILD="$BUILD_NAME" \
+    ${ROCKY_EXTRA_ARGS}
 
 openqa-cli api \
     -X POST isos \
@@ -41,8 +43,8 @@ openqa-cli api \
     DISTRI=rocky \
     FLAVOR="dvd-iso" \
     VERSION="$ROCKY_VERSION" \
-    BUILD="$BUILD_PREFIX-dvd-$ROCKY_VERSION" \
-    "${ROCKY_EXTRA_ARGS}"
+    BUILD="$BUILD_NAME" \
+    ${ROCKY_EXTRA_ARGS}
 
 openqa-cli api \
     -X POST isos \
@@ -51,8 +53,8 @@ openqa-cli api \
     DISTRI=rocky \
     FLAVOR=package-set \
     VERSION="$ROCKY_VERSION" \
-    BUILD="$BUILD_PREFIX-packageset-$ROCKY_VERSION" \
-    "${ROCKY_EXTRA_ARGS}"
+    BUILD="$BUILD_NAME" \
+    ${ROCKY_EXTRA_ARGS}
 
 openqa-cli api \
     -X POST isos \
@@ -61,8 +63,8 @@ openqa-cli api \
     DISTRI=rocky \
     FLAVOR=minimal-iso \
     VERSION="$ROCKY_VERSION" \
-    BUILD="$BUILD_PREFIX-minimal-$ROCKY_VERSION" \
-    "${ROCKY_EXTRA_ARGS}"
+    BUILD="$BUILD_NAME" \
+    ${ROCKY_EXTRA_ARGS}
 
 openqa-cli api \
     -X POST isos \
@@ -71,5 +73,5 @@ openqa-cli api \
     DISTRI=rocky \
     FLAVOR=boot-iso \
     VERSION="$ROCKY_VERSION" \
-    BUILD="$BUILD_PREFIX-boot-$ROCKY_VERSION" \
-    "${ROCKY_EXTRA_ARGS}"
+    BUILD="$BUILD_NAME" \
+    ${ROCKY_EXTRA_ARGS}
