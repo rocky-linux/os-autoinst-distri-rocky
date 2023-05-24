@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 113,
+      "ypos": 575,
+      "xpos": 427,
+      "type": "match",
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "ENV-LANGUAGE-english",
+    "bootloader_uefi"
+  ]
+}
