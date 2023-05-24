@@ -17,7 +17,6 @@ sub run {
     verify_installed_packages;
     if (get_var("DISTRI") eq "rocky") {
         if (get_version_major() < 9) {
-
             # pandoc-common is in PowerTools in Rocky Linux 8
             assert_script_run 'dnf config-manager --set-enabled powertools', 60;
         }
