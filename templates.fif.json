@@ -82,7 +82,7 @@
             },
             "version": "*"
         },
-	"rocky-boot-iso-aarch64-*": {
+        "rocky-boot-iso-aarch64-*": {
             "arch": "aarch64",
             "distri": "rocky",
             "flavor": "boot-iso",
@@ -210,7 +210,7 @@
             "machine": "uefi",
             "product": "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*"
         },
-	"rocky-boot-iso-aarch64-*-aarch64": {
+        "rocky-boot-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-boot-iso-aarch64-*"
         },
@@ -422,7 +422,7 @@
                 "POSTINSTALL": "autocloud"
             }
         },
-	"install_resize_lvm": {
+        "install_resize_lvm": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
@@ -926,8 +926,8 @@
         },
         "install_scsi_updates_img": {
             "profiles": {
-              "rocky-universal-aarch64-*-aarch64": 20,
-              "rocky-universal-x86_64-*-64bit": 20
+                "rocky-universal-aarch64-*-aarch64": 20,
+                "rocky-universal-x86_64-*-64bit": 20
             },
             "settings": {
                 "CDMODEL": "scsi-cd",
@@ -1416,6 +1416,36 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
+            }
+        },
+        "slurm22": {
+            "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 10,
+                "rocky-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "slurm",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false",
+                "SLURM_VERSION": "22"
+            }
+        },
+        "slurm23": {
+            "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 10,
+                "rocky-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "slurm",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false",
+                "SLURM_VERSION": "23"
             }
         },
         "support_server": {
