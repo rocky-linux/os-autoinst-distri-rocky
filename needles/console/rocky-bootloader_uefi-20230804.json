@@ -12,6 +12,7 @@
   "tags": [
     "ENV-DISTRI-rocky",
     "ENV-LANGUAGE-english",
+    "bootloader",
     "bootloader_uefi"
   ]
 }
