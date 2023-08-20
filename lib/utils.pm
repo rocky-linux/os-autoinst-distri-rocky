@@ -451,6 +451,9 @@ sub cleanup_workaround_repo {
 }
 
 sub setup_workaround_repo {
+    # doesn't work for Rocky
+    my $distri = get_var("DISTRI");
+    return if ($release eq "distri");
     # we periodically need to pull an update from updates-testing in
     # to fix some bug or other. so, here's an organized way to do it.
     # we do this here so the workaround packages are in the repo data
@@ -502,6 +505,9 @@ sub setup_workaround_repo {
 }
 
 sub _repo_setup_compose {
+    # doesn't work for Rocky
+    my $distri = get_var("DISTRI");
+    return if ($release eq "distri");
     # doesn't work for IoT or CoreOS, anything that hits this on those
     # paths must work with default mirror config...
     my $subvariant = get_var("SUBVARIANT");
@@ -531,6 +537,9 @@ sub _repo_setup_compose {
 }
 
 sub _repo_setup_updates {
+    # doesn't work for Rocky
+    my $distri = get_var("DISTRI");
+    return if ($release eq "distri");
     # Appropriate repo setup steps for testing a Bodhi update
     # Check if we already ran, bail if so
     return unless script_run "test -f /etc/yum.repos.d/advisory.repo";
