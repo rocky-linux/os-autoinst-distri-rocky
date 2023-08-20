@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "width": 56,
+      "ypos": 34,
+      "xpos": 17,
+      "height": 21,
+      "type": "match",
+      "click_point": {
+        "xpos": 28,
+        "ypos": 10.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "LANGUAGE-russian",
+    "anaconda_spoke_done"
+  ]
+}
