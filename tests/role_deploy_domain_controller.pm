@@ -39,8 +39,13 @@ sub run {
         }
     }
 
-    # login
-    $self->root_console();
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty => 3);
+
+    if (get_var("ROOT_PASSWORD")) {
+        console_login(user => "root", password => get_var("ROOT_PASSWORD"));
+    }
+
     # We need entropy. Install rng-tools and start it up. Fedora uses haveged
     # but Rocky Linux does not have it unless EPEL is used.
     assert_script_run "dnf --assumeyes install rng-tools", 300;
@@ -75,7 +80,7 @@ sub run {
     assert_script_run "ipa-getkeytab -s $ipa_hostname -p testservice/$ipa_hostname";
     validate_script_output 'klist -k /tmp/testservice.keytab', sub { $_ =~ m/testservice\/$ipa_hostname/ };
     # This is commented for now. We need a while loop that watches for ipa-getcert list -r to become empty.
-    #assert_script_run "ipa-getcert request -K testservice/$ipa_hostname -D $ipa_hostname -f /etc/pki/tls/certs/testservice.pki -k /etc/pki/tls/private/testservice.key";
+#assert_script_run "ipa-getcert request -K testservice/$ipa_hostname -D $ipa_hostname -f /etc/pki/tls/certs/testservice.pki -k /etc/pki/tls/private/testservice.key";
     #validate_script_output "ipa-getcert list -r | sed -n '/Request ID/,/auto-renew: yes/p'", sub { $_ =~ m// };
 
     ############################################################################
