@@ -23,7 +23,7 @@ sub run {
     my $ipa_realm = 'TEST.OPENQA.ROCKYLINUX.ORG';
     my $ipa_admin_password = 'b1U3OnyX!';
     my $ipa_reverse_zone = '2.16.172.in-addr.arpa';
-    my $ipa_install_args = "-U --auto-forwarders --realm=$ipa_realm --domain=$ipa_domain --ds-password=$ipa_admin_password --admin-password=$ipa_admin_password --setup-dns --reverse-zone=$ipa_reverse_zone --allow-zone-overlap";
+    my $ipa_install_args = "-U --auto-forwarders --realm=$ipa_realm --domain=$ipa_domain --ds-password=$ipa_admin_password --admin-password=$ipa_admin_password --setup-dns --reverse-zone=$ipa_reverse_zone --allow-zone-overlap --skip-mem-check";
     given ($version_major) {
         when ('8') {
             $ipa_install_cmd = 'dnf --assumeyes module install idm:DL1/{dns,client,server,common}';
