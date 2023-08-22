@@ -77,7 +77,7 @@ sub run {
     ############################################################################
     # Testing kerb services
     assert_script_run "ipa service-add testservice/$ipa_hostname";
-    assert_script_run "ipa-getkeytab -s $ipa_hostname -p testservice/$ipa_hostname";
+    assert_script_run "ipa-getkeytab -s $ipa_hostname -p testservice/$ipa_hostname -k /tmp/testservice.keytab";
     validate_script_output 'klist -k /tmp/testservice.keytab', sub { $_ =~ m/testservice\/$ipa_hostname/ };
     # This is commented for now. We need a while loop that watches for ipa-getcert list -r to become empty.
 #assert_script_run "ipa-getcert request -K testservice/$ipa_hostname -D $ipa_hostname -f /etc/pki/tls/certs/testservice.pki -k /etc/pki/tls/private/testservice.key";
