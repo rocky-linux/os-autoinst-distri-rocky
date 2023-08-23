@@ -119,6 +119,7 @@ sub run {
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test2\@$ipa_realm";
 
     # add a sudo rule
+    assert_script_run "echo '$ipa_admin_password' | kinit admin";
     assert_script_run 'ipa sudorule-add testrule --desc="Test rule in IPA" --hostcat=all --cmdcat=all --runasusercat=all --runasgroupcat=all';
     assert_script_run 'ipa sudorule-add-user testrule --users="test1"';
     validate_script_output 'ipa sudorule-show testrule', sub { $_ =~ m/Rule name: testrule/ };
