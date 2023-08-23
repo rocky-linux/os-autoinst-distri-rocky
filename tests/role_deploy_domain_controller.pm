@@ -128,7 +128,6 @@ sub run {
     # If we want to test this in openQA it appears we may need to deploy more complete
     # config for sudo. For now change validate_script_output to assert_script_run
     assert_script_run 'sss_cache -R';
-    assert_script_run 'sleep 120; # waiting for sssd to update';
     #validate_script_output 'sudo -l -U test1', sub { $_ =~ m/test1 may run the following commands/ };
     assert_script_run 'sudo -l -U test1';
 
