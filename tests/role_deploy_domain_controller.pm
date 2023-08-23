@@ -126,6 +126,7 @@ sub run {
     validate_script_output 'ipa sudorule-show testrule', sub { $_ =~ m/Users: test1/ };
     # This may fail - Invalidate sudo cache and check test1's sudo perms
     assert_script_run 'sss_cache -R';
+    sleep(120);
     validate_script_output 'sudo -l -U test1', sub { $_ =~ m/test1 may run the following commands/ };
 
     # we're ready for children to enroll, now
