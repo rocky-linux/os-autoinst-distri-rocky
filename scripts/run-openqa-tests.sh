@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-MAJOR_VERSION=9
-MINOR_VERSION=0
-
 ## Usage: Post an ISO for the specified FLAVOR. Defaults to boot-iso.
 #
 ## Run the boot-iso FLAVOR
@@ -15,13 +12,14 @@ MINOR_VERSION=0
 ## Run the localization test suites
 # ROCKY_FLAVOR ROCKY_EXTRA_ARGS=TEST=install_arabic_language,install_asian_language,install_european_language,install_cyrillic_language scripts/run-openqa-tests.sh
 
+ROCKY_VERSION="9.2"
+
+MAJOR_VERSION=${ROCKY_VERSION:0:1}
+MINOR_VERSION=${ROCKY_VERSION:2:1}
 ROCKY_FLAVOR="${ROCKY_FLAVOR:-boot-iso}"
-ROCKY_VERSION="$MAJOR_VERSION.$MINOR_VERSION"
 ROCKY_ARCH="${ROCKY_ARCH:=x86_64}"
 ROCKY_EXTRA_ARGS="${ROCKY_EXTRA_ARGS:-}"
-BUILD_PREFIX="-$(date +%Y%m%d.%H%M%S).0-$(git branch --show-current)"
-BUILD_NAME="$BUILD_PREFIX-$ROCKY_FLAVOR-$ROCKY_VERSION"
-
+BUILD_NAME="-$(date +%Y%m%d).0-$(git branch --show-current)-$ROCKY_VERSION"
 ISO_PREFIX="Rocky-$ROCKY_VERSION-$ROCKY_ARCH"
 
 if [[ "$ROCKY_FLAVOR" == "dvd-iso" || "$ROCKY_FLAVOR" == "universal" ]]; then
