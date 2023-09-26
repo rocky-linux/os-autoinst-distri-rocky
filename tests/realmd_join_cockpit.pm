@@ -57,7 +57,7 @@ sub run {
     type_string("admin", 4);
     send_key "tab";
     sleep 3;
-    type_string("monkeys123", 4);
+    type_string("b1U3OnyX!", 4);
     sleep 3;
     assert_and_click "cockpit_join_button";
     # join involves package installs, so it may take some time

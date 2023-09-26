@@ -5,21 +5,23 @@ use utils;
 
 sub run {
     my $self = shift;
-    # switch to tty1 (we're usually there already, but just in case
-    # we're carrying on from a failed freeipa_webui that didn't fail
-    # at tty1)
-    send_key "ctrl-alt-f1";
+    my $ipa_domain = 'test.openqa.rockylinux.org';
+    my $ipa_realm = 'TEST.OPENQA.ROCKYLINUX.ORG';
+
+    # Rocky SUT is graphical so stay on/force tty3 do NOT switch to tty1
+    $self->root_console(tty => 3);
     wait_still_screen 1;
+
     # check domain is listed in 'realm list'
     validate_script_output 'realm list', sub { $_ =~ m/domain-name: test\.openqa\.rockylinux\.org.*configured: kerberos-member/s };
     # check we can see the admin user in getent
-    assert_script_run 'getent passwd admin@TEST.OPENQA.ROCKYLINUX.ORG';
+    assert_script_run "getent passwd admin\@$ipa_realm";
     # check keytab entries
     my $hostname = script_output 'hostname';
     my $qhost = quotemeta($hostname);
     validate_script_output 'klist -k', sub { $_ =~ m/$qhost\@TEST\.OPENQA\.ROCKYLINUX\.ORG/ };
     # check we can kinit with the host principal
-    assert_script_run "kinit -k host/$hostname\@TEST.OPENQA.ROCKYLINUX.ORG";
+    assert_script_run "kinit -k host/$hostname\@$ipa_realm";
     # Set a longer timeout for login(1) to workaround RHBZ #1661273
     assert_script_run 'echo "LOGIN_TIMEOUT 180" >> /etc/login.defs';
     # switch to tty2 for login tests
@@ -32,7 +34,7 @@ sub run {
     # "permission denied" message doesn't last that long
     sleep 2;
     assert_screen "text_console_login";
-    type_string "test2\@TEST.OPENQA.ROCKYLINUX.ORG\n";
+    type_string "test2\@$ipa_realm\n";
     assert_screen "console_password_required";
     type_string "batterystaple\n";
     assert_screen "login_permission_denied";
