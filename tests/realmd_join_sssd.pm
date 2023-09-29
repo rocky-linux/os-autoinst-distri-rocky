@@ -82,7 +82,7 @@ sub run {
 
         # deploy as a replica
         my ($ip, $hostname) = split(/ /, get_var("POST_STATIC"));
-        my $args = "--ip-address=$ip --setup-dns --auto-forwarders --setup-ca --allow-zone-overlap -U --principal admin --admin-password $ipa_admin_password";
+        my $args = "--ip-address=$ip --setup-dns --auto-forwarders --setup-ca --allow-zone-overlap -U --principal admin --admin-password '$ipa_admin_password'";
         assert_script_run "ipa-replica-install $args", 1500;
 
         # enable and start the systemd service
