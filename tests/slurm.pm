@@ -9,17 +9,17 @@ sub slurm_setup {
     assert_script_run "dnf -y install rocky-release-hpc", 120;
 
     # Set up munge
-    assert_script_run 'dnf -y install munge --releasever=' . get_var("CURRREL"), 120;
+    assert_script_run 'dnf -y install munge --releasever=' . get_version_major, 120;
     assert_script_run "dd if=/dev/urandom bs=1 count=1024 >/etc/munge/munge.key";
     assert_script_run "chmod 400 /etc/munge/munge.key";
     assert_script_run "chown munge.munge /etc/munge/munge.key";
     assert_script_run "systemctl enable --now munge.service";
 
     # install slurm
-    if (get_var("CURRREL") eq '8') {
+    if (get_version_major() eq '8') {
         assert_script_run "dnf config-manager --set-enabled powertools";
     }
-    assert_script_run "dnf install -y slurm$version-slurmdbd slurm$version-slurmrestd slurm$version-slurmctld slurm$version-slurmd  --releasever=" . get_var("CURRREL");
+    assert_script_run "dnf install -y slurm$version-slurmdbd slurm$version-slurmrestd slurm$version-slurmctld slurm$version-slurmd  --releasever=" . get_version_major;
 
     # Since this is a single node system, we don't have to modify the conf files. We will for larger multi-node tests.
     # start services
