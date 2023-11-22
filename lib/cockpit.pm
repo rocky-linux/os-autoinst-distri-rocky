@@ -26,9 +26,9 @@ sub start_cockpit {
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
     wait_still_screen(stilltime => 5, similarity_level => 45);
     if ($login) {
-        type_safely "root";
+        type_safely "test";
         wait_screen_change { send_key "tab"; };
-        type_safely get_var("ROOT_PASSWORD", "weakpassword");
+        type_safely get_var("USER_PASSWORD", "weakpassword");
         send_key "ret";
         assert_screen "cockpit_main";
         # wait for any animation or other weirdness
