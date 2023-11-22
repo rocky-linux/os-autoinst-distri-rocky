@@ -7,7 +7,7 @@ use cockpit;
 sub run {
     my $self = shift;
     # run firefox and login to cockpit
-    start_cockpit(1);
+    start_cockpit(login => 1);
     # go to the logs screen
     assert_and_click "cockpit_logs";
     # the date dropdown changes and messes with the button locations, so wait

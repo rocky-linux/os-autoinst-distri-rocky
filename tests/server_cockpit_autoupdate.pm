@@ -9,7 +9,7 @@ sub run {
     my $self = shift;
 
     # Start Cockpit
-    start_cockpit(1);
+    start_cockpit(login => 1);
 
     # Navigate to the Update screen
     select_cockpit_update();

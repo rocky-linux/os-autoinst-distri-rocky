@@ -16,7 +16,7 @@ sub run {
     verify_installed_packages;
 
     # Start Cockpit
-    start_cockpit(1);
+    start_cockpit(login => 1);
     # Navigate to update screen
     select_cockpit_update();
 
@@ -74,13 +74,14 @@ sub run {
         # When Cockpit packages are also included in the updates
         # the user is forced to reconnect, i.e. to restart the Web Application
         # and relog for further interaction. We will check if reconnection is
-        # needed and if so, we will restart Firefox and login again.
+        # needed and if so, we will restart Firefox and login again. We do
+        # *not* need to gain admin privs again, trying to do so will fail.
         #
         last if (check_screen("cockpit_updates_updated"));
         if (check_screen("cockpit_updates_reconnect", 1)) {
             quit_firefox;
             sleep 5;
-            start_cockpit(1);
+            start_cockpit(login => 1, admin => 0);
             select_cockpit_update();
             last;
 
