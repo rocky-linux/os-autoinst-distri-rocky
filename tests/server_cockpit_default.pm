@@ -13,7 +13,7 @@ sub run {
     assert_script_run 'systemctl is-active cockpit.socket';
     assert_script_run 'firewall-cmd --query-service cockpit';
     # test cockpit web UI start
-    start_cockpit(0);
+    start_cockpit(login => 0);
     # quit firefox (return to console)
     quit_firefox;
     # we don't get back to a prompt instantly and keystrokes while X
