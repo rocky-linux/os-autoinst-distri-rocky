@@ -31,7 +31,7 @@ sub run {
     # note: we can't use wait_screen_change, wait_still_screen or
     # check_type_string in cockpit because of that fucking constantly
     # scrolling graph
-    start_cockpit(1);
+    start_cockpit(login => 1);
     # we may have to scroll down before the button is visible
     if (check_screen "cockpit_join_domain_button", 5) {
         click_lastmatch;
