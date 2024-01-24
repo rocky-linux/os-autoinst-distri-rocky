@@ -90,7 +90,6 @@
             "flavor": "boot-iso",
             "settings": {
                 "GRUB": "ip=dhcp",
-                "+QEMURAM": 3072,
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -113,7 +112,6 @@
             "distri": "rocky",
             "flavor": "minimal-iso",
             "settings": {
-                "+QEMURAM": 3072,
                 "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
