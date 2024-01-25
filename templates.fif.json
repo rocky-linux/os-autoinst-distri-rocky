@@ -24,7 +24,9 @@
                 "QEMUCPU": "host",
                 "QEMUCPUS": "2",
                 "QEMUMACHINE": "virt,gic-version=max",
-                "QEMURAM": 3072,
+                "QEMURAM": 4096,
+                "QEMU_MAX_MIGRATION_TIME": "480",
+                "QEMU_VIDEO_DEVICE": "virtio-gpu-pci",
                 "QEMU_VIRTIO_RNG": "1",
                 "SERIALDEV": "ttyAMA0",
                 "TIMEOUT_SCALE": "1.5",
@@ -32,6 +34,36 @@
                 "UEFI_PFLASH_CODE": "/usr/share/edk2/aarch64/QEMU_EFI-pflash.raw",
                 "UEFI_PFLASH_VARS": "/usr/share/edk2/aarch64/vars-template-pflash.raw",
                 "WORKER_CLASS": "qemu_aarch64"
+            }
+        },
+        "s390x": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "s390x",
+                "PART_TABLE_TYPE": "mbr",
+                "QEMU": "s390x",
+                "QEMU_APPEND": "bios /usr/share/qemu/390-ccw.img -boot once=cd0",
+                "QEMUMACHINE": "s390-ccw-virtio",
+                "QEMURAM": 4096,
+                "QEMU_VIDEO_DEVICE": "virtio-gpu",
+                "QEMU_MAX_MIGRATION_TIME": "480",
+                "QEMU_NO_KVM": "1",
+                "WORKER_CLASS": "qemu_s390x"
+            }
+        },
+        "ppc64le": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "ppc64le",
+                "OFW": 1,
+                "PART_TABLE_TYPE": "mbr",
+                "QEMU": "ppc64",
+                "QEMUCPU": "host",
+                "QEMURAM": 4096,
+                "QEMU_VIDEO_DEVICE": "VGA",
+                "QEMU_MAX_MIGRATION_TIME": "480",
+                "QEMU_VIRTIO_RNG": "1",
+                "WORKER_CLASS": "qemu_ppc64le"
             }
         },
         "uefi": {
@@ -82,13 +114,34 @@
             },
             "version": "*"
         },
+        "rocky-boot-iso-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "boot-iso",
+            "settings": {
+                "GRUB": "ip=dhcp",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-boot-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "boot-iso",
+            "settings": {
+                "GRUB": "ip=dhcp",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "rocky-boot-iso-aarch64-*": {
             "arch": "aarch64",
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
                 "GRUB": "ip=dhcp",
-                "+QEMURAM": 3072,
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -106,12 +159,33 @@
             },
             "version": "*"
         },
+        "rocky-minimal-iso-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "minimal-iso",
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-minimal-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "minimal-iso",
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "rocky-minimal-iso-aarch64-*": {
             "arch": "aarch64",
             "distri": "rocky",
             "flavor": "minimal-iso",
             "settings": {
-                "+QEMURAM": 3072,
                 "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
@@ -125,6 +199,28 @@
             "settings": {
                 "+QEMURAM": 3072,
                 "DEPLOY_UPLOAD_TEST": "install_minimal_upload",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-dvd-iso-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "dvd-iso",
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-dvd-iso-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "dvd-iso",
+            "settings": {
+                "DEPLOY_UPLOAD_TEST": "install_default_upload",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -152,6 +248,26 @@
             },
             "version": "*"
         },
+        "rocky-package-set-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "package-set",
+            "settings": {
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-package-set-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "package-set",
+            "settings": {
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
         "rocky-package-set-aarch64-*": {
             "arch": "aarch64",
             "distri": "rocky",
@@ -166,6 +282,26 @@
             "arch": "x86_64",
             "distri": "rocky",
             "flavor": "package-set",
+            "settings": {
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-universal-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "universal",
+            "settings": {
+                "HDDSIZEGB": "15",
+                "TEST_TARGET": "ISO"
+            },
+            "version": "*"
+        },
+        "rocky-universal-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "universal",
             "settings": {
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
@@ -210,6 +346,14 @@
             "machine": "uefi",
             "product": "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*"
         },
+        "rocky-boot-iso-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-boot-iso-ppc64le-*"
+        },
+        "rocky-boot-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-boot-iso-ppc64le-*"
+        },
         "rocky-boot-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-boot-iso-aarch64-*"
@@ -222,6 +366,14 @@
             "machine": "uefi",
             "product": "rocky-boot-iso-x86_64-*"
         },
+        "rocky-minimal-iso-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-minimal-iso-ppc64le-*"
+        },
+        "rocky-minimal-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-minimal-iso-ppc64le-*"
+        },
         "rocky-minimal-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-minimal-iso-aarch64-*"
@@ -229,6 +381,14 @@
         "rocky-minimal-iso-x86_64-*-64bit": {
             "machine": "64bit",
             "product": "rocky-minimal-iso-x86_64-*"
+        },
+        "rocky-dvd-iso-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-dvd-iso-ppc64le-*"
+        },
+        "rocky-dvd-iso-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-dvd-iso-ppc64le-*"
         },
         "rocky-dvd-iso-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -242,6 +402,14 @@
             "machine": "uefi",
             "product": "rocky-dvd-iso-x86_64-*"
         },
+        "rocky-package-set-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-package-set-ppc64le-*"
+        },
+        "rocky-package-set-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-package-set-ppc64le-*"
+        },
         "rocky-package-set-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-package-set-aarch64-*"
@@ -253,6 +421,14 @@
         "rocky-package-set-x86_64-*-uefi": {
             "machine": "64bit",
             "product": "rocky-package-set-x86_64-*"
+        },
+        "rocky-universal-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-universal-ppc64le-*"
+        },
+        "rocky-universal-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-universal-ppc64le-*"
         },
         "rocky-universal-aarch64-*-aarch64": {
             "machine": "aarch64",
@@ -270,6 +446,8 @@
     "TestSuites": {
         "anaconda_help": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -284,6 +462,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -303,6 +483,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -322,6 +504,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -341,6 +525,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -360,6 +546,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -379,6 +567,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -398,6 +588,8 @@
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-64bit": 30,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -424,6 +616,8 @@
         },
         "install_resize_lvm": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -439,6 +633,8 @@
         },
         "install_anaconda_text": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
@@ -448,6 +644,8 @@
         },
         "install_arabic_language": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -466,6 +664,8 @@
         },
         "install_asian_language": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -484,6 +684,8 @@
         },
         "install_custom_gui_lvm_ext4": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
@@ -499,6 +701,8 @@
         },
         "install_custom_gui_standard_partition_ext4": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
@@ -512,6 +716,8 @@
         },
         "install_custom_gui_software_raid": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
@@ -527,6 +733,8 @@
         },
         "install_custom_gui_xfs": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
@@ -541,6 +749,8 @@
         },
         "install_cyrillic_language": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -559,9 +769,13 @@
         },
         "install_default": {
             "profiles": {
+                "rocky-boot-iso-s390x-*-s390x": 10,
+                "rocky-boot-iso-ppc64le-*-ppc64le": 10,
                 "rocky-boot-iso-aarch64-*-aarch64": 10,
                 "rocky-boot-iso-x86_64-*-64bit": 10,
                 "rocky-boot-iso-x86_64-*-uefi": 11,
+                "rocky-dvd-iso-s390x-*-s390x": 11,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 11,
                 "rocky-dvd-iso-aarch64-*-aarch64": 11,
                 "rocky-dvd-iso-x86_64-*-uefi": 11
             },
@@ -573,6 +787,8 @@
         },
         "install_minimal": {
             "profiles": {
+                "rocky-minimal-iso-s390x-*-s390x": 10,
+                "rocky-minimal-iso-ppc64le-*-ppc64le": 10,
                 "rocky-minimal-iso-aarch64-*-aarch64": 10,
                 "rocky-minimal-iso-x86_64-*-64bit": 10
             },
@@ -583,6 +799,8 @@
         },
         "install_minimal_upload": {
             "profiles": {
+                "rocky-minimal-iso-s390x-*-s390x": 10,
+                "rocky-minimal-iso-ppc64le-*-ppc64le": 10,
                 "rocky-minimal-iso-aarch64-*-aarch64": 10,
                 "rocky-minimal-iso-x86_64-*-64bit": 10
             },
@@ -594,6 +812,8 @@
         },
         "install_default_upload": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 10,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 10,
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
                 "rocky-dvd-iso-x86_64-*-64bit": 10
             },
@@ -606,6 +826,8 @@
         },
         "install_delete_partial": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
@@ -620,6 +842,8 @@
         },
         "install_delete_pata": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
@@ -635,6 +859,8 @@
         },
         "install_european_language": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -684,6 +910,8 @@
         },
         "install_lvmthin": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
@@ -697,6 +925,8 @@
         },
         "install_lvm_ext4": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40,
                 "rocky-dvd-iso-x86_64-*-uefi": 41
@@ -711,6 +941,8 @@
         },
         "install_standard_partition_ext4": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 30,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30,
                 "rocky-dvd-iso-x86_64-*-uefi": 31
@@ -723,6 +955,8 @@
         },
         "install_mirrorlist_graphical": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
@@ -733,6 +967,8 @@
         },
         "install_multi": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
@@ -748,6 +984,8 @@
         },
         "install_multi_empty": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
@@ -762,6 +1000,8 @@
         },
         "install_with_swap": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 50,
+                "rocky-universal-ppc64le-*-ppc64le": 50,
                 "rocky-universal-aarch64-*-aarch64": 50,
                 "rocky-universal-x86_64-*-64bit": 50,
                 "rocky-universal-x86_64-*-uefi": 51
@@ -839,6 +1079,8 @@
         },
         "install_repository_http_graphical": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
@@ -850,6 +1092,8 @@
         },
         "install_repository_http_variation": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20
             },
@@ -861,6 +1105,8 @@
         },
         "install_repository_nfs_graphical": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 30,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30
             },
@@ -900,6 +1146,8 @@
         },
         "install_rescue_encrypted": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 31,
+                "rocky-universal-ppc64le-*-ppc64le": 31,
                 "rocky-universal-aarch64-*-aarch64": 31,
                 "rocky-universal-x86_64-*-64bit": 31,
                 "rocky-universal-x86_64-*-uefi": 32
@@ -913,6 +1161,8 @@
         },
         "install_sata": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 20,
+                "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
                 "rocky-universal-x86_64-*-64bit": 20,
                 "rocky-universal-x86_64-*-uefi": 21
@@ -941,6 +1191,8 @@
         },
         "install_serial_console": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30
             },
@@ -953,6 +1205,8 @@
         },
         "install_shrink_ext4": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -966,6 +1220,8 @@
         },
         "install_shrink_ntfs": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40
             },
@@ -992,6 +1248,8 @@
         },
         "install_simple_free_space": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
@@ -1007,6 +1265,8 @@
         },
         "install_software_raid": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30,
                 "rocky-universal-x86_64-*-uefi": 31
@@ -1095,6 +1355,8 @@
         },
         "install_xfs": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 40,
+                "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
                 "rocky-universal-x86_64-*-64bit": 40,
                 "rocky-universal-x86_64-*-uefi": 41
@@ -1108,6 +1370,8 @@
         },
         "memtest": {
             "profiles": {
+                "rocky-universal-s390x-*-s390x": 30,
+                "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
                 "rocky-universal-x86_64-*-64bit": 30
             },
@@ -1117,6 +1381,8 @@
         },
         "modularity_tests": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 30,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
                 "rocky-dvd-iso-x86_64-*-64bit": 30
             },
@@ -1168,6 +1434,8 @@
         },
         "release_identification": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 40,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
                 "rocky-dvd-iso-x86_64-*-64bit": 40
             },
@@ -1243,6 +1511,8 @@
         },
         "server_filesystem_default": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },
@@ -1258,6 +1528,8 @@
         },
         "server_firewall_default": {
             "profiles": {
+                "rocky-dvd-iso-s390x-*-s390x": 20,
+                "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
                 "rocky-dvd-iso-x86_64-*-64bit": 20
             },

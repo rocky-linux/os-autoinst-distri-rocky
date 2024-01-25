@@ -3,5 +3,5 @@
   "$id": "fif-arch.json",
   "title": "FIF arch schema",
   "type": "string",
-  "enum": [ "x86_64", "arm", "aarch64", "ppc64le" ]
+  "enum": [ "x86_64", "arm", "aarch64", "ppc64le", "s390x" ]
 }
