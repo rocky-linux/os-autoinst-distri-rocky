@@ -775,6 +775,7 @@
         },
         "install_package_set_minimal": {
             "profiles": {
+                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -784,6 +785,7 @@
         },
         "install_package_set_server": {
             "profiles": {
+                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -793,6 +795,7 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
+                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
@@ -811,6 +814,7 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
+                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-64bit": 30
             },
             "settings": {
