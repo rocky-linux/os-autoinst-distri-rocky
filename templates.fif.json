@@ -348,7 +348,7 @@
         },
         "rocky-boot-iso-s390x-*-s390x": {
             "machine": "s390x",
-            "product": "rocky-boot-iso-ppc64le-*"
+            "product": "rocky-boot-iso-s390x-*"
         },
         "rocky-boot-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
@@ -368,7 +368,7 @@
         },
         "rocky-minimal-iso-s390x-*-s390x": {
             "machine": "s390x",
-            "product": "rocky-minimal-iso-ppc64le-*"
+            "product": "rocky-minimal-iso-s390x-*"
         },
         "rocky-minimal-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
@@ -384,7 +384,7 @@
         },
         "rocky-dvd-iso-s390x-*-s390x": {
             "machine": "s390x",
-            "product": "rocky-dvd-iso-ppc64le-*"
+            "product": "rocky-dvd-iso-s390x-*"
         },
         "rocky-dvd-iso-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
@@ -404,7 +404,7 @@
         },
         "rocky-package-set-s390x-*-s390x": {
             "machine": "s390x",
-            "product": "rocky-package-set-ppc64le-*"
+            "product": "rocky-package-set-s390x-*"
         },
         "rocky-package-set-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
@@ -424,7 +424,7 @@
         },
         "rocky-universal-s390x-*-s390x": {
             "machine": "s390x",
-            "product": "rocky-universal-ppc64le-*"
+            "product": "rocky-universal-s390x-*"
         },
         "rocky-universal-ppc64le-*-ppc64le": {
             "machine": "ppc64le",
