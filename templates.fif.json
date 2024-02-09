@@ -1740,6 +1740,20 @@
                 "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
+        },
+        "toolbox": {
+            "profiles": {
+                "rocky-dvd-iso-aarch64-*-aarch64": 10,
+                "rocky-dvd-iso-x86_64-*-64bit": 10
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "toolbox",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "ROOT_PASSWORD": "weakpassword",
+                "USER_LOGIN": "false"
+            }
         }
     }
 }

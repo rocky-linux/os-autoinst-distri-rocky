@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 1,
+      "type": "match",
+      "height": 14,
+      "ypos": 545,
+      "width": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "console_in_toolbox"
+  ]
+}
