@@ -2,10 +2,11 @@
 use base "installedtest";
 use strict;
 use testapi;
+use utils;
 
 sub run {
   my $self = shift;
-  my $version_major = get_version_major;
+  my $version_major = get_version_major();
   assert_script_run "dnf install toolbox --assumeyes", 360 unless (get_var("CANNED"));
   assert_script_run "rpm -q toolbox";
   assert_script_run "toolbox create container_rl -y", 300;
@@ -25,7 +26,7 @@ sub run {
   type_string "toolbox enter fedora-toolbox-39\n";
   assert_screen "console_in_toolbox", 180;
   type_string "exit\n";
-  sleep 5
+  sleep 5;
   validate_script_output "toolbox run --distro fedora --release 39 cat /etc/fedora-release", sub { m/Fedora release 39 \(Thirty Nine\)/ };
   # clean up
   assert_script_run 'podman stop fedora-toolbox-39';
