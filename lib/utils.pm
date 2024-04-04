@@ -8,7 +8,7 @@ use Exporter;
 use feature "switch";
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup setup_workaround_repo cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_version_major get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_version_major get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -450,60 +450,6 @@ sub cleanup_workaround_repo {
     script_run "rm -f /etc/yum.repos.d/workarounds.repo";
 }
 
-sub setup_workaround_repo {
-    # doesn't work for Rocky
-    my $distri = get_var("DISTRI");
-    return if ($distri eq "rocky");
-    # we periodically need to pull an update from updates-testing in
-    # to fix some bug or other. so, here's an organized way to do it.
-    # we do this here so the workaround packages are in the repo data
-    # but *not* in the package lists generated above (those should
-    # only include packages from the update under test). we'll define
-    # a hash of releases and update IDs. if no workarounds are needed
-    # for any release, the hash can be empty and this will do nothing
-    my $version = shift || get_var("VERSION");
-    cleanup_workaround_repo;
-    script_run "dnf -y install bodhi-client createrepo", 300;
-    # write a repo config file, unless this is the support_server test
-    # and it is running on a different release than the update is for
-    # (in this case we need the repo to exist but do not want to use
-    # it on the actual support_server system)
-    unless (get_var("TEST") eq "support_server" && $version ne get_var("CURRREL")) {
-        assert_script_run 'printf "[workarounds]\nname=Workarounds repo\nbaseurl=file:///opt/workarounds_repo\nenabled=1\nmetadata_expire=1\ngpgcheck=0" > /etc/yum.repos.d/workarounds.repo';
-    }
-    assert_script_run "mkdir -p /opt/workarounds_repo";
-    assert_script_run "pushd /opt/workarounds_repo";
-    my %workarounds = (
-        "32" => [],
-        "33" => [],
-        "34" => ["FEDORA-2021-d7b1dc57fe"]
-    );
-    # then we'll download each update for our release:
-    my $advortasks = $workarounds{$version};
-    foreach my $advortask (@$advortasks) {
-        my $cmd = "bodhi updates download --updateid=$advortask";
-        if ($advortask =~ /^\d+$/) {
-            my $arch = get_var("ARCH");
-            $cmd = "koji download-task --arch=$arch --arch=noarch $advortask";
-        }
-        my $count = 3;
-        my $success = 0;
-        while ($count) {
-            if (script_run $cmd, 180) {
-                $count -= 1;
-            }
-            else {
-                $count = 0;
-                $success = 1;
-            }
-        }
-        die "Workaround update download failed!" unless $success;
-    }
-    # and create repo metadata
-    assert_script_run "createrepo .";
-    assert_script_run "popd";
-}
-
 sub _repo_setup_compose {
     # doesn't work for Rocky
     my $distri = get_var("DISTRI");
@@ -561,8 +507,6 @@ sub _repo_setup_updates {
             assert_script_run "dnf config-manager --set-disabled updates-testing-modular";
         }
     }
-    # set up the workaround repo
-    setup_workaround_repo;
 
     # Set up an additional repo containing the update or task packages. We do
     # this rather than simply running a one-time update because it may be the
