@@ -433,9 +433,12 @@ sub repos_mirrorlist {
     # the infra repo is updated but mirrormanager metadata checksums
     # have not been updated, and the infra repo is rejected as its
     # metadata checksum isn't known to MM
+    # NOTE: For Rocky CURRREL is used to specify/select HDD1 for multi-host
+    #       tests, for example *8.10-BETA*qcow2, and repo names are
+    #       really tied to the major version in Rocky.
     my $files = shift;
-    my $currentversion = get_var("CURRREL");
-    if ($currentversion eq '8') {
+    my $currentversion = get_var("VERSION");
+    if (get_version_major($currentversion) eq '8') {
         $files ||= "/etc/yum.repos.d/Rocky*.repo";
     }
     else {
