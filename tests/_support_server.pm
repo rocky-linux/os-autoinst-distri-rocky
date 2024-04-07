@@ -52,10 +52,10 @@ sub _pxe_setup {
             assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Extras.repo';
             assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Devel.repo';
         } else {
-            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky.repo';
-            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-addons.repo';
-            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-devel.repo';
-            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-extras.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-addons.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-devel.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-extras.repo';
         }
         # If we're pointing at Staging via alternate DNF_CONTENTDIR then modify dnf vars in /var/tmp/rocky
         if ($contentdir) {
