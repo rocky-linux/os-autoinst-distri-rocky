@@ -13,7 +13,6 @@ sub run {
     if (index($testname, "upgrade_2") != -1) {
         $version = get_var("UP2REL");
     }
-    setup_workaround_repo $version;
     assert_script_run 'dnf -y update --refresh', 1800;
     script_run "reboot", 0;
 
