@@ -69,12 +69,9 @@ sub _pxe_setup {
         assert_script_run "cp /var/tmp/rocky/boot/efi/EFI/rocky/{shimx64.efi,shimx64-rocky.efi,grubx64.efi} /var/lib/tftpboot";
         # bootloader configs
         # BIOS
-        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux 64-bit\n  menu default\n  kernel rocky/vmlinuz\n  append initr
-d=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
+        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux 64-bit\n  menu default\n  kernel rocky/vmlinuz\n  append initrd=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
         # UEFI
-        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\
-n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux 64-bit\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=
-file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
+        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux 64-bit\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/grub.cfg";
