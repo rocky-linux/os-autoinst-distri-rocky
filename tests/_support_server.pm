@@ -25,6 +25,7 @@ sub _pxe_setup {
     assert_script_run "printf 'dhcp-match=set:efi-x86_64,option:client-arch,7\ndhcp-match=set:efi-x86_64,option:client-arch,9\ndhcp-match=set:bios,option:client-arch,0\ndhcp-match=set:efi-aarch64,option:client-arch,11\ndhcp-match=set:ppc64,option:client-arch,12\ndhcp-match=set:ppc64,option:client-arch,13\ndhcp-boot=tag:efi-x86_64,\"shim.efi\"\ndhcp-boot=tag:bios,\"pxelinux.0\"\ndhcp-boot=tag:efi-aarch64,\"grubaa64.efi\"\ndhcp-boot=tag:ppc64,\"boot/grub2/powerpc-ieee1275/core.elf\"\n' >> /etc/dnsmasq.conf";
     # install and configure bootloaders
     my $ourversion = get_var("CURRREL");
+    my $contentdir = get_var("DNF_CONTENTDIR");
     my $testversion = get_var("RELEASE");
     assert_script_run "mkdir -p /var/tmp/rocky";
     my $arch = get_var("ARCH");
@@ -41,7 +42,26 @@ sub _pxe_setup {
         assert_script_run "rpm --root=/var/tmp/rocky --rebuilddb", 60;
         assert_script_run "cd /var/tmp; dnf download rocky-release rocky-repos rocky-gpg-keys", 60;
         assert_script_run "rpm --root=/var/tmp/rocky --nodeps -i /var/tmp/*.rpm", 60;
-        #assert_script_run "sed -i /var/tmp/rocky/etc/yum.repos.d/Rocky-*.repo -e 's/repo=/repo=rocky-/g'", 60;
+
+        # Rocky Linux repos in /var/tmp/rocky point at mirrorlist and should be
+        # pointed at baseurl to support repositories in the staging if used for
+        # Beta or Lookahead builds.
+        if (get_version_major() < 9) {
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-BaseOS.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-AppStream.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Extras.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Devel.repo';
+        } else {
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-addons.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-devel.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . $mount . '/var/tmp/rocky/etc/yum.repos.d/rocky-extras.repo';
+        }
+        # If we're pointing at Staging via alternate DNF_CONTENTDIR then modify dnf vars in /var/tmp/rocky
+        if ($contentdir) {
+            assert_script_run 'printf "%s\n" ' . $contentdir . ' > ' . '/var/tmp/rocky/etc/dnf/vars/contentdir';
+        }
+
         assert_script_run "dnf -y --releasever=$ourversion --refresh --installroot=/var/tmp/rocky install shim-x64 grub2-efi-x64", 1800;
 
         # copy bootloader files to tftp root
