@@ -126,6 +126,7 @@ sub _pxe_setup {
 
 sub run {
     my $self = shift;
+    my $contentdir = get_var("DNF_CONTENTDIR");
     # disable systemd-resolved, it conflicts with dnsmasq
     unless (script_run "systemctl is-active systemd-resolved.service") {
         script_run "systemctl stop systemd-resolved.service";
@@ -165,8 +166,20 @@ sub run {
 
     # create the file share
     assert_script_run "mkdir -p /export";
-    # get the kickstart
-    assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
+    # get the kickstart or kickstart template and replace content
+    if ($contentdir) {
+        my $releasever = get_var("DNF_RELEASEVAR");
+        assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net-template.ks";
+        # Tweak the kickstart template
+        if ($releasever) {
+            assert_script_run "sed -e 's,DNF_CONTENTDIR," . $contentdir . ",g;s,DNF_RELEASEVER," . $releasever . ",g' ks.cfg";
+        } else {
+            my $version = get_var("VERSION");
+            assert_script_run "sed -e 's,DNF_CONTENTDIR," . $contentdir . ",g;s,DNF_RELEASEVER," . $version . ",g' ks.cfg";
+        }
+    } else {
+        assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
+    }
     # for update tests, set up the update repository and export it
     if (get_var("ADVISORY_OR_TASK")) {
         assert_script_run "echo '/opt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";
