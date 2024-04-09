@@ -114,7 +114,7 @@ sub _pxe_setup {
     # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
     assert_script_run "curl -o ks.cfg https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
     # tweak the repo config in it
-    assert_script_run "sed -i -e 's,^url.*,nfs --server=nfs://172.16.2.110 --dir=/repo --opts=nfsvers=4,g' ks.cfg";
+    assert_script_run "sed -i -e 's,^url.*,nfs --server=nfs://172.16.2.110 --dir=/repo,g' ks.cfg";
     # embed it
     assert_script_run "echo ks.cfg | cpio -c -o >> /var/lib/tftpboot/rocky/initrd.img";
     # chown root
@@ -206,8 +206,14 @@ sub run {
         assert_script_run "printf '/export 172.16.2.0/24(ro)\n/repo 172.16.2.0/24(ro)\n/iso 172.16.2.0/24(ro)' > /etc/exports";
     }
 
-    # open firewall port
-    assert_script_run "firewall-cmd --add-service=nfs";
+    # configure nfsv3 ports
+    assert_script_run "printf '[lockd]\nport=5555\n\n[statd]\nport=6666\n' > /etc/nfs.conf";
+
+    # configure firewall
+    assert_script_run "firewall-cmd --add-service={nfs,rpc-bind,mountd}";
+    assert_script_run "firewall-cmd --add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}";
+    assert_script_run "firewall-cmd --reload";
+
     # start the server
     assert_script_run "systemctl restart nfs-server.service";
     assert_script_run "systemctl is-active nfs-server.service";
