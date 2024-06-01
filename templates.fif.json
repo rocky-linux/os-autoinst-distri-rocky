@@ -787,6 +787,11 @@
         },
         "install_minimal": {
             "profiles": {
+                "rocky-boot-iso-s390x-*-s390x": 10,
+                "rocky-boot-iso-ppc64le-*-ppc64le": 10,
+                "rocky-boot-iso-aarch64-*-aarch64": 10,
+                "rocky-boot-iso-x86_64-*-64bit": 10,
+                "rocky-boot-iso-x86_64-*-uefi": 11,
                 "rocky-minimal-iso-s390x-*-s390x": 10,
                 "rocky-minimal-iso-ppc64le-*-ppc64le": 10,
                 "rocky-minimal-iso-aarch64-*-aarch64": 10,
