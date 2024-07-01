@@ -419,7 +419,7 @@
             "product": "rocky-package-set-x86_64-*"
         },
         "rocky-package-set-x86_64-*-uefi": {
-            "machine": "bios",
+            "machine": "uefi",
             "product": "rocky-package-set-x86_64-*"
         },
         "rocky-universal-s390x-*-s390x": {
