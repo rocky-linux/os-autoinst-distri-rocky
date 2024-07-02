@@ -83,6 +83,28 @@
                 "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
                 "WORKER_CLASS": "qemu_x86_64"
             }
+        },
+        "uesb": {
+            "backend": "qemu",
+            "settings": {
+                "ARCH_BASE_MACHINE": "64bit",
+                "PART_TABLE_TYPE": "gpt",
+                "QEMUCPU": "Nehalem",
+                "QEMUCPUS": "2",
+                "QEMURAM": "3072",
+                "QEMU_VIDEO_DEVICE": "virtio-vga",
+                "XRES": "1024",
+                "YRES": "768",
+                "QEMUMACHINE": "q35,smm=on",
+                "QEMU_APPEND": "global driver=cfi.pflash01,property=secure,value=on",
+                "QEMU_MAX_MIGRATION_TIME": "480",
+                "QEMU_VIRTIO_RNG": "1",
+                "UEFI": "1",
+                "UEFI_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd",
+                "UEFI_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.secboot.fd",
+                "UEFI_SECURE": "1",
+                "WORKER_CLASS": "qemu_x86_64"
+            }
         }
     },
     "Products": {
