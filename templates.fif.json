@@ -842,6 +842,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 10,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 10,
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
+                "rocky-dvd-iso-x86_64-*-uefi": 10,
                 "rocky-dvd-iso-x86_64-*-bios": 10
             },
             "settings": {
@@ -1471,6 +1472,19 @@
                 "ENTRYPOINT": "text_login_gui rocky_release os_release",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false"
+            }
+        },
+        "secure_boot_fallback": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 11
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "_secure_boot_fallback",
+                "ROOT_PASSWORD": "weakpassword",
+                "+START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
             }
         },
