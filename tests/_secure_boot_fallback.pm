@@ -10,7 +10,7 @@ sub run {
     }
     script_run 'efibootmgr';
     # now try deleting the "rocky" boot entry and rebooting, to check the fallback path
-    assert_script_run('efibootmgr -b $(efibootmgr | grep rocky | cut -f1 | sed -e "s,[^0-9],,g") -B');
+    assert_script_run('efibootmgr -b $(efibootmgr | grep -i rocky | cut -f1 | sed -e "s,[^0-9],,g") -B');
     # check that worked
     validate_script_output('efibootmgr', sub { $_ !~ m/.*rocky.*/s });
     type_string("reboot\n");
