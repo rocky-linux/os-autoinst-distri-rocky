@@ -1063,6 +1063,7 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
+                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-bios": 30
             },
             "settings": {
@@ -1081,7 +1082,6 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
-                "rocky-package-set-aarch64-*-aarch64": 30,
                 "rocky-package-set-x86_64-*-bios": 30
             },
             "settings": {
