@@ -107,6 +107,6 @@ These variables should be set when tests are scheduled (when running `isos post`
 | `PREVREL` | the previous stable Rocky release at the time of the test run |
 | `UP1REL` | the source release for "1-release" upgrade tests (usually but not always same as `CURRREL`) |
 | `UP2REL` | the source release for "2-release" upgrade tests (currently always same as `PREVREL`) |
-| `LOCATION` | contains Pungi base compose location (something like `https://kojipkgs.rockylinux.org/compose/branched/Rocky-8.4-20210801.n.0/compose/`) |
+| `LOCATION` | Rocky doesn't replicate compose process used by upstream distribution. `LOCATION` has three general use cases: substitution value for `REPOSITORY_VARIATION` or `REPOSITORY_GRAPHICAL` in `templates.fif.json`, within `utils.pm` in `_repo_setup_compose` which is not valid for Rocky and within `support_server.pm` in `_pxe_setup` to pull the kernel and initrd used for PXE installs. Required value is repository URL prefix, eg. `https://download.rockylinux.org/pub/rocky/8/`. |
 | `DNF_CONTENTDIR` | the value to change `/etc/dnf/vars/contentdir` to (eg. `stg/rocky`) allowing repository reconfiguration to point at staging (usually but not always used with `DNF_RELEASEVER`) |
 | `DNF_RELEASEVER` | the value to change `/etc/dnf/vars/releasever` to (eg. `8.8-Beta`) allowing repository reconfiguration to point at a specific release (usually but not always used with `DNF_CONTENTDIR`) |

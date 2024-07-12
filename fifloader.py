@@ -212,6 +212,11 @@ def generate_job_templates(products, profiles, testsuites):
                     jobtemplate['group_name'] = "Rocky PowerPC Updates"
                 else:
                     jobtemplate['group_name'] = "Rocky PowerPC"
+            elif jobtemplate['machine_name'] in ('s390x'):
+                if 'updates' in product['flavor']:
+                    jobtemplate['group_name'] = "Rocky s390x Updates"
+                else:
+                    jobtemplate['group_name'] = "Rocky s390x"
             elif jobtemplate['machine_name'] in ('aarch64', 'ARM'):
                 if 'updates' in product['flavor']:
                     jobtemplate['group_name'] = "Rocky AArch64 Updates"

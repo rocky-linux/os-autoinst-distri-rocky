@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 544,
+      "height": 23,
+      "width": 127,
+      "xpos": 786,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "anaconda_install_destination_encrypt_data"
+  ]
+}

@@ -84,40 +84,40 @@
             "machine": "aarch64",
             "product": "rocky-updates-server-upgrade-aarch64-*"
         },
-        "rocky-updates-server-upgrade-x86_64-*-64bit": {
-            "machine": "64bit",
+        "rocky-updates-server-upgrade-x86_64-*-bios": {
+            "machine": "bios",
             "product": "rocky-updates-server-upgrade-x86_64-*"
         },
         "rocky-updates-server-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-updates-server-aarch64-*"
         },
-        "rocky-updates-server-x86_64-*-64bit": {
-            "machine": "64bit",
+        "rocky-updates-server-x86_64-*-bios": {
+            "machine": "bios",
             "product": "rocky-updates-server-x86_64-*"
         },
         "rocky-updates-workstation-upgrade-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-updates-workstation-upgrade-aarch64-*"
         },
-        "rocky-updates-workstation-upgrade-x86_64-*-64bit": {
-            "machine": "64bit",
+        "rocky-updates-workstation-upgrade-x86_64-*-bios": {
+            "machine": "bios",
             "product": "rocky-updates-workstation-upgrade-x86_64-*"
         },
         "rocky-updates-workstation-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-updates-workstation-aarch64-*"
         },
-        "rocky-updates-workstation-x86_64-*-64bit": {
-            "machine": "64bit",
+        "rocky-updates-workstation-x86_64-*-bios": {
+            "machine": "bios",
             "product": "rocky-updates-workstation-x86_64-*"
         },
         "rocky-updates-minimal-aarch64-*-aarch64": {
             "machine": "aarch64",
             "product": "rocky-updates-minimal-aarch64-*"
         },
-        "rocky-updates-minimal-x86_64-*-64bit": {
-            "machine": "64bit",
+        "rocky-updates-minimal-x86_64-*-bios": {
+            "machine": "bios",
             "product": "rocky-updates-minimal-x86_64-*"
         }
     },
@@ -125,7 +125,7 @@
         "advisory_boot": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             },
             "settings": {
                 "ADVISORY_BOOT_TEST": "1",
@@ -136,116 +136,116 @@
         },
         "base_selinux": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "base_service_manipulation": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "base_services_start": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "base_update_cli": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "base_reboot_unmount": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "base_system_logging": {
             "profiles": {
-                "rocky-updates-minimal-x86_64-*-64bit": 40,
+                "rocky-updates-minimal-x86_64-*-bios": 40,
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40,
-                "rocky-updates-workstation-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40,
+                "rocky-updates-workstation-x86_64-*-bios": 40
             }
         },
         "desktop_background": {
             "profiles": {
                 "rocky-updates-workstation-aarch64-*-aarch64": 30,
-                "rocky-updates-workstation-x86_64-*-64bit": 30
+                "rocky-updates-workstation-x86_64-*-bios": 30
             }
         },
         "desktop_browser": {
             "profiles": {
                 "rocky-updates-workstation-aarch64-*-aarch64": 30,
-                "rocky-updates-workstation-x86_64-*-64bit": 30
+                "rocky-updates-workstation-x86_64-*-bios": 30
             }
         },
         "desktop_printing": {
             "profiles": {
                 "rocky-updates-workstation-aarch64-*-aarch64": 30,
-                "rocky-updates-workstation-x86_64-*-64bit": 30
+                "rocky-updates-workstation-x86_64-*-bios": 30
             }
         },
         "desktop_terminal": {
             "profiles": {
                 "rocky-updates-workstation-aarch64-*-aarch64": 30,
-                "rocky-updates-workstation-x86_64-*-64bit": 30
+                "rocky-updates-workstation-x86_64-*-bios": 30
             }
         },
         "desktop_update_graphical": {
             "profiles": {
                 "rocky-updates-workstation-aarch64-*-aarch64": 30,
-                "rocky-updates-workstation-x86_64-*-64bit": 30
+                "rocky-updates-workstation-x86_64-*-bios": 30
             }
         },
         "server_cockpit_basic": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             }
         },
         "server_cockpit_default": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             }
         },
         "server_cockpit_updates": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             }
         },
         "server_database_client": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             }
         },
         "server_firewall_default": {
             "profiles": {
                 "rocky-updates-server-aarch64-*-aarch64": 40,
-                "rocky-updates-server-x86_64-*-64bit": 40
+                "rocky-updates-server-x86_64-*-bios": 40
             }
         },
         "upgrade_desktop_encrypted_64bit": {
             "profiles": {
                 "rocky-updates-workstation-upgrade-aarch64-*-aarch64": 40,
-                "rocky-updates-workstation-upgrade-x86_64-*-64bit": 40
+                "rocky-updates-workstation-upgrade-x86_64-*-bios": 40
             }
         }
     }
