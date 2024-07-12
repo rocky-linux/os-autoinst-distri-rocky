@@ -25,6 +25,7 @@ sub _pxe_setup {
     assert_script_run "printf 'dhcp-match=set:efi-x86_64,option:client-arch,7\ndhcp-match=set:efi-x86_64,option:client-arch,9\ndhcp-match=set:bios,option:client-arch,0\ndhcp-match=set:efi-aarch64,option:client-arch,11\ndhcp-match=set:ppc64,option:client-arch,12\ndhcp-match=set:ppc64,option:client-arch,13\ndhcp-boot=tag:efi-x86_64,\"shim.efi\"\ndhcp-boot=tag:bios,\"pxelinux.0\"\ndhcp-boot=tag:efi-aarch64,\"grubaa64.efi\"\ndhcp-boot=tag:ppc64,\"boot/grub2/powerpc-ieee1275/core.elf\"\n' >> /etc/dnsmasq.conf";
     # install and configure bootloaders
     my $ourversion = get_var("CURRREL");
+    my $contentdir = get_var("DNF_CONTENTDIR");
     my $testversion = get_var("RELEASE");
     assert_script_run "mkdir -p /var/tmp/rocky";
     my $arch = get_var("ARCH");
@@ -41,7 +42,26 @@ sub _pxe_setup {
         assert_script_run "rpm --root=/var/tmp/rocky --rebuilddb", 60;
         assert_script_run "cd /var/tmp; dnf download rocky-release rocky-repos rocky-gpg-keys", 60;
         assert_script_run "rpm --root=/var/tmp/rocky --nodeps -i /var/tmp/*.rpm", 60;
-        #assert_script_run "sed -i /var/tmp/rocky/etc/yum.repos.d/Rocky-*.repo -e 's/repo=/repo=rocky-/g'", 60;
+
+        # Rocky Linux repos in /var/tmp/rocky point at mirrorlist and should be
+        # pointed at baseurl to support repositories in the staging if used for
+        # Beta or Lookahead builds.
+        if (get_version_major() < 9) {
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-BaseOS.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-AppStream.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Extras.repo';
+            assert_script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s,^#\(baseurl=http[s]*://\),\1,g" ' . '/var/tmp/rocky/etc/yum.repos.d/Rocky-Devel.repo';
+        } else {
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-addons.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-devel.repo';
+            script_run 'sed -i -e "s/^mirrorlist/#mirrorlist/g;s/^#baseurl/baseurl/g" ' . '/var/tmp/rocky/etc/yum.repos.d/rocky-extras.repo';
+        }
+        # If we're pointing at Staging via alternate DNF_CONTENTDIR then modify dnf vars in /var/tmp/rocky
+        if ($contentdir) {
+            assert_script_run 'printf "%s\n" ' . $contentdir . ' > ' . '/var/tmp/rocky/etc/dnf/vars/contentdir';
+        }
+
         assert_script_run "dnf -y --releasever=$ourversion --refresh --installroot=/var/tmp/rocky install shim-x64 grub2-efi-x64", 1800;
 
         # copy bootloader files to tftp root
@@ -49,12 +69,9 @@ sub _pxe_setup {
         assert_script_run "cp /var/tmp/rocky/boot/efi/EFI/rocky/{shimx64.efi,shimx64-rocky.efi,grubx64.efi} /var/lib/tftpboot";
         # bootloader configs
         # BIOS
-        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux 64-bit\n  menu default\n  kernel rocky/vmlinuz\n  append initr
-d=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
+        assert_script_run "printf 'default vesamenu.c32\nprompt 1\ntimeout 600\n\nlabel linux\n  menu label ^Install Rocky Linux 64-bit\n  menu default\n  kernel rocky/vmlinuz\n  append initrd=rocky/initrd.img inst.ks=file:///ks.cfg ip=dhcp\nlabel local\n  menu label Boot from ^local drive\n  localboot 0xffff\n' >> /var/lib/tftpboot/pxelinux.cfg/default";
         # UEFI
-        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\
-n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux 64-bit\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=
-file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
+        assert_script_run "printf 'function load_video {\n  insmod efi_gop\n  insmod efi_uga\n  insmod ieee1275_fb\n  insmod vbe\n  insmod vga\n  insmod video_bochs\n  insmod video_cirrus\n}\n\nload_video\nset gfxpayload=keep\ninsmod gzio\n\nmenuentry \"Install Rocky Linux 64-bit\"  --class rocky --class gnu-linux --class gnu --class os {\n  linuxefi rocky/vmlinuz ip=dhcp inst.ks=file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
         # DEBUG DEBUG
         upload_logs "/etc/dnsmasq.conf";
         upload_logs "/var/lib/tftpboot/grub.cfg";
@@ -97,7 +114,7 @@ file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
     # https://fedoraproject.org/wiki/QA:Testcase_Kickstart_File_Path_Ks_Cfg
     assert_script_run "curl -o ks.cfg https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
     # tweak the repo config in it
-    assert_script_run "sed -i -e 's,^url.*,nfs --server=nfs://172.16.2.110 --dir=/repo --opts=nfsver=4,g' ks.cfg";
+    assert_script_run "sed -i -e 's,^url.*,nfs --server=nfs://172.16.2.110 --dir=/repo,g' ks.cfg";
     # embed it
     assert_script_run "echo ks.cfg | cpio -c -o >> /var/lib/tftpboot/rocky/initrd.img";
     # chown root
@@ -109,6 +126,7 @@ file:///ks.cfg\n  initrdefi rocky/initrd.img\n}' >> /var/lib/tftpboot/grub.cfg";
 
 sub run {
     my $self = shift;
+    my $contentdir = get_var("DNF_CONTENTDIR");
     # disable systemd-resolved, it conflicts with dnsmasq
     unless (script_run "systemctl is-active systemd-resolved.service") {
         script_run "systemctl stop systemd-resolved.service";
@@ -148,8 +166,20 @@ sub run {
 
     # create the file share
     assert_script_run "mkdir -p /export";
-    # get the kickstart
-    assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
+    # get the kickstart or kickstart template and replace content
+    if ($contentdir) {
+        my $releasever = get_var("DNF_RELEASEVAR");
+        assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net-template.ks";
+        # Tweak the kickstart template
+        if ($releasever) {
+            assert_script_run "sed -e 's,DNF_CONTENTDIR," . $contentdir . ",g;s,DNF_RELEASEVER," . $releasever . ",g' ks.cfg";
+        } else {
+            my $version = get_var("VERSION");
+            assert_script_run "sed -e 's,DNF_CONTENTDIR," . $contentdir . ",g;s,DNF_RELEASEVER," . $version . ",g' ks.cfg";
+        }
+    } else {
+        assert_script_run "curl -o /export/root-user-crypted-net.ks https://git.rockylinux.org/tcooper/kickstarts/-/raw/main/root-user-crypted-net.ks";
+    }
     # for update tests, set up the update repository and export it
     if (get_var("ADVISORY_OR_TASK")) {
         assert_script_run "echo '/opt/update_repo 172.16.2.0/24(ro)' >> /etc/exports";
@@ -176,8 +206,14 @@ sub run {
         assert_script_run "printf '/export 172.16.2.0/24(ro)\n/repo 172.16.2.0/24(ro)\n/iso 172.16.2.0/24(ro)' > /etc/exports";
     }
 
-    # open firewall port
-    assert_script_run "firewall-cmd --add-service=nfs";
+    # configure nfsv3 ports
+    assert_script_run "printf '[lockd]\nport=5555\n\n[statd]\nport=6666\n' > /etc/nfs.conf";
+
+    # configure firewall
+    assert_script_run "firewall-cmd --add-service={nfs,rpc-bind,mountd}";
+    assert_script_run "firewall-cmd --add-port={5555/tcp,5555/udp,6666/tcp,6666/udp}";
+    assert_script_run "firewall-cmd --reload";
+
     # start the server
     assert_script_run "systemctl restart nfs-server.service";
     assert_script_run "systemctl is-active nfs-server.service";

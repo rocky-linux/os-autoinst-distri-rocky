@@ -6,7 +6,7 @@ use utils;
 sub run {
     my $self = shift;
     # If UPGRADE is set, we have to wait for the entire upgrade
-    my $wait_time = 300;
+    my $wait_time = 600;
     $wait_time = 6000 if (get_var("UPGRADE"));
 
     # handle bootloader, if requested

@@ -1,10 +1,10 @@
 {
   "area": [
     {
-      "width": 45,
-      "height": 17,
-      "xpos": 411,
-      "ypos": 134,
+      "ypos": 544,
+      "height": 23,
+      "width": 127,
+      "xpos": 786,
       "type": "match"
     }
   ],
@@ -12,6 +12,6 @@
   "tags": [
     "ENV-DISTRI-rocky",
     "LANGUAGE-arabic",
-    "anaconda_network_connected"
+    "anaconda_install_destination_encrypt_data"
   ]
 }

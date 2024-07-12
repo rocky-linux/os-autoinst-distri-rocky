@@ -13,8 +13,12 @@ our @EXPORT = qw(start_cockpit select_cockpit_update check_updates);
 
 sub start_cockpit {
     # Starting from a console, get to a browser with Cockpit (running
-    # on localhost) shown. If $login is truth-y, also log in. Assumes
+    # on localhost) shown. If login is truth-y, also log in. If login
+    # and admin are both truthy, also gain admin privileges. Assumes
     # X and Firefox are installed.
+    my %args = @_;
+    $args{login} //= 0;
+    $args{admin} //= 1;
     my $login = shift || 0;
     # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
     assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
@@ -25,11 +29,17 @@ sub start_cockpit {
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");
     wait_still_screen(stilltime => 5, similarity_level => 45);
-    if ($login) {
-        type_safely "root";
+    if ($args{login}) {
+        type_safely "test";
         wait_screen_change { send_key "tab"; };
-        type_safely get_var("ROOT_PASSWORD", "weakpassword");
+        type_safely get_var("USER_PASSWORD", "weakpassword");
         send_key "ret";
+        if ($args{admin}) {
+            assert_and_click "cockpit_admin_enable";
+            assert_screen "cockpit_admin_password";
+            type_safely get_var("USER_PASSWORD", "weakpassword");
+            send_key "ret";
+        }
         assert_screen "cockpit_main";
         # wait for any animation or other weirdness
         # can't use wait_still_screen because of that damn graph
