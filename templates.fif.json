@@ -400,6 +400,10 @@
             "machine": "aarch64",
             "product": "rocky-minimal-iso-aarch64-*"
         },
+        "rocky-minimal-iso-x86_64-*-uefi": {
+            "machine": "uefi",
+            "product": "rocky-minimal-iso-x86_64-*"
+        },
         "rocky-minimal-iso-x86_64-*-bios": {
             "machine": "bios",
             "product": "rocky-minimal-iso-x86_64-*"
