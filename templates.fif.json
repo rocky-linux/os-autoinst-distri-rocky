@@ -471,7 +471,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "ENTRYPOINT": "_boot_to_anaconda anaconda_help",
@@ -487,7 +487,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -508,7 +508,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -529,7 +529,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -550,7 +550,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -571,7 +571,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -592,7 +592,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -613,7 +613,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -641,7 +641,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "false",
@@ -658,7 +658,7 @@
                 "rocky-universal-s390x-*-s390x": 20,
                 "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
-                "rocky-universal-x86_64-*-bios": 20
+                "rocky-universal-x86_64-*-uefi": 20
             },
             "settings": {
                 "ANACONDA_TEXT": "1"
@@ -669,7 +669,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -689,7 +689,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -774,7 +774,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -817,7 +817,8 @@
                 "rocky-minimal-iso-s390x-*-s390x": 10,
                 "rocky-minimal-iso-ppc64le-*-ppc64le": 10,
                 "rocky-minimal-iso-aarch64-*-aarch64": 10,
-                "rocky-minimal-iso-x86_64-*-bios": 10
+                "rocky-minimal-iso-x86_64-*-uefi": 10,
+                "rocky-minimal-iso-x86_64-*-bios": 11
             },
             "settings": {
                 "PACKAGE_SET": "minimal",
@@ -829,7 +830,8 @@
                 "rocky-minimal-iso-s390x-*-s390x": 10,
                 "rocky-minimal-iso-ppc64le-*-ppc64le": 10,
                 "rocky-minimal-iso-aarch64-*-aarch64": 10,
-                "rocky-minimal-iso-x86_64-*-bios": 10
+                "rocky-minimal-iso-x86_64-*-uefi": 10,
+                "rocky-minimal-iso-x86_64-*-bios": 11
             },
             "settings": {
                 "PACKAGE_SET": "minimal",
@@ -890,7 +892,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -908,7 +910,7 @@
         "install_iscsi": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "ANACONDA_STATIC": "172.16.2.111",
@@ -923,7 +925,7 @@
         "install_kickstart_nfs": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-bios": 30
+                "rocky-universal-x86_64-*-uefi": 30
             },
             "settings": {
                 "GRUB": "inst.ks=nfs:172.16.2.110:/export/root-user-crypted-net.ks",
@@ -986,7 +988,7 @@
                 "rocky-universal-s390x-*-s390x": 20,
                 "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
-                "rocky-universal-x86_64-*-bios": 20
+                "rocky-universal-x86_64-*-uefi": 20
             },
             "settings": {
                 "MIRRORLIST_GRAPHICAL": "1",
@@ -1043,7 +1045,7 @@
         },
         "install_package_set_minimal": {
             "profiles": {
-                "rocky-package-set-x86_64-*-bios": 30
+                "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1052,7 +1054,7 @@
         },
         "install_package_set_server": {
             "profiles": {
-                "rocky-package-set-x86_64-*-bios": 30
+                "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1061,7 +1063,7 @@
         },
         "install_package_set_graphical-server": {
             "profiles": {
-                "rocky-package-set-x86_64-*-bios": 30
+                "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1070,7 +1072,7 @@
         },
         "install_package_set_workstation": {
             "profiles": {
-                "rocky-package-set-x86_64-*-bios": 30
+                "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -1079,7 +1081,7 @@
         },
         "install_package_set_virtualization-host": {
             "profiles": {
-                "rocky-package-set-x86_64-*-bios": 30
+                "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1110,7 +1112,7 @@
                 "rocky-universal-s390x-*-s390x": 20,
                 "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
-                "rocky-universal-x86_64-*-bios": 20
+                "rocky-universal-x86_64-*-uefi": 20
             },
             "settings": {
                 "REPOSITORY_GRAPHICAL": "%LOCATION%",
@@ -1123,7 +1125,7 @@
                 "rocky-universal-s390x-*-s390x": 20,
                 "rocky-universal-ppc64le-*-ppc64le": 20,
                 "rocky-universal-aarch64-*-aarch64": 20,
-                "rocky-universal-x86_64-*-bios": 20
+                "rocky-universal-x86_64-*-uefi": 20
             },
             "settings": {
                 "REPOSITORY_VARIATION": "%LOCATION%",
@@ -1136,7 +1138,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 30,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1149,7 +1151,7 @@
         "install_repository_nfs_variation": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1162,7 +1164,7 @@
         "install_repository_nfsiso_variation": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1205,7 +1207,7 @@
         "install_scsi_updates_img": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 20,
-                "rocky-universal-x86_64-*-bios": 20
+                "rocky-universal-x86_64-*-uefi": 20
             },
             "settings": {
                 "CDMODEL": "scsi-cd",
@@ -1222,7 +1224,7 @@
                 "rocky-universal-s390x-*-s390x": 30,
                 "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-bios": 30
+                "rocky-universal-x86_64-*-uefi": 30
             },
             "settings": {
                 "ANACONDA_TEXT": "1",
@@ -1236,7 +1238,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "HDD_1": "disk_shrink_ext4.img",
@@ -1251,7 +1253,7 @@
                 "rocky-universal-s390x-*-s390x": 40,
                 "rocky-universal-ppc64le-*-ppc64le": 40,
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "HDD_1": "disk_shrink_ntfs.img",
@@ -1310,7 +1312,7 @@
         "install_updates_nfs": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.stage2=nfs:nfsvers=4:172.16.2.110:/repo",
@@ -1325,7 +1327,7 @@
         "install_vnc_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1342,7 +1344,7 @@
         "install_vnc_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.vnc net.ifnames=0 biosdevname=0 ip=172.16.2.114::172.16.2.2:255.255.255.0:vnc001.test.openqa.rockylinux.org:eth0:off",
@@ -1354,7 +1356,7 @@
         "install_vncconnect_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1370,7 +1372,7 @@
         "install_vncconnect_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.vnc inst.vncconnect=172.16.2.117:5500 net.ifnames=0 biosdevname=0 ip=172.16.2.116::172.16.2.2:255.255.255.0:vnc003.test.openqa.rockylinux.org:eth0:off",
@@ -1401,7 +1403,7 @@
                 "rocky-universal-s390x-*-s390x": 30,
                 "rocky-universal-ppc64le-*-ppc64le": 30,
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-bios": 30
+                "rocky-universal-x86_64-*-uefi": 30
             },
             "settings": {
                 "ENTRYPOINT": "memtest"
@@ -1412,7 +1414,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 30,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1427,7 +1429,7 @@
         "realmd_join_cockpit": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
@@ -1445,7 +1447,7 @@
         "realmd_join_sssd": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1465,7 +1467,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1491,7 +1493,7 @@
         "server_cockpit_basic": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
@@ -1505,7 +1507,7 @@
         "server_cockpit_default": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1521,7 +1523,7 @@
         "server_cockpit_updates": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
@@ -1535,7 +1537,7 @@
         "server_database_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1555,7 +1557,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1572,7 +1574,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 20,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 20,
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1585,7 +1587,7 @@
         "server_freeipa_replication_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1604,7 +1606,7 @@
         "server_freeipa_replication_master": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1623,7 +1625,7 @@
         "server_freeipa_replication_replica": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1643,7 +1645,7 @@
         "server_realmd_join_kickstart": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "GRUB": "inst.ks=hd:vdb1:/freeipaclient.ks",
@@ -1662,7 +1664,7 @@
         "server_remote_logging_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1680,7 +1682,7 @@
         "server_remote_logging_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1698,7 +1700,7 @@
         "server_role_deploy_database_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1716,7 +1718,7 @@
         "server_role_deploy_domain_controller": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 20,
-                "rocky-dvd-iso-x86_64-*-bios": 20
+                "rocky-dvd-iso-x86_64-*-uefi": 20
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1734,7 +1736,7 @@
         "slurm22": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10
+                "rocky-dvd-iso-x86_64-*-uefi": 10
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1749,7 +1751,7 @@
         "slurm23": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10
+                "rocky-dvd-iso-x86_64-*-uefi": 10
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1764,9 +1766,9 @@
         "support_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10,
+                "rocky-dvd-iso-x86_64-*-uefi": 10,
                 "rocky-universal-aarch64-*-aarch64": 10,
-                "rocky-universal-x86_64-*-bios": 10
+                "rocky-universal-x86_64-*-uefi": 10
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1785,7 +1787,7 @@
         "toolbox": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10
+                "rocky-dvd-iso-x86_64-*-uefi": 10
             },
             "settings": {
                 "BOOTFROM": "c",
