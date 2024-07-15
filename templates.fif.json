@@ -848,8 +848,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 10,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 10,
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-uefi": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10
+                "rocky-dvd-iso-x86_64-*-uefi": 10
             },
             "settings": {
                 "DESKTOP": "gnome",
@@ -962,8 +961,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 40,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 40,
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40,
-                "rocky-dvd-iso-x86_64-*-uefi": 41
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1103,7 +1101,7 @@
                 "DELAYED_START": "1",
                 "KICKSTART": "1",
                 "NICTYPE": "tap",
-                "PARALLEL_WITH": "support_server@%ARCH_BASE_MACHINE%",
+                "PARALLEL_WITH": "support_server",
                 "PXEBOOT": "once",
                 "ROOT_PASSWORD": "111111",
                 "TEST_TARGET": "COMPOSE",
