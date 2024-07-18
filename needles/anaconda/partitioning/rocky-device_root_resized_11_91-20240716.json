@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 74,
+      "xpos": 374,
+      "type": "match",
+      "height": 22,
+      "ypos": 135
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "device_root_resized_twelve"
+  ]
+}
