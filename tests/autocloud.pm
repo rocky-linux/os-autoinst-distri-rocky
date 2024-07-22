@@ -66,7 +66,7 @@ sub run {
     assert_script_run "sudo chmod ugo+w /dev/" . $serialdev;
     # let's go to another tty and login as regular user again
     send_key "alt-f2";
-    console_login(user => "test", password => "weakpassword");
+    console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceAfter -v";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerInstalled -v";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerStorageSetup -v";
