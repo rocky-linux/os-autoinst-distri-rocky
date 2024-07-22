@@ -19,6 +19,10 @@ sub run {
     # autocloud used to use, via tunir and this tunir config:
     # https://infrastructure.fedoraproject.org/cgit/ansible.git/tree/roles/autocloud/backend/files/fedora.txt?id=6e7c1b90593df8371fd34ed9484bd4da119236d3
     my $self = shift;
+    # tests require python3 which is not default installed in Rocky 8
+    if (get_version_major() < 9) {
+        assert_script_run("dnf install -y python3", timeout => 240);
+    }
     # we need to use script_run as regular user
     assert_script_run "chmod ugo+w /dev/" . $serialdev;
     # let's go to another tty and login as regular user
