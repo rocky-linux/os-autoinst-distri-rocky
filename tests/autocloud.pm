@@ -28,7 +28,7 @@ sub run {
     # let's go to another tty and login as regular user
     send_key "alt-f2";
     console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
-    assert_script_run "curl -O https://fedorapeople.org/groups/qa/tunirtests.tar.gz";
+    assert_script_run "curl -O https://openqa.rockylinux.org/qa/tunirtests.tar.gz";
     assert_script_run "tar xvf tunirtests.tar.gz";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomic01Status -v";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtests";
