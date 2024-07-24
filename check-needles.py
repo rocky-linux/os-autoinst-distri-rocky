@@ -93,6 +93,16 @@ for dtype in ("lvmvg", "lvmlv", "lvmthin", "raid"):
 for fsys in ("ext3", "ext4", "xfs", "btrfs", "ppc_prep_boot", "swap", "efi_filesystem"):
     testliterals.append(f"anaconda_blivet_part_fs_{fsys}")
     testliterals.append(f"anaconda_blivet_part_fs_{fsys}_selected")
+# custom_gui
+for dtype in ("", "_lvmlv", "_raid", "_standard_partition"):
+    testliterals.append(f"anaconda_custom_part_devicetype{dtype}")
+for ptype in ("raid_1", "raid_4"):
+    testliterals.append(f"anaconda_custom_part_{ptype}")
+    testliterals.append(f"anaconda_custom_part_{ptype}_selected")
+for fsys in ("efi_filesystem", "ext4", "swap", "xfs"):
+    testliterals.append(f"anaconda_custom_part_fs_{fsys}")
+    testliterals.append(f"anaconda_custom_part_fs_{fsys}_selected")
+
 # this is variable-y in custom_change_type but we only actually have
 # one value
 testliterals.append("anaconda_part_device_type_raid")
