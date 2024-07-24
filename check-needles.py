@@ -69,7 +69,7 @@ for environment in ("anaconda", "gnome"):
     for layout in ("native", "ascii"):
         testliterals.append(f"{environment}_layout_{layout}")
 # package set selection, using get_var('PACKAGE_SET')
-for pkgset in ("kde", "workstation", "minimal"):
+for pkgset in ("minimal", "server", "graphical-server", "workstation", "virtualization-host"):
     testliterals.append(f"anaconda_{pkgset}_highlighted")
     testliterals.append(f"anaconda_{pkgset}_selected")
 # desktop_login stuff
