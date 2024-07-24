@@ -61,7 +61,7 @@ for rel in range(8, 10):
     testliterals.append(f"{rel}_background")
     testliterals.append(f"version_{rel}_ident")
 # anaconda id needles, using tell_source
-for source in ("workstation", "generic", "server"):
+for source in ("generic", "server"):
     testliterals.append(f"leftbar_{source}")
     testliterals.append(f"topbar_{source}")
 # keyboard layout switching, using desktop_switch_layout
