@@ -57,7 +57,7 @@ for testpath in testpaths:
 # now let's do some whitelisting, for awkward cases where we know that
 # we concatenate string literals and stuff
 # versioned backgrounds and release IDs
-for rel in range(8, 10):
+for rel in ["8", "9", "10"]:
     testliterals.append(f"{rel}_background")
     testliterals.append(f"version_{rel}_ident")
 # anaconda id needles, using tell_source
