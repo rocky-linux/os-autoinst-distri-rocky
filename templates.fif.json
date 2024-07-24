@@ -1048,7 +1048,7 @@
         "install_package_set_minimal": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
-                "rocky-package-set-x86_64-*-uefi": 30
+                "rocky-package-set-x86_64-*-bios": 30
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1058,7 +1058,7 @@
         "install_package_set_server": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
-                "rocky-package-set-x86_64-*-uefi": 30
+                "rocky-package-set-x86_64-*-bios": 30
             },
             "settings": {
                 "DESKTOP": "false",
@@ -1068,7 +1068,7 @@
         "install_package_set_graphical-server": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
-                "rocky-package-set-x86_64-*-uefi": 30
+                "rocky-package-set-x86_64-*-bios": 30
             },
             "settings": {
                 "DESKTOP": "gnome",
