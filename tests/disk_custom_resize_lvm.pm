@@ -56,7 +56,7 @@ sub run {
     type_very_safely "/";
     # Skip to the Size window
     send_key "tab";
-    type_very_safely "12 GiB";
+    type_very_safely "11.5 GiB";
     # Reformat and update the partition
     assert_and_click "anaconda_part_device_reformat";
     assert_and_click "anaconda_part_update_settings";
