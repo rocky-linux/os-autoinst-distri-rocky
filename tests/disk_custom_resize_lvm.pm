@@ -62,10 +62,8 @@ sub run {
     assert_and_click "anaconda_part_update_settings";
     # give it a second or two to update
     wait_still_screen 2;
-    # Fedora original here as to resize to 13GiB but Rocky default / partition
-    # size is 12.5GiB and we can only resize down.
-    # Check that the partition has been resized for 12GiB
-    assert_screen "device_root_resized_twelve";
+    # Check that the partition has been resized for 11.5GiB
+    assert_screen "device_root_resized_eleven_point_five";
 
     # Add new /home partition into the emptied space.
     assert_and_click "anaconda_part_add";
