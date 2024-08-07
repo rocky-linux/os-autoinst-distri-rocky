@@ -57,11 +57,11 @@ for testpath in testpaths:
 # now let's do some whitelisting, for awkward cases where we know that
 # we concatenate string literals and stuff
 # versioned backgrounds and release IDs
-for rel in range(30, 100):
+for rel in ["8", "9", "10"]:
     testliterals.append(f"{rel}_background")
     testliterals.append(f"version_{rel}_ident")
 # anaconda id needles, using tell_source
-for source in ("workstation", "generic", "server"):
+for source in ("generic", "server"):
     testliterals.append(f"leftbar_{source}")
     testliterals.append(f"topbar_{source}")
 # keyboard layout switching, using desktop_switch_layout
@@ -69,7 +69,7 @@ for environment in ("anaconda", "gnome"):
     for layout in ("native", "ascii"):
         testliterals.append(f"{environment}_layout_{layout}")
 # package set selection, using get_var('PACKAGE_SET')
-for pkgset in ("kde", "workstation", "minimal"):
+for pkgset in ("minimal", "server", "graphical-server", "workstation", "virtualization-host"):
     testliterals.append(f"anaconda_{pkgset}_highlighted")
     testliterals.append(f"anaconda_{pkgset}_selected")
 # desktop_login stuff
@@ -93,6 +93,16 @@ for dtype in ("lvmvg", "lvmlv", "lvmthin", "raid"):
 for fsys in ("ext3", "ext4", "xfs", "btrfs", "ppc_prep_boot", "swap", "efi_filesystem"):
     testliterals.append(f"anaconda_blivet_part_fs_{fsys}")
     testliterals.append(f"anaconda_blivet_part_fs_{fsys}_selected")
+# custom_gui
+for dtype in ("", "_lvmlv", "_raid", "_standard_partition"):
+    testliterals.append(f"anaconda_custom_part_devicetype{dtype}")
+for ptype in ("raid_1", "raid_4"):
+    testliterals.append(f"anaconda_custom_part_{ptype}")
+    testliterals.append(f"anaconda_custom_part_{ptype}_selected")
+for fsys in ("efi_filesystem", "ext4", "swap", "xfs"):
+    testliterals.append(f"anaconda_custom_part_fs_{fsys}")
+    testliterals.append(f"anaconda_custom_part_fs_{fsys}_selected")
+
 # this is variable-y in custom_change_type but we only actually have
 # one value
 testliterals.append("anaconda_part_device_type_raid")
