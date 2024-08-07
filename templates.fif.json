@@ -1333,7 +1333,7 @@
         "install_vnc_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1350,7 +1350,7 @@
         "install_vnc_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.vnc net.ifnames=0 biosdevname=0 ip=172.16.2.114::172.16.2.2:255.255.255.0:vnc001.test.openqa.rockylinux.org:eth0:off",
@@ -1362,7 +1362,7 @@
         "install_vncconnect_client": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "BOOTFROM": "c",
@@ -1378,7 +1378,7 @@
         "install_vncconnect_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.vnc inst.vncconnect=172.16.2.117:5500 net.ifnames=0 biosdevname=0 ip=172.16.2.116::172.16.2.2:255.255.255.0:vnc003.test.openqa.rockylinux.org:eth0:off",
