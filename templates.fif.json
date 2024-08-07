@@ -914,7 +914,7 @@
         "install_iscsi": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 40,
-                "rocky-universal-x86_64-*-bios": 40
+                "rocky-universal-x86_64-*-uefi": 40
             },
             "settings": {
                 "ANACONDA_STATIC": "172.16.2.111",
@@ -929,7 +929,7 @@
         "install_kickstart_nfs": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-bios": 30
+                "rocky-universal-x86_64-*-uefi": 30
             },
             "settings": {
                 "GRUB": "inst.ks=nfs:172.16.2.110:/export/root-user-crypted-net.ks",
@@ -1145,7 +1145,7 @@
                 "rocky-dvd-iso-s390x-*-s390x": 30,
                 "rocky-dvd-iso-ppc64le-*-ppc64le": 30,
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1158,7 +1158,7 @@
         "install_repository_nfs_variation": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1171,7 +1171,7 @@
         "install_repository_nfsiso_variation": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
-                "rocky-dvd-iso-x86_64-*-bios": 30
+                "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "INSTALL_UNLOCK": "support_ready",
@@ -1318,7 +1318,7 @@
         "install_updates_nfs": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-bios": 40
+                "rocky-dvd-iso-x86_64-*-uefi": 40
             },
             "settings": {
                 "GRUB": "inst.stage2=nfs:nfsvers=4:172.16.2.110:/repo",
@@ -1772,9 +1772,9 @@
         "support_server": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 10,
-                "rocky-dvd-iso-x86_64-*-bios": 10,
+                "rocky-dvd-iso-x86_64-*-uefi": 10,
                 "rocky-universal-aarch64-*-aarch64": 10,
-                "rocky-universal-x86_64-*-bios": 10
+                "rocky-universal-x86_64-*-uefi": 10
             },
             "settings": {
                 "BOOTFROM": "c",
