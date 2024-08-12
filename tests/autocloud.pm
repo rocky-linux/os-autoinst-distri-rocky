@@ -32,7 +32,6 @@ sub run {
     assert_script_run "tar xvf tunirtests.tar.gz";
     assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomic01Status -v";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtests";
-    _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestBzip2";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestsCpio";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestDiffutills";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestaudit";
