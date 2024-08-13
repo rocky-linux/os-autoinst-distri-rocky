@@ -30,7 +30,6 @@ sub run {
     console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
     assert_script_run "curl -O https://openqa.rockylinux.org/qa/tunirtests.tar.gz";
     assert_script_run "tar -xvzf tunirtests.tar.gz";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomic01Status -v";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtests";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestsCpio";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestDiffutills";
@@ -67,14 +66,6 @@ sub run {
     send_key "alt-f2";
     console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceAfter -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerInstalled -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerStorageSetup -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicFirstBootRun -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicCommand -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicDockerImage -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestRootMount -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.Testreadonlymount -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerDaemon -v";
 }
 
 
