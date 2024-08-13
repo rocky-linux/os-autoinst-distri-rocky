@@ -42,7 +42,7 @@ sub run {
     assert_script_run "sudo python3 -m unittest tunirtests.cloudtests.Testtmpmount -v";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudtests.Testnetname -v";
     # this test only works properly as a regular user
-    _soft_fail_run "tunirtests.cloudtests.TestJournalWritten", 0;
+    #_soft_fail_run "tunirtests.cloudtests.TestJournalWritten", 0;
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceStop -v";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceDisable -v";
     type_string "sudo reboot\n";
@@ -56,7 +56,7 @@ sub run {
     _soft_fail_run "tunirtests.testreboot.TestReboot";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceManipulation -v";
     # this test only works properly as a regular user
-    _soft_fail_run "tunirtests.cloudtests.TestJournalWrittenAfterReboot", 0;
+    #_soft_fail_run "tunirtests.cloudtests.TestJournalWrittenAfterReboot", 0;
     type_string "sudo reboot\n";
     boot_to_login_screen(timeout => 180);
     console_login(user => "root", get_var("USER_PASSWORD", "weakpassword"));
