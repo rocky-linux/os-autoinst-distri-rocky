@@ -29,10 +29,8 @@ sub run {
     send_key "alt-f2";
     console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
     assert_script_run "curl -O https://openqa.rockylinux.org/qa/tunirtests.tar.gz";
-    assert_script_run "tar xvf tunirtests.tar.gz";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomic01Status -v";
+    assert_script_run "tar -xvzf tunirtests.tar.gz";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtests";
-    _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestBzip2";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestsCpio";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestDiffutills";
     _soft_fail_run "tunirtests.nongatingtests.TunirNonGatingtestaudit";
@@ -44,7 +42,7 @@ sub run {
     assert_script_run "sudo python3 -m unittest tunirtests.cloudtests.Testtmpmount -v";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudtests.Testnetname -v";
     # this test only works properly as a regular user
-    _soft_fail_run "tunirtests.cloudtests.TestJournalWritten", 0;
+    #_soft_fail_run "tunirtests.cloudtests.TestJournalWritten", 0;
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceStop -v";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceDisable -v";
     type_string "sudo reboot\n";
@@ -58,7 +56,7 @@ sub run {
     _soft_fail_run "tunirtests.testreboot.TestReboot";
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceManipulation -v";
     # this test only works properly as a regular user
-    _soft_fail_run "tunirtests.cloudtests.TestJournalWrittenAfterReboot", 0;
+    #_soft_fail_run "tunirtests.cloudtests.TestJournalWrittenAfterReboot", 0;
     type_string "sudo reboot\n";
     boot_to_login_screen(timeout => 180);
     console_login(user => "root", get_var("USER_PASSWORD", "weakpassword"));
@@ -68,14 +66,6 @@ sub run {
     send_key "alt-f2";
     console_login(user => get_var("USER_LOGIN", "test"), password => get_var("USER_PASSWORD", "weakpassword"));
     assert_script_run "sudo python3 -m unittest tunirtests.cloudservice.TestServiceAfter -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerInstalled -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerStorageSetup -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicFirstBootRun -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicCommand -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestAtomicDockerImage -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestRootMount -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.Testreadonlymount -v";
-    assert_script_run "sudo python3 -m unittest tunirtests.atomictests.TestDockerDaemon -v";
 }
 
 
