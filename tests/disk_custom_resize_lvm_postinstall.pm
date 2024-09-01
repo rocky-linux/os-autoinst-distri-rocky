@@ -5,8 +5,9 @@ use testapi;
 sub run {
     assert_screen "root_console";
     # check that there is a root partition and that it has
-    # the correct size -> 13G
-    assert_script_run "lsblk | grep root | grep '12G'";
+    # the correct size -> 11.5G
+    script_run "lsblk";
+    assert_script_run "lsblk | grep root | grep '11.5G'";
 }
 
 sub test_flags {

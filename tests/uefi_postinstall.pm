@@ -14,6 +14,7 @@ sub run {
     # this test shows if the system is booted with efi
     assert_script_run '[ -d /sys/firmware/efi/ ]';
     # this test shows if the system is secure boot
+    script_run 'df;lsblk';
     script_run 'mokutil --sb-state';
 }
 
