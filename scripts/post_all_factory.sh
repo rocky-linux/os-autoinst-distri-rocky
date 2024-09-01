@@ -2,7 +2,8 @@
 
 set -x
 
-ARCHES=(x86_64)
+ARCHES=("x86_64")
+VERSIONS=("8.10" "9.4")
 ISO_URL_BASE="https://download.rockylinux.org/pub/rocky"
 FACTORY_ISO_FIXED_DIR=/var/tmp/openqa/share/factory/iso/fixed
 
@@ -21,27 +22,40 @@ get_latest_iso() {
 
 for arch in "${ARCHES[@]}";
 do
-  for version in "9.2" "8.8";
+  for version in "${VERSIONS[@]}";
   do
     # Using the same BUILD message for all test suites will group all jobs into a single item
     build_msg="$(date +%Y%m%d)-Rocky-${version}-${arch}.0"
+    version_major=$(printf "%s\n" "${version}" | cut -d\. -f1)
 
     for media in boot minimal;
     do
       latest_iso=$(get_latest_iso "${version}" "${arch}" "${media}")
       test -f "${FACTORY_ISO_FIXED_DIR}/${latest_iso}" || \
-          (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version:0:1}/isos/${arch}/${latest_iso}")
-      openqa-cli api -X POST isos \
-        ISO="${latest_iso}" \
-        ARCH="${arch}" \
-        DISTRI=rocky \
-        FLAVOR="${media}-iso" \
-        VERSION="${version}" \
-        CURRREL="${version:0:1}" \
-        BUILD="${build_msg}"
+          (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version_major}/isos/${arch}/${latest_iso}")
+      if [ "${version_major}" == "8" ]; then
+        openqa-cli api -X POST isos \
+          ISO="${latest_iso}" \
+          ARCH="${arch}" \
+          DISTRI=rocky \
+          FLAVOR="${media}-iso" \
+          VERSION="${version}" \
+          CURRREL="${version_major}" \
+          GRUB="ip=dhcp" \
+          BUILD="${build_msg}" "$@"
+      else
+        openqa-cli api -X POST isos \
+          ISO="${latest_iso}" \
+          ARCH="${arch}" \
+          DISTRI=rocky \
+          FLAVOR="${media}-iso" \
+          VERSION="${version}" \
+          CURRREL="${version_major}" \
+          BUILD="${build_msg}" "$@"
+      fi
     done
 
-    case ${version:0:1} in
+    case ${version_major} in
       8)
         media=dvd1
         ;;
@@ -55,48 +69,90 @@ do
     do
       latest_iso=$(get_latest_iso "${version}" "${arch}" "${media}")
       test -f "${FACTORY_ISO_FIXED_DIR}/${latest_iso}" || \
-          (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version:0:1}/isos/${arch}/${latest_iso}")
+          (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version_major}/isos/${arch}/${latest_iso}")
       case ${flavor} in
         universal)
           # universal will boot with DVD ISO but perform a network install from LOCATION
           # NOTE: In Rocky 8 there may be network available on boot issue
-          openqa-cli api -X POST isos \
-            ISO="${latest_iso}" \
-            ARCH="${arch}" \
-            DISTRI=rocky \
-            FLAVOR="${flavor}" \
-            LOCATION="${ISO_URL_BASE}/${version}/BaseOS" \
-            NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
-            QEMU_HOST_IP="172.16.2.2" \
-            VERSION="${version}" \
-            CURRREL="${version:0:1}" \
-            BUILD="${build_msg}"
+          if [ "${version_major}" == "8" ]; then
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              LOCATION="${ISO_URL_BASE}/${version}" \
+              NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
+              QEMU_HOST_IP="172.16.2.2" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              GRUB="ip=dhcp" \
+              BUILD="${build_msg}" "$@"
+          else
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              LOCATION="${ISO_URL_BASE}/${version}" \
+              NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
+              QEMU_HOST_IP="172.16.2.2" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              BUILD="${build_msg}" "$@"
+          fi
           ;;
         dvd-iso)
           # dvd-iso FLAVOR needs NIC_TYPE_USER_OPTIONS and QEMU_HOST_IP for multi-worker tests
           # and LOCATION for various repository variations and support_server
-          openqa-cli api -X POST isos \
-            ISO="${latest_iso}" \
-            ARCH="${arch}" \
-            DISTRI=rocky \
-            FLAVOR="${flavor}" \
-            LOCATION="${ISO_URL_BASE}/${version}/BaseOS" \
-            NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
-            QEMU_HOST_IP="172.16.2.2" \
-            VERSION="${version}" \
-            CURRREL="${version:0:1}" \
-            BUILD="${build_msg}"
+          if [ "${version_major}" == "8" ]; then
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              LOCATION="${ISO_URL_BASE}/${version}" \
+              NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
+              QEMU_HOST_IP="172.16.2.2" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              GRUB="ip=dhcp" \
+              BUILD="${build_msg}" "$@"
+          else
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              LOCATION="${ISO_URL_BASE}/${version}" \
+              NICTYPE_USER_OPTIONS="net=172.16.2.0/24" \
+              QEMU_HOST_IP="172.16.2.2" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              BUILD="${build_msg}" "$@"
+          fi
           ;;
         package-set)
           # package-set FLAVOR is media only
-          openqa-cli api -X POST isos \
-            ISO="${latest_iso}" \
-            ARCH="${arch}" \
-            DISTRI=rocky \
-            FLAVOR="${flavor}" \
-            VERSION="${version}" \
-            CURRREL="${version:0:1}" \
-            BUILD="${build_msg}"
+          if [ "${version_major}" == "8" ]; then
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              GRUB="ip=dhcp" \
+              BUILD="${build_msg}" "$@"
+          else
+            openqa-cli api -X POST isos \
+              ISO="${latest_iso}" \
+              ARCH="${arch}" \
+              DISTRI=rocky \
+              FLAVOR="${flavor}" \
+              VERSION="${version}" \
+              CURRREL="${version_major}" \
+              BUILD="${build_msg}" "$@"
+          fi
           ;;
         *)
           ;;
