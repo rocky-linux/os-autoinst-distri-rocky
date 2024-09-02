@@ -33,6 +33,7 @@ do
       latest_image=$(get_latest_image "${version_major}" "${arch}" "${image_class}")
       test -f "${FACTORY_HDD_FIXED_DIR}/${latest_image}" || \
           (cd "${FACTORY_HDD_FIXED_DIR}" || exit; curl -LOR "${IMAGE_URL_BASE}/${version_major}/images/${arch}/${latest_image}")
+
       flavor=$(printf "%s\n" "${image_class}" | tr '-' '_')
       openqa-cli api -X POST isos \
         HDD_2="${latest_image}" \

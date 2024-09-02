@@ -32,7 +32,7 @@ do
     latest_iso=$(get_latest_iso "${version}" "${arch}" "${flavor}")
     test -f "${FACTORY_ISO_FIXED_DIR}/${latest_iso}" || \
         (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version_major}/isos/${arch}/${latest_iso}")
-  
+
     if [ "${version_major}" == "8" ]; then
       openqa-cli api -X POST isos \
           ISO="${latest_iso}" \

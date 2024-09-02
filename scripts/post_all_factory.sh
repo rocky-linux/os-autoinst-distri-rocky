@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -x
 
@@ -33,6 +33,7 @@ do
       latest_iso=$(get_latest_iso "${version}" "${arch}" "${media}")
       test -f "${FACTORY_ISO_FIXED_DIR}/${latest_iso}" || \
           (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version_major}/isos/${arch}/${latest_iso}")
+
       if [ "${version_major}" == "8" ]; then
         openqa-cli api -X POST isos \
           ISO="${latest_iso}" \
@@ -70,6 +71,7 @@ do
       latest_iso=$(get_latest_iso "${version}" "${arch}" "${media}")
       test -f "${FACTORY_ISO_FIXED_DIR}/${latest_iso}" || \
           (cd "${FACTORY_ISO_FIXED_DIR}" || exit; curl -LOR "${ISO_URL_BASE}/${version_major}/isos/${arch}/${latest_iso}")
+
       case ${flavor} in
         universal)
           # universal will boot with DVD ISO but perform a network install from LOCATION
