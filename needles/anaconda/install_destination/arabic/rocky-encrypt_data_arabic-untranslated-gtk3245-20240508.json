@@ -3,9 +3,13 @@
     {
       "ypos": 544,
       "height": 23,
-      "width": 127,
-      "xpos": 786,
-      "type": "match"
+      "width": 259,
+      "xpos": 747,
+      "type": "match",
+      "click_point": {
+        "xpos": 246,
+        "ypos": 12
+      }
     }
   ],
   "properties": [],
