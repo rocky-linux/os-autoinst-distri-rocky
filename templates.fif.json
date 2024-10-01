@@ -669,14 +669,14 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
-        "desktop_login": {
+        "desktop_browser": {
             "profiles": {
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "desktop_login",
+                "POSTINSTALL": "desktop_browser",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
@@ -691,14 +691,25 @@
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
-        "desktop_browser": {
+        "desktop_keyring": {
             "profiles": {
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
                 "BOOTFROM": "c",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "desktop_browser",
+                "POSTINSTALL_PATH": "tests/applications/keyring",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_login": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_login",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
