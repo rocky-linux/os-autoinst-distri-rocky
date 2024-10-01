@@ -470,6 +470,17 @@
         }
     },
     "TestSuites": {
+        "apps_startstop": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "STARTSTOP": "true",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "anaconda_help": {
             "profiles": {
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -656,6 +667,204 @@
                 "INSTALL": "1",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "install_lvm_ext4"
+            }
+        },
+        "archiver": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/archiver",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "calculator": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/calculator",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "characters": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/characters",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "clocks": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/clocks",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "contacts": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/contacts",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "disks": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/disks",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "evince": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/evince",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "fonts": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/fonts",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "gnome-panel": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/gnome-panel",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "gnome_text_editor": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/gnome-text-editor",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "help_viewer": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/help",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "loupe": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/loupe",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "maps": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/maps",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "nautilus": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/nautilus",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "navigation": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/navigation",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "sysmon": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/sysmon",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "tour": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/tour",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "weather": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 50
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL_PATH": "tests/applications/weather",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
             }
         },
         "install_anaconda_text": {
