@@ -658,6 +658,103 @@
                 "START_AFTER_TEST": "install_lvm_ext4"
             }
         },
+        "desktop_background": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_background",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_login": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_login",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_fprint": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_fprint",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_browser": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_browser",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_notifications_live": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "ENTRYPOINT": "desktop_notifications"
+            }
+        },
+        "desktop_notifications_postinstall": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "ENTRYPOINT": "desktop_notifications",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_printing": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "USE_CUPS": "1",
+                "POSTINSTALL": "desktop_printing",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_printing_builtin": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_printing",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
+        "desktop_terminal": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "POSTINSTALL": "desktop_terminal",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
+            }
+        },
         "install_anaconda_text": {
             "profiles": {
                 "rocky-universal-s390x-*-s390x": 20,
