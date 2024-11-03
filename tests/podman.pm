@@ -14,19 +14,19 @@ sub run {
     # check podman is installed
     assert_script_run "rpm -q podman";
     # check to see if you can pull an image from the registry
-    assert_script_run "podman pull registry.fedoraproject.org/fedora:latest", 300;
+    assert_script_run "podman pull docker.io/rockylinux/rockylinux:9", 300;
     # run hello-world to test
-    validate_script_output "podman run -it registry.fedoraproject.org/fedora:latest echo Hello-World", sub { m/Hello-World/ };
+    validate_script_output "podman run -it docker.io/rockylinux/rockylinux:9 echo Hello-World", sub { m/Hello-World/ };
     # create a Dockerfile
-    assert_script_run 'printf \'FROM registry.fedoraproject.org/fedora:latest\nRUN /usr/bin/dnf install -y httpd\nEXPOSE 80\nCMD ["-D", "FOREGROUND"]\nENTRYPOINT ["/usr/sbin/httpd"]\n\' > Dockerfile';
+    assert_script_run 'printf \'FROM docker.io/rockylinux/rockylinux:9\nRUN /usr/bin/dnf install -y httpd\nEXPOSE 80\nCMD ["-D", "FOREGROUND"]\nENTRYPOINT ["/usr/sbin/httpd"]\n\' > Dockerfile';
     # Build an image
-    assert_script_run 'podman build -t fedora-httpd $(pwd)', 180;
+    assert_script_run 'podman build -t rocky-httpd $(pwd)', 180;
     # Verify the image
-    validate_script_output "podman images", sub { m/fedora-httpd/ };
+    validate_script_output "podman images", sub { m/rocky-httpd/ };
     # Run the container
-    assert_script_run "podman run -d -p 80:80 localhost/fedora-httpd";
+    assert_script_run "podman run -d -p 80:80 localhost/rocky-httpd";
     # Verify the container is running
-    validate_script_output "podman container ls", sub { m/fedora-httpd/ };
+    validate_script_output "podman container ls", sub { m/rocky-httpd/ };
     # Test apache is working
     assert_script_run "curl http://localhost";
     # Open the firewall, except on CoreOS where it's not installed
