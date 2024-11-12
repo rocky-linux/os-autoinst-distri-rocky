@@ -118,6 +118,13 @@ sub desktop_vt {
             type_very_safely "weakpassword\n";
         }
     }
+    else {
+    type_very_safely "\t";
+    type_very_safely "\n";
+    type_very_safely "weakpassword\n";
+    wait_still_screen 3;
+    send_key 'alt-f1';
+    }
 }
 
 # Wait for login screen to appear. Handle the annoying GPU buffer
