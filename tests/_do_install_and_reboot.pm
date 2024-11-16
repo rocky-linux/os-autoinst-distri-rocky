@@ -182,7 +182,7 @@ sub run {
         # messages, which screw up some needles
         assert_script_run 'sed -i -e "s,\(GRUB_CMDLINE_LINUX.*\)\",\1 console=tty0 quiet\",g" ' . $mount . '/etc/default/grub';
         # regenerate the bootloader config
-        assert_script_run "chroot $mount grub2-mkconfig -o /boot/efi/EFI/rocky/grub.cfg";
+        assert_script_run "chroot $mount grub2-mkconfig -o /boot/grub2/grub.cfg";
     }
     if (grep { $_ eq 'abrt' } @actions) {
         # Chroot in the newly installed system and switch on ABRT systemwide
