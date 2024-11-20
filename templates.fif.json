@@ -1098,15 +1098,14 @@
         "install_pxeboot": {
             "profiles": {
                 "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-uefi": 30,
-                "rocky-universal-x86_64-*-bios": 31
+                "rocky-universal-x86_64-*-uefi": 30
             },
             "settings": {
                 "+ISO": "",
                 "DELAYED_START": "1",
                 "KICKSTART": "1",
                 "NICTYPE": "tap",
-                "PARALLEL_WITH": "support_server@bios",
+                "PARALLEL_WITH": "support_server",
                 "PXEBOOT": "once",
                 "ROOT_PASSWORD": "111111",
                 "TEST_TARGET": "COMPOSE",
