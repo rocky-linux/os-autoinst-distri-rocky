@@ -12,7 +12,7 @@ set -e
 ## Run the localization test suites
 # ROCKY_FLAVOR ROCKY_EXTRA_ARGS=TEST=install_arabic_language,install_asian_language,install_european_language,install_cyrillic_language scripts/run-openqa-tests.sh
 
-ROCKY_VERSION="9.2"
+ROCKY_VERSION="9.5"
 
 MAJOR_VERSION=${ROCKY_VERSION:0:1}
 MINOR_VERSION=${ROCKY_VERSION:2:1}

@@ -3,7 +3,7 @@
 set -x
 
 ARCHES=("x86_64" "aarch64")
-VERSIONS=("8.10" "9.4")
+VERSIONS=("8.10" "9.5")
 ISO_URL_BASE="https://download.rockylinux.org/pub/rocky"
 FACTORY_ISO_FIXED_DIR=/var/tmp/openqa/share/factory/iso/fixed
 
