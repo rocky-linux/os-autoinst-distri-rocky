@@ -6,7 +6,7 @@ set -e
 # Test a beta build with alternative repo URL
 #   ROCKY_EXTRA_ARGS="GRUB=ip=dhcp GRUBADD=inst.repo=https://dl.rockylinux.org/stg/rocky/8.8-BETA/BaseOS/x86_64/os DNF_CONTENTDIR=stg CURRREL=8 IDENTIFICATION=false" scripts/run-all-flavors.sh
 
-ROCKY_VERSION="9.2"
+ROCKY_VERSION="9.5"
 
 MAJOR_VERSION=${ROCKY_VERSION:0:1}
 MINOR_VERSION=${ROCKY_VERSION:2:1}

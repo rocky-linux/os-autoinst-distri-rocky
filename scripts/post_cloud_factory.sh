@@ -3,7 +3,7 @@
 set -x
 
 ARCHES=("x86_64")
-VERSIONS=("8.10" "9.4")
+VERSIONS=("8.10" "9.5")
 IMAGE_URL_BASE="https://dl.rockylinux.org/pub/rocky"
 FACTORY_HDD_FIXED_DIR=/var/tmp/openqa/share/factory/hdd/fixed
 
