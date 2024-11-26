@@ -25,7 +25,7 @@ sub download_testdata {
     # Change ownership and attributes
     assert_script_run("chown -R test:test openqa_testdata");
     # Move the test file into a correct location.
-    assert_script_run("cp openqa_testdata/evince/evince.pdf Documents");
+    assert_script_run("cp openqa_testdata/documents/evince.pdf Documents");
 }
 
 sub run {
