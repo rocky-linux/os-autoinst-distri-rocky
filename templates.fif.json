@@ -1403,6 +1403,17 @@
                 "DESKTOP": "false"
             }
         },
+        "install_zfs": {
+            "profiles": {
+                "rocky-universal-x86_64-*-uefi": 40
+            },
+            "settings": {
+                "PARTITIONING": "custom_zfs",
+                "ROOT_PASSWORD": "weakpassword",
+                "PACKAGE_SET": "minimal",
+                "DESKTOP": "false"
+            }
+        },
         "memtest": {
             "profiles": {
                 "rocky-universal-s390x-*-s390x": 30,
