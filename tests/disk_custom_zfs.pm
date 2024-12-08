@@ -15,6 +15,7 @@ sub run {
     custom_scheme_select("standard");
     # Do 'automatic' partition creation
     assert_and_click "anaconda_part_automatic";
+    # Load xfs to give a running system to install zfs on
     # Change root partition to xfs
     custom_change_fs("xfs");
     assert_and_click "anaconda_spoke_done";

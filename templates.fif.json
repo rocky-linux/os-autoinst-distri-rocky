@@ -1409,6 +1409,7 @@
             },
             "settings": {
                 "PARTITIONING": "custom_zfs",
+                "POSTINSTALL": "disk_custom_zfs_postinstall",
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
                 "DESKTOP": "false"
