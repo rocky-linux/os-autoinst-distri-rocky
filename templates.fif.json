@@ -1412,6 +1412,7 @@
                 "POSTINSTALL": "disk_custom_zfs_postinstall",
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
+                "STORE_HDD_1": "disk_%MACHINE%_zfs.qcow2",
                 "DESKTOP": "false"
             }
         },
