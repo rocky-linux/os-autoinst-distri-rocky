@@ -88,6 +88,8 @@
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
+                "INSECURE_PFLASH_CODE": "/usr/share/edk2/ovmf/OVMF_CODE.fd",
+                "INSECURE_PFLASH_VARS": "/usr/share/edk2/ovmf/OVMF_VARS.fd",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMUCPU": "Nehalem",
                 "QEMUCPUS": "2",
@@ -1413,6 +1415,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
                 "STORE_HDD_1": "disk_%MACHINE%_zfs.qcow2",
+                "UEFI_SECURE": "0",
                 "DESKTOP": "false"
             }
         },
