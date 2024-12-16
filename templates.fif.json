@@ -66,7 +66,7 @@
                 "WORKER_CLASS": "qemu_ppc64le"
             }
         },
-        "uefx": {
+        "64bit": {
             "backend": "qemu",
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
@@ -464,6 +464,10 @@
         },
         "rocky-universal-x86_64-*-bios": {
             "machine": "bios",
+            "product": "rocky-universal-x86_64-*"
+        },
+        "rocky-universal-x86_64-*-64bit": {
+            "machine": "64bit",
             "product": "rocky-universal-x86_64-*"
         },
         "rocky-universal-x86_64-*-uefi": {
@@ -1407,7 +1411,7 @@
         },
         "install_zfs": {
             "profiles": {
-                "rocky-universal-x86_64-*-uefi": 40
+                "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
                 "PARTITIONING": "custom_zfs",
@@ -1415,7 +1419,6 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
                 "STORE_HDD_1": "disk_%MACHINE%_zfs.qcow2",
-                "UEFI_SECURE": "0",
                 "DESKTOP": "false"
             }
         },
