@@ -1414,8 +1414,9 @@
                 "rocky-universal-x86_64-*-64bit": 40
             },
             "settings": {
-                "PARTITIONING": "custom_zfs",
-                "POSTINSTALL": "disk_custom_zfs_postinstall",
+                "NUMDISKS": "3",
+                "PARTITIONING": "custom_xfs",
+                "POSTINSTALL": "disk_custom_zfs_install",
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
                 "STORE_HDD_1": "disk_%MACHINE%_zfs.qcow2",
