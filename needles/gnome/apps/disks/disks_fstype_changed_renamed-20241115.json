@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 294,
+      "height": 38,
+      "type": "match",
+      "ypos": 259,
+      "width": 72
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_fstype_changed_renamed"
+  ]
+}

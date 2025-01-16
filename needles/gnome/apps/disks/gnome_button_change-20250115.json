@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 546,
+      "ypos": 423,
+      "width": 58,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gnome_button_change"
+  ]
+}

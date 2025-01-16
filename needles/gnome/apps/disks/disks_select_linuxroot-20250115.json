@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 269,
+      "ypos": 190,
+      "width": 193,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_select_linuxroot"
+  ]
+}

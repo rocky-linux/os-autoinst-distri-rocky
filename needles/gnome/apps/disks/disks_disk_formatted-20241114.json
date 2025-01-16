@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 584,
+      "ypos": 263,
+      "width": 64,
+      "height": 27,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_disk_formatted"
+  ]
+}

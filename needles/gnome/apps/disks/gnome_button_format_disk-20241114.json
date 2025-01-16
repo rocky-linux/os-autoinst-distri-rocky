@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 682,
+      "ypos": 452,
+      "width": 70,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "gnome_button_format_disk"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 301,
+      "ypos": 379,
+      "width": 139,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_select_swap"
+  ]
+}
