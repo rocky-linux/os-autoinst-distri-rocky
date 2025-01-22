@@ -1,16 +1,16 @@
 {
   "area": [
     {
-      "xpos": 951,
-      "ypos": 44,
-      "width": 20,
-      "height": 20,
+      "xpos": 411,
+      "ypos": 41,
+      "width": 79,
+      "height": 27,
       "type": "match"
     }
   ],
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "gnome_burger_menu"
+    "clocks_button_alarm"
   ]
 }

@@ -1,9 +1,9 @@
 {
   "area": [
     {
-      "xpos": 951,
-      "ypos": 44,
-      "width": 20,
+      "xpos": 657,
+      "ypos": 143,
+      "width": 38,
       "height": 20,
       "type": "match"
     }
@@ -11,6 +11,6 @@
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
-    "gnome_burger_menu"
+    "gnome_add_button"
   ]
 }
