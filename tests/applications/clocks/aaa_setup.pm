@@ -1,13 +1,18 @@
 use base "installedtest";
+
 use strict;
 use testapi;
 use utils;
 
-# This script will start the Gnome Clocks application and save the status
+# This script will install and start the Gnome Clocks application and save the status
 # for any subsequent tests.
 
 sub run {
     my $self = shift;
+
+    console_login();
+    assert_script_run("flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo");
+    assert_script_run "flatpak install -y flathub org.gnome.clocks",300;
 
     # At first, we need to set time and time zones manually.
     $self->root_console(tty => 3);
@@ -16,7 +21,7 @@ sub run {
     # Set the time zone
     assert_script_run("timedatectl set-timezone Europe/Prague");
     # Set the time and date
-    assert_script_run("timedatectl set-time '2022-09-09 09:00:00'");
+    assert_script_run("timedatectl set-time '2024-09-09 09:00:00'");
     # Return back
     desktop_vt();
 
