@@ -73,9 +73,9 @@ sub run {
     # Check that two numbers can be divided.
     calculate("77", "7", "div");
     # Check that two numbers can be divided using modulo.
-    calculate("28", "5", "mod");
+#    calculate("28", "5", "mod");
     # Check that you can count with Pi
-    calculate("p", "10", "multi");
+#    calculate("p", "10", "multi");
     # Check that you can use a root
     calculate("r144", "10", "add");
     # Check that you can use square

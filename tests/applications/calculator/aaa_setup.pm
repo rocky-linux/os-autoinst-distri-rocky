@@ -7,6 +7,10 @@ use utils;
 
 sub run {
     my $self = shift;
+
+    console_login();
+    desktop_vt();
+
     # Set update notification timestamp
     set_update_notification_timestamp();
     # Run the application
