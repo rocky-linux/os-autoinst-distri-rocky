@@ -1431,6 +1431,39 @@
                 "USER_LOGIN": "false"
             }
         },
+        "podman": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "podman",
+                "POST_STATIC": "172.16.2.114 podman001.test.openqa.rockylinux.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap2"
+            }
+        },
+        "podman_client": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "podman",
+                "POSTINSTALL": "_podman_client",
+                "POST_STATIC": "172.16.2.115 podclient001.test.openqa.rockylinux.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap2"
+            }
+        },
         "realmd_join_cockpit": {
             "profiles": {
                 "rocky-dvd-iso-aarch64-*-aarch64": 30,
