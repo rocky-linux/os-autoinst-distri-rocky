@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 124,
+      "ypos": 98,
+      "width": 215,
+      "height": 29,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "weather_icon_current",
+    "cheating"
+  ]
+}
