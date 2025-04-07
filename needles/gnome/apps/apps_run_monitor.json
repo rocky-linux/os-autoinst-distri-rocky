@@ -10,6 +10,8 @@
   ],
   "properties": [],
   "tags": [
-    "apps_run_monitor"
+    "apps_run_monitor",
+    "apps_run_systemmonitor",
+    "ENV-DISTRI-rocky"
   ]
 }
