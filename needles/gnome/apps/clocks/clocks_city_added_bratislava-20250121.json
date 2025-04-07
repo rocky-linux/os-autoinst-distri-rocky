@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 230,
+      "ypos": 110,
+      "width": 81,
+      "height": 26,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "clocks_city_added_bratislava"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 27,
+      "xpos": 232,
+      "width": 28,
+      "ypos": 344
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_button_mount"
+  ]
+}

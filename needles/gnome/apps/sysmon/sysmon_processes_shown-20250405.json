@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 321,
+      "ypos": 44,
+      "width": 98,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "sysmon_processes_shown"
+  ]
+}

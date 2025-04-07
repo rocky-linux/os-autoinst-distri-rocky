@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 273,
+      "ypos": 349,
+      "type": "match",
+      "width": 25,
+      "height": 19
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_partition_delete"
+  ]
+}

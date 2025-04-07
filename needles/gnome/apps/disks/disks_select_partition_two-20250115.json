@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 699,
+      "ypos": 271,
+      "width": 55,
+      "height": 12,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    " ENV-DISTRI-rocky",
+    "disks_select_partition_two"
+  ]
+}

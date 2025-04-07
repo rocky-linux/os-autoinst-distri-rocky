@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 444,
+      "ypos": 213,
+      "width": 53,
+      "height": 46,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "clocks_alarm_hour"
+  ]
+}

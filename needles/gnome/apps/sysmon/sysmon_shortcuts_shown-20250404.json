@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 474,
+      "ypos": 164,
+      "width": 75,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "sysmon_shortcuts_shown"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 544,
+      "ypos": 56,
+      "width": 80,
+      "height": 28,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "apps_run_clocks"
+  ]
+}

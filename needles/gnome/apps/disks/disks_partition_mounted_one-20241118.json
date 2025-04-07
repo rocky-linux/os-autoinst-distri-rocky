@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 450,
+      "height": 23,
+      "width": 220,
+      "type": "match",
+      "ypos": 402
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_partition_mounted_one"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 330,
+      "ypos": 243,
+      "width": 78,
+      "height": 29,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gnome_city_button_bratislava"
+  ]
+}
