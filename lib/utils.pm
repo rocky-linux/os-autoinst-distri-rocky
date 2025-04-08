@@ -871,12 +871,22 @@ sub download_modularity_tests {
 
 sub quit_firefox {
     # Quit Firefox, handling the 'close multiple tabs' warning screen if
-    # it shows up
+    # it shows up. Expects to quit to a recognizable console
     send_key "ctrl-q";
     # expect to get to either the tabs warning or a console
     if (check_screen ["user_console", "root_console", "firefox_close_tabs"], 30) {
-        # if we hit the tabs warning, click it
-        click_lastmatch if (match_has_tag "firefox_close_tabs");
+        # if we hit a console we're good
+        unless (match_has_tag("firefox_close_tabs")) {
+            wait_still_screen 5;
+            return;
+        }
+        # otherwise we hit the tabs warning, click it
+        click_lastmatch;
+        # again, if we hit a console, we're good
+        if (check_screen ["user_console", "root_console"], 30) {
+            wait_still_screen 5;
+            return;
+        }
     }
     # it's a bit odd if we reach here, but could mean we quit to a
     # desktop, or the firefox_close_tabs needle went stale...
