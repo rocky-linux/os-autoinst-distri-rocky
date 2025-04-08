@@ -34,7 +34,6 @@ sub run {
 
     # Quit Cockpit
     quit_firefox;
-    sleep 3;
 
     # Check that the dnf-automatic service has started
     assert_script_run "systemctl is-active dnf-automatic-install.timer";
