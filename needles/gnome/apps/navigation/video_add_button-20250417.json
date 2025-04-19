@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 963,
+      "ypos": 45,
+      "width": 31,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "video_add_button"
+  ]
+}

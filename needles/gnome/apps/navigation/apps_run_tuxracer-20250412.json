@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 389,
+      "ypos": 15,
+      "width": 244,
+      "height": 103,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "apps_run_tuxracer"
+  ]
+}
