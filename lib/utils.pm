@@ -822,7 +822,11 @@ sub anaconda_create_user {
         wait_still_screen 2;
         _type_user_password();
     }
-    assert_and_click "anaconda_install_user_creation_make_admin";
+    # In r10+ Add adminstrative privileges to this user account (wheel group membership) is selected
+    my $version_major = get_version_major;
+    if ($version_major < 10) {
+        assert_and_click "anaconda_install_user_creation_make_admin";
+    }
     assert_and_click "anaconda_spoke_done";
     # since 20170105, we will get a warning here when the password
     # contains non-ASCII characters. Assume only switched layouts
