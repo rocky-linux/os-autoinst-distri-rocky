@@ -347,8 +347,9 @@ sub do_bootloader {
         ofw => get_var("OFW"),
         @_
     );
-    # if not postinstall not UEFI and not ofw, syslinux
-    $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) ? "grub" : "syslinux";
+    # if not postinstall, not UEFI, not ofw, and not R10+, syslinux
+    my $version_major = get_version_major;
+    $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) || ($version_major >= 10) ? "grub" : "syslinux";
     # we use the firmware-type specific tags because we want to be
     # sure we actually did a UEFI boot
     my $boottag = "bootloader_bios";
