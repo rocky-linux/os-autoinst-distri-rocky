@@ -141,7 +141,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -152,7 +151,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -163,7 +161,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -174,7 +171,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "+QEMURAM": 3072,
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"

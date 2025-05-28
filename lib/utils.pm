@@ -347,8 +347,9 @@ sub do_bootloader {
         ofw => get_var("OFW"),
         @_
     );
-    # if not postinstall not UEFI and not ofw, syslinux
-    $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) ? "grub" : "syslinux";
+    # if not postinstall, not UEFI, not ofw, and not R10+, syslinux
+    my $version_major = get_version_major;
+    $args{bootloader} //= ($args{uefi} || $args{postinstall} || $args{ofw}) || ($version_major >= 10) ? "grub" : "syslinux";
     # we use the firmware-type specific tags because we want to be
     # sure we actually did a UEFI boot
     my $boottag = "bootloader_bios";
@@ -821,7 +822,11 @@ sub anaconda_create_user {
         wait_still_screen 2;
         _type_user_password();
     }
-    assert_and_click "anaconda_install_user_creation_make_admin";
+    # In r10+ Add adminstrative privileges to this user account (wheel group membership) is selected
+    my $version_major = get_version_major;
+    if ($version_major < 10) {
+        assert_and_click "anaconda_install_user_creation_make_admin";
+    }
     assert_and_click "anaconda_spoke_done";
     # since 20170105, we will get a warning here when the password
     # contains non-ASCII characters. Assume only switched layouts

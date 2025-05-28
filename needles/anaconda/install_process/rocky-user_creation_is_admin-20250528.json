@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 336,
+      "width": 200,
+      "ypos": 178,
+      "height": 22,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_install_user_creation_make_admin"
+  ]
+}
