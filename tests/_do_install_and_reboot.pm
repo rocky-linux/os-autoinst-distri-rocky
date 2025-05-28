@@ -11,35 +11,16 @@ sub _set_root_password {
     my $root_password = get_var("ROOT_PASSWORD") || "weakpassword";
     unless (get_var("INSTALLER_NO_ROOT")) {
         assert_and_click "anaconda_install_root_password";
-        if (get_var("MEMCHECK")) {
-            # work around https://bugzilla.redhat.com/show_bug.cgi?id=1659266
-            unless (check_screen "anaconda_install_root_password_screen", 30) {
-                record_soft_failure "UI may be frozen due to brc#1659266";
-                assert_screen "anaconda_install_root_password_screen", 300;
-            }
-        }
-        else {
-            assert_screen "anaconda_install_root_password_screen";
-        }
+        assert_screen "anaconda_install_root_password_screen";
         # wait out animation
         wait_still_screen 2;
         desktop_switch_layout("ascii", "anaconda") if (get_var("SWITCHED_LAYOUT"));
-        if (get_var("IMAGETYPE") eq 'dvd-ostree') {
-            # we can't type SUPER safely for ostree installer tests, as
-            # the install completes quite fast and if we type too slow
-            # the USER CREATION spoke may be blocked
-            type_safely $root_password;
-            wait_screen_change { send_key "tab"; };
-            type_safely $root_password;
-        }
-        else {
-            # these screens seems insanely subject to typing errors, so
-            # type super safely. This doesn't really slow the test down
-            # as we still get done before the install process is complete.
-            type_very_safely $root_password;
-            wait_screen_change { send_key "tab"; };
-            type_very_safely $root_password;
-        }
+        # these screens seems insanely subject to typing errors, so
+        # type super safely. This doesn't really slow the test down
+        # as we still get done before the install process is complete.
+        type_very_safely $root_password;
+        wait_screen_change { send_key "tab"; };
+        type_very_safely $root_password;
         # Another screen to test identification on
         my $identification = get_var('IDENTIFICATION');
         if ($identification eq 'true') {
