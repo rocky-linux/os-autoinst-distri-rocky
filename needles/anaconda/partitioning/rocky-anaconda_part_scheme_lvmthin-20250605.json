@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 64,
+      "ypos": 287,
+      "width": 141,
+      "height": 20,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_part_scheme_lvmthin"
+  ]
+}
