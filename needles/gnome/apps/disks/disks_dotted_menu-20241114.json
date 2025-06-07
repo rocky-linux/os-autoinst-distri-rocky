@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "xpos": 940,
+      "ypos": 40,
+      "width": 26,
+      "height": 28,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_dotted_menu"
+  ]
+}

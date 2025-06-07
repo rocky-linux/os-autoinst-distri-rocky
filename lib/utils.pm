@@ -8,7 +8,7 @@ use Exporter;
 use feature "switch";
 use lockapi;
 use testapi;
-our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_version_major get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper/;
+our @EXPORT = qw/run_with_error_check type_safely type_very_safely desktop_vt boot_to_login_screen console_login console_switch_layout desktop_switch_layout console_loadkeys_us do_bootloader boot_decrypt check_release menu_launch_type repo_setup cleanup_workaround_repo console_initial_setup handle_welcome_screen gnome_initial_setup anaconda_create_user check_desktop download_modularity_tests quit_firefox advisory_get_installed_packages advisory_check_nonmatching_packages start_with_launcher quit_with_shortcut lo_dismiss_tip disable_firefox_studies select_rescue_mode copy_devcdrom_as_isofile get_release_number get_version_major get_code_name check_left_bar check_top_bar check_prerelease check_version spell_version_number _assert_and_click is_branched rec_log click_unwanted_notifications repos_mirrorlist register_application get_registered_applications solidify_wallpaper check_and_install_git download_testdata make_serial_writable set_update_notification_timestamp kde_doublek_workaround dm_perform_login/;
 
 # We introduce this global variable to hold the list of applications that have
 # registered during the apps_startstop_test when they have sucessfully run.
@@ -117,6 +117,13 @@ sub desktop_vt {
         if (check_screen "auth_required", 1) {
             type_very_safely "weakpassword\n";
         }
+    }
+    else {
+    type_very_safely "\t";
+    type_very_safely "\n";
+    type_very_safely "weakpassword\n";
+    wait_still_screen 3;
+    send_key 'alt-f1';
     }
 }
 
@@ -1394,6 +1401,161 @@ sub solidify_wallpaper {
         # check that is has changed color
         assert_screen 'apps_settings_screen_black';
     }
+}
+
+# This routine is used in Desktop test suites, such as Evince or Gedit.
+# It checks if git is installed and installs it, if necessary.
+sub check_and_install_git {
+    unless (get_var("CANNED")) {
+        if (script_run("rpm -q git")) {
+            assert_script_run("dnf install -y git");
+        }
+    }
+}
+
+# This routine is used in Desktop test suites. It downloads the test data from
+# the repository and populates the directory structure.
+# The data repository is located at https://pagure.io/fedora-qa/openqa_testdata.
+
+sub download_testdata {
+    # We can select which Data to copy over.
+    my $data = shift;
+    $data = 'structure' unless ($data);
+    # Navigate to the user's home directory
+    my $user = get_var("USER_LOGIN") // "test";
+    assert_script_run("cd /home/$user/");
+    # Create a temporary directory to unpack the zipped file.
+    assert_script_run("mkdir temp");
+    assert_script_run("cd temp");
+    # Download the compressed file with the repository content.
+    assert_script_run("curl --retry-delay 10 --max-time 120 --retry 5 -o repository.tar.gz https://pagure.io/fedora-qa/openqa_testdata/blob/thetree/f/repository.tar.gz", timeout => 600);
+    # Untar it.
+    assert_script_run("tar -zxvf repository.tar.gz");
+    # Copy out the files into the VMs directory structure.
+    if ($data eq "structure") {
+        assert_script_run("cp music/* /home/$user/Music");
+        assert_script_run("cp documents/* /home/$user/Documents");
+        assert_script_run("cp pictures/* /home/$user/Pictures");
+        assert_script_run("cp video/* /home/$user/Videos");
+        assert_script_run("cp reference/* /home/$user/");
+    }
+    else {
+        assert_script_run("mkdir /home/$user/$data");
+        assert_script_run("cp $data/* /home/$user/$data/");
+    }
+    # Delete the temporary directory and the downloaded file.
+    assert_script_run("cd");
+    assert_script_run("rm -rf /home/$user/temp");
+    # Change ownership
+    assert_script_run("chown -R test:test /home/$user/");
+}
+
+# On Fedora, the serial console is not writable for regular users which lames
+# some of the openQA commands that send messages to the serial console to check
+# that a command has finished, for example assert_script_run, etc.
+# This routine changes the rights on the serial console file and makes it
+# writable for everyone, so that those commands work. This is actually very useful
+# for testing commands from users' perspective. The routine also handles becoming the root.
+# We agree that this is not the "correct" way, to enable users to type onto serial console
+# and that it correctly should be done via groups (dialout) but that would require rebooting
+# the virtual machine. Therefore we do it this way, which has immediate effect.
+sub make_serial_writable {
+    become_root();
+    sleep 2;
+    # Make serial console writable for everyone.
+    enter_cmd("chmod 666 /dev/${serialdev}");
+    sleep 2;
+    # Exit the root account
+    enter_cmd("exit");
+    sleep 2;
+}
+
+# Sometimes, especially in between freezes, there are Software Updates available
+# that trigger a notification pop-up which covers some part of the screen
+# and possibly steals focus from the applications, thus making tests to fail.
+# This will set the update notification timestamp to the current time (-30 seconds),
+# forcing the notification mechanism to think it already had notified.
+# Note, that this has to be run under the user under which the tests run,
+# not root.
+sub set_update_notification_timestamp {
+    # Get the current time
+    my $ep_time = time();
+    # Subtract 30 seconds from the number.
+    $ep_time -= 30;
+    # Run a command using the command dialogue
+    send_key('alt-f2');
+    wait_still_screen(2);
+    # Set the new timestamp using the gsettings command.
+    type_very_safely("gsettings set org.gnome.software update-notification-timestamp $ep_time\n");
+}
+
+# This routine takes a list of applications. It will then use the terminal
+# to start all these applications in the background and then it will exit the
+# terminal. This is useful when we want to start multiple applications quickly.
+sub start_applications {
+    my @applications = @_;
+    # Open the terminal
+    desktop_launch_terminal();
+    assert_screen("apps_run_terminal");
+    wait_still_screen(2);
+    # Iterate over the application list
+    # and start each application from it.
+    foreach (@applications) {
+        assert_script_run("$_ &");
+        # Take some time for things to settle.
+        wait_still_screen(1);
+    }
+    # Exit the terminal.
+    enter_cmd("exit");
+}
+
+# this is a workaround for an annoying KDE bug where the first character
+# typed into the launcher is often repeated. I think it's due to KDE
+# working hard to cache all the launchers, or something, so we try to
+# work around it by doing a 'throwaway' open, type a 'k', wait a bit,
+# close operation before we do anything 'real'. this is repeated in
+# several tests so we share it here
+sub kde_doublek_workaround {
+    my %args = @_;
+    $args{key} //= 'k';
+    wait_screen_change { send_key 'super'; };
+    wait_still_screen 3;
+    send_key $args{key};
+    wait_still_screen 5;
+    send_key 'esc';
+    wait_still_screen 3;
+}
+
+# handle login at a graphical DM once we have reached the initial
+# DM screen. Factored out of _graphical_wait_login for reuse by
+# tests that reboot and need to login afterwards
+sub dm_perform_login {
+    my ($desktop, $password) = @_;
+    # GDM 3.24.1 dumps a cursor in the middle of the screen here...
+    mouse_hide;
+    if ($desktop eq 'gnome') {
+        # we have to hit enter to get the password dialog, and it
+        # doesn't always work for some reason so just try it three
+        # times
+        send_key_until_needlematch("graphical_login_input", "ret", 3, 5);
+    }
+    assert_screen "graphical_login_input";
+    # seems like we often double-type on aarch64 if we start right
+    # away
+    wait_still_screen(stilltime => 5, similarity_level => 38);
+    if (get_var("SWITCHED_LAYOUT")) {
+        # see _do_install_and_reboot; when layout is switched
+        # user password is doubled to contain both US and native
+        # chars
+        desktop_switch_layout 'ascii';
+        type_very_safely $password;
+        desktop_switch_layout 'native';
+        type_very_safely $password;
+    }
+    else {
+        type_very_safely $password;
+    }
+    send_key "ret";
 }
 
 1;

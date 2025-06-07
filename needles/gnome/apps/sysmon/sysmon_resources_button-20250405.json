@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 459,
+      "ypos": 42,
+      "width": 23,
+      "height": 24,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "sysmon_resources_button"
+  ]
+}

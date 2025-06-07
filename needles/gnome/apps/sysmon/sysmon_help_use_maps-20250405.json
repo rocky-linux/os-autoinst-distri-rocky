@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 517,
+      "ypos": 365,
+      "width": 149,
+      "height": 25,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "sysmon_help_use_maps"
+  ]
+}

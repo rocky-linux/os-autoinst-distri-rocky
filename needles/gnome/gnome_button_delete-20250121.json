@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 565,
+      "ypos": 242,
+      "width": 25,
+      "height": 30,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gnome_button_delete"
+  ]
+}

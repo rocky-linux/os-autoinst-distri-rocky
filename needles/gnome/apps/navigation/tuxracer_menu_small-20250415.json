@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 314,
+      "ypos": 245,
+      "width": 97,
+      "height": 61,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "tuxracer_menu_small"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 257,
+      "ypos": 309,
+      "width": 119,
+      "height": 34,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "tuxracer_bunnyhill"
+  ]
+}
