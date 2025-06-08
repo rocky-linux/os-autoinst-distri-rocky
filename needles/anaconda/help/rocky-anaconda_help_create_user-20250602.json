@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 386,
+      "type": "match",
+      "xpos": 39,
+      "ypos": 173,
+      "height": 43
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_help_create_user"
+  ]
+}

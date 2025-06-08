@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 37,
+      "ypos": 620,
+      "width": 25,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_part_add"
+  ]
+}

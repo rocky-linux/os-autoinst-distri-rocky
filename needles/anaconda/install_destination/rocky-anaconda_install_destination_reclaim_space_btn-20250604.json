@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 678,
+      "height": 22,
+      "ypos": 496,
+      "width": 108
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_install_destination_reclaim_space_btn"
+  ]
+}

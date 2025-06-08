@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 49,
+      "ypos": 534,
+      "width": 82,
+      "height": 23,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_part_select_efiboot"
+  ]
+}
