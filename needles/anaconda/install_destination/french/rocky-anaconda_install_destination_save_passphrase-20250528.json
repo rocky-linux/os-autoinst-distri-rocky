@@ -11,6 +11,7 @@
   "properties": [],
   "tags": [
     "ENV-DISTRI-rocky",
+    "ENV-LANGUAGE-french",
     "anaconda_install_destination_save_passphrase"
   ]
 }
