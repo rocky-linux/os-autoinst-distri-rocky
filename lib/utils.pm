@@ -76,7 +76,7 @@ sub get_code_name {
 
     given ($version_major) {
         when ('9') { $code_name = 'Blue Onyx'; }
-        when ('10') { $code_name = 'Smoky Quartz'; }
+        when ('10') { $code_name = 'Red Quartz'; }
         when ('11') { $code_name = 'Lavender Calcite'; }
         default {
             $code_name = 'Green Obsidian';
