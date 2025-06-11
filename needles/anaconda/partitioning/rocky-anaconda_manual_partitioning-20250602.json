@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 23,
+      "xpos": 208,
+      "width": 75,
+      "ypos": 523,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "anaconda_manual_partitioning"
+  ]
+}

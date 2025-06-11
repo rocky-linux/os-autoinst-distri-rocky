@@ -5,7 +5,7 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
                 "PART_TABLE_TYPE": "mbr",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "Haswell",
                 "QEMUCPUS": "2",
                 "QEMURAM": "2048",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
@@ -71,7 +71,7 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
                 "PART_TABLE_TYPE": "gpt",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "Haswell",
                 "QEMUCPUS": "2",
                 "QEMURAM": "2048",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
@@ -89,7 +89,7 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "64bit",
                 "PART_TABLE_TYPE": "gpt",
-                "QEMUCPU": "Nehalem",
+                "QEMUCPU": "Haswell",
                 "QEMUCPUS": "2",
                 "QEMURAM": "3072",
                 "QEMU_VIDEO_DEVICE": "virtio-vga",
@@ -141,7 +141,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -152,7 +151,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -163,7 +161,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"
             },
@@ -174,7 +171,6 @@
             "distri": "rocky",
             "flavor": "boot-iso",
             "settings": {
-                "GRUB": "ip=dhcp",
                 "+QEMURAM": 3072,
                 "HDDSIZEGB": "15",
                 "TEST_TARGET": "ISO"

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 614,
+      "height": 16,
+      "xpos": 1,
+      "width": 149
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "boot_enter_passphrase"
+  ]
+}
