@@ -658,7 +658,7 @@ sub console_initial_setup {
     type_string "c\n";
     wait_still_screen 7;
 
-    assert_screen "console_initial_SETUP_DONE", 30;
+    assert_screen "console_initial_setup_done", 30;
     type_string "c\n";    # continue
 }
 
