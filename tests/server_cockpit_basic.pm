@@ -6,6 +6,9 @@ use cockpit;
 
 sub run {
     my $self = shift;
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty => 3);
+
     # run firefox and login to cockpit
     start_cockpit(login => 1);
     # go to the logs screen
