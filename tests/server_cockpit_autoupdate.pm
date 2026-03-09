@@ -7,6 +7,8 @@ use cockpit;
 
 sub run {
     my $self = shift;
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty => 3);
 
     # Start Cockpit
     start_cockpit(login => 1);
@@ -34,6 +36,12 @@ sub run {
 
     # Quit Cockpit
     quit_firefox;
+
+    # For Rocky 10 drop to root console
+    if ((get_var("DISTRI") eq "rocky") && (get_var("DESKTOP") eq "gnome") && (get_version_major() >= 10)) {
+        # Switch to console
+        $self->root_console(tty => 3);
+    }
 
     # Check that the dnf-automatic service has started
     assert_script_run "systemctl is-active dnf-automatic-install.timer";
