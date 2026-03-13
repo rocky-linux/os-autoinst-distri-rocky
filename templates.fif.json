@@ -1822,12 +1822,12 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
                 "POSTINSTALL": "server_cockpit_basic",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
+                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "server_cockpit_default": {
@@ -1842,8 +1842,7 @@
                 "POSTINSTALL": "_setup_browser server_cockpit_default",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
-                "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2",
-                "USER_LOGIN": "false"
+                "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2"
             }
         },
         "server_cockpit_updates": {
@@ -1852,12 +1851,12 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
                 "POSTINSTALL": "server_cockpit_updates server_cockpit_autoupdate",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
+                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "server_database_client": {

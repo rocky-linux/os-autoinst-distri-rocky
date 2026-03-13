@@ -6,6 +6,9 @@ use cockpit;
 
 sub run {
     my $self = shift;
+    # switch to TTY3 for both, graphical and console tests
+    $self->root_console(tty => 3);
+
     # run firefox and login to cockpit
     start_cockpit(login => 1);
     # go to the logs screen
@@ -23,7 +26,11 @@ sub run {
     send_key "backspace";
     send_key "backspace";
     send_key "backspace";
-    type_string "info\n";
+    # only sudo entries in the filter
+    type_string "info identifier:sudo\n";
+    wait_still_screen 2;
+    # toggle back out of the filter entry screen to show a small number of entries
+    assert_and_click "cockpit_logs_toggle_filters";
     wait_still_screen 5;
     # now click an entry
     assert_and_click "cockpit_logs_entry";
