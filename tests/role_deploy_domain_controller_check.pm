@@ -33,8 +33,8 @@ sub run {
     assert_script_run 'ipa-server-install -U --uninstall', 300;
     # try and un-garble the screen that the above sometimes garbles
     # ...we may be on tty1 or tty3 now, so flip between them
-    send_key "ctrl-alt-f1";
-    send_key "ctrl-alt-f3";
+    select_console "tty1-console";
+    select_console "tty3-console";
     # FIXME check server is decommissioned...how?
 }
 

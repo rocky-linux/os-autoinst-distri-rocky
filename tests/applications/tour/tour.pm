@@ -8,12 +8,15 @@ use utils;
 sub run {
     my $self = shift;
 
-    console_login();
-    desktop_vt();
-
     # Start the Application
     menu_launch_type("tour");
 
+    # Rocky 10+ tour opens without a 'Start' or 'Close' button but with
+    # a highlighted next button which will start the tour. The first
+    # highlighted right arrow should be captured as tour_start the following
+    # un-highlighted right arrow should be captured at tour_next.
+    # At the end of the test there is no 'Done' button but the circle-x
+    # button should be captured as tour_done.
     assert_and_click("tour_start");
 
     assert_screen("tour_overview");

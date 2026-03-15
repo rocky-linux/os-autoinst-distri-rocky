@@ -448,14 +448,13 @@ sub crash_anaconda_text {
     # It is used in the `install_text.pm` test and can be switched on by using the CRASH_REPORT
     # variable set to 1.
     #
-    # First let us navigate to reach the shell window in Anaconda using the alt-f3 combo,
-    # this should take us to another terminal, where we can simulate the crash.
-    send_key "alt-f3";
+    # tty3 has a shell on all f31+ installer and live images
+    select_console "tty3-console";
     assert_screen("anaconda_text_install_shell");
     # We use the trigger command to do the simulated crash.
     type_string "kill -USR1 `cat /var/run/anaconda.pid`\n";
     # And navigate back to the main panel of Anaconda. This should require
-    send_key "alt-f1";
+    select_console "tty1-console";
     assert_screen("anaconda_text_install_main");
     # We wait until the crash menu appears. This usually takes some time,
     # so let's try for 300 seconds, this should be long enough.

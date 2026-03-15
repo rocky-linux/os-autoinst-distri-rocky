@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 18,
+      "width": 131,
+      "xpos": 419,
+      "type": "match",
+      "ypos": 562
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "evince_remove_annotation"
+  ]
+}

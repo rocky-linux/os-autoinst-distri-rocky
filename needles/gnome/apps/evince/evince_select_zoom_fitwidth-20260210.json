@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 821,
+      "ypos": 118,
+      "width": 99,
+      "height": 19,
+      "type": "match",
+      "click_point": {
+        "xpos": 88.5,
+        "ypos": 9.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "evince_select_zoom_fitwidth"
+  ]
+}

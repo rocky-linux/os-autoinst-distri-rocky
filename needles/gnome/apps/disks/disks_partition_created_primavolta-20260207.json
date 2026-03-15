@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 343,
+      "ypos": 308,
+      "type": "match",
+      "height": 43,
+      "width": 68
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_partition_created_primavolta"
+  ]
+}

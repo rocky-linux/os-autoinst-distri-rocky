@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 22,
+      "width": 137,
+      "ypos": 447,
+      "type": "match",
+      "xpos": 295
+    },
+    {
+      "xpos": 562,
+      "ypos": 293,
+      "width": 105,
+      "height": 30,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_diskloop_status"
+  ]
+}

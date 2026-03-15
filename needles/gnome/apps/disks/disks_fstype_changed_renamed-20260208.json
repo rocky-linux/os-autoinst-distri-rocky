@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 72,
+      "height": 38,
+      "type": "match",
+      "ypos": 309,
+      "xpos": 339
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_fstype_changed_renamed"
+  ]
+}

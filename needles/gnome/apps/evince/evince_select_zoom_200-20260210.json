@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 358,
+      "type": "match",
+      "xpos": 823,
+      "height": 21,
+      "width": 44
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "evince_select_zoom_200"
+  ]
+}

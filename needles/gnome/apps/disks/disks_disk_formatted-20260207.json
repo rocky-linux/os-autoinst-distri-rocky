@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 312,
+      "type": "match",
+      "xpos": 583,
+      "height": 27,
+      "width": 64
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_disk_formatted"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 307,
+      "xpos": 771,
+      "height": 43,
+      "width": 68
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_partition_created_terciavolta"
+  ]
+}

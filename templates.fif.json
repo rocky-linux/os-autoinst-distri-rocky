@@ -709,6 +709,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/archiver",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -720,6 +721,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/calculator",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -731,6 +733,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/characters",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -742,6 +745,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/clocks",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -753,6 +757,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/contacts",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -764,6 +769,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/disks",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -775,6 +781,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/evince",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -786,6 +793,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/fonts",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -797,6 +805,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/gnome-panel",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -808,6 +817,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/gnome-text-editor",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -819,6 +829,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/help",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -830,6 +841,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/loupe",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -841,6 +853,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/maps",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -852,6 +865,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/nautilus",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -863,6 +877,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/navigation",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -874,6 +889,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/sysmon",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -885,6 +901,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/tour",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -896,6 +913,7 @@
             },
             "settings": {
                 "BOOTFROM": "c",
+                "DESKTOP": "gnome",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
                 "POSTINSTALL_PATH": "tests/applications/weather",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%"
@@ -1669,65 +1687,6 @@
                 "WORKER_CLASS": "tap"
             }
         },
-        "install_vnc_client": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-uefi": 40
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "DESKTOP": "gnome",
-                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.qcow2",
-                "INSTALL": "1",
-                "NICTYPE": "tap",
-                "PARALLEL_WITH": "install_vnc_server",
-                "PREINSTALL": "_vnc_client_connect_pre _graphical_wait_login _vnc_client_connect",
-                "VNC_CLIENT": "1",
-                "WORKER_CLASS": "tap"
-            }
-        },
-        "install_vnc_server": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-uefi": 40
-            },
-            "settings": {
-                "GRUB": "inst.vnc net.ifnames=0 biosdevname=0 ip=172.16.2.114::172.16.2.2:255.255.255.0:vnc001.test.openqa.rockylinux.org:eth0:off",
-                "NICTYPE": "tap",
-                "VNC_SERVER": "1",
-                "WORKER_CLASS": "tap"
-            }
-        },
-        "install_vncconnect_client": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-uefi": 40
-            },
-            "settings": {
-                "BOOTFROM": "c",
-                "DESKTOP": "gnome",
-                "HDD_1": "disk_rocky%CURRREL%_desktop_%ARCH%.qcow2",
-                "INSTALL": "1",
-                "NICTYPE": "tap",
-                "PREINSTALL": "_vncconnect_client_setup_pre _graphical_wait_login _vncconnect_client_setup",
-                "VNC_CLIENT": "1",
-                "WORKER_CLASS": "tap"
-            }
-        },
-        "install_vncconnect_server": {
-            "profiles": {
-                "rocky-dvd-iso-aarch64-*-aarch64": 40,
-                "rocky-dvd-iso-x86_64-*-uefi": 40
-            },
-            "settings": {
-                "GRUB": "inst.vnc inst.vncconnect=172.16.2.117:5500 net.ifnames=0 biosdevname=0 ip=172.16.2.116::172.16.2.2:255.255.255.0:vnc003.test.openqa.rockylinux.org:eth0:off",
-                "INSTALL_UNLOCK": "vncconnect_client_ready",
-                "NICTYPE": "tap",
-                "PARALLEL_WITH": "install_vncconnect_client",
-                "VNC_SERVER": "1",
-                "WORKER_CLASS": "tap"
-            }
-        },
         "install_xfs": {
             "profiles": {
                 "rocky-universal-s390x-*-s390x": 40,
@@ -1741,17 +1700,6 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "PACKAGE_SET": "minimal",
                 "DESKTOP": "false"
-            }
-        },
-        "memtest": {
-            "profiles": {
-                "rocky-universal-s390x-*-s390x": 30,
-                "rocky-universal-ppc64le-*-ppc64le": 30,
-                "rocky-universal-aarch64-*-aarch64": 30,
-                "rocky-universal-x86_64-*-bios": 30
-            },
-            "settings": {
-                "ENTRYPOINT": "memtest"
             }
         },
         "modularity_tests": {
@@ -1769,6 +1717,39 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false"
+            }
+        },
+        "podman": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "POSTINSTALL": "podman",
+                "POST_STATIC": "172.16.2.114 podman001.test.openqa.rockylinux.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap2"
+            }
+        },
+        "podman_client": {
+            "profiles": {
+                "rocky-dvd-iso-x86_64-*-uefi": 30
+            },
+            "settings": {
+                "BOOTFROM": "c",
+                "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
+                "NICTYPE": "tap",
+                "PARALLEL_WITH": "podman",
+                "POSTINSTALL": "_podman_client",
+                "POST_STATIC": "172.16.2.115 podclient001.test.openqa.rockylinux.org",
+                "ROOT_PASSWORD": "weakpassword",
+                "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
+                "USER_LOGIN": "false",
+                "WORKER_CLASS": "tap2"
             }
         },
         "realmd_join_cockpit": {
@@ -1841,12 +1822,12 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
                 "POSTINSTALL": "server_cockpit_basic",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
+                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "server_cockpit_default": {
@@ -1861,8 +1842,7 @@
                 "POSTINSTALL": "_setup_browser server_cockpit_default",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
-                "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2",
-                "USER_LOGIN": "false"
+                "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2"
             }
         },
         "server_cockpit_updates": {
@@ -1871,12 +1851,12 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
                 "POSTINSTALL": "server_cockpit_updates server_cockpit_autoupdate",
-                "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false"
+                "ROOT_PASSWORD": "weakpassword"
             }
         },
         "server_database_client": {

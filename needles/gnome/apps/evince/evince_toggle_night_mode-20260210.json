@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 806,
+      "ypos": 450,
+      "type": "match",
+      "height": 25,
+      "width": 88
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "evince_toggle_night_mode"
+  ]
+}

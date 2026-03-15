@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 35,
+      "width": 44,
+      "xpos": 560,
+      "type": "match",
+      "ypos": 423
+    },
+    {
+      "xpos": 526,
+      "ypos": 558,
+      "width": 115,
+      "height": 28,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "navigation_details_shown"
+  ]
+}

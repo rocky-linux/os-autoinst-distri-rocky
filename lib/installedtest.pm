@@ -9,7 +9,7 @@ use base 'basetest';
 # should be used when with tests, where system is already installed, e. g all parts
 # of upgrade tests, postinstall phases...
 
-use testapi qw(is_serial_terminal :DEFAULT);
+use testapi qw(is_serial_terminal :DEFAULT select_console);
 use utils;
 
 sub root_console {
@@ -25,7 +25,7 @@ sub root_console {
     }
     else {
         # For normal terminal emulation, use key combo to reach a tty
-        send_key "ctrl-alt-f$args{tty}";
+        select_console "tty$args{tty}-console";
     }
     console_login;    # Do the login.
 }

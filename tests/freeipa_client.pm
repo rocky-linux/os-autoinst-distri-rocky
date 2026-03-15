@@ -25,7 +25,7 @@ sub run {
     # Set a longer timeout for login(1) to workaround RHBZ #1661273
     assert_script_run 'echo "LOGIN_TIMEOUT 180" >> /etc/login.defs';
     # switch to tty2 for login tests
-    send_key "ctrl-alt-f2";
+    select_console "tty2-console";
     # try and login as test1, should work
     console_login(user => 'test1@TEST.OPENQA.ROCKYLINUX.ORG', password => 'batterystaple');
     type_string "exit\n";

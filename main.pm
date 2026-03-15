@@ -147,8 +147,8 @@ sub load_install_tests() {
     # boot phase is loaded automatically every time
     autotest::loadtest "tests/_boot_to_anaconda.pm";
 
-    # if this is a kickstart or VNC install, that's all folks
-    return if (get_var("KICKSTART") || get_var("VNC_SERVER"));
+    # if this is a kickstart install, that's all folks
+    return if (get_var("KICKSTART"));
 
     # Root password and user creation spokes are suppressed on
     # Workstation live install and Silverblue DVD install, so we do
@@ -281,10 +281,6 @@ sub load_postinstall_tests() {
     # the installed system: just load its test and return
     if (get_var("MEMCHECK")) {
         autotest::loadtest "tests/_memcheck.pm";
-        return;
-    }
-    # VNC client test's work is done once install is complete
-    if (get_var("VNC_CLIENT")) {
         return;
     }
 

@@ -30,25 +30,34 @@ sub download_testdata {
 
 sub run {
     my $self = shift;
+
     # Switch to console
     $self->root_console(tty => 3);
+
     # Perform git test
     check_and_install_git();
+
     # Download the test data
     download_testdata();
+
+    # Install Evince with flatpak
+    assert_script_run("flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo");
+    assert_script_run "flatpak install -y flathub org.gnome.Evince", 300;
+
     # Exit the terminal
     desktop_vt;
 
+    # Set the update notification timestamp
+    set_update_notification_timestamp();
+
     # Start the application
-    menu_launch_type("evince");
-    # Check that is started
-    assert_screen 'apps_run_dviewer';
+    menu_launch_type("evince", checkstart => 1);
 
     # Open the test file to create a starting point for the other Evince tests.
     # Click on Open button to open the File Open Dialog
     assert_and_click("evince_open_file_dialog", button => "left", timeout => 30);
 
-    if (get_var("CANNED")) {
+    if (get_var("CANNED") || (get_var("DISTRI") eq "rocky" && (get_version_major() < 10))) {
         # open the Documents folder.
         assert_and_click("evince_documents", button => "left", timeout => 30);
     }

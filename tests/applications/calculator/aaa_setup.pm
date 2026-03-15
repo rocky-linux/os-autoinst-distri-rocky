@@ -7,15 +7,10 @@ use utils;
 
 sub run {
     my $self = shift;
-
-    console_login();
-    desktop_vt();
-
     # Set update notification timestamp
     set_update_notification_timestamp();
     # Run the application
-    menu_launch_type("Calculator");
-    assert_screen("apps_run_calculator");
+    menu_launch_type("Calculator", checkstart => 1);
     # wait for system to settle before snapshotting
     sleep 10;
 }
@@ -27,4 +22,3 @@ sub test_flags {
 1;
 
 # vim: set sw=4 et:
-

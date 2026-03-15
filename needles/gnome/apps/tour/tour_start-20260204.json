@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 975,
+      "ypos": 401,
+      "width": 39,
+      "height": 41,
+      "type": "match",
+      "click_point": {
+        "xpos": 19.5,
+        "ypos": 20.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "tour_start"
+  ]
+}

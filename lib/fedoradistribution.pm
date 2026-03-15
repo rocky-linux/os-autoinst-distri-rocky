@@ -33,6 +33,12 @@ sub init() {
             # "virtio-console1", third as "virtio-console2" etc.
             $self->add_console('virtio-console' . $num, 'virtio_terminal', {socked_path => cwd() . '/virtio_console' . $num});
         }
+        $self->add_console('tty1-console', 'tty-console', {tty => 1});
+        $self->add_console('tty2-console', 'tty-console', {tty => 2});
+        $self->add_console('tty3-console', 'tty-console', {tty => 3});
+        $self->add_console('tty4-console', 'tty-console', {tty => 4});
+        $self->add_console('tty5-console', 'tty-console', {tty => 5});
+        $self->add_console('tty6-console', 'tty-console', {tty => 6});
     }
 }
 

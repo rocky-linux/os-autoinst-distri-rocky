@@ -129,7 +129,7 @@ sub root_console {
     }
     else {
         # tty3 has a shell on all f31+ installer and live images
-        send_key "ctrl-alt-f3";
+        select_console "tty3-console";
     }
     console_login(user => "root", timeout => $args{timeout});
 }

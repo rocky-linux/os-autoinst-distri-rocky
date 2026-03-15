@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "ypos": 325,
+      "type": "match",
+      "xpos": 333,
+      "width": 77,
+      "height": 119
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "navigation_navibar_calculator"
+  ]
+}

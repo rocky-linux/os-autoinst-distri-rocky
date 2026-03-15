@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 21,
+      "width": 53,
+      "ypos": 221,
+      "type": "match",
+      "xpos": 546
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "evince_about_credits"
+  ]
+}

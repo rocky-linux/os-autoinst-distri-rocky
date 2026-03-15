@@ -48,7 +48,7 @@ sub run {
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test3\@$ipa_realm";
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test4\@$ipa_realm";
     # switch to tty4 (boy, the tty jugglin')
-    send_key "ctrl-alt-f4";
+    select_console "tty4-console";
     # try and login as test3, should work
     console_login(user => 'test3@TEST.OPENQA.ROCKYLINUX.ORG', password => 'batterystaple');
     type_string "exit\n";
@@ -62,7 +62,7 @@ sub run {
     type_string "batterystaple\n";
     assert_screen "login_permission_denied";
     # back to tty1
-    send_key "ctrl-alt-f1";
+    select_console "tty1-console";
 }
 
 sub test_flags {

@@ -14,17 +14,36 @@ our @EXPORT = qw(start_cockpit select_cockpit_update check_updates);
 sub start_cockpit {
     # Starting from a console, get to a browser with Cockpit (running
     # on localhost) shown. If login is truth-y, also log in. If login
-    # and admin are both truthy, also gain admin privileges. Assumes
-    # X and Firefox are installed.
+    # and admin are both truthy, also gain admin privileges.
+    # Assumes Firefox is installed. On Rocky 9 use startx and on
+    # Rocky 10 switch back to desktop and use Run Command.
     my %args = @_;
     $args{login} //= 0;
     $args{admin} //= 1;
     my $login = shift || 0;
-    # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
-    assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
-    disable_firefox_studies;
-    # run firefox directly in X as root. never do this, kids!
-    type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
+
+    if ((get_var("DISTRI") eq "rocky") && (get_var("DESKTOP") eq "gnome") && (get_version_major() >= 10)) {
+        # We arrive in console mode, switch back to desktop in Rocky 10
+        desktop_vt();
+
+        # Abbreviated launch via "Run Command" in gnome-desktop
+        send_key "alt-f2";
+        wait_still_screen(stilltime => 5, similarity_level => 45);
+        type_safely "firefox localhost:9090\n";
+        wait_still_screen(stilltime => 5, similarity_level => 45);
+
+        # Maximize Firefox window to match startx style startup
+        send_key "super-up";
+        wait_still_screen(stilltime => 2, similarity_level => 45);
+    }
+    else {
+        # https://bugzilla.redhat.com/show_bug.cgi?id=1439429
+        assert_script_run "sed -i -e 's,enable_xauth=1,enable_xauth=0,g' /usr/bin/startx";
+        disable_firefox_studies;
+        # run firefox directly in X as root. never do this, kids!
+        type_string "startx /usr/bin/firefox -width 1024 -height 768 http://localhost:9090\n";
+    }
+
     assert_screen "cockpit_login", 60;
     # this happened on early Modular Server composes...
     record_soft_failure "Unbranded Cockpit" if (match_has_tag "cockpit_login_unbranded");

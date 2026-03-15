@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "width": 40,
+      "xpos": 876,
+      "ypos": 632,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "gnome_button_save_blue"
+  ]
+}

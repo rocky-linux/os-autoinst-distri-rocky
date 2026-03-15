@@ -1,11 +1,12 @@
 use base "basetest";
 use strict;
 use testapi;
+use anaconda;
 use utils;
 
 sub run {
     my $self = shift;
-    send_key "ctrl-alt-f3";
+    select_console "tty3-console";
     # do user login unless USER_LOGIN is set to string 'false'
     # Since there is no console support for arabic, so we cannot let the user log in
     # with a password that requires Arabic support.

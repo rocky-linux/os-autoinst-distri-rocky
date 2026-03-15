@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "xpos": 321,
+      "ypos": 45,
+      "width": 107,
+      "height": 21,
+      "type": "match"
+    },
+    {
+      "xpos": 323,
+      "ypos": 84,
+      "width": 47,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "apps_run_system_monitor"
+  ]
+}

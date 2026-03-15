@@ -6,8 +6,8 @@ use anaconda;
 
 
 # this enables you to send a command and some post-command wait time
-# in one step and also distinguishes between serial console and normal
-# VNC based console and handles the wait times differently.
+# in one step and also distinguishes between serial or other consoles
+# and handles the wait times differently.
 sub console_type_wait {
     my ($string, $wait) = @_;
     $wait ||= 5;
@@ -23,8 +23,7 @@ sub console_type_wait {
 sub run {
     my $self = shift;
 
-    # First, preset the environment according to the chosen console. This test
-    # can run both on a VNC based console, or a serial console.
+    # First, preset the environment according to the chosen console.
     if (get_var("SERIAL_CONSOLE")) {
         select_console('virtio-console1');
         unless (testapi::is_serial_terminal) {
@@ -51,7 +50,7 @@ sub run {
     );
 
     # The error message that we are going to check for in the text installation
-    # must be different for serial console and a VNC terminal emulator.
+    # must be different for serial console or other terminal emulator.
     my $error = "";
     if (testapi::is_serial_terminal) {
         $error = "unknown error has occured";

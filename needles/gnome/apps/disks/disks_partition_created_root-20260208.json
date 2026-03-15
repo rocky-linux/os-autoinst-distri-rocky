@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 68,
+      "height": 44,
+      "ypos": 307,
+      "type": "match",
+      "xpos": 496
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_partition_created_root"
+  ]
+}

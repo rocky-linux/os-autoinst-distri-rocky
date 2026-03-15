@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "click_point": {
+        "xpos": 20.5,
+        "ypos": 28
+      },
+      "type": "match",
+      "height": 54,
+      "xpos": 390,
+      "width": 69,
+      "ypos": 107,
+      "match": 90
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "calculator_upper_edge"
+  ]
+}

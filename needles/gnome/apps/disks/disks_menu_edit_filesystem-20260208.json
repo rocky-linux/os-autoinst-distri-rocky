@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "height": 23,
+      "width": 125,
+      "xpos": 375,
+      "ypos": 281,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "disks_menu_edit_filesystem"
+  ]
+}
