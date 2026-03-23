@@ -8,8 +8,22 @@ use cockpit;
 
 sub run {
     my $self = shift;
+    my $distri = get_var("DISTRI");
+    my $desktop = get_var("DESKTOP");
+    my $user_login = get_var("USER_LOGIN");
+
+    # Test now starts with DESKTOP => "gnome" so that start_cockpit will launch
+    # firefox in graphical desktop in Rocky 10+ instead of from console with
+    # startx which is still used for Rocky 9-.
+
+    # switch to TTY3 for graphical tests, console tests already using tty3
+    if ($distri eq "rocky" && $desktop eq "gnome" && $user_login ne "false") {
+        $self->root_console(tty => 3);
+        assert_screen("root_console");
+    }
+
     # use appropriate server IP, hostname, mutex and admin password
-    #  Several tests use the 'regular' FreeIPA server, so the values
+    # Several tests use the 'regular' FreeIPA server, so the values
     # for that are the defaults; other tests use a replica server, or
     # the AD server, so they specify this in their vars.
     my $ipa_server = get_var("REALMD_DNS_SERVER_HOST", 'ipa001.test.openqa.rockylinux.org');
@@ -37,6 +51,12 @@ sub run {
     # do repo setup
     repo_setup();
 
+    # Cockpit in Rocky 10+ doesn't seem to know how to install ipa-client
+    # while trying to meet the install-api-client requirement. As a workaround
+    # install ipa-client before launching Cockpit and leave the join step
+    # for the Cockpit UI.
+    assert_script_run "dnf -y install ipa-client", 300;
+
     # set sssd debugging level higher (useful for debugging failures)
     # optional as it's not really part of the test
     script_run "dnf -y install sssd-tools", 220;
@@ -59,7 +79,7 @@ sub run {
         send_key "pgdn";
         # wait out scroll...
         wait_still_screen 2;
-        assert_and_click "cockpit_join_domain_button", timeout => 5;
+        assert_and_click("cockpit_join_domain_button", timeout => 5);
     }
     assert_screen "cockpit_join_domain";
 
@@ -83,6 +103,12 @@ sub run {
 
     # quit browser to return to console
     quit_firefox;
+
+    # switch to TTY3 for graphical tests, console tests already using tty3
+    if ($distri eq "rocky" && $desktop eq "gnome" && $user_login ne "false") {
+        $self->root_console(tty => 3);
+        assert_screen("root_console");
+    }
 }
 
 sub test_flags {
