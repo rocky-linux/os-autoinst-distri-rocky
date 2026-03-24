@@ -19,9 +19,10 @@ sub run {
     my $ipa_hostname = script_output 'hostname';
     my $ipa_install_cmd;
     my @ipa_firewall_services;
-    my $ipa_domain = 'test.openqa.rockylinux.org';
-    my $ipa_realm = 'TEST.OPENQA.ROCKYLINUX.ORG';
-    my $ipa_admin_password = 'b1U3OnyX!';
+    my $ipa_domain = get_var("REALMD_DOMAIN", "test.openqa.rockylinux.org");
+    my $ipa_realm = get_var("REALMD_REALM", "TEST.OPENQA.ROCKYLINUX.ORG");
+    my $ipa_admin_password = get_var("REALMD_ADMIN_PASSWORD", 'b1U3OnyX!');
+    my $ipa_admin_user = get_var("REALMD_ADMIN_USER", 'admin');
     my $ipa_reverse_zone = '2.16.172.in-addr.arpa';
     my $ipa_install_args = "-U --auto-forwarders --realm=$ipa_realm --domain=$ipa_domain --ds-password=$ipa_admin_password --admin-password=$ipa_admin_password --setup-dns --reverse-zone=$ipa_reverse_zone --allow-zone-overlap --skip-mem-check";
     given ($version_major) {
@@ -71,7 +72,7 @@ sub run {
     assert_script_run "systemctl start ipa.service", 300;
 
     # kinit as admin
-    assert_script_run "echo '$ipa_admin_password' | kinit admin";
+    assert_script_run "echo '$ipa_admin_password' | kinit $ipa_admin_user";
     # set up an OTP for client001 enrolment (this should enroll by kickstart or another way)
     assert_script_run "ipa host-add client001.$ipa_domain --password=monkeys --force";
     ############################################################################
@@ -119,7 +120,7 @@ sub run {
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test2\@$ipa_realm";
 
     # add a sudo rule
-    assert_script_run "kswitch -p admin\@$ipa_realm";
+    assert_script_run "kswitch -p $ipa_admin_user\@$ipa_realm";
     assert_script_run 'ipa sudorule-add testrule --desc="Test rule in IPA" --hostcat=all --cmdcat=all --runasusercat=all --runasgroupcat=all';
     assert_script_run 'ipa sudorule-add-user testrule --users="test1"';
     validate_script_output 'ipa sudorule-show testrule', sub { $_ =~ m/Rule name: testrule/ };

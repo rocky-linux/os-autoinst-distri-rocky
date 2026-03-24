@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "width": 40,
+      "xpos": 109,
+      "ypos": 127,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "freeipa_webui_policy"
+  ]
+}

@@ -26,7 +26,7 @@ sub run {
     # there are often cases where we need to see the logs (e.g. client
     # test failed due to server issue)
     $self->post_fail_hook();
-    assert_script_run 'systemctl stop ipa.service';
+    assert_script_run 'systemctl stop ipa.service', 300;
     # check server is stopped
     assert_script_run '! systemctl is-active ipa.service';
     # decommission the server
