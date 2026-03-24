@@ -1107,6 +1107,10 @@ sub select_rescue_mode {
     }
     else {
         # select troubleshooting
+        if (get_var("DISTRI") eq "rocky" && (get_version_major() >= 9)) {
+            # Skip FIPS mode item in GRUB menu in Rocky 9+
+            send_key "down";
+        }
         send_key "down";
         send_key "ret";
         # select "rescue system"
