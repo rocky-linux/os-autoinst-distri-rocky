@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 32,
+      "ypos": 727,
+      "width": 162,
+      "height": 27,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_inspect_storage_device"
+  ]
+}
