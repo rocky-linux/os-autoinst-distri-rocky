@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 15,
+      "xpos": 505,
+      "ypos": 312,
+      "type": "match",
+      "width": 121
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_part_devicetype_standard_partition"
+  ]
+}

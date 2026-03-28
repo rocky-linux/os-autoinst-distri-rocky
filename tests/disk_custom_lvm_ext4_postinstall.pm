@@ -9,10 +9,31 @@ sub run {
         $self->root_console(tty => 4);
     }
     assert_screen "root_console";
-    my $devboot = 'vda1';
+    my $devboot = 'vda2';
 
-    if (get_var('OFW') || get_var('UEFI')) {
-        $devboot = 'vda2';
+    # In upstream the variants for $devboot are removed. We currently test in
+    # Rocky 9 and 10 which span the anaconda change mentioned in this commit
+    # message...
+    #
+    # commit f7a8550258d467bf722e9a0726723756c6769faa
+    # Author: Adam Williamson <awilliam@redhat.com>
+    # Date:   Tue Aug 16 10:29:03 2022 -0400
+    #
+    # Create biosboot partitions in blivet tests
+    #
+    # From anaconda-37.12.1, anaconda default to GPT for all BIOS
+    # installs. So we need to create a BIOS boot partition when doing
+    # a BIOS install. I think all other potential configs (x86_64
+    # UEFI, aarch64 (UEFI), ppc64le (OFW)) are covered under the other
+    # two paths, so just making this `else` should be OK.
+    #
+    # Signed-off-by: Adam Williamson <awilliam@redhat.com>
+    #
+    # ...thus we need to support two variants and logically toggle
+    # when the major OS version changes as well as recognize BIOS or
+    # UEFI boot mode.
+    if ((get_var('DISTRI') eq 'rocky') && (get_version_major() < 10) && (get_var('UEFI') ne "1")) {
+        $devboot = 'vda1';
     }
     # check that lvm is present:
     validate_script_output "lvdisplay | grep 'LV Status'", sub { $_ =~ m/available/ };

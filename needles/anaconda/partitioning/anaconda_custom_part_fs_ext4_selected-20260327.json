@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 282,
+      "height": 15,
+      "xpos": 504,
+      "type": "match",
+      "width": 40
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_part_fs_ext4_selected"
+  ]
+}

@@ -2,6 +2,7 @@ use base "anacondatest";
 use strict;
 use testapi;
 use anaconda;
+use utils;
 
 sub run {
     my $self = shift;
@@ -13,6 +14,11 @@ sub run {
     if (get_var("UEFI")) {
         # if we're running on UEFI, we need esp
         custom_add_partition(size => 512, mountpoint => '/boot/efi', filesystem => 'efi_filesystem');
+    }
+    elsif ((get_var("DISTRI") eq "rocky") && (get_version_major() >= 10)) {
+        # Rocky 10+ is GPT and requires a BIOS Boot partition for non-UEFI install
+        # default size (not-modifiable?) is 2MiB
+        custom_add_partition(mountpoint => 'biosboot', filesystem => 'biosboot');
     }
     if (get_var("OFW")) {
         custom_add_partition(size => 4, filesystem => 'ppc_prep_boot');

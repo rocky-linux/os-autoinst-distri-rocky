@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 503,
+      "ypos": 373,
+      "width": 69,
+      "height": 18,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_part_biosboot_selected"
+  ]
+}
