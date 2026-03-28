@@ -57,6 +57,13 @@ sub run {
         wait_still_screen 5;
     }
 
+    # Rocky has a swap partition that we need to keep to prevent storage
+    # configuration error
+    assert_and_click "anaconda_part_select_swap";
+    assert_and_click "anaconda_part_device_reformat";
+    assert_and_click "anaconda_part_update_settings";
+    # give it a few seconds to update
+    wait_still_screen 5;
     # Now resize and format the current root partition
     assert_and_click "anaconda_part_select_root";
     # Navigate to Mountpoint
