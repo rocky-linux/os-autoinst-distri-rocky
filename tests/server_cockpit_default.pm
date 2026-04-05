@@ -11,16 +11,6 @@ sub run {
     if (get_var("DISTRI") eq "rocky" && (get_version_major() >= 10)) {
         # acpica-tools package is in CRB in Rocky 10+
         assert_script_run "dnf config-manager --set-enabled crb";
-
-        # disable gnome session idle/lock screen behavior for user that can be
-        # triggered by lengthy updates
-        script_run 'exit', 0;
-        console_login(user => get_var('USER_LOGIN', 'test'), password => get_var('USER_PASSWORD', 'weakpassword'));
-        script_run 'gsettings set org.gnome.desktop.session idle-delay 3600', 0;
-        script_run 'gsettings set org.gnome.desktop.screensaver lock-enabled false', 0;
-        wait_still_screen 5;
-        script_run 'exit', 0;
-        console_login(user => 'root', password => get_var('ROOT_PASSWORD', 'weakpassword'));
     }
 
     # install bulk of available updates to prevent issues in cockpit

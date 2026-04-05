@@ -128,6 +128,7 @@ sub desktop_vt {
             send_key 'alt-f1';
         }
     }
+    check_desktop(timeout => 120);
 }
 
 # Wait for login screen to appear. Handle the annoying GPU buffer

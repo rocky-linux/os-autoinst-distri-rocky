@@ -1758,6 +1758,7 @@
                 "rocky-dvd-iso-x86_64-*-uefi": 30
             },
             "settings": {
+                "DESKTOP": "gnome",
                 "+HDD_1": "disk_%MACHINE%_cockpit.qcow2",
                 "+START_AFTER_TEST": "server_cockpit_default",
                 "BOOTFROM": "c",
@@ -1766,7 +1767,6 @@
                 "POSTINSTALL": "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client",
                 "POST_STATIC": "172.16.2.102 client002.test.openqa.rockylinux.org",
                 "ROOT_PASSWORD": "weakpassword",
-                "USER_LOGIN": "false",
                 "WORKER_CLASS": "tap"
             }
         },
@@ -1838,8 +1838,10 @@
             "settings": {
                 "BOOTFROM": "c",
                 "DESKTOP": "gnome",
+		        "GNOME_DESKTOP_SESSION_IDLE_DELAY": "3600",
+		        "GNOME_DESKTOP_SCREENSAVER_LOCK_ENABLED": "false",
                 "HDD_1": "disk_%FLAVOR%_%MACHINE%.qcow2",
-                "POSTINSTALL": "_setup_browser server_cockpit_default",
+                "POSTINSTALL": "_gsettings_desktop _setup_browser server_cockpit_default",
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "STORE_HDD_1": "disk_%MACHINE%_cockpit.qcow2"

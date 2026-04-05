@@ -14,15 +14,19 @@ use feature "switch";
 
 sub run {
     my $self = shift;
-    # use FreeIPA server or replica as DNS server
     my $version_major = get_version_major;
     my $relnum = get_release_number;
-    my $ipa_admin_password = 'b1U3OnyX!';
-    my $server = 'ipa001.test.openqa.rockylinux.org';
-    my $server_ip = '172.16.2.100';
-    my $server_mutex = 'freeipa_ready';
+
+    # use FreeIPA server or replica as DNS server
+    my $ipa_server = get_var("REALMD_DNS_SERVER_HOST", 'ipa001.test.openqa.rockylinux.org');
+    my $ipa_server_ip = get_var("REALMD_DNS_SERVER_IP", '172.16.2.100');
+    my $server_mutex = get_var("REALMD_SERVER_MUTEX", 'freeipa_ready');
+    my $ipa_admin_password = get_var("REALMD_ADMIN_PASSWORD", 'b1U3OnyX!');
+    my $ipa_admin_user = get_var("REALMD_ADMIN_USER", 'admin');
+    my $ipa_domain = get_var("REALMD_DOMAIN", "test.openqa.rockylinux.org");
     my $ipa_install_cmd;
     my @ipa_firewall_services;
+
     given ($version_major) {
         when ('8') {
             $ipa_install_cmd = 'dnf --assumeyes module install idm:DL1/{dns,client,server,common}';
@@ -38,20 +42,21 @@ sub run {
         }
     }
 
-
     if (get_var("FREEIPA_REPLICA")) {
-        $server = 'ipa002.test.openqa.rockylinux.org';
-        $server_ip = '172.16.2.106';
+        $ipa_server = 'ipa002.test.openqa.rockylinux.org';
+        $ipa_server_ip = '172.16.2.106';
     }
+
     if (get_var("FREEIPA_REPLICA_CLIENT")) {
-        $server = 'ipa003.test.openqa.rockylinux.org';
-        $server_ip = '172.16.2.107';
+        $ipa_server = 'ipa003.test.openqa.rockylinux.org';
+        $ipa_server_ip = '172.16.2.107';
         $server_mutex = 'replica_ready';
     }
+
     # this gets us the name of the first connection in the list,
     # which should be what we want
     my $connection = script_output "nmcli --fields NAME con show | head -2 | tail -1";
-    assert_script_run "nmcli con mod '$connection' ipv4.dns '$server_ip'";
+    assert_script_run "nmcli con mod '$connection' ipv4.dns '$ipa_server_ip'";
     assert_script_run "nmcli con down '$connection'";
     assert_script_run "nmcli con up '$connection'";
 
@@ -59,10 +64,12 @@ sub run {
     # sure name resolution is working before we proceed)
     mutex_lock $server_mutex;
     mutex_unlock $server_mutex;
+
     # use compose repo, disable u-t, etc. unless this is an upgrade
     # test (in which case we're on the 'old' release at this point;
     # one of the upgrade test modules does repo_setup later)
     repo_setup() unless get_var("UPGRADE");
+
     # do the enrolment
     if (get_var("FREEIPA_REPLICA")) {
         # here we're enrolling not just as a client, but as a replica
@@ -96,14 +103,20 @@ sub run {
         wait_for_children;
     }
     else {
-        assert_script_run "echo '$ipa_admin_password' | realm join --user=admin ${server}", 300;
+        # here we're enrolling as a client
+        # install client packages
+        assert_script_run "dnf -y install ipa-client", 300;
+        assert_script_run "echo '$ipa_admin_password' | realm join --user=admin $ipa_server", 300;
     }
+
     # set sssd debugging level higher (useful for debugging failures)
     # optional as it's not really part of the test
     script_run "dnf -y install sssd-tools", 220;
     script_run "sss_debuglevel 9";
+
     # if upgrade test, report that we're enrolled
     mutex_create('client_enrolled') if get_var("UPGRADE");
+
     # if this is an upgrade test, wait for server to be upgraded before
     # continuing, as we rely on it for name resolution
     if (get_var("UPGRADE")) {
