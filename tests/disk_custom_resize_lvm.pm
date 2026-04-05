@@ -43,12 +43,27 @@ sub run {
         assert_and_click "anaconda_part_select_efiboot";
         goto_mountpoint();
         type_very_safely "/boot/efi";
-        assert_and_click "anaconda_part_device_reformat";
+        # Rocky 10.2+ doesn't allow reformat of EFI System Partition
+        if (get_var("DISTRI") eq "rocky") {
+            if ((get_version_major() < 10) || (get_var("VERSION") eq "10.1")) {
+                assert_and_click "anaconda_part_device_reformat";
+            }
+        }
+        else {
+            assert_and_click "anaconda_part_device_reformat";
+        }
         assert_and_click "anaconda_part_update_settings";
         # give it a second or two to update
         wait_still_screen 5;
     }
 
+    # Rocky has a swap partition that we need to keep to prevent storage
+    # configuration error
+    assert_and_click "anaconda_part_select_swap";
+    assert_and_click "anaconda_part_device_reformat";
+    assert_and_click "anaconda_part_update_settings";
+    # give it a few seconds to update
+    wait_still_screen 5;
     # Now resize and format the current root partition
     assert_and_click "anaconda_part_select_root";
     # Navigate to Mountpoint

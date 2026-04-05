@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "width": 44,
+      "type": "match",
+      "height": 17,
+      "xpos": 503,
+      "ypos": 311
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-english",
+    "anaconda_custom_part_devicetype_lvmlv"
+  ]
+}
