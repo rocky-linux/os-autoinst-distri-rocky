@@ -13,7 +13,7 @@ sub run {
     # NOTE: This will trigger an authentication (perhaps 2x) in desktop_vt()
     $self->root_console(tty => 3);
     assert_script_run("flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo");
-    assert_script_run "flatpak install -y flathub org.gnome.weather",300;
+    assert_script_run "flatpak install -y flathub org.gnome.Weather", 300;
 
     # Exit the terminal
     desktop_vt;
@@ -64,4 +64,3 @@ sub test_flags {
 1;
 
 # vim: set sw=4 et:
-
