@@ -6,11 +6,17 @@ use freeipa;
 
 sub run {
     my $self = shift;
+    my $distri = get_var("DISTRI");
+    my $desktop = get_var("DESKTOP");
+    my $user_login = get_var("USER_LOGIN");
+
     # we're restarting firefox (instead of using the same one from
     # realmd_join_cockpit) so Firefox's trusted CA store refreshes and
     # it trusts the web server cert
     my $ipa_realm = 'TEST.OPENQA.ROCKYLINUX.ORG';
     my $ipa_admin_password = 'b1U3OnyX!';
+
+    # using freeipa webui add users and hbac policies
     start_webui("admin", $ipa_admin_password);
     add_user("test3", "Three");
     add_user("test4", "Four");
@@ -26,8 +32,10 @@ sub run {
     send_key "ret";
     assert_and_click "freeipa_webui_policy_add_user";
     wait_still_screen 2;
+
     # filter users
     type_safely "test3\n";
+
     # go to the correct checkbox (assert_and_click is tricky as
     # we can't make sure we click the right checkbox), check it,
     # select right arrow, click it - tab tab tab, space, tab, enter
@@ -42,16 +50,28 @@ sub run {
     send_key "pgup";
     wait_still_screen 1;
     assert_and_click "freeipa_webui_policy_save";
+
     # quit browser to return to console
     quit_firefox;
+
+    # switch to TTY3 for graphical tests, console tests already using tty3
+    # NOTE: The choice of TTY3 comes from _console_wait_login test.
+    if ($distri eq "rocky" && $desktop eq "gnome" && $user_login ne "false") {
+        $self->root_console(tty => 3);
+        assert_screen("root_console");
+    }
+
     # set permanent passwords for both accounts
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test3\@$ipa_realm";
     assert_script_run "printf 'correcthorse\nbatterystaple\nbatterystaple' | kinit test4\@$ipa_realm";
+
     # switch to tty4 (boy, the tty jugglin')
     select_console "tty4-console";
+
     # try and login as test3, should work
     console_login(user => 'test3@TEST.OPENQA.ROCKYLINUX.ORG', password => 'batterystaple');
     type_string "exit\n";
+
     # try and login as test4, should fail. we cannot use console_login
     # as it takes 10 seconds to complete when login fails, and
     # "permission denied" message doesn't last that long
@@ -61,8 +81,9 @@ sub run {
     assert_screen "console_password_required";
     type_string "batterystaple\n";
     assert_screen "login_permission_denied";
-    # back to tty1
-    select_console "tty1-console";
+
+    # back to tty3
+    select_console "tty3-console";
 }
 
 sub test_flags {
