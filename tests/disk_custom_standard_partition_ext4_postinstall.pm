@@ -19,6 +19,12 @@ sub run {
         $devswap = 'vda3';
         $devboot = 'vda4';
     }
+    elsif ((get_var('DISTRI') eq 'rocky') && (get_version_major() >= 10) && !get_var('UEFI')) {
+        $count = 5;
+        $devroot = 'vda2';
+        $devswap = 'vda3';
+        $devboot = 'vda4';
+    }
     # check number of partitions
     script_run 'fdisk -l | grep /dev/vda';    # debug
     validate_script_output 'fdisk -l | grep /dev/vda | wc -l', sub { $_ =~ m/$count/ };
