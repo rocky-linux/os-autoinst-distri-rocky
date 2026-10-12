@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "height": 14,
+      "width": 166,
+      "ypos": 500,
+      "type": "match",
+      "xpos": 774
+    },
+    {
+      "height": 13,
+      "ypos": 498,
+      "width": 48,
+      "xpos": 653,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "cockpit_join_complete"
+  ]
+}
