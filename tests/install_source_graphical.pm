@@ -72,6 +72,18 @@ sub run {
         assert_and_click "anaconda_spoke_done";
     }
 
+    wait_still_screen 2;
+
+    # if we changed the install source (eg. nfs) the software selection shows
+    # as an error so needs to be applied a second time
+    if (check_screen('anaconda_main_hub_software_selection_error', 10)) {
+        # Go into the Software Selection spoke
+        assert_and_click "anaconda_main_hub_software_selection_error";
+
+        # and back again
+        assert_and_click "anaconda_spoke_done";
+    }
+
     # Anaconda hub
     assert_screen "anaconda_main_hub", 300;
 }
