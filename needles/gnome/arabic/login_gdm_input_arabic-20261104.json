@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "ypos": 417,
+      "xpos": 581,
+      "height": 41,
+      "width": 57,
+      "match": 90
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "DESKTOP-gnome",
+    "ENV-DISTRI-rocky",
+    "LANGUAGE-arabic",
+    "graphical_login_input"
+  ]
+}
