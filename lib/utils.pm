@@ -1259,13 +1259,15 @@ sub check_prerelease {
     my $build = get_var('BUILD');
     # if it's a nightly installer image we should see tags
     $prerelease = 1 if ($build =~ /\.t\.\d+/ && !get_var("LIVE"));
-    # In Rocky we cannot use ISO name for prerelease indication but we do usually put it in the BUILD
-    $prerelease = 1 if ($build =~ /^Rocky-\d+\.\d+-(B(?i)eta(?-i)|LookAhead)-\d+-.n.0/);
-    # check based on ISO name, does not work for 8.x boot-iso name(s) which must use
-    # LABEL
-    my $iso = get_var('ISO');
-    $prerelease = 1 if ($iso =~ /^Rocky-\d+\.\d+-(B(?i)eta(?-i)|LookAhead)-(x86_64|aarch64|ppc64le|s390x)-(boot|dvd\d?|minimal).iso/);
-
+    if (get_var("DISTRI") eq "rocky") {
+        # Rocky generally POSTs with BUILD containing LookAhead, BETA or RC-#
+        # Match for PRERELEASE BUILDs
+        $prerelease = 1 if ($build =~ /^Rocky-\d+\.\d+-(B(?i)eta(?-i)|LookAhead)-\d+-/);
+        # Match for RELEASE CANDIDATE BUILDs
+        $prerelease = 0 if ($build =~ /^Rocky-\d+\.\d+-RC\d+-\d+.n.\d+/);
+        # Match for full release BUILDs
+        $prerelease = 0 if ($build =~ /^Rocky-\d+\.\d+-\d+.n.\d+/);
+    }
     # For all prerelease requiring ISOs, assert that prerelease is there.
     if ($prerelease == 1) {
         assert_screen "prerelease_note";
