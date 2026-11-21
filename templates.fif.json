@@ -440,6 +440,22 @@
             "machine": "aarch64",
             "product": "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*"
         },
+        "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*"
+        },
         "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": {
             "machine": "bios",
             "product": "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*"
