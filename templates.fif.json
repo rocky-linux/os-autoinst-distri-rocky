@@ -58,7 +58,7 @@
                 "OFW": 1,
                 "PART_TABLE_TYPE": "mbr",
                 "QEMU": "ppc64",
-                "QEMUCPU": "host",
+                "QEMUCPU": "power9",
                 "QEMURAM": 4096,
                 "QEMU_VIDEO_DEVICE": "VGA",
                 "QEMU_MAX_MIGRATION_TIME": "480",
