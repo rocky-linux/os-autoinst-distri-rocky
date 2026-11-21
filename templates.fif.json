@@ -1869,7 +1869,7 @@
                 "POSTINSTALL": "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client",
                 "POST_STATIC": "172.16.2.102 client002.test.openqa.rockylinux.org",
                 "ROOT_PASSWORD": "weakpassword",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "realmd_join_sssd": {
@@ -1887,7 +1887,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "release_identification": {
@@ -1978,7 +1978,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_filesystem_default": {
@@ -2087,7 +2087,7 @@
                 "POSTINSTALL": "freeipa_client",
                 "ROOT_PASSWORD": "anaconda",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_remote_logging_client": {
@@ -2105,7 +2105,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_remote_logging_server": {
@@ -2123,7 +2123,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_role_deploy_database_server": {
@@ -2141,7 +2141,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_role_deploy_domain_controller": {
@@ -2159,7 +2159,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "slurm22": {
