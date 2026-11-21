@@ -21,7 +21,7 @@
                 "ARCH_BASE_MACHINE": "aarch64",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMU": "aarch64",
-                "QEMUCPU": "host",
+                "QEMUCPU": "max",
                 "QEMUCPUS": "2",
                 "QEMUMACHINE": "virt,gic-version=max",
                 "QEMURAM": 4096,
