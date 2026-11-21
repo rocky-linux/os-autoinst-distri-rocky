@@ -599,8 +599,14 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -620,8 +626,14 @@
         },
         "base_system_logging": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -641,8 +653,14 @@
         },
         "base_update_cli": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -662,8 +680,14 @@
         },
         "base_package_install_remove": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -683,8 +707,14 @@
         },
         "base_services_start": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -704,8 +734,14 @@
         },
         "base_selinux": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -725,10 +761,14 @@
         },
         "base_service_manipulation": {
             "profiles": {
-                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 31,
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
-                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 31,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -748,8 +788,14 @@
         },
         "cloud_autocloud": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30
             },
