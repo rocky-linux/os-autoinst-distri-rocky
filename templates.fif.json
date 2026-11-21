@@ -136,6 +136,62 @@
             },
             "version": "*"
         },
+        "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "GenericCloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "GenericCloud_LVM-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "GenericCloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "GenericCloud_LVM-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
         "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*": {
             "arch": "x86_64",
             "distri": "rocky",
