@@ -41,8 +41,10 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "s390x",
                 "PART_TABLE_TYPE": "mbr",
+                "CDMODEL": "scsi-cd",
+                "HDDMODEL": "virtio-blk",
                 "QEMU": "s390x",
-                "QEMU_APPEND": "bios /usr/share/qemu/390-ccw.img -boot once=cd0",
+                "QEMU_APPEND": "bios /usr/share/qemu/s390-ccw.img -boot once=cd0",
                 "QEMUMACHINE": "s390-ccw-virtio",
                 "QEMURAM": 4096,
                 "QEMU_VIDEO_DEVICE": "virtio-gpu",
