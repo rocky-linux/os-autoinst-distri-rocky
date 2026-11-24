@@ -21,7 +21,7 @@
                 "ARCH_BASE_MACHINE": "aarch64",
                 "PART_TABLE_TYPE": "gpt",
                 "QEMU": "aarch64",
-                "QEMUCPU": "host",
+                "QEMUCPU": "max",
                 "QEMUCPUS": "2",
                 "QEMUMACHINE": "virt,gic-version=max",
                 "QEMURAM": 4096,
@@ -41,8 +41,10 @@
             "settings": {
                 "ARCH_BASE_MACHINE": "s390x",
                 "PART_TABLE_TYPE": "mbr",
+                "CDMODEL": "scsi-cd",
+                "HDDMODEL": "virtio-blk",
                 "QEMU": "s390x",
-                "QEMU_APPEND": "bios /usr/share/qemu/390-ccw.img -boot once=cd0",
+                "QEMU_APPEND": "bios /usr/share/qemu/s390-ccw.img -boot once=cd0",
                 "QEMUMACHINE": "s390-ccw-virtio",
                 "QEMURAM": 4096,
                 "QEMU_VIDEO_DEVICE": "virtio-gpu",
@@ -58,7 +60,7 @@
                 "OFW": 1,
                 "PART_TABLE_TYPE": "mbr",
                 "QEMU": "ppc64",
-                "QEMUCPU": "host",
+                "QEMUCPU": "power9",
                 "QEMURAM": 4096,
                 "QEMU_VIDEO_DEVICE": "VGA",
                 "QEMU_MAX_MIGRATION_TIME": "480",
@@ -124,6 +126,62 @@
         },
         "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*": {
             "arch": "aarch64",
+            "distri": "rocky",
+            "flavor": "GenericCloud_LVM-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "GenericCloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*": {
+            "arch": "ppc64le",
+            "distri": "rocky",
+            "flavor": "GenericCloud_LVM-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*": {
+            "arch": "s390x",
+            "distri": "rocky",
+            "flavor": "GenericCloud_Base-qcow2-qcow2",
+            "settings": {
+                "BOOTFROM": "c",
+                "DEPLOY_UPLOAD_TEST": "",
+                "+HDD_1": "%HDD_2%",
+                "ISO": "cloudinit.iso",
+                "ROOT_PASSWORD": "weakpassword",
+                "TEST_TARGET": "HDD_1"
+            },
+            "version": "*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*": {
+            "arch": "s390x",
             "distri": "rocky",
             "flavor": "GenericCloud_LVM-qcow2-qcow2",
             "settings": {
@@ -384,6 +442,22 @@
             "machine": "aarch64",
             "product": "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*"
         },
+        "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": {
+            "machine": "ppc64le",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*"
+        },
+        "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*"
+        },
+        "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": {
+            "machine": "s390x",
+            "product": "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*"
+        },
         "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": {
             "machine": "bios",
             "product": "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*"
@@ -527,8 +601,14 @@
         },
         "base_reboot_unmount": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -548,8 +628,14 @@
         },
         "base_system_logging": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -569,8 +655,14 @@
         },
         "base_update_cli": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 20,
@@ -590,8 +682,14 @@
         },
         "base_package_install_remove": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -611,8 +709,14 @@
         },
         "base_services_start": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -632,8 +736,14 @@
         },
         "base_selinux": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -653,10 +763,14 @@
         },
         "base_service_manipulation": {
             "profiles": {
-                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 31,
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
-                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 31,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30,
                 "rocky-dvd-iso-s390x-*-s390x": 40,
@@ -676,8 +790,14 @@
         },
         "cloud_autocloud": {
             "profiles": {
+                "rocky-GenericCloud_Base-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_Base-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_Base-qcow2-qcow2-x86_64-*-uefi": 30,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-aarch64-*-aarch64": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-ppc64le-*-ppc64le": 42,
+                "rocky-GenericCloud_LVM-qcow2-qcow2-s390x-*-s390x": 42,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-bios": 31,
                 "rocky-GenericCloud_LVM-qcow2-qcow2-x86_64-*-uefi": 30
             },
@@ -1409,6 +1529,7 @@
         "install_package_set_minimal": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
+                "rocky-package-set-ppc64le-*-ppc64le": 30,
                 "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
@@ -1419,6 +1540,7 @@
         "install_package_set_server": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
+                "rocky-package-set-ppc64le-*-ppc64le": 30,
                 "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
@@ -1751,7 +1873,7 @@
                 "POSTINSTALL": "realmd_join_cockpit freeipa_webui freeipa_password_change freeipa_client",
                 "POST_STATIC": "172.16.2.102 client002.test.openqa.rockylinux.org",
                 "ROOT_PASSWORD": "weakpassword",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "realmd_join_sssd": {
@@ -1769,7 +1891,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "release_identification": {
@@ -1860,7 +1982,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_filesystem_default": {
@@ -1969,7 +2091,7 @@
                 "POSTINSTALL": "freeipa_client",
                 "ROOT_PASSWORD": "anaconda",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_remote_logging_client": {
@@ -1987,7 +2109,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_remote_logging_server": {
@@ -2005,7 +2127,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_role_deploy_database_server": {
@@ -2023,7 +2145,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "server_role_deploy_domain_controller": {
@@ -2041,7 +2163,7 @@
                 "ROOT_PASSWORD": "weakpassword",
                 "START_AFTER_TEST": "%DEPLOY_UPLOAD_TEST%",
                 "USER_LOGIN": "false",
-                "WORKER_CLASS": "tap"
+                "WORKER_CLASS": "tap2"
             }
         },
         "slurm22": {
