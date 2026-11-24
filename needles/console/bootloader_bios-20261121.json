@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "height": 13,
+      "type": "match",
+      "width": 154,
+      "xpos": 34,
+      "ypos": 81
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "ENV-DISTRI-rocky",
+    "bootloader",
+    "bootloader_bios"
+  ]
+}
