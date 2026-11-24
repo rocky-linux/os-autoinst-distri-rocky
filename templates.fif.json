@@ -1529,6 +1529,7 @@
         "install_package_set_minimal": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
+                "rocky-package-set-ppc64le-*-ppc64le": 30,
                 "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
@@ -1539,6 +1540,7 @@
         "install_package_set_server": {
             "profiles": {
                 "rocky-package-set-aarch64-*-aarch64": 30,
+                "rocky-package-set-ppc64le-*-ppc64le": 30,
                 "rocky-package-set-x86_64-*-uefi": 30
             },
             "settings": {
