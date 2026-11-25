@@ -9,13 +9,15 @@ sub run {
         $self->root_console(tty => 4);
     }
     assert_screen "root_console";
+
     # for aarch64 non-english tests
     console_loadkeys_us;
-    # this test shows if the system is booted with efi
-    assert_script_run '[ -d /sys/firmware/efi/ ]';
-    # this test shows if the system is secure boot
-    script_run 'df;lsblk';
-    script_run 'mokutil --sb-state';
+
+    # this shows if the system is booted with efi, whether or not secure boot
+    # is enabled, state of PK and KEK as well as presence of Microsoft
+    # Certificates.
+    script_run 'curl -LOR https://pjones.fedorapeople.org/secureboot.test0.2025/show-trusted.sh';
+    script_run 'bash ./show-trusted.sh';
 }
 
 sub test_flags {
